@@ -6,17 +6,14 @@
 @{
     Product product = WebSiteContext.Product();
 
-    if (HttpContext.Current.Request.HttpMethod == "POST" &&
-        HttpContext.Current.Request.Form.AllKeys.Any(x => x == "addToBasket")
-        )
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "addToBasket"))
     {
 
         var variant = string.IsNullOrEmpty(HttpContext.Current.Request.Form["selectedVariant"]) ? null : HttpContext.Current.Request.Form["selectedVariant"];
-        TransactionLibrary.AddToBasket(
-            CatalogLibrary.GetCatalog().Name,
-            1,
-            product.Sku,
-            variant);
+        TransactionLibrary.AddToBasket(CatalogLibrary.GetCatalog().Name, 1, product.Sku, variant);
+        TransactionLibrary.ExecuteBasketPipeline();
+        HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
+        
     }
     
     
@@ -24,7 +21,6 @@
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
     
 }
-
 
 <div class="row-fluid">
     <div class="span6">

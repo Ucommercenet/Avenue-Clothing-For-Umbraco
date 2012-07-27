@@ -1,17 +1,20 @@
 ﻿@using UCommerce.Catalog
 @using UCommerce.EntitiesV2
-<ul class="nav nav-list">
-@foreach (var category in CatalogLibrary.GetCatalog().Categories)
-{
 
-        <li class="nav-header">@category.DisplayName()</li>
-        @*<li class="active"><a href="#">Link</a></li>*@
-    foreach (var product in category.Products)
+@RenderNavigation(CatalogLibrary.GetRootCategories())
+
+@helper RenderNavigation(ICollection<Category> categories)
     {
-        <li><a href="@CatalogLibrary.GetNiceUrlForProduct(product,category)">@product.DisplayName()</a></li>
+    if (categories.Any())
+    {
+        <ul class="nav nav-list">
+            @foreach (var category in categories)
+            {
+                <li>
+                    <a href="@CatalogLibrary.GetNiceUrlForCategory(category.Id)">@category.DisplayName()</a>
+                    @RenderNavigation(category.Categories)
+                </li>
+            }
+        </ul>
     }
-        
-        
-    
 }
-</ul>

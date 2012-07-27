@@ -77,7 +77,8 @@
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
-        <asp:ContentPlaceHolder runat="server" ID="MainContent"></asp:ContentPlaceHolder>
+            <umbraco:Macro ID="Macro2" Alias="Breadcrumb[Razor]" runat="server"></umbraco:Macro>  
+            <asp:ContentPlaceHolder runat="server" ID="MainContent"></asp:ContentPlaceHolder>
         </div><!--/span-->
       </div><!--/row-->
       <hr>

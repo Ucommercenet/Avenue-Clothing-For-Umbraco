@@ -1,0 +1,21 @@
+﻿@using UCommerce.Catalog
+@using UCommerce.EntitiesV2
+
+<ul class="breadcrumb">
+    
+    @{
+        Category lastCategory = null;
+        foreach (var category in WebSiteContext.Categories())
+        {
+            <li><a href="@CatalogLibrary.GetNiceUrlForCategory(category.Id)">@category.DisplayName()</a><span class="divider">/</span></li>
+            lastCategory = category;
+        }
+
+        Product product = WebSiteContext.Product();
+        if (product != null)
+        {
+            <li><a href="@CatalogLibrary.GetNiceUrlForProduct(product, lastCategory)">@product.DisplayName()</a></li>
+        }
+    }
+</ul>
+
