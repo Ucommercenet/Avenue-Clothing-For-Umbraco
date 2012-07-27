@@ -1,0 +1,92 @@
+﻿@using UCommerce.Catalog
+@using UCommerce.EntitiesV2
+@using UCommerce.Transactions
+@using umbraco.MacroEngines
+
+@{
+    Product product = WebSiteContext.Product();
+
+    if (HttpContext.Current.Request.HttpMethod == "POST" &&
+        HttpContext.Current.Request.Form.AllKeys.Any(x => x == "addToBasket")
+        )
+    {
+
+        var variant = string.IsNullOrEmpty(HttpContext.Current.Request.Form["selectedVariant"]) ? null : HttpContext.Current.Request.Form["selectedVariant"];
+        TransactionLibrary.AddToBasket(
+            CatalogLibrary.GetCatalog().Name,
+            1,
+            product.Sku,
+            variant);
+    }
+    
+    
+    
+    var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
+    
+}
+
+
+<div class="row-fluid">
+    <div class="span6">
+        @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
+        {
+            dynamic mediaItem = new DynamicMedia(product.PrimaryImageMediaId);
+            <img src="@mediaItem.umbracoFile" />
+        }
+        
+    </div>
+    <!--/span-->
+    <div class="span6">
+        <h1>@product.DisplayName()</h1>
+        <h6>@product.DynamicProperty().Brand</h6>
+        <em>@product.ShortDescription()</em>
+        <br />
+        <br />
+        <div class="well">
+            <p>List price: @product.Price()</p>
+            <p>Tax: @product.Tax()</p>
+            <p>PriceExclTax: @product.PriceExclTax()</p>
+            
+        </div>
+        <form method="post">
+        
+            
+            @if(product.Variants.Any())
+            {
+                <div class="well">
+                    <h4>Variants</h4>
+                    <br />
+                    <select name="selectedVariant">
+                        @foreach (var variant in product.Variants)
+                        {
+                            <option value="@variant.VariantSku">@variant.DisplayName()</option>
+                        }
+                    </select>
+                </div>        
+            }
+            <input name="addToBasket" class="btn btn-primary" type="submit" value="Add to basket"/>
+        
+        </form>
+    </div>
+    <!--/span-->
+</div>
+<div class="row-fluid">
+    <div class="span8">
+        <p>@Html.Raw(product.LongDescription())</p>
+    </div>
+    @if (relatedProducts.Any())
+    {
+        <div class="span4 well">
+            <h4>Related products</h4>
+        
+            @foreach (var relatedProduct in @product.GetRelatedProducts().SelectMany(x => x.Value))
+            {
+                <a href="@CatalogLibrary.GetNiceUrlForProduct(relatedProduct)">@relatedProduct.DisplayName()</a>
+            }
+        
+        </div>
+    }
+</div>
+
+
+

@@ -1,0 +1,17 @@
+﻿@using UCommerce.Catalog
+@using UCommerce.EntitiesV2
+<ul class="nav nav-list">
+@foreach (var category in CatalogLibrary.GetCatalog().Categories)
+{
+
+        <li class="nav-header">@category.DisplayName()</li>
+        @*<li class="active"><a href="#">Link</a></li>*@
+    foreach (var product in category.Products)
+    {
+        <li><a href="@CatalogLibrary.GetNiceUrlForProduct(product,category)">@product.DisplayName()</a></li>
+    }
+        
+        
+    
+}
+</ul>
