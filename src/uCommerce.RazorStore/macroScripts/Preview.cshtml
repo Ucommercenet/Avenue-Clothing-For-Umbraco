@@ -92,7 +92,17 @@
                         @lineItem.ProductName
                     </td>
                     <td>
-                        @CatalogLibrary.FormatCurrency(lineItem.Price)
+                        @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
+                            {
+                                <span style="text-decoration:line-through">
+                                    @CatalogLibrary.FormatCurrency(lineItem.Price)    
+                                </span>
+                                @CatalogLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
+                            }
+                            else
+                            {
+                                @CatalogLibrary.FormatCurrency(lineItem.Price)    
+                            }
                     </td>
                     <td>
                         @CatalogLibrary.FormatCurrency(lineItem.VAT)
@@ -105,10 +115,7 @@
                     </td>
                 </tr>
             }
-            <tr>
-                <td colspan="6">
-                </td>
-            </tr>
+            
             <tr>
                 <td colspan="5">
                     Sub total:
@@ -130,7 +137,7 @@
                     Order discounts:
                 </td>
                 <td>
-                    -discount (TODO)
+                    -@CatalogLibrary.FormatCurrency(basket.Discount)
                 </td>
             </tr>
             <tr>

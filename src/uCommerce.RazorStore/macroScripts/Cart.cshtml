@@ -1,21 +1,32 @@
 ﻿@using UCommerce.Catalog
 @using UCommerce.EntitiesV2
+@using UCommerce.Marketing
 @using UCommerce.Transactions
 @{
     var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
 
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x.StartsWith("addVoucher")))
+    {
+        var code = HttpContext.Current.Request.Form["voucherCode"];
+        if (!string.IsNullOrWhiteSpace(code))
+        {
+            MarketingLibrary.AddVoucher(code);
+            TransactionLibrary.ExecuteBasketPipeline();
+            HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
+        }
+    }
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x.StartsWith("updateBasket")))
     {
-        foreach (var orderLineId in basket.OrderLines.Select(x=>x.OrderLineId).ToList())
+        foreach (var orderLineId in basket.OrderLines.Select(x => x.OrderLineId).ToList())
         {
             int newQuantity;
-            if(int.TryParse(HttpContext.Current.Request.Form["quantityInput_" + orderLineId], out newQuantity))
+            if (int.TryParse(HttpContext.Current.Request.Form["quantityInput_" + orderLineId], out newQuantity))
             {
                 TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
             }
         }
 
-        
+
         TransactionLibrary.ExecuteBasketPipeline();
         if (HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateBasketAndContinue"))
         {
@@ -25,10 +36,11 @@
         {
             HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
         }
-        
+
     }
-    
+
 }
+
 <form method="post">
     <div class="row-fluid well">
     
@@ -55,47 +67,29 @@
                             @lineItem.ProductName
                         </td>
                         <td>
-                            @CatalogLibrary.FormatCurrency(lineItem.Price)
-                            @*<xsl:choose>
-								    <xsl:when test="unitDiscount != 0">
-									    <span style="text-decoration:line-through">
-										    <xsl:value-of select="CommerceLibrary:FormatCurrency(@price)"/>
-									    </span>&nbsp;
-									    <xsl:value-of select="CommerceLibrary:FormatCurrency(@price - @unitDiscount)"/>
-								    </xsl:when>
-								    <xsl:otherwise>
-									    <xsl:value-of select="CommerceLibrary:FormatCurrency(@price)"/>
-								    </xsl:otherwise>
-							    </xsl:choose>*@
+                            @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
+                            {
+                                <span style="text-decoration:line-through">
+                                    @CatalogLibrary.FormatCurrency(lineItem.Price)    
+                                </span>
+                                @CatalogLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
+                            }
+                            else
+                            {
+                                @CatalogLibrary.FormatCurrency(lineItem.Price)    
+                            }
                         </td>
                         <td>
                             @CatalogLibrary.FormatCurrency(lineItem.VAT)
                         </td>
                         <td>
-                            <input type="text" class="input-mini" name="quantityInput_@(lineItem.OrderLineId)" value="@lineItem.Quantity">
-                                @*<xsl:attribute name="value">
-									    <xsl:value-of select="@quantity"/>
-								    </xsl:attribute>*@
-                                @*<xsl:attribute name="name">quantityInput_<xsl:value-of select="@index"/></xsl:attribute>*@
-                            </input>
+                            <input type="text" class="input-mini" name="quantityInput_@(lineItem.OrderLineId)" value="@lineItem.Quantity" />
                         </td>
                         <td>
                             @CatalogLibrary.FormatCurrency(lineItem.Total)
                         </td>
                     </tr>
-
-                    //{index = index+1;}
                 }
-                <tr>
-                    <td colspan="6">
-                        discounts  (TODO)
-                        @*<xsl:call-template name="discountTemplate">
-								    <xsl:with-param name="discounts" select="discounts"/>
-								    <xsl:with-param name="id" select="@index"/>
-							    </xsl:call-template>*@
-                    </td>
-                </tr>
-
                 <tr>
                     <td colspan="5">Sub total:</td>
                     <td>
@@ -111,21 +105,13 @@
                 <tr>
                     <td colspan="5">Order discounts:</td>
                     <td>
-                        -discount (TODO)
+                        -@CatalogLibrary.FormatCurrency(basket.Discount)
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="6">
-                        discounts (TODO)
-                        @*<xsl:call-template name="discountTemplate">
-							    <xsl:with-param name="discounts" select="$cart/purchaseOrder/discounts"/>
-							    <xsl:with-param name="id" select="@orderGuid"/>
-						    </xsl:call-template>*@
-                    </td>
-                </tr>
+                
                 <tr>
                     <td colspan="5">Order total:</td>
-                    <td>
+                    <td >
                         @CatalogLibrary.FormatCurrency(basket.OrderTotal)
                     </td>
                 </tr>
@@ -133,8 +119,8 @@
         </table>
     </div>
     <div class="row-fluid well">
-			<input type="text" name="voucherCode"></input>
-			<input type="submit" value="Add voucher"></input>
+        <input type="text" name="voucherCode"></input>
+        <input name="addVoucher" class="btn" type="submit" value="Add voucher"/>
     </div>
     <input name="updateBasket" class="btn" type="submit" value="Update cart"/>
     
