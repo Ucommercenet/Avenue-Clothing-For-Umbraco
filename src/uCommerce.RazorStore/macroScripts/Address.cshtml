@@ -1,0 +1,99 @@
+﻿@using UCommerce.EntitiesV2
+@using UCommerce.Transactions
+@{
+    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+    var billingAddress = basket.BillingAddress ?? new OrderAddress();
+    var shipmentAddress = basket.Shipments.Where(x=>x.ShipmentAddress.AddressName == "Shipment").Select(x => x.ShipmentAddress).FirstOrDefault() ?? new OrderAddress(){AddressName = "Shipment"};
+    
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateAddresses"))
+    {
+
+        TransactionLibrary.EditBillingInformation(
+            HttpContext.Current.Request.Form["FirstName"],
+            HttpContext.Current.Request.Form["LastName"],
+            HttpContext.Current.Request.Form["EmailAddress"],
+            HttpContext.Current.Request.Form["PhoneNumber"],
+            HttpContext.Current.Request.Form["MobilePhoneNumber"],
+            HttpContext.Current.Request.Form["CompanyName"],
+            HttpContext.Current.Request.Form["Line1"],
+            HttpContext.Current.Request.Form["Line2"],
+            HttpContext.Current.Request.Form["PostalCode"],
+            HttpContext.Current.Request.Form["City"],
+            "",
+            HttpContext.Current.Request.Form["Attention"],
+            int.Parse(HttpContext.Current.Request.Form["Country"])
+        );
+
+        TransactionLibrary.EditShipmentInformation(
+            shipmentAddress.AddressName,
+            HttpContext.Current.Request.Form["Shipping_FirstName"],
+            HttpContext.Current.Request.Form["Shipping_LastName"],
+            HttpContext.Current.Request.Form["Shipping_EmailAddress"],
+            HttpContext.Current.Request.Form["Shipping_PhoneNumber"],
+            HttpContext.Current.Request.Form["Shipping_MobilePhoneNumber"],
+            HttpContext.Current.Request.Form["Shipping_CompanyName"],
+            HttpContext.Current.Request.Form["Shipping_Line1"],
+            HttpContext.Current.Request.Form["Shipping_Line2"],
+            HttpContext.Current.Request.Form["Shipping_PostalCode"],
+            HttpContext.Current.Request.Form["Shipping_City"],
+            "",
+            HttpContext.Current.Request.Form["Shipping_Attention"],
+            int.Parse(HttpContext.Current.Request.Form["Shipping_Country"])
+        );
+
+        HttpContext.Current.Response.Redirect("Shipping.aspx");
+
+    }
+
+    
+}
+@helper  RenderCountrySelectOptions(OrderAddress address){
+    foreach (var country in TransactionLibrary.GetCountries().OrderBy(x => x.Name))
+    {
+        <option value="@country.CountryId" @(address.Country != null && address.Country.Equals(country) ? "selected" : string.Empty)>@country.Name</option>
+    }
+}
+
+<form method="post">
+    <div class="row-fluid well">
+        <div class="span6">
+            <h3>Billing address</h3>
+            <br/>
+            <label>First name</label><input type="text" class="span7" name="FirstName"value="@billingAddress.FirstName" />
+            <label>Last name</label><input type="text" class="span7" name="LastName"value="@billingAddress.LastName" />
+            <label>Company</label><input type="text" class="span7" name="CompanyName"value="@billingAddress.CompanyName" />
+            <label>Street</label><input type="text" class="span7" name="Line1" value="@billingAddress.Line1" />
+            <label>Street 2</label><input type="text" class="span7" name="Line2" value="@billingAddress.Line2" />
+            <label>Postal code</label><input type="text" class="span7" name="PostalCode" value="@billingAddress.PostalCode" />
+            <label>City</label><input type="text" class="span7" name="City" value="@billingAddress.City" />
+            <label>Country</label>
+                <select class="span7" name="Country">
+                    @RenderCountrySelectOptions(billingAddress)
+                </select>
+            <label>Attention</label><input type="text" class="span7" name="Attention" value="@billingAddress.Attention" />
+            <label>E-mail</label><input type="text" class="span7" name="EmailAddress" value="@billingAddress.EmailAddress" />
+            <label>Phone</label><input type="text" class="span7" name="PhoneNumber" value="@billingAddress.PhoneNumber" />
+            <label>Mobile phone</label><input type="text" class="span7" name="MobilePhoneNumber" value="@billingAddress.MobilePhoneNumber" />
+        </div>
+    <div class="span6">
+            <h3>Shipping address</h3>
+            <br/>
+            <label>First name</label><input type="text" class="span7" name="Shipping_FirstName"value="@shipmentAddress.FirstName" />
+            <label>Last name</label><input type="text" class="span7" name="Shipping_LastName"value="@shipmentAddress.LastName" />
+            <label>Company</label><input type="text" class="span7" name="Shipping_CompanyName"value="@shipmentAddress.CompanyName" />
+            <label>Street</label><input type="text" class="span7" name="Shipping_Line1" value="@shipmentAddress.Line1" />
+            <label>Street 2</label><input type="text" class="span7" name="Shipping_Line2" value="@shipmentAddress.Line2" />
+            <label>Postal code</label><input type="text" class="span7" name="Shipping_PostalCode" value="@shipmentAddress.PostalCode" />
+            <label>City</label><input type="text" class="span7" name="Shipping_City" value="@shipmentAddress.City" />
+            <label>Country</label>
+                <select class="span7" name="Shipping_Country">
+                    @RenderCountrySelectOptions(shipmentAddress)
+                </select>
+            <label>Attention</label><input type="text" class="span7" name="Shipping_Attention" value="@shipmentAddress.Attention" />
+            <label>E-mail</label><input type="text" class="span7" name="Shipping_EmailAddress" value="@shipmentAddress.EmailAddress" />
+            <label>Phone</label><input type="text" class="span7" name="Shipping_PhoneNumber" value="@shipmentAddress.PhoneNumber" />
+            <label>Mobile phone</label><input type="text" class="span7" name="Shipping_MobilePhoneNumber" value="@shipmentAddress.MobilePhoneNumber" />
+        </div>
+    </div>
+    <input name="updateAddresses" class="btn btn-primary" type="submit" value="Next"/>
+</form>

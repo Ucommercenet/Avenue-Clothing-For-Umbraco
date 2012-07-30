@@ -1,0 +1,172 @@
+﻿@using UCommerce.Catalog
+@using UCommerce.EntitiesV2
+@using UCommerce.Transactions
+@{
+    
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "sendOrder"))
+    {
+        TransactionLibrary.ExecuteBasketPipeline();
+        TransactionLibrary.Checkout();
+        HttpContext.Current.Response.Redirect("Confirmation.aspx");
+
+    }
+    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+    var billingAddress = basket.BillingAddress ?? new OrderAddress();
+    var shipmentAddress = basket.Shipments.Where(x => x.ShipmentAddress.AddressName == "Shipment").Select(x => x.ShipmentAddress).FirstOrDefault() ?? new OrderAddress() { AddressName = "Shipment" };
+    var shipments = basket.Shipments.Where(x => x.ShipmentAddress.AddressName == "Shipment");
+    
+    
+}
+<form method="post">
+<div class="row-fluid well">
+    <div class="span6">
+        <h3>
+            Billing address</h3>
+        <br />
+        <address>
+            <strong>@billingAddress.FirstName @billingAddress.LastName</strong><br>
+            @billingAddress.Line1<br>
+            @billingAddress.PostalCode @billingAddress.City<br>
+            @billingAddress.Country.Name<br>
+            <abbr title="Phone">
+                P:</abbr>@billingAddress.PhoneNumber<br>
+            <abbr title="Mobile">
+                M:</abbr>@billingAddress.MobilePhoneNumber<br>
+            <abbr title="Email">
+                E:</abbr><a href="mailto:@billingAddress.EmailAddress">@billingAddress.EmailAddress</a>
+        </address>
+    </div>
+    <div class="span6">
+        <h3>
+            Shipping address</h3>
+        <br />
+        <address>
+            <strong>@shipmentAddress.FirstName @shipmentAddress.LastName</strong><br>
+            @shipmentAddress.CompanyName att. @shipmentAddress.Attention<br>
+            @shipmentAddress.Line1<br>
+            @shipmentAddress.PostalCode @shipmentAddress.City<br>
+            @shipmentAddress.Country.Name<br>
+            <abbr title="Phone">
+                P:</abbr>@shipmentAddress.PhoneNumber<br>
+            <abbr title="Mobile">
+                M:</abbr>@shipmentAddress.MobilePhoneNumber<br>
+            <abbr title="Email">
+                E:</abbr><a href="mailto:@shipmentAddress.EmailAddress">@shipmentAddress.EmailAddress</a>
+        </address>
+    </div>
+</div>
+
+<div class="row-fluid well">
+    <table class="table  table-condensed">
+        <thead>
+            <tr>
+                <th>
+                    Item no.
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Item price
+                </th>
+                <th>
+                    VAT
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lineItem in basket.OrderLines)
+            {
+                
+                <tr>
+                    <td>
+                        @lineItem.Sku
+                    </td>
+                    <td>
+                        @lineItem.ProductName
+                    </td>
+                    <td>
+                        @CatalogLibrary.FormatCurrency(lineItem.Price)
+                    </td>
+                    <td>
+                        @CatalogLibrary.FormatCurrency(lineItem.VAT)
+                    </td>
+                    <td>
+                        @lineItem.Quantity
+                    </td>
+                    <td>
+                        @CatalogLibrary.FormatCurrency(lineItem.Total)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Sub total:
+                </td>
+                <td>
+                    @CatalogLibrary.FormatCurrency(basket.SubTotal)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    VAT:
+                </td>
+                <td>
+                    @CatalogLibrary.FormatCurrency(basket.VAT)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Order discounts:
+                </td>
+                <td>
+                    -discount (TODO)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Shipping
+                    <ul>
+                        @foreach (var shipment in shipments)
+                        {
+                            <li>@shipment.ShipmentName</li>
+                        }
+                    </ul>
+                </td>
+                <td>@CatalogLibrary.FormatCurrency(basket.ShippingTotal)</td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Payment
+                    <ul>
+                    @foreach (var payment in basket.Payments)
+                    {
+                        <li>@payment.PaymentMethodName</li>
+                    }
+                    </ul>
+                </td>
+                <td>@CatalogLibrary.FormatCurrency(basket.PaymentTotal)</td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Order total:
+                </td>
+                <td>
+                    @CatalogLibrary.FormatCurrency(basket.OrderTotal)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<input name="sendOrder" class="btn btn-primary" type="submit" value="Send order" />
+</form>

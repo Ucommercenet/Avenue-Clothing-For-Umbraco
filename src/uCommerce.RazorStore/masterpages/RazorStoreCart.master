@@ -1,0 +1,8 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStore.master" AutoEventWireup="true" %>
+
+<%@ Register TagPrefix="umbraco" Namespace="umbraco.presentation.templateControls" Assembly="umbraco" %>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="MainContent">
+    <umbraco:Macro ID="Macro1" runat="server" Alias="Cart[Razor]"/>
+    
+
+</asp:Content>

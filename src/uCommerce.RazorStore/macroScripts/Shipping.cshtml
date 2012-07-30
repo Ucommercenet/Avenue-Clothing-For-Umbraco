@@ -1,0 +1,43 @@
+﻿@using UCommerce.Catalog
+@using UCommerce.EntitiesV2
+@using UCommerce.Transactions
+@{
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateShipment"))
+    {
+        int newShipmentId;
+        if(int.TryParse(HttpContext.Current.Request.Form["ShippingMethod"], out newShipmentId))
+        {
+            TransactionLibrary.CreateShipment(newShipmentId, "Shipment", true);
+            TransactionLibrary.ExecuteBasketPipeline();
+            HttpContext.Current.Response.Redirect("Payment.aspx");
+        }
+        
+    }
+    
+    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+    var shipment = basket.Shipments.FirstOrDefault(x => x.ShipmentAddress.AddressName == "Shipment");
+}
+@helper RenderShippingMethodLabel(ShippingMethod shippingMethod, PurchaseOrder basket)
+{
+    var price = @shippingMethod.GetPriceForCurrency(basket.BillingCurrency);
+    var formattedPrice = CatalogLibrary.FormatCurrency(price == null ? 0 : price.Price);
+    
+    @shippingMethod.Name <text>(</text>@formattedPrice<text>)</text>
+    
+}
+<form  method="post">
+    <div class="row-fluid well" >
+        <div class="span6">
+            <h3>Shipping method</h3>
+            <br/>
+            @foreach (var shippingMethod in TransactionLibrary.GetShippingMethods("Shipment"))
+            {
+                <label class="radio">
+                    <input type="radio" name="ShippingMethod"  @(shipment != null && shipment.ShippingMethod.Equals(shippingMethod) ? "checked" : string.Empty) 
+                        value="@shippingMethod.ShippingMethodId" />@RenderShippingMethodLabel(shippingMethod, basket)</label>
+            }
+
+        </div>
+    </div>
+    <input name="updateShipment" class="btn btn-primary" type="submit" value="Next"/>
+</form>
