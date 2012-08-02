@@ -160,6 +160,12 @@
   <ItemGroup>
     <Content Include="masterpages\RazorStorePayment.master" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Components.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

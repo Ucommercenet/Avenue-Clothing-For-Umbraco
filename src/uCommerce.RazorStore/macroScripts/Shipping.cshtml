@@ -1,6 +1,6 @@
 ﻿@using UCommerce.Catalog
 @using UCommerce.EntitiesV2
-@using UCommerce.Transactions
+@using UCommerce.Api
 @{
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateShipment"))
     {

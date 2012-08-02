@@ -1,5 +1,5 @@
 ﻿@using UCommerce.EntitiesV2
-@using UCommerce.Transactions
+@using UCommerce.Api
 @{
     var basket = TransactionLibrary.GetBasket().PurchaseOrder;
     var billingAddress = basket.BillingAddress ?? new OrderAddress();

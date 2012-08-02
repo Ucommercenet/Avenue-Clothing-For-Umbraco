@@ -1,7 +1,7 @@
 ﻿using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Catalog;
+using UCommerce.Api;
 using UCommerce.Transactions;
 
 namespace uCommerce.RazorStore.ServiceStack.Commands
@@ -14,10 +14,12 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
         public string VariantSku { get; set; }
         public bool AddToExistingLine { get; set; }
     }
+
     public class AddToBasketResponse : IHasResponseStatus
     {
         public ResponseStatus ResponseStatus { get; set; }
     }
+    
     public class AddToBasketService : ServiceBase<AddToBasket>
     {
         protected override object Run(AddToBasket request)

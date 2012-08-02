@@ -1,5 +1,6 @@
-﻿@using UCommerce.Catalog
+﻿@using UCommerce.Api
 @using UCommerce.EntitiesV2
+@using UCommerce.Runtime
 
 <ul class="breadcrumb">
     
@@ -11,7 +12,7 @@
             lastCategory = category;
         }
 
-        Product product = WebSiteContext.Product();
+        Product product = SiteContext.Current.CatalogContext.CurrentProduct;
         if (product != null)
         {
             <li><a href="@CatalogLibrary.GetNiceUrlForProduct(product, lastCategory)">@product.DisplayName()</a></li>

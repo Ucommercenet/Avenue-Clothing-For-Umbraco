@@ -1,7 +1,7 @@
 ﻿using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Catalog;
+using UCommerce.Api;
 using UCommerce.Transactions;
 
 namespace uCommerce.RazorStore.ServiceStack.Commands

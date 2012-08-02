@@ -4,7 +4,7 @@ var uCommerce = uCommerce || {};
         uCommerce : {
             getBasket: function(options, onSuccess, onError) {
                 var defaults = {
-                    create: false
+//                    create: false
                 };
                 var extendedOptions = $.extend(defaults, options);
                 callServiceStack({ GetBasket: extendedOptions }, onSuccess, onError);
@@ -32,7 +32,7 @@ var uCommerce = uCommerce || {};
         
     });
     $.uCommerce.defaults = {
-        servicepath: '/servicestackapi',
+        servicepath: '/ucommerceapi',
         protocol: location.protocol,
         host: location.host
     };

@@ -2,14 +2,13 @@
 using System.Diagnostics.Eventing.Reader;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Transactions;
+using UCommerce.Api;
 using uCommerce.RazorStore.ServiceStack.Model;
 
 namespace uCommerce.RazorStore.ServiceStack.Commands
 {
     public class GetBasket
     {
-        public bool Create { get; set; }
     }
     public class GetBasketResponse: IHasResponseStatus
     {
@@ -43,7 +42,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         protected override object Run(GetBasket request)
         {
-            var basket =  TransactionLibrary.GetBasket(request.Create);
+            var basket =  TransactionLibrary.GetBasket(false);
             return new GetBasketResponse(basket);
         }
 
