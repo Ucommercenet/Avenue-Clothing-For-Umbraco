@@ -106,7 +106,7 @@
     <Content Include="umbraco\masterpages\default.Master" />
     <Content Include="masterpages\RazorStoreFrontPage.master" />
     <Content Include="masterpages\RazorStoreProduct.master" />
-    <Compile Include="macroScripts\Product.cshtml" />
+    <Content Include="macroScripts\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macroScripts\RazorTest.cshtml" />

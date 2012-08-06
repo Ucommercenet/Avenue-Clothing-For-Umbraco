@@ -7,7 +7,7 @@
         int newShipmentId;
         if(int.TryParse(HttpContext.Current.Request.Form["ShippingMethod"], out newShipmentId))
         {
-            TransactionLibrary.CreateShipment(newShipmentId, "Shipment", true);
+            TransactionLibrary.CreateShipment(newShipmentId, overwriteExisting: true);
             TransactionLibrary.ExecuteBasketPipeline();
             HttpContext.Current.Response.Redirect("Payment.aspx");
         }
@@ -15,7 +15,7 @@
     }
     
     var basket = TransactionLibrary.GetBasket().PurchaseOrder;
-    var shipment = basket.Shipments.FirstOrDefault(x => x.ShipmentAddress.AddressName == "Shipment");
+    var currentShippingMethod = TransactionLibrary.GetShippingMethod();
 }
 @helper RenderShippingMethodLabel(ShippingMethod shippingMethod, PurchaseOrder basket)
 {
@@ -30,10 +30,10 @@
         <div class="span6">
             <h3>Shipping method</h3>
             <br/>
-            @foreach (var shippingMethod in TransactionLibrary.GetShippingMethods("Shipment"))
+            @foreach (var shippingMethod in TransactionLibrary.GetShippingMethods())
             {
                 <label class="radio">
-                    <input type="radio" name="ShippingMethod"  @(shipment != null && shipment.ShippingMethod.Equals(shippingMethod) ? "checked" : string.Empty) 
+                    <input type="radio" name="ShippingMethod"  @(shippingMethod.Equals(currentShippingMethod) ? "checked" : string.Empty) 
                         value="@shippingMethod.ShippingMethodId" />@RenderShippingMethodLabel(shippingMethod, basket)</label>
             }
 

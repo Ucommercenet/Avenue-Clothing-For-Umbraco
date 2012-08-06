@@ -1,13 +1,8 @@
 ﻿@using UCommerce.EntitiesV2
 @using UCommerce.Api
 @{
-    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
-    var billingAddress = basket.BillingAddress ?? new OrderAddress();
-    var shipmentAddress = basket.Shipments.Where(x=>x.ShipmentAddress.AddressName == "Shipment").Select(x => x.ShipmentAddress).FirstOrDefault() ?? new OrderAddress(){AddressName = "Shipment"};
-    
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateAddresses"))
     {
-
         TransactionLibrary.EditBillingInformation(
             HttpContext.Current.Request.Form["FirstName"],
             HttpContext.Current.Request.Form["LastName"],
@@ -25,7 +20,6 @@
         );
 
         TransactionLibrary.EditShipmentInformation(
-            shipmentAddress.AddressName,
             HttpContext.Current.Request.Form["Shipping_FirstName"],
             HttpContext.Current.Request.Form["Shipping_LastName"],
             HttpContext.Current.Request.Form["Shipping_EmailAddress"],
@@ -42,9 +36,10 @@
         );
 
         HttpContext.Current.Response.Redirect("Shipping.aspx");
-
     }
 
+    var billingAddress = TransactionLibrary.GetBillingInformation();
+    var shipmentAddress = TransactionLibrary.GetShipmentInformation();
     
 }
 @helper  RenderCountrySelectOptions(OrderAddress address){

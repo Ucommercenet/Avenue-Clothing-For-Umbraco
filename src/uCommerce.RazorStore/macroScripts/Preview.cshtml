@@ -1,6 +1,4 @@
-﻿@using UCommerce.Catalog
-@using UCommerce.EntitiesV2
-@using UCommerce.Api
+﻿@using UCommerce.Api
 @{
     
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "sendOrder"))
@@ -11,9 +9,9 @@
 
     }
     var basket = TransactionLibrary.GetBasket().PurchaseOrder;
-    var billingAddress = basket.BillingAddress ?? new OrderAddress();
-    var shipmentAddress = basket.Shipments.Where(x => x.ShipmentAddress.AddressName == "Shipment").Select(x => x.ShipmentAddress).FirstOrDefault() ?? new OrderAddress() { AddressName = "Shipment" };
-    var shipments = basket.Shipments.Where(x => x.ShipmentAddress.AddressName == "Shipment");
+    var billingAddress = TransactionLibrary.GetBillingInformation();
+    var shipmentAddress = TransactionLibrary.GetShipmentInformation();
+    var shipments = basket.Shipments;
     
     
 }

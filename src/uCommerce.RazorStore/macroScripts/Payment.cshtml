@@ -32,7 +32,7 @@
         <div class="span6">
             <h3>Payment method</h3>
             <br/>
-            @foreach (var paymentMethod in TransactionLibrary.GetPaymentMethods("Shipment"))
+            @foreach (var paymentMethod in TransactionLibrary.GetPaymentMethods())
             {
                 <label class="radio">
                     <input type="radio" name="PaymentMethod"  @(payment != null && payment.PaymentMethod.Equals(paymentMethod) ? "checked" : string.Empty) 
