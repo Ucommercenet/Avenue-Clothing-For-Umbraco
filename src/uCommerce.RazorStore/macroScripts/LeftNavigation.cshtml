@@ -11,7 +11,7 @@
             @foreach (var category in categories)
             {
                 <li>
-                    <a href="@CatalogLibrary.GetNiceUrlForCategory(category.Id)">@category.DisplayName()</a>
+                    <a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
                     @RenderNavigation(category.Categories)
                 </li>
             }

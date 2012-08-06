@@ -8,7 +8,7 @@
         Category lastCategory = null;
         foreach (var category in WebSiteContext.Categories())
         {
-            <li><a href="@CatalogLibrary.GetNiceUrlForCategory(category.Id)">@category.DisplayName()</a><span class="divider">/</span></li>
+            <li><a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a><span class="divider">/</span></li>
             lastCategory = category;
         }
 

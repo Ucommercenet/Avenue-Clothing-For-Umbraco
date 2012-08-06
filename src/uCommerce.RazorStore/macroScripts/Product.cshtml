@@ -1,6 +1,4 @@
-﻿@using UCommerce.Catalog
-@using UCommerce.EntitiesV2
-@using UCommerce.Transactions
+﻿@using UCommerce.EntitiesV2
 @using umbraco.MacroEngines
 @using UCommerce.Api
 
@@ -11,7 +9,7 @@
     {
 
         var variant = string.IsNullOrEmpty(HttpContext.Current.Request.Form["selectedVariant"]) ? null : HttpContext.Current.Request.Form["selectedVariant"];
-        TransactionLibrary.AddToBasket(CatalogLibrary.GetCatalog().Name, 1, product.Sku, variant);
+        TransactionLibrary.AddToBasket(1, product.Sku, variant);
         TransactionLibrary.ExecuteBasketPipeline();
         HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
         

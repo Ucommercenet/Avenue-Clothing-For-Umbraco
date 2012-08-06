@@ -26,7 +26,7 @@
         @foreach (var subCategory in category.Categories)
         {
             <div class="well">
-                <p><a href="@CatalogLibrary.GetNiceUrlForCategory(subCategory.Id)">@subCategory.DisplayName()</a></p>
+                <p><a href="@CatalogLibrary.GetNiceUrlForCategory(subCategory)">@subCategory.DisplayName()</a></p>
                 <em>@Html.Raw(subCategory.Description())</em>
             </div>    
         }

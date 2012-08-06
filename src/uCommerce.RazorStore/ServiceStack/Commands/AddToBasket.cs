@@ -24,9 +24,8 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         protected override object Run(AddToBasket request)
         {
-            if(string.IsNullOrWhiteSpace(request.CatalogName))
-                request.CatalogName = CatalogLibrary.GetCatalog().Name;
-            TransactionLibrary.AddToBasket(request.CatalogName, request.Quantity,request.Sku,request.VariantSku, request.AddToExistingLine);
+            //TODO: catalogname is not used - refactor to use catalogId instead
+            TransactionLibrary.AddToBasket(request.Quantity,request.Sku,request.VariantSku, request.AddToExistingLine);
             TransactionLibrary.ExecuteBasketPipeline();
             return new AddToBasketResponse();
         }
