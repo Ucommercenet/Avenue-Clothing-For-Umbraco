@@ -67,49 +67,49 @@
                             @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
                             {
                                 <span style="text-decoration:line-through">
-                                    @CatalogLibrary.FormatCurrency(lineItem.Price)    
+                                    @TransactionLibrary.FormatCurrency(lineItem.Price)    
                                 </span>
-                                @CatalogLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
+                                @TransactionLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
                             }
                             else
                             {
-                                @CatalogLibrary.FormatCurrency(lineItem.Price)    
+                                @TransactionLibrary.FormatCurrency(lineItem.Price)    
                             }
                         </td>
                         <td>
-                            @CatalogLibrary.FormatCurrency(lineItem.VAT)
+                            @TransactionLibrary.FormatCurrency(lineItem.VAT)
                         </td>
                         <td>
                             <input type="text" class="input-mini" name="quantityInput_@(lineItem.OrderLineId)" value="@lineItem.Quantity" />
                         </td>
                         <td>
-                            @CatalogLibrary.FormatCurrency(lineItem.Total)
+                            @TransactionLibrary.FormatCurrency(lineItem.Total)
                         </td>
                     </tr>
                 }
                 <tr>
                     <td colspan="5">Sub total:</td>
                     <td>
-                        @CatalogLibrary.FormatCurrency(basket.SubTotal)
+                        @TransactionLibrary.FormatCurrency(basket.SubTotal)
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">VAT:</td>
                     <td>
-                        @CatalogLibrary.FormatCurrency(basket.VAT)
+                        @TransactionLibrary.FormatCurrency(basket.VAT)
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">Order discounts:</td>
                     <td>
-                        -@CatalogLibrary.FormatCurrency(basket.Discount)
+                        -@TransactionLibrary.FormatCurrency(basket.Discount)
                     </td>
                 </tr>
                 
                 <tr>
                     <td colspan="5">Order total:</td>
                     <td >
-                        @CatalogLibrary.FormatCurrency(basket.OrderTotal)
+                        @TransactionLibrary.FormatCurrency(basket.OrderTotal)
                     </td>
                 </tr>
             </tbody>

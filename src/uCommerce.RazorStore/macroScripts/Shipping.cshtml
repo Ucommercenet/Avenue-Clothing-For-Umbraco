@@ -19,7 +19,7 @@
 @helper RenderShippingMethodLabel(ShippingMethod shippingMethod, PurchaseOrder basket)
 {
     var price = @shippingMethod.GetPriceForCurrency(basket.BillingCurrency);
-    var formattedPrice = CatalogLibrary.FormatCurrency(price == null ? 0 : price.Price);
+    var formattedPrice = TransactionLibrary.FormatCurrency(price == null ? 0 : price.Price);
     
     @shippingMethod.Name <text>(</text>@formattedPrice<text>)</text>
     

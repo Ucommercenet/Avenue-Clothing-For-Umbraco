@@ -21,7 +21,7 @@
     decimal feePercent = paymentMethod.FeePercent;
 
     var fee = paymentMethod.GetFeeForCurrency(basket.BillingCurrency);
-    var formattedPrice = CatalogLibrary.FormatCurrency(fee == null ? 0 : fee.Fee);
+    var formattedPrice = TransactionLibrary.FormatCurrency(fee == null ? 0 : fee.Fee);
     
     @paymentMethod.Name <text>(</text>@formattedPrice <text>+</text> @feePercent<text>%)</text> 
     

@@ -14,5 +14,5 @@
     }
     else
     {
-        <a href="/shop/checkout/cart.aspx">@basket.OrderLines.Sum(x=>x.Quantity) items in cart, total: @CatalogLibrary.FormatCurrency(@basket.SubTotal)</a>
+        <a href="/shop/checkout/cart.aspx">@basket.OrderLines.Sum(x=>x.Quantity) items in cart, total: @TransactionLibrary.FormatCurrency(@basket.SubTotal)</a>
     }
