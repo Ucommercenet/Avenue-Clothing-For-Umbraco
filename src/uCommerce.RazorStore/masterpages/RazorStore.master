@@ -47,20 +47,11 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="/shop">uCommece Razor Store</a>
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> Username
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Sign Out</a></li>
-            </ul>
-          </div>
-          <div class="nav-collapse">
+          <div class="nav-collapse pull-right">
             <ul class="nav">
-              <li><a href="/shop/checkout/cart.aspx">Cart</a></li>
+              <li>
+                  <umbraco:Macro ID="Macro3" Alias="MiniBasket[Razor]" runat="server"></umbraco:Macro>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
