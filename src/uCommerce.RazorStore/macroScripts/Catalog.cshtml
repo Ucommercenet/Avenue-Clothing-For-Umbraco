@@ -1,8 +1,10 @@
 ﻿@using UCommerce.Api
 @using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
 
 @{
-    Category category = WebSiteContext.Category();
+    Category category = SiteContext.Current.CatalogContext.CurrentCategory;
 }
 
 <div class="row-fluid">

@@ -1,12 +1,13 @@
 ﻿@using UCommerce.Api
 @using UCommerce.EntitiesV2
+@using UCommerce.Extensions
 @using UCommerce.Runtime
 
 <ul class="breadcrumb">
     
     @{
         Category lastCategory = null;
-        foreach (var category in WebSiteContext.Categories())
+        foreach (var category in SiteContext.Current.CatalogContext.CurrentCategories)
         {
             <li><a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a><span class="divider">/</span></li>
             lastCategory = category;

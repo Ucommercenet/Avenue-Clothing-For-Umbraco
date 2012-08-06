@@ -109,9 +109,6 @@
     <Content Include="macroScripts\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\RazorTest.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="img\glyphicons-halflings-white.png" />

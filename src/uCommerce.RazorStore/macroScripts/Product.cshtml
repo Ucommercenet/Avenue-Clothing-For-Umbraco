@@ -1,9 +1,11 @@
 ﻿@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
 @using umbraco.MacroEngines
 @using UCommerce.Api
 
 @{
-    Product product = WebSiteContext.Product();
+    Product product = SiteContext.Current.CatalogContext.CurrentProduct;
 
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "addToBasket"))
     {
