@@ -42,9 +42,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\inetpub\u3\bin\cms.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\..\lib\ServiceStack\3.78\ServiceStack.dll</HintPath>
     </Reference>
@@ -79,7 +76,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="UCommerce, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\inetpub\u3\bin\UCommerce.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\3.0.0.0 PR3\UCommerce.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>C:\inetpub\u3\bin\umbraco.dll</HintPath>
