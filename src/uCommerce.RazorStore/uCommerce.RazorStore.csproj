@@ -78,6 +78,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\3.0.0.0 PR3\UCommerce.dll</HintPath>
     </Reference>
+    <Reference Include="UCommerce.Infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\3.0.0.0 PR3\UCommerce.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="umbraco">
       <HintPath>C:\inetpub\u3\bin\umbraco.dll</HintPath>
     </Reference>
@@ -86,6 +90,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceStack\AppHost.cs" />
     <Compile Include="ServiceStack\Commands\UpdateLineItem.cs" />
@@ -96,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\bootstrap-responsive.css" />
+    <Content Include="Global.asax" />
     <Content Include="js\servicestack.js" />
     <Content Include="js\jquery.ucommerce.js" />
     <Content Include="masterpages\RazorStore.master" />
