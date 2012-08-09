@@ -108,7 +108,6 @@
     <Content Include="js\jquery.ucommerce.js" />
     <Content Include="masterpages\RazorStore.master" />
     <Content Include="macroScripts\LeftNavigation.cshtml" />
-    <Content Include="umbraco\masterpages\default.Master" />
     <Content Include="masterpages\RazorStoreFrontPage.master" />
     <Content Include="masterpages\RazorStoreProduct.master" />
     <Content Include="macroScripts\Product.cshtml" />
