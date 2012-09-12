@@ -7,6 +7,7 @@
     var basket = SiteContext.Current.OrderContext.GetBasket();
     var product = SiteContext.Current.CatalogContext.CurrentProduct;
     var request = HttpContext.Current.Request;
+    var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
 
     if (request.HttpMethod == "POST")
     {
@@ -92,6 +93,16 @@
                 <p class="item-tax">(@Html.Raw(incVAT) @product.Tax() Tax)</p>
             </aside>
         </div>
+        @if (inBasket)
+        {
+            <div class="clearfix">&nbsp;</div>
+            <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <p><strong>Note!</strong> This item is already in your basket.</p>
+                <p><a class="btn btn-primary" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        }
         <form method="post" class="form-horizontal">
         <div class="span12 well">
             @if (variants.Any())
