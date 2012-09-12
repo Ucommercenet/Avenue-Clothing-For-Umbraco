@@ -10,7 +10,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     public class GetBasket
     {
     }
-    public class GetBasketResponse: IHasResponseStatus
+    public class GetBasketResponse : IHasResponseStatus
     {
         public GetBasketResponse(UCommerce.EntitiesV2.Basket basket)
         {
@@ -42,7 +42,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         protected override object Run(GetBasket request)
         {
-            var basket =  TransactionLibrary.GetBasket(false);
+            var basket = TransactionLibrary.GetBasket(false);
             return new GetBasketResponse(basket);
         }
 

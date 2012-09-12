@@ -1,7 +1,8 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStore.master" AutoEventWireup="true" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
 <%@ Register TagPrefix="umbraco" Namespace="umbraco.presentation.templateControls" Assembly="umbraco" %>
-<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="MainContent">
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
     <umbraco:Macro runat="server" Alias="Product[Razor]"/>
-    
-
+</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="cphScripts">
+    <script src="/js/ucommerce.demostore.productpage.js"></script>
 </asp:Content>

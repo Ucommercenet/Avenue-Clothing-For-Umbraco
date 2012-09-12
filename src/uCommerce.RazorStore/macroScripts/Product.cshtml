@@ -3,24 +3,23 @@
 @using UCommerce.Runtime
 @using umbraco.MacroEngines
 @using UCommerce.Api
-
 @{
-    Product product = SiteContext.Current.CatalogContext.CurrentProduct;
+    var product = SiteContext.Current.CatalogContext.CurrentProduct;
 
-    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "addToBasket"))
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "add-to-basket"))
     {
-
         var variant = string.IsNullOrEmpty(HttpContext.Current.Request.Form["selectedVariant"]) ? null : HttpContext.Current.Request.Form["selectedVariant"];
         TransactionLibrary.AddToBasket(1, product.Sku, variant);
         TransactionLibrary.ExecuteBasketPipeline();
         HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
-        
     }
-    
-    var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
-    
-}
 
+    var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
+
+    var variants = product.Variants;
+    var uniqueColours = variants.Select(v => v.ProductProperties.First(p => p.ProductDefinitionField.Name == "Colour").Value).Distinct();
+    var uniqueSizes = variants.Select(v => v.ProductProperties.First(p => p.ProductDefinitionField.Name == "CollarSize").Value).Distinct();
+}
 <div class="row-fluid">
     <div class="span6">
         @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
@@ -28,9 +27,7 @@
             dynamic mediaItem = new DynamicMedia(product.PrimaryImageMediaId);
             <img src="@mediaItem.umbracoFile" />
         }
-        
     </div>
-    <!--/span-->
     <div class="span6">
         <h1>@product.DisplayName()</h1>
         <h6>@product.DynamicProperty().Brand</h6>
@@ -41,29 +38,42 @@
             <p>List price: @product.Price()</p>
             <p>Tax: @product.Tax()</p>
             <p>PriceExclTax: @product.PriceExclTax()</p>
-            
         </div>
-        <form method="post">
-        
-            
-            @if(product.Variants.Any())
+        <form method="post" class="form-horizontal">
+        <div class="well">
+            @if (variants.Any())
             {
-                <div class="well">
-                    <h4>Variants</h4>
-                    <br />
-                    <select name="selectedVariant">
-                        @foreach (var variant in product.Variants)
-                        {
-                            <option value="@variant.VariantSku">@variant.DisplayName()</option>
-                        }
-                    </select>
-                </div>        
+                <div class="control-group">
+                    <label class="control-label" for="selected-size">Size</label>
+                    <div class="controls">
+                        <select name="selected-size" id="selected-size">
+                            <option value="">-- Please Select --</option>
+                            @foreach (var size in uniqueSizes)
+                            {
+                                <option value="@size">@size"</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="selected-colour">Colour</label>
+                    <div class="controls">
+                        <select name="selected-colour" id="selected-colour">
+                            <option value="">-- Please Select --</option>
+                            @foreach (var colour in uniqueColours)
+                            {
+                                <option value="@colour">@colour</option>
+                            }
+                        </select>
+                    </div>
+                </div>
             }
-            <input name="addToBasket" class="btn btn-primary" type="submit" value="Add to basket"/>
-        
+            <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
+            <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
+            <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+        </div>
         </form>
     </div>
-    <!--/span-->
 </div>
 <div class="row-fluid">
     <div class="span8">
@@ -73,15 +83,10 @@
     {
         <div class="span4 well">
             <h4>Related products</h4>
-        
             @foreach (var relatedProduct in @product.GetRelatedProducts().SelectMany(x => x.Value))
             {
                 <a href="@CatalogLibrary.GetNiceUrlForProduct(relatedProduct)">@relatedProduct.DisplayName()</a>
             }
-        
         </div>
     }
 </div>
-
-
-

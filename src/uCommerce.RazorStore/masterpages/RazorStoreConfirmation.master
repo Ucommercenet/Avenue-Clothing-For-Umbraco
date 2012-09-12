@@ -1,7 +1,7 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStore.master" AutoEventWireup="true" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
 
 <%@ Register TagPrefix="umbraco" Namespace="umbraco.presentation.templateControls" Assembly="umbraco" %>
-<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="MainContent">
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
     <umbraco:Macro ID="Macro1" runat="server" Alias="Confirmation[Razor]"/>
-	
+  
 </asp:content>

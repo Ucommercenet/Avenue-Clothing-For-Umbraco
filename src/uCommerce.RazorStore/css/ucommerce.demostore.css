@@ -1,0 +1,4 @@
+﻿select option:disabled {
+    font-style:italic;
+    color:#dcdcdc;
+}

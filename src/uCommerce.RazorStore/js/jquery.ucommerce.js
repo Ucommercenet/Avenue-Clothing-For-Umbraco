@@ -9,6 +9,11 @@ var uCommerce = uCommerce || {};
                 var extendedOptions = $.extend(defaults, options);
                 callServiceStack({ GetBasket: extendedOptions }, onSuccess, onError);
             },
+            getProductVariations: function(options, onSuccess, onError) {
+                var defaults = {};
+                var extendedOptions = $.extend(defaults, options);
+                callServiceStack({ GetProductVariations: extendedOptions }, onSuccess, onError);
+            },
             addToBasket: function(options, onSuccess, onError) {
                  var defaults = {
                     quantity: 1, 
@@ -28,8 +33,6 @@ var uCommerce = uCommerce || {};
                 callServiceStack({ UpdateLineItem: extendedOptions }, onSuccess, onError);
             }
         }
-        
-        
     });
     $.uCommerce.defaults = {
         servicepath: '/ucommerceapi',
@@ -38,7 +41,6 @@ var uCommerce = uCommerce || {};
     };
     function callServiceStack(request, onSuccess, onError) {
         var gateway = new servicestack.ClientGateway($.uCommerce.defaults.protocol + "//" + $.uCommerce.defaults.host + $.uCommerce.defaults.servicepath + '/');
-        
         gateway.postToService(request, onSuccess, onError);
     }
 })(jQuery);
