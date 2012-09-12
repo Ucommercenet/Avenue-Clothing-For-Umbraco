@@ -1,4 +1,20 @@
-﻿select option:disabled {
-    font-style:italic;
-    color:#dcdcdc;
+﻿/* Product Details Page
+-------------------------------------------*/
+#product-details {
 }
+    #product-details select option:disabled {
+        font-style:italic;
+        color:#dcdcdc;
+    }
+    #product-details aside .item-price{
+        color:#46a546;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 40px;
+        margin: 10px 0;
+    }
+    #product-details aside .item-tax{
+        font-style: italic;
+        font-size: 0.9em;
+        color:#606060;
+    }

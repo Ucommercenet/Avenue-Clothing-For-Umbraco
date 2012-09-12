@@ -26,7 +26,7 @@
     var uniqueColours = variants.Select(v => v.ProductProperties.First(p => p.ProductDefinitionField.Name == "Colour").Value).Distinct();
     var uniqueSizes = variants.Select(v => v.ProductProperties.First(p => p.ProductDefinitionField.Name == "CollarSize").Value).Distinct();
 }
-<div class="row-fluid">
+<div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
     <div class="span6">
         @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
         {
@@ -35,17 +35,17 @@
         }
     </div>
     <section class="span6">
-        <header class="span12 page-header">
-            <div class="span8">
-                <h1>@product.DisplayName()</h1>
+        <div class="span12 page-header">
+            <header class="span8">
+                <h1 itemprop="name">@product.DisplayName()</h1>
                 <h6>@product.DynamicProperty().Brand</h6>
                 <small><em>@product.ShortDescription()</em></small>
-            </div>
-            <aside class="span4">
-                <p class="item-price">@product.Price()</p>
+            </header>
+            <aside class="span4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <p class="item-price" itemprop="price">@product.Price()</p>
                 <p class="item-tax">(@Html.Raw(incVAT) @product.Tax() Tax)</p>
             </aside>
-        </header>
+        </div>
         <form method="post" class="form-horizontal">
         <div class="span12 well">
             @if (variants.Any())
@@ -81,9 +81,24 @@
             <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
         </div>
         </form>
-        <article class="span12">
-            @Html.Raw(product.LongDescription())
-        </article>
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#product-description" data-toggle="tab">Details</a></li>
+                <li><a href="#delivery-info" data-toggle="tab">Delivery</a></li>
+                <li><a href="#returns-info" data-toggle="tab">Returns</a></li>
+            </ul>
+            <div class="tab-content">
+                <article itemprop="description" id="product-description" class="tab-pane active">
+                    @Html.Raw(product.LongDescription())
+                </article>
+                <div id="delivery-info" class="tab-pane">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas placerat elementum tristique. Ut ut pretium massa. Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="returns-info" class="tab-pane">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas placerat elementum tristique. Ut ut pretium massa. Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
 <div class="row-fluid">
