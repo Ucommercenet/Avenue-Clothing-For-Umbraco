@@ -9,6 +9,8 @@ namespace uCommerce.RazorStore.ServiceStack.Model
 
         public decimal? SubTotal { get; set; }
 
+        public int? TotalItems { get; set; }
+
         public List<LineItem> LineItems { get; set; }
     }
 }

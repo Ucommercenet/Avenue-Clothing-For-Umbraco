@@ -14,6 +14,11 @@ var uCommerce = uCommerce || {};
                 var extendedOptions = $.extend(defaults, options);
                 callServiceStack({ GetProductVariations: extendedOptions }, onSuccess, onError);
             },
+            getVariantSkuFromSelection: function(options, onSuccess, onError) {
+                var defaults = {};
+                var extendedOptions = $.extend(defaults, options);
+                callServiceStack({ GetVariantSkuFromSelection: extendedOptions }, onSuccess, onError);
+            },
             addToBasket: function(options, onSuccess, onError) {
                  var defaults = {
                     quantity: 1, 

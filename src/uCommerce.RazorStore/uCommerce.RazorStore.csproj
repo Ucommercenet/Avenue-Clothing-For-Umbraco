@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceStack\AppHost.cs" />
+    <Compile Include="ServiceStack\Commands\GetVariantSkuFromSelection.cs" />
     <Compile Include="ServiceStack\Commands\GetProductVariations.cs" />
     <Compile Include="ServiceStack\Commands\UpdateLineItem.cs" />
     <Compile Include="ServiceStack\Model\Basket.cs" />

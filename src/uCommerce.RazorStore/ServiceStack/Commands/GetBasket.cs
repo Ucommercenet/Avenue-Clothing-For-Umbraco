@@ -7,6 +7,8 @@ using uCommerce.RazorStore.ServiceStack.Model;
 
 namespace uCommerce.RazorStore.ServiceStack.Commands
 {
+    using System.Linq;
+
     public class GetBasket
     {
     }
@@ -14,10 +16,13 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         public GetBasketResponse(UCommerce.EntitiesV2.Basket basket)
         {
-            Basket = new Basket();
-            Basket.OrderTotal = basket.PurchaseOrder.OrderTotal;
-            Basket.SubTotal = basket.PurchaseOrder.SubTotal;
-            Basket.LineItems = new List<LineItem>();
+            Basket = new Basket
+                {
+                    OrderTotal = basket.PurchaseOrder.OrderTotal,
+                    TotalItems = basket.PurchaseOrder.OrderLines.Sum(l => l.Quantity),
+                    SubTotal = basket.PurchaseOrder.SubTotal,
+                    LineItems = new List<LineItem>()
+                };
             foreach (var orderLine in basket.PurchaseOrder.OrderLines)
             {
                 var lineItem = new LineItem();

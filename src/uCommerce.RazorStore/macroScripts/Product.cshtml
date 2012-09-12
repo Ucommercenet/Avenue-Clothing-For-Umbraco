@@ -5,11 +5,16 @@
 @using UCommerce.Api
 @{
     var product = SiteContext.Current.CatalogContext.CurrentProduct;
+    var request = HttpContext.Current.Request;
 
-    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "add-to-basket"))
+    if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "add-to-basket"))
     {
-        var variant = string.IsNullOrEmpty(HttpContext.Current.Request.Form["selectedVariant"]) ? null : HttpContext.Current.Request.Form["selectedVariant"];
-        TransactionLibrary.AddToBasket(1, product.Sku, variant);
+        var selectedSize = request.Form["selected-size"];
+        var selectedColour = request.Form["selected-colour"];
+
+        var variant = product.Variants.First(v => v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "CollarSize" && p.Value == selectedSize) && v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "Colour" && p.Value == selectedColour));
+        var quantity = Convert.ToInt32(request.Form["quantity-to-add"]);
+        TransactionLibrary.AddToBasket(quantity, product.Sku, variant.VariantSku);
         TransactionLibrary.ExecuteBasketPipeline();
         HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
     }
@@ -69,6 +74,7 @@
                 </div>
             }
             <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
+            <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
             <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
             <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
         </div>

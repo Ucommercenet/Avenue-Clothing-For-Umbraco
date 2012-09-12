@@ -1,25 +1,79 @@
-﻿$(function () {
-    wireupVariationOptions($("#product-sku"), $("#selected-size"), $("#selected-colour"), $("#add-to-basket"));
+﻿var _minicart = null;
+$(function () {
+    _minicart = $('#mini-cart');
+    wireupVariationOptions($('#product-sku'), $('#selected-size'), $('#selected-colour'), $('#add-to-basket'));
+    wireupAddToCartButton($('#add-to-basket'), $('#product-sku'), $('#selected-size'), $('#selected-colour'), $('#quantity-to-add'));
 });
-function wireupVariationOptions(productId, size, colour, addToCartButton) {
+function wireupVariationOptions(sku, size, colour, addToCartButton) {
     addToCartButton.removeClass('btn-success').addClass('disabled');
-    updateVariationOptions(productId, size, colour);
+    updateVariationOptions(sku, size, colour);
     size.change(function () {
         // Reset the colour options
         $('option:first', colour).attr('selected', true);
-        updateVariationOptions(productId, size, colour, function () {
+        updateVariationOptions(sku, size, colour, function () {
             updateAddToCartButton(size, colour, addToCartButton);
         });
     });
     colour.change(function () {
-        updateVariationOptions(productId, size, colour, function () {
+        updateVariationOptions(sku, size, colour, function () {
             updateAddToCartButton(size, colour, addToCartButton);
         });
     });
 };
+function wireupAddToCartButton(addToCartButton, skuInput, sizeInput, colourInput, quantityInput) {
+    addToCartButton.click(function (e) {
+        e.preventDefault();
+
+        var sku = skuInput.val();
+        var size = sizeInput.val();
+        var colour = colourInput.val();
+        var qty = quantityInput.val();
+
+        $.uCommerce.getVariantSkuFromSelection(
+            {
+                productSku: sku,
+                size: size,
+                colour: colour
+            },
+            function (data) {
+                var variant = data.Variant;
+                $.uCommerce.addToBasket(
+                    {
+                        sku: variant.Sku,
+                        variantSku: variant.VariantSku,
+                        quantity: qty
+                    },
+                    function () {
+                        updateCartTotals(addToCartButton);
+                    }
+                );
+            });
+        return false;
+    });
+};
+function updateCartTotals(addToCartButton) {
+    if (_minicart == null) {
+        return;
+    }
+    $.uCommerce.getBasket({}, function (response) {
+        var basket = response.Basket;
+        var qty = $(".cart-qty", _minicart);
+        var sub = $(".sub-total", _minicart);
+        qty.text(basket.TotalItems);
+        sub.text(basket.OrderTotal);
+
+        _minicart.effect("highlight", {}, 3000);
+        var alert = $('<div />', {
+            "class": "alert alert-success",
+            html: 'Thanks, this item has been added to your cart. <a href="/shop/checkout/cart.aspx">Click here to view your cart</a>.'
+        });
+        addToCartButton.parent().append(alert);
+        setTimeout(function () {
+            alert.remove();
+        }, 3000);
+    });
+};
 function updateAddToCartButton(size, colour, addToCartButton) {
-    console.log(size.val());
-    console.log(colour.val());
     // If the user has made a valid selection enable the add to cart button
     if (colour.val() != '' && size.val() != '') {
         addToCartButton.removeClass('disabled').addClass('btn-success').removeAttr('disabled');
@@ -27,7 +81,7 @@ function updateAddToCartButton(size, colour, addToCartButton) {
         addToCartButton.removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
     }
 };
-function updateVariationOptions(productId, size, colour, success, failure) {
+function updateVariationOptions(sku, size, colour, success, failure) {
     var selectedSize = size.val();
     var colourOptions = $('option', colour).not('option[value=""]');
 
@@ -35,7 +89,7 @@ function updateVariationOptions(productId, size, colour, success, failure) {
     colourOptions.attr('disabled', 'disabled');
 
     $.uCommerce.getProductVariations(
-            { productSku: productId.val() },
+            { productSku: sku.val() },
             function (data) {
                 $.each(data.Variations, function (i, v) {
                     var variationSize = getObjectsByKey(v.Properties, 'Name', 'CollarSize')[0];
@@ -57,14 +111,16 @@ function updateVariationOptions(productId, size, colour, success, failure) {
                 var availableOptions = $('option', colour).not('option[value=""]').not(':disabled');
                 if (selectedSize != '' && availableOptions.size() == 1) {
                     colour.val(availableOptions.val());
-                    console.log("Updated Select");
                 }
 
+
+
                 // Now call any functions that need to run after the updates
-                if(success)
+                if (success)
                     success();
-            }
-    );
+            },
+            failure
+        );
 }
 function getObjectsByKey(obj, key, val) {
     var objects = [];
