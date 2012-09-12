@@ -28,6 +28,9 @@
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <a class="brand" href="/shop">uCommece Razor Store</a>
+                    <form class="navbar-search pull-left" action="">
+                      <input id="site-search" name="search" type="text" class="search-query span4" placeholder="Search the store">
+                    </form>
                     <div class="nav-collapse pull-right">
                         <ul class="nav">
                             <li>
@@ -65,6 +68,7 @@
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/servicestack.js"></script>
         <script src="/js/jquery.ucommerce.js"></script>
+        <script src="/js/ucommerce.demostore.js"></script>
         <asp:ContentPlaceHolder runat="server" ID="cphScripts"/>
     </body>
     </html>
