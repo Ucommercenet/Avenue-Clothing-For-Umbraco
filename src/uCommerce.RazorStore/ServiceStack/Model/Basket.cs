@@ -11,6 +11,12 @@ namespace uCommerce.RazorStore.ServiceStack.Model
 
         public int? TotalItems { get; set; }
 
+        public string FormattedOrderTotal { get; set; }
+
+        public string FormattedSubTotal { get; set; }
+
+        public string FormattedTotalItems { get; set; }
+
         public List<LineItem> LineItems { get; set; }
     }
 }

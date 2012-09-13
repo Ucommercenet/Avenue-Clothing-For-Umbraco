@@ -25,7 +25,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
                     {
                         Sku = product.Sku,
                         VariantSku = product.VariantSku,
-                        ProductName = product.Name,
+                        ProductName = product.ProductDescriptions.First().DisplayName,
                         Url = CatalogLibrary.GetNiceUrlForProduct(product),
                         Properties = product.ProductProperties.Select(prop => new ProductProperty()
                             {

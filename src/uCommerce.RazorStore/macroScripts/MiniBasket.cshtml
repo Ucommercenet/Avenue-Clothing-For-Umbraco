@@ -1,5 +1,6 @@
 ﻿@using UCommerce.Api
 @using UCommerce.EntitiesV2
+@using UCommerce.Runtime
 @{
     PurchaseOrder basket = null;
     if(TransactionLibrary.HasBasket())
@@ -14,5 +15,5 @@
     }
     else
     {
-        <a href="/shop/checkout/cart.aspx" id="mini-cart"><i class="icon-shopping-cart"></i><span class="cart-qty">@basket.OrderLines.Sum(x=>x.Quantity)</span> items in cart, total: <span class="sub-total">@TransactionLibrary.FormatCurrency(@basket.SubTotal)</span></a>
+        <a href="/shop/checkout/cart.aspx" id="mini-cart"><i class="icon-shopping-cart"></i><span class="cart-qty">@basket.OrderLines.Sum(x => x.Quantity).ToString("#,##")</span> items in cart, total: <span class="sub-total">@SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency.Name@basket.SubTotal.Value.ToString("#,##0.00")</span></a>
     }

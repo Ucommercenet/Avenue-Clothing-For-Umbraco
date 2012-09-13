@@ -2,14 +2,11 @@
 @using UCommerce.EntitiesV2
 @using UCommerce.Extensions
 @using UCommerce.Runtime
-
 @{
     Category category = SiteContext.Current.CatalogContext.CurrentCategory;
 }
-
 <div class="row-fluid">
     <h1>@category.DisplayName()</h1>
-    
 </div>
 <hr />
 <div class="row-fluid">
@@ -18,11 +15,26 @@
         @foreach (var product in CatalogLibrary.GetProducts(category))
         {
             <div class="well">
-                <p><a href="@CatalogLibrary.GetNiceUrlForProduct(product,category)">@product.DisplayName()</a></p>
+                <p><a href="@CatalogLibrary.GetNiceUrlForProduct(product, category)">@product.DisplayName()</a></p>
                 <em>@product.ShortDescription()</em>
+                @if (product.ProductReviews.Any())
+                {
+                    var rating = product.ProductReviews.Average(r => r.Rating);
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        if (rating >= i)
+                        {
+                    <i class="icon-star"></i>
+                        }
+                        else
+                        {
+                    <i class="icon-star-empty"></i>
+                        }
+                    }
+                }
             </div>    
         }
-       </div> 
+    </div>
     <div class="span6">
         <h2>Categories</h2>
         @foreach (var subCategory in CatalogLibrary.GetCategories(category))
@@ -32,5 +44,5 @@
                 <em>@Html.Raw(subCategory.Description())</em>
             </div>    
         }
-       </div> 
+    </div>
 </div>

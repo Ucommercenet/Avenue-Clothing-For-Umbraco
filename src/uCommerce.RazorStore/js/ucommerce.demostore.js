@@ -6,7 +6,7 @@
                 $.map(resp, function (data) {
                     var matches = [];
                     for (var i = 0; i < data.length; i++) {
-                        matches.push(data[0].ProductName);
+                        matches.push(data[i].ProductName);
                     }
                     return process(matches);
                 });

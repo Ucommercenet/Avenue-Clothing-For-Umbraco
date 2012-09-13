@@ -85,7 +85,21 @@
         <div class="span12 page-header">
             <header class="span8">
                 <h1 itemprop="name">@product.DisplayName()</h1>
-                <h6>@product.DynamicProperty().Brand</h6>
+                <h6><small>@if (product.ProductReviews.Any())
+                {
+                    var rating = product.ProductReviews.Average(r => r.Rating);
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        if (rating >= i)
+                        {
+                    <i class="icon-star"></i>
+                        }
+                        else
+                        {
+                    <i class="icon-star-empty"></i>
+                        }
+                    }
+                }</small> @product.DynamicProperty().Brand</h6>
                 <small><em>@product.ShortDescription()</em></small>
             </header>
             <aside class="span4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -93,18 +107,15 @@
                 <p class="item-tax">(@Html.Raw(incVAT) @product.Tax() Tax)</p>
             </aside>
         </div>
-        @if (inBasket)
-        {
-            <div class="clearfix">&nbsp;</div>
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <p><strong>Note!</strong> This item is already in your basket.</p>
-                <p><a class="btn btn-primary" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
-            </div>
-            <div class="clearfix">&nbsp;</div>
-        }
         <form method="post" class="form-horizontal">
         <div class="span12 well">
+            @if (inBasket)
+            {
+                <div class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
+                </div>
+            }
             @if (variants.Any())
             {
                 <div class="control-group">
