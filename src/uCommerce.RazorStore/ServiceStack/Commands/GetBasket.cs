@@ -20,18 +20,26 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
         {
             var currencySymbol = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency.Name;
 
+            var po = basket.PurchaseOrder;
+
             Basket = new Basket
                 {
-                    OrderTotal = basket.PurchaseOrder.OrderTotal,
-                    TotalItems = basket.PurchaseOrder.OrderLines.Sum(l => l.Quantity),
-                    SubTotal = basket.PurchaseOrder.SubTotal,
-                    FormattedOrderTotal = currencySymbol + basket.PurchaseOrder.OrderTotal.Value.ToString("#,##.00"),
-                    FormattedTotalItems = basket.PurchaseOrder.OrderLines.Sum(l => l.Quantity).ToString("#,##"),
-                    FormattedSubTotal = currencySymbol + basket.PurchaseOrder.SubTotal.Value.ToString("#,##.00"),
+                    SubTotal = po.SubTotal,
+                    TaxTotal = po.TaxTotal,
+                    DiscountTotal =  po.DiscountTotal,
+                    OrderTotal = po.OrderTotal,
+                    TotalItems = po.OrderLines.Sum(l => l.Quantity),
+                    
+                    FormattedSubTotal = currencySymbol + po.SubTotal.Value.ToString("#,##.00"),
+                    FormattedTaxTotal = currencySymbol + po.TaxTotal.Value.ToString("#,##.00"),
+                    FormattedDiscountTotal =  currencySymbol + po.DiscountTotal.Value.ToString("#,##.00"),
+                    FormattedOrderTotal = currencySymbol + po.OrderTotal.Value.ToString("#,##.00"),
+                    FormattedTotalItems = po.OrderLines.Sum(l => l.Quantity).ToString("#,##"),
+
                     LineItems = new List<LineItem>()
                 };
 
-            foreach (var orderLine in basket.PurchaseOrder.OrderLines)
+            foreach (var orderLine in po.OrderLines)
             {
                 var lineItem = new LineItem
                     {

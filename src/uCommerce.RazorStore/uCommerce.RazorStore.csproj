@@ -110,6 +110,7 @@
     <Content Include="css\bootstrap-responsive.css" />
     <Content Include="css\ucommerce.demostore.css" />
     <Content Include="Global.asax" />
+    <Content Include="js\ucommerce.demostore.cart.js" />
     <Content Include="js\ucommerce.demostore.js" />
     <Content Include="js\servicestack.js" />
     <Content Include="js\jquery.ucommerce.js" />

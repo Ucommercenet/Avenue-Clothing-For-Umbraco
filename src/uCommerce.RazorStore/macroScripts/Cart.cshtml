@@ -1,125 +1,143 @@
 ﻿@using UCommerce.Api
 @{
     var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
+    var request = HttpContext.Current.Request;
 
-    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x.StartsWith("addVoucher")))
+    if (request.HttpMethod == "POST")
     {
-        var code = HttpContext.Current.Request.Form["voucherCode"];
-        if (!string.IsNullOrWhiteSpace(code))
+        if (request.Form.AllKeys.Any(x => x.StartsWith("add-voucher")))
         {
-            MarketingLibrary.AddVoucher(code);
-            TransactionLibrary.ExecuteBasketPipeline();
-            HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
-        }
-    }
-    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x.StartsWith("updateBasket")))
-    {
-        foreach (var orderLineId in basket.OrderLines.Select(x => x.OrderLineId).ToList())
-        {
-            int newQuantity;
-            if (int.TryParse(HttpContext.Current.Request.Form["quantityInput_" + orderLineId], out newQuantity))
+            var code = request.Form["voucher-code"];
+            if (!string.IsNullOrWhiteSpace(code))
             {
-                TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
+                MarketingLibrary.AddVoucher(code);
+                TransactionLibrary.ExecuteBasketPipeline();
             }
         }
 
+        if (request.Form.AllKeys.Any(x => x.StartsWith("update-basket-line")))
+        {
+            int orderLineId;
+            int newQuantity;
 
-        TransactionLibrary.ExecuteBasketPipeline();
-        if (HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateBasketAndContinue"))
+            if (int.TryParse(request.Form["update-basket-line"], out orderLineId) && int.TryParse(request.Form["quantityInput_" + orderLineId], out newQuantity))
+            {
+                TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
+            }
+            TransactionLibrary.ExecuteBasketPipeline();
+        }
+
+        if (request.Form.AllKeys.Any(x => x.StartsWith("update-basket")))
+        {
+            foreach (var orderLineId in basket.OrderLines.Select(x => x.OrderLineId).ToList())
+            {
+                int newQuantity;
+                if (int.TryParse(request.Form["quantityInput_" + orderLineId], out newQuantity))
+                {
+                    TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
+                }
+            }
+            TransactionLibrary.ExecuteBasketPipeline();
+        }
+
+        if (request.Form.AllKeys.Any(x => x == "update-and-continue"))
         {
             HttpContext.Current.Response.Redirect("Address.aspx");
         }
-        else
-        {
-            HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
-        }
 
+        HttpContext.Current.Response.Redirect(request.RawUrl);
     }
-
 }
-
 <form method="post">
-    <div class="row-fluid well">
-    
-        <table class="table  table-condensed">
-            <thead>
-                <tr>
-                    <th>Item no.</th>
-                    <th>Description</th>
-                    <th>Item price</th>
-                    <th>VAT</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var lineItem in basket.OrderLines)
-                {
-                
-                    <tr>
-                        <td>
-                            @lineItem.Sku
-                        </td>
-                        <td>
-                            @lineItem.ProductName
-                        </td>
-                        <td>
-                            @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
-                            {
-                                <span style="text-decoration:line-through">
-                                    @TransactionLibrary.FormatCurrency(lineItem.Price)    
-                                </span>
-                                @TransactionLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
-                            }
-                            else
-                            {
-                                @TransactionLibrary.FormatCurrency(lineItem.Price)    
-                            }
-                        </td>
-                        <td>
-                            @TransactionLibrary.FormatCurrency(lineItem.VAT)
-                        </td>
-                        <td>
-                            <input type="text" class="input-mini" name="quantityInput_@(lineItem.OrderLineId)" value="@lineItem.Quantity" />
-                        </td>
-                        <td>
-                            @TransactionLibrary.FormatCurrency(lineItem.Total)
-                        </td>
-                    </tr>
-                }
-                <tr>
-                    <td colspan="5">Sub total:</td>
+<div class="row-fluid">
+    <table class="table table-striped" id="cart">
+        <thead>
+            <tr>
+                <th class="span7">Description</th>
+                <th class="span1 money">Price</th>
+                <th class="span1 money">VAT</th>
+                <th class="span2">Quantity</th>
+                <th class="span1 money">Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lineItem in basket.OrderLines)
+            {
+                var product = @CatalogLibrary.GetProduct(lineItem.Sku);
+                <tr class="order-line">
+                    <td><a href="@CatalogLibrary.GetNiceUrlForProduct(product)">@lineItem.ProductName</a> </td>
+                    <td class="money">
+                        @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
+                        {
+                            <span style="text-decoration: line-through">
+                                @TransactionLibrary.FormatCurrency(lineItem.Price)
+                            </span>
+                            @TransactionLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
+                        }
+                        else
+                        {
+                            @TransactionLibrary.FormatCurrency(lineItem.Price)    
+                        }
+                    </td>
+                    <td class="money">
+                        @TransactionLibrary.FormatCurrency(lineItem.VAT)
+                    </td>
                     <td>
-                        @TransactionLibrary.FormatCurrency(basket.SubTotal)
+                        <div class="input-append">
+                            <input type="text" name="quantityInput_@(lineItem.OrderLineId)" value="@lineItem.Quantity" class="qty" />
+                            <button name="update-basket-line" class="btn btn-success update-cart" type="submit" value="@lineItem.OrderLineId"><i class="icon-refresh icon-white"></i></button>
+                        </div>
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="5">VAT:</td>
+                    <td class="money line-total">
+                        @TransactionLibrary.FormatCurrency(lineItem.Total)
+                    </td>
                     <td>
-                        @TransactionLibrary.FormatCurrency(basket.VAT)
-                    </td>
+                        <button type="button" class="line-remove">×</button></td>
                 </tr>
-                <tr>
-                    <td colspan="5">Order discounts:</td>
-                    <td>
-                        -@TransactionLibrary.FormatCurrency(basket.Discount)
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td colspan="5">Order total:</td>
-                    <td >
-                        @TransactionLibrary.FormatCurrency(basket.OrderTotal)
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            }
+            <tr>
+                <td rowspan="4">
+                    <div class="span6">
+                        <div class="input-append">
+                            <input type="text" name="voucher-code" />
+                            <button name="add-voucher" class="btn" type="submit"><i class="icon-plus"></i>Add Voucher</button>
+                        </div>
+                        <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
+                    </div>
+                </td>
+                <td colspan="2" rowspan="4">
+                    <button name="update-basket" class="btn update-basket" type="submit"><i class="icon-refresh"></i>Update</button>
+                </td>
+                <td>Sub total:</td>
+                <td class="money order-subtotal">
+                    @TransactionLibrary.FormatCurrency(basket.SubTotal)
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>VAT:</td>
+                <td class="money order-tax">
+                    @TransactionLibrary.FormatCurrency(basket.VAT)
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Discounts:</td>
+                <td class="money order-discounts">-@TransactionLibrary.FormatCurrency(basket.Discount)</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Order total:</td>
+                <td class="money order-total">
+                    @TransactionLibrary.FormatCurrency(basket.OrderTotal)
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pull-right">
+        <button name="update-and-continue" class="btn btn-large btn-success" type="submit">Continue to Checkout <i class="icon-arrow-right icon-white"></i></button>
     </div>
-    <div class="row-fluid well">
-        <input type="text" name="voucherCode"></input>
-        <input name="addVoucher" class="btn" type="submit" value="Add voucher"/>
-    </div>
-    <input name="updateBasket" class="btn" type="submit" value="Update cart"/>
-    
-    <input name="updateBasketAndContinue" class="btn btn-primary" type="submit" value="Next"/>
-		</form>
+</div>
+</form>

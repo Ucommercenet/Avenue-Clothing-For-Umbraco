@@ -1,8 +1,8 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
 
-<%@ Register TagPrefix="umbraco" Namespace="umbraco.presentation.templateControls" Assembly="umbraco" %>
+<asp:Content runat="server" ContentPlaceHolderID="cphScripts">
+    <script src="/js/ucommerce.demostore.cart.js"></script>
+</asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
-    <umbraco:Macro ID="Macro1" runat="server" Alias="Cart[Razor]"/>
-    
-
+    <umbraco:macro id="Macro1" runat="server" alias="Cart[Razor]" />
 </asp:Content>

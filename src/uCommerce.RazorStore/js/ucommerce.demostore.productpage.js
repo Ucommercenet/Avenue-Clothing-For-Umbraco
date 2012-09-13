@@ -1,7 +1,5 @@
-﻿var _minicart = null;
-var _itemAddedAlert = null;
+﻿var _itemAddedAlert = null;
 $(function () {
-    _minicart = $('#mini-cart');
     wireupVariationOptions($('#product-sku'), $('#selected-size'), $('#selected-colour'), $('#add-to-basket'));
     wireupAddToCartButton($('#add-to-basket'), $('#product-sku'), $('#selected-size'), $('#selected-colour'), $('#quantity-to-add'));
 });
@@ -46,49 +44,34 @@ function wireupAddToCartButton(addToCartButton, skuInput, sizeInput, colourInput
                     },
                     function () {
                         updateCartTotals(addToCartButton);
+                        
+                        var parent = addToCartButton.parent();
+                        var alert = parent.find(".item-added");
+                        if (alert.length == 0) {
+                            // Add an alert box so the customer knows they've added an item to the cart
+                            alert = $('<div />', {
+                                "class": "alert alert-success item-added",
+                                html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/shop/checkout/cart.aspx">Click here to view your cart</a>.</p>'
+                            }).hide();
+                            parent.append(alert);
+                            alert.slideDown();
+                        } else {
+                            alert.effect("highlight", { color: '#FCF8E3' }, 500);
+                        }
+
+                        // Incase there's already a timeout in place, clear it
+                        clearTimeout(_itemAddedAlert);
+
+                        // Remove the alert after 5 seconds
+                        _itemAddedAlert = setTimeout(function () {
+                            alert.slideUp(500, function () {
+                                alert.remove();
+                            });
+                        }, 5000);
                     }
                 );
             });
         return false;
-    });
-};
-function updateCartTotals(addToCartButton) {
-    if (_minicart == null) {
-        return;
-    }
-    $.uCommerce.getBasket({}, function (response) {
-        var basket = response.Basket;
-        var qty = $(".cart-qty", _minicart);
-        var sub = $(".sub-total", _minicart);
-        qty.text(basket.FormattedTotalItems);
-        sub.text(basket.FormattedOrderTotal);
-
-        // Pulse the cart so it catches the user's attention
-        $('span', _minicart).effect("highlight", {}, 500);
-
-        var parent = addToCartButton.parent();
-        var alert = parent.find(".item-added");
-        if (alert.length == 0) {
-            // Add an alert box so the customer knows they've added an item to the cart
-            alert = $('<div />', {
-                "class": "alert alert-success item-added",
-                html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/shop/checkout/cart.aspx">Click here to view your cart</a>.</p>'
-            }).hide();
-            parent.append(alert);
-            alert.slideDown();
-        } else {
-            alert.effect("highlight", { color: '#FCF8E3' }, 500);
-        }
-
-        // Incase there's already a timeout in place, clear it
-        clearTimeout(_itemAddedAlert);
-        
-        // Remove the alert after 5 seconds
-        _itemAddedAlert = setTimeout(function () {
-            alert.slideUp(500, function () {
-                alert.remove();
-            });
-        }, 5000);
     });
 };
 function updateAddToCartButton(size, colour, addToCartButton) {
@@ -130,9 +113,7 @@ function updateVariationOptions(sku, size, colour, success, failure) {
                 if (selectedSize != '' && availableOptions.size() == 1) {
                     colour.val(availableOptions.val());
                 }
-
-
-
+                
                 // Now call any functions that need to run after the updates
                 if (success)
                     success();
