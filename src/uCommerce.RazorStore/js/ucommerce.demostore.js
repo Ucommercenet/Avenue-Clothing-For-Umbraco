@@ -1,6 +1,4 @@
-﻿var _minicart = null;
-$(function () {
-    _minicart = $('#mini-cart');
+﻿$(function () {
     $('#site-search').typeahead({
         minLength: 3,
         source: function (query, process) {
@@ -17,9 +15,6 @@ $(function () {
     });
 });
 function updateCartTotals() {
-    if (_minicart == null) {
-        return;
-    }
     $.uCommerce.getBasket({}, function (response) {
         var basket = response.Basket;
         var qty = $(".item-qty");
