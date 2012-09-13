@@ -1,4 +1,10 @@
-﻿/* Product Details Page
+﻿/* Common
+-------------------------------------------*/
+td.money{
+text-align: right;
+}
+
+/* Product Details Page
 -------------------------------------------*/
 #product-details {
 }
@@ -22,9 +28,6 @@
 -------------------------------------------*/
 #cart{
 }
-    #cart .money{
-        text-align: right;
-    }
     #cart .qty{
         text-align: center;
         width: 50px;
