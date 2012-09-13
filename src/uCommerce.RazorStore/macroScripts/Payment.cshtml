@@ -1,7 +1,7 @@
 ﻿@using UCommerce.EntitiesV2
 @using UCommerce.Api
 @{
-    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updatePayment"))
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "update-payment"))
     {
         int newPaymentMethodId;
         if (int.TryParse(HttpContext.Current.Request.Form["payment-method"], out newPaymentMethodId))
@@ -40,5 +40,5 @@
 
         </div>
     </div>
-    <input name="updatePayment" class="btn btn-primary" type="submit" value="Next"/>
+    <input name="update-payment" class="btn btn-primary" type="submit" value="Next"/>
 </form>

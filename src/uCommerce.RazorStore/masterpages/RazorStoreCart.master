@@ -1,8 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
 
-<asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce.demostore.cart.js"></script>
-</asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
     <umbraco:macro id="Macro1" runat="server" alias="Cart[Razor]" />
+</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="cphScripts">
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/ucommerce.demostore.cart.js"></script>
 </asp:Content>
