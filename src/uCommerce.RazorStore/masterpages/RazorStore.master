@@ -1,4 +1,7 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %><asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server"><!DOCTYPE html>
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,15 +24,18 @@
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <asp:ContentPlaceHolder runat="server" ID="cphHead"/>
+        <asp:ContentPlaceHolder runat="server" ID="cphHead" />
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <a class="brand" href="/shop">uCommece Razor Store</a>
-                    <form class="navbar-search pull-left" action="">
-                      <input id="site-search" name="search" type="text" class="search-query span4" placeholder="Search the store">
+                    <form class="navbar-search form-search pull-left" action="">
+                    <div class="input-append">
+                        <input id="site-search" type="text" name="search" type="text" class="span4 search-query" placeholder="Search the store">
+                        <button type="submit" class="btn">Search</button>
+                    </div>
                     </form>
                     <div class="nav-collapse pull-right">
                         <ul class="nav">
@@ -49,12 +55,12 @@
                     </div>
                 </div>
                 <div class="span9">
-                    <asp:ContentPlaceHolder runat="server" ID="cphMain"/>
+                    <asp:ContentPlaceHolder runat="server" ID="cphMain" />
                 </div>
             </div>
             <hr>
             <footer>
-                <asp:ContentPlaceHolder runat="server" ID="cphFoot"/>
+                <asp:ContentPlaceHolder runat="server" ID="cphFoot" />
                 <div class="span6">
                     <p>&copy; <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco">uCommerce ApS</a></p>
                 </div>
@@ -69,7 +75,7 @@
         <script src="/js/servicestack.js"></script>
         <script src="/js/jquery.ucommerce.js"></script>
         <script src="/js/ucommerce.demostore.js"></script>
-        <asp:ContentPlaceHolder runat="server" ID="cphScripts"/>
+        <asp:ContentPlaceHolder runat="server" ID="cphScripts" />
     </body>
     </html>
 </asp:Content>
