@@ -1,10 +1,10 @@
 ﻿@using UCommerce.EntitiesV2
 @using UCommerce.Api
 @{
-    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateShipment"))
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "update-shipment"))
     {
         int newShipmentId;
-        if(int.TryParse(HttpContext.Current.Request.Form["ShippingMethod"], out newShipmentId))
+        if(int.TryParse(HttpContext.Current.Request.Form["shipping-method"], out newShipmentId))
         {
             TransactionLibrary.CreateShipment(newShipmentId, overwriteExisting: true);
             TransactionLibrary.ExecuteBasketPipeline();
@@ -32,11 +32,11 @@
             @foreach (var shippingMethod in TransactionLibrary.GetShippingMethods())
             {
                 <label class="radio">
-                    <input type="radio" name="ShippingMethod"  @(shippingMethod.Equals(currentShippingMethod) ? "checked" : string.Empty) 
+                    <input type="radio" name="shipping-method"  @(shippingMethod.Equals(currentShippingMethod) ? "checked" : string.Empty) 
                         value="@shippingMethod.ShippingMethodId" />@RenderShippingMethodLabel(shippingMethod, basket)</label>
             }
 
         </div>
     </div>
-    <input name="updateShipment" class="btn btn-primary" type="submit" value="Next"/>
+    <input name="update-shipment" class="btn btn-primary" type="submit" value="Next"/>
 </form>

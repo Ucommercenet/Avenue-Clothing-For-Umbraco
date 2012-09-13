@@ -1,38 +1,39 @@
-﻿@using UCommerce.EntitiesV2
+﻿
+@using UCommerce.EntitiesV2
 @using UCommerce.Api
 @{
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updateAddresses"))
     {
         TransactionLibrary.EditBillingInformation(
-            HttpContext.Current.Request.Form["FirstName"],
-            HttpContext.Current.Request.Form["LastName"],
-            HttpContext.Current.Request.Form["EmailAddress"],
-            HttpContext.Current.Request.Form["PhoneNumber"],
-            HttpContext.Current.Request.Form["MobilePhoneNumber"],
-            HttpContext.Current.Request.Form["CompanyName"],
-            HttpContext.Current.Request.Form["Line1"],
-            HttpContext.Current.Request.Form["Line2"],
-            HttpContext.Current.Request.Form["PostalCode"],
-            HttpContext.Current.Request.Form["City"],
+            HttpContext.Current.Request.Form["billing-firstname"],
+            HttpContext.Current.Request.Form["billing-lastname"],
+            HttpContext.Current.Request.Form["billing-email"],
+            HttpContext.Current.Request.Form["billing-phone"],
+            HttpContext.Current.Request.Form["billing-mobile"],
+            HttpContext.Current.Request.Form["billing-company"],
+            HttpContext.Current.Request.Form["billing-line1"],
+            HttpContext.Current.Request.Form["billing-line2"],
+            HttpContext.Current.Request.Form["billing-postcode"],
+            HttpContext.Current.Request.Form["billing-city"],
             "",
-            HttpContext.Current.Request.Form["Attention"],
-            int.Parse(HttpContext.Current.Request.Form["Country"])
+            HttpContext.Current.Request.Form["billing-attention"],
+            int.Parse(HttpContext.Current.Request.Form["billing-country"])
         );
 
         TransactionLibrary.EditShipmentInformation(
-            HttpContext.Current.Request.Form["Shipping_FirstName"],
-            HttpContext.Current.Request.Form["Shipping_LastName"],
-            HttpContext.Current.Request.Form["Shipping_EmailAddress"],
-            HttpContext.Current.Request.Form["Shipping_PhoneNumber"],
-            HttpContext.Current.Request.Form["Shipping_MobilePhoneNumber"],
-            HttpContext.Current.Request.Form["Shipping_CompanyName"],
-            HttpContext.Current.Request.Form["Shipping_Line1"],
-            HttpContext.Current.Request.Form["Shipping_Line2"],
-            HttpContext.Current.Request.Form["Shipping_PostalCode"],
-            HttpContext.Current.Request.Form["Shipping_City"],
+            HttpContext.Current.Request.Form["shipping-firstname"],
+            HttpContext.Current.Request.Form["shipping-lastname"],
+            HttpContext.Current.Request.Form["shipping-email"],
+            HttpContext.Current.Request.Form["shipping-phone"],
+            HttpContext.Current.Request.Form["shipping-mobile"],
+            HttpContext.Current.Request.Form["shipping-company"],
+            HttpContext.Current.Request.Form["shipping-line1"],
+            HttpContext.Current.Request.Form["shipping-line2"],
+            HttpContext.Current.Request.Form["shipping-postcode"],
+            HttpContext.Current.Request.Form["shipping-city"],
             "",
-            HttpContext.Current.Request.Form["Shipping_Attention"],
-            int.Parse(HttpContext.Current.Request.Form["Shipping_Country"])
+            HttpContext.Current.Request.Form["shipping-attention"],
+            int.Parse(HttpContext.Current.Request.Form["shipping-country"])
         );
 
         HttpContext.Current.Response.Redirect("Shipping.aspx");
@@ -54,40 +55,40 @@
         <div class="span6">
             <h3>Billing address</h3>
             <br/>
-            <label>First name</label><input type="text" class="span7" name="FirstName"value="@billingAddress.FirstName" />
-            <label>Last name</label><input type="text" class="span7" name="LastName"value="@billingAddress.LastName" />
-            <label>Company</label><input type="text" class="span7" name="CompanyName"value="@billingAddress.CompanyName" />
-            <label>Street</label><input type="text" class="span7" name="Line1" value="@billingAddress.Line1" />
-            <label>Street 2</label><input type="text" class="span7" name="Line2" value="@billingAddress.Line2" />
-            <label>Postal code</label><input type="text" class="span7" name="PostalCode" value="@billingAddress.PostalCode" />
-            <label>City</label><input type="text" class="span7" name="City" value="@billingAddress.City" />
+            <label>First name</label><input type="text" class="span7" name="billing-firstname"value="@billingAddress.FirstName" />
+            <label>Last name</label><input type="text" class="span7" name="billing-lastname"value="@billingAddress.LastName" />
+            <label>Company</label><input type="text" class="span7" name="billing-company"value="@billingAddress.CompanyName" />
+            <label>Street</label><input type="text" class="span7" name="billing-line1" value="@billingAddress.Line1" />
+            <label>Street 2</label><input type="text" class="span7" name="billing-line2" value="@billingAddress.Line2" />
+            <label>Postal code</label><input type="text" class="span7" name="billing-postcode" value="@billingAddress.PostalCode" />
+            <label>City</label><input type="text" class="span7" name="billing-city" value="@billingAddress.City" />
             <label>Country</label>
-                <select class="span7" name="Country">
+                <select class="span7" name="billing-country">
                     @RenderCountrySelectOptions(billingAddress)
                 </select>
-            <label>Attention</label><input type="text" class="span7" name="Attention" value="@billingAddress.Attention" />
-            <label>E-mail</label><input type="text" class="span7" name="EmailAddress" value="@billingAddress.EmailAddress" />
-            <label>Phone</label><input type="text" class="span7" name="PhoneNumber" value="@billingAddress.PhoneNumber" />
-            <label>Mobile phone</label><input type="text" class="span7" name="MobilePhoneNumber" value="@billingAddress.MobilePhoneNumber" />
+            <label>Attention</label><input type="text" class="span7" name="billing-attention" value="@billingAddress.Attention" />
+            <label>E-mail</label><input type="text" class="span7" name="billing-email" value="@billingAddress.EmailAddress" />
+            <label>Phone</label><input type="text" class="span7" name="billing-phone" value="@billingAddress.PhoneNumber" />
+            <label>Mobile phone</label><input type="text" class="span7" name="billing-mobile" value="@billingAddress.MobilePhoneNumber" />
         </div>
     <div class="span6">
             <h3>Shipping address</h3>
             <br/>
-            <label>First name</label><input type="text" class="span7" name="Shipping_FirstName"value="@shipmentAddress.FirstName" />
-            <label>Last name</label><input type="text" class="span7" name="Shipping_LastName"value="@shipmentAddress.LastName" />
-            <label>Company</label><input type="text" class="span7" name="Shipping_CompanyName"value="@shipmentAddress.CompanyName" />
-            <label>Street</label><input type="text" class="span7" name="Shipping_Line1" value="@shipmentAddress.Line1" />
-            <label>Street 2</label><input type="text" class="span7" name="Shipping_Line2" value="@shipmentAddress.Line2" />
-            <label>Postal code</label><input type="text" class="span7" name="Shipping_PostalCode" value="@shipmentAddress.PostalCode" />
-            <label>City</label><input type="text" class="span7" name="Shipping_City" value="@shipmentAddress.City" />
+            <label>First name</label><input type="text" class="span7" name="shipping-firstname"value="@shipmentAddress.FirstName" />
+            <label>Last name</label><input type="text" class="span7" name="shipping-lastname"value="@shipmentAddress.LastName" />
+            <label>Company</label><input type="text" class="span7" name="shipping-company"value="@shipmentAddress.CompanyName" />
+            <label>Street</label><input type="text" class="span7" name="shipping-line1" value="@shipmentAddress.Line1" />
+            <label>Street 2</label><input type="text" class="span7" name="shipping-line2" value="@shipmentAddress.Line2" />
+            <label>Postal code</label><input type="text" class="span7" name="shipping-postcode" value="@shipmentAddress.PostalCode" />
+            <label>City</label><input type="text" class="span7" name="shipping-city" value="@shipmentAddress.City" />
             <label>Country</label>
-                <select class="span7" name="Shipping_Country">
+                <select class="span7" name="shipping-country">
                     @RenderCountrySelectOptions(shipmentAddress)
                 </select>
-            <label>Attention</label><input type="text" class="span7" name="Shipping_Attention" value="@shipmentAddress.Attention" />
-            <label>E-mail</label><input type="text" class="span7" name="Shipping_EmailAddress" value="@shipmentAddress.EmailAddress" />
-            <label>Phone</label><input type="text" class="span7" name="Shipping_PhoneNumber" value="@shipmentAddress.PhoneNumber" />
-            <label>Mobile phone</label><input type="text" class="span7" name="Shipping_MobilePhoneNumber" value="@shipmentAddress.MobilePhoneNumber" />
+            <label>Attention</label><input type="text" class="span7" name="shipping-attention" value="@shipmentAddress.Attention" />
+            <label>E-mail</label><input type="text" class="span7" name="shipping-email" value="@shipmentAddress.EmailAddress" />
+            <label>Phone</label><input type="text" class="span7" name="shipping-phone" value="@shipmentAddress.PhoneNumber" />
+            <label>Mobile phone</label><input type="text" class="span7" name="shipping-mobile" value="@shipmentAddress.MobilePhoneNumber" />
         </div>
     </div>
     <input name="updateAddresses" class="btn btn-primary" type="submit" value="Next"/>

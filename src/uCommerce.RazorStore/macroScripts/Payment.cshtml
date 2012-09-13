@@ -4,7 +4,7 @@
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "updatePayment"))
     {
         int newPaymentMethodId;
-        if (int.TryParse(HttpContext.Current.Request.Form["PaymentMethod"], out newPaymentMethodId))
+        if (int.TryParse(HttpContext.Current.Request.Form["payment-method"], out newPaymentMethodId))
         {
             TransactionLibrary.CreatePayment(newPaymentMethodId);
             TransactionLibrary.ExecuteBasketPipeline();
@@ -34,7 +34,7 @@
             @foreach (var paymentMethod in TransactionLibrary.GetPaymentMethods())
             {
                 <label class="radio">
-                    <input type="radio" name="PaymentMethod"  @(payment != null && payment.PaymentMethod.Equals(paymentMethod) ? "checked" : string.Empty) 
+                    <input type="radio" name="payment-method"  @(payment != null && payment.PaymentMethod.Equals(paymentMethod) ? "checked" : string.Empty) 
                         value="@paymentMethod.PaymentMethodId" />@RenderPaymentMethodLabel(paymentMethod, basket)</label>
             }
 

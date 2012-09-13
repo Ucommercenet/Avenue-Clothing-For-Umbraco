@@ -20,7 +20,7 @@
             int orderLineId;
             int newQuantity;
 
-            if (int.TryParse(request.Form["update-basket-line"], out orderLineId) && int.TryParse(request.Form["quantityInput_" + orderLineId], out newQuantity))
+            if (int.TryParse(request.Form["update-basket-line"], out orderLineId) && int.TryParse(request.Form["quantity-input_" + orderLineId], out newQuantity))
             {
                 TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
             }
@@ -32,7 +32,7 @@
             foreach (var orderLineId in basket.OrderLines.Select(x => x.OrderLineId).ToList())
             {
                 int newQuantity;
-                if (int.TryParse(request.Form["quantityInput_" + orderLineId], out newQuantity))
+                if (int.TryParse(request.Form["quantity-input_" + orderLineId], out newQuantity))
                 {
                     TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
                 }
@@ -85,7 +85,7 @@
                     </td>
                     <td>
                         <div class="input-append">
-                            <input type="text" name="quantityInput_@(lineItem.OrderLineId)" value="@lineItem.Quantity" class="qty" />
+                            <input type="text" name="quantity-input_@(lineItem.OrderLineId)" value="@lineItem.Quantity" class="qty" />
                             <button name="update-basket-line" class="btn btn-success update-cart" type="submit" value="@lineItem.OrderLineId"><i class="icon-refresh icon-white"></i></button>
                         </div>
                     </td>
