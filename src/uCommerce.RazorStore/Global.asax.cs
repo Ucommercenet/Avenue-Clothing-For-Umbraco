@@ -14,7 +14,8 @@ namespace uCommerce.RazorStore
 
 		protected void Application_Start(object sender, EventArgs e)
 		{
-			ObjectFactory.Instance.Resolve<AppHost>();
+			//ObjectFactory.Instance.Resolve<AppHost>();
+		    new AppHost().Init();
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
