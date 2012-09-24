@@ -8,7 +8,8 @@
     var product = SiteContext.Current.CatalogContext.CurrentProduct;
     var request = HttpContext.Current.Request;
     var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
-
+    var price = CatalogLibrary.CalculatePrice(product);
+        
     if (request.HttpMethod == "POST")
     {
         if (request.Form.AllKeys.Any(x => x == "add-to-basket"))
@@ -103,8 +104,8 @@
                 <small><em>@product.ShortDescription()</em></small>
             </header>
             <aside class="span4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                <p class="item-price" itemprop="price">@product.Price()</p>
-                <p class="item-tax">(@Html.Raw(incVAT) @product.Tax() Tax)</p>
+                <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
+                <p class="item-tax">(@Html.Raw(incVAT)@price.YourTax.Value Tax)</p>
             </aside>
         </div>
         <form method="post" class="form-horizontal">

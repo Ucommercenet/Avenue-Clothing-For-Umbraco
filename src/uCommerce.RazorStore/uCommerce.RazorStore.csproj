@@ -74,13 +74,11 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UCommerce, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\3.0.0.0 PR3\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce">
+      <HintPath>..\..\lib\uCommerce\3.0.0.0 RC1\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\3.0.0.0 PR3\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure">
+      <HintPath>..\..\lib\uCommerce\3.0.0.0 RC1\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>C:\inetpub\u3\bin\umbraco.dll</HintPath>
