@@ -15,5 +15,5 @@
     }
     else
     {
-        <a href="/shop/checkout/cart.aspx" id="mini-cart"><i class="icon-shopping-cart"></i><span class="item-qty">@basket.OrderLines.Sum(x => x.Quantity).ToString("#,##")</span> items in cart, total: <span class="order-total">@SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency.Name@basket.OrderTotal.Value.ToString("#,##0.00")</span></a>
+        <a href="/shop/checkout/cart.aspx" id="mini-cart"><i class="icon-shopping-cart icon-white"></i><span class="item-qty">@basket.OrderLines.Sum(x => x.Quantity).ToString("#,##")</span> items in cart, total: <span class="order-total">@SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency.Name@basket.OrderTotal.Value.ToString("#,##0.00")</span></a>
     }
