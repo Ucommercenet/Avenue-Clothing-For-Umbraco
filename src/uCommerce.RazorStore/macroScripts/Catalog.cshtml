@@ -2,6 +2,7 @@
 @using UCommerce.EntitiesV2
 @using UCommerce.Extensions
 @using UCommerce.Runtime
+@using umbraco.MacroEngines
 @{
     Category category = SiteContext.Current.CatalogContext.CurrentCategory;
 }
@@ -10,13 +11,18 @@
 </div>
 <hr />
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span12">
         <h2>Products</h2>
         @foreach (var product in CatalogLibrary.GetProducts(category))
         {
-            <div class="well">
-                <p><a href="@CatalogLibrary.GetNiceUrlForProduct(product, category)">@product.DisplayName()</a></p>
-                <em>@product.ShortDescription()</em>
+            var price = CatalogLibrary.CalculatePrice(product);
+            <div class="product span4">
+                @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
+                {
+                    dynamic mediaItem = new DynamicMedia(product.ThumbnailImageMediaId);
+                    <img src="@mediaItem.umbracoFile" />
+                }
+                <span class="ratings">
                 @if (product.ProductReviews.Any())
                 {
                     var rating = product.ProductReviews.Average(r => r.Rating);
@@ -32,16 +38,9 @@
                         }
                     }
                 }
-            </div>    
-        }
-    </div>
-    <div class="span6">
-        <h2>Categories</h2>
-        @foreach (var subCategory in CatalogLibrary.GetCategories(category))
-        {
-            <div class="well">
-                <p><a href="@CatalogLibrary.GetNiceUrlForCategory(subCategory)">@subCategory.DisplayName()</a></p>
-                <em>@Html.Raw(subCategory.Description())</em>
+                </span>
+                <p class="item-name"><a href="@CatalogLibrary.GetNiceUrlForProduct(product, category)">@product.DisplayName()</a></p>
+                <p class="item-price">@price.YourPrice.AmountExclTax.Value.ToString("#,##.00")</p>
             </div>    
         }
     </div>
