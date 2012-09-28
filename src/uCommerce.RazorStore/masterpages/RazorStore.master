@@ -11,6 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/bootstrap-responsive.css" rel="stylesheet">
         <style type="text/css">
             body {
                 padding-top: 60px;
@@ -30,7 +31,7 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
-                    <a class="brand" href="/shop">uCommece Razor Store</a>
+                    <a class="brand" href="/shop">Avenue Clothing</a>
                     <form class="navbar-search form-search pull-left" action="">
                     <div class="input-append">
                         <input id="site-search" type="text" name="search" type="text" class="span4 search-query" placeholder="Search the store">
@@ -50,8 +51,31 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3">
-                    <div class="well sidebar-nav">
+                    <div class="well sidebar-nav" id="main-nav">
                         <umbraco:macro alias="LeftNavigation[Razor]" runat="server" />
+                    </div>
+                    <div class="well sidebar-nav">
+                        <ul>
+                            <li>Handmade material</li>
+                            <li>5 star satisfaction</li>
+                            <li>Free delivery</li>
+                            <li>Payment Information<br />
+                                <img src="/img/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" /> </li>
+                        </ul>
+                        <img src="/img/ucommerce.png" alt="Powered by uCommerce" />
+                    </div>
+                    <div class="well sidebar-nav">
+                        <h5>About Avenue Clothing</h5>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p><a href="#" class="btn">Find Out More</a></p>
+                    </div>
+                    <div class="well sidebar-nav">
+                        <h5>Get 10% off & sign up</h5>
+                        <p>to our newsletter.</p>
+                        <form>
+                        <input />
+                        <button type="submit" class="btn">Go</button>
+                        </form>
                     </div>
                 </div>
                 <div class="span9">

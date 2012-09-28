@@ -1,0 +1,36 @@
+﻿@inherits umbraco.MacroEngines.DynamicNodeContext
+@{
+    var banners = Model.AncestorOrSelf(1).DescendantsOrSelf("HomepageBanner").OrderBy("SortOrder desc");
+    var i = 0;
+}
+<div id="myCarousel" class="carousel slide">
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        @foreach (var banner in banners)
+        {
+            if (banner.HasProperty("bannerImage") && banner.bannerImage != "")
+            {
+                var css = "item";
+                if (i == 0)
+                {
+                    css += " active";
+                    i++;
+                }
+                <div class="@css"><img src='@banner.bannerImage' /></div>
+            }
+        }
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a> <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+    <div class="span6">
+        <h2>Categories</h2>
+        @foreach (var subCategory in CatalogLibrary.GetCategories(category))
+        {
+            <div class="well">
+                <p><a href="@CatalogLibrary.GetNiceUrlForCategory(subCategory)">@subCategory.DisplayName()</a></p>
+                <em>@Html.Raw(subCategory.Description())</em>
+            </div>    
+        }
+    </div>
