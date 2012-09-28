@@ -6,6 +6,54 @@
 @{
     Category category = SiteContext.Current.CatalogContext.CurrentCategory;
 }
+@helper RenderStars(IEnumerable<ProductReview> ratings)
+    {
+    var productReviews = ratings as List<ProductReview> ?? ratings.ToList();
+    if (productReviews.Any())
+    {
+        var rating = productReviews.Average(r => r.Rating);
+    <p class="ratings"><span>
+        @for (var i = 1; i <= 5; i++)
+        {
+            if (rating >= i)
+            {
+            <i class="icon-star"></i>
+            }
+            else
+            {
+            <i class="icon-star-empty"></i>
+            }
+        }
+    </span></p>
+    }
+}
+@helper RenderProducts(Category category)
+    {
+        var products = CatalogLibrary.GetProducts(category);
+        if (products.Any())
+        {
+            foreach (var product in products)
+            {
+                var price = CatalogLibrary.CalculatePrice(product);
+    <div class="product span4">
+        <div class="product-image">
+            @if (!string.IsNullOrEmpty(product.ThumbnailImageMediaId))
+            {
+                dynamic mediaItem = new DynamicMedia(product.ThumbnailImageMediaId);
+                <img src="@mediaItem.umbracoFile" />
+            }
+            @RenderStars(product.ProductReviews)
+        </div>
+        <p class="item-name"><a href="@CatalogLibrary.GetNiceUrlForProduct(product, category)">@product.DisplayName()</a></p>
+        <p class="item-price">@price.YourPrice.AmountExclTax.Value.ToString("#,##.00")</p>
+    </div>    
+            }
+        }
+        foreach (var childCategory in category.Categories)
+        {
+    @RenderProducts(childCategory)
+        }
+}
 <div class="row-fluid">
     <div class="hero-unit">
         @if (!string.IsNullOrEmpty(category.ImageMediaId))
@@ -17,37 +65,6 @@
 </div>
 <div class="row-fluid">
     <div class="span12">
-        @foreach (var product in CatalogLibrary.GetProducts(category))
-        {
-            var price = CatalogLibrary.CalculatePrice(product);
-            <div class="product span4">
-                <div class="product-image">
-                    @if (!string.IsNullOrEmpty(product.ThumbnailImageMediaId))
-                    {
-                        dynamic mediaItem = new DynamicMedia(product.ThumbnailImageMediaId);
-                        <img src="@mediaItem.umbracoFile" />
-                    }
-                    @if (product.ProductReviews.Any())
-                    {
-                        var rating = product.ProductReviews.Average(r => r.Rating);
-                        <p class="ratings"><span>
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                if (rating >= i)
-                                {
-                                <i class="icon-star"></i>
-                                }
-                                else
-                                {
-                                <i class="icon-star-empty"></i>
-                                }
-                            }
-                        </span></p>
-                    }
-                </div>
-                <p class="item-name"><a href="@CatalogLibrary.GetNiceUrlForProduct(product, category)">@product.DisplayName()</a></p>
-                <p class="item-price">@price.YourPrice.AmountExclTax.Value.ToString("#,##.00")</p>
-            </div>    
-        }
+        @RenderProducts(category)
     </div>
 </div>
