@@ -23,14 +23,3 @@
     <!-- Carousel nav -->
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a> <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
-
-    <div class="span6">
-        <h2>Categories</h2>
-        @foreach (var subCategory in CatalogLibrary.GetCategories(category))
-        {
-            <div class="well">
-                <p><a href="@CatalogLibrary.GetNiceUrlForCategory(subCategory)">@subCategory.DisplayName()</a></p>
-                <em>@Html.Raw(subCategory.Description())</em>
-            </div>    
-        }
-    </div>
