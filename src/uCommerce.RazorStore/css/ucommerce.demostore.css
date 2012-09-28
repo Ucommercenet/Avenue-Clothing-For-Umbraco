@@ -84,8 +84,29 @@ h1, h2, h3, h4, h5, h6, p {
         #main-nav li.on > a,
         #main-nav .nav li.on > a:hover{
             color: #fff;
+            font-weight: bold;
             background-color:#4a95c5;
         }
+#why-buy {
+}
+    #why-buy ol{
+        padding: 0;
+        margin: 0;
+    }
+        #why-buy ol li{
+            font-size: 1.2em;
+            list-style: none;
+            padding: 20px 10px;
+            color:#767676;
+            border-bottom: 1px solid #ebebeb;
+            font-weight: bold;
+        }
+#powered-by-ucommerce {
+    padding: 20px 20px 10px;
+}
+#about {
+    padding: 20px;
+}
 td.money {
     text-align: right;
 }

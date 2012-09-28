@@ -74,11 +74,13 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UCommerce">
-      <HintPath>..\..\lib\uCommerce\3.0.0.0 RC1\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce, Version=3.0.0.12270, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\3.0.0.0 RC2\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure">
-      <HintPath>..\..\lib\uCommerce\3.0.0.0 RC1\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=3.0.0.12270, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\3.0.0.0 RC2\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>C:\inetpub\u3\bin\umbraco.dll</HintPath>
@@ -184,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="macroScripts\HomepageBanners.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="macroScripts\HomepageCatalog.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

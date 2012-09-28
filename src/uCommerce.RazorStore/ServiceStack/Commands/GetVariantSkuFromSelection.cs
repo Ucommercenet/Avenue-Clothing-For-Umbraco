@@ -1,5 +1,6 @@
 ﻿namespace uCommerce.RazorStore.ServiceStack.Commands
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -16,16 +17,22 @@
     public class GetVariantSkuFromSelection
     {
         public string ProductSku { get; set; }
-        public string Size { get; set; }
-        public string Colour { get; set; }
+        public IDictionary<string, string> VariantProperties { get; set; }
     }
     public class GetVariantSkuFromSelectionResponse : IHasResponseStatus
     {
-        public GetVariantSkuFromSelectionResponse(UCommerce.EntitiesV2.Product parentProduct, string size, string colour)
+        public GetVariantSkuFromSelectionResponse(UCommerce.EntitiesV2.Product parentProduct, IDictionary<string, string> properties)
         {
-            var variant = parentProduct.Variants.FirstOrDefault(v =>
-                    v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "CollarSize" && p.Value == size)
-                    && v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "Colour" && p.Value == colour));
+            UCommerce.EntitiesV2.Product variant = null;
+
+            if (parentProduct.Variants.Any() && properties.Any()) // If there are variant values we'll need to find the selected variant
+            {
+                variant = parentProduct.Variants.FirstOrDefault(v => v.ProductProperties.All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+            }
+            else if (!parentProduct.Variants.Any()) // Only use the current product where there are no variants
+            {
+                variant = parentProduct;
+            }
 
             if (variant == null)
                 return;
@@ -53,7 +60,7 @@
         protected override object Run(GetVariantSkuFromSelection request)
         {
             var product = CatalogLibrary.GetProduct(request.ProductSku);
-            return new GetVariantSkuFromSelectionResponse(product, request.Size, request.Colour);
+            return new GetVariantSkuFromSelectionResponse(product, request.VariantProperties);
         }
 
     }

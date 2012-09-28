@@ -54,28 +54,32 @@
                     <div class="well sidebar-nav" id="main-nav">
                         <umbraco:macro alias="LeftNavigation[Razor]" runat="server" />
                     </div>
-                    <div class="well sidebar-nav">
-                        <ul>
-                            <li>Handmade material</li>
+                    <div class="well sidebar-nav" id="why-buy">
+                        <ol>
                             <li>5 star satisfaction</li>
                             <li>Free delivery</li>
                             <li>Payment Information<br />
-                                <img src="/img/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" /> </li>
-                        </ul>
-                        <img src="/img/ucommerce.png" alt="Powered by uCommerce" />
+                            <img src="/img/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" /></li>
+                        </ol>
+                        <p id="powered-by-ucommerce"><img src="/img/ucommerce.png" alt="Powered by uCommerce" /></p>
                     </div>
-                    <div class="well sidebar-nav">
+                    <div class="well sidebar-nav" id="about">
                         <h5>About Avenue Clothing</h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                        <p><a href="#" class="btn">Find Out More</a></p>
+                        <p>Avenue Clothing is an example store to demonstrate the simple -yet powerful e-commerce functionality uCommerce brings to Umbraco.</p>
+                        <p>All products listed are from existing retailers but no orders will be fulfilled.</p>
+                        <p><a href="http://ucommerce.dk" class="btn" title="The most feature rich e-commerce package for Umbraco">Find Out More</a></p>
                     </div>
-                    <div class="well sidebar-nav">
-                        <h5>Get 10% off & sign up</h5>
-                        <p>to our newsletter.</p>
-                        <form>
-                        <input />
-                        <button type="submit" class="btn">Go</button>
-                        </form>
+                    <div class="well sidebar-nav" id="newsletter">
+                        <h5>Keep up-to-date</h5>
+                        <p>Sign up to our newsletter.</p>
+                        <form action="http://thesitedoctor.createsend.com/t/y/s/xbjtk/" method="post" class="validate" target="_blank">
+                            <input type="email" name="cm-xbjtk-xbjtk" id="xbjtk-xbjtk" class="required email" />
+                            <button type="submit" class="btn">Go</button>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div>
+						</form>
                     </div>
                 </div>
                 <div class="span9">

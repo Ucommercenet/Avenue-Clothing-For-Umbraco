@@ -13,11 +13,13 @@
     public class GetProductVariations
     {
         public string ProductSku{ get; set; }
+
     }
     public class GetProductVariationsResponse : IHasResponseStatus
     {
         public GetProductVariationsResponse(UCommerce.EntitiesV2.Product parentProduct)
         {
+            
             Variations = parentProduct.Variants.Select(variant => new ProductVariation
                 {
                     Sku = variant.Sku,

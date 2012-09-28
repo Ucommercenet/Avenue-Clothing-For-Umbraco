@@ -9,7 +9,7 @@
     var request = HttpContext.Current.Request;
     var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
     var price = CatalogLibrary.CalculatePrice(product);
-        
+
     if (request.HttpMethod == "POST")
     {
         if (request.Form.AllKeys.Any(x => x == "add-to-basket"))
@@ -70,9 +70,9 @@
     var incVAT = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr=\"Including\">Inc</abbr>" : "<abbr=\"Excluding\">Exc</abbr>";
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
-    var variants = product.Variants;
-    var uniqueColours = variants.Select(v => v.ProductProperties.First(p => p.ProductDefinitionField.Name == "Colour").Value).Distinct();
-    var uniqueSizes = variants.Select(v => v.ProductProperties.First(p => p.ProductDefinitionField.Name == "CollarSize").Value).Distinct();
+    var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
+                         group v by v.ProductDefinitionField into g
+                         select g;
 }
 <div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
     <div class="span6">
@@ -86,21 +86,22 @@
         <div class="span12 page-header">
             <header class="span8">
                 <h1 itemprop="name">@product.DisplayName()</h1>
-                <h6><small>@if (product.ProductReviews.Any())
-                {
-                    var rating = product.ProductReviews.Average(r => r.Rating);
-                    for (int i = 1; i <= 5; i++)
+                <h6><small>
+                    @if (product.ProductReviews.Any())
                     {
-                        if (rating >= i)
+                        var rating = product.ProductReviews.Average(r => r.Rating);
+                        for (int i = 1; i <= 5; i++)
                         {
-                    <i class="icon-star"></i>
+                            if (rating >= i)
+                            {
+                        <i class="icon-star"></i>
+                            }
+                            else
+                            {
+                        <i class="icon-star-empty"></i>
+                            }
                         }
-                        else
-                        {
-                    <i class="icon-star-empty"></i>
-                        }
-                    }
-                }</small> @product.DynamicProperty().Brand</h6>
+                    }</small> @product.DynamicProperty().Brand</h6>
                 <small><em>@product.ShortDescription()</em></small>
             </header>
             <aside class="span4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -117,32 +118,24 @@
                     <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
                 </div>
             }
-            @if (variants.Any())
+            @if (uniqueVariants.Any())
             {
+                foreach (var prop in uniqueVariants)
+                {
+                    var controlName = prop.Key.Name.ToLower();
                 <div class="control-group">
-                    <label class="control-label" for="selected-size">Size</label>
+                    <label class="control-label" for="selected-@controlName">@prop.Key.GetDisplayName()</label>
                     <div class="controls">
-                        <select name="selected-size" id="selected-size">
+                        <select name="selected-@controlName" id="selected-@controlName" class="variant">
                             <option value="">-- Please Select --</option>
-                            @foreach (var size in uniqueSizes)
+                            @foreach (var value in prop.Select(p => p.Value).Distinct())
                             {
-                                <option value="@size">@size"</option>
+                                <option value="@value">@value</option>
                             }
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="selected-colour">Colour</label>
-                    <div class="controls">
-                        <select name="selected-colour" id="selected-colour">
-                            <option value="">-- Please Select --</option>
-                            @foreach (var colour in uniqueColours)
-                            {
-                                <option value="@colour">@colour</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+                }
             }
             <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
             <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
