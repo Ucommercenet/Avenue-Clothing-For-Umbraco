@@ -2,7 +2,6 @@
 @using UCommerce.EntitiesV2
 @using UCommerce.Extensions
 @using UCommerce.Runtime
-@RenderNavigation(CatalogLibrary.GetRootCategories())
 @helper RenderNavigation(ICollection<Category> categories)
     {
     if (categories.Any())
@@ -24,3 +23,6 @@
         </ul>
     }
 }
+
+
+@RenderNavigation(CatalogLibrary.GetRootCategories())
