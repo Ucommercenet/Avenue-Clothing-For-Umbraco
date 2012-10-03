@@ -1,8 +1,11 @@
-﻿@using UCommerce.Api
+﻿@using UCommerce
+@using UCommerce.Api
+@using UCommerce.Runtime
 @{
     var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
     var request = HttpContext.Current.Request;
-
+    var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+    
     if (request.HttpMethod == "POST")
     {
         if (request.Form.AllKeys.Any(x => x.StartsWith("add-voucher")))
@@ -47,6 +50,11 @@
 
         HttpContext.Current.Response.Redirect(request.RawUrl);
     }
+
+    var subTotal = new Money(basket.SubTotal.Value, currency);
+    var vat = new Money(basket.VAT.Value, currency);
+    var discount = new Money(basket.Discount.Value, currency);
+    var orderTotal = new Money(basket.OrderTotal.Value, currency);
 }
 <form method="post">
 <div class="row-fluid">
@@ -65,23 +73,29 @@
             @foreach (var lineItem in basket.OrderLines)
             {
                 var product = @CatalogLibrary.GetProduct(lineItem.Sku);
+                var itemPrice = new Money(lineItem.Price, currency);
+                var itemVAT = new Money(lineItem.VAT, currency);
+                var lineTotal = new Money(lineItem.Total.Value, currency);
+
                 <tr class="order-line">
                     <td><a href="@CatalogLibrary.GetNiceUrlForProduct(product)">@lineItem.ProductName</a> </td>
                     <td class="money">
                         @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
                         {
+                            var nowPrice = new Money((lineItem.Price - lineItem.UnitDiscount.Value), currency);
+                            
                             <span style="text-decoration: line-through">
-                                @TransactionLibrary.FormatCurrency(lineItem.Price)
+                                @itemPrice
                             </span>
-                            @TransactionLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
+                            @nowPrice    
                         }
                         else
                         {
-                            @TransactionLibrary.FormatCurrency(lineItem.Price)    
+                            @itemPrice
                         }
                     </td>
                     <td class="money">
-                        @TransactionLibrary.FormatCurrency(lineItem.VAT)
+                        @itemVAT
                     </td>
                     <td>
                         <div class="input-append">
@@ -90,7 +104,7 @@
                         </div>
                     </td>
                     <td class="money line-total">
-                        @TransactionLibrary.FormatCurrency(lineItem.Total)
+                        @lineTotal
                     </td>
                     <td>
                         <button type="button" class="line-remove">×</button></td>
@@ -111,26 +125,28 @@
                 </td>
                 <td>Sub total:</td>
                 <td class="money order-subtotal">
-                    @TransactionLibrary.FormatCurrency(basket.SubTotal)
+                    @subTotal
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>VAT:</td>
                 <td class="money order-tax">
-                    @TransactionLibrary.FormatCurrency(basket.VAT)
+                    @vat
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>Discounts:</td>
-                <td class="money order-discounts">-@TransactionLibrary.FormatCurrency(basket.Discount)</td>
+                <td class="money order-discount">
+                    @discount
+                </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>Order total:</td>
                 <td class="money order-total">
-                    @TransactionLibrary.FormatCurrency(basket.OrderTotal)
+                    @orderTotal
                 </td>
                 <td>&nbsp;</td>
             </tr>

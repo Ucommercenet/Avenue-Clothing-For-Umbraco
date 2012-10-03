@@ -9,6 +9,7 @@ namespace uCommerce.RazorStore.ServiceStack.Model
         public decimal Price { get; set; }
         public string ProductName { get; set; }
         public decimal? Total { get; set; }
+        public string FormattedTotal { get; set; }
         public decimal? UnitDiscount { get; set; }
         public decimal VAT { get; set; }
         public decimal VATRate { get; set; }

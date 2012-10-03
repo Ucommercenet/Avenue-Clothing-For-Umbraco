@@ -9,6 +9,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
 {
     using System.Linq;
 
+    using UCommerce;
     using UCommerce.Runtime;
 
     public class GetBasket
@@ -18,9 +19,14 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         public GetBasketResponse(UCommerce.EntitiesV2.Basket basket)
         {
-            var currencySymbol = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency.Name;
+            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
 
             var po = basket.PurchaseOrder;
+
+            var subTotal = new Money(po.SubTotal.Value, currency);
+            var taxTotal = new Money(po.TaxTotal.Value, currency);
+            var discountTotal = new Money(po.DiscountTotal.Value, currency);
+            var orderTotal = new Money(po.OrderTotal.Value, currency);
 
             Basket = new Basket
                 {
@@ -30,29 +36,31 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
                     OrderTotal = po.OrderTotal,
                     TotalItems = po.OrderLines.Sum(l => l.Quantity),
                     
-                    FormattedSubTotal = currencySymbol + po.SubTotal.Value.ToString("#,##.00"),
-                    FormattedTaxTotal = currencySymbol + po.TaxTotal.Value.ToString("#,##.00"),
-                    FormattedDiscountTotal =  currencySymbol + po.DiscountTotal.Value.ToString("#,##.00"),
-                    FormattedOrderTotal = currencySymbol + po.OrderTotal.Value.ToString("#,##.00"),
+                    FormattedSubTotal = subTotal.ToString(),
+                    FormattedTaxTotal = taxTotal.ToString(),
+                    FormattedDiscountTotal =  discountTotal.ToString(),
+                    FormattedOrderTotal = orderTotal.ToString(),
                     FormattedTotalItems = po.OrderLines.Sum(l => l.Quantity).ToString("#,##"),
 
                     LineItems = new List<LineItem>()
                 };
 
-            foreach (var orderLine in po.OrderLines)
+            foreach (var line in po.OrderLines)
             {
+                var lineTotal = new Money(line.Total.Value, currency);
                 var lineItem = new LineItem
                     {
-                        OrderLineId = orderLine.OrderLineId,
-                        Quantity = orderLine.Quantity,
-                        Sku = orderLine.Sku,
-                        VariantSku = orderLine.VariantSku,
-                        Price = orderLine.Price,
-                        ProductName = orderLine.ProductName,
-                        Total = orderLine.Total,
-                        UnitDiscount = orderLine.UnitDiscount,
-                        VAT = orderLine.VAT,
-                        VATRate = orderLine.VATRate
+                        OrderLineId = line.OrderLineId,
+                        Quantity = line.Quantity,
+                        Sku = line.Sku,
+                        VariantSku = line.VariantSku,
+                        Price = line.Price,
+                        ProductName = line.ProductName,
+                        Total = line.Total,
+                        FormattedTotal = lineTotal.ToString(),
+                        UnitDiscount = line.UnitDiscount,
+                        VAT = line.VAT,
+                        VATRate = line.VATRate
                     };
                 Basket.LineItems.Add(lineItem);
             }

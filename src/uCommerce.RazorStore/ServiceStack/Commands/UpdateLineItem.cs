@@ -8,6 +8,9 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
 {
     using System.Linq;
 
+    using UCommerce;
+    using UCommerce.Runtime;
+
     using uCommerce.RazorStore.ServiceStack.Model;
 
     public class UpdateLineItem
@@ -19,6 +22,10 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         public UpdateLineItemResponse(UCommerce.EntitiesV2.OrderLine line)
         {
+            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+            
+            var lineTotal = new Money(line.Total.Value, currency);
+            
             UpdatedLine = new LineItem()
             {
                 OrderLineId = line.OrderLineId,
@@ -28,6 +35,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
                 Price = line.Price,
                 ProductName = line.ProductName,
                 Total = line.Total,
+                FormattedTotal = lineTotal.ToString(),
                 UnitDiscount = line.UnitDiscount,
                 VAT = line.VAT,
                 VATRate = line.VATRate

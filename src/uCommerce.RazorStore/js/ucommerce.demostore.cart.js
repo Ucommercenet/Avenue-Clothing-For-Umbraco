@@ -24,7 +24,9 @@ function watchForQuantityChange(cart) {
         function (updatedLine) {
             updateCartTotals();
             t.fadeOut();
-            updateLineTotals(t.parents('tr'), updatedLine.UpdatedLine);
+            var row = t.parents('tr');
+            updateLineTotals(row, updatedLine.UpdatedLine);
+            updateQuantity(row, updatedLine.UpdatedLine);
         });
         return false;
     });
@@ -34,7 +36,10 @@ function watchForQuantityChange(cart) {
     });
 };
 function updateLineTotals(row, line) {
-    $('.line-total', row).text(line.Total.toFixed(2));
+    $('.line-total', row).text(line.FormattedTotal);
+};
+function updateQuantity(row, line) {
+    $('.qty', row).data('original', line.Quantity);
 };
 function enableUpdateButton(cart) {
     $('.update-basket', cart).addClass('btn-success').removeClass('disabled').removeAttr('disabled');
