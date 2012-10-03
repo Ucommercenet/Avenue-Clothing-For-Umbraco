@@ -4,17 +4,27 @@
 @using umbraco.MacroEngines
 @using UCommerce.Api
 @{
+    var request = HttpContext.Current.Request;
     var basket = SiteContext.Current.OrderContext.GetBasket();
     var product = SiteContext.Current.CatalogContext.CurrentProduct;
+    bool? itemAddedToCart = null;
 
-    if (HttpContext.Current.Request.HttpMethod == "POST")
+    if (request.HttpMethod == "POST")
     {
+        @* View /App_Code/uCommerce/Functions/Product.cshtml for this function *@
+        var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
         @* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
-        var variant = uCommerce.Functions.Basket.GetVariantFromPostData(product, "variation-");
-        uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
-
+        itemAddedToCart = uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
+        
         @* View /App_Code/uCommerce/Functions/Review.cshtml for this function *@
         uCommerce.Functions.Review.LeaveReview(product, "review-name", "review-email", "review-rating", "review-headline", "review-text");
+    }
+    else if (request.HttpMethod == "GET")
+    {
+        if(!String.IsNullOrWhiteSpace(request.QueryString["item-added"]))
+        {
+            itemAddedToCart = true;
+        }
     }
 
     var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
@@ -37,6 +47,15 @@
         </div>
     </div>
 }
+@if (itemAddedToCart.HasValue && !itemAddedToCart.Value)
+{
+    <div class="row-fluid">
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Uh oh!</strong> Something went wrong when we tried to add this to your cart. Please try again.</p>
+        </div>
+    </div>
+}
 <div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
     <div class="span6">
         @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
@@ -51,8 +70,7 @@
             <h6>
                 @if (product.ProductReviews.Any())
                 {
-                    <small>
-                        @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                    <small>@* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
                         @uCommerce.Helpers.ProductReview.DisplayStars(product.Rating)
                     </small> 
                 }
@@ -86,6 +104,13 @@
             <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
             <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
             <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+            @if (itemAddedToCart.HasValue && itemAddedToCart.Value)
+            {
+                <div class="alert alert-success item-added">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p>Thanks, this item has been added to your cart. <a href="/shop/checkout/cart.aspx">Click here to view your cart</a>.</p>
+                </div>
+            }
         </div>
         </form>
         <div class="tabbable">
@@ -111,7 +136,7 @@
                         <h5>Latest Reviews</h5>
                         foreach (var review in product.ProductReviews)
                         {
-                        @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+@* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
                         @uCommerce.Helpers.ProductReview.DisplayReview(review)
                         }
                     }

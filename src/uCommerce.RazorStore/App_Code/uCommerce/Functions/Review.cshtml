@@ -2,7 +2,7 @@
 @using UCommerce.EntitiesV2
 @using UCommerce.Runtime
 @functions{
-    public static void LeaveReview(Product product, string nameKey, string emailKey, string ratingKey, string headlineKey, string reviewTextKey)
+    public static void LeaveReview(UCommerce.EntitiesV2.Product product, string nameKey, string emailKey, string ratingKey, string headlineKey, string reviewTextKey)
     {
         var request = HttpContext.Current.Request;
         var basket = SiteContext.Current.OrderContext.GetBasket();
