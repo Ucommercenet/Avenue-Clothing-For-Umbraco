@@ -26,6 +26,25 @@
             });
         }
     });
+    $('#newsletter-form').submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        if (!form.validate()) {
+            return false;
+        }
+        form.css('opacity', 0.5);
+        $.getJSON(this.action + "?callback=&", $(this).serialize(), function (data) {
+            var thanks = $('<p />', { text: "Thanks! We\'ll be in touch soon!" });
+            if (data.Status === 400) {
+                alert("Error: " + data.Message);
+                form.css('opacity', 1);
+                $('input:first', form).focus();
+            } else { // 200
+                form.fadeOut(300, function () { $(this).css('opacity', 1).html(thanks).fadeIn(300); });
+            }
+        });
+        return false;
+    });
 });
 function updateCartTotals() {
     $.uCommerce.getBasket({}, function (response) {

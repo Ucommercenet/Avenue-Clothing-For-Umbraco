@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
-
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
     <!DOCTYPE html>
     <html lang="en">
@@ -12,15 +11,6 @@
         <meta name="author" content="">
         <link href="/css/bootstrap.css" rel="stylesheet">
         <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-            .sidebar-nav {
-                padding: 9px 0;
-            }
-        </style>
         <link href="/css/ucommerce.demostore.css" rel="stylesheet">
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,13 +62,11 @@
                     <div class="well sidebar-nav" id="newsletter">
                         <h5>Keep up-to-date</h5>
                         <p>Sign up to our newsletter.</p>
-                        <form action="http://thesitedoctor.createsend.com/t/y/s/xbjtk/" method="post" class="validate" target="_blank">
-                            <input type="email" name="cm-xbjtk-xbjtk" id="xbjtk-xbjtk" class="required email" />
-                            <button type="submit" class="btn">Go</button>
-							<div id="mce-responses" class="clear">
-								<div class="response" id="mce-error-response" style="display:none"></div>
-								<div class="response" id="mce-success-response" style="display:none"></div>
-							</div>
+                        <form action="http://thesitedoctor.createsend.com/t/y/s/xbjtk/" method="post" class="validate" id="newsletter-form">
+                            <div class="input-append">
+                                <input type="email" name="cm-xbjtk-xbjtk" id="xbjtk-xbjtk" class="required email span9" />
+                                <button type="submit" class="btn">Go</button>
+                            </div>
 						</form>
                     </div>
                 </div>

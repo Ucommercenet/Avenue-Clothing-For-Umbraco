@@ -1,5 +1,12 @@
 ﻿/* Bootstrap Theme Overrides
 -------------------------------------------*/
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+.sidebar-nav {
+    padding: 9px 0;
+}
 .container-fluid {
     max-width:1200px;
     margin-left: auto;
@@ -45,7 +52,11 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     background: url("/img/logo.png") 24px 6px no-repeat;
     padding-left: 65px;
 }
+.navbar-search .search-query {
+    padding: 3px 14px;
+}
 .btn {
+    padding: 3px 14px;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
     background: #59B4EE; /*6dbe78*/
@@ -152,7 +163,8 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 #powered-by-ucommerce {
     padding: 20px 20px 10px;
 }
-#about {
+#about,
+#newsletter {
     padding: 20px;
 }
 td.money {
@@ -250,6 +262,20 @@ td.money {
         margin:0;
     }
     #product-details .review .review-by{
+        font-size: 0.85em;
+    }
+#product-details .review .review-comment {
+    padding-left: 50px;
+    background: url(/img/return.png) 15px 15px no-repeat;
+    margin: 5px 0;
+}
+    #product-details .review .review-comment article,
+    #product-details .review .review-comment header {
+        border-left:5px solid #4a95c5;
+        padding-left: 10px;
+        min-height: 25px;
+    }
+    #product-details .review .review-comment header {
         font-size: 0.85em;
     }
 /* Cart Page

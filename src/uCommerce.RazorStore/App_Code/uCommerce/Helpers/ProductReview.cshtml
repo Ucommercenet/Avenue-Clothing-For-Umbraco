@@ -45,8 +45,7 @@
     <section class="review-comment">
         <article itemprop="description">@comment.Comment</article>
         <header>
-            <p>by <span itemprop="author">@comment.Customer.FirstName</span> on
-                <abbr title="@comment.CreatedOn.ToString("u")">@comment.CreatedOn.ToString("MMM dd, yyyy")</abbr></p>
+            by <span itemprop="author">@comment.Customer.FirstName</span> on <abbr title="@comment.CreatedOn.ToString("u")">@comment.CreatedOn.ToString("MMM dd, yyyy")</abbr>
         </header>
     </section>
         }
