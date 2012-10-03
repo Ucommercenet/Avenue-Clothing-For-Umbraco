@@ -56,8 +56,8 @@
                     </div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>
-                            <li class="star">5 star satisfaction</li>
-                            <li class="truck">Free delivery</li>
+                            <li><i class="icon-grey-star"></i>5 star satisfaction</li>
+                            <li><i class="icon-truck"></i>Free delivery</li>
                             <li>Payment Information<br />
                             <img src="/img/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" title="We accept VISA, SOLO, PayPal, MasterCard" /></li>
                         </ol>
@@ -99,6 +99,7 @@
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+        <script src="/js/jquery.validate.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/servicestack.js"></script>
         <script src="/js/jquery.ucommerce.js"></script>

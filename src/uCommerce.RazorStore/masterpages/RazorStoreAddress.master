@@ -5,6 +5,5 @@
     <umbraco:Macro ID="Macro1" runat="server" Alias="Address[Razor]"/>
 </asp:content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/ucommerce.demostore.checkout.js"></script>
 </asp:Content>

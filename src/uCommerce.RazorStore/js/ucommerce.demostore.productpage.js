@@ -1,8 +1,9 @@
 ﻿var _itemAddedAlert = null;
 $(function () {
-    relateVariations($('#product-sku'), $('#collarsize'), $('#colour'), $('#add-to-basket'));
+    relateVariations($('#product-sku'), $('#variation-collarsize'), $('#variation-colour'), $('#add-to-basket'));
     enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
     wireupAddToCartButton($('#add-to-basket'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
+    wireupRatings($('.rating'));
 });
 function relateVariations(sku, size, colour, addToCartButton) {
     updateVariationOptions(sku, size, colour);
@@ -38,6 +39,39 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
         addToCartButton.removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
     }
 };
+function wireupRatings(radios) {
+    $('#review-form').hide();
+    $('label', radios).each(function () {
+        var t = $(this);
+        t.addClass('off');
+        $('input:radio', t).hide();
+        setStarHoverOutState($('i', t));
+        t.hover(function () {
+            var parent = $(this);
+            var labels = parent.prevAll('label');
+            setStarHoverState($('i', labels));
+            setStarHoverState($('i', parent));
+        }, function () {
+            var parent = $(this);
+            var labels = parent.prevAll('label');
+            if (!parent.hasClass('selected')) {
+                setStarHoverOutState($('i', labels));
+                setStarHoverOutState($('i', parent));
+            }
+        });
+        t.click(function () {
+            var parent = $(this);
+            parent.addClass('selected');
+            $('#review-form').slideDown();
+        });
+    });
+};
+function setStarHoverState(label) {
+    label.addClass('icon-star').removeClass('icon-star-empty');
+}
+function setStarHoverOutState(label) {
+    label.addClass('icon-star-empty').removeClass('icon-star');
+}
 function wireupAddToCartButton(addToCartButton, skuInput, variantInputs, quantityInput) {
     addToCartButton.click(function (e) {
         e.preventDefault();
@@ -46,7 +80,7 @@ function wireupAddToCartButton(addToCartButton, skuInput, variantInputs, quantit
         var myarray = {};
         variantInputs.each(function (i, v) {
             var t = $(v);
-            myarray[t.attr("id")] = t.val();
+            myarray[t.attr("id").replace("variation-", "")] = t.val();
         });
         var qty = quantityInput.val();
 

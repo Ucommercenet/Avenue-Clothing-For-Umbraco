@@ -34,13 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="businesslogic, Version=1.0.4583.15473, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\inetpub\u3\bin\businesslogic.dll</HintPath>
+    <Reference Include="businesslogic">
+      <HintPath>..\..\lib\umbraco\businesslogic.dll</HintPath>
     </Reference>
-    <Reference Include="cms, Version=1.0.4583.15475, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\inetpub\u3\bin\cms.dll</HintPath>
+    <Reference Include="cms">
+      <HintPath>..\..\lib\umbraco\cms.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\..\lib\ServiceStack\3.78\ServiceStack.dll</HintPath>
@@ -83,10 +81,10 @@
       <HintPath>..\..\lib\uCommerce\3.0.0.0 RC2\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
-      <HintPath>C:\inetpub\u3\bin\umbraco.dll</HintPath>
+      <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.MacroEngines">
-      <HintPath>C:\inetpub\u3\bin\umbraco.MacroEngines.dll</HintPath>
+      <HintPath>..\..\lib\umbraco\umbraco.MacroEngines.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +187,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="macroScripts\HomepageCatalog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\uCommerce\Helpers\ProductReview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\uCommerce\Helpers\Product.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\uCommerce\Helpers\Category.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\uCommerce\Functions\Basket.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\uCommerce\Functions\Review.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

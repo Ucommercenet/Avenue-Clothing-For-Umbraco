@@ -1,0 +1,42 @@
+﻿@using UCommerce.Api
+@using UCommerce.EntitiesV2
+@functions{
+    public static Product GetVariantFromPostData(Product product, string variantPrefix)
+    {
+        var request = HttpContext.Current.Request;
+        var keys = request.Form.AllKeys.Where(k => k.StartsWith(variantPrefix));
+        var properties = keys.Select(k => new { Key = k, Value = Request.Form[k] }).ToList();
+
+        Product variant = null;
+
+        if (product.Variants.Any() && properties.Any()) // If there are variant values we'll need to find the selected variant
+        {
+            variant = product.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite).All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+        }
+        else if (!product.Variants.Any()) // Only use the current product where there are no variants
+        {
+            variant = product;
+        }
+
+        return variant;
+    }
+
+    public static void AddToBasket(string addToBasketKey, string quantityKey, Product variant)
+    {
+        var request = HttpContext.Current.Request;
+
+        if (request.Form.AllKeys.All(x => x != addToBasketKey))
+        {
+            return;
+        }
+        
+        var selectedSize = request.Form["size"];
+        var selectedColour = request.Form["colour"];
+
+        var quantity = Convert.ToInt32(request.Form[quantityKey]);
+
+        TransactionLibrary.AddToBasket(quantity, variant.Sku, variant.VariantSku);
+        TransactionLibrary.ExecuteBasketPipeline();
+        HttpContext.Current.Response.Redirect(request.RawUrl);
+    }
+}

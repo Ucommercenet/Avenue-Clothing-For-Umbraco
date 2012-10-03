@@ -6,68 +6,21 @@
 @{
     var basket = SiteContext.Current.OrderContext.GetBasket();
     var product = SiteContext.Current.CatalogContext.CurrentProduct;
-    var request = HttpContext.Current.Request;
+
+    if (HttpContext.Current.Request.HttpMethod == "POST")
+    {
+        @* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
+        var variant = uCommerce.Functions.Basket.GetVariantFromPostData(product, "variation-");
+        uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
+
+        @* View /App_Code/uCommerce/Functions/Review.cshtml for this function *@
+        uCommerce.Functions.Review.LeaveReview(product, "review-name", "review-email", "review-rating", "review-headline", "review-text");
+    }
+
     var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
     var price = CatalogLibrary.CalculatePrice(product);
 
-    if (request.HttpMethod == "POST")
-    {
-        if (request.Form.AllKeys.Any(x => x == "add-to-basket"))
-        {
-            var selectedSize = request.Form["size"];
-            var selectedColour = request.Form["colour"];
-
-            var variant = product.Variants.First(v => v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "CollarSize" && p.Value == selectedSize) && v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "Colour" && p.Value == selectedColour));
-            var quantity = Convert.ToInt32(request.Form["quantity-to-add"]);
-            TransactionLibrary.AddToBasket(quantity, product.Sku, variant.VariantSku);
-            TransactionLibrary.ExecuteBasketPipeline();
-            HttpContext.Current.Response.Redirect(HttpContext.Current.Request.RawUrl);
-        }
-
-        if (request.Form.AllKeys.Any(x => x == "review-product"))
-        {
-            var name = request.Form["review-name"];
-            var email = request.Form["review-email"];
-            var rating = Convert.ToInt32(request.Form["review-rating"]);
-            var reviewHeadline = request.Form["review-headline"];
-            var reviewText = request.Form["review-text"];
-
-            if (basket.PurchaseOrder.Customer == null)
-            {
-                basket.PurchaseOrder.Customer = new Customer() { FirstName = name, LastName = String.Empty, EmailAddress = email };
-            }
-            else
-            {
-                basket.PurchaseOrder.Customer.FirstName = name;
-                if (basket.PurchaseOrder.Customer.LastName == null)
-                {
-                    basket.PurchaseOrder.Customer.LastName = String.Empty;
-                }
-                basket.PurchaseOrder.Customer.EmailAddress = email;
-            }
-
-            basket.PurchaseOrder.Customer.Save();
-
-            var review = new ProductReview()
-            {
-                ProductCatalogGroup = SiteContext.Current.CatalogContext.CurrentCatalogGroup,
-                ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"),
-                CreatedOn = DateTime.Now,
-                CreatedBy = "System",
-                Product = product,
-                Customer = basket.PurchaseOrder.Customer,
-                Rating = rating,
-                ReviewHeadline = reviewHeadline,
-                ReviewText = reviewText,
-                Ip = request.UserHostName
-            };
-
-            product.AddProductReview(review);
-            product.Save();
-        }
-    }
-
-    var incVAT = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
+    var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
     var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
@@ -93,50 +46,41 @@
         }
     </div>
     <section class="span6">
-        <div class="span12 page-header">
-            <header class="span8">
-                <h1 itemprop="name">@product.DisplayName()</h1>
-                <h6><small>
-                    @if (product.ProductReviews.Any())
-                    {
-                        var rating = product.ProductReviews.Average(r => r.Rating);
-                        for (int i = 1; i <= 5; i++)
-                        {
-                            if (rating >= i)
-                            {
-                        <i class="icon-star"></i>
-                            }
-                            else
-                            {
-                        <i class="icon-star-empty"></i>
-                            }
-                        }
-                    }</small> @product.DynamicProperty().Brand</h6>
-                <small><em>@product.ShortDescription()</em></small>
-            </header>
-        </div>
+        <header class="span12 page-header">
+            <h1 itemprop="name">@product.DisplayName()</h1>
+            <h6>
+                @if (product.ProductReviews.Any())
+                {
+                    <small>
+                        @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                        @uCommerce.Helpers.ProductReview.DisplayStars(product.Rating)
+                    </small> 
+                }
+                @product.DynamicProperty().Brand</h6>
+            <small><em>@product.ShortDescription()</em></small>
+        </header>
         <form method="post">
         <div class="span12 well">
             <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                 <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
-                <p class="item-tax">@Html.Raw(incVAT) @price.YourTax tax</p>
+                <p class="item-tax">@Html.Raw(productIncludesTax) @price.YourTax tax</p>
             </aside>
             @if (uniqueVariants.Any())
             {
-            <div class="span7">
-                @foreach (var prop in uniqueVariants)
-                {
-                    var controlName = prop.Key.Name.ToLower();
-                    <label for="@controlName">@prop.Key.GetDisplayName()</label>
-                    <select name="@controlName" id="@controlName" class="variant">
-                        <option value="">-- Please Select --</option>
-                        @foreach (var value in prop.Select(p => p.Value).Distinct())
-                        {
-                            <option value="@value">@value</option>
-                        }
-                    </select>
-                }
-            </div>
+                <div class="span7">
+                    @foreach (var prop in uniqueVariants)
+                    {
+                        var controlName = string.Format("variation-{0}", prop.Key.Name.ToLower());
+                        <label for="@controlName">@prop.Key.GetDisplayName()</label>
+                        <select name="@controlName" id="@controlName" class="variant">
+                            <option value="">-- Please Select --</option>
+                            @foreach (var value in prop.Select(p => p.Value).Distinct())
+                            {
+                                <option value="@value">@value</option>
+                            }
+                        </select>
+                    }
+                </div>
             }
             <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
             <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
@@ -164,83 +108,19 @@
                 <div id="customer-reviews" class="tab-pane">
                     @if (product.ProductReviews.Any())
                     {
+                        <h5>Latest Reviews</h5>
                         foreach (var review in product.ProductReviews)
                         {
-                        <section itemprop="review" itemscope itemtype="http://schema.org/Review">
-                            <header>
-                                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                                    @for (int i = 1; i <= 5; i++)
-                                    {
-                                        if (review.Rating >= i)
-                                        {
-                                        <i class="icon-star"></i>
-                                        }
-                                        else
-                                        {
-                                        <i class="icon-star-empty"></i>
-                                        }
-                                    }
-                                </div>
-                                <p itemprop="name">@review.ReviewHeadline</p>
-                            </header>
-                            <aside>
-                                <p>by <span itemprop="author">@review.Customer.FirstName</span> at @review.CreatedOn</p>
-                            </aside>
-                            <p itemprop="description">@review.ReviewText</p>
-                            <meta itemprop="ratingValue" content="@review.Rating">
-                            <meta itemprop="worstRating" content="1">
-                            <meta itemprop="bestRating" content="5">
-                            <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
-                        </section>
-
+                        @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                        @uCommerce.Helpers.ProductReview.DisplayReview(review)
                         }
                     }
                     else
                     {
                         <p>No-one has reviewed this product yet.</p>
                     }
-                    <form method="post" class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label" for="review-name">Your Name</label>
-                        <div class="controls">
-                            <input type="text" id="review-name" name="review-name" placeholder="Name" class="span12">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="review-email">Your Email</label>
-                        <div class="controls">
-                            <input type="text" id="review-email" name="review-email" placeholder="Email" class="span12">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="review-rating">Rating</label>
-                        <div class="controls btn-group">
-                            <label class="btn btn-small">
-                                <input type="radio" name="review-rating" value="1" /><i class="icon-star"></i></label>
-                            <label class="btn btn-small">
-                                <input type="radio" name="review-rating" value="2" /><i class="icon-star"></i></label>
-                            <label class="btn btn-small">
-                                <input type="radio" name="review-rating" value="3" /><i class="icon-star"></i></label>
-                            <label class="btn btn-small">
-                                <input type="radio" name="review-rating" value="4" /><i class="icon-star"></i></label>
-                            <label class="btn btn-small">
-                                <input type="radio" name="review-rating" value="5" /><i class="icon-star"></i></label>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="review-headline">Review Title</label>
-                        <div class="controls">
-                            <input type="text" id="review-headline" name="review-headline" placeholder="Title" class="span12">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="review-text">Comments</label>
-                        <div class="controls">
-                            <textarea rows="3" class="span12" id="review-text" name="review-text"></textarea>
-                            <button type="submit" class="btn btn-primary" name="review-product">Save</button>
-                        </div>
-                    </div>
-                    </form>
+                    @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                    @uCommerce.Helpers.ProductReview.DisplayReviewForm(product)
                 </div>
             </div>
         </div>

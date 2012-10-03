@@ -18,6 +18,11 @@ h1, h2, h3, h4, h5, h6, p {
     -moz-box-shadow: none;
     box-shadow: none;
 }
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
 .hero-unit {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -100,6 +105,12 @@ h1, h2, h3, h4, h5, h6, p {
     -moz-border-radius: 0;
     border-radius: 0;
 }
+.icon-truck {
+  background-position: 0 0;
+}
+.icon-grey-star {
+  background-position: -96px 0;
+}
 /* Common
 -------------------------------------------*/
 #main-nav ul {
@@ -137,14 +148,6 @@ h1, h2, h3, h4, h5, h6, p {
             color:#767676;
             border-bottom: 1px solid #ebebeb;
             font-weight: bold;
-        }
-        #why-buy ol li.star,
-        #why-buy ol li.truck {
-            padding-left: 40px;
-            background: url('/img/icon-star.png') 15px 22px no-repeat;
-        }
-        #why-buy ol li.truck{
-            background-image: url('/img/icon-delivery.png');
         }
 #powered-by-ucommerce {
     padding: 20px 20px 10px;
@@ -226,6 +229,29 @@ td.money {
     font-size: 0.9em;
     color: #606060;
 }
+#product-details .rating {
+}
+    #product-details .rating label {
+        cursor: pointer;
+        float:left;
+    }
+        #product-details .rating label i {
+        }
+#product-details .review {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+    #product-details .review .review-stars{
+        float:left;
+        width:100px;
+    }
+    #product-details .review .review-headline{
+        font-weight: bold;
+        margin:0;
+    }
+    #product-details .review .review-by{
+        font-size: 0.85em;
+    }
 /* Cart Page
 -------------------------------------------*/
 #cart {

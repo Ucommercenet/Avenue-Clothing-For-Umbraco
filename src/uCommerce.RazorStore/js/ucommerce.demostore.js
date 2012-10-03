@@ -1,4 +1,17 @@
 ﻿$(function () {
+    $('form.validate').each(function () {
+        $(this).validate({
+            errorElement: "span",
+            errorClass: "help-inline",
+            highlight: function (label) {
+                $(label).closest('.control-group').addClass('error');
+            },
+            success: function (label) {
+                label.closest('.control-group').addClass('success');
+            }
+        });
+
+    });
     $('#site-search').typeahead({
         minLength: 3,
         source: function (query, process) {

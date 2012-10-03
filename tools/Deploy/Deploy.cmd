@@ -23,6 +23,7 @@ IF /I %lastChar%==\  set path2=%path2:~0,-1%
 echo %path1%
 echo %path2%
 
+robocopy "%path1%\App_Code" "%path2%\App_Code" /s
 robocopy "%path1%\macroScripts" "%path2%\macroScripts" 
 robocopy "%path1%\css" "%path2%\css"
 robocopy "%path1%\img" "%path2%\img"
