@@ -56,10 +56,10 @@
                     </div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>
-                            <li>5 star satisfaction</li>
-                            <li>Free delivery</li>
+                            <li class="star">5 star satisfaction</li>
+                            <li class="truck">Free delivery</li>
                             <li>Payment Information<br />
-                            <img src="/img/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" /></li>
+                            <img src="/img/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" title="We accept VISA, SOLO, PayPal, MasterCard" /></li>
                         </ol>
                         <p id="powered-by-ucommerce"><img src="/img/ucommerce.png" alt="Powered by uCommerce" /></p>
                     </div>

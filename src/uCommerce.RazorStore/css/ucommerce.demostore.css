@@ -77,6 +77,9 @@ h1, h2, h3, h4, h5, h6, p {
             padding: 5px 15px;
             text-shadow: none;
         }
+            #main-nav li ul li a{
+                padding: 0px 15px;
+            }
         #main-nav .nav > li > a:hover {
             text-decoration: underline;
             background-color: transparent;
@@ -100,6 +103,14 @@ h1, h2, h3, h4, h5, h6, p {
             color:#767676;
             border-bottom: 1px solid #ebebeb;
             font-weight: bold;
+        }
+        #why-buy ol li.star,
+        #why-buy ol li.truck {
+            padding-left: 40px;
+            background: url('/img/icon-star.png') 15px 22px no-repeat;
+        }
+        #why-buy ol li.truck{
+            background-image: url('/img/icon-delivery.png');
         }
 #powered-by-ucommerce {
     padding: 20px 20px 10px;
