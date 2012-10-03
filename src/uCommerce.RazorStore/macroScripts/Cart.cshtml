@@ -5,14 +5,18 @@
     var request = HttpContext.Current.Request;
     var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
     var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
-    
+
     if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "update-and-continue"))
     {
         @* For this helper functions refer to /App_Code/uCommerce/Functions/Basket.cshtml *@
         uCommerce.Functions.Basket.UpdateCartLines("update-and-continue", "quantity-input-", basket);
         HttpContext.Current.Response.Redirect("Address.aspx");
     }
-    
+    if (request.HttpMethod == "POST")
+    {
+        HttpContext.Current.Response.Redirect(request.RawUrl);
+    }
+
     var subTotal = new Money(basket.SubTotal.Value, currency);
     var vat = new Money(basket.VAT.Value, currency);
     var discount = new Money(basket.Discount.Value, currency);
@@ -65,7 +69,8 @@
                     <td class="money line-total">
                         @lineTotal
                     </td>
-                    <td><button type="submit" class="line-remove" name="basket-remove-item" value="@lineItem.OrderLineId">×</button></td>
+                    <td>
+                        <button type="submit" class="line-remove" name="basket-remove-item" value="@lineItem.OrderLineId">×</button></td>
                 </tr>
             }
             <tr>
