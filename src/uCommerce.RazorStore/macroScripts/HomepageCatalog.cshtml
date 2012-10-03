@@ -1,57 +1,9 @@
-﻿@using UCommerce.Api
-@using UCommerce.EntitiesV2
-@using UCommerce.Extensions
-@using UCommerce.Runtime
-@using umbraco.MacroEngines
+﻿@using UCommerce.Runtime
 @{
-    var categories = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && Convert.ToBoolean(pp.Value))));
-}
-@helper RenderStars(IEnumerable<ProductReview> ratings)
-    {
-        var productReviews = ratings as List<ProductReview> ?? ratings.ToList();
-        if (productReviews.Any())
-        {
-            var rating = productReviews.Average(r => r.Rating);
-    <p class="ratings"><span>
-        @for (var i = 1; i <= 5; i++)
-        {
-            if (rating >= i)
-            {
-            <i class="icon-star"></i>
-            }
-            else
-            {
-            <i class="icon-star-empty"></i>
-            }
-        }
-    </span></p>
-        }
-}
-@helper RenderProducts(IEnumerable<Product> products)
-    {
-        if (products.Any())
-        {
-            foreach (var product in products)
-            {
-                var url = CatalogLibrary.GetNiceUrlForProduct(product);
-                var price = CatalogLibrary.CalculatePrice(product);
-    <div class="product span4">
-        <div class="product-image">
-            @if (!string.IsNullOrEmpty(product.ThumbnailImageMediaId))
-            {
-                dynamic mediaItem = new DynamicMedia(product.ThumbnailImageMediaId);
-                <a href="@url"><img src="@mediaItem.umbracoFile" /></a>
-            }
-            @RenderStars(product.ProductReviews)
-        </div>
-        <p class="item-name"><a href="@url">@product.DisplayName()</a></p>
-        <p class="item-price">@price.YourPrice.AmountExclTax.Value.ToString("#,##.00")</p>
-    </div>    
-            }
-        }
+    var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && Convert.ToBoolean(pp.Value))));
 }
 <div class="row-fluid">
     <div class="span12">
-        @RenderProducts(categories)
+        @uCommerce.Helpers.Product.DisplayListProducts(products, null)
     </div>
 </div>
