@@ -10,7 +10,10 @@
     if(TransactionLibrary.HasBasket())
     {
         basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
-        orderTotal = new Money(basket.OrderTotal.Value, currency);
+        if(basket.OrderTotal.HasValue)
+        {
+            orderTotal = new Money(basket.OrderTotal.Value, currency);
+        }
     }
 }
 
