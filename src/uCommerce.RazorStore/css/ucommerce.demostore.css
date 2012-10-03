@@ -89,6 +89,11 @@ h1, h2, h3, h4, h5, h6, p {
     -moz-border-radius: 0;
     border-radius: 0;
 }
+.nav-tabs > li > a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
 .form-search .input-append .search-query,
 .form-search .input-append .btn{
     -webkit-border-radius: 0;
@@ -117,7 +122,6 @@ h1, h2, h3, h4, h5, h6, p {
         #main-nav li.on > a,
         #main-nav .nav li.on > a:hover{
             color: #fff;
-            font-weight: bold;
             background-color:#4a95c5;
         }
 #why-buy {
@@ -215,7 +219,7 @@ td.money {
     font-weight: bold;
     font-size: 36px;
     line-height: 40px;
-    margin: 10px 0;
+    margin: 10px 0 0;
 }
 #product-details aside .item-tax {
     font-style: italic;

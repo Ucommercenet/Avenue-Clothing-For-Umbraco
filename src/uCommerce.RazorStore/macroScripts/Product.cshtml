@@ -14,8 +14,8 @@
     {
         if (request.Form.AllKeys.Any(x => x == "add-to-basket"))
         {
-            var selectedSize = request.Form["selected-size"];
-            var selectedColour = request.Form["selected-colour"];
+            var selectedSize = request.Form["size"];
+            var selectedColour = request.Form["colour"];
 
             var variant = product.Variants.First(v => v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "CollarSize" && p.Value == selectedSize) && v.ProductProperties.Any(p => p.ProductDefinitionField.Name == "Colour" && p.Value == selectedColour));
             var quantity = Convert.ToInt32(request.Form["quantity-to-add"]);
@@ -67,13 +67,22 @@
         }
     }
 
-    var incVAT = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr=\"Including\">Inc</abbr>" : "<abbr=\"Excluding\">Exc</abbr>";
+    var incVAT = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
     var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
                          where v.ProductDefinitionField.DisplayOnSite
                          group v by v.ProductDefinitionField into g
                          select g;
+}
+@if (inBasket)
+{
+    <div class="row-fluid">
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
+        </div>
+    </div>
 }
 <div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
     <div class="span6">
@@ -105,38 +114,29 @@
                     }</small> @product.DynamicProperty().Brand</h6>
                 <small><em>@product.ShortDescription()</em></small>
             </header>
-            <aside class="span4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
-                <p class="item-tax">(@Html.Raw(incVAT) @price.YourTax Tax)</p>
-            </aside>
         </div>
-        <form method="post" class="form-horizontal">
+        <form method="post">
         <div class="span12 well">
-            @if (inBasket)
-            {
-                <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
-                </div>
-            }
+            <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
+                <p class="item-tax">@Html.Raw(incVAT) @price.YourTax tax</p>
+            </aside>
             @if (uniqueVariants.Any())
             {
-                foreach (var prop in uniqueVariants)
+            <div class="span7">
+                @foreach (var prop in uniqueVariants)
                 {
                     var controlName = prop.Key.Name.ToLower();
-                <div class="control-group">
-                    <label class="control-label" for="selected-@controlName">@prop.Key.GetDisplayName()</label>
-                    <div class="controls">
-                        <select name="selected-@controlName" id="selected-@controlName" class="variant">
-                            <option value="">-- Please Select --</option>
-                            @foreach (var value in prop.Select(p => p.Value).Distinct())
-                            {
-                                <option value="@value">@value</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+                    <label for="@controlName">@prop.Key.GetDisplayName()</label>
+                    <select name="@controlName" id="@controlName" class="variant">
+                        <option value="">-- Please Select --</option>
+                        @foreach (var value in prop.Select(p => p.Value).Distinct())
+                        {
+                            <option value="@value">@value</option>
+                        }
+                    </select>
                 }
+            </div>
             }
             <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
             <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
