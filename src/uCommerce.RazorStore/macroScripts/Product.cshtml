@@ -71,6 +71,7 @@
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
     var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
+                         where v.ProductDefinitionField.DisplayOnSite
                          group v by v.ProductDefinitionField into g
                          select g;
 }
