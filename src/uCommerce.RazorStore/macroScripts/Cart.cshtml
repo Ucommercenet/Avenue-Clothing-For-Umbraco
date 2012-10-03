@@ -18,8 +18,8 @@
     }
 
     var subTotal = new Money(basket.SubTotal.Value, currency);
-    var vat = new Money(basket.VAT.Value, currency);
-    var discount = new Money(basket.Discount.Value, currency);
+    var tax = new Money(basket.VAT.Value, currency);
+    var discount = new Money(basket.Discount.Value * -1, currency);
     var orderTotal = new Money(basket.OrderTotal.Value, currency);
 }
 <form method="post">
@@ -95,7 +95,7 @@
             <tr>
                 <td>VAT:</td>
                 <td class="money order-tax">
-                    @vat
+                    @tax
                 </td>
                 <td>&nbsp;</td>
             </tr>

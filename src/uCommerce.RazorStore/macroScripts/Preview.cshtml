@@ -1,4 +1,6 @@
-﻿@using UCommerce.Api
+﻿@using UCommerce
+@using UCommerce.Api
+@using UCommerce.Runtime
 @{
     var request = HttpContext.Current.Request;
     if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "send-order"))
@@ -9,9 +11,17 @@
 
     }
     var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+    var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
     var billingAddress = TransactionLibrary.GetBillingInformation();
     var shipmentAddress = TransactionLibrary.GetShipmentInformation();
     var shipments = basket.Shipments;
+
+    var subTotal = new Money(basket.SubTotal.Value, currency);
+    var tax = new Money(basket.VAT.Value, currency);
+    var discount = new Money(basket.Discount.Value * -1, currency);
+    var shippingTotal = new Money(basket.ShippingTotal.Value, currency);
+    var paymentTotal = new Money(basket.PaymentTotal.Value, currency);
+    var orderTotal = new Money(basket.OrderTotal.Value, currency);
 }
 <form method="post">
 <div class="row-fluid well">
@@ -52,53 +62,58 @@
         <thead>
             <tr>
                 <th>Item no. </th>
-                <th class="span7">Description</th>
+                <th class="span8">Description</th>
                 <th class="span1 money">Price</th>
                 <th class="span1 money">VAT</th>
-                <th class="span2">Quantity</th>
+                <th class="span1 number">Quantity</th>
                 <th class="span1 money">Total</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var lineItem in basket.OrderLines)
             {
+                var itemPrice = new Money(lineItem.Price, currency);
+                var itemTax = new Money(lineItem.VAT, currency);
+                var lineTotal = new Money(lineItem.Total.Value, currency);
+
                 <tr>
                     <td>@lineItem.Sku</td>
                     <td>@lineItem.ProductName</td>
                     <td class="money">
                         @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
                         {
+                            var nowPrice = new Money((lineItem.Price - lineItem.UnitDiscount.Value), currency);
                             <span style="text-decoration: line-through">
-                                @TransactionLibrary.FormatCurrency(lineItem.Price)
+                                @itemPrice
                             </span>
-                            @TransactionLibrary.FormatCurrency(lineItem.Price - lineItem.UnitDiscount)    
+                            @nowPrice
                         }
                         else
                         {
-                            @TransactionLibrary.FormatCurrency(lineItem.Price)    
+                            @itemPrice
                         }
                     </td>
-                    <td class="money">@TransactionLibrary.FormatCurrency(lineItem.VAT)</td>
-                    <td>@lineItem.Quantity</td>
-                    <td class="money">@TransactionLibrary.FormatCurrency(lineItem.Total)</td>
+                    <td class="money">@itemTax</td>
+                    <td class="number">@lineItem.Quantity</td>
+                    <td class="money">@lineTotal</td>
                 </tr>
             }
             <tr>
                 <td rowspan="6" colspan="2"></td>
                 <td colspan="3">Sub total: </td>
                 <td class="money">
-                    @TransactionLibrary.FormatCurrency(basket.SubTotal)
+                    @subTotal
                 </td>
             </tr>
             <tr>
                 <td colspan="3">VAT: </td>
                 <td class="money">
-                    @TransactionLibrary.FormatCurrency(basket.VAT)
+                    @tax
                 </td>
             </tr>
             <tr>
                 <td colspan="3">Order discounts: </td>
-                <td class="money">-@TransactionLibrary.FormatCurrency(basket.Discount)</td>
+                <td class="money">@discount</td>
             </tr>
             <tr>
                 <td colspan="3">Shipping
@@ -116,7 +131,7 @@
                         <text> (via </text>@shipments.First().ShipmentName<text>)</text>
                     }
                 </td>
-                <td class="money">@TransactionLibrary.FormatCurrency(basket.ShippingTotal)</td>
+                <td class="money">@shippingTotal</td>
             </tr>
             <tr>
                 <td colspan="3">Payment
@@ -134,11 +149,11 @@
                         <text> (</text>@basket.Payments.First().PaymentMethodName<text>)</text>                        
                     }
                 </td>
-                <td class="money">@TransactionLibrary.FormatCurrency(basket.PaymentTotal)</td>
+                <td class="money">@paymentTotal</td>
             </tr>
             <tr>
                 <td colspan="3">Order total: </td>
-                <td class="money">@TransactionLibrary.FormatCurrency(basket.OrderTotal)</td>
+                <td class="money">@orderTotal</td>
             </tr>
         </tbody>
     </table>
