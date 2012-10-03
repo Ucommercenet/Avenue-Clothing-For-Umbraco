@@ -21,8 +21,8 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
-                    <a class="brand" href="/shop">Avenue Clothing</a>
-                    <form class="navbar-search form-search pull-left" action="">
+                    <a class="brand" href="/shop.aspx">Avenue Clothing</a>
+                    <form class="navbar-search form-search pull-left" action="/shop/search.aspx">
                     <div class="input-append">
                         <input id="site-search" type="text" name="search" type="text" class="span4 search-query" placeholder="Search the store">
                         <button type="submit" class="btn">Search</button>

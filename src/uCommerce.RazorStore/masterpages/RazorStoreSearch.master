@@ -1,0 +1,4 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
+    <umbraco:Macro runat="server" Alias="StoreSearch[Razor]"/>
+</asp:content>

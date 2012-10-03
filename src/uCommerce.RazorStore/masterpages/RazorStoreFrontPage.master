@@ -3,7 +3,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="cphMain">
     <umbraco:macro runat="server" alias="homepageBanners" />
     <div class="hero-unit">
-        <umbraco:Item field="pageBody" runat="server" />
+        <umbraco:Item field="content" runat="server" />
     </div>
     <umbraco:macro runat="server" alias="HomepageCatalog[Razor]" />
     <!--/row-->
