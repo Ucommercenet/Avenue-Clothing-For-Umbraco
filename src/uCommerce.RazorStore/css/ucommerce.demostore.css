@@ -160,6 +160,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
             border-bottom: 1px solid #ebebeb;
             font-weight: bold;
         }
+            #why-buy ol li i{
+                margin-right: 10px;
+            }
 #powered-by-ucommerce {
     padding: 20px 20px 10px;
 }

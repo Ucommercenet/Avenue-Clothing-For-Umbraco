@@ -1,10 +1,41 @@
 ﻿$(function () {
-    watchForQuantityChange($('#cart'));
+    wireUpCart($('#cart'));
 });
-function watchForQuantityChange(cart) {
-    $('.update-cart', cart).hide();
-    disableUpdateButton(cart);
-    $('.qty', cart).change(function () {
+function wireUpCart(cart) {
+    wireupQuantityChange(cart);
+    wireUpClickHandlers(cart);
+};
+function wireupQuantityChange(cart) {
+    $('tr.order-line', cart).each(function (i, row) {
+        addUpdateButton(cart, row);
+    });
+};
+function addUpdateButton(cart, row) {
+    var qty = $('.qty', row);
+    var lineId = qty.data("orderlineid");
+    qty.data('original', qty.val());
+
+    var div = $('<div />', {
+        "class": "input-append"
+    });
+    qty.wrap(div);
+   
+    var btn = $('<button />', {
+        name: "update-basket-line",
+        "class": "btn btn-success update-cart",
+        "type": "submit",
+        value: lineId
+    }).hide();
+
+    $("<i />", {
+        "class": "icon-refresh icon-white"
+    }).appendTo(btn);
+
+    btn.insertAfter(qty);
+    watchForQuantityChange(qty, cart);
+};
+function watchForQuantityChange(qty, cart) {
+    qty.change(function () {
         var t = $(this);
         if (t.val() == t.data('original')) {
             return;
@@ -12,6 +43,9 @@ function watchForQuantityChange(cart) {
         $('.update-cart', t.parent()).fadeIn();
         enableUpdateButton(cart);
     });
+};
+function wireUpClickHandlers(cart) {
+    disableUpdateButton(cart);
     $('.update-cart', cart).click(function (e) {
         e.preventDefault();
         var t = $(this);
@@ -24,15 +58,17 @@ function watchForQuantityChange(cart) {
         function (updatedLine) {
             updateCartTotals();
             t.fadeOut();
+            qty.removeClass('pending-change');
             var row = t.parents('tr');
             updateLineTotals(row, updatedLine.UpdatedLine);
             updateQuantity(row, updatedLine.UpdatedLine);
+            if ($('.pending-change', cart).length > 0) {
+                enableUpdateButton(cart);
+            } else {
+                disableUpdateButton(cart);
+            }
         });
         return false;
-    });
-    $('.qty', cart).each(function () {
-        var t = $(this);
-        t.data('original', t.val());
     });
 };
 function updateLineTotals(row, line) {

@@ -2,55 +2,17 @@
 @using UCommerce.Api
 @using UCommerce.Runtime
 @{
-    var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
     var request = HttpContext.Current.Request;
+    var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
     var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
     
-    if (request.HttpMethod == "POST")
+    if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "update-and-continue"))
     {
-        if (request.Form.AllKeys.Any(x => x.StartsWith("add-voucher")))
-        {
-            var code = request.Form["voucher-code"];
-            if (!string.IsNullOrWhiteSpace(code))
-            {
-                MarketingLibrary.AddVoucher(code);
-                TransactionLibrary.ExecuteBasketPipeline();
-            }
-        }
-
-        if (request.Form.AllKeys.Any(x => x.StartsWith("update-basket-line")))
-        {
-            int orderLineId;
-            int newQuantity;
-
-            if (int.TryParse(request.Form["update-basket-line"], out orderLineId) && int.TryParse(request.Form["quantity-input_" + orderLineId], out newQuantity))
-            {
-                TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
-            }
-            TransactionLibrary.ExecuteBasketPipeline();
-        }
-
-        if (request.Form.AllKeys.Any(x => x.StartsWith("update-basket")))
-        {
-            foreach (var orderLineId in basket.OrderLines.Select(x => x.OrderLineId).ToList())
-            {
-                int newQuantity;
-                if (int.TryParse(request.Form["quantity-input_" + orderLineId], out newQuantity))
-                {
-                    TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
-                }
-            }
-            TransactionLibrary.ExecuteBasketPipeline();
-        }
-
-        if (request.Form.AllKeys.Any(x => x == "update-and-continue"))
-        {
-            HttpContext.Current.Response.Redirect("Address.aspx");
-        }
-
-        HttpContext.Current.Response.Redirect(request.RawUrl);
+        @* For this helper functions refer to /App_Code/uCommerce/Functions/Basket.cshtml *@
+        uCommerce.Functions.Basket.UpdateCartLines("update-and-continue", "quantity-input-", basket);
+        HttpContext.Current.Response.Redirect("Address.aspx");
     }
-
+    
     var subTotal = new Money(basket.SubTotal.Value, currency);
     var vat = new Money(basket.VAT.Value, currency);
     var discount = new Money(basket.Discount.Value, currency);
@@ -74,7 +36,7 @@
             {
                 var product = @CatalogLibrary.GetProduct(lineItem.Sku);
                 var itemPrice = new Money(lineItem.Price, currency);
-                var itemVAT = new Money(lineItem.VAT, currency);
+                var itemTax = new Money(lineItem.VAT, currency);
                 var lineTotal = new Money(lineItem.Total.Value, currency);
 
                 <tr class="order-line">
@@ -95,19 +57,15 @@
                         }
                     </td>
                     <td class="money">
-                        @itemVAT
+                        @itemTax
                     </td>
                     <td>
-                        <div class="input-append">
-                            <input type="text" name="quantity-input_@(lineItem.OrderLineId)" value="@lineItem.Quantity" class="qty" />
-                            <button name="update-basket-line" class="btn btn-success update-cart" type="submit" value="@lineItem.OrderLineId"><i class="icon-refresh icon-white"></i></button>
-                        </div>
+                        <input type="text" name="quantity-input-@lineItem.OrderLineId" data-orderlineid="@lineItem.OrderLineId" value="@lineItem.Quantity" class="qty" />
                     </td>
                     <td class="money line-total">
                         @lineTotal
                     </td>
-                    <td>
-                        <button type="button" class="line-remove">×</button></td>
+                    <td><button type="submit" class="line-remove" name="basket-remove-item" value="@lineItem.OrderLineId">×</button></td>
                 </tr>
             }
             <tr>
@@ -115,13 +73,13 @@
                     <div class="span6">
                         <div class="input-append">
                             <input type="text" name="voucher-code" />
-                            <button name="add-voucher" class="btn" type="submit"><i class="icon-plus"></i>Add Voucher</button>
+                            <button name="add-voucher" class="btn" type="submit"><i class="icon-plus icon-white"></i>Add Voucher</button>
                         </div>
                         <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
                     </div>
                 </td>
                 <td colspan="2" rowspan="4">
-                    <button name="update-basket" class="btn update-basket" type="submit"><i class="icon-refresh"></i>Update</button>
+                    <button name="update-basket" id="update-basket" class="btn update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
                 </td>
                 <td>Sub total:</td>
                 <td class="money order-subtotal">
@@ -138,7 +96,7 @@
             </tr>
             <tr>
                 <td>Discounts:</td>
-                <td class="money order-discount">
+                <td class="money order-discounts">
                     @discount
                 </td>
                 <td>&nbsp;</td>
