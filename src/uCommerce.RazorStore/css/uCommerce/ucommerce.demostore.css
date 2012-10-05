@@ -49,7 +49,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 .navbar .brand {
     font-family: Arial, Helvetica, sans-serif;
-    background: url("/img/logo.png") 24px 6px no-repeat;
+    background: url("../../img/ucommerce/logo.png") 24px 6px no-repeat;
     padding-left: 65px;
 }
 .navbar-search .search-query {
@@ -73,7 +73,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     text-decoration: none;
-    background-color: #4A95C5;/*65b06f*/
+    background-color: #4A95C5;
 }
 .btn-group > .btn {
   position: relative;
@@ -272,7 +272,7 @@ td.money {
     }
 #product-details .review .review-comment {
     padding-left: 50px;
-    background: url(/img/return.png) 15px 15px no-repeat;
+    background: url(/img/ucommerce/return.png) 15px 15px no-repeat;
     margin: 5px 0;
 }
     #product-details .review .review-comment article,

@@ -101,22 +101,29 @@
     <Compile Include="ServiceStack\Model\ProductProperty.cs" />
     <Compile Include="ServiceStack\Model\LineItem.cs" />
     <Compile Include="ServiceStack\Commands\AddToBasket.cs" />
+    <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.cs">
+      <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.designer.cs">
+      <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\bootstrap-responsive.css" />
-    <Content Include="css\ucommerce.demostore.css" />
+    <Content Include="css\uCommerce\bootstrap-responsive.css" />
+    <Content Include="css\uCommerce\ucommerce.demostore.css" />
     <Content Include="Global.asax" />
-    <Content Include="img\cards.png" />
-    <Content Include="img\logo.png" />
-    <Content Include="img\return.png" />
-    <Content Include="img\ucommerce.png" />
-    <Content Include="js\ucommerce.demostore.checkout.js" />
-    <Content Include="js\jquery.validate.min.js" />
-    <Content Include="js\ucommerce.demostore.cart.js" />
-    <Content Include="js\ucommerce.demostore.js" />
-    <Content Include="js\servicestack.js" />
-    <Content Include="js\jquery.ucommerce.js" />
-    <Content Include="js\ucommerce.demostore.productpage.js" />
+    <Content Include="img\uCommerce\cards.png" />
+    <Content Include="img\uCommerce\logo.png" />
+    <Content Include="img\uCommerce\return.png" />
+    <Content Include="img\uCommerce\ucommerce.png" />
+    <Content Include="js\uCommerce\ucommerce.demostore.checkout.js" />
+    <Content Include="js\uCommerce\jquery.validate.min.js" />
+    <Content Include="js\uCommerce\ucommerce.demostore.cart.js" />
+    <Content Include="js\uCommerce\ucommerce.demostore.js" />
+    <Content Include="js\uCommerce\servicestack.js" />
+    <Content Include="js\uCommerce\jquery.ucommerce.js" />
+    <Content Include="js\uCommerce\ucommerce.demostore.productpage.js" />
     <Content Include="masterpages\RazorStoreContent.master" />
     <Content Include="macroScripts\uCommerce\LeftNavigation.cshtml" />
     <Content Include="masterpages\RazorStoreFrontPage.master" />
@@ -124,12 +131,12 @@
     <Content Include="macroScripts\uCommerce\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\bootstrap.css" />
-    <Content Include="css\bootstrap.min.css" />
-    <Content Include="img\ucommerce.glyphicons-halflings-white.png" />
-    <Content Include="img\ucommerce.glyphicons-halflings.png" />
-    <Content Include="js\bootstrap.js" />
-    <Content Include="js\bootstrap.min.js" />
+    <Content Include="css\uCommerce\bootstrap.css" />
+    <Content Include="css\uCommerce\bootstrap.min.css" />
+    <Content Include="img\uCommerce\ucommerce.glyphicons-halflings-white.png" />
+    <Content Include="img\uCommerce\ucommerce.glyphicons-halflings.png" />
+    <Content Include="js\uCommerce\bootstrap.js" />
+    <Content Include="js\uCommerce\bootstrap.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macroScripts\uCommerce\Breadcrumb.cshtml" />
@@ -176,6 +183,7 @@
     <Content Include="Components.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
