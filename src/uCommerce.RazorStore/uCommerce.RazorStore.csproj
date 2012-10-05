@@ -116,30 +116,30 @@
     <Content Include="js\jquery.ucommerce.js" />
     <Content Include="js\ucommerce.demostore.productpage.js" />
     <Content Include="masterpages\RazorStoreContent.master" />
-    <Content Include="macroScripts\LeftNavigation.cshtml" />
+    <Content Include="macroScripts\uCommerce\LeftNavigation.cshtml" />
     <Content Include="masterpages\RazorStoreFrontPage.master" />
     <Content Include="masterpages\RazorStoreProduct.master" />
-    <Content Include="macroScripts\Product.cshtml" />
+    <Content Include="macroScripts\uCommerce\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="img\glyphicons-halflings-white.png" />
-    <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\ucommerce.glyphicons-halflings-white.png" />
+    <Content Include="img\ucommerce.glyphicons-halflings.png" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Breadcrumb.cshtml" />
+    <Content Include="macroScripts\uCommerce\Breadcrumb.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Catalog.cshtml" />
+    <Content Include="macroScripts\uCommerce\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStoreCatalog.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Cart.cshtml" />
+    <Content Include="macroScripts\uCommerce\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStoreCart.master" />
@@ -148,16 +148,16 @@
     <Content Include="masterpages\RazorStoreAddress.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Address.cshtml" />
+    <Content Include="macroScripts\uCommerce\Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Shipping.cshtml" />
+    <Content Include="macroScripts\uCommerce\Shipping.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Preview.cshtml" />
+    <Content Include="macroScripts\uCommerce\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Confirmation.cshtml" />
+    <Content Include="macroScripts\uCommerce\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStoreConfirmation.master" />
@@ -165,7 +165,7 @@
     <Content Include="masterpages\RazorStoreShipping.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Payment.cshtml" />
+    <Content Include="macroScripts\uCommerce\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStorePayment.master" />
@@ -177,16 +177,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\MiniBasket.cshtml" />
+    <Content Include="macroScripts\uCommerce\MiniBasket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStore.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\HomepageBanners.cshtml" />
+    <Content Include="macroScripts\uCommerce\HomepageBanners.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\HomepageCatalog.cshtml" />
+    <Content Include="macroScripts\uCommerce\HomepageCatalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\uCommerce\Helpers\ProductReview.cshtml" />
@@ -207,14 +207,15 @@
     <Content Include="App_Code\uCommerce\Functions\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Actions.Cart.cshtml" />
+    <Content Include="macroScripts\uCommerce\Actions.Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\Search.cshtml" />
+    <Content Include="macroScripts\uCommerce\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStoreSearch.master" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
