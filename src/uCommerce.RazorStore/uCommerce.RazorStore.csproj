@@ -114,6 +114,9 @@
     <Content Include="css\uCommerce\ucommerce.demostore.css" />
     <Content Include="Global.asax" />
     <Content Include="img\uCommerce\cards.png" />
+    <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
+    <Content Include="img\uCommerce\homepage-banner-blue-kittens.jpg" />
+    <Content Include="img\uCommerce\homepage-banner-purple-wonderland.jpg" />
     <Content Include="img\uCommerce\logo.png" />
     <Content Include="img\uCommerce\return.png" />
     <Content Include="img\uCommerce\ucommerce.png" />
