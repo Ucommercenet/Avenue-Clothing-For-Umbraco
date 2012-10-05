@@ -106,6 +106,10 @@
     <Content Include="css\bootstrap-responsive.css" />
     <Content Include="css\ucommerce.demostore.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\cards.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\return.png" />
+    <Content Include="img\ucommerce.png" />
     <Content Include="js\ucommerce.demostore.checkout.js" />
     <Content Include="js\jquery.validate.min.js" />
     <Content Include="js\ucommerce.demostore.cart.js" />
