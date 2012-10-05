@@ -9,9 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href="/css/ucommerce/bootstrap.css" rel="stylesheet">
-        <link href="/css/ucommerce/bootstrap-responsive.css" rel="stylesheet">
-        <link href="/css/ucommerce/ucommerce.demostore.css" rel="stylesheet">
+        <link href="/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/css/ucommerce.demostore.css" rel="stylesheet">
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -31,7 +31,7 @@
                     <div class="nav-collapse pull-right">
                         <ul class="nav">
                             <li>
-                                <umbraco:macro alias="MiniBasket[Razor]" runat="server" />
+                                <umbraco:macro alias="ucMiniBasket" runat="server" />
                             </li>
                         </ul>
                     </div>
@@ -42,7 +42,7 @@
             <div class="row-fluid">
                 <div class="span3">
                     <div class="well sidebar-nav" id="main-nav">
-                        <umbraco:macro alias="LeftNavigation[Razor]" runat="server" />
+                        <umbraco:macro alias="ucLeftNavigation" runat="server" />
                     </div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>

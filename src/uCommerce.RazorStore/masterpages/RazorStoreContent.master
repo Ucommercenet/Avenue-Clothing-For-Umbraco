@@ -4,7 +4,7 @@
     <asp:ContentPlaceHolder runat="server" ID="cphHead" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="cphMain" runat="server">
-    <umbraco:macro alias="Breadcrumb[Razor]" runat="server" />
+    <umbraco:macro alias="ucBreadcrumb" runat="server" />
     <asp:ContentPlaceHolder runat="server" ID="cphMain" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="cphFoot" runat="server">

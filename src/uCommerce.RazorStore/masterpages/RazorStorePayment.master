@@ -2,6 +2,6 @@
 
 <%@ Register TagPrefix="umbraco" Namespace="umbraco.presentation.templateControls" Assembly="umbraco" %>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
-    <umbraco:Macro ID="Macro1" runat="server" Alias="Payment[Razor]"/>
+    <umbraco:Macro ID="Macro1" runat="server" Alias="ucPayment"/>
   
 </asp:content>

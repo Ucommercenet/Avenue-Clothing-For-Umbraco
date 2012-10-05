@@ -1,0 +1,28 @@
+﻿@using UCommerce.Api
+@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
+@helper RenderNavigation(ICollection<Category> categories)
+    {
+    if (categories.Any())
+    {
+        <ul class="nav nav-list">
+            @foreach (var category in categories)
+            {
+                var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
+                var css = "";
+                if (currentCategory != null && currentCategory.CategoryId == category.CategoryId)
+                {
+                    css = " class=\"on\"";
+                }
+                <li@Html.Raw(css)>
+                    <a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
+                    @RenderNavigation(category.Categories)
+                </li>
+            }
+        </ul>
+    }
+}
+
+
+@RenderNavigation(CatalogLibrary.GetRootCategories())

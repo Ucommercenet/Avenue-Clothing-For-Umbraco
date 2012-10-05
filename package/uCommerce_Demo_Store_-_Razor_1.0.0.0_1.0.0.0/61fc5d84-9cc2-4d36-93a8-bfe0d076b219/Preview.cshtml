@@ -1,0 +1,163 @@
+﻿@using UCommerce
+@using UCommerce.Api
+@using UCommerce.Runtime
+@{
+    var request = HttpContext.Current.Request;
+    if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "send-order"))
+    {
+        TransactionLibrary.ExecuteBasketPipeline();
+        TransactionLibrary.Checkout();
+        HttpContext.Current.Response.Redirect("Confirmation.aspx");
+
+    }
+    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+    var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+    var billingAddress = TransactionLibrary.GetBillingInformation();
+    var shipmentAddress = TransactionLibrary.GetShipmentInformation();
+    var shipments = basket.Shipments;
+
+    var subTotal = new Money(basket.SubTotal.Value, currency);
+    var tax = new Money(basket.VAT.Value, currency);
+    var discount = new Money(basket.Discount.Value * -1, currency);
+    var shippingTotal = new Money(basket.ShippingTotal.Value, currency);
+    var paymentTotal = new Money(basket.PaymentTotal.Value, currency);
+    var orderTotal = new Money(basket.OrderTotal.Value, currency);
+}
+<form method="post">
+<div class="row-fluid well">
+    <div class="span6">
+        <h3>Billing address</h3>
+        <br />
+        <address><strong>@billingAddress.FirstName @billingAddress.LastName</strong><br>
+            @billingAddress.Line1<br>
+            @billingAddress.PostalCode @billingAddress.City<br>
+            @billingAddress.Country.Name
+            @if (!String.IsNullOrWhiteSpace(@billingAddress.Attention))
+            {
+                <text>att. </text> @billingAddress.Attention
+            }<br>
+            <abbr title="Phone">P:</abbr>@billingAddress.PhoneNumber<br>
+            <abbr title="Mobile">M:</abbr>@billingAddress.MobilePhoneNumber<br>
+            <abbr title="Email">E:</abbr><a href="mailto:@billingAddress.EmailAddress">@billingAddress.EmailAddress</a> </address>
+    </div>
+    <div class="span6">
+        <h3>Shipping address</h3>
+        <br />
+        <address><strong>@shipmentAddress.FirstName @shipmentAddress.LastName</strong><br>
+            @shipmentAddress.CompanyName
+            @if (!String.IsNullOrWhiteSpace(@shipmentAddress.Attention))
+            {
+                <text>att. </text> @shipmentAddress.Attention
+            }<br />
+            @shipmentAddress.Line1<br>
+            @shipmentAddress.PostalCode @shipmentAddress.City<br>
+            @shipmentAddress.Country.Name<br>
+            <abbr title="Phone">P:</abbr>@shipmentAddress.PhoneNumber<br>
+            <abbr title="Mobile">M:</abbr>@shipmentAddress.MobilePhoneNumber<br>
+            <abbr title="Email">E:</abbr><a href="mailto:@shipmentAddress.EmailAddress">@shipmentAddress.EmailAddress</a> </address>
+    </div>
+</div>
+<div class="row-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item no. </th>
+                <th class="span8">Description</th>
+                <th class="span1 money">Price</th>
+                <th class="span1 money">VAT</th>
+                <th class="span1 number">Quantity</th>
+                <th class="span1 money">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lineItem in basket.OrderLines)
+            {
+                var itemPrice = new Money(lineItem.Price, currency);
+                var itemTax = new Money(lineItem.VAT, currency);
+                var lineTotal = new Money(lineItem.Total.Value, currency);
+
+                <tr>
+                    <td>@lineItem.Sku</td>
+                    <td>@lineItem.ProductName</td>
+                    <td class="money">
+                        @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
+                        {
+                            var nowPrice = new Money((lineItem.Price - lineItem.UnitDiscount.Value), currency);
+                            <span style="text-decoration: line-through">
+                                @itemPrice
+                            </span>
+                            @nowPrice
+                        }
+                        else
+                        {
+                            @itemPrice
+                        }
+                    </td>
+                    <td class="money">@itemTax</td>
+                    <td class="number">@lineItem.Quantity</td>
+                    <td class="money">@lineTotal</td>
+                </tr>
+            }
+            <tr>
+                <td rowspan="6" colspan="2"></td>
+                <td colspan="3">Sub total: </td>
+                <td class="money">
+                    @subTotal
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">VAT: </td>
+                <td class="money">
+                    @tax
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">Order discounts: </td>
+                <td class="money">@discount</td>
+            </tr>
+            <tr>
+                <td colspan="3">Shipping
+                    @if (shipments.Count > 1)
+                    {
+                        <ul>
+                            @foreach (var shipment in shipments)
+                            {
+                                <li>@shipment.ShipmentName</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <text> (via </text>@shipments.First().ShipmentName<text>)</text>
+                    }
+                </td>
+                <td class="money">@shippingTotal</td>
+            </tr>
+            <tr>
+                <td colspan="3">Payment
+                    @if (basket.Payments.Count > 1)
+                    {
+                        <ul>
+                            @foreach (var payment in basket.Payments)
+                            {
+                                <li>@payment.PaymentMethodName</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <text> (</text>@basket.Payments.First().PaymentMethodName<text>)</text>                        
+                    }
+                </td>
+                <td class="money">@paymentTotal</td>
+            </tr>
+            <tr>
+                <td colspan="3">Order total: </td>
+                <td class="money">@orderTotal</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/shop/checkout/payment.aspx" class="btn btn-small">Back to Payment Method</a>
+<button name="send-order" class="pull-right btn btn-large btn-success" type="submit">Complete Order <i class="icon-arrow-right icon-white"></i>
+</form>

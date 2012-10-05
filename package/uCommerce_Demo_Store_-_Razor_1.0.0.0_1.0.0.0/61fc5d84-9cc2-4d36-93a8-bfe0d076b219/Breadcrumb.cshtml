@@ -1,0 +1,31 @@
+﻿@inherits umbraco.MacroEngines.DynamicNodeContext
+@using UCommerce.Api
+@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
+<ul class="breadcrumb">
+    @{
+        Category lastCategory = null;
+        foreach (var category in SiteContext.Current.CatalogContext.CurrentCategories)
+        {
+        <li><a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a> <span class="divider">/</span></li>
+            lastCategory = category;
+        }
+
+        Product product = SiteContext.Current.CatalogContext.CurrentProduct;
+        if (product != null)
+        {
+        <li><a href="@CatalogLibrary.GetNiceUrlForProduct(product, lastCategory)">@product.DisplayName()</a></li>
+        }
+
+        if (lastCategory == null && product == null)
+        {
+            foreach (var level in Model.Ancestors().Where("Visible"))
+            {
+            <li><a href="@level.Url">@level.Name</a> <span class="divider">/</span></li>
+            }
+
+        <li>@Model.Name</li>
+        }
+    }
+</ul>

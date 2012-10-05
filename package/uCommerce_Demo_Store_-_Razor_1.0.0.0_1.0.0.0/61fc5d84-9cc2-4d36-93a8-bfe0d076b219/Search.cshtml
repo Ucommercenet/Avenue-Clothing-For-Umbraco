@@ -1,0 +1,28 @@
+﻿@using UCommerce.EntitiesV2
+@{
+    var keyword = HttpContext.Current.Request.QueryString["search"];
+    IEnumerable<Product> products = new List<Product>();
+    
+    if (!string.IsNullOrWhiteSpace(keyword))
+    {
+        products = Product.Find(p =>
+                                p.VariantSku == null
+                                && p.DisplayOnSite
+                                &&
+                                (
+                                    p.Sku.Contains(keyword)
+                                    || p.Name.Contains(keyword)
+                                    || p.ProductDescriptions.Any(d => d.DisplayName.Contains(keyword) 
+                                                                        || d.ShortDescription.Contains(keyword) 
+                                                                        || d.LongDescription.Contains(keyword)
+                                                                )
+                                )
+                            );
+    }
+}
+<div class="row-fluid">
+    <div class="span12 product-list">
+        @* View /App_Code/uCommerce/Helpers/Review/Category.cshtml for this helper *@
+        @uCommerce.Helpers.Product.DisplayListProducts(products, null)
+    </div>
+</div>

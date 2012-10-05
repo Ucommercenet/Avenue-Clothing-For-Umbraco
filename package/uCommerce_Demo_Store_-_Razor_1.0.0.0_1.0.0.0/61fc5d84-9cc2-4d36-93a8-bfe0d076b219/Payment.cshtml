@@ -1,0 +1,45 @@
+﻿@using UCommerce.EntitiesV2
+@using UCommerce.Api
+@{
+    if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "update-payment"))
+    {
+        int newPaymentMethodId;
+        if (int.TryParse(HttpContext.Current.Request.Form["payment-method"], out newPaymentMethodId))
+        {
+            TransactionLibrary.CreatePayment(newPaymentMethodId);
+            TransactionLibrary.ExecuteBasketPipeline();
+            HttpContext.Current.Response.Redirect("Preview.aspx");
+        }
+        
+    }
+    
+    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+    var payment = basket.Payments.FirstOrDefault();
+}
+@helper RenderPaymentMethodLabel(PaymentMethod paymentMethod, PurchaseOrder basket)
+{
+    decimal feePercent = paymentMethod.FeePercent;
+
+    var fee = paymentMethod.GetFeeForCurrency(basket.BillingCurrency);
+    var formattedPrice = TransactionLibrary.FormatCurrency(fee == null ? 0 : fee.Fee);
+    
+    @paymentMethod.Name <text>(</text>@formattedPrice <text>+</text> @feePercent<text>%)</text> 
+    
+}
+<form  method="post">
+    <div class="row-fluid well" >
+        <div class="span6">
+            <h3>Payment method</h3>
+            <br/>
+            @foreach (var paymentMethod in TransactionLibrary.GetPaymentMethods())
+            {
+                <label class="radio">
+                    <input type="radio" name="payment-method"  @(payment != null && payment.PaymentMethod.Equals(paymentMethod) ? "checked" : string.Empty) 
+                        value="@paymentMethod.PaymentMethodId" />@RenderPaymentMethodLabel(paymentMethod, basket)</label>
+            }
+
+        </div>
+    </div>
+    <a href="/shop/checkout/shipping.aspx" class="btn btn-small">Back to Shipping Method</a>
+    <button name="update-payment" class="pull-right btn btn-large btn-success" type="submit">Continue to Payment Page <i class="icon-arrow-right icon-white"></i>
+</form>

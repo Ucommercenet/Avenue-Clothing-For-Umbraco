@@ -1,0 +1,23 @@
+﻿@functions{
+    public static UCommerce.EntitiesV2.Product GetVariantFromPostData(UCommerce.EntitiesV2.Product product, string variantPrefix)
+    {
+        var request = HttpContext.Current.Request;
+        var keys = request.Form.AllKeys.Where(k => k.StartsWith(variantPrefix, StringComparison.InvariantCultureIgnoreCase));
+        var properties = keys.Select(k => new { Key = k.Replace(variantPrefix, string.Empty), Value = Request.Form[k] }).ToList();
+
+        UCommerce.EntitiesV2.Product variant = null;
+
+        // If there are variant values we'll need to find the selected variant
+        if (product.Variants.Any() && properties.Any())
+        {
+            variant = product.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite).All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+        }
+        // Only use the current product where there are no variants
+        else if (!product.Variants.Any())
+        {
+            variant = product;
+        }
+
+        return variant;
+    }
+}

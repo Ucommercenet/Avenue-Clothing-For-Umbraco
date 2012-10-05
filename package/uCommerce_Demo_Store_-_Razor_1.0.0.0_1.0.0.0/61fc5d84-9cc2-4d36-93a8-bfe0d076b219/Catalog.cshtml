@@ -1,0 +1,22 @@
+﻿@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
+@using umbraco.MacroEngines
+@{
+    Category category = SiteContext.Current.CatalogContext.CurrentCategory;
+}
+<div class="row-fluid">
+    <div class="hero-unit">
+        @if (!string.IsNullOrEmpty(category.ImageMediaId))
+        {
+            dynamic mediaItem = new DynamicMedia(category.ImageMediaId);
+            <img src="@mediaItem.umbracoFile" alt="@category.DisplayName()" />
+        }
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12 product-list">
+        @* View /App_Code/uCommerce/Helpers/Review/Category.cshtml for this helper *@
+        @uCommerce.Helpers.Category.DisplayCategoryProducts(category)
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@helper DisplayStars(double? rating)
+    {
+        if (rating.HasValue)
+        {
+            <span class="star-rating">
+            @for (var i = 20; i <= 100; i = i + 20)
+            {
+                if (rating >= i)
+                {
+    <i class="icon-star"></i>
+                }
+                else
+                {
+    <i class="icon-star-empty"></i>
+                }
+            }
+            </span>
+        }
+}
+@helper DisplayReview(UCommerce.EntitiesV2.ProductReview review)
+    {
+    <section itemprop="review" itemscope itemtype="http://schema.org/Review" class="review">
+        <header>
+            <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
+                @DisplayStars(review.Rating)
+            </div>
+            <p itemprop="name" class="review-headline">@review.ReviewHeadline</p>
+        </header>
+        <aside class="review-by">
+            <p>by <span itemprop="author">@review.Customer.FirstName</span> on
+                <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr></p>
+        </aside>
+        <p itemprop="description">@review.ReviewText</p>
+        <meta itemprop="ratingValue" content="@review.Rating">
+        <meta itemprop="worstRating" content="1">
+        <meta itemprop="bestRating" content="5">
+        <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
+        @DisplayReviewComments(review.Comments)
+    </section>
+}
+@helper DisplayReviewComments(IEnumerable<UCommerce.EntitiesV2.ProductReviewComment> comments)
+    {
+        foreach (var comment in comments)
+        {
+    <section class="review-comment">
+        <article itemprop="description">@comment.Comment</article>
+        <header>
+            by <span itemprop="author">@comment.Customer.FirstName</span> on <abbr title="@comment.CreatedOn.ToString("u")">@comment.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+        </header>
+    </section>
+        }
+}
+@helper DisplayReviewForm(UCommerce.EntitiesV2.Product product)
+{
+<form method="post" class="validate form-horizontal">
+    <h5>Send Us Your Review</h5>
+    <div class="control-group">
+        <label class="control-label" for="review-rating">Rating</label>
+        <div class="controls rating">
+            <label><input type="radio" name="review-rating" value="1" /><i class="icon-star"></i></label>
+            <label><input type="radio" name="review-rating" value="2" /><i class="icon-star"></i></label>
+            <label><input type="radio" name="review-rating" value="3" /><i class="icon-star"></i></label>
+            <label><input type="radio" name="review-rating" value="4" /><i class="icon-star"></i></label>
+            <label><input type="radio" name="review-rating" value="5" /><i class="icon-star"></i></label>
+        </div>
+    </div>
+    <div id="review-form">
+        <div class="control-group">
+            <label class="control-label" for="review-name">Your Name</label>
+            <div class="controls">
+                <input type="text" id="review-name" name="review-name" placeholder="Name" class="required span12">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="review-email">Your Email</label>
+            <div class="controls">
+                <input type="text" id="review-email" name="review-email" placeholder="Email" class="required span12">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="review-headline">Review Title</label>
+            <div class="controls">
+                <input type="text" id="review-headline" name="review-headline" placeholder="Title" class="required span12">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="review-text">Comments</label>
+            <div class="controls">
+                <textarea rows="3" id="review-text" name="review-text" placeholder="Your review" class="required span12"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" name="review-product">Save</button>
+                <input type="hidden" name="reviewed-product-sku" id="@product.Sku" />
+            </div>
+        </div>
+    </div>
+</form>
+}

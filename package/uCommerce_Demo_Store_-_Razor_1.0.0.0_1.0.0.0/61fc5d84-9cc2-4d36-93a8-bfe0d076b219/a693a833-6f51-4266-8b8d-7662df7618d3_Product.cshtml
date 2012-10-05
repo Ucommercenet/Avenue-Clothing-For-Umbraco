@@ -1,0 +1,34 @@
+﻿@using UCommerce.Api
+@using UCommerce.Extensions
+@using UCommerce.EntitiesV2
+@using UCommerce.Runtime
+@using umbraco.MacroEngines
+@helper DisplayListProducts(IEnumerable<UCommerce.EntitiesV2.Product> products, UCommerce.EntitiesV2.Category category)
+    {
+    foreach (var product in products)
+    {
+    @DisplayListItemProduct(product, category)
+    }
+}
+@helper DisplayListItemProduct(UCommerce.EntitiesV2.Product product, UCommerce.EntitiesV2.Category category)
+    {
+        var url = CatalogLibrary.GetNiceUrlForProduct(product, category);
+        var price = CatalogLibrary.CalculatePrice(product);
+    <div class="product span4">
+        <div class="product-image">
+            @if (!string.IsNullOrEmpty(product.ThumbnailImageMediaId))
+            {
+                dynamic mediaItem = new DynamicMedia(product.ThumbnailImageMediaId);
+                <a href="@url"><img src="@mediaItem.umbracoFile" /></a>
+            }
+            @if (product.ProductReviews.Any())
+            {
+@* View /App_Code/ReviewHelpers.cshtml for this helper *@
+                <p class="ratings">@uCommerce.Helpers.ProductReview.DisplayStars(product.Rating)</p>
+            }
+        </div>
+        <p class="item-name"><a href="@url">@product.DisplayName()</a></p>
+        <p class="item-price">@price.YourPrice.AmountExclTax</p>
+        <p class="btn-group view-details"><a href="@url" class="btn">View more <span><i class="icon-shopping-cart icon-white"></i></span></a></p>
+    </div>
+}

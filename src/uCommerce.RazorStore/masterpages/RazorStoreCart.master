@@ -1,11 +1,11 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
 <asp:Content runat="server" ContentPlaceHolderID="cphHead">
-    <umbraco:macro runat="server" alias="Actions.Cart[Razor]" />
+    <umbraco:macro runat="server" alias="ucActionsCart" />
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="cphMain">
-    <umbraco:macro runat="server" alias="Cart[Razor]" />
+    <umbraco:macro runat="server" alias="ucCart" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce.demostore.cart.js"></script>
+    <script src="/js/ucommerce/ucommerce.demostore.cart.js"></script>
 </asp:Content>

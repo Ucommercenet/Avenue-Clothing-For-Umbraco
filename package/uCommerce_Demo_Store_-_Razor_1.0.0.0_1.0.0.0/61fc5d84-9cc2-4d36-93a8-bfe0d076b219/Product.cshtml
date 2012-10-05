@@ -1,0 +1,165 @@
+﻿@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
+@using umbraco.MacroEngines
+@using UCommerce.Api
+@{
+    var request = HttpContext.Current.Request;
+    var basket = SiteContext.Current.OrderContext.GetBasket();
+    var product = SiteContext.Current.CatalogContext.CurrentProduct;
+    bool? itemAddedToCart = null;
+
+    if (request.HttpMethod == "POST")
+    {
+        @* View /App_Code/uCommerce/Functions/Product.cshtml for this function *@
+        var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
+        @* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
+        itemAddedToCart = uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
+        
+        @* View /App_Code/uCommerce/Functions/Review.cshtml for this function *@
+        uCommerce.Functions.Review.LeaveReview(product, "review-name", "review-email", "review-rating", "review-headline", "review-text");
+    }
+    else if (request.HttpMethod == "GET")
+    {
+        if(!String.IsNullOrWhiteSpace(request.QueryString["item-added"]))
+        {
+            itemAddedToCart = true;
+        }
+    }
+
+    var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
+    var price = CatalogLibrary.CalculatePrice(product);
+
+    var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
+    var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
+
+    var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
+                         where v.ProductDefinitionField.DisplayOnSite
+                         group v by v.ProductDefinitionField into g
+                         select g;
+}
+@if (inBasket)
+{
+    <div class="row-fluid">
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/shop/checkout/cart.aspx">View Your Cart</a></p>
+        </div>
+    </div>
+}
+@if (itemAddedToCart.HasValue && !itemAddedToCart.Value)
+{
+    <div class="row-fluid">
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Oh no!</strong> Something went wrong when we tried to add this to your cart. It could be we don't have the variation you selected. Please try again.</p>
+        </div>
+    </div>
+}
+<div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
+    <div class="span6">
+        @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
+        {
+            dynamic mediaItem = new DynamicMedia(product.PrimaryImageMediaId);
+            <img src="@mediaItem.umbracoFile" />
+        }
+    </div>
+    <section class="span6">
+        <header class="span12 page-header">
+            <h1 itemprop="name">@product.DisplayName()</h1>
+            <h6>
+                @if (product.ProductReviews.Any())
+                {
+                    <small>@* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                        @uCommerce.Helpers.ProductReview.DisplayStars(product.Rating)
+                    </small> 
+                }
+                @product.DynamicProperty().Brand</h6>
+            <small><em>@product.ShortDescription()</em></small>
+        </header>
+        <form method="post">
+        <div class="span12 well">
+            <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
+                <p class="item-tax">@Html.Raw(productIncludesTax) @price.YourTax tax</p>
+            </aside>
+            @if (uniqueVariants.Any())
+            {
+                <div class="span7">
+                    @foreach (var prop in uniqueVariants)
+                    {
+                        var controlName = string.Format("variation-{0}", prop.Key.Name.ToLower());
+                        <label for="@controlName">@prop.Key.GetDisplayName()</label>
+                        <select name="@controlName" id="@controlName" class="variant">
+                            <option value="">-- Please Select --</option>
+                            @foreach (var value in prop.Select(p => p.Value).Distinct())
+                            {
+                                <option value="@value">@value</option>
+                            }
+                        </select>
+                    }
+                </div>
+            }
+            <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
+            <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
+            <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
+            <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+            @if (itemAddedToCart.HasValue && itemAddedToCart.Value)
+            {
+                <div class="alert alert-success item-added">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p>Thanks, this item has been added to your cart. <a href="/shop/checkout/cart.aspx">Click here to view your cart</a>.</p>
+                </div>
+            }
+        </div>
+        </form>
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#product-description" data-toggle="tab">Details</a></li>
+                <li><a href="#delivery-info" data-toggle="tab">Delivery</a></li>
+                <li><a href="#returns-info" data-toggle="tab">Returns</a></li>
+                <li><a href="#customer-reviews" data-toggle="tab">Reviews</a></li>
+            </ul>
+            <div class="tab-content">
+                <article itemprop="description" id="product-description" class="tab-pane active">
+                    @Html.Raw(product.LongDescription())
+                </article>
+                <div id="delivery-info" class="tab-pane">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas placerat elementum tristique. Ut ut pretium massa. Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="returns-info" class="tab-pane">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas placerat elementum tristique. Ut ut pretium massa. Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="customer-reviews" class="tab-pane">
+                    @if (product.ProductReviews.Any())
+                    {
+                        <h5>Latest Reviews</h5>
+                        foreach (var review in product.ProductReviews)
+                        {
+@* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                        @uCommerce.Helpers.ProductReview.DisplayReview(review)
+                        }
+                    }
+                    else
+                    {
+                        <p>No-one has reviewed this product yet.</p>
+                    }
+                    @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper *@
+                    @uCommerce.Helpers.ProductReview.DisplayReviewForm(product)
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="row-fluid">
+    @if (relatedProducts.Any())
+    {
+        <div class="span4 well">
+            <h4>Related products</h4>
+            @foreach (var relatedProduct in @product.GetRelatedProducts().SelectMany(x => x.Value))
+            {
+                <a href="@CatalogLibrary.GetNiceUrlForProduct(relatedProduct)">@relatedProduct.DisplayName()</a>
+            }
+        </div>
+    }
+</div>
