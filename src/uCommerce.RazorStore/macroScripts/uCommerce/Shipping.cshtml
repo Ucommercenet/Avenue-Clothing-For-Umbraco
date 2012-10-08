@@ -1,4 +1,5 @@
-﻿@using UCommerce.EntitiesV2
+﻿@using UCommerce
+@using UCommerce.EntitiesV2
 @using UCommerce.Api
 @{
     if (HttpContext.Current.Request.HttpMethod == "POST" && HttpContext.Current.Request.Form.AllKeys.Any(x => x == "update-shipment"))
@@ -18,9 +19,9 @@
 }
 @helper RenderShippingMethodLabel(ShippingMethod shippingMethod, PurchaseOrder basket)
 {
-    var price = @shippingMethod.GetPriceForCurrency(basket.BillingCurrency);
-    var formattedPrice = TransactionLibrary.FormatCurrency(price == null ? 0 : price.Price);
-    
+    var price = shippingMethod.GetPriceForCurrency(basket.BillingCurrency);
+    var formattedPrice = new Money((price == null ? 0 : price.Price), basket.BillingCurrency);
+
     @shippingMethod.Name <text>(</text>@formattedPrice<text>)</text>
     
 }
