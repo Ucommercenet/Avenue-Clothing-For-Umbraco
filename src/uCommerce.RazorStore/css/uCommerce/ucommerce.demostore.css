@@ -49,11 +49,12 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 .navbar .brand {
     font-family: Arial, Helvetica, sans-serif;
-    background: url("../../img/ucommerce/logo.png") 24px 6px no-repeat;
-    padding-left: 65px;
+    background: url("../../img/ucommerce/logo.png") 0 6px no-repeat;
+    padding-left: 40px;
 }
 .navbar-search .search-query {
     padding: 3px 14px;
+    border: 0 none;
 }
 .btn {
     padding: 3px 14px;
@@ -119,11 +120,19 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .icon-truck {
   background-position: 0 0;
 }
+.icon-grey-search {
+  background-position: -24px 0;
+}
 .icon-grey-star {
   background-position: -96px 0;
 }
 /* Common
 -------------------------------------------*/
+#search-form {}
+    #search-form .btn {
+        background-color: #fff;
+        border: 0 none;
+    }
 #main-nav ul {
 }
     #main-nav li{
