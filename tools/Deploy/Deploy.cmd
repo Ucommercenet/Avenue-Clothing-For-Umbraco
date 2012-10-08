@@ -1,3 +1,4 @@
+
 @echo off
 rem Run from Tools folder
 rem Usage
@@ -24,10 +25,10 @@ echo %path1%
 echo %path2%
 
 robocopy "%path1%\App_Code" "%path2%\App_Code" /s
-robocopy "%path1%\macroScripts" "%path2%\macroScripts" 
-robocopy "%path1%\css" "%path2%\css"
-robocopy "%path1%\img" "%path2%\img"
-robocopy "%path1%\js" "%path2%\js"
+robocopy "%path1%\macroScripts" "%path2%\macroScripts" /s
+robocopy "%path1%\css" "%path2%\css" /s
+robocopy "%path1%\img" "%path2%\img" /s
+robocopy "%path1%\js" "%path2%\js" /s
 robocopy "%path1%\masterpages" "%path2%\masterpages"
 robocopy "%path1%\bin" "%path2%\bin" uCommerce.RazorStore.dll
 robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
