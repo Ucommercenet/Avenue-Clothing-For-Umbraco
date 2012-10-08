@@ -10,33 +10,24 @@
 namespace uCommerce.RazorStore.Umbraco.ucommerce.Install {
     
     
-    public partial class DemoStoreInstaller {
+    public partial class InstallDemoData {
         
         /// <summary>
-        /// chkSettings control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSettings;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// chkCatalog control.
+        /// installer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkCatalog;
-        
-        /// <summary>
-        /// btnInstall control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInstall;
+        protected global::uCommerce.RazorStore.Umbraco.ucommerce.Install.DemoStoreInstaller installer;
     }
 }
