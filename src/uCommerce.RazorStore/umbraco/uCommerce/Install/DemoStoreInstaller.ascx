@@ -1,9 +1,16 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DemoStoreInstaller.ascx.cs" Inherits="uCommerce.RazorStore.Umbraco.ucommerce.Install.DemoStoreInstaller" %>
-<p>Thanks for installing the demo uCommerce store. We've not installed any products yet so you have a completely blank install.</p>
-<p>Please select what you would like to be installed:</p>
-<p><asp:CheckBox runat="server" ID="chkSettings" Text="Install the default configuration"/></p>
-<p><asp:CheckBox runat="server" ID="chkCatalog" Text="Install the example catalog (categories/products)"/></p>
-<p><asp:Button runat="server" ID="btnInstall" Text="Install Example Products" OnClick="btnInstall_Click"/></p>
+<asp:Panel runat="server" ID="pnlInstall">
+    <h1>Installation Complete</h1>
+    <p>Thanks for installing the demo uCommerce store. We've not installed any products yet so you have a completely blank install.</p>
+    <p>Please select what you would like to be installed:</p>
+    <p><asp:CheckBox runat="server" ID="chkSettings" Text="Install the default configuration"/></p>
+    <p><asp:CheckBox runat="server" ID="chkCatalog" Text="Install the example catalog (categories/products)"/></p>
+    <p><asp:Button runat="server" ID="btnInstall" Text="Install Example Products" OnClick="btnInstall_Click"/></p>
+</asp:Panel>
+<asp:Panel runat="server" ID="pnlthanks" Visible="false">
+    <h1>Catalogue Added</h1>
+    <p>Thanks. You're all done and now have a demo store up and running.</p>
+</asp:Panel>
 <div class="well sidebar-nav" id="newsletter">
     <h5>Keep up-to-date</h5>
     <p>Sign up to our newsletter.</p>

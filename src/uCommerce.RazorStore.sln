@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uCommerce.RazorStore", "uCommerce.RazorStore\uCommerce.RazorStore.csproj", "{F8F50DF5-68DC-4268-B132-F3730BE6E80F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommerce.RazorStore", "uCommerce.RazorStore\UCommerce.RazorStore.csproj", "{F8F50DF5-68DC-4268-B132-F3730BE6E80F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

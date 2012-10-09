@@ -1,18 +1,19 @@
 ﻿namespace uCommerce.RazorStore.Umbraco.ucommerce.Install
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using UCommerce.EntitiesV2;
     using UCommerce.EntitiesV2.Factories;
     using UCommerce.Infrastructure;
     using UCommerce.Infrastructure.Globalization;
+    using UCommerce.Security;
 
     public partial class DemoStoreInstaller : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void btnInstall_Click(object sender, EventArgs e)
@@ -22,6 +23,9 @@
 
             if (chkCatalog.Checked)
                 ConfigureCatalogue();
+
+            pnlInstall.Visible = false;
+            pnlthanks.Visible = true;
         }
 
         private void ConfigureSettings()
@@ -35,57 +39,198 @@
             var catalogGroup = CreateCatalogGroup();
             var catalog = CreateProductCatalog(catalogGroup);
             CreateCatalogue(catalog);
+            AssignAccessPermissionsToDemoStore(catalogGroup);
+        }
+
+        private void AssignAccessPermissionsToDemoStore(ProductCatalogGroup catalogGroup)
+        {
+            var userService = ObjectFactory.Instance.Resolve<IUserService>();
+            var user = userService.GetCurrentUser();
+
+            var roleService = ObjectFactory.Instance.Resolve<IRoleService>();
+            var roles = roleService.GetAllRoles();
+
+            roleService.AddUserToRoles(user, roles);
         }
 
         private ProductCatalogGroup CreateCatalogGroup()
         {
             var name = "avenue-clothing.com";
-            return ProductCatalogGroup.SingleOrDefault(c => c.Name == name) ?? new ProductCatalogGroupFactory().NewWithDefaults(name);
+            var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == name) ?? new ProductCatalogGroupFactory().NewWithDefaults(name);
+            group.ProductReviewsRequireApproval = true;
+            group.Deleted = false;
+            group.CreateCustomersAsUmbracoMembers = true;
+            return group;
         }
 
         private ProductCatalog CreateProductCatalog(ProductCatalogGroup catalogGroup)
         {
             var name = "Demo Store";
-            return catalogGroup.ProductCatalogs.SingleOrDefault(c => c.Name == name) ?? new ProductCatalogFactory().NewWithDefaults(catalogGroup, name);
+            var catalog = catalogGroup.ProductCatalogs.SingleOrDefault(c => c.Name == name) ?? new ProductCatalogFactory().NewWithDefaults(catalogGroup, name);
+            catalog.DisplayOnWebSite = true;
+            catalog.Deleted = false;
+            catalog.ShowPricesIncludingVAT = true;
+            return catalog;
         }
 
         private void CreateCatalogue(ProductCatalog catalog)
         {
-            var shirts = CreateCategory(catalog, "Shirts");
-            catalog.AddCategory(shirts);
+            CreateShirts(catalog);
+            CreateShoes(catalog);
+            CreateAccessories(catalog);
+        }
 
-            var formal = CreateCategory(catalog, "Formal Shirts");
-            var casual = CreateCategory(catalog, "Casual Shirts");
-            shirts.AddCategory(formal);
-            shirts.AddCategory(casual);
-            shirts.Save();
+        private void CreateShirts(ProductCatalog catalog)
+        {
+            var shirts = CreateCatalogCategory(catalog, "Shirts");
+            var shirtDefinition = GetProductDefinition("Shirt");
+            CreateFormalShirts(shirts, shirtDefinition);
+            CreateCasualShirts(shirts, shirtDefinition);
+        }
 
-            var shirtDefinition = ProductDefinition.SingleOrDefault(d => d.Name == "Shirt");
-            var kittens = CreateProduct(formal, shirtDefinition, "Blue Kittens Mood Slim Fit Signature Shirt", 189);
-            var wonderland = CreateProduct(casual, shirtDefinition, "Black & White Wonderland Mood Slim Fit Signature Shirt - Limited Edition [200 pieces]", 219);
+        private void CreateCasualShirts(Category shirts, ProductDefinition shirtDefinition)
+        {
+            var casual = CreateChildCategory(shirts, "Casual Shirts");
+            var wonderland = CreateProductOnCategory(casual, shirtDefinition, "SWWMSFSS-LE", "Black & White Wonderland Mood Slim Fit Signature Shirt - Limited Edition [200 pieces]", 219);
+            AddShirtVariantsToProduct(wonderland, "Plain", new List<string>() { "15", "16", "17", "18" }, new List<string>() { "White" });
+        }
 
-            var shoes = CreateCategory(catalog, "Shoes");
-            catalog.AddCategory(shoes);
+        private void CreateFormalShirts(Category shirts, ProductDefinition shirtDefinition)
+        {
+            var formal = CreateChildCategory(shirts, "Formal Shirts");
+            var kittens = CreateProductOnCategory(formal, shirtDefinition, "BKMSFSS", "Blue Kittens Mood Slim Fit Signature Shirt", 189);
+            AddShirtVariantsToProduct(kittens, "Plain", new List<string>() { "15", "16", "17", "18" }, new List<string>() { "White", "Blue" });
+        }
 
-            var shoeDefinition = ProductDefinition.SingleOrDefault(d => d.Name == "Shoe");
-            CreateProduct(shoes, shoeDefinition, "Paraboot Avoriaz/Jannu Marron Brut Marron Brown Hiking Boot Shoes", 189);
-            CreateProduct(shoes, shoeDefinition, "Paraboot Chambord Tex Marron Lis Marron Brown Shoes", 189);
-            CreateProduct(shoes, shoeDefinition, "Paraboot Chambord Tex Marron Lis Cafe Brown Shoes", 189);
+        private void CreateShoes(ProductCatalog catalog)
+        {
+            var shoes = CreateCatalogCategory(catalog, "Shoes");
 
-            var accessories = CreateCategory(catalog, "Accessories");
-            catalog.AddCategory(accessories);
+            var shoeDefinition = GetProductDefinition("Shoe");
 
-            var accessoryDefinition = ProductDefinition.SingleOrDefault(d => d.Name == "Accessory");
-            CreateProduct(accessories, accessoryDefinition, "Baby Alpaca Throw", 189);
+            var hiking = CreateProductOnCategory(shoes, shoeDefinition, "074617", "Paraboot Avoriaz/Jannu Marron Brut Marron Brown Hiking Boot Shoes", 343.85M);
+            AddShoeVariantsToProduct(hiking, new List<string>() { "6", "8", "10" });
 
-            var belts = CreateCategory(catalog, "Belts");
-            var scarves = CreateCategory(catalog, "Scarves");
-            accessories.AddCategory(belts);
-            accessories.AddCategory(scarves);
-            accessories.Save();
+            var marron = CreateProductOnCategory(shoes, shoeDefinition, "710708", "Paraboot Chambord Tex Marron Lis Marron Brown Shoes", 281.75M);
+            AddShoeVariantsToProduct(marron, new List<string>() { "6", "8", "10" });
 
-            CreateProduct(belts, accessoryDefinition, "Paul Smith", 189);
-            CreateProduct(scarves, accessoryDefinition, "Baby Alpaca Scarf", 189);
+            var brown = CreateProductOnCategory(shoes, shoeDefinition, "710707", "Paraboot Chambord Tex Marron Lis Cafe Brown Shoes", 281.75M);
+            AddShoeVariantsToProduct(brown, new List<string>() { "6", "8", "10", "12" });
+        }
+
+        private void CreateAccessories(ProductCatalog catalog)
+        {
+            var accessories = CreateCatalogCategory(catalog, "Accessories");
+
+            var accessoryDefinition = GetProductDefinition("Accessory");
+
+            var alpacaThrow = CreateProductOnCategory(accessories, accessoryDefinition, "BAT", "Baby Alpaca Throw", 189);
+
+            CreateBelts(accessories, accessoryDefinition);
+            CreateScarves(accessories, accessoryDefinition);
+        }
+
+        private void CreateScarves(Category accessories, ProductDefinition accessoryDefinition)
+        {
+            var scarves = CreateChildCategory(accessories, "Scarves");
+            var alpacaScarf = CreateProductOnCategory(scarves, accessoryDefinition, "PAS", "Baby Alpaca Scarf", 99);
+        }
+
+        private void CreateBelts(Category accessories, ProductDefinition accessoryDefinition)
+        {
+            var belts = CreateChildCategory(accessories, "Belts");
+            var paulSmithBelt = CreateProductOnCategory(belts, accessoryDefinition, "PSB", "Paul Smith Belt", 189);
+        }
+
+        private static ProductDefinition GetProductDefinition(string name)
+        {
+            var definition = ProductDefinition.SingleOrDefault(d => d.Name == name);
+
+            if (definition == null)
+                throw new ArgumentOutOfRangeException("definition", string.Format("No product definition with the name \"{0}\" could be found. Please check you have installed the default settings.", name));
+
+            return definition;
+        }
+
+        private void AddShirtVariantsToProduct(Product product, string namePrefix, IList<string> sizes, IList<string> colours)
+        {
+            if (!sizes.Any())
+                return;
+
+            foreach (var size in sizes)
+            {
+                foreach (var colour in colours)
+                {
+                    AddShirtVariantToProduct(product, namePrefix, size, colour);
+                }
+            }
+        }
+
+        private void AddShoeVariantsToProduct(Product product, IList<string> sizes)
+        {
+            if (!sizes.Any())
+                return;
+
+            foreach (var size in sizes)
+            {
+                AddShoeVariantToProduct(product, size);
+            }
+        }
+
+        private void AddShoeVariantToProduct(Product product, string size)
+        {
+            var sku = string.Format("{0}-{1}", product.Sku, size);
+            var variant = CreateVariantOnProduct(product, sku, size);
+            AddProductProperty("ShoeSize", variant, string.Format("UK {0}", size));
+            variant.Save();
+        }
+
+        private void AddShirtVariantToProduct(Product product, string namePrefix, string size, string colour)
+        {
+            var sku = string.Format("{0}-{1}-{2}", product.Sku, size, colour);
+            var name = string.Format("{0} {1} {2}\"", namePrefix, size, colour);
+
+            var variant = CreateVariantOnProduct(product, sku, name);
+            AddProductProperty("CollarSize", variant, size);
+            AddProductProperty("Colour", variant, colour);
+            variant.Save();
+        }
+
+        private void AddProductProperty(string dataFieldName, Product variant, string value)
+        {
+            if (variant.ProductProperties.Any(p => p.Value == value))
+                return;
+
+            var field = GetProductDefinitionField(dataFieldName);
+            variant.AddProductProperty(new ProductProperty
+                {
+                    ProductDefinitionField = field, 
+                    Value = value
+                });
+        }
+
+        private ProductDefinitionField GetProductDefinitionField(string name)
+        {
+            var field = ProductDefinitionField.SingleOrDefault(d => d.Name == name);
+
+            if (field == null)
+                throw new ArgumentOutOfRangeException("field", string.Format("No product definition field with the name \"{0}\" could be found. Please check you have installed the default settings.", name));
+
+            return field;
+        }
+
+        private Category CreateCatalogCategory(ProductCatalog catalog, string name)
+        {
+            var category = CreateCategory(catalog, name);
+            catalog.AddCategory(category);
+            return category;
+        }
+
+        private Category CreateChildCategory(Category parent, string name)
+        {
+            var category = CreateCategory(parent.ProductCatalog, name);
+            parent.AddCategory(category);
+            return category;
         }
 
         private static Category CreateCategory(ProductCatalog catalog, string name)
@@ -94,39 +239,60 @@
             var category = Category.SingleOrDefault(c => c.Name == name) ?? new CategoryFactory().NewWithDefaults(catalog, definition, name);
             category.DisplayOnSite = true;
 
-            DoForEachCulture(language => category.AddCategoryDescription(new CategoryDescription()
+            DoForEachCulture(language =>
                 {
-                    CultureCode = language,
-                    DisplayName = name
-                }));
+                    if (category.GetDescription(language) == null)
+                        category.AddCategoryDescription(new CategoryDescription() { CultureCode = language, DisplayName = name });
+                });
 
             category.Save();
             return category;
         }
 
-        private Product CreateProduct(Category category, ProductDefinition productDefinition, string name, decimal price)
+        private Product CreateProductOnCategory(Category category, ProductDefinition productDefinition, string sku, string name, decimal price)
         {
-            // ProductDefinition productDefinition = ProductDefinition.Get(Convert.ToInt32(this.DefinitionDropDown.SelectedValue));
-            //var product = Product.SingleOrDefault(p => p.Name == name && p.CategoryProductRelations.Any(r => r.Category.Id == category.Id)) ?? new ProductFactory().;
-            var sku = (name.Length > 30) ? name.Substring(0, 30) : name;
-            var product = new Product
-            {
-                Name = name,
-                Sku = sku,
-                ProductDefinition = productDefinition,
-                DisplayOnSite = true,
-                AllowOrdering = true
-            };
+            var product = CreateBaseProduct(productDefinition, sku, null, name);
 
-            DoForEachCulture(language => product.AddProductDescription(new ProductDescription()
+            DoForEachCulture(
+                language =>
                 {
-                    CultureCode = language,
-                    DisplayName = name
-                }));
+                    if (!product.HasDescription(language))
+                        product.AddProductDescription(new ProductDescription() { CultureCode = language, DisplayName = name });
+                });
 
-            product.AddPriceGroupPrice(new PriceGroupPrice() { Price = price });
+            if (!product.PriceGroupPrices.Any())
+                product.AddPriceGroupPrice(new PriceGroupPrice { Price = price, PriceGroup = category.ProductCatalog.PriceGroup });
 
-            category.AddProduct(product, 0);
+            product.Save();
+
+            if (product.CategoryProductRelations.All(r => r.Category.CategoryId != category.CategoryId))
+                category.AddProduct(product, 0);
+
+            return product;
+        }
+
+        private Product CreateVariantOnProduct(Product product, string variantSku, string name)
+        {
+            var variant = CreateBaseProduct(product.ProductDefinition, product.Sku, variantSku, name);
+            product.AddVariant(variant);
+            return variant;
+        }
+
+        private Product CreateBaseProduct(ProductDefinition productDefinition, string sku, string variantSku, string name)
+        {
+            if (sku.Length > 30)
+                sku = sku.Substring(0, 30);
+
+            var product = Product.SingleOrDefault(p => p.Sku == sku && p.VariantSku == variantSku) ?? new Product();
+
+            product.Sku = sku;
+            product.VariantSku = variantSku;
+            product.Name = name;
+            product.ProductDefinition = productDefinition;
+            product.DisplayOnSite = true;
+            product.AllowOrdering = true;
+            product.Save();
+
             return product;
         }
 
@@ -167,21 +333,20 @@
             dataTypeEnum.DataType = DataType.Get(parentDataType.DataTypeId);
             dataTypeEnum.Save();
 
-            DoForEachCulture(language => dataTypeEnum.AddDescription(new DataTypeEnumDescription
-                    {
-                        CultureCode = language,
-                        DisplayName = colour,
-                        Description = colour
-                    }));
+            DoForEachCulture(language =>
+                {
+                    if (dataTypeEnum.GetDescription(language) == null)
+                        dataTypeEnum.AddDescription(new DataTypeEnumDescription { CultureCode = language, DisplayName = colour, Description = colour });
+                });
 
             return dataTypeEnum;
         }
 
         private void CreateProductDefinitions()
         {
-            CreateShirt();
-            CreateShoe();
-            CreateAccessory();
+            CreateShirtProductDefinition();
+            CreateShoeProductDefinition();
+            CreateAccessoryProductDefinition();
         }
 
         private static ProductDefinition CreateProductDefinition(string name)
@@ -194,48 +359,49 @@
             return productDefinition;
         }
 
-        private void CreateShirt()
+        private void CreateShirtProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Shirt");
-            productDefinition.AddProductDefinitionField(ProductDefinitionField("CollarSize", "Number", true, true, "Collar Inches"));
-            productDefinition.AddProductDefinitionField(ProductDefinitionField("Colour", "Colour", true, true, "Colour"));
-            productDefinition.AddProductDefinitionField(ProductDefinitionField("ShowOnHomepage", "Boolean", true, true, "Show On Homepage"));
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "CollarSize", "Number", true, true, "Collar Inches");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "Colour", "Colour", true, true, "Colour");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", true, true, "Show On Homepage");
         }
 
-        private void CreateShoe()
+        private void CreateShoeProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Shoe");
-            productDefinition.AddProductDefinitionField(ProductDefinitionField("ShoeSize", "ShortText", true, true, "Shoe Size"));
-            productDefinition.AddProductDefinitionField(ProductDefinitionField("ShowOnHomepage", "Boolean", true, true, "Show On Homepage"));
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShoeSize", "ShortText", true, true, "Shoe Size");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", true, true, "Show On Homepage");
         }
 
-        private void CreateAccessory()
+        private void CreateAccessoryProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Accessory");
-            productDefinition.AddProductDefinitionField(ProductDefinitionField("ShowOnHomepage", "Boolean", true, true, "Show On Homepage"));
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", true, true, "Show On Homepage");
         }
 
-        private static ProductDefinitionField ProductDefinitionField(string name, string typeName, bool displayOnWebsite, bool variantProperty, string displayName)
+        private static void AddProductDefinitionFieldIfDoesntExist(ProductDefinition definition, string name, string typeName, bool displayOnWebsite, bool variantProperty, string displayName)
         {
-            var definition = new ProductDefinitionField()
-                {
-                    Name = name,
-                    DataType = DataType.SingleOrDefault(d => d.TypeName == typeName),
-                    Deleted = false,
-                    Multilingual = false,
-                    DisplayOnSite = displayOnWebsite,
-                    IsVariantProperty = variantProperty,
-                    RenderInEditor = true
-                };
+            if (definition.GetDefinitionFields().Any(f => f.Name == name))
+                return;
 
-            DoForEachCulture(language => definition.AddProductDefinitionFieldDescription(new ProductDefinitionFieldDescription
-                {
-                    CultureCode = language,
-                    DisplayName = displayName,
-                    Description = displayName
-                }));
+            var field = ProductDefinitionField.SingleOrDefault(f => f.Name == name && f.ProductDefinition.ProductDefinitionId == definition.ProductDefinitionId) ?? new ProductDefinitionFieldFactory().NewWithDefaults(name);
+            field.Name = name;
+            field.DataType = DataType.SingleOrDefault(d => d.TypeName == typeName);
+            field.Deleted = false;
+            field.Multilingual = false;
+            field.DisplayOnSite = displayOnWebsite;
+            field.IsVariantProperty = variantProperty;
+            field.RenderInEditor = true;
 
-            return definition;
+            //DoForEachCulture(language =>
+            //    {
+            //        if (field.GetDescription(language) == null)
+            //            field.AddProductDefinitionFieldDescription(new ProductDefinitionFieldDescription { CultureCode = language, DisplayName = displayName, Description = displayName });
+            //    });
+
+            definition.AddProductDefinitionField(field);
+            definition.Save();
         }
 
         private static void DoForEachCulture(Action<string> toDo)

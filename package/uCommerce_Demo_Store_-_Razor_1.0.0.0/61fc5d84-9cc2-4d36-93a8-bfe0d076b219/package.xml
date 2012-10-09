@@ -253,7 +253,9 @@
             <name>The Site Doctor Ltd</name>
             <website>http://www.thesitedoctor.co.uk</website>
         </author>
-        <readme><![CDATA[Thank you for installing the uCommerce demo store.]]></readme>
+        <readme><![CDATA[Thank you for installing the uCommerce demo store. By default this package will install an example store structure and Razor templates. 
+
+At the end of the installer you will be given the opportunity to install a demo store.]]></readme>
     </info>
     <Documents>
         <DocumentSet importMode="root">
