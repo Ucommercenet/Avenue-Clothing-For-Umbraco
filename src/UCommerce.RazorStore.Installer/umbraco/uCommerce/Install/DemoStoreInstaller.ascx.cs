@@ -1,16 +1,17 @@
-﻿namespace uCommerce.RazorStore.Umbraco.ucommerce.Install
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using UCommerce.EntitiesV2;
+using UCommerce.EntitiesV2.Factories;
+using UCommerce.Infrastructure;
+using UCommerce.Infrastructure.Globalization;
+using UCommerce.Security;
+
+
+namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using UCommerce.EntitiesV2;
-    using UCommerce.EntitiesV2.Factories;
-    using UCommerce.Infrastructure;
-    using UCommerce.Infrastructure.Globalization;
-    using UCommerce.Security;
-
-    public partial class DemoStoreInstaller : System.Web.UI.UserControl
+    public partial class DemoStoreInstaller1 : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,13 @@
             pnlthanks.Visible = true;
         }
 
+        protected void btnAssignPermissions_Click(object sender, EventArgs e)
+        {
+            var name = "avenue-clothing.com";
+            var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == name);
+            AssignAccessPermissionsToDemoStore(group);
+        }
+
         private void ConfigureSettings()
         {
             CreateDataTypes();
@@ -39,7 +47,6 @@
             var catalogGroup = CreateCatalogGroup();
             var catalog = CreateProductCatalog(catalogGroup);
             CreateCatalogue(catalog);
-            AssignAccessPermissionsToDemoStore(catalogGroup);
         }
 
         private void AssignAccessPermissionsToDemoStore(ProductCatalogGroup catalogGroup)
@@ -203,10 +210,10 @@
 
             var field = GetProductDefinitionField(dataFieldName);
             variant.AddProductProperty(new ProductProperty
-                {
-                    ProductDefinitionField = field, 
-                    Value = value
-                });
+            {
+                ProductDefinitionField = field,
+                Value = value
+            });
         }
 
         private ProductDefinitionField GetProductDefinitionField(string name)
@@ -240,10 +247,10 @@
             category.DisplayOnSite = true;
 
             DoForEachCulture(language =>
-                {
-                    if (category.GetDescription(language) == null)
-                        category.AddCategoryDescription(new CategoryDescription() { CultureCode = language, DisplayName = name });
-                });
+            {
+                if (category.GetDescription(language) == null)
+                    category.AddCategoryDescription(new CategoryDescription() { CultureCode = language, DisplayName = name });
+            });
 
             category.Save();
             return category;
@@ -334,10 +341,10 @@
             dataTypeEnum.Save();
 
             DoForEachCulture(language =>
-                {
-                    if (dataTypeEnum.GetDescription(language) == null)
-                        dataTypeEnum.AddDescription(new DataTypeEnumDescription { CultureCode = language, DisplayName = colour, Description = colour });
-                });
+            {
+                if (dataTypeEnum.GetDescription(language) == null)
+                    dataTypeEnum.AddDescription(new DataTypeEnumDescription { CultureCode = language, DisplayName = colour, Description = colour });
+            });
 
             return dataTypeEnum;
         }

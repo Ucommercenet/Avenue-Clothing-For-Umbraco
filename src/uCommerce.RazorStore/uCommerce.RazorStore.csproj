@@ -103,20 +103,6 @@
     <Compile Include="ServiceStack\Model\ProductProperty.cs" />
     <Compile Include="ServiceStack\Model\LineItem.cs" />
     <Compile Include="ServiceStack\Commands\AddToBasket.cs" />
-    <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.cs">
-      <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.designer.cs">
-      <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="umbraco\uCommerce\Install\InstallDemoData.aspx.cs">
-      <DependentUpon>InstallDemoData.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="umbraco\uCommerce\Install\InstallDemoData.aspx.designer.cs">
-      <DependentUpon>InstallDemoData.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\uCommerce\bootstrap-responsive.css" />
@@ -195,8 +181,6 @@
     <Content Include="Components.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
-    <Content Include="umbraco\uCommerce\Install\InstallDemoData.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

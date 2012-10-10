@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace uCommerce.RazorStore.Umbraco.ucommerce.Install {
+namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install {
     
     
-    public partial class DemoStoreInstaller {
+    public partial class DemoStoreInstaller1 {
         
         /// <summary>
         /// pnlInstall control.
@@ -56,5 +56,14 @@ namespace uCommerce.RazorStore.Umbraco.ucommerce.Install {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlthanks;
+        
+        /// <summary>
+        /// btnAssignPermissions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAssignPermissions;
     }
 }
