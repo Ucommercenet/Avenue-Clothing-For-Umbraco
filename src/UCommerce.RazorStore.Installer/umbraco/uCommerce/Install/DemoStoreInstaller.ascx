@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DemoStoreInstaller.ascx.cs" Inherits="UCommerce.RazorStore.Installer.umbraco.uCommerce.Install.DemoStoreInstaller1" %>
-<div style="width:100%;background-color:#231f21;">
-    <img src="../images/uCommerce-logo-small.png" style="margin:10px;" />
+<div style="width:100%;height:85px;background-color:#231f21;">
+    <img src="../images/uCommerce-logo-small.png" style="margin:10px;float:left;" />
+    <span style="font-family:Arial,Helvetica,sans-serif;font-size:25px;font-weight:bold;color:#fff;padding-top:40px;display:block;">Demo Razor Store</span>
 </div>
 <asp:Panel runat="server" ID="pnlInstall">
     <h1>Installation Complete</h1>
@@ -80,7 +81,7 @@
             e.preventDefault();
             var t = $(this);
             var id = t.attr("href");
-            $(id).slideDown();
+            $(id).slideToggle();
             return false;
         });
         $('#newsletter-form button').click(function (e) {
