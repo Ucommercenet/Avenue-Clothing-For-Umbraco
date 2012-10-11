@@ -29,3 +29,4 @@ _ReSharper*
 *.orig
 ._*
 *_ToPackage*
+*nrcunch*
