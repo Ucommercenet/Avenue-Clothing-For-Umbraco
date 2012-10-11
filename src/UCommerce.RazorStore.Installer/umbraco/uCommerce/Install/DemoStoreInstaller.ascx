@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DemoStoreInstaller.ascx.cs" Inherits="UCommerce.RazorStore.Installer.umbraco.uCommerce.Install.DemoStoreInstaller1" %>
 <div style="width:100%;height:85px;background-color:#231f21;">
-    <img src="../images/uCommerce-logo-small.png" style="margin:10px;float:left;" />
+    <img src="/umbraco/ucommerce/images/uCommerce-logo-small.png" style="margin:10px;float:left;" />
     <span style="font-family:Arial,Helvetica,sans-serif;font-size:25px;font-weight:bold;color:#fff;padding-top:40px;display:block;">Demo Razor Store</span>
 </div>
 <asp:Panel runat="server" ID="pnlInstall">
@@ -54,7 +54,7 @@
 </asp:Panel>
 <div class="well sidebar-nav" id="newsletter">
     <h2>Keep up-to-date</h2>
-    <p>Sign up to our newsletter.</p>
+    <p>Sign up to our newsletter for updates to the demo store and other useful tips.</p>
     <div id="newsletter-form">
         <label for="name">Name:</label><br /><input type="text" name="cm-name" id="name" /><br />
         <label for="xqlur-xqlur">Email:</label><br /><input type="text" name="cm-xqlur-xqlur" id="xqlur-xqlur" class="required email" /><br />

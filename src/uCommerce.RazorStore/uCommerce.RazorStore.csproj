@@ -105,8 +105,8 @@
     <Compile Include="ServiceStack\Commands\AddToBasket.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\uCommerce\bootstrap-responsive.css" />
-    <Content Include="css\uCommerce\ucommerce.demostore.css" />
+    <Content Include="css\uCommerce.bootstrap-responsive.css" />
+    <Content Include="css\uCommerce.demostore.css" />
     <Content Include="Global.asax" />
     <Content Include="img\uCommerce\cards.png" />
     <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
@@ -115,13 +115,13 @@
     <Content Include="img\uCommerce\logo.png" />
     <Content Include="img\uCommerce\return.png" />
     <Content Include="img\uCommerce\ucommerce.png" />
-    <Content Include="js\uCommerce\ucommerce.demostore.checkout.js" />
-    <Content Include="js\uCommerce\jquery.validate.min.js" />
-    <Content Include="js\uCommerce\ucommerce.demostore.cart.js" />
-    <Content Include="js\uCommerce\ucommerce.demostore.js" />
-    <Content Include="js\uCommerce\servicestack.js" />
-    <Content Include="js\uCommerce\jquery.ucommerce.js" />
-    <Content Include="js\uCommerce\ucommerce.demostore.productpage.js" />
+    <Content Include="js\uCommerce.bootstrap.js" />
+    <Content Include="js\uCommerce.demostore.checkout.js" />
+    <Content Include="js\uCommerce.demostore.cart.js" />
+    <Content Include="js\uCommerce.demostore.js" />
+    <Content Include="js\uCommerce.ServiceStack.js" />
+    <Content Include="js\uCommerce.jQuery.js" />
+    <Content Include="js\uCommerce.demostore.productpage.js" />
     <Content Include="masterpages\RazorStoreContent.master" />
     <Content Include="macroScripts\uCommerce\LeftNavigation.cshtml" />
     <Content Include="masterpages\RazorStoreFrontPage.master" />
@@ -129,12 +129,9 @@
     <Content Include="macroScripts\uCommerce\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\uCommerce\bootstrap.css" />
-    <Content Include="css\uCommerce\bootstrap.min.css" />
+    <Content Include="css\uCommerce.bootstrap.css" />
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings-white.png" />
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings.png" />
-    <Content Include="js\uCommerce\bootstrap.js" />
-    <Content Include="js\uCommerce\bootstrap.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macroScripts\uCommerce\Breadcrumb.cshtml" />
@@ -222,7 +219,15 @@
   <ItemGroup>
     <Content Include="masterpages\RazorStoreSearch.master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="masterpages\RazorStoreCheckout.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="umbraco\images\umbraco\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="masterpages\RazorStoreEmail.master" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

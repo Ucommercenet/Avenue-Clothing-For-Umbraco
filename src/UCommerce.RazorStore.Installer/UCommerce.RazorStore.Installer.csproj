@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Catalogue.cs" />
+    <Compile Include="umbraco\uCommerce\Install\ConfigurationInstaller.cs" />
     <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.cs">
       <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -82,6 +83,7 @@
     <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.designer.cs">
       <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
     </Compile>
+    <Compile Include="umbraco\uCommerce\Install\Helpers.cs" />
     <Compile Include="umbraco\uCommerce\Install\InstallDemoData.aspx.cs">
       <DependentUpon>InstallDemoData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
