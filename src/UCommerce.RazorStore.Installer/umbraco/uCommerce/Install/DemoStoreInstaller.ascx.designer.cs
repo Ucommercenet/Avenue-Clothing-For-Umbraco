@@ -40,6 +40,24 @@ namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install {
         protected global::System.Web.UI.WebControls.CheckBox chkCatalog;
         
         /// <summary>
+        /// chkDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkDelete;
+        
+        /// <summary>
+        /// chkPublish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkPublish;
+        
+        /// <summary>
         /// btnInstall control.
         /// </summary>
         /// <remarks>
@@ -49,13 +67,22 @@ namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install {
         protected global::System.Web.UI.WebControls.Button btnInstall;
         
         /// <summary>
-        /// pnlthanks control.
+        /// pnlThanks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlthanks;
+        protected global::System.Web.UI.WebControls.Panel pnlThanks;
+        
+        /// <summary>
+        /// litStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litStatus;
         
         /// <summary>
         /// btnAssignPermissions control.
@@ -65,5 +92,14 @@ namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAssignPermissions;
+        
+        /// <summary>
+        /// pnlThanks2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlThanks2;
     }
 }

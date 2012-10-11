@@ -53,7 +53,7 @@
                             <li>Payment Information<br />
                             <img src="/img/ucommerce/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" title="We accept VISA, SOLO, PayPal, MasterCard" /></li>
                         </ol>
-                        <p id="powered-by-ucommerce"><img src="/img/ucommerce/ucommerce.png" alt="Powered by uCommerce" /></p>
+                        <p id="powered-by-ucommerce"><a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank"><img src="/img/ucommerce/ucommerce.png" alt="Powered by uCommerce" /></a></p>
                     </div>
                     <div class="well sidebar-nav" id="about">
                         <h5>About Avenue Clothing</h5>
@@ -80,10 +80,10 @@
             <footer>
                 <asp:ContentPlaceHolder runat="server" ID="cphFoot" />
                 <div class="span6">
-                    <p>&copy; <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco">uCommerce ApS</a></p>
+                    <p>&copy; <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank">uCommerce ApS</a></p>
                 </div>
                 <div class="span6 pull-right">
-                    <p>Store demo'd by <a href="http://www.thesitedoctor.co.uk/" title="The Site Doctor - Herefordshire based Web Design, Development and IT Consultancy">The Site Doctor</a> 2012</p>
+                    <p>Store demo'd by <a href="http://www.thesitedoctor.co.uk/" title="The Site Doctor - Herefordshire based Web Design, Development and IT Consultancy" target="_blank">The Site Doctor</a> 2012</p>
                 </div>
             </footer>
         </div>
