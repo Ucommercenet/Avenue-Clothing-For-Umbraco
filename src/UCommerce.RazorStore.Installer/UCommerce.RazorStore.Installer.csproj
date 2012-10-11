@@ -39,6 +39,9 @@
     <Reference Include="cms">
       <HintPath>..\..\lib\umbraco\cms.dll</HintPath>
     </Reference>
+    <Reference Include="interfaces">
+      <HintPath>..\..\lib\umbraco\interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -69,6 +72,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XmlStubs\Languages.xml" />
+    <Content Include="XmlStubs\Macros.xml" />
+    <Content Include="XmlStubs\DocumentTypes.xml" />
+    <Content Include="XmlStubs\Documents.xml" />
+    <Content Include="XmlStubs\Info.xml" />
     <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Accessories.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Tops.jpg" />
@@ -100,8 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="umbraco\uCommerce\Install\Catalogue.cs" />
-    <Compile Include="umbraco\uCommerce\Install\ConfigurationInstaller.cs" />
+    <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
+    <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />
     <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.cs">
       <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -109,11 +117,13 @@
     <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.designer.cs">
       <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
     </Compile>
-    <Compile Include="umbraco\uCommerce\Install\Helpers.cs" />
+    <Compile Include="umbraco\uCommerce\Install\Helpers\Helpers.cs" />
+    <Compile Include="umbraco\uCommerce\Install\Helpers\Node.cs" />
     <Compile Include="umbraco\uCommerce\Install\InstallDemoData.aspx.cs">
       <DependentUpon>InstallDemoData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="umbraco\uCommerce\Install\Helpers\Media.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -144,4 +154,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\DemoStoreDeploy.cmd"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

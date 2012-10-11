@@ -8,7 +8,7 @@ using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Globalization;
 using UCommerce.Security;
 
-namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install
+namespace UCommerce.RazorStore.Installer
 {
     public class ConfigurationInstaller
     {

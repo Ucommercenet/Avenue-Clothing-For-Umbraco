@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+    <package>
+        <name>uCommerce Demo Store - Razor</name>
+        <version>1.0.0.0</version>
+        <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
+        <url>http://www.ucommerce.dk</url>
+        <requirements>
+            <major>4</major>
+            <minor>9</minor>
+            <patch>0</patch>
+        </requirements>
+    </package>
+    <author>
+        <name>The Site Doctor Ltd</name>
+        <website>http://www.thesitedoctor.co.uk</website>
+    </author>
+    <readme>
+        <![CDATA[Thank you for installing the uCommerce demo store. By default this package will install an example store structure and Razor templates. 
+
+At the end of the installer you will be given the opportunity to install the example settings, categories and products.]]>
+    </readme>
+</info>

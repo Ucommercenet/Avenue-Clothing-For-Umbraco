@@ -3,7 +3,7 @@
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Globalization;
 
-namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install
+namespace UCommerce.RazorStore.Installer
 {
     public class Helpers
     {

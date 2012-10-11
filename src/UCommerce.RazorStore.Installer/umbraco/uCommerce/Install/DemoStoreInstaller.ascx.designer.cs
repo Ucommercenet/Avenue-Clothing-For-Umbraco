@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install {
+namespace UCommerce.RazorStore.Installer {
     
     
     public partial class DemoStoreInstaller1 {

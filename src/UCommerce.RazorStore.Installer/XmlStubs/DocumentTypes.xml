@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DocumentTypes>
+    <DocumentType>
+        <Info>
+            <Name>uCommerce page</Name>
+            <Alias>uCommercePage</Alias>
+            <Icon>ucommerce-page.png</Icon>
+            <Thumbnail>doc.png</Thumbnail>
+            <Description>
+            </Description>
+            <AllowedTemplates>
+                <Template>RazorStoreContent</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreContent</DefaultTemplate>
+        </Info>
+        <Structure>
+            <DocumentType>uCommercePage</DocumentType>
+        </Structure>
+        <GenericProperties>
+            <GenericProperty>
+                <Name>Content</Name>
+                <Alias>content</Alias>
+                <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+                <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+                <Tab>Content</Tab>
+                <Mandatory>False</Mandatory>
+                <Validation>
+                </Validation>
+                <Description><![CDATA[]]></Description>
+            </GenericProperty>
+            <GenericProperty>
+                <Name>Hide in navigation</Name>
+                <Alias>umbracoNaviHide</Alias>
+                <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+                <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+                <Tab>
+                </Tab>
+                <Mandatory>False</Mandatory>
+                <Validation>
+                </Validation>
+                <Description><![CDATA[]]></Description>
+            </GenericProperty>
+        </GenericProperties>
+        <Tabs>
+            <Tab>
+                <Id>6</Id>
+                <Caption>Content</Caption>
+            </Tab>
+        </Tabs>
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Address</Name>
+            <Alias>uCommerceAddress</Alias>
+            <Icon>ucommerce-address.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreAddress</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreAddress</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Product</Name>
+            <Alias>uCommerceProduct</Alias>
+            <Icon>ucommerce-product.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreProduct</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreProduct</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Cart</Name>
+            <Alias>uCommerceCart</Alias>
+            <Icon>ucommerce-cart.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreCart</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreCart</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Catalog</Name>
+            <Alias>uCommerceCatalog</Alias>
+            <Icon>ucommerce-catalog.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreCatalog</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreCatalog</DefaultTemplate>
+        </Info>
+        <Structure>
+            <DocumentType>Product</DocumentType>
+        </Structure>
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Checkout</Name>
+            <Alias>uCommerceCheckout</Alias>
+            <Icon>ucommerce-checkout.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreCheckout</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreCheckout</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Confirmation</Name>
+            <Alias>uCommerceConfirmation</Alias>
+            <Icon>ucommerce-confirmation.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreConfirmation</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreConfirmation</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Email</Name>
+            <Alias>uCommerceEmail</Alias>
+            <Icon>ucommerce-email.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <AllowedTemplates>
+                <Template>RazorStoreEmail</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreEmail</DefaultTemplate>
+        </Info>
+        <Structure>
+            <DocumentType>Email</DocumentType>
+        </Structure>
+        <GenericProperties>
+            <GenericProperty>
+                <Name>Hide in navigation</Name>
+                <Alias>umbracoNaviHide</Alias>
+                <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+                <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+                <Tab>
+                </Tab>
+                <Mandatory>False</Mandatory>
+                <Validation>
+                </Validation>
+                <Description><![CDATA[]]></Description>
+            </GenericProperty>
+            <GenericProperty>
+                <Name>Header</Name>
+                <Alias>header</Alias>
+                <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+                <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+                <Tab>Email</Tab>
+                <Mandatory>False</Mandatory>
+                <Validation>
+                </Validation>
+                <Description><![CDATA[]]></Description>
+            </GenericProperty>
+            <GenericProperty>
+                <Name>Footer</Name>
+                <Alias>footer</Alias>
+                <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+                <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+                <Tab>Email</Tab>
+                <Mandatory>False</Mandatory>
+                <Validation>
+                </Validation>
+                <Description><![CDATA[]]></Description>
+            </GenericProperty>
+        </GenericProperties>
+        <Tabs>
+            <Tab>
+                <Id>7</Id>
+                <Caption>Email</Caption>
+            </Tab>
+        </Tabs>
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Front Page</Name>
+            <Alias>uCommerceFrontPage</Alias>
+            <Icon>ucommerce-frontpage.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreFrontPage</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreFrontPage</DefaultTemplate>
+        </Info>
+        <Structure>
+            <DocumentType>Product</DocumentType>
+            <DocumentType>Catalog</DocumentType>
+            <DocumentType>Cart</DocumentType>
+            <DocumentType>Email</DocumentType>
+            <DocumentType>uCommercePage</DocumentType>
+        </Structure>
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Payment</Name>
+            <Alias>uCommercePayment</Alias>
+            <Icon>ucommerce-payment.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStorePayment</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStorePayment</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Preview</Name>
+            <Alias>uCommercePreview</Alias>
+            <Icon>ucommerce-preview.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStorePreview</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStorePreview</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Search</Name>
+            <Alias>uCommerceSearch</Alias>
+            <Icon>ucommerce-search.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreSearch</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreSearch</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+    <DocumentType>
+        <Info>
+            <Name>Shipping</Name>
+            <Alias>uCommerceShipping</Alias>
+            <Icon>ucommerce-shipping.png</Icon>
+            <Thumbnail>folder.png</Thumbnail>
+            <Description>
+            </Description>
+            <Master>uCommercePage</Master>
+            <AllowedTemplates>
+                <Template>RazorStoreShipping</Template>
+            </AllowedTemplates>
+            <DefaultTemplate>RazorStoreShipping</DefaultTemplate>
+        </Info>
+        <Structure />
+        <GenericProperties />
+        <Tabs />
+    </DocumentType>
+</DocumentTypes>

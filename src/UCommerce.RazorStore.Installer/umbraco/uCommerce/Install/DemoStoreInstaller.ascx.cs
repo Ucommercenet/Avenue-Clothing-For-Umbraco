@@ -1,12 +1,14 @@
 ﻿using System;
 
-using UCommerce.EntitiesV2;
-
-namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install
+namespace UCommerce.RazorStore.Installer
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
+
+    using UCommerce.EntitiesV2;
+
+    using umbraco;
+    using umbraco.cms.businesslogic.web;
 
     public partial class DemoStoreInstaller1 : System.Web.UI.UserControl
     {
@@ -26,14 +28,44 @@ namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install
             {
                 var installer = new CatalogueInstaller("avenue-clothing.com", "Demo Store");
                 installer.Configure();
+                var mediaService = new MediaService(Server.MapPath(umbraco.IO.SystemDirectories.Media), Server.MapPath("~/umbraco/ucommerce/install/files/"));
+
+                mediaService.InstallCategoryImages(Category.All());
+                mediaService.InstallProductImages(Product.All());
             }
 
             var messages = new List<string>();
-            if (chkDelete.Checked)
+            if (!chkDelete.Checked)
+            {
                 messages.Add("You will need to delete the default uCommerce store manually.");
+            }
+            else
+            {
+                var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerc");
+                if (group != null)
+                {
+                    group.Deleted = true;
+                    group.Save();
+                }
+            }
 
-            if (chkPublish.Checked)
+            if (!chkPublish.Checked)
+            {
                 messages.Add("You will need to publish the new content nodes manually.");
+            }
+            else
+            {
+                var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceFrontPage");
+                if (docType != null)
+                {
+                    var root = Document.GetDocumentsOfDocumentType(docType.Id);
+                    foreach (var document in root)
+                    {
+                        Node.PublishChildDocs(document);
+                    }
+                    library.RefreshContent();
+                }
+            }
 
             if (messages.Any())
             {

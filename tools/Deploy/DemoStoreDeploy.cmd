@@ -1,8 +1,6 @@
 @echo off
-rem Run from Tools folder
 
-cd ..\..\
-
+cd ..\..\..\
 
 rem Delete the exisiting packages folder and any contents
 del package\uCommerce_Demo_Store_-_Razor_1.0.0.0\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q

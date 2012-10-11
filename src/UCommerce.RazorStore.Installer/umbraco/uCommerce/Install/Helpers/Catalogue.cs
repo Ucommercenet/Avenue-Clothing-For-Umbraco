@@ -5,7 +5,7 @@ using System.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 
-namespace UCommerce.RazorStore.Installer.umbraco.uCommerce.Install
+namespace UCommerce.RazorStore.Installer
 {
     public class CatalogueInstaller
     {

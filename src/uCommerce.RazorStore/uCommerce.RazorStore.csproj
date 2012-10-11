@@ -270,6 +270,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\deploy.cmd" "$(ProjectDir)" "D:\ucommerce_razor_test\www"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\DemoStoreDeploy.cmd"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DemoStoreInstaller.ascx.cs" Inherits="UCommerce.RazorStore.Installer.umbraco.uCommerce.Install.DemoStoreInstaller1" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DemoStoreInstaller.ascx.cs" Inherits="UCommerce.RazorStore.Installer.DemoStoreInstaller1" %>
 <div style="width:100%;height:85px;background-color:#231f21;">
     <img src="/umbraco/ucommerce/images/uCommerce-logo-small.png" style="margin:10px;float:left;" />
     <span style="font-family:Arial,Helvetica,sans-serif;font-size:25px;font-weight:bold;color:#fff;padding-top:40px;display:block;">Demo Razor Store</span>
