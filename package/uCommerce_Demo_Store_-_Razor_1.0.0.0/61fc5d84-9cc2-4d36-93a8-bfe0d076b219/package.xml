@@ -7,6 +7,11 @@
             <orgName>uCommerce.RazorStore.dll</orgName>
         </file>
         <file>
+            <guid>UCommerce.RazorStore.Installer.dll</guid>
+            <orgPath>/bin</orgPath>
+            <orgName>UCommerce.RazorStore.Installer.dll</orgName>
+        </file>
+        <file>
             <guid>ServiceStack.Common.dll</guid>
             <orgPath>/bin</orgPath>
             <orgName>ServiceStack.Common.dll</orgName>
@@ -192,49 +197,114 @@
             <orgName>homepage-banner-purple-wonderland.jpg</orgName>
         </file>
         <file>
-            <guid>bootstrap.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>bootstrap.js</orgName>
+            <guid>ucommerce-address.png</guid>
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-address.png</orgName>
         </file>
         <file>
-            <guid>bootstrap.min.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>bootstrap.min.js</orgName>
+            <guid>ucommerce-cart.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-cart.png</orgName>
         </file>
         <file>
-            <guid>jquery.ucommerce.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>jquery.ucommerce.js</orgName>
+            <guid>ucommerce-catalog.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-catalog.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-checkout.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-checkout.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-confirmation.png</guid>
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-confirmation.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-frontpage.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-frontpage.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-page.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-page.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-payment.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-payment.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-preview.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-preview.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-product.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-product.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-search.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-search.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-shipping.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-shipping.png</orgName>
+        </file>
+        <file>
+            <guid>ucommerce-email.png</guid>            
+            <orgPath>/umbraco/images/umbraco</orgPath>
+            <orgName>ucommerce-email.png</orgName>
         </file>
         <file>
             <guid>jquery.validate.min.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
+            <orgPath>/js</orgPath>
             <orgName>jquery.validate.min.js</orgName>
         </file>
         <file>
-            <guid>servicestack.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>servicestack.js</orgName>
+            <guid>uCommerce.bootstrap.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>uCommerce.bootstrap.js</orgName>
         </file>
         <file>
-            <guid>ucommerce.demostore.cart.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>ucommerce.demostore.cart.js</orgName>
+            <guid>uCommerce.bootstrap.min.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>uCommerce.bootstrap.min.js</orgName>
         </file>
         <file>
-            <guid>ucommerce.demostore.checkout.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>ucommerce.demostore.checkout.js</orgName>
+            <guid>uCommerce.jQuery.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>uCommerce.jQuery.js</orgName>
         </file>
         <file>
-            <guid>ucommerce.demostore.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>ucommerce.demostore.js</orgName>
+            <guid>uCommerce.ServiceStack.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>uCommerce.ServiceStack.js</orgName>
         </file>
         <file>
-            <guid>ucommerce.demostore.productpage.js</guid>
-            <orgPath>/js/ucommerce</orgPath>
-            <orgName>ucommerce.demostore.productpage.js</orgName>
+            <guid>uCommerce.DemoStore.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>uCommerce.DemoStore.js</orgName>
+        </file>
+        <file>
+            <guid>uCommerce.DemoStore.Cart.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>ucommerce.DemoStore.Cart.js</orgName>
+        </file>
+        <file>
+            <guid>uCommerce.DemoStore.Checkout.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>ucommerce.DemoStore.Checkout.js</orgName>
+        </file>
+        <file>
+            <guid>uCommerce.DemoStore.ProductPage.js</guid>
+            <orgPath>/js</orgPath>
+            <orgName>uCommerce.DemoStore.ProductPage.js</orgName>
         </file>
     </files>
     <info>
@@ -253,82 +323,234 @@
             <name>The Site Doctor Ltd</name>
             <website>http://www.thesitedoctor.co.uk</website>
         </author>
-        <readme><![CDATA[Thank you for installing the uCommerce demo store. By default this package will install an example store structure and Razor templates. 
+        <readme>
+            <![CDATA[Thank you for installing the uCommerce demo store. By default this package will install an example store structure and Razor templates. 
 
-At the end of the installer you will be given the opportunity to install a demo store.]]></readme>
+At the end of the installer you will be given the opportunity to install the example settings, categories and products.]]>
+        </readme>
     </info>
     <Documents>
         <DocumentSet importMode="root">
-            <uCommerce id="1062" parentID="-1" level="1" writerID="0" creatorID="0" nodeType="1059" template="1057" sortOrder="2" createDate="2009-09-08T11:57:23" updateDate="2012-07-26T13:30:11" nodeName="uCommerce" urlName="ucommerce" writerName="admin" creatorName="admin" path="-1,1062" isDoc="">
+            <uCommerceFrontPage id="1078" parentID="1062" level="2" writerID="0" creatorID="0" nodeType="1059" template="1085" sortOrder="0" createDate="2012-07-19T10:47:27" updateDate="2012-10-03T18:56:12" nodeName="Shop" urlName="shop" writerName="admin" creatorName="admin" path="-1,1078" isDoc="">
                 <umbracoNaviHide>0</umbracoNaviHide>
-                <uCommerce id="1078" parentID="1062" level="2" writerID="0" creatorID="0" nodeType="1059" template="1085" sortOrder="0" createDate="2012-07-19T10:47:27" updateDate="2012-10-03T18:56:12" nodeName="Shop" urlName="shop" writerName="admin" creatorName="admin" path="-1,1062,1078" isDoc="">
+                <content>
+                    <![CDATA[<h1>Some Heading</h1><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>]]>
+                </content>
+                <uCommerceCatalog id="1091" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1090" sortOrder="1" createDate="2012-07-27T12:26:40" updateDate="2012-07-27T12:27:48" nodeName="Catalog" urlName="catalog" writerName="admin" creatorName="admin" path="-1,1078,1091" isDoc="">
+                    <content><![CDATA[]]></content>
                     <umbracoNaviHide>0</umbracoNaviHide>
-                    <content>
-                        <![CDATA[<h1>Some Heading</h1>
-<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>]]>
-                    </content>
-                    <uCommercePage id="1084" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1086" sortOrder="0" createDate="2012-07-26T13:40:38" updateDate="2012-07-31T10:08:06" nodeName="Product" urlName="product" writerName="admin" creatorName="admin" path="-1,1062,1078,1084" isDoc="">
+                    <uCommerceProduct id="1084" parentID="1091" level="4" writerID="0" creatorID="0" nodeType="1060" template="1086" sortOrder="0" createDate="2012-07-26T13:40:38" updateDate="2012-07-31T10:08:06" nodeName="Product" urlName="product" writerName="admin" creatorName="admin" path="-1,1078,1091,1084" isDoc="">
                         <content><![CDATA[]]></content>
                         <umbracoNaviHide>0</umbracoNaviHide>
-                    </uCommercePage>
-                    <uCommercePage id="1091" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1090" sortOrder="1" createDate="2012-07-27T12:26:40" updateDate="2012-07-27T12:27:48" nodeName="Catalog" urlName="catalog" writerName="admin" creatorName="admin" path="-1,1062,1078,1091" isDoc="">
+                    </uCommerceProduct>
+                </uCommerceCatalog>
+                <uCommerceCart id="1094" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1059" template="1057" sortOrder="2" createDate="2012-07-27T13:40:50" updateDate="2012-07-27T13:40:55" nodeName="Cart" urlName="cart" writerName="admin" creatorName="admin" path="-1,1078,1094" isDoc="">
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                    <uCommerceAddress id="1100" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1099" sortOrder="1" createDate="2012-07-30T08:45:54" updateDate="2012-07-30T08:57:42" nodeName="Address" urlName="address" writerName="admin" creatorName="admin" path="-1,1078,1094,1100" isDoc="">
                         <content><![CDATA[]]></content>
                         <umbracoNaviHide>0</umbracoNaviHide>
-                    </uCommercePage>
-                    <uCommerce id="1094" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1059" template="1057" sortOrder="2" createDate="2012-07-27T13:40:50" updateDate="2012-07-27T13:40:55" nodeName="Checkout" urlName="checkout" writerName="admin" creatorName="admin" path="-1,1062,1078,1094" isDoc="">
-                        <umbracoNaviHide>0</umbracoNaviHide>
-                        <uCommercePage id="1095" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1092" sortOrder="0" createDate="2012-07-27T13:41:04" updateDate="2012-07-27T13:41:11" nodeName="Cart" urlName="cart" writerName="admin" creatorName="admin" path="-1,1062,1078,1094,1095" isDoc="">
-                            <content><![CDATA[]]></content>
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </uCommercePage>
-                        <uCommercePage id="1100" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1099" sortOrder="1" createDate="2012-07-30T08:45:54" updateDate="2012-07-30T08:57:42" nodeName="Address" urlName="address" writerName="admin" creatorName="admin" path="-1,1062,1078,1094,1100" isDoc="">
-                            <content><![CDATA[]]></content>
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </uCommercePage>
-                        <uCommercePage id="1104" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1101" sortOrder="2" createDate="2012-07-30T11:45:53" updateDate="2012-07-30T11:46:22" nodeName="Shipping" urlName="shipping" writerName="admin" creatorName="admin" path="-1,1062,1078,1094,1104" isDoc="">
-                            <content><![CDATA[]]></content>
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </uCommercePage>
-                        <uCommercePage id="1108" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1107" sortOrder="3" createDate="2012-07-30T11:49:18" updateDate="2012-07-30T11:49:40" nodeName="Payment" urlName="payment" writerName="admin" creatorName="admin" path="-1,1062,1078,1094,1108" isDoc="">
-                            <content><![CDATA[]]></content>
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </uCommercePage>
-                        <uCommercePage id="1105" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1102" sortOrder="4" createDate="2012-07-30T11:46:29" updateDate="2012-07-30T11:46:36" nodeName="Preview" urlName="preview" writerName="admin" creatorName="admin" path="-1,1062,1078,1094,1105" isDoc="">
-                            <content><![CDATA[]]></content>
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </uCommercePage>
-                        <uCommercePage id="1106" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1103" sortOrder="5" createDate="2012-07-30T11:46:48" updateDate="2012-07-30T11:46:55" nodeName="Confirmation" urlName="confirmation" writerName="admin" creatorName="admin" path="-1,1062,1078,1094,1106" isDoc="">
-                            <content><![CDATA[]]></content>
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </uCommercePage>
-                    </uCommerce>
-                    <uCommercePage id="1145" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1144" sortOrder="3" createDate="2012-10-03T19:17:10" updateDate="2012-10-03T19:18:22" nodeName="Search" urlName="search" writerName="admin" creatorName="admin" path="-1,1062,1078,1145" isDoc="">
+                    </uCommerceAddress>
+                    <uCommerceShipping id="1104" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1101" sortOrder="2" createDate="2012-07-30T11:45:53" updateDate="2012-07-30T11:46:22" nodeName="Shipping" urlName="shipping" writerName="admin" creatorName="admin" path="-1,1078,1094,1104" isDoc="">
                         <content><![CDATA[]]></content>
                         <umbracoNaviHide>0</umbracoNaviHide>
-                    </uCommercePage>
-                    <Email id="1121" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1058" template="1049" sortOrder="4" createDate="2012-09-13T12:33:12" updateDate="2012-09-13T12:36:33" nodeName="Emails" urlName="emails" writerName="admin" creatorName="admin" path="-1,1062,1078,1121" isDoc="">
+                    </uCommerceShipping>
+                    <uCommercePayment id="1108" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1107" sortOrder="3" createDate="2012-07-30T11:49:18" updateDate="2012-07-30T11:49:40" nodeName="Payment" urlName="payment" writerName="admin" creatorName="admin" path="-1,1078,1094,1108" isDoc="">
+                        <content><![CDATA[]]></content>
+                        <umbracoNaviHide>0</umbracoNaviHide>
+                    </uCommercePayment>
+                    <uCommercePreview id="1105" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1102" sortOrder="4" createDate="2012-07-30T11:46:29" updateDate="2012-07-30T11:46:36" nodeName="Preview" urlName="preview" writerName="admin" creatorName="admin" path="-1,1078,1094,1105" isDoc="">
+                        <content><![CDATA[]]></content>
+                        <umbracoNaviHide>0</umbracoNaviHide>
+                    </uCommercePreview>
+                    <uCommerceConfirmation id="1106" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1103" sortOrder="5" createDate="2012-07-30T11:46:48" updateDate="2012-07-30T11:46:55" nodeName="Confirmation" urlName="confirmation" writerName="admin" creatorName="admin" path="-1,1078,1094,1106" isDoc="">
+                        <content><![CDATA[]]></content>
+                        <umbracoNaviHide>0</umbracoNaviHide>
+                    </uCommerceConfirmation>
+                </uCommerceCart>
+                <uCommerceSearch id="1145" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1144" sortOrder="3" createDate="2012-10-03T19:17:10" updateDate="2012-10-03T19:18:22" nodeName="Search" urlName="search" writerName="admin" creatorName="admin" path="-1,1078,1145" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommerceSearch>
+                <uCommerceEmail id="1120" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1058" template="1049" sortOrder="4" createDate="2012-09-13T12:33:12" updateDate="2012-09-13T12:36:33" nodeName="Emails" urlName="emails" writerName="admin" creatorName="admin" path="-1,1078,1120" isDoc="">
+                    <umbracoNaviHide>1</umbracoNaviHide>
+                    <uCommerceEmail id="1121" parentID="1120" level="4" writerID="0" creatorID="0" nodeType="1058" template="1049" sortOrder="1" createDate="2012-09-13T12:32:56" updateDate="2012-09-13T12:36:59" nodeName="Order Confirmation Email" urlName="order-confirmation-email" writerName="admin" creatorName="admin" path="-1,1078,1120,1121" isDoc="">
                         <umbracoNaviHide>1</umbracoNaviHide>
-                        <Email id="1120" parentID="1121" level="4" writerID="0" creatorID="0" nodeType="1058" template="1049" sortOrder="1" createDate="2012-09-13T12:32:56" updateDate="2012-09-13T12:36:59" nodeName="Order Confirmation Email" urlName="order-confirmation-email" writerName="admin" creatorName="admin" path="-1,1062,1078,1121,1120" isDoc="">
-                            <umbracoNaviHide>0</umbracoNaviHide>
-                        </Email>
-                    </Email>
-                </uCommerce>
-            </uCommerce>
+                    </uCommerceEmail>
+                </uCommerceEmail>
+            </uCommerceFrontPage>
         </DocumentSet>
     </Documents>
     <DocumentTypes>
         <DocumentType>
             <Info>
+                <Name>uCommerce page</Name>
+                <Alias>uCommercePage</Alias>
+                <Icon>ucommerce-page.png</Icon>
+                <Thumbnail>doc.png</Thumbnail>
+                <Description>
+                </Description>
+                <AllowedTemplates>
+                    <Template>RazorStoreContent</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreContent</DefaultTemplate>
+            </Info>
+            <Structure>
+                <DocumentType>uCommercePage</DocumentType>
+            </Structure>
+            <GenericProperties>
+                <GenericProperty>
+                    <Name>Content</Name>
+                    <Alias>content</Alias>
+                    <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+                    <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+                    <Tab>Content</Tab>
+                    <Mandatory>False</Mandatory>
+                    <Validation>
+                    </Validation>
+                    <Description><![CDATA[]]></Description>
+                </GenericProperty>
+                <GenericProperty>
+                    <Name>Hide in navigation</Name>
+                    <Alias>umbracoNaviHide</Alias>
+                    <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
+                    <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+                    <Tab>
+                    </Tab>
+                    <Mandatory>False</Mandatory>
+                    <Validation>
+                    </Validation>
+                    <Description><![CDATA[]]></Description>
+                </GenericProperty>
+            </GenericProperties>
+            <Tabs>
+                <Tab>
+                    <Id>6</Id>
+                    <Caption>Content</Caption>
+                </Tab>
+            </Tabs>
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Address</Name>
+                <Alias>uCommerceAddress</Alias>
+                <Icon>ucommerce-address.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreAddress</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreAddress</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Product</Name>
+                <Alias>uCommerceProduct</Alias>
+                <Icon>ucommerce-product.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreProduct</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreProduct</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Cart</Name>
+                <Alias>uCommerceCart</Alias>
+                <Icon>ucommerce-cart.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreCart</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreCart</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Catalog</Name>
+                <Alias>uCommerceCatalog</Alias>
+                <Icon>ucommerce-catalog.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreCatalog</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreCatalog</DefaultTemplate>
+            </Info>
+            <Structure>
+                <DocumentType>Product</DocumentType>
+            </Structure>
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Checkout</Name>
+                <Alias>uCommerceCheckout</Alias>
+                <Icon>ucommerce-checkout.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreCheckout</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreCheckout</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Confirmation</Name>
+                <Alias>uCommerceConfirmation</Alias>
+                <Icon>ucommerce-confirmation.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreConfirmation</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreConfirmation</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
                 <Name>Email</Name>
-                <Alias>Email</Alias>
-                <Icon>newsletter.gif</Icon>
+                <Alias>uCommerceEmail</Alias>
+                <Icon>ucommerce-email.png</Icon>
                 <Thumbnail>folder.png</Thumbnail>
                 <Description>
                 </Description>
                 <AllowedTemplates>
-                    <Template>Email</Template>
+                    <Template>RazorStoreEmail</Template>
                 </AllowedTemplates>
-                <DefaultTemplate>Email</DefaultTemplate>
+                <DefaultTemplate>RazorStoreEmail</DefaultTemplate>
             </Info>
             <Structure>
                 <DocumentType>Email</DocumentType>
@@ -378,126 +600,99 @@ At the end of the installer you will be given the opportunity to install a demo 
         </DocumentType>
         <DocumentType>
             <Info>
-                <Name>uCommerce</Name>
-                <Alias>uCommerce</Alias>
-                <Icon>ucommerce-icon.png</Icon>
+                <Name>Front Page</Name>
+                <Alias>uCommerceFrontPage</Alias>
+                <Icon>ucommerce-frontpage.png</Icon>
                 <Thumbnail>folder.png</Thumbnail>
                 <Description>
                 </Description>
+                <Master>uCommercePage</Master>
                 <AllowedTemplates>
-                    <Template>uCommerce</Template>
                     <Template>RazorStoreFrontPage</Template>
                 </AllowedTemplates>
                 <DefaultTemplate>RazorStoreFrontPage</DefaultTemplate>
             </Info>
             <Structure>
+                <DocumentType>Product</DocumentType>
+                <DocumentType>Catalog</DocumentType>
+                <DocumentType>Cart</DocumentType>
                 <DocumentType>Email</DocumentType>
-                <DocumentType>uCommerce</DocumentType>
                 <DocumentType>uCommercePage</DocumentType>
             </Structure>
-            <GenericProperties>
-                <GenericProperty>
-                    <Name>Hide in navigation</Name>
-                    <Alias>umbracoNaviHide</Alias>
-                    <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
-                    <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
-                    <Tab>
-                    </Tab>
-                    <Mandatory>False</Mandatory>
-                    <Validation>
-                    </Validation>
-                    <Description><![CDATA[]]></Description>
-                </GenericProperty>
-                <GenericProperty>
-                    <Name>Content</Name>
-                    <Alias>content</Alias>
-                    <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
-                    <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
-                    <Tab>Content</Tab>
-                    <Mandatory>False</Mandatory>
-                    <Validation>
-                    </Validation>
-                    <Description><![CDATA[]]></Description>
-                </GenericProperty>
-            </GenericProperties>
-            <Tabs>
-                <Tab>
-                    <Id>9</Id>
-                    <Caption>Content</Caption>
-                </Tab>
-            </Tabs>
+            <GenericProperties />
+            <Tabs />
         </DocumentType>
         <DocumentType>
             <Info>
-                <Name>uCommerce page</Name>
-                <Alias>uCommercePage</Alias>
-                <Icon>doc.gif</Icon>
-                <Thumbnail>doc.png</Thumbnail>
+                <Name>Payment</Name>
+                <Alias>uCommercePayment</Alias>
+                <Icon>ucommerce-payment.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
                 <Description>
                 </Description>
+                <Master>uCommercePage</Master>
                 <AllowedTemplates>
-                    <Template>Address</Template>
-                    <Template>Cart</Template>
-                    <Template>Catalog</Template>
-                    <Template>Checkout</Template>
-                    <Template>OrderConfirmation</Template>
-                    <Template>Login</Template>
-                    <Template>OrderHistory</Template>
-                    <Template>Payment</Template>
-                    <Template>Product</Template>
-                    <Template>ProductReviewWithComments</Template>
-                    <Template>Shipping</Template>
-                    <Template>Submit</Template>
-                    <Template>Test</Template>
-                    <Template>RazorTest</Template>
-                    <Template>RazorStoreProduct</Template>
-                    <Template>RazorStoreCatalog</Template>
-                    <Template>RazorStoreCart</Template>
-                    <Template>RazorStoreAddress</Template>
-                    <Template>RazorStoreShipping</Template>
-                    <Template>RazorStorePreview</Template>
-                    <Template>RazorStoreConfirmation</Template>
                     <Template>RazorStorePayment</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStorePayment</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Preview</Name>
+                <Alias>uCommercePreview</Alias>
+                <Icon>ucommerce-preview.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStorePreview</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStorePreview</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Search</Name>
+                <Alias>uCommerceSearch</Alias>
+                <Icon>ucommerce-search.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
                     <Template>RazorStoreSearch</Template>
                 </AllowedTemplates>
-                <DefaultTemplate>
-                </DefaultTemplate>
+                <DefaultTemplate>RazorStoreSearch</DefaultTemplate>
             </Info>
-            <Structure>
-                <DocumentType>Email</DocumentType>
-                <DocumentType>uCommercePage</DocumentType>
-            </Structure>
-            <GenericProperties>
-                <GenericProperty>
-                    <Name>Content</Name>
-                    <Alias>content</Alias>
-                    <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
-                    <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
-                    <Tab>Content</Tab>
-                    <Mandatory>False</Mandatory>
-                    <Validation>
-                    </Validation>
-                    <Description><![CDATA[]]></Description>
-                </GenericProperty>
-                <GenericProperty>
-                    <Name>Hide in navigation</Name>
-                    <Alias>umbracoNaviHide</Alias>
-                    <Type>38b352c1-e9f8-4fd8-9324-9a2eab06d97a</Type>
-                    <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
-                    <Tab>
-                    </Tab>
-                    <Mandatory>False</Mandatory>
-                    <Validation>
-                    </Validation>
-                    <Description><![CDATA[]]></Description>
-                </GenericProperty>
-            </GenericProperties>
-            <Tabs>
-                <Tab>
-                    <Id>6</Id>
-                    <Caption>Content</Caption>
-                </Tab>
-            </Tabs>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
+        </DocumentType>
+        <DocumentType>
+            <Info>
+                <Name>Shipping</Name>
+                <Alias>uCommerceShipping</Alias>
+                <Icon>ucommerce-shipping.png</Icon>
+                <Thumbnail>folder.png</Thumbnail>
+                <Description>
+                </Description>
+                <Master>uCommercePage</Master>
+                <AllowedTemplates>
+                    <Template>RazorStoreShipping</Template>
+                </AllowedTemplates>
+                <DefaultTemplate>RazorStoreShipping</DefaultTemplate>
+            </Info>
+            <Structure />
+            <GenericProperties />
+            <Tabs />
         </DocumentType>
     </DocumentTypes>
     <Templates>
@@ -516,8 +711,8 @@ At the end of the installer you will be given the opportunity to install a demo 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href="/css/bootstrap.css" rel="stylesheet">
-        <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/css/ucommerce.bootstrap.css" rel="stylesheet">
+        <link href="/css/ucommerce.bootstrap-responsive.css" rel="stylesheet">
         <link href="/css/ucommerce.demostore.css" rel="stylesheet">
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -528,11 +723,12 @@ At the end of the installer you will be given the opportunity to install a demo 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
-                    <a class="brand" href="/shop.aspx">Avenue Clothing</a>
-                    <form class="navbar-search form-search pull-left" action="/shop/search.aspx">
+                    <div class="row-fluid">
+                    <a class="brand span3" href="/shop.aspx" >Avenue Clothing</a>
+                    <form id="search-form" class="navbar-search form-search pull-left" action="/shop/search.aspx">
                     <div class="input-append">
-                        <input id="site-search" type="text" name="search" type="text" class="span4 search-query" placeholder="Search the store">
-                        <button type="submit" class="btn">Search</button>
+                        <input id="site-search" type="text" name="search" type="text" class="search-query" placeholder="Search the store">
+                        <button type="submit" class="btn"><i class="icon-grey-search"></i></button>
                     </div>
                     </form>
                     <div class="nav-collapse pull-right">
@@ -541,6 +737,7 @@ At the end of the installer you will be given the opportunity to install a demo 
                                 <umbraco:macro alias="ucMiniBasket" runat="server" />
                             </li>
                         </ul>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -594,16 +791,15 @@ At the end of the installer you will be given the opportunity to install a demo 
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-        <script src="/js/ucommerce/jquery.validate.min.js"></script>
-        <script src="/js/ucommerce/bootstrap.min.js"></script>
-        <script src="/js/ucommerce/servicestack.js"></script>
-        <script src="/js/ucommerce/jquery.ucommerce.js"></script>
-        <script src="/js/ucommerce/ucommerce.demostore.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+        <script src="/js/ucommerce.bootstrap.js"></script>
+        <script src="/js/ucommerce.servicestack.js"></script>
+        <script src="/js/ucommerce.jquery.js"></script>
+        <script src="/js/ucommerce.demostore.js"></script>
         <asp:ContentPlaceHolder runat="server" ID="cphScripts" />
     </body>
     </html>
-</asp:Content>
-]]>
+</asp:Content>]]>
             </Design>
         </Template>
         <Template>
@@ -618,9 +814,8 @@ At the end of the installer you will be given the opportunity to install a demo 
     <umbraco:Macro ID="Macro1" runat="server" Alias="ucAddressEdit"/>
 </asp:content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce/ucommerce.demostore.checkout.js"></script>
-</asp:Content>
-]]>
+    <script src="/js/ucommerce.demostore.checkout.js"></script>
+</asp:Content>]]>
             </Design>
         </Template>
         <Template>
@@ -637,9 +832,8 @@ At the end of the installer you will be given the opportunity to install a demo 
     <umbraco:macro runat="server" alias="ucCart" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce/ucommerce.demostore.cart.js"></script>
-</asp:Content>
-]]>
+    <script src="/js/ucommerce.demostore.cart.js"></script>
+</asp:Content>]]>
             </Design>
         </Template>
         <Template>
@@ -655,6 +849,30 @@ At the end of the installer you will be given the opportunity to install a demo 
     
 
 </asp:Content>]]>
+            </Design>
+        </Template>
+        <Template>
+            <Name>RazorStoreCheckout</Name>
+            <Alias>RazorStoreCheckout</Alias>
+            <Master>RazorStoreContent</Master>
+            <Design>
+                <![CDATA[<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="cphHead" runat="server">
+	
+</asp:content>
+
+<asp:content ContentPlaceHolderId="cphMain" runat="server">
+	
+</asp:content>
+
+<asp:content ContentPlaceHolderId="cphFoot" runat="server">
+	
+</asp:content>
+
+<asp:content ContentPlaceHolderId="cphScripts" runat="server">
+	
+</asp:content>]]>
             </Design>
         </Template>
         <Template>
@@ -690,8 +908,7 @@ At the end of the installer you will be given the opportunity to install a demo 
 </asp:Content>
 <asp:Content ContentPlaceHolderID="cphScripts" runat="server">
     <asp:ContentPlaceHolder runat="server" ID="cphScripts" />
-</asp:Content>
-]]>
+</asp:Content>]]>
             </Design>
         </Template>
         <Template>
@@ -708,8 +925,7 @@ At the end of the installer you will be given the opportunity to install a demo 
     </div>
     <umbraco:macro runat="server" alias="ucHomepageCatalog" />
     <!--/row-->
-</asp:Content>
-]]>
+</asp:Content>]]>
             </Design>
         </Template>
         <Template>
@@ -751,7 +967,7 @@ At the end of the installer you will be given the opportunity to install a demo 
     <umbraco:Macro runat="server" Alias="ucProduct"/>
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce/ucommerce.demostore.productpage.js"></script>
+    <script src="/js/ucommerce.demostore.productpage.js"></script>
 </asp:Content>]]>
             </Design>
         </Template>
@@ -780,11 +996,46 @@ At the end of the installer you will be given the opportunity to install a demo 
 </asp:content>]]>
             </Design>
         </Template>
+        <Template>
+            <Name>RazorStoreEmail</Name>
+            <Alias>RazorStoreEmail</Alias>
+            <Design>
+                <![CDATA[<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>uCommerce Razor Store</title>
+        <asp:ContentPlaceHolder runat="server" ID="cphHead" />
+    </head>
+    <body>
+        <table width="600" style="width:600px;">
+            <tr>
+                <td width="600" style="width:600px;"><a href="/shop.aspx">Avenue Clothing</a></td>
+            </tr>
+            <tr>
+                <td width="600" style="width:600px;">
+                    <umbraco:Item field="header" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td width="600" style="width:600px;">
+                    <umbraco:Item field="footer" runat="server" />
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>
+</asp:Content>]]>
+            </Design>
+        </Template>
     </Templates>
     <Stylesheets>
         <Stylesheet>
-            <Name>bootstrap</Name>
-            <FileName>bootstrap</FileName>
+            <Name>ucommerce.bootstrap.css</Name>
+            <FileName>ucommerce.bootstrap</FileName>
             <Content>
                 <![CDATA[/*!
  * Bootstrap v2.1.1
@@ -6627,7 +6878,7 @@ button.close {
             </Content>
         </Stylesheet>
         <Stylesheet>
-            <Name>bootstrap-responsive</Name>
+            <Name>ucommerce.bootstrap-responsive.css</Name>
             <FileName>bootstrap-responsive</FileName>
             <Content>
                 <![CDATA[/*!
@@ -7448,7 +7699,7 @@ button.close {
             </Content>
         </Stylesheet>
         <Stylesheet>
-            <Name>ucommerce.demostore</Name>
+            <Name>ucommerce.demostore.css</Name>
             <FileName>ucommerce.demostore</FileName>
             <Content>
                 <![CDATA[/* Bootstrap Theme Overrides
