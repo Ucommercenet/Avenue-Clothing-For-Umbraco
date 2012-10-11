@@ -34,19 +34,22 @@
             _rootMediaNode = GetRootMediaFolder();
 
             _defaultFolderName = "avenue-clothing.com";
-            _folderType = MediaType.GetByAlias("folder");
-            _imageType = MediaType.GetByAlias("image");
+            _folderType = new MediaType(1031);
+            _imageType = new MediaType(1032);
         }
 
         private Media GetRootMediaFolder()
         {
-            var folders = (Media[])Media.GetMediaOfMediaType(_folderType.Id);
-            return folders.FirstOrDefault(f => f.Text == _defaultFolderName) ?? CreateMediaFolder(_defaultFolderName, -1);
+            //    var folders = Media.GetMediaOfMediaType(_folderType.Id);
+            //    return folders.FirstOrDefault(f => f.Text == _defaultFolderName) ?? CreateMediaFolder(_defaultFolderName, -1);
+
+            return CreateMediaFolder(_defaultFolderName, -1);
         }
 
         private Media CreateMediaFolder(string folderName, int parentId)
         {
-            return Media.MakeNew(folderName, _folderType, new User(0), parentId);
+            var media = Media.MakeNew(folderName, _folderType, new User(0), parentId);
+            return media;
         }
 
         private Media CreateMediaImage(string imageName, int parentId)

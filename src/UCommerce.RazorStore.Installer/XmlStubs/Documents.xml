@@ -1,23 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<info>
-    <package>
-        <name>uCommerce Demo Store - Razor</name>
-        <version>1.0.0.0</version>
-        <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
-        <url>http://www.ucommerce.dk</url>
-        <requirements>
-            <major>4</major>
-            <minor>9</minor>
-            <patch>0</patch>
-        </requirements>
-    </package>
-    <author>
-        <name>The Site Doctor Ltd</name>
-        <website>http://www.thesitedoctor.co.uk</website>
-    </author>
-    <readme>
-        <![CDATA[Thank you for installing the uCommerce demo store. By default this package will install an example store structure and Razor templates. 
-
-At the end of the installer you will be given the opportunity to install the example settings, categories and products.]]>
-    </readme>
-</info>
+<Documents>
+    <DocumentSet importMode="root">
+        <uCommerceFrontPage id="1078" parentID="1062" level="2" writerID="0" creatorID="0" nodeType="1059" template="1085" sortOrder="0" createDate="2012-07-19T10:47:27" updateDate="2012-10-03T18:56:12" nodeName="Shop" urlName="shop" writerName="admin" creatorName="admin" path="-1,1078" isDoc="">
+            <umbracoNaviHide>0</umbracoNaviHide>
+            <content>
+                <![CDATA[<h1>Some Heading</h1><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>]]>
+            </content>
+            <uCommerceCatalog id="1091" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1090" sortOrder="1" createDate="2012-07-27T12:26:40" updateDate="2012-07-27T12:27:48" nodeName="Catalog" urlName="catalog" writerName="admin" creatorName="admin" path="-1,1078,1091" isDoc="">
+                <content><![CDATA[]]></content>
+                <umbracoNaviHide>0</umbracoNaviHide>
+                <uCommerceProduct id="1084" parentID="1091" level="4" writerID="0" creatorID="0" nodeType="1060" template="1086" sortOrder="0" createDate="2012-07-26T13:40:38" updateDate="2012-07-31T10:08:06" nodeName="Product" urlName="product" writerName="admin" creatorName="admin" path="-1,1078,1091,1084" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommerceProduct>
+            </uCommerceCatalog>
+            <uCommerceCart id="1094" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1059" template="1057" sortOrder="2" createDate="2012-07-27T13:40:50" updateDate="2012-07-27T13:40:55" nodeName="Cart" urlName="cart" writerName="admin" creatorName="admin" path="-1,1078,1094" isDoc="">
+                <umbracoNaviHide>0</umbracoNaviHide>
+                <uCommerceAddress id="1100" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1099" sortOrder="1" createDate="2012-07-30T08:45:54" updateDate="2012-07-30T08:57:42" nodeName="Address" urlName="address" writerName="admin" creatorName="admin" path="-1,1078,1094,1100" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommerceAddress>
+                <uCommerceShipping id="1104" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1101" sortOrder="2" createDate="2012-07-30T11:45:53" updateDate="2012-07-30T11:46:22" nodeName="Shipping" urlName="shipping" writerName="admin" creatorName="admin" path="-1,1078,1094,1104" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommerceShipping>
+                <uCommercePayment id="1108" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1107" sortOrder="3" createDate="2012-07-30T11:49:18" updateDate="2012-07-30T11:49:40" nodeName="Payment" urlName="payment" writerName="admin" creatorName="admin" path="-1,1078,1094,1108" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommercePayment>
+                <uCommercePreview id="1105" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1102" sortOrder="4" createDate="2012-07-30T11:46:29" updateDate="2012-07-30T11:46:36" nodeName="Preview" urlName="preview" writerName="admin" creatorName="admin" path="-1,1078,1094,1105" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommercePreview>
+                <uCommerceConfirmation id="1106" parentID="1094" level="4" writerID="0" creatorID="0" nodeType="1060" template="1103" sortOrder="5" createDate="2012-07-30T11:46:48" updateDate="2012-07-30T11:46:55" nodeName="Confirmation" urlName="confirmation" writerName="admin" creatorName="admin" path="-1,1078,1094,1106" isDoc="">
+                    <content><![CDATA[]]></content>
+                    <umbracoNaviHide>0</umbracoNaviHide>
+                </uCommerceConfirmation>
+            </uCommerceCart>
+            <uCommerceSearch id="1145" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1144" sortOrder="3" createDate="2012-10-03T19:17:10" updateDate="2012-10-03T19:18:22" nodeName="Search" urlName="search" writerName="admin" creatorName="admin" path="-1,1078,1145" isDoc="">
+                <content><![CDATA[]]></content>
+                <umbracoNaviHide>0</umbracoNaviHide>
+            </uCommerceSearch>
+            <uCommerceEmail id="1120" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1058" template="1049" sortOrder="4" createDate="2012-09-13T12:33:12" updateDate="2012-09-13T12:36:33" nodeName="Emails" urlName="emails" writerName="admin" creatorName="admin" path="-1,1078,1120" isDoc="">
+                <umbracoNaviHide>1</umbracoNaviHide>
+                <uCommerceEmail id="1121" parentID="1120" level="4" writerID="0" creatorID="0" nodeType="1058" template="1049" sortOrder="1" createDate="2012-09-13T12:32:56" updateDate="2012-09-13T12:36:59" nodeName="Order Confirmation Email" urlName="order-confirmation-email" writerName="admin" creatorName="admin" path="-1,1078,1120,1121" isDoc="">
+                    <umbracoNaviHide>1</umbracoNaviHide>
+                </uCommerceEmail>
+            </uCommerceEmail>
+        </uCommerceFrontPage>
+    </DocumentSet>
+</Documents>

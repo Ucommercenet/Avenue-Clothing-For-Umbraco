@@ -73,7 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="XmlStubs\Languages.xml" />
-    <Content Include="XmlStubs\Macros.xml" />
+    <Content Include="XmlStubs\Macros.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XmlStubs\DocumentTypes.xml" />
     <Content Include="XmlStubs\Documents.xml" />
     <Content Include="XmlStubs\Info.xml" />

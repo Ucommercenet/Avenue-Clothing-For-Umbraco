@@ -62,7 +62,7 @@ namespace UCommerce.RazorStore.Installer
         {
             var casual = CreateChildCategory(shirts, "Casual");
 
-             var prettyGreen= CreateProductOnCategory(casual, shirtDefinition, "GHXG-4044-7604-1", "Pretty Green White Pinstripe Jersey Short Sleeve Polo Shirt", 65, "", "<ul><li>Three button placket and classic polo collar</li><li>Short sleeved</li><li>Signature embroidered Pretty Green chest badge</li><li>White and black pin stripe</li><li>100% jersey cotton</li><li>Style number : GHXG/4044/7604/1</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/polo-shirts-7/pretty-green-white-pinstripe-jersey-short-19759.htm\">Pritchards.co.uk</a></p>");
+            var prettyGreen = CreateProductOnCategory(casual, shirtDefinition, "GHXG-4044-7604-1", "Pretty Green White Pinstripe Jersey Short Sleeve Polo Shirt", 65, "", "<ul><li>Three button placket and classic polo collar</li><li>Short sleeved</li><li>Signature embroidered Pretty Green chest badge</li><li>White and black pin stripe</li><li>100% jersey cotton</li><li>Style number : GHXG/4044/7604/1</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/polo-shirts-7/pretty-green-white-pinstripe-jersey-short-19759.htm\">Pritchards.co.uk</a></p>");
             AddShirtVariantsToProduct(prettyGreen, "Striped", new List<string>() { "SML", "MED", "LAR", "X.L" }, new List<string>() { "White/Red" });
         }
 
@@ -89,7 +89,7 @@ namespace UCommerce.RazorStore.Installer
 
             var comic = CreateProductOnCategory(formal, shirtDefinition, "CMSFSS", "Comic Mood Slim Fit Signature Shirt", 179, "", smDesc + "<p>As featured on <a href=\"https:///shop/all-moods/comic-mood-slim-fit-signature-shirt/c-23/c-85/p-151\">stauntonmoods.com</a></p>");
             AddShirtVariantsToProduct(comic, "Plain", new List<string>() { "15", "16", "17", "18" }, new List<string>() { "White", "Blue" });
-            
+
             var eton = CreateProductOnCategory(formal, shirtDefinition, "2285794682539", "Eton Purple & White Stripe Contemporary Fit Formal Dress Shirt", 135, "", "<ul><li>Contemporary Fit</li><li>Single button cuffs with double button holes for cuff links</li><li>Pointed collar with bone inserts</li><li>Purple and white stipe</li><li>100% cotton</li><li>Style number : 2285794682539</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/shirts-6/eton-purple-white-stripe-contemporary-formal-20625.htm\">Pritchards.co.uk</a></p>");
             AddShirtVariantsToProduct(eton, "Striped", new List<string>() { "15", "15.5", "16", "16.5" }, new List<string>() { "White" });
 
@@ -290,6 +290,9 @@ namespace UCommerce.RazorStore.Installer
         {
             if (sku.Length > 30)
                 sku = sku.Substring(0, 30);
+
+            if (!String.IsNullOrWhiteSpace(variantSku) && variantSku.Length > 30)
+                variantSku = variantSku.Substring(0, 30);
 
             var product = Product.SingleOrDefault(p => p.Sku == sku && p.VariantSku == variantSku) ?? new Product();
 

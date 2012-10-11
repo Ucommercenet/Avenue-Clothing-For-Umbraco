@@ -28,10 +28,11 @@ namespace UCommerce.RazorStore.Installer
             {
                 var installer = new CatalogueInstaller("avenue-clothing.com", "Demo Store");
                 installer.Configure();
-                var mediaService = new MediaService(Server.MapPath(umbraco.IO.SystemDirectories.Media), Server.MapPath("~/umbraco/ucommerce/install/files/"));
 
-                mediaService.InstallCategoryImages(Category.All());
-                mediaService.InstallProductImages(Product.All());
+                //var mediaService = new MediaService(Server.MapPath(umbraco.IO.SystemDirectories.Media), Server.MapPath("~/umbraco/ucommerce/install/files/"));
+
+                //mediaService.InstallCategoryImages(Category.All());
+                //mediaService.InstallProductImages(Product.All());
             }
 
             var messages = new List<string>();
