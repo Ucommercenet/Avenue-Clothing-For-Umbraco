@@ -178,6 +178,19 @@
     <Content Include="Components.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="umbraco\images\umbraco\ucommerce-address.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-cart.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-catalog.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-checkout.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-confirmation.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-email.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-frontpage.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-page.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-payment.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-preview.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-product.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-search.png" />
+    <Content Include="umbraco\images\umbraco\ucommerce-shipping.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +235,7 @@
   <ItemGroup>
     <Content Include="masterpages\RazorStoreCheckout.master" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="umbraco\images\umbraco\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="masterpages\RazorStoreEmail.master" />
   </ItemGroup>

@@ -70,6 +70,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
+    <Content Include="umbraco\uCommerce\Install\Files\Category\Accessories.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Category\Tops.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Category\Formal.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Category\Casual.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Category\Scarves.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Category\Shoes.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\074617.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\19324.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\19849.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\20178.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\20180.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\20301.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\2285794682539.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\710707.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\710708.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\A02 WCJNK C0223 C421A.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\A04 WCBPS C4572 G4562.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\BKMSFSS.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\BWWMSFSS-LE.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\CMSFSS.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\GGMSFSS-LE.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\GHXG-4044-7604-1.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\JNMSFSS.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\LBAS.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\LBAT.jpg" />
+    <Content Include="umbraco\uCommerce\Install\Files\Product\PMMSFSS-LE.jpg" />
     <Content Include="umbraco\uCommerce\Install\InstallDemoData.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +115,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
