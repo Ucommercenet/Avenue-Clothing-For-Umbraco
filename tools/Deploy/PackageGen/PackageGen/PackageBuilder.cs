@@ -88,6 +88,7 @@
                 "umbPackage",
                 CreateFilesStub(),
                 GetXmlStub("Info"),
+                GetXmlStub("Documents"),
                 GetXmlStub("DocumentTypes"),
                 CreateTemplatesStub(),
                 CreateStylesheetsStub(),
