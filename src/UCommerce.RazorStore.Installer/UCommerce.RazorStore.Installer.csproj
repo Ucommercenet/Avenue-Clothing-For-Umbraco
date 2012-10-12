@@ -20,6 +20,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,7 +129,7 @@
     <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.designer.cs">
       <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
     </Compile>
-    <Compile Include="umbraco\uCommerce\Install\Helpers\Helpers.cs" />
+    <Compile Include="umbraco\uCommerce\Install\Helpers\GenericHelpers.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Node.cs" />
     <Compile Include="umbraco\uCommerce\Install\InstallDemoData.aspx.cs">
       <DependentUpon>InstallDemoData.aspx</DependentUpon>

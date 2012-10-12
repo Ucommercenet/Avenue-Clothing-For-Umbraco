@@ -1,11 +1,10 @@
 ﻿using System;
-
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Globalization;
 
-namespace UCommerce.RazorStore.Installer
+namespace UCommerce.RazorStore.Installer.Helpers
 {
-    public class Helpers
+    public class GenericHelpers
     {
         public static void DoForEachCulture(Action<string> toDo)
         {

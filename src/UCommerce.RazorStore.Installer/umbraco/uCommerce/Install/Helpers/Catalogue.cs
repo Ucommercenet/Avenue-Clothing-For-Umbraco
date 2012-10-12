@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 
-namespace UCommerce.RazorStore.Installer
+namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class CatalogueInstaller
     {
@@ -241,7 +240,7 @@ namespace UCommerce.RazorStore.Installer
             var category = Category.SingleOrDefault(c => c.Name == name) ?? new CategoryFactory().NewWithDefaults(catalog, definition, name);
             category.DisplayOnSite = true;
 
-            Helpers.DoForEachCulture(language =>
+            GenericHelpers.DoForEachCulture(language =>
             {
                 if (category.GetDescription(language) == null)
                     category.AddCategoryDescription(new CategoryDescription() { CultureCode = language, DisplayName = name });
@@ -255,7 +254,7 @@ namespace UCommerce.RazorStore.Installer
         {
             var product = CreateBaseProduct(productDefinition, sku, null, name);
 
-            Helpers.DoForEachCulture(
+            GenericHelpers.DoForEachCulture(
                 language =>
                 {
                     if (!product.HasDescription(language))

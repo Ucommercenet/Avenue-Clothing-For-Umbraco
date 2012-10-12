@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿using System.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
-using UCommerce.Infrastructure.Globalization;
 using UCommerce.Security;
+using umbraco.cms.businesslogic.web;
 
-namespace UCommerce.RazorStore.Installer
+namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class ConfigurationInstaller
     {
@@ -16,6 +13,26 @@ namespace UCommerce.RazorStore.Installer
         {
             CreateDataTypes();
             CreateProductDefinitions();
+            ConfigureEmails();
+        }
+
+        private void ConfigureEmails()
+        {
+            var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
+            if (docType == null) 
+                return;
+
+            var emails = Document.GetDocumentsOfDocumentType(docType.Id);
+            var emailContent = emails.FirstOrDefault(e => e.Text == "Order Confirmation Email");
+            if (emailContent == null)
+                return;
+
+            var emailType = EmailProfileInformation.FirstOrDefault(p => p.EmailType.Name == "OrderConfirmation");
+            foreach (var content in emailType.EmailProfile.EmailContents)
+            {
+                content.ContentId = emailContent.Id.ToString();
+                content.Save();
+            }
         }
 
         public void AssignAccessPermissionsToDemoStore()
@@ -66,7 +83,7 @@ namespace UCommerce.RazorStore.Installer
             dataTypeEnum.DataType = DataType.Get(parentDataType.DataTypeId);
             dataTypeEnum.Save();
 
-            Helpers.DoForEachCulture(language =>
+            GenericHelpers.DoForEachCulture(language =>
             {
                 if (dataTypeEnum.GetDescription(language) == null)
                     dataTypeEnum.AddDescription(new DataTypeEnumDescription { CultureCode = language, DisplayName = colour, Description = colour });
@@ -127,7 +144,7 @@ namespace UCommerce.RazorStore.Installer
             field.IsVariantProperty = variantProperty;
             field.RenderInEditor = true;
 
-            //DoForEachCulture(language =>
+            //Helpers.DoForEachCulture(language =>
             //    {
             //        if (field.GetDescription(language) == null)
             //            field.AddProductDefinitionFieldDescription(new ProductDefinitionFieldDescription { CultureCode = language, DisplayName = displayName, Description = displayName });
