@@ -4,5 +4,5 @@
     <umbraco:Macro runat="server" Alias="ucProduct"/>
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce/ucommerce.demostore.productpage.js"></script>
+    <script src="/js/ucommerce.demostore.productpage.js"></script>
 </asp:Content>
