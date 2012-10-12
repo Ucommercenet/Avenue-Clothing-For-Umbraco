@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
@@ -9,17 +10,77 @@ namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class ConfigurationInstaller
     {
+        private Currency _defaultCurrency;
+        private PriceGroup _defaultPriceGroup;
+        private IList<Country> _countries = new List<Country>();
+
         public void Configure()
         {
+            CreateCurrencies();
+            CreatePriceGroups();
+            CreateCountries();
+            CreateShippingMethods();
+            CreatePaymentMethods();
             CreateDataTypes();
             CreateProductDefinitions();
             ConfigureEmails();
         }
 
+        private void CreateCurrencies()
+        {
+            _defaultCurrency = CreateCurrency("EUR", 100);
+            CreateCurrency("GBP", 88);
+        }
+
+        private Currency CreateCurrency(string isoCode, int exchangeRate)
+        {
+            var currency = Currency.SingleOrDefault(c => c.ISOCode == isoCode) ?? new Currency();
+            currency.Name = isoCode;
+            currency.ISOCode = isoCode;
+            currency.Deleted = false;
+            currency.ExchangeRate = exchangeRate;
+            currency.Save();
+
+            return currency;
+        }
+
+        private void CreateCountries()
+        {
+            _countries.Add(CreateCountry("Denmark", "da-DK"));
+            _countries.Add(CreateCountry("United Kingdom", "en-GB"));
+        }
+
+        private Country CreateCountry(string name, string cultureCode)
+        {
+            var country = Country.SingleOrDefault(c => c.Name == name) ?? new Country();
+            country.Name = name;
+            country.Culture = cultureCode;
+            country.Deleted = false;
+            country.Save();
+            return country;
+        }
+
+        private void CreatePriceGroups()
+        {
+            _defaultPriceGroup = CreatePriceGroup("EUR 15 pct", _defaultCurrency, 15);
+        }
+
+        private PriceGroup CreatePriceGroup(string name, Currency currency, decimal vatRate)
+        {
+            var priceGroup = PriceGroup.SingleOrDefault(c => c.Name == name) ?? new PriceGroupFactory().NewWithDefaults(name);
+            priceGroup.Name = name;
+            priceGroup.Currency = currency;
+            priceGroup.VATRate = vatRate;
+            priceGroup.Deleted = false;
+            priceGroup.Save();
+
+            return priceGroup;
+        }
+
         private void ConfigureEmails()
         {
             var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
-            if (docType == null) 
+            if (docType == null)
                 return;
 
             var emails = Document.GetDocumentsOfDocumentType(docType.Id);
@@ -33,6 +94,54 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 content.ContentId = emailContent.Id.ToString();
                 content.Save();
             }
+        }
+
+        private void CreateShippingMethods()
+        {
+            CreateShippingMethod("Standard (Free)", 0, _defaultCurrency, _defaultPriceGroup);
+            CreateShippingMethod("Express", 10, _defaultCurrency, _defaultPriceGroup);
+        }
+
+        private void CreateShippingMethod(string name, decimal shippingFee, Currency currency, PriceGroup priceGroup)
+        {
+            var shippingMethod = ShippingMethod.SingleOrDefault(x => x.Name == name) ?? new ShippingMethodFactory().NewWithDefaults(name);
+            shippingMethod.AddShippingMethodPrice(new ShippingMethodPrice()
+                                                      {
+                                                          Price = shippingFee,
+                                                          Currency = currency,
+                                                          PriceGroup = priceGroup
+                                                      });
+            shippingMethod.ClearEligibleCountries();
+            foreach (var country in _countries)
+            {
+                shippingMethod.AddEligibleCountry(country);
+            }
+            shippingMethod.Save();
+        }
+
+        private void CreatePaymentMethods()
+        {
+            CreatePaymentMethod("Account", 0, _defaultCurrency, _defaultPriceGroup, 5);
+            CreatePaymentMethod("Invoice", 0, _defaultCurrency, _defaultPriceGroup, 0);
+        }
+
+        private void CreatePaymentMethod(string name, decimal fee, Currency currency, PriceGroup priceGroup, decimal feePercentage)
+        {
+            var paymentMethod = PaymentMethod.SingleOrDefault(x => x.Name == name) ?? new PaymentMethodFactory().NewWithDefaults(name);
+            paymentMethod.Deleted = false;
+            paymentMethod.FeePercent = feePercentage;
+            paymentMethod.AddPaymentMethodFee(new PaymentMethodFee()
+            {
+                Fee = fee,
+                Currency = currency,
+                PriceGroup = priceGroup
+            });
+            paymentMethod.ClearEligibleCountries();
+            foreach (var country in _countries)
+            {
+                paymentMethod.AddEligibleCountry(country);
+            }
+            paymentMethod.Save();
         }
 
         public void AssignAccessPermissionsToDemoStore()
@@ -61,7 +170,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             dataTypeEnum.AddDataTypeEnum(GenerateColourDataTypeEnum("White", dataTypeEnum));
         }
 
-        private static DataType CreateDataType(string name, string dataType)
+        private DataType CreateDataType(string name, string dataType)
         {
             var dataTypeEnum = DataType.SingleOrDefault(x => x.TypeName == name) ?? new DataTypeFactory().NewWithDefaults(name);
 

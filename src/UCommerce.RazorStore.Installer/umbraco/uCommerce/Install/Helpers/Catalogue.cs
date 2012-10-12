@@ -21,6 +21,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
         {
             var catalogGroup = CreateCatalogGroup();
             var catalog = CreateProductCatalog(catalogGroup);
+            EnablePaymentMethodForCatalog(catalogGroup);
+            EnableShippingMethodForCatalog(catalogGroup);
             CreateCatalogue(catalog);
         }
 
@@ -30,16 +32,47 @@ namespace UCommerce.RazorStore.Installer.Helpers
             group.ProductReviewsRequireApproval = true;
             group.Deleted = false;
             group.CreateCustomersAsUmbracoMembers = true;
+            group.Save();
             return group;
         }
 
         private ProductCatalog CreateProductCatalog(ProductCatalogGroup catalogGroup)
         {
             var catalog = catalogGroup.ProductCatalogs.SingleOrDefault(c => c.Name == _catalogName) ?? new ProductCatalogFactory().NewWithDefaults(catalogGroup, _catalogName);
+
             catalog.DisplayOnWebSite = true;
             catalog.Deleted = false;
             catalog.ShowPricesIncludingVAT = true;
+            catalog.Save();
+            
+            var priceGroup = PriceGroup.SingleOrDefault(p => p.Name == "EUR 15 pct");
+            if (priceGroup != null)
+                catalog.PriceGroup = priceGroup;
+
+            catalog.Save();
             return catalog;
+        }
+
+        private void EnableShippingMethodForCatalog(ProductCatalogGroup catalogGroup)
+        {
+            var shippingMethods = ShippingMethod.All();
+            foreach (var method in shippingMethods)
+            {
+                method.ClearEligibleProductCatalogGroups();
+                method.AddEligibleProductCatalogGroup(catalogGroup);
+                method.Save();
+            }
+        }
+
+        private void EnablePaymentMethodForCatalog(ProductCatalogGroup catalogGroup)
+        {
+            var paymentMethods = PaymentMethod.All();
+            foreach (var method in paymentMethods)
+            {
+                method.ClearEligibleProductCatalogGroups();
+                method.AddEligibleProductCatalogGroup(catalogGroup);
+                method.Save();
+            }
         }
 
         private void CreateCatalogue(ProductCatalog catalog)
