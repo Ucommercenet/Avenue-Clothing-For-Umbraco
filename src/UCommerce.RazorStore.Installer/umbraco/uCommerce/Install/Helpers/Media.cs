@@ -31,11 +31,11 @@
             _mediaFolder = mediaFolder;
             _installFolder = installFolder;
 
-            _rootMediaNode = GetRootMediaFolder();
-
             _defaultFolderName = "avenue-clothing.com";
-            _folderType = new MediaType(1031);
-            _imageType = new MediaType(1032);
+            _folderType = MediaType.GetByAlias("folder");
+            _imageType = MediaType.GetByAlias("image");
+
+            _rootMediaNode = GetRootMediaFolder();
         }
 
         private Media GetRootMediaFolder()
