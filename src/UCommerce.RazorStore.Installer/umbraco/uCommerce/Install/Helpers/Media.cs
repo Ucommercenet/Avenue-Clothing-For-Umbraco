@@ -94,7 +94,10 @@
                 if (!String.IsNullOrWhiteSpace(p.ThumbnailImageMediaId) && !String.IsNullOrWhiteSpace(p.ThumbnailImageMediaId))
                     continue;
 
-                var media = GetImageFromFolder("product", p.Name, productImagesFolder);
+                if (!String.IsNullOrWhiteSpace(p.VariantSku))
+                    continue;
+
+                var media = GetImageFromFolder("product", p.Sku, productImagesFolder);
 
                 if (media == null)
                     continue;
@@ -161,12 +164,24 @@
                 TrySetProperty(item, "umbracoWidth", fileWidth.ToString());
                 TrySetProperty(item, "umbracoHeight", fileHeight.ToString());
 
-                using (var bp = generateThumbnail(image, 100, fileWidth, fileHeight))
-                {
-                    var thumbnailFileName = file.FullName.Replace("." + ext, "_thumb") + ".jpg";
-                    bp.Save(thumbnailFileName, ImageFormat.Jpeg);
-                }
+                Mini(file, ext, image, fileWidth, fileHeight);
             }
+        }
+
+        private void Mini(FileInfo file, string ext, Image image, int fileWidth, int fileHeight)
+        {
+            using (var bp = CreateThumbnailOfImage(image, 100, fileWidth, fileHeight))
+            {
+                var thumbnailFileName = GenerateThumbnailName(file, ext);
+                var codec = GetCodecByMimeType("image/jpeg");
+                var parameters = GetEncoderParameters(90);
+                bp.Save(thumbnailFileName, codec, parameters);
+            }
+        }
+
+        private static string GenerateThumbnailName(FileInfo file, string ext)
+        {
+            return file.FullName.Replace("." + ext, "_thumb") + ".jpg";
         }
 
         private static void TrySetProperty(Media m, string propertyName, string ext)
@@ -180,7 +195,7 @@
             }
         }
 
-        private Bitmap generateThumbnail(Image image, int maxWidthHeight, int fileWidth, int fileHeight)
+        private Bitmap CreateThumbnailOfImage(Image image, int maxWidthHeight, int fileWidth, int fileHeight)
         {
             var fx = (float)fileWidth / (float)maxWidthHeight;
             var fy = (float)fileHeight / (float)maxWidthHeight;
@@ -195,7 +210,7 @@
             if (heightTh == 0)
                 heightTh = 1;
 
-            using (var bp = new Bitmap(widthTh, heightTh))
+            var bp = new Bitmap(widthTh, heightTh);
             using (var g = Graphics.FromImage(bp))
             {
                 g.SmoothingMode = SmoothingMode.HighQuality;
@@ -207,6 +222,19 @@
 
                 return bp;
             }
+        }
+
+        private ImageCodecInfo GetCodecByMimeType(string mimeType)
+        {
+            var codecs = ImageCodecInfo.GetImageEncoders();
+            return codecs.FirstOrDefault(t => t.MimeType.Equals(mimeType));
+        }
+
+        private EncoderParameters GetEncoderParameters(long quality)
+        {
+            var ep = new EncoderParameters();
+            ep.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+            return ep;
         }
     }
 }
