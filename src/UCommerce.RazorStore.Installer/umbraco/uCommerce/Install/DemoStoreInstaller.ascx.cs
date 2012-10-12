@@ -31,8 +31,11 @@ namespace UCommerce.RazorStore.Installer
 
                 var mediaService = new MediaService(Server.MapPath(umbraco.IO.SystemDirectories.Media), Server.MapPath("~/umbraco/ucommerce/install/files/"));
 
-                mediaService.InstallCategoryImages(Category.All());
-                mediaService.InstallProductImages(Product.All());
+                var categories = Category.All().ToList();
+                var products = Product.All().ToList();
+
+                mediaService.InstallCategoryImages(categories);
+                mediaService.InstallProductImages(products);
             }
 
             var messages = new List<string>();
