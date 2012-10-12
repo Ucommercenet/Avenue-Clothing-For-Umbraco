@@ -19,9 +19,9 @@
 
     @if(basket == null || !basket.OrderLines.Any())
     {
-        <a href="/shop">Your Shopping Cart is empty</a>
+        <a href="/">Your Shopping Cart is empty</a>
     }
     else
     {
-        <a href="/shop/cart.aspx" id="mini-cart"><i class="icon-shopping-cart icon-white"></i><span class="item-qty">@basket.OrderLines.Sum(x => x.Quantity).ToString("#,##")</span> items in cart, total: <span class="order-total">@orderTotal</span></a>
+        <a href="/cart.aspx" id="mini-cart"><i class="icon-shopping-cart icon-white"></i><span class="item-qty">@basket.OrderLines.Sum(x => x.Quantity).ToString("#,##")</span> items in cart, total: <span class="order-total">@orderTotal</span></a>
     }
