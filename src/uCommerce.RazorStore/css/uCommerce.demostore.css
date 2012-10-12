@@ -188,10 +188,15 @@ td.money {
 /* Product List Page
 -------------------------------------------*/
 .product-list .product {
-    min-height:425px;
+    min-height:500px;
     border:1px solid #fff;
     text-align: center;
     background-color: #F5F5F5;
+    margin-bottom:10px;
+}
+.product-list .product:nth-child(3n+1) {
+    clear:left;
+    margin-left:0;
 }
     .product-list .product:hover {
         border-color:#59B4EE;
