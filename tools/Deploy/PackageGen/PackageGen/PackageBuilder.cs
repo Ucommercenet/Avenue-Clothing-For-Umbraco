@@ -1,4 +1,6 @@
-﻿namespace PackageGen
+﻿using System.Text.RegularExpressions;
+
+namespace PackageGen
 {
     using System;
     using System.Collections.Generic;
@@ -69,7 +71,7 @@
         {
             if (File.Exists(_packageName))
             {
-                WriteMessage(String.Format("Package file already exists, deleteing: {0}", _packageName)); 
+                WriteMessage(String.Format("Package file already exists, deleteing: {0}", _packageName));
                 File.Delete(_packageName);
             }
 
@@ -141,16 +143,26 @@
             return newFileName;
         }
 
+        private static Regex parentMaster = new Regex("MasterPageFile=\"~/masterpages/(?<filename>.+)\\.master", RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.Singleline);
+
         private XElement CreateTemplatesStub()
         {
             var items = CreateXmlFromFileType("*.master", (file, contents) =>
                 {
-                    WriteMessage(String.Format("Adding template: {0}", file.FullName)); 
-                    
+                    WriteMessage(String.Format("Adding template: {0}", file.FullName));
+
+                    var match = parentMaster.Match(contents);
+                    var parent = string.Empty;
+
+                    var val = match.Groups["filename"].Value;
+                    if (!string.IsNullOrWhiteSpace(val))
+                        parent = match.Groups["filename"].Value;
+
                     var nameWithoutExt = Path.GetFileNameWithoutExtension(file.FullName);
                     return new XElement("Template",
                             new XElement("Name", nameWithoutExt),
                             new XElement("Alias", nameWithoutExt),
+                            new XElement("Master", parent),
                             new XElement("Design", new XCData(contents))
                         );
                 });
@@ -171,7 +183,7 @@
 
                 var nameWithoutExt = Path.GetFileNameWithoutExtension(file.FullName);
                 return new XElement("Stylesheet",
-                        new XElement("Name", file.Name),
+                        new XElement("Name", nameWithoutExt),
                         new XElement("FileName", nameWithoutExt),
                         new XElement("Content", new XCData(contents))
                     );

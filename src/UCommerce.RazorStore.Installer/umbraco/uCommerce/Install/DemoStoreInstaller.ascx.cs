@@ -29,10 +29,10 @@ namespace UCommerce.RazorStore.Installer
                 var installer = new CatalogueInstaller("avenue-clothing.com", "Demo Store");
                 installer.Configure();
 
-                //var mediaService = new MediaService(Server.MapPath(umbraco.IO.SystemDirectories.Media), Server.MapPath("~/umbraco/ucommerce/install/files/"));
+                var mediaService = new MediaService(Server.MapPath(umbraco.IO.SystemDirectories.Media), Server.MapPath("~/umbraco/ucommerce/install/files/"));
 
-                //mediaService.InstallCategoryImages(Category.All());
-                //mediaService.InstallProductImages(Product.All());
+                mediaService.InstallCategoryImages(Category.All());
+                mediaService.InstallProductImages(Product.All());
             }
 
             var messages = new List<string>();
@@ -42,7 +42,7 @@ namespace UCommerce.RazorStore.Installer
             }
             else
             {
-                var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerc");
+                var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerce.dk");
                 if (group != null)
                 {
                     group.Deleted = true;
