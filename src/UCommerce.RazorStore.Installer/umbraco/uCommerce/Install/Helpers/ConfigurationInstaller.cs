@@ -105,12 +105,16 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private void CreateShippingMethod(string name, decimal shippingFee, Currency currency, PriceGroup priceGroup)
         {
             var shippingMethod = ShippingMethod.SingleOrDefault(x => x.Name == name) ?? new ShippingMethodFactory().NewWithDefaults(name);
-            shippingMethod.AddShippingMethodPrice(new ShippingMethodPrice()
-                                                      {
-                                                          Price = shippingFee,
-                                                          Currency = currency,
-                                                          PriceGroup = priceGroup
-                                                      });
+            //foreach (var shippingMethodPrice in shippingMethod.ShippingMethodPrices)
+            //{
+            //    shippingMethod.RemoveShippingMethodPrice(shippingMethodPrice);
+            //}
+            //shippingMethod.AddShippingMethodPrice(new ShippingMethodPrice()
+            //                                          {
+            //                                              Price = shippingFee,
+            //                                              Currency = currency,
+            //                                              PriceGroup = priceGroup
+            //                                          });
             shippingMethod.ClearEligibleCountries();
             foreach (var country in _countries)
             {
@@ -130,12 +134,13 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var paymentMethod = PaymentMethod.SingleOrDefault(x => x.Name == name) ?? new PaymentMethodFactory().NewWithDefaults(name);
             paymentMethod.Deleted = false;
             paymentMethod.FeePercent = feePercentage;
-            paymentMethod.AddPaymentMethodFee(new PaymentMethodFee()
-            {
-                Fee = fee,
-                Currency = currency,
-                PriceGroup = priceGroup
-            });
+
+            //paymentMethod.AddPaymentMethodFee(new PaymentMethodFee()
+            //{
+            //    Fee = fee,
+            //    Currency = currency,
+            //    PriceGroup = priceGroup
+            //});
             paymentMethod.ClearEligibleCountries();
             foreach (var country in _countries)
             {
