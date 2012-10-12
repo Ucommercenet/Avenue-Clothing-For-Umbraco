@@ -160,7 +160,7 @@
     </DocumentType>
     <DocumentType>
         <Info>
-            <Name>Email</Name>
+            <Name>uCommerce Email</Name>
             <Alias>uCommerceEmail</Alias>
             <Icon>ucommerce-email.png</Icon>
             <Thumbnail>folder.png</Thumbnail>
