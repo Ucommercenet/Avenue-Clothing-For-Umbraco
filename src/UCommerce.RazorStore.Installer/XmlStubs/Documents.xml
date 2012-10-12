@@ -4,7 +4,8 @@
         <uCommerceFrontPage id="1078" parentID="1062" level="2" writerID="0" creatorID="0" nodeType="1059" template="1085" sortOrder="0" createDate="2012-07-19T10:47:27" updateDate="2012-10-03T18:56:12" nodeName="Shop" urlName="shop" writerName="admin" creatorName="admin" path="-1,1078" isDoc="">
             <umbracoNaviHide>0</umbracoNaviHide>
             <content>
-                <![CDATA[<h1>Some Heading</h1><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>]]>
+                <![CDATA[<h1>Welcome to Avenue Clothing</h1>
+<p>This is an example store which runs on uCommerce. It is designed to demonstrate some of the functionality that comes out-of-the-box and help developers get started with the awesome feature rich e-commerce package for Umbraco.</p>]]>
             </content>
             <uCommerceCatalog id="1091" parentID="1078" level="3" writerID="0" creatorID="0" nodeType="1060" template="1090" sortOrder="1" createDate="2012-07-27T12:26:40" updateDate="2012-07-27T12:27:48" nodeName="Catalog" urlName="catalog" writerName="admin" creatorName="admin" path="-1,1078,1091" isDoc="">
                 <content><![CDATA[]]></content>
