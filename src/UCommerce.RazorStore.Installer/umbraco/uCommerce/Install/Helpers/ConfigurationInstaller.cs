@@ -62,7 +62,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void CreatePriceGroups()
         {
-            _defaultPriceGroup = CreatePriceGroup("EUR 15 pct", _defaultCurrency, 15);
+            _defaultPriceGroup = CreatePriceGroup("EUR 15 pct", _defaultCurrency, 0.15M);
         }
 
         private PriceGroup CreatePriceGroup(string name, Currency currency, decimal vatRate)
