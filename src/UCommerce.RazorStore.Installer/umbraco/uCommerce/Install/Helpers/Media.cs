@@ -40,10 +40,13 @@
 
         private Media GetRootMediaFolder()
         {
-            //    var folders = Media.GetMediaOfMediaType(_folderType.Id);
-            //    return folders.FirstOrDefault(f => f.Text == _defaultFolderName) ?? CreateMediaFolder(_defaultFolderName, -1);
+            return GetOrCreateMediaFolder(_defaultFolderName, -1);
+        }
 
-            return CreateMediaFolder(_defaultFolderName, -1);
+        private Media GetOrCreateMediaFolder(string folderName, int parentId)
+        {
+            var folders = Media.GetMediaOfMediaType(_folderType.Id);
+            return folders.FirstOrDefault(f => f.Text == folderName && (f.ParentId == parentId || parentId == -1)) ?? CreateMediaFolder(folderName, parentId);
         }
 
         private Media CreateMediaFolder(string folderName, int parentId)
@@ -59,12 +62,15 @@
 
         public IEnumerable<Media> InstallCategoryImages(IEnumerable<Category> categories)
         {
+            var categoryImagesFolder = GetOrCreateMediaFolder("Category Images", _rootMediaNode.Id);
+
+            var items = new List<Media>();
             foreach (var c in categories)
             {
                 if (!String.IsNullOrWhiteSpace(c.ImageMediaId))
                     continue;
 
-                var media = GetValue("category", c.Name);
+                var media = GetImageFromFolder("category", c.Name, categoryImagesFolder);
 
                 if (media == null)
                     continue;
@@ -72,18 +78,23 @@
                 c.ImageMediaId = media.Id.ToString();
                 c.Save();
 
-                yield return media;
+                items.Add(media);
             }
+
+            return items;
         }
 
         public IEnumerable<Media> InstallProductImages(IEnumerable<Product> products)
         {
+            var productImagesFolder = GetOrCreateMediaFolder("Product Images", _rootMediaNode.Id);
+
+            var items = new List<Media>();
             foreach (var p in products)
             {
                 if (!String.IsNullOrWhiteSpace(p.ThumbnailImageMediaId) && !String.IsNullOrWhiteSpace(p.ThumbnailImageMediaId))
                     continue;
 
-                var media = GetValue("product", p.Name);
+                var media = GetImageFromFolder("product", p.Name, productImagesFolder);
 
                 if (media == null)
                     continue;
@@ -92,14 +103,16 @@
                 p.PrimaryImageMediaId = media.Id.ToString();
                 p.Save();
 
-                yield return media;
+                items.Add(media);
             }
+
+            return items;
         }
 
-        private Media GetValue(string folder, string filename)
+        private Media GetImageFromFolder(string folder, string filename, Media parent)
         {
             var file = LookForFile(folder, filename);
-            return file == null ? null : UmbracoSave(file);
+            return file == null ? null : UmbracoSave(file, parent);
         }
 
         private FileInfo LookForFile(string folder, string imageName)
@@ -108,16 +121,16 @@
             return File.Exists(path) ? new FileInfo(path) : null;
         }
 
-        private Media UmbracoSave(FileInfo file)
+        private Media UmbracoSave(FileInfo file, Media parent)
         {
             if (file == null || !file.Exists)
                 return null;
 
             var ext = file.Extension.Replace(".", string.Empty).ToLower();
-            var item = CreateMediaImage(file.Name, _rootMediaNode.Id);
+            var item = CreateMediaImage(file.Name, parent.Id);
 
             var relativePath = string.Concat("/media/", item.Id, "/" + file.Name);
-            var mediaFolder = _mediaFolder + item.Id.ToString();
+            var mediaFolder = Path.Combine(_mediaFolder, item.Id.ToString());
 
             if (!Directory.Exists(mediaFolder))
                 Directory.CreateDirectory(mediaFolder);
@@ -130,7 +143,7 @@
             TrySetProperty(item, "umbracoFile", relativePath);
 
             if (_thumbnailExtensions.Contains(ext))
-                CreateImageProperties(file, item, ext);
+                CreateImageProperties(new FileInfo(fullFilePath), item, ext);
 
             item.XmlGenerate(new XmlDocument());
 
@@ -150,8 +163,8 @@
 
                 using (var bp = generateThumbnail(image, 100, fileWidth, fileHeight))
                 {
-                    var thumbnailFileName = file.Name.Replace("." + ext, "_thumb") + ".jpg";
-                    bp.Save(thumbnailFileName, GetCodecForMimeType("image/jpeg"), GetEncoderParameter(90));
+                    var thumbnailFileName = file.FullName.Replace("." + ext, "_thumb") + ".jpg";
+                    bp.Save(thumbnailFileName, ImageFormat.Jpeg);
                 }
             }
         }
@@ -194,24 +207,6 @@
 
                 return bp;
             }
-        }
-
-        private EncoderParameters GetEncoderParameter(int quality)
-        {
-            var ep = new EncoderParameters();
-            ep.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-            return ep;
-        }
-
-        private ImageCodecInfo GetCodecForMimeType(string mimeType)
-        {
-            var codecs = ImageCodecInfo.GetImageEncoders();
-            ImageCodecInfo codec = null;
-            foreach (ImageCodecInfo t in codecs.Where(t => t.MimeType.Equals(mimeType)))
-            {
-                codec = t;
-            }
-            return codec;
         }
     }
 }
