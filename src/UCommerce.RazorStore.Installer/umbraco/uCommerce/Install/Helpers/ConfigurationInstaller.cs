@@ -114,20 +114,20 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var productDefinition = CreateProductDefinition("Shirt");
             AddProductDefinitionFieldIfDoesntExist(productDefinition, "CollarSize", "Number", true, true, "Collar Inches");
             AddProductDefinitionFieldIfDoesntExist(productDefinition, "Colour", "Colour", true, true, "Colour");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", true, true, "Show On Homepage");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
         }
 
         private void CreateShoeProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Shoe");
             AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShoeSize", "ShortText", true, true, "Shoe Size");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", true, true, "Show On Homepage");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
         }
 
         private void CreateAccessoryProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Accessory");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", true, true, "Show On Homepage");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
         }
 
         private void AddProductDefinitionFieldIfDoesntExist(ProductDefinition definition, string name, string typeName, bool displayOnWebsite, bool variantProperty, string displayName)

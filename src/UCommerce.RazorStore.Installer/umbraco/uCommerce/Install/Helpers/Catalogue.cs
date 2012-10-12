@@ -73,6 +73,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
             var wonderland = CreateProductOnCategory(formal, shirtDefinition, "BWWMSFSS-LE", "Black & White Wonderland Mood Slim Fit Signature Shirt - Limited Edition [200 pieces]", 219, "", smDesc + "<p>As featured on <a href=\"https://stauntonmoods.com/shop/all-moods/black--white-wonderland-mood-slim-fit-signature-shirt---limited-edition-%5b200-pieces%5d/c-23/c-85/p-235\">stauntonmoods.com</a></p>");
             AddShirtVariantsToProduct(wonderland, "Plain", new List<string>() { "15", "16", "17", "18" }, new List<string>() { "White" });
+            AddProductProperty(wonderland, "ShowOnHomepage", "true");
+            wonderland.Save();
 
             var kittens = CreateProductOnCategory(formal, shirtDefinition, "BKMSFSS", "Blue Kittens Mood Slim Fit Signature Shirt", 179, "", smDesc + "<p>As featured on <a href=\"https://stauntonmoods.com/shop/all-moods/blue-kittens-mood-slim-fit-signature-shirt/c-23/c-85/p-119\">stauntonmoods.com</a></p>");
             AddShirtVariantsToProduct(kittens, "Plain", new List<string>() { "15", "16", "17", "18" }, new List<string>() { "White", "Blue" });
@@ -91,6 +93,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
             var eton = CreateProductOnCategory(formal, shirtDefinition, "2285794682539", "Eton Purple & White Stripe Contemporary Fit Formal Dress Shirt", 135, "", "<ul><li>Contemporary Fit</li><li>Single button cuffs with double button holes for cuff links</li><li>Pointed collar with bone inserts</li><li>Purple and white stipe</li><li>100% cotton</li><li>Style number : 2285794682539</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/shirts-6/eton-purple-white-stripe-contemporary-formal-20625.htm\">Pritchards.co.uk</a></p>");
             AddShirtVariantsToProduct(eton, "Striped", new List<string>() { "15", "15.5", "16", "16.5" }, new List<string>() { "White" });
+            AddProductProperty(eton, "ShowOnHomepage", "true");
+            eton.Save();
 
             var rlA02 = CreateProductOnCategory(formal, shirtDefinition, "A02 WCJNK C0223 C421A", "Polo Ralph Lauren Blue & White Stripe Custom Fit Regent Poplin Dress Shirt", 85, "", "<ul><li>Custom fit dress shirt</li><li>Classic single button collar</li><li>Long sleeve with single button cuff</li><li>Blue and white stripe with newport navy polo player</li><li>100% poplin cotton</li><li>Style number : A02 WCJNK C0223 C421A</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/shirts-6/polo-ralph-lauren-blue-white-stripe-18999.htm\">Pritchards.co.uk</a></p>");
             AddShirtVariantsToProduct(rlA02, "Striped", new List<string>() { "SML", "MED", "LAR", "X.L", "XXL", "XXXL" }, new List<string>() { "Blue" });
@@ -107,6 +111,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
             var hiking = CreateProductOnCategory(shoes, shoeDefinition, "074617", "Paraboot Avoriaz/Jannu Marron Brut Marron Brown Hiking Boot Shoes", 343.85M, "", "<ul><li>Paraboot Avoriaz Mountaineering Boots</li><li>Marron Brut Marron (Brown)</li><li>Full leather inners and uppers</li><li>Norwegien Welted Commando Sole</li><li>Hand made in France</li><li>Style number : 074617</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/shoes-trainers-11/paraboot-avoriaz-jannu-marron-brut-brown-20879.htm\">Pritchards.co.uk</a></p>");
             AddShoeVariantsToProduct(hiking, new List<string>() { "6", "8", "10" });
+            AddProductProperty(hiking, "ShowOnHomepage", "true");
+            hiking.Save();
 
             var marron = CreateProductOnCategory(shoes, shoeDefinition, "710708", "Paraboot Chambord Tex Marron Lis Marron Brown Shoes", 281.75M, "", "<ul><li>Style : Chambord Tex</li><li>Colour : Marron Lis Marron</li><li>Paraboot style code : 710708</li><li>Estimated delivery time : 1 - 4 weeks</li><li>Customers ordering from outside the EU will receive a 20% VAT discount on their order. This is applied at checkout once you have given your delivery details.</li></ul><p>As featured on <a href=\"http://www.pritchards.co.uk/shoes-trainers-11/paraboot-order-chambord-marron-brown-shoes-20709.htm\">Pritchards.co.uk</a></p>");
             AddShoeVariantsToProduct(marron, new List<string>() { "6", "8", "10" });
@@ -182,7 +188,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
         {
             var sku = string.Format("{0}-{1}", product.Sku, size);
             var variant = CreateVariantOnProduct(product, sku, size);
-            AddProductProperty("ShoeSize", variant, string.Format("UK {0}", size));
+            AddProductProperty(variant, "ShoeSize", string.Format("UK {0}", size));
             variant.Save();
         }
 
@@ -192,27 +198,27 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var name = string.Format("{0} {1} {2}\"", namePrefix, size, colour);
 
             var variant = CreateVariantOnProduct(product, sku, name);
-            AddProductProperty("CollarSize", variant, size);
-            AddProductProperty("Colour", variant, colour);
+            AddProductProperty(variant, "CollarSize", size);
+            AddProductProperty(variant, "Colour", colour);
             variant.Save();
         }
 
-        private void AddProductProperty(string dataFieldName, Product variant, string value)
+        private void AddProductProperty(Product product, string dataFieldName, string value)
         {
-            if (variant.ProductProperties.Any(p => p.Value == value))
+            if (product.ProductProperties.Any(p => p.ProductDefinitionField.Name == dataFieldName && p.Value == value))
                 return;
 
-            var field = GetProductDefinitionField(dataFieldName);
-            variant.AddProductProperty(new ProductProperty
+            var field = GetProductDefinitionField(product, dataFieldName);
+            product.AddProductProperty(new ProductProperty
             {
                 ProductDefinitionField = field,
                 Value = value
             });
         }
 
-        private ProductDefinitionField GetProductDefinitionField(string name)
+        private ProductDefinitionField GetProductDefinitionField(Product product, string name)
         {
-            var field = ProductDefinitionField.SingleOrDefault(d => d.Name == name);
+            var field = ProductDefinitionField.SingleOrDefault(d => product.ProductDefinition.Name == d.ProductDefinition.Name && d.Name == name);
 
             if (field == null)
                 throw new ArgumentOutOfRangeException("field", string.Format("No product definition field with the name \"{0}\" could be found. Please check you have installed the default settings.", name));
