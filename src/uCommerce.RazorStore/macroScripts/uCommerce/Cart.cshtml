@@ -10,7 +10,7 @@
     {
 @* For this helper functions refer to /App_Code/uCommerce/Functions/Basket.cshtml *@
         uCommerce.Functions.Basket.UpdateCartLines("update-and-continue", "quantity-input-", basket);
-        HttpContext.Current.Response.Redirect("Address.aspx");
+        HttpContext.Current.Response.Redirect("/cart/address.aspx");
     }
     if (request.HttpMethod == "POST")
     {
