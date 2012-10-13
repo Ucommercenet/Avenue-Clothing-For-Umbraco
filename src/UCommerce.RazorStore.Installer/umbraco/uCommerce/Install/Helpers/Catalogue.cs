@@ -33,7 +33,28 @@ namespace UCommerce.RazorStore.Installer.Helpers
             group.Deleted = false;
             group.CreateCustomersAsUmbracoMembers = true;
             group.Save();
+            group.OrderNumberSerie = GetDefaultOrderNumberSeries();
+            group.EmailProfile = GetDefaultEmailProfile();
+            group.Save();
             return group;
+        }
+
+        private EmailProfile GetDefaultEmailProfile()
+        {
+            var emailProfile = EmailProfile.SingleOrDefault(o => o.Name == "Default");
+            if (emailProfile == null)
+                throw new ArgumentOutOfRangeException("emailProfile", "The Default email profile could not be found. Have you run the installer?");
+
+            return emailProfile;
+        }
+
+        private OrderNumberSerie GetDefaultOrderNumberSeries()
+        {
+            var orderNumberSeries = OrderNumberSerie.SingleOrDefault(o => o.Name == "Example");
+            if(orderNumberSeries == null)
+                throw new ArgumentOutOfRangeException("orderNumberSeries", "The Example order number series could not be found. Have you run the installer?");
+
+            return orderNumberSeries;
         }
 
         private ProductCatalog CreateProductCatalog(ProductCatalogGroup catalogGroup)

@@ -82,7 +82,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="XmlStubs\Languages.xml" />
+    <Content Include="XmlStubs\Languages.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XmlStubs\Macros.xml">
       <SubType>Designer</SubType>
     </Content>

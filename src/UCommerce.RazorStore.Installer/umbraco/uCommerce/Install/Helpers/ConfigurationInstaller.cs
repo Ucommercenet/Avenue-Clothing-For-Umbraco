@@ -13,14 +13,16 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private Currency _defaultCurrency;
         private PriceGroup _defaultPriceGroup;
         private IList<Country> _countries = new List<Country>();
+        private IList<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
 
         public void Configure()
         {
             CreateCurrencies();
             CreatePriceGroups();
+            CreateOrderNumberSeries();
             CreateCountries();
-            CreateShippingMethods();
             CreatePaymentMethods();
+            CreateShippingMethods();
             CreateDataTypes();
             CreateProductDefinitions();
             ConfigureEmails();
@@ -65,6 +67,22 @@ namespace UCommerce.RazorStore.Installer.Helpers
             _defaultPriceGroup = CreatePriceGroup("EUR 15 pct", _defaultCurrency, 0.15M);
         }
 
+        private void CreateOrderNumberSeries()
+        {
+            CreateOrderNumberSeries("Example", "TEST-");
+        }
+
+        private void CreateOrderNumberSeries(string name, string prefix)
+        {
+            var orderNumberSeries = OrderNumberSerie.SingleOrDefault(o => o.Name == name) ?? new OrderNumberSerie();
+            orderNumberSeries.Name = name;
+            orderNumberSeries.Deleted = false;
+            orderNumberSeries.Prefix = prefix;
+            orderNumberSeries.Increment = 1;
+            orderNumberSeries.CurrentNumber = 0;
+            orderNumberSeries.Save();
+        }
+
         private PriceGroup CreatePriceGroup(string name, Currency currency, decimal vatRate)
         {
             var priceGroup = PriceGroup.SingleOrDefault(c => c.Name == name) ?? new PriceGroupFactory().NewWithDefaults(name);
@@ -78,6 +96,26 @@ namespace UCommerce.RazorStore.Installer.Helpers
         }
 
         private void ConfigureEmails()
+        {
+            ConfigureEmailProfiles();
+            ConfigureEmailContent();
+        }
+
+        private void ConfigureEmailProfiles()
+        {
+            CreateEmailProfile("Default");
+        }
+
+        private void CreateEmailProfile(string name)
+        {
+            var emailProfile = EmailProfile.SingleOrDefault(p => p.Name == name) ?? new EmailProfile();
+            emailProfile.Name = name;
+            emailProfile.Deleted = false;
+            //TODO: Finish configuring the profile
+            emailProfile.Save();
+        }
+
+        private void ConfigureEmailContent()
         {
             var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
             if (docType == null)
@@ -120,21 +158,25 @@ namespace UCommerce.RazorStore.Installer.Helpers
             {
                 shippingMethod.AddEligibleCountry(country);
             }
+            shippingMethod.ClearEligibilePaymentMethods();
+            foreach (var method in _paymentMethods)
+            {
+                shippingMethod.AddEligiblePaymentMethod(method);
+            }
             shippingMethod.Save();
         }
 
         private void CreatePaymentMethods()
         {
-            CreatePaymentMethod("Account", 0, _defaultCurrency, _defaultPriceGroup, 5);
-            CreatePaymentMethod("Invoice", 0, _defaultCurrency, _defaultPriceGroup, 0);
+            _paymentMethods.Add(CreatePaymentMethod("Account", 0, _defaultCurrency, _defaultPriceGroup, 5));
+            _paymentMethods.Add(CreatePaymentMethod("Invoice", 0, _defaultCurrency, _defaultPriceGroup, 0));
         }
 
-        private void CreatePaymentMethod(string name, decimal fee, Currency currency, PriceGroup priceGroup, decimal feePercentage)
+        private PaymentMethod CreatePaymentMethod(string name, decimal fee, Currency currency, PriceGroup priceGroup, decimal feePercentage)
         {
             var paymentMethod = PaymentMethod.SingleOrDefault(x => x.Name == name) ?? new PaymentMethodFactory().NewWithDefaults(name);
             paymentMethod.Deleted = false;
             paymentMethod.FeePercent = feePercentage;
-
             //paymentMethod.AddPaymentMethodFee(new PaymentMethodFee()
             //{
             //    Fee = fee,
@@ -147,6 +189,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 paymentMethod.AddEligibleCountry(country);
             }
             paymentMethod.Save();
+            return paymentMethod;
         }
 
         public void AssignAccessPermissionsToDemoStore()
