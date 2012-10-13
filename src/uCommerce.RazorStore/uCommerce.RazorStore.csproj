@@ -21,6 +21,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -181,7 +185,7 @@
     <Content Include="masterpages\RazorStorePayment.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Components.config" />
+    <Content Include="Core.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\images\umbraco\ucommerce-address.png" />
