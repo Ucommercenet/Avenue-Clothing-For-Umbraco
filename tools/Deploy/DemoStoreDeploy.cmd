@@ -23,7 +23,7 @@ robocopy src\UCommerce.RazorStore\bin package\_ToPackage\files\bin uCommerce.Raz
 
 rem Copy over the installer files
 robocopy src\UCommerce.RazorStore.Installer package\_ToPackage\files *.ascx *.js *.png *.jpg *.jpeg *.gif /s /FFT /Z /XA:H /W:5
-robocopy src\UCommerce.RazorStore.Installer\bin package\_ToPackage\files\bin *.dll /FFT /Z /XA:H /W:5
+robocopy src\UCommerce.RazorStore.Installer\bin package\_ToPackage\files\bin UCommerce.RazorStore.Installer.dll /FFT /Z /XA:H /W:5
 robocopy src\UCommerce.RazorStore.Installer\XmlStubs package\_ToPackage *.xml /FFT /Z /XA:H /W:5
 
 rem Package the various files
