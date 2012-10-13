@@ -74,8 +74,9 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void CreateOrderNumberSeries(string name, string prefix)
         {
-            var orderNumberSeries = OrderNumberSerie.SingleOrDefault(o => o.Name == name) ?? new OrderNumberSerie();
+            var orderNumberSeries = OrderNumberSerie.SingleOrDefault(o => o.OrderNumberName == name) ?? new OrderNumberSerie();
             orderNumberSeries.Name = name;
+            orderNumberSeries.OrderNumberName = name;
             orderNumberSeries.Deleted = false;
             orderNumberSeries.Prefix = prefix;
             orderNumberSeries.Increment = 1;

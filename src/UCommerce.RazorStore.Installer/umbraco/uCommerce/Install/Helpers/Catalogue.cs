@@ -50,7 +50,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private OrderNumberSerie GetDefaultOrderNumberSeries()
         {
-            var orderNumberSeries = OrderNumberSerie.SingleOrDefault(o => o.Name == "Example");
+            var orderNumberSeries = OrderNumberSerie.SingleOrDefault(o => o.OrderNumberName == "Example");
             if(orderNumberSeries == null)
                 throw new ArgumentOutOfRangeException("orderNumberSeries", "The Example order number series could not be found. Have you run the installer?");
 
