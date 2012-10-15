@@ -90,10 +90,10 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
         <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-        <script src="/js/ucommerce.bootstrap.js"></script>
-        <script src="/js/ucommerce.servicestack.js"></script>
-        <script src="/js/ucommerce.jquery.js"></script>
-        <script src="/js/ucommerce.demostore.js"></script>
+        <script src="/scripts/ucommerce.bootstrap.js"></script>
+        <script src="/scripts/ucommerce.servicestack.js"></script>
+        <script src="/scripts/ucommerce.jquery.js"></script>
+        <script src="/scripts/ucommerce.demostore.js"></script>
         <asp:ContentPlaceHolder runat="server" ID="cphScripts" />
     </body>
     </html>

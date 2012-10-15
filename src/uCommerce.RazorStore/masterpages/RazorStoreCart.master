@@ -7,5 +7,5 @@
     <umbraco:macro runat="server" alias="ucCart" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/js/ucommerce.demostore.cart.js"></script>
+    <script src="/scripts/ucommerce.demostore.cart.js"></script>
 </asp:Content>
