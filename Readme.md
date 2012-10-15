@@ -2,6 +2,17 @@
 
 This is the first release and is still in very active development so please be careful if you plan to install it on an existing uCommerce installation please **back up first**!
 
+## Folder Overview ##
+
+Below is a quick overview of the important folders
+
+* lib - the folder which includes the various references we use
+* package - the location of the build package
+* src - where the magic is
+	* uCommerce.RazorStore - All the files for the Razor Store (this is where you will need to spend most of your time)
+	* UCommerce.RazorStore.Installer - All the logic we use to build the package and store programattically. The place to look if you're interested in learning more about using the uCommerce API
+* tools - the various build scripts and tools we need to make the package
+
 ## Installation Instructions ##
 
 The final release will be fully automated and as close to one-click deploy as we can make it but at the moment there are a couple of post-installation steps while we iron things out:
@@ -10,24 +21,7 @@ The final release will be fully automated and as close to one-click deploy as we
 1. Update */umbraco/ucommerce/configuration/core.config* and add the following node: `<component id="ServiceStackApi" service="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" type="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" lifestyle="Singleton"/>` just after the opening *components* node
 1. Edit your web.config file and make the following changes:
 	1. Ensure you have "*~/ucommerceapi/*" in the list of reserved paths (appSettings --> umbracoReservedPaths)
-	1. Add the ucommerceapi *location* node to the end of your web.config just before the closing configuration tag (see below)
-
-    :::xml
-    <location path="ucommerceapi">
-        <system.web>
-          <httpHandlers>
-              <add path="*" type="ServiceStack.WebHost.Endpoints.ServiceStackHttpHandlerFactory, ServiceStack" verb="*"/>
-          </httpHandlers>
-        </system.web>
-        <!-- Required for IIS 7.0 -->
-        <system.webServer>
-            <modules runAllManagedModulesForAllRequests="true"/>
-            <validation validateIntegratedModeConfiguration="false" />
-            <handlers>
-              <add path="*" name="ServiceStack.Factory" type="ServiceStack.WebHost.Endpoints.ServiceStackHttpHandlerFactory, ServiceStack" verb="*" preCondition="integratedMode" resourceType="Unspecified" allowPathInfo="true" />
-            </handlers>
-        </system.webServer>
-    </location>
+	1. Add the ucommerceapi *location* node to the end of your web.config just before the closing configuration tag (check the web.config file in the root of the *uCommerce.RazorStore* folder)
 
 ## What's Inside? ##
 
