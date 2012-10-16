@@ -74,14 +74,23 @@
     <Reference Include="UCommerce.Infrastructure">
       <HintPath>..\..\lib\uCommerce\3.0.0.12278\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="UCommerce.Umbraco">
+      <HintPath>..\..\lib\uCommerce\3.0.0.12278\UCommerce.Umbraco.dll</HintPath>
+    </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
     </Reference>
     <Reference Include="umbraco.MacroEngines">
       <HintPath>..\..\lib\umbraco\umbraco.MacroEngines.dll</HintPath>
     </Reference>
+    <Reference Include="XmlConfigMerge">
+      <HintPath>..\..\lib\XmlConfigMerge\XmlConfigMerge.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XmlStubs\Actions.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XmlStubs\Languages.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -121,6 +130,7 @@
     <Content Include="umbraco\uCommerce\Install\InstallDemoData.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PackageActions\MergeConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />
@@ -139,7 +149,17 @@
     </Compile>
     <Compile Include="umbraco\uCommerce\Install\Helpers\Media.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Web.IIS7.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Core.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

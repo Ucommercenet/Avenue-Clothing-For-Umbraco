@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Actions>
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="umbracoReservedPaths" value="~/ucommerceapi/" />
+    <Action runat="install" alias="MergeConfigFiles" targetConfig="~/web.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.Web.config" sourceConfigIntegratedMode="~/umbraco/ucommerce/install/uCommerce.DemoStore.Web.IIS7.config" />
+    <Action runat="install" alias="MergeConfigFiles" targetConfig="~/umbraco/ucommerce/Configuration/Core.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.Core.config" />
+</Actions>
