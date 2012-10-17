@@ -20,7 +20,7 @@ namespace UCommerce.RazorStore.Installer.Tests
     {
         public class ExecuteTests
         {
-            private MergeConfigFile _merger;
+            private MergeConfigFiles _merger;
 
             private string _targetXmlPath;
             private string _sourceXmlPath;
@@ -29,7 +29,7 @@ namespace UCommerce.RazorStore.Installer.Tests
             [SetUp]
             public void Initialise()
             {
-                _merger = new MergeConfigFile();
+                _merger = new MergeConfigFiles();
                 _targetXmlPath = createTargetXmlDocument();
                 _sourceXmlPath = createSourceXmlDocument();
                 _sourceIIS7XmlPath = createSourceIIS7XmlDocument();
@@ -110,7 +110,7 @@ namespace UCommerce.RazorStore.Installer.Tests
                 var xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
     <appSettings>
-        <add key=""umbracoReservedPaths"" value=""~/umbraco,~/install/,~/ucommerceapi/"" />
+        <add key=""umbracoReservedPaths"" value=""~/umbraco,~/install/"" />
     </appSettings>
 </configuration>";
                 var doc = createXmlDocument(xml);
@@ -121,6 +121,9 @@ namespace UCommerce.RazorStore.Installer.Tests
             {
                 var xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
+    <appSettings>
+        <add key=""umbracoReservedPaths"" value=""~/umbraco,~/install/"" />
+    </appSettings>
     <location path=""ucommerceapi"">
         <system.web>
             <httpHandlers>

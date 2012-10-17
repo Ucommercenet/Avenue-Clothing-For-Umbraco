@@ -130,7 +130,7 @@
     <Content Include="umbraco\uCommerce\Install\InstallDemoData.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PackageActions\MergeConfigFile.cs" />
+    <Compile Include="PackageActions\MergeConfigFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />

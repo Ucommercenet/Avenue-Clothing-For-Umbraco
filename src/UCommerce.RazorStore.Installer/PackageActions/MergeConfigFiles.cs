@@ -6,12 +6,9 @@
 
     using Tools.XmlConfigMerge;
 
-    using UCommerce.Umbraco.Installer.PackageActions;
-
-    using umbraco.BusinessLogic;
     using umbraco.interfaces;
 
-    public class MergeConfigFile : IPackageAction
+    public class MergeConfigFiles : IPackageAction
     {
         private string _targetConfigFullPath;
         public string _sourceConfigFullPath;
@@ -36,27 +33,20 @@
 
                 BackupExistingConfig(_targetConfigFullPath);
 
-                Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles: {0} into: {1}", _sourceConfigFullPath, _targetConfigFullPath));
+                //Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles: {0} into: {1}", _sourceConfigFullPath, _targetConfigFullPath));
                 var config = new ConfigFileManager(_targetConfigFullPath, _sourceConfigFullPath);
                 config.Save();
 
                 if (!String.IsNullOrWhiteSpace(SourceConfigIntegratedModePath))
                 {
-                    Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles (IIS7): {0} into: {1}", _sourceConfigIntegratedModeFullPath, _targetConfigFullPath));
+                    //Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles (IIS7): {0} into: {1}", _sourceConfigIntegratedModeFullPath, _targetConfigFullPath));
                     config = new ConfigFileManager(_targetConfigFullPath, _sourceConfigIntegratedModeFullPath);
                     config.Save();
                 }
             }
             catch (Exception ex)
             {
-                Log.Add(LogTypes.Error, -1, string.Concat(new object[]
-                {
-                    ex.Message,
-                    "\n",
-                    ex.TargetSite,
-                    "\n",
-                    ex.StackTrace
-                }));
+                //Log.Add(LogTypes.Error, -1, string.Concat(new object[] { ex.Message, "\n", ex.TargetSite, "\n", ex.StackTrace }));
                 return false;
             }
             return true;
@@ -72,19 +62,12 @@
             //    Initialize(xmlData);
             //    new ConfigInstaller().CleanConfig(TargetConfig);
             //    TargetConfig.Save(System.Web.HttpContext.Current.Server.MapPath("~/web.config"));
-            //    Log.Add(LogTypes.Notify, -1, "Cleaned uCommerce config");
+            //    //Log.Add(LogTypes.Notify, -1, "Cleaned uCommerce config");
             //    result = true;
             //}
             //catch (Exception ex)
             //{
-            //    Log.Add(LogTypes.Error, -1, string.Concat(new object[]
-            //    {
-            //        ex.Message,
-            //        "\n",
-            //        ex.TargetSite,
-            //        "\n",
-            //        ex.StackTrace
-            //    }));
+            //    //Log.Add(LogTypes.Error, -1, string.Concat(new object[]{ex.Message,"\n",ex.TargetSite,"\n",ex.StackTrace}));
             //    result = false;
             //}
             //return result;
@@ -106,7 +89,7 @@
             var directory = Path.GetDirectoryName(path);
             var filename = Path.GetFileName(path);
             var newPath = string.Format("{0}.{1}.backup", Path.Combine(directory, filename), DateTime.Now.Ticks);
-            Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles Backup Existing Config: {0} to: {1}", path, newPath));
+            //Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles Backup Existing Config: {0} to: {1}", path, newPath));
             loadTargetConfigAsXml().Save(newPath);
         }
 
