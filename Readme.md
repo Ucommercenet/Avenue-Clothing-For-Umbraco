@@ -15,18 +15,7 @@ Below is a quick overview of the important folders
 
 ## Installation Instructions ##
 
-**The install process should now be completely automatic!** Just in case you have a previous release -or it doesn't for you, here are the manual steps you (used) to have to do:
-
-1. Copy global.asax from the root of *uCommerce.RazorStore* into the root of your web project
-1. Update */umbraco/ucommerce/configuration/core.config* and add the following node: `<component id="ServiceStackApi" service="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" type="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" lifestyle="Singleton"/>` just after the opening *components* node
-1. Update */config/UrlRewriting.config* and alter the destinationUrl for the following rewrites (Thanks to [@MartinBakmand](https://twitter.com/MartinBakmand/status/257890315388719104 ) for spotting this one): 
-	1. *DefaultCategoryProductRewrite*: ~/catalog/product.aspx?catalog=$2&amp;category=$3&amp;product=$4
-	1. *DefaultProductRewrite*: ~/catalog/product.aspx?catalog=$2&amp;product=$3
-	1. *DefaultCategoryRewrite*: ~/catalog.aspx?catalog=$2&amp;category=$3
-	1. *DefaultCatalogRewrite*: ~/catalog.aspx?catalog=$2
-1. Edit your web.config file and make the following changes:
-	1. Ensure you have "*~/ucommerceapi/*" in the list of reserved paths (appSettings --> umbracoReservedPaths)
-	1. Add the ucommerceapi *location* node to the end of your web.config just before the closing configuration tag (check the web.config file in the root of the *uCommerce.RazorStore* folder)
+**The install process should now be completely automatic!** Just in case you have a previous release -or it doesn't for you, the manual steps you (used) to have to do are at the end of this readme.
 
 ## What's Inside? ##
 
@@ -89,3 +78,16 @@ Don't forget to let us know what you're up to.
 
 Produced with love for you by [The Site Doctor](http://www.thesitedoctor.co.uk/ "The most feature rich e-commerce package for Umbraco") for 
 [uCommerce](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco")
+
+## Previous Installation Process ##
+
+1. Copy global.asax from the root of *uCommerce.RazorStore* into the root of your web project
+1. Update */umbraco/ucommerce/configuration/core.config* and add the following node: `<component id="ServiceStackApi" service="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" type="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" lifestyle="Singleton"/>` just after the opening *components* node
+1. Update */config/UrlRewriting.config* and alter the destinationUrl for the following rewrites (Thanks to [@MartinBakmand](https://twitter.com/MartinBakmand/status/257890315388719104 ) for spotting this one): 
+	1. *DefaultCategoryProductRewrite*: ~/catalog/product.aspx?catalog=$2&amp;category=$3&amp;product=$4
+	1. *DefaultProductRewrite*: ~/catalog/product.aspx?catalog=$2&amp;product=$3
+	1. *DefaultCategoryRewrite*: ~/catalog.aspx?catalog=$2&amp;category=$3
+	1. *DefaultCatalogRewrite*: ~/catalog.aspx?catalog=$2
+1. Edit your web.config file and make the following changes:
+	1. Ensure you have "*~/ucommerceapi/*" in the list of reserved paths (appSettings --> umbracoReservedPaths)
+	1. Add the ucommerceapi *location* node to the end of your web.config just before the closing configuration tag (check the web.config file in the root of the *uCommerce.RazorStore* folder)
