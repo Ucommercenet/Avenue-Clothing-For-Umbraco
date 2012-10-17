@@ -73,6 +73,7 @@ We've already got a few extensions in the works for you including:
 - Basic stock management
 - Search auto-complete which displays the product in the list
 - Introduction on how to theme the store
+- Google Analytics integration
 
 ## Keep In Touch ##
 
