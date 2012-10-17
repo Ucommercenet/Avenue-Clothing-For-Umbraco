@@ -5,7 +5,7 @@ $(function () {
     wireupAddToCartButton($('#add-to-basket'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
     wireupRatings($('.rating'));
 });
-function relateVariations(sku, size, colour, addToCartButton) {
+function relateVariations(sku, size, colour) {
     updateVariationOptions(sku, size, colour);
     size.change(function () {
         // Reset the colour options
@@ -34,9 +34,9 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 
     // If the user has made a valid selection enable the add to cart button
     if (empty.length == 0) {
-        addToCartButton.removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
-    } else {
         addToCartButton.removeClass('disabled').addClass('btn-success').removeAttr('disabled');
+    } else {
+        addToCartButton.removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
     }
 };
 function wireupRatings(radios) {
