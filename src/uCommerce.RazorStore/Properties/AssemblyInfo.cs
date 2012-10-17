@@ -1,16 +1,18 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Web;
+
+using uCommerce.RazorStore.ServiceStack;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("uCommerce.RazorStore")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Assembly containing the functionality for the uCommerce Demo Razor Store")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("The Site Doctor Ltd")]
 [assembly: AssemblyProduct("uCommerce.RazorStore")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright © uCommerce and The Site Doctor 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,3 +35,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: PreApplicationStartMethod(typeof(ApplicationBase), "Application_Start")]
