@@ -29,7 +29,7 @@ namespace UCommerce.RazorStore.Installer.Tests
             [SetUp]
             public void Initialise()
             {
-                _merger = new MergeConfigFiles();
+                _merger = new MergeConfigFiles(true);
                 _targetXmlPath = createTargetXmlDocument();
                 _sourceXmlPath = createSourceXmlDocument();
                 _sourceIIS7XmlPath = createSourceIIS7XmlDocument();
