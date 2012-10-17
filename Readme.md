@@ -15,7 +15,7 @@ Below is a quick overview of the important folders
 
 ## Installation Instructions ##
 
-The final release will be fully automated and as close to one-click deploy as we can make it but at the moment there are a couple of post-installation steps while we iron things out:
+**The install process should now be completely automatic!** Just in case you have a previous release -or it doesn't for you, here are the manual steps you (used) to have to do:
 
 1. Copy global.asax from the root of *uCommerce.RazorStore* into the root of your web project
 1. Update */umbraco/ucommerce/configuration/core.config* and add the following node: `<component id="ServiceStackApi" service="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" type="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" lifestyle="Singleton"/>` just after the opening *components* node
