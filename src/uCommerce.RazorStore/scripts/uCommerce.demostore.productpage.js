@@ -159,6 +159,7 @@ function updateVariationOptions(sku, size, colour, success, failure) {
                 var availableOptions = $('option', colour).not('option[value=""]').not(':disabled');
                 if (selectedSize != '' && availableOptions.size() == 1) {
                     colour.val(availableOptions.val());
+                    colour.trigger('change');
                 }
                 
                 // Now call any functions that need to run after the updates
