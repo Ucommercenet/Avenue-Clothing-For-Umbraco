@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XmlConfigMerge</name>
+    </assembly>
+    <members>
+        <member name="T:Tools.XmlConfigMerge.ConfigFileManager">
+            <summary>
+            Manages config file reading and writing, and optional merging of two config files.
+            </summary>
+        </member>
+        <member name="M:Tools.XmlConfigMerge.ConfigFileManager.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="masterConfigPath"></param>
+            <param name="mergeFromConfigPath"></param>
+            <param name="makeMergeFromConfigPathTheSavePath"></param>
+            <exception cref="T:System.Exception">if mergeFromConfigPath is specified but does not exist, and makeMergeFromConfigPathTheSavePath is false</exception>
+        </member>
+        <member name="M:Tools.XmlConfigMerge.ConfigFileManager.ReplaceXPathValues(System.String,System.String,System.Text.RegularExpressions.Regex)">
+            <summary>
+            Search and replace on one or more specified values as specified by a single xpath expressino
+            </summary>
+            <param name="xPath"></param>
+            <param name="replaceWith"></param>
+            <param name="regexPattern">Optionally specify a regex pattern to search within the found values. 
+            If a single () group is found within this expression, only this portion is replaced.</param>
+            <returns></returns>
+            <exception cref="T:System.ApplicationException">When no nodes match xpath-expression and no regexPattern is specified (is null), 
+            and can't auto-create the node (is not an appSettings expression).</exception>
+        </member>
+        <member name="M:Tools.XmlConfigMerge.ConfigFileManager.UpdateExistingElementsAndAttribs(System.Xml.XmlDocument,System.Xml.XmlDocument)">
+            <summary>
+            Merge element and attribute values from one xml doc to another.
+            </summary>
+            <param name="fromXdoc"></param>
+            <param name="toXdoc"></param>
+            <remarks>
+            Multiple same-named peer elements, are merged in the ordinal order they appear.
+            </remarks>
+        </member>
+    </members>
+</doc>
