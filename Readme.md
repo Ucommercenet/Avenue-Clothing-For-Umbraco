@@ -63,6 +63,7 @@ We've already got a few extensions in the works for you including:
 - Search auto-complete which displays the product in the list
 - Introduction on how to theme the store
 - Google Analytics integration
+- Example login
 
 ## Keep In Touch ##
 
@@ -78,6 +79,15 @@ Don't forget to let us know what you're up to.
 
 Produced with love for you by [The Site Doctor](http://www.thesitedoctor.co.uk/ "The most feature rich e-commerce package for Umbraco") for 
 [uCommerce](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco")
+
+## Known Issues##
+
+If you spot anything please let us know. We're currently aware of the following issues:
+
+* Checkout: The catalog tries to create a member in Umbraco (which it can't do as there's no group added)
+* Product Page: The first item doesn't update the mini cart
+* You can't select Express or Standard (Free) shipping methods as there's no price for EUR
+* The order confirmation email just has a link in it and no other content
 
 ## Previous Installation Process ##
 
