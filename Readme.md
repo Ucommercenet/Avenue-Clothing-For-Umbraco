@@ -88,6 +88,7 @@ If you spot anything please let us know. We're currently aware of the following 
 * Product Page: The first item doesn't update the mini cart
 * You can't select Express or Standard (Free) shipping methods as there's no price for EUR
 * The order confirmation email just has a link in it and no other content
+* The JavaScript service doesn't work if you're running on an unlicensed version of the store
 
 ## Previous Installation Process ##
 
