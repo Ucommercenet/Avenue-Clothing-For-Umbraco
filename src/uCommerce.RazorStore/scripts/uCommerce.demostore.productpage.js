@@ -157,9 +157,12 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
 
                 // If there is only a single item in the list then select it
                 var availableOptions = $('option', colour).not('option[value=""]').not(':disabled');
+
                 if (selectedSize != '' && availableOptions.size() == 1 && userAction) {
                     colour.val(availableOptions.val());
+                    //Fire these events manually to prevent a loop
                     updateVariationOptions(sku, size, colour, false);
+                    updateAddToCartButton($('#add-to-basket'), $('.variant'));
                 }
 
                 // Now call any functions that need to run after the updates
