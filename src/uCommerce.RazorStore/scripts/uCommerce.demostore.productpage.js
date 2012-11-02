@@ -6,14 +6,14 @@ $(function () {
     wireupRatings($('.rating'));
 });
 function relateVariations(sku, size, colour) {
-    updateVariationOptions(sku, size, colour);
+    updateVariationOptions(sku, size, colour, true);
     size.change(function () {
         // Reset the colour options
         $('option:first', colour).attr('selected', true);
-        updateVariationOptions(sku, size, colour);
+        updateVariationOptions(sku, size, colour, true);
     });
     colour.change(function () {
-        updateVariationOptions(sku, size, colour);
+        updateVariationOptions(sku, size, colour, true);
     });
 };
 function enableAddToCartWhenSelected(addToCartButton, variantInputs) {
@@ -129,7 +129,7 @@ function wireupAddToCartButton(addToCartButton, skuInput, variantInputs, quantit
         return false;
     });
 };
-function updateVariationOptions(sku, size, colour, success, failure) {
+function updateVariationOptions(sku, size, colour, userAction, success, failure) {
     var selectedSize = size.val();
     var colourOptions = $('option', colour).not('option[value=""]');
 
@@ -157,11 +157,11 @@ function updateVariationOptions(sku, size, colour, success, failure) {
 
                 // If there is only a single item in the list then select it
                 var availableOptions = $('option', colour).not('option[value=""]').not(':disabled');
-                if (selectedSize != '' && availableOptions.size() == 1) {
+                if (selectedSize != '' && availableOptions.size() == 1 && userAction) {
                     colour.val(availableOptions.val());
-                    colour.trigger('change');
+                    updateVariationOptions(sku, size, colour, false);
                 }
-                
+
                 // Now call any functions that need to run after the updates
                 if (success)
                     success();
