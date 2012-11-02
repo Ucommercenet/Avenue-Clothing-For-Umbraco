@@ -92,8 +92,7 @@ If you spot anything please let us know. We're currently aware of the following 
 
 ## Previous Installation Process ##
 
-1. Copy global.asax from the root of *uCommerce.RazorStore* into the root of your web project
-1. Update */umbraco/ucommerce/configuration/core.config* and add the following node: `<component id="ServiceStackApi" service="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" type="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" lifestyle="Singleton"/>` just after the opening *components* node
+1. Update */umbraco/ucommerce/configuration/core.config* and if it's missing add the following node: `<component id="ServiceStackApi" service="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" type="uCommerce.RazorStore.ServiceStack.AppHost, uCommerce.RazorStore" lifestyle="Singleton"/>` just before the closing *components* node
 1. Update */config/UrlRewriting.config* and alter the destinationUrl for the following rewrites (Thanks to [@MartinBakmand](https://twitter.com/MartinBakmand/status/257890315388719104 ) for spotting this one): 
 	1. *DefaultCategoryProductRewrite*: ~/catalog/product.aspx?catalog=$2&amp;category=$3&amp;product=$4
 	1. *DefaultProductRewrite*: ~/catalog/product.aspx?catalog=$2&amp;product=$3
