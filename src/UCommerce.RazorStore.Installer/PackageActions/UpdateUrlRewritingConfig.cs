@@ -13,7 +13,7 @@ namespace UCommerce.RazorStore.Installer.PackageActions
 
     public class UpdateUrlRewritingConfig : IPackageAction
     {
-        private static string _xpathFormatString = "/urlrewritingnet/rewrites/add[@name='{0}']/@destinationUrl";
+        private static string _xpathFormatString = "//add[@name='{0}']/@destinationUrl";
         private string _targetConfigFullPath;
         private string _sourceConfigFullPath;
 
