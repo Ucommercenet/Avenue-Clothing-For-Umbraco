@@ -31,7 +31,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == _catalogGroupName) ?? new ProductCatalogGroupFactory().NewWithDefaults(_catalogGroupName);
             group.ProductReviewsRequireApproval = true;
             group.Deleted = false;
-            group.CreateCustomersAsUmbracoMembers = true;
+            group.CreateCustomersAsUmbracoMembers = false;
+            group.DomainId = null;
             group.Save();
             group.OrderNumberSerie = GetDefaultOrderNumberSeries();
             group.EmailProfile = GetDefaultEmailProfile();
