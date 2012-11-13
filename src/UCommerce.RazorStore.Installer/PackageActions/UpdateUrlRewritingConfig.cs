@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml.Linq;
+using UCommerce.Umbraco.Installer.PackageActions;
 
 namespace UCommerce.RazorStore.Installer.PackageActions
 {
@@ -35,22 +37,12 @@ namespace UCommerce.RazorStore.Installer.PackageActions
 
             PackageActionsHelpers.BackupExistingXmlConfig(_targetConfigFullPath);
 
-            var config = new ConfigFileManager(_targetConfigFullPath);
+			var existingRewrites = XElement.Load(_targetConfigFullPath);
+			var newRewrites = XElement.Load(_sourceConfigFullPath);
 
-            var current = GetRewritingNode(config, "DefaultCategoryProductRewrite");
-            if (!String.IsNullOrEmpty(current))
-            {
-                ReplaceValue(config, "DefaultCategoryProductRewrite", "~/catalog/product.aspx?catalog=$2&amp;category=$3&amp;product=$4");
-                ReplaceValue(config, "DefaultProductRewrite", "~/catalog/product.aspx?catalog=$2&amp;product=$3");
-                ReplaceValue(config, "DefaultCategoryRewrite", "~/catalog.aspx?catalog=$2&amp;category=$3");
-                ReplaceValue(config, "DefaultCatalogRewrite", "~/catalog.aspx?catalog=$2");
-            }
-            else
-            {
-                config = new ConfigFileManager(_targetConfigFullPath, _sourceConfigFullPath);
-            }
+	        var mergedRewrites = new UrlRewriteRulesInstaller().Merge(existingRewrites, newRewrites);
 
-            config.Save();
+			mergedRewrites.Save(_targetConfigFullPath);
 
             return true;
         }
