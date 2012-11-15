@@ -30,9 +30,9 @@
     {
         tax = new Money(basket.VAT.Value, currency);
     }
-    if (basket.Discount.HasValue)
+    if (basket.DiscountTotal.HasValue)
     {
-        discount = new Money(basket.Discount.Value * -1, currency);
+        discount = new Money(basket.DiscountTotal.Value * -1, currency);
     }
     if (basket.OrderTotal.HasValue)
     {
