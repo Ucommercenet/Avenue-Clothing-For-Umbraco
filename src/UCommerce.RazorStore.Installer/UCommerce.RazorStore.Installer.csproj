@@ -68,14 +68,17 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UCommerce">
-      <HintPath>..\..\lib\uCommerce\3.0.0.12278\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce, Version=3.0.0.12278, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\3.0.0.12306\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure">
-      <HintPath>..\..\lib\uCommerce\3.0.0.12278\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=3.0.0.12278, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\3.0.0.12306\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Umbraco">
-      <HintPath>..\..\lib\uCommerce\3.0.0.12278\UCommerce.Umbraco.dll</HintPath>
+    <Reference Include="UCommerce.Umbraco, Version=3.0.0.12278, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\3.0.0.12306\UCommerce.Umbraco.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
