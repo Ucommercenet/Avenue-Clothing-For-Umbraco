@@ -8,8 +8,8 @@
         TransactionLibrary.ExecuteBasketPipeline();
 		TransactionLibrary.RequestPayments();
         HttpContext.Current.Response.Redirect("Confirmation.aspx");
-
     }
+    
     var basket = TransactionLibrary.GetBasket().PurchaseOrder;
     var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
     var billingAddress = TransactionLibrary.GetBillingInformation();
