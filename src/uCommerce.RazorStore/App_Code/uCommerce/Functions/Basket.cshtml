@@ -19,6 +19,9 @@
         TransactionLibrary.ExecuteBasketPipeline();
         var returnUrl = request.RawUrl;
 
+        if (returnUrl.Contains("item-added"))
+            HttpContext.Current.Response.Redirect(returnUrl);
+
         if (returnUrl.Contains("?"))
             HttpContext.Current.Response.Redirect(string.Format("{0}&item-added=true", returnUrl));
 
