@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using uCommerce.RazorStore.ServiceStack.Commands;
 
 namespace uCommerce.RazorStore.ServiceStack.Model
 {

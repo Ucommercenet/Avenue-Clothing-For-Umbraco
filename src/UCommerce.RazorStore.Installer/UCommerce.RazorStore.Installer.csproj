@@ -163,7 +163,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Core.config" />
+    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Custom.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.UrlRewriting.config">

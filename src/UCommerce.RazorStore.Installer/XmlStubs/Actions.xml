@@ -3,5 +3,5 @@
     <Action runat="install" alias="UpdateWebConfigAppSettings" targetConfig="~/web.config" />
     <Action runat="install" alias="UpdateUrlRewritingConfig" targetConfig="~/config/UrlRewriting.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.UrlRewriting.config" />
     <Action runat="install" alias="MergeConfigFiles" targetConfig="~/web.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.Web.config" sourceConfigIntegratedMode="~/umbraco/ucommerce/install/uCommerce.DemoStore.Web.IIS7.config" />
-    <Action runat="install" alias="MergeConfigFiles" targetConfig="~/umbraco/ucommerce/Configuration/Core.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.Core.config" />
+    <Action runat="install" alias="MergeConfigFiles" targetConfig="~/umbraco/ucommerce/Configuration/Custom.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.Custom.config" />
 </Actions>
