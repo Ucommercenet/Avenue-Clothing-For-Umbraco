@@ -7,14 +7,21 @@ using uCommerce.RazorStore.ServiceStack.Model;
 
 namespace uCommerce.RazorStore.ServiceStack.Commands
 {
+    using System;
     using System.Linq;
 
     using UCommerce;
+    using UCommerce.EntitiesV2;
     using UCommerce.Runtime;
+
+    using umbraco.MacroEngines;
+
+    using Basket = uCommerce.RazorStore.ServiceStack.Model.Basket;
 
     public class GetBasket
     {
     }
+
     public class GetBasketResponse : IHasResponseStatus
     {
         public GetBasketResponse(UCommerce.EntitiesV2.Basket basket)
@@ -32,13 +39,13 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
                 {
                     SubTotal = po.SubTotal,
                     TaxTotal = po.TaxTotal,
-                    DiscountTotal =  po.DiscountTotal,
+                    DiscountTotal = po.DiscountTotal,
                     OrderTotal = po.OrderTotal,
                     TotalItems = po.OrderLines.Sum(l => l.Quantity),
-                    
+
                     FormattedSubTotal = subTotal.ToString(),
                     FormattedTaxTotal = taxTotal.ToString(),
-                    FormattedDiscountTotal =  discountTotal.ToString(),
+                    FormattedDiscountTotal = discountTotal.ToString(),
                     FormattedOrderTotal = orderTotal.ToString(),
                     FormattedTotalItems = po.OrderLines.Sum(l => l.Quantity).ToString("#,##"),
 
@@ -47,13 +54,19 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
 
             foreach (var line in po.OrderLines)
             {
+                var product = CatalogLibrary.GetProduct(line.Sku);
+                var url = CatalogLibrary.GetNiceUrlForProduct(product);
+                var imageUrl = getImageUrlForProduct(product);
                 var lineTotal = new Money(line.Total.Value, currency);
+
                 var lineItem = new LineItem
                     {
                         OrderLineId = line.OrderLineId,
                         Quantity = line.Quantity,
                         Sku = line.Sku,
                         VariantSku = line.VariantSku,
+                        Url = url,
+                        ImageUrl = imageUrl,
                         Price = line.Price,
                         ProductName = line.ProductName,
                         Total = line.Total,
@@ -64,6 +77,25 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
                     };
                 Basket.LineItems.Add(lineItem);
             }
+        }
+
+        private string getImageUrlForProduct(Product product)
+        {
+            var thumbnail = getImageUrlFromMediaItem(product.ThumbnailImageMediaId);
+            
+            // If we have a thumbnail image then return that otherwise return the product's main image
+            return String.IsNullOrWhiteSpace(thumbnail)
+                ? getImageUrlFromMediaItem(product.PrimaryImageMediaId)
+                : thumbnail;
+        }
+
+        private string getImageUrlFromMediaItem(string mediaId)
+        {
+            if (String.IsNullOrWhiteSpace(mediaId))
+                return String.Empty;
+
+            dynamic mediaItem = new DynamicMedia(mediaId);
+            return mediaItem.umbracoFile;
         }
 
         public ResponseStatus ResponseStatus { get; set; }
