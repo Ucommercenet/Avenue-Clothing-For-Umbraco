@@ -1,8 +1,6 @@
-﻿using ServiceStack.ServiceHost;
-using ServiceStack.ServiceInterface;
+﻿using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.ServiceModel;
 using UCommerce.Api;
-using UCommerce.Transactions;
 
 namespace uCommerce.RazorStore.ServiceStack.Commands
 {
@@ -22,10 +20,15 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         public UpdateLineItemResponse(UCommerce.EntitiesV2.OrderLine line)
         {
+            if (line == null)
+            {
+                UpdatedLine = new LineItem();
+                return;
+            }
+
             var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
-            
             var lineTotal = new Money(line.Total.Value, currency);
-            
+
             UpdatedLine = new LineItem()
             {
                 OrderLineId = line.OrderLineId,
