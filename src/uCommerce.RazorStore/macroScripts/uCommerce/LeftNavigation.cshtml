@@ -15,7 +15,7 @@
                 {
                     css = " class=\"on\"";
                 }
-                <li@Html.Raw(css)>
+                <li @Html.Raw(css)>
                     <a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
                     @RenderNavigation(category.Categories)
                 </li>
