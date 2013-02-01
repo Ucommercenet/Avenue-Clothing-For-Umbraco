@@ -141,6 +141,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             TrySetProperty(item, "umbracoExtension", ext);
             TrySetProperty(item, "umbracoBytes", file.Length.ToString());
             TrySetProperty(item, "umbracoFile", relativePath);
+			item.Save();
 
             if (_thumbnailExtensions.Contains(ext))
                 CreateImageProperties(new FileInfo(fullFilePath), item, ext);
