@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using ServiceStack.ServiceInterface;
-using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Api;
-using uCommerce.RazorStore.ServiceStack.Model;
-
-namespace uCommerce.RazorStore.ServiceStack.Commands
+﻿namespace UCommerce.RazorStore.Services.Commands
 {
+    using System.Collections.Generic;
+
+    using ServiceStack.ServiceInterface;
+    using ServiceStack.ServiceInterface.ServiceModel;
+
+    using UCommerce.Api;
+
     using System.Linq;
+
+    using UCommerce.RazorStore.Services.Model;
 
     public class Search
     {
@@ -41,7 +43,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
 
         public ICollection<ProductVariation> Variations { get; set; }
     }
-    public class SearchService : ServiceBase<Search>
+    public class SearchService : ServiceBase<Search>, IUCommerceApiService
     {
         protected override object Run(Search request)
         {

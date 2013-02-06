@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using ServiceStack.ServiceInterface;
-using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Api;
-using uCommerce.RazorStore.ServiceStack.Model;
-
-namespace uCommerce.RazorStore.ServiceStack.Commands
+﻿namespace UCommerce.RazorStore.Services.Commands
 {
+    using System.Collections.Generic;
+
+    using ServiceStack.ServiceInterface;
+    using ServiceStack.ServiceInterface.ServiceModel;
+
+    using UCommerce.Api;
+
     using System;
     using System.Linq;
 
     using UCommerce;
     using UCommerce.EntitiesV2;
+    using UCommerce.RazorStore.Services.Model;
     using UCommerce.Runtime;
 
     using umbraco.MacroEngines;
 
-    using Basket = uCommerce.RazorStore.ServiceStack.Model.Basket;
+    using Basket = UCommerce.RazorStore.Services.Model.Basket;
 
     public class GetBasket
     {
@@ -101,7 +102,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
         public ResponseStatus ResponseStatus { get; set; }
         public Basket Basket { get; set; }
     }
-    public class GetBasketService : ServiceBase<GetBasket>
+    public class GetBasketService : ServiceBase<GetBasket>, IUCommerceApiService
     {
         protected override object Run(GetBasket request)
         {

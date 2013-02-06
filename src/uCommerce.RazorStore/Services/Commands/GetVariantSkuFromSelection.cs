@@ -1,18 +1,17 @@
-﻿namespace uCommerce.RazorStore.ServiceStack.Commands
+﻿namespace UCommerce.RazorStore.Services.Commands
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using UCommerce.Api;
-    using UCommerce.EntitiesV2;
 
-    using global::ServiceStack.ServiceInterface;
-    using global::ServiceStack.ServiceInterface.ServiceModel;
+    using ServiceStack.ServiceInterface;
+    using ServiceStack.ServiceInterface.ServiceModel;
 
-    using uCommerce.RazorStore.ServiceStack.Model;
+    using UCommerce.RazorStore.Services.Model;
 
-    using ProductProperty = uCommerce.RazorStore.ServiceStack.Model.ProductProperty;
+    using ProductProperty = UCommerce.RazorStore.Services.Model.ProductProperty;
 
     public class GetVariantSkuFromSelection
     {
@@ -55,7 +54,7 @@
 
         public ProductVariation Variant { get; set; }
     }
-    public class GetVariantSkuFromSelectionService : ServiceBase<GetVariantSkuFromSelection>
+    public class GetVariantSkuFromSelectionService : ServiceBase<GetVariantSkuFromSelection>, IUCommerceApiService
     {
         protected override object Run(GetVariantSkuFromSelection request)
         {

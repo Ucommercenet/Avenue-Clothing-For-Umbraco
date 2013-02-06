@@ -101,19 +101,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ServiceStack\uCommerceApiAppHost.cs" />
-    <Content Include="App_Start\uCommerceApiRegistration.cs" />
+    <Compile Include="Services\IUCommerceApiService.cs" />
+    <Compile Include="Services\uCommerceApiAppHost.cs" />
+    <Compile Include="Services\uCommerceApiRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceStack\Commands\Search.cs" />
-    <Compile Include="ServiceStack\Commands\GetVariantSkuFromSelection.cs" />
-    <Compile Include="ServiceStack\Commands\GetProductVariations.cs" />
-    <Compile Include="ServiceStack\Commands\UpdateLineItem.cs" />
-    <Compile Include="ServiceStack\Model\Basket.cs" />
-    <Compile Include="ServiceStack\Commands\GetBasket.cs" />
-    <Compile Include="ServiceStack\Model\ProductVariation.cs" />
-    <Compile Include="ServiceStack\Model\ProductProperty.cs" />
-    <Compile Include="ServiceStack\Model\LineItem.cs" />
-    <Compile Include="ServiceStack\Commands\AddToBasket.cs" />
+    <Compile Include="Services\Commands\Search.cs" />
+    <Compile Include="Services\Commands\GetVariantSkuFromSelection.cs" />
+    <Compile Include="Services\Commands\GetProductVariations.cs" />
+    <Compile Include="Services\Commands\UpdateLineItem.cs" />
+    <Compile Include="Services\Model\Basket.cs" />
+    <Compile Include="Services\Commands\GetBasket.cs" />
+    <Compile Include="Services\Model\ProductVariation.cs" />
+    <Compile Include="Services\Model\ProductProperty.cs" />
+    <Compile Include="Services\Model\LineItem.cs" />
+    <Compile Include="Services\Commands\AddToBasket.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\uCommerce.bootstrap-responsive.css" />

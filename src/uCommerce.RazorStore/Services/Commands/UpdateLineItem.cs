@@ -1,15 +1,15 @@
-﻿using ServiceStack.ServiceInterface;
-using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Api;
-
-namespace uCommerce.RazorStore.ServiceStack.Commands
+﻿namespace UCommerce.RazorStore.Services.Commands
 {
+    using ServiceStack.ServiceInterface;
+    using ServiceStack.ServiceInterface.ServiceModel;
+
+    using UCommerce.Api;
+
     using System.Linq;
 
     using UCommerce;
+    using UCommerce.RazorStore.Services.Model;
     using UCommerce.Runtime;
-
-    using uCommerce.RazorStore.ServiceStack.Model;
 
     public class UpdateLineItem
     {
@@ -49,7 +49,7 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
 
         public LineItem UpdatedLine { get; set; }
     }
-    public class UpdateLineItemService : ServiceBase<UpdateLineItem>
+    public class UpdateLineItemService : ServiceBase<UpdateLineItem>, IUCommerceApiService
     {
         protected override object Run(UpdateLineItem request)
         {

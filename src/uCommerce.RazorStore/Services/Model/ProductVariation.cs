@@ -1,4 +1,4 @@
-namespace uCommerce.RazorStore.ServiceStack.Model
+namespace UCommerce.RazorStore.Services.Model
 {
     using System.Collections.Generic;
 

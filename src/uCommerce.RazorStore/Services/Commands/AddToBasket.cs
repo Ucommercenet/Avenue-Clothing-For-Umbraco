@@ -1,11 +1,10 @@
-﻿using ServiceStack.ServiceHost;
-using ServiceStack.ServiceInterface;
-using ServiceStack.ServiceInterface.ServiceModel;
-using UCommerce.Api;
-using UCommerce.Transactions;
-
-namespace uCommerce.RazorStore.ServiceStack.Commands
+﻿namespace UCommerce.RazorStore.Services.Commands
 {
+    using ServiceStack.ServiceInterface;
+    using ServiceStack.ServiceInterface.ServiceModel;
+
+    using UCommerce.Api;
+
     public class AddToBasket
     {
         public string CatalogName { get; set; }
@@ -19,8 +18,8 @@ namespace uCommerce.RazorStore.ServiceStack.Commands
     {
         public ResponseStatus ResponseStatus { get; set; }
     }
-    
-    public class AddToBasketService : ServiceBase<AddToBasket>
+
+    public class AddToBasketService : ServiceBase<AddToBasket>, IUCommerceApiService
     {
         protected override object Run(AddToBasket request)
         {

@@ -1,14 +1,14 @@
-﻿namespace uCommerce.RazorStore.ServiceStack.Commands
+﻿namespace UCommerce.RazorStore.Services.Commands
 {
     using System.Collections.Generic;
     using System.Linq;
 
     using UCommerce.Api;
 
-    using global::ServiceStack.ServiceInterface;
-    using global::ServiceStack.ServiceInterface.ServiceModel;
+    using ServiceStack.ServiceInterface;
+    using ServiceStack.ServiceInterface.ServiceModel;
 
-    using uCommerce.RazorStore.ServiceStack.Model;
+    using UCommerce.RazorStore.Services.Model;
 
     public class GetProductVariations
     {
@@ -38,7 +38,7 @@
 
         public ICollection<ProductVariation> Variations { get; set; }
     }
-    public class GetProductVariationsService : ServiceBase<GetProductVariations>
+    public class GetProductVariationsService : ServiceBase<GetProductVariations>, IUCommerceApiService
     {
         protected override object Run(GetProductVariations request)
         {
