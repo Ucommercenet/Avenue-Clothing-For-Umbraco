@@ -7,7 +7,7 @@
         int newPaymentMethodId;
         if (int.TryParse(HttpContext.Current.Request.Form["payment-method"], out newPaymentMethodId))
         {
-            TransactionLibrary.CreatePayment(newPaymentMethodId);
+            TransactionLibrary.CreatePayment(newPaymentMethodId, requestPayment:false);
             TransactionLibrary.ExecuteBasketPipeline();
             HttpContext.Current.Response.Redirect("Preview.aspx");
         }
