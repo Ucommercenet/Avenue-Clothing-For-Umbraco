@@ -22,6 +22,20 @@
     var shippingTotal = new Money(basket.ShippingTotal.Value, currency);
     var paymentTotal = new Money(basket.PaymentTotal.Value, currency);
     var orderTotal = new Money(basket.OrderTotal.Value, currency);
+
+    var rowspan = 3;
+    if (discount.Value > 0)
+    {
+        rowspan++;
+    }
+    if (shippingTotal.Value > 0)
+    {
+        rowspan++;
+    }
+    if (paymentTotal.Value > 0)
+    {
+        rowspan++;
+    }
 }
 <form method="post">
 <div class="row-fluid well">
@@ -99,7 +113,7 @@
                 </tr>
             }
             <tr>
-                <td rowspan="6" colspan="2"></td>
+                <td rowspan="@rowspan" colspan="2"></td>
                 <td colspan="3">Sub total: </td>
                 <td class="money">
                     @subTotal
@@ -111,10 +125,15 @@
                     @tax
                 </td>
             </tr>
+        @if(discount.Value > 0)
+        {
             <tr>
                 <td colspan="3">Order discounts: </td>
                 <td class="money">@discount</td>
             </tr>
+        }
+        @if (shippingTotal.Value > 0)
+        {
             <tr>
                 <td colspan="3">Shipping
                     @if (shipments.Count > 1)
@@ -128,11 +147,14 @@
                     }
                     else
                     {
-                        <text> (via </text>@shipments.First().ShipmentName<text>)</text>
+                        <text> (via @shipments.First().ShipmentName)</text>
                     }
                 </td>
                 <td class="money">@shippingTotal</td>
             </tr>
+        }
+        @if (paymentTotal.Value > 0)
+        {
             <tr>
                 <td colspan="3">Payment
                     @if (basket.Payments.Count > 1)
@@ -146,11 +168,12 @@
                     }
                     else
                     {
-                        <text> (</text>@basket.Payments.First().PaymentMethodName<text>)</text>                        
+                        <text> (@basket.Payments.First().PaymentMethodName)</text>                        
                     }
                 </td>
                 <td class="money">@paymentTotal</td>
             </tr>
+        }
             <tr>
                 <td colspan="3">Order total: </td>
                 <td class="money">@orderTotal</td>
