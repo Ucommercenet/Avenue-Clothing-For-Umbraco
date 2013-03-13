@@ -86,6 +86,7 @@
             return null;
         }
 
+        // NOTE: This could be made more efficient by checking whether the quantities are different
         foreach (var orderLineId in basket.OrderLines.Select(x => x.OrderLineId).ToList())
         {
             int newQuantity;
@@ -94,7 +95,27 @@
                 TransactionLibrary.UpdateLineItem(orderLineId, newQuantity);
             }
         }
-        
+
+        //// NOTE: If you are expecting a lot of changes each time, this would be better a better way to handle the updates
+        // var orderLines = basket.OrderLines.ToList();
+        // foreach (var orderLine in orderLines)
+        // {
+        //     int newQuantity;
+             
+        //     if (!int.TryParse(request.Form[quantityKey + orderLine], out newQuantity)) 
+        //         continue;
+             
+        //     orderLine.Quantity = newQuantity;
+             
+        //     if (newQuantity == 0)
+        //         basket.RemoveOrderLine(orderLine);
+        // }
+
+        foreach (var line in basket.OrderLines.Where(l => l.Quantity == 0))
+        {
+            basket.RemoveOrderLine(line);
+        }
+
         TransactionLibrary.ExecuteBasketPipeline();
         return true;
     }
