@@ -70,7 +70,7 @@
                     var lineTotal = new Money(lineItem.Total.Value, currency);
 
                     <tr class="order-line">
-                        <td><a href="@CatalogLibrary.GetNiceUrlForProduct(product)">@product.DisplayName()</a></td>
+                        <td><a href="@CatalogLibrary.GetNiceUrlForProduct(product)">@lineItem.ProductName</a></td>
                         <td class="money">
                             @if (lineItem.UnitDiscount.HasValue && lineItem.UnitDiscount > 0)
                             {
