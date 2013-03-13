@@ -250,7 +250,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private void AddShirtVariantToProduct(Product product, string namePrefix, string size, string colour)
         {
             var sku = string.Format("{0}-{1}-{2}", product.Sku, size, colour);
-            var name = string.Format("{0} {1} {2}\"", namePrefix, size, colour);
+            var name = string.Format("{0} {1}\" {2}", namePrefix, size, colour);
 
             var variant = CreateVariantOnProduct(product, sku, name);
             AddProductProperty(variant, "CollarSize", size);
