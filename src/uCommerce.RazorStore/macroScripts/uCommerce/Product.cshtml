@@ -11,17 +11,17 @@
 
     if (request.HttpMethod == "POST")
     {
-        @* View /App_Code/uCommerce/Functions/Product.cshtml for this function *@
+@* View /App_Code/uCommerce/Functions/Product.cshtml for this function *@
         var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
-        @* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
+@* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
         itemAddedToCart = uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
         
-        @* View /App_Code/uCommerce/Functions/Review.cshtml for this function *@
+@* View /App_Code/uCommerce/Functions/Review.cshtml for this function *@
         uCommerce.Functions.Review.LeaveReview(product, "review-name", "review-email", "review-rating", "review-headline", "review-text");
     }
     else if (request.HttpMethod == "GET")
     {
-        if(!String.IsNullOrWhiteSpace(request.QueryString["item-added"]))
+        if (!String.IsNullOrWhiteSpace(request.QueryString["item-added"]))
         {
             itemAddedToCart = true;
         }
@@ -33,11 +33,22 @@
     var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
+    // It would be better to write this explicitly
+    // IEnumerable<IGrouping<ProductDefinitionField, ProductProperty>> uniqueVariants = null;
+    // if (product.ProductDefinition.IsProductFamily())
+    // {
+    //    uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
+    //                     where v.ProductDefinitionField.DisplayOnSite
+    //                     group v by v.ProductDefinitionField
+    //                     into g
+    //                     select g;
+    // }
+ 
     var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
                          where v.ProductDefinitionField.DisplayOnSite
                          group v by v.ProductDefinitionField into g
                          select g;
-}
+}}
 @if (inBasket)
 {
     <div class="row-fluid">
@@ -78,40 +89,40 @@
             <small><em>@product.ShortDescription()</em></small>
         </header>
         <form method="post">
-        <div class="span12 well">
-            <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
-                <p class="item-tax">@Html.Raw(productIncludesTax) @price.YourTax tax</p>
-            </aside>
-            @if (uniqueVariants.Any())
-            {
-                <div class="span7">
-                    @foreach (var prop in uniqueVariants)
-                    {
-                        var controlName = string.Format("variation-{0}", prop.Key.Name.ToLower());
-                        <label for="@controlName">@prop.Key.GetDisplayName()</label>
-                        <select name="@controlName" id="@controlName" class="variant">
-                            <option value="">-- Please Select --</option>
-                            @foreach (var value in prop.Select(p => p.Value).Distinct())
-                            {
-                                <option value="@value">@value</option>
-                            }
-                        </select>
-                    }
-                </div>
-            }
-            <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
-            <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
-            <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
-            <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
-            @if (itemAddedToCart.HasValue && itemAddedToCart.Value)
-            {
-                <div class="alert alert-success item-added">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <p>Thanks, this item has been added to your cart. <a href="/cart.aspx">Click here to view your cart</a>.</p>
-                </div>
-            }
-        </div>
+            <div class="span12 well">
+                <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                    <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
+                    <p class="item-tax">@Html.Raw(productIncludesTax) @price.YourTax tax</p>
+                </aside>
+                @if (uniqueVariants.Any())
+                {
+                    <div class="span7">
+                        @foreach (var prop in uniqueVariants)
+                        {
+                            var controlName = string.Format("variation-{0}", prop.Key.Name.ToLower());
+                            <label for="@controlName">@prop.Key.GetDisplayName()</label>
+                            <select name="@controlName" id="@controlName" class="variant">
+                                <option value="">-- Please Select --</option>
+                                @foreach (var value in prop.Select(p => p.Value).Distinct())
+                                {
+                                    <option value="@value">@value</option>
+                                }
+                            </select>
+                        }
+                    </div>
+                }
+                <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
+                <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
+                <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
+                <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+                @if (itemAddedToCart.HasValue && itemAddedToCart.Value)
+                {
+                    <div class="alert alert-success item-added">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <p>Thanks, this item has been added to your cart. <a href="/cart.aspx">Click here to view your cart</a>.</p>
+                    </div>
+                }
+            </div>
         </form>
         <div class="tabbable">
             <ul class="nav nav-tabs">
