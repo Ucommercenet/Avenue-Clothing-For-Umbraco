@@ -23,20 +23,29 @@
     var formattedPrice = new Money((price == null ? 0 : price.Price), basket.BillingCurrency);
 
     @shippingMethod.Name <text>(</text>@formattedPrice<text>)</text>
-    
+}
+@{
+    var shippingCountry = TransactionLibrary.GetShipmentInformation().Country;
+    var availableShippingMethods = TransactionLibrary.GetShippingMethods(shippingCountry);
 }
 <form  method="post">
     <div class="row-fluid well" >
         <div class="span6">
             <h3>Shipping method</h3>
             <br/>
-            @foreach (var shippingMethod in TransactionLibrary.GetShippingMethods())
+            @if (availableShippingMethods.Any())
             {
-                <label class="radio">
-                    <input type="radio" name="shipping-method"  @(shippingMethod.Equals(currentShippingMethod) ? "checked" : string.Empty) 
-                        value="@shippingMethod.ShippingMethodId" />@RenderShippingMethodLabel(shippingMethod, basket)</label>
+                foreach (var shippingMethod in availableShippingMethods)
+                {
+                    <label class="radio">
+                        <input type="radio" name="shipping-method"  @(shippingMethod.Equals(currentShippingMethod) ? "checked" : string.Empty) 
+                               value="@shippingMethod.ShippingMethodId" />@RenderShippingMethodLabel(shippingMethod, basket)</label>
+                }
             }
-
+            else
+            {
+                <p class="alert">WARNING: No shipping methods have been configured for @shippingCountry.Name within <a href="http://ucommerce.dk">UCommerce</a> administration area.</p>
+            }
         </div>
     </div>
     <a href="/cart/address.aspx" class="btn btn-small">Back to Address</a>

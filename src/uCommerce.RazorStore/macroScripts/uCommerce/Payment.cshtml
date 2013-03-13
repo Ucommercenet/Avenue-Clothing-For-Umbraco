@@ -25,20 +25,29 @@
     var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency);
     
     @paymentMethod.Name <text>(</text>@formattedFee <text>+</text> @feePercent.ToString("0.00")<text>%)</text> 
-    
+}
+@{
+    var billingCountry = TransactionLibrary.GetShipmentInformation().Country;
+    var availableBillingMethods = TransactionLibrary.GetPaymentMethods(billingCountry);
 }
 <form  method="post">
-    <div class="row-fluid well" >
+    <div class="row-fluid well">
         <div class="span6">
             <h3>Payment method</h3>
             <br/>
-            @foreach (var paymentMethod in TransactionLibrary.GetPaymentMethods())
+            @if (availableBillingMethods.Any())
             {
-                <label class="radio">
-                    <input type="radio" name="payment-method"  @(payment != null && payment.PaymentMethod.Equals(paymentMethod) ? "checked" : string.Empty) 
-                        value="@paymentMethod.PaymentMethodId" />@RenderPaymentMethodLabel(paymentMethod, basket)</label>
+                foreach (var paymentMethod in availableBillingMethods)
+                {
+                    <label class="radio">
+                        <input type="radio" name="payment-method"  @(payment != null && payment.PaymentMethod.Equals(paymentMethod) ? "checked" : string.Empty) 
+                            value="@paymentMethod.PaymentMethodId" />@RenderPaymentMethodLabel(paymentMethod, basket)</label>
+                }
             }
-
+            else
+            {
+                <p class="alert">WARNING: No payment methods have been configured for @billingCountry.Name within <a href="http://ucommerce.dk">UCommerce</a> administration area.</p>
+            }
         </div>
     </div>
     <a href="/cart/shipping.aspx" class="btn btn-small">Back to Shipping Method</a>
