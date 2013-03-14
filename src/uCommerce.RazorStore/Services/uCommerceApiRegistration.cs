@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
 
 [assembly: PreApplicationStartMethod(typeof(UCommerce.RazorStore.Services.uCommerceApiRegistration), "Start")]
 
@@ -20,12 +22,20 @@ namespace UCommerce.RazorStore.Services
         private static Assembly[] GetServicesFromAssemblies()
         {
             var type = typeof(IUCommerceApiService);
-            return AppDomain.CurrentDomain.GetAssemblies().ToList()
-                            .SelectMany(s => s.GetTypes())
-                            .Where(type.IsAssignableFrom)
-                            .Select(t => t.Assembly)
-                            .Distinct()
-                            .ToArray();
+            var dirs = getAssembliesFromDirectory();
+            return dirs
+                    .SelectMany(s => s.GetTypes())
+                    .Where(type.IsAssignableFrom)
+                    .Select(t => t.Assembly)
+                    .Distinct()
+                    .ToArray();
+        }
+
+        private static IEnumerable<Assembly> getAssembliesFromDirectory()
+        {
+            var path = Assembly.GetExecutingAssembly().Location;
+            var fls = Directory.GetFiles(path, "*.dll");
+            return fls.Select(f => Assembly.LoadFile(f));
         }
     }
 }
