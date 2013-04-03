@@ -21,21 +21,14 @@ namespace UCommerce.RazorStore.Services
 
         private static Assembly[] GetServicesFromAssemblies()
         {
-            var type = typeof(IUCommerceApiService);
-            var dirs = getAssembliesFromDirectory();
-            return dirs
-                    .SelectMany(s => s.GetTypes())
-                    .Where(type.IsAssignableFrom)
-                    .Select(t => t.Assembly)
-                    .Distinct()
-                    .ToArray();
-        }
-
-        private static IEnumerable<Assembly> getAssembliesFromDirectory()
-        {
-            var path = Assembly.GetExecutingAssembly().Location;
-            var fls = Directory.GetFiles(path, "*.dll");
-            return fls.Select(f => Assembly.LoadFile(f));
+            var serviceType = typeof(IUCommerceApiService);
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            return assemblies
+                        .SelectMany(s => s.GetTypes())
+                        .Where(serviceType.IsAssignableFrom)
+                        .Select(t => t.Assembly)
+                        .Distinct()
+                        .ToArray();
         }
     }
 }
