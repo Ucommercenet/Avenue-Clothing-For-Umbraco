@@ -276,7 +276,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private void CreateShirtProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Shirt");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "CollarSize", "Number", true, true, "Collar Inches");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "CollarSize", "ShortText", true, true, "Collar Inches");
             AddProductDefinitionFieldIfDoesntExist(productDefinition, "Colour", "Colour", true, true, "Colour");
             AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
         }
