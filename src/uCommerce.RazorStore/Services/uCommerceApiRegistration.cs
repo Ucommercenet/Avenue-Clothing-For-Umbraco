@@ -29,18 +29,33 @@ namespace UCommerce.RazorStore.Services
         private static Assembly[] GetServicesFromAssemblies()
         {
             var serviceType = typeof(IUCommerceApiService);
-            var assemblies = GetAssemblies();
-            return assemblies
-                        .SelectMany(s => s.GetTypes())
-                        .Where(serviceType.IsAssignableFrom)
+            var assemblies = GetAllAssemblies();
+            var types = GetTypesFromAssemblies(assemblies);
+            return types.Where(serviceType.IsAssignableFrom)
                         .Select(t => t.Assembly)
                         .Distinct()
                         .ToArray();
         }
 
-        private static IEnumerable<Assembly> GetAssemblies()
+        private static IEnumerable<Assembly> GetAllAssemblies()
         {
             return new ReadOnlyCollection<Assembly>(BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToList());
+        }
+
+        private static IEnumerable<Type> GetTypesFromAssemblies(IEnumerable<Assembly> assemblies)
+        {
+            var allTypes = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
+                try
+                {
+                    var types = assembly.GetTypes();
+                    allTypes.AddRange(types);
+                }
+                catch { }
+            }
+
+            return allTypes;
         }
     }
 }
