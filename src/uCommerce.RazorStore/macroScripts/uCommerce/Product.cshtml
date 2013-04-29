@@ -48,7 +48,7 @@
                          where v.ProductDefinitionField.DisplayOnSite
                          group v by v.ProductDefinitionField into g
                          select g;
-}}
+}
 @if (inBasket)
 {
     <div class="row-fluid">
@@ -91,7 +91,7 @@
         <form method="post">
             <div class="span12 well">
                 <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                    <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
+                    <p class="item-price" itemprop="price">@price.YourPrice.Amount</p>
                     <p class="item-tax">@Html.Raw(productIncludesTax) @price.YourTax tax</p>
                 </aside>
                 @if (uniqueVariants.Any())
