@@ -1,5 +1,5 @@
-﻿@using UCommerce.Api
-@using UCommerce.EntitiesV2
+﻿@using UCommerce.EntitiesV2
+@using UCommerce.Pipelines
 @using UCommerce.Runtime
 @functions{
     public static void LeaveReview(UCommerce.EntitiesV2.Product product, string nameKey, string emailKey, string ratingKey, string headlineKey, string reviewTextKey)
@@ -34,9 +34,22 @@
 
         basket.PurchaseOrder.Customer.Save();
 
-        var review = new ProductReview() { ProductCatalogGroup = SiteContext.Current.CatalogContext.CurrentCatalogGroup, ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"), CreatedOn = DateTime.Now, CreatedBy = "System", Product = product, Customer = basket.PurchaseOrder.Customer, Rating = rating, ReviewHeadline = reviewHeadline, ReviewText = reviewText, Ip = request.UserHostName };
+        var review = new ProductReview()
+                         {
+                             ProductCatalogGroup = SiteContext.Current.CatalogContext.CurrentCatalogGroup, 
+                             ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"), 
+                             CreatedOn = DateTime.Now, 
+                             CreatedBy = "System", 
+                             Product = product, 
+                             Customer = basket.PurchaseOrder.Customer, 
+                             Rating = rating, 
+                             ReviewHeadline = reviewHeadline, 
+                             ReviewText = reviewText, 
+                             Ip = request.UserHostName
+                         };
 
         product.AddProductReview(review);
-        product.Save();
+        
+        PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
     }
 }
