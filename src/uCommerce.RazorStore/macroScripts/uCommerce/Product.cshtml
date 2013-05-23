@@ -111,8 +111,11 @@
                         }
                     </div>
                 }
+
                 <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
                 <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
+                <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId" />
+
                 <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
                 <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
                 @if (itemAddedToCart.HasValue && itemAddedToCart.Value)
