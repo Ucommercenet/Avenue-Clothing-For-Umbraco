@@ -52,7 +52,10 @@ namespace UCommerce.RazorStore.Services
                     var types = assembly.GetTypes();
                     allTypes.AddRange(types);
                 }
-                catch { }
+                catch (Exception)
+                {
+                    umbraco.BusinessLogic.Log.Add(umbraco.BusinessLogic.LogTypes.Error, umbraco.BusinessLogic.User.GetUser(0), -1, "Could not load types from: " + assembly.Location);
+                }
             }
 
             return allTypes;
