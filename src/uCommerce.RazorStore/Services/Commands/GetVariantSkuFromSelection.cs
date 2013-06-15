@@ -20,6 +20,10 @@
     }
     public class GetVariantSkuFromSelectionResponse : IHasResponseStatus
     {
+        public GetVariantSkuFromSelectionResponse()
+        {
+        }
+
         public GetVariantSkuFromSelectionResponse(UCommerce.EntitiesV2.Product parentProduct, IDictionary<string, string> properties)
         {
             UCommerce.EntitiesV2.Product variant = null;
