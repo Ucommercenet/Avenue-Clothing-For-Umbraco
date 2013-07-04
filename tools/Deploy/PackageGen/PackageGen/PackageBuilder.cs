@@ -109,10 +109,17 @@ namespace PackageGen
 
         private XElement CreateFilesStub()
         {
+            WriteStubHeader("Files");
             var extensionsToIgnore = new List<string>() { ".css", ".master" };
             var items = CreateXmlFromFileType("*.*", (file, contents) =>
                 {
                     if (extensionsToIgnore.Contains(file.Extension))
+                        return null;
+
+                    var relativeFilename = file.FullName.Replace(_filesFolder.FullName, String.Empty).TrimStart('\\');
+
+                    // Avoid including any master pages
+                    if (relativeFilename.StartsWith("views", StringComparison.InvariantCultureIgnoreCase) && relativeFilename.LastIndexOf("\\") <= 5 && relativeFilename.EndsWith(".cshtml"))
                         return null;
 
                     WriteMessage(String.Format("Adding file: {0}", file.FullName));
@@ -143,12 +150,22 @@ namespace PackageGen
             return newFileName;
         }
 
-        private static Regex parentMaster = new Regex("MasterPageFile=\"~/masterpages/(?<filename>.+)\\.master", RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.Singleline);
+        private static Regex parentMaster = new Regex( "((MasterPageFile=\\\"~/masterpages/(?<filename>.+)\\.master)|(Layout\\s?=\\s?\\\"(?<filename>.+)\\.cshtml\\\"))", RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.Singleline);
 
         private XElement CreateTemplatesStub()
         {
-            var items = CreateXmlFromFileType("*.master", (file, contents) =>
+            WriteStubHeader("Templates");
+            var items = CreateXmlFromFileType(new[] { "*.master", "*.cshtml" }, (file, contents) =>
                 {
+                    var relativeFilename = file.FullName.Replace(_filesFolder.FullName, String.Empty).TrimStart('\\');
+
+                    // Avoid including any non-master pages
+                    if (!relativeFilename.StartsWith("views", StringComparison.InvariantCultureIgnoreCase) || relativeFilename.LastIndexOf("\\") > 5)
+                    {
+                        WriteMessage("Ignoring template: " + relativeFilename);
+                        return null;
+                    }
+
                     WriteMessage(String.Format("Adding template: {0}", file.FullName));
 
                     var match = parentMaster.Match(contents);
@@ -168,7 +185,7 @@ namespace PackageGen
                 });
 
             var templateRoot = new XElement("Templates");
-            foreach (var item in items)
+            foreach (var item in items.Where(i => i != null))
             {
                 templateRoot.Add(item);
             }
@@ -177,6 +194,7 @@ namespace PackageGen
 
         private XElement CreateStylesheetsStub()
         {
+            WriteStubHeader("Stylesheets");
             var items = CreateXmlFromFileType("*.css", (file, contents) =>
             {
                 WriteMessage(String.Format("Adding stylesheet: {0}", file.FullName));
@@ -200,6 +218,11 @@ namespace PackageGen
 
         private IEnumerable<XElement> CreateXmlFromFileType(string extension, Func<FileInfo, string, XElement> fileProcessor)
         {
+            return CreateXmlFromFileType(new[] { extension }, fileProcessor);
+        }
+
+        private IEnumerable<XElement> CreateXmlFromFileType(string[] extension, Func<FileInfo, string, XElement> fileProcessor)
+        {
             var files = GetFilesOfTypeFromFolder(extension);
             return from file in files
                    let contents = ReadFileContents(file)
@@ -208,6 +231,7 @@ namespace PackageGen
 
         private XElement GetXmlStub(string nodename)
         {
+            WriteStubHeader(nodename);
             var filename = Path.Combine(_xmlStubsPath.FullName, string.Format("{0}.xml", nodename));
 
             if (File.Exists(filename))
@@ -225,9 +249,9 @@ namespace PackageGen
             return new XElement(nodename);
         }
 
-        private IEnumerable<FileInfo> GetFilesOfTypeFromFolder(string extension)
+        private IEnumerable<FileInfo> GetFilesOfTypeFromFolder(params string[] extensions)
         {
-            return _filesFolder.GetFiles(extension, SearchOption.AllDirectories);
+            return extensions.SelectMany(extension => _filesFolder.GetFiles(extension, SearchOption.AllDirectories));
         }
 
         private string ReadFileContents(FileSystemInfo file)
@@ -236,6 +260,11 @@ namespace PackageGen
             {
                 return sr.ReadToEnd();
             }
+        }
+
+        private void WriteStubHeader(string creatingFilesStub)
+        {
+            WriteMessage("\n\n---- - - - - - - - - ----\nCreating " + creatingFilesStub + " stub\n---- - - - - - - - - ----");
         }
 
         private void WriteMessage(string message)

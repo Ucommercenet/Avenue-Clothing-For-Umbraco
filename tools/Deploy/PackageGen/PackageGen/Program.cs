@@ -16,7 +16,7 @@ namespace PackageGen
             var packageName = string.Empty;
             var packageId = string.Empty;
             var sourceFolder = string.Empty;
-            var installControl = "/umbraco/ucommerce/install/installer.ascx";
+            var installControl = string.Empty;
             var xmlStubs = string.Empty;
 
             var p = new OptionSet() 
