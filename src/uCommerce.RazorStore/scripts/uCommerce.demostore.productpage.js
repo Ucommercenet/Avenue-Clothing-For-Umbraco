@@ -2,7 +2,7 @@
 $(function () {
 	relateVariations($('#product-sku'), $('#variation-collarsize'), $('#variation-colour'), $('#add-to-basket'));
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
-	wireupAddToCartButton($('#add-to-basket'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
+	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
 });
 function relateVariations(sku, size, colour) {
@@ -72,7 +72,7 @@ function setStarHoverState(label) {
 function setStarHoverOutState(label) {
 	label.addClass('icon-star-empty').removeClass('icon-star');
 }
-function wireupAddToCartButton(addToCartButton, skuInput, variantInputs, quantityInput) {
+function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, variantInputs, quantityInput) {
 	addToCartButton.click(function (e) {
 		e.preventDefault();
 
@@ -93,6 +93,7 @@ function wireupAddToCartButton(addToCartButton, skuInput, variantInputs, quantit
             	var variant = data.Variant;
             	$.uCommerce.addToBasket(
                     {
+                        catalogId: catalogIdInput.val(),
                     	sku: variant.Sku,
                     	variantSku: variant.VariantSku,
                     	quantity: qty

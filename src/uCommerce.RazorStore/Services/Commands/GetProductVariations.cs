@@ -17,6 +17,10 @@
     }
     public class GetProductVariationsResponse : IHasResponseStatus
     {
+        public GetProductVariationsResponse()
+        {
+        }
+
         public GetProductVariationsResponse(UCommerce.EntitiesV2.Product parentProduct)
         {
             

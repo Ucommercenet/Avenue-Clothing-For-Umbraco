@@ -12,7 +12,8 @@
     if (request.HttpMethod == "POST")
     {
 @* View /App_Code/uCommerce/Functions/Product.cshtml for this function *@
-        var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
+        
+    var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
 @* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
         itemAddedToCart = uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
         
@@ -33,22 +34,13 @@
     var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
-    // It would be better to write this explicitly
-    // IEnumerable<IGrouping<ProductDefinitionField, ProductProperty>> uniqueVariants = null;
-    // if (product.ProductDefinition.IsProductFamily())
-    // {
-    //    uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
-    //                     where v.ProductDefinitionField.DisplayOnSite
-    //                     group v by v.ProductDefinitionField
-    //                     into g
-    //                     select g;
-    // }
- 
     var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
                          where v.ProductDefinitionField.DisplayOnSite
+                            && v.ProductDefinitionField.IsVariantProperty
+                            && !v.ProductDefinitionField.Deleted
                          group v by v.ProductDefinitionField into g
                          select g;
-}}
+}
 @if (inBasket)
 {
     <div class="row-fluid">
@@ -91,7 +83,7 @@
         <form method="post">
             <div class="span12 well">
                 <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                    <p class="item-price" itemprop="price">@price.YourPrice.AmountExclTax</p>
+                    <p class="item-price" itemprop="price">@price.YourPrice.Amount</p>
                     <p class="item-tax">@Html.Raw(productIncludesTax) @price.YourTax tax</p>
                 </aside>
                 @if (uniqueVariants.Any())
@@ -111,8 +103,11 @@
                         }
                     </div>
                 }
+
                 <input name="product-sku" id="product-sku" type="hidden" value="@product.Sku" />
                 <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
+                <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId" />
+
                 <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
                 <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
                 @if (itemAddedToCart.HasValue && itemAddedToCart.Value)

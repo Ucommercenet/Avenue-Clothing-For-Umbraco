@@ -25,6 +25,10 @@
 
     public class GetBasketResponse : IHasResponseStatus
     {
+        public GetBasketResponse()
+        {
+        }
+
         public GetBasketResponse(UCommerce.EntitiesV2.Basket basket)
         {
             var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;

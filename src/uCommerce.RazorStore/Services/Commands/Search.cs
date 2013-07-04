@@ -17,6 +17,10 @@
     }
     public class SearchResponse : IHasResponseStatus
     {
+        public SearchResponse()
+        {
+        }
+
         public SearchResponse(IEnumerable<UCommerce.EntitiesV2.Product> products)
         {
             Variations = new List<ProductVariation>();

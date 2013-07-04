@@ -18,6 +18,10 @@
     }
     public class UpdateLineItemResponse : IHasResponseStatus
     {
+        public UpdateLineItemResponse()
+        {
+        }
+
         public UpdateLineItemResponse(UCommerce.EntitiesV2.OrderLine line)
         {
             if (line == null)
