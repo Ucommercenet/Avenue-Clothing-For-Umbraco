@@ -38,6 +38,7 @@
                          where v.ProductDefinitionField.DisplayOnSite
                             && v.ProductDefinitionField.IsVariantProperty
                             && !v.ProductDefinitionField.Deleted
+                            && v.Value != null && v.Value != String.Empty
                          group v by v.ProductDefinitionField into g
                          select g;
 }

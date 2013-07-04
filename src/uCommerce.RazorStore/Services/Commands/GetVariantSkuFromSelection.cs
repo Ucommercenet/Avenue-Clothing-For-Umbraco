@@ -30,7 +30,7 @@
 
             if (parentProduct.Variants.Any() && properties.Any()) // If there are variant values we'll need to find the selected variant
             {
-                variant = parentProduct.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite).All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+                variant = parentProduct.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite && pp.ProductDefinitionField.IsVariantProperty && !pp.ProductDefinitionField.Deleted && pp.Value != null && pp.Value != String.Empty).All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
             }
             else if (!parentProduct.Variants.Any()) // Only use the current product where there are no variants
             {
