@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pipelines\Checkout\CreateMemberForCustomerTask.cs" />
     <Compile Include="Services\IUCommerceApiService.cs" />
     <Compile Include="Services\uCommerceApiAppHost.cs" />
     <Compile Include="Services\uCommerceApiRegistration.cs" />
