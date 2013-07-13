@@ -41,6 +41,13 @@ var uCommerce = uCommerce || {};
                 };
                 var extendedOptions = $.extend(defaults, options);
                 callServiceStack({ UpdateLineItem: extendedOptions }, onSuccess, onError);
+            },
+            addOrderLineProperty: function (options, onSuccess, onError) {
+                var defaults = {
+                    orderLineId: 0
+                };
+                var extendedOptions = $.extend(defaults, options);
+                callServiceStack({ AddOrderLineProperty: extendedOptions }, onSuccess, onError);
             }
         }
     });
