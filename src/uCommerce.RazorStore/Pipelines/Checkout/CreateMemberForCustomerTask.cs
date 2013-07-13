@@ -14,7 +14,7 @@ namespace UCommerce.RazorStore.Pipelines.Checkout
     using UCommerce.Infrastructure.Logging;
     using UCommerce.Pipelines;
     using UCommerce.Security;
-    
+
     /// <summary>
     /// Custom pipeline task that creates a member and emails them their password that was created during the checkout process.
     /// </summary>
@@ -78,8 +78,11 @@ namespace UCommerce.RazorStore.Pipelines.Checkout
             var password = getPasswordFromOrder(purchaseOrder);
             var existingMember = !String.IsNullOrWhiteSpace(customer.MemberId);
 
-            if (existingMember || String.IsNullOrWhiteSpace(password))
+            if (existingMember)
                 return clearPasswordAndReturn(purchaseOrder, PipelineExecutionResult.Success);
+
+            if (String.IsNullOrWhiteSpace(password))
+                password = generatePassword();
 
             var memberId = createUmbracoMember(memberTypeId, memberGroupId, email, password);
 
@@ -176,9 +179,6 @@ namespace UCommerce.RazorStore.Pipelines.Checkout
 
             if (_memberService.IsMember(email))
                 return _memberService.GetMemberFromEmail(email);
-
-            if (!String.IsNullOrWhiteSpace(password))
-                password = generatePassword();
 
             return _memberService.MakeNew(email, password, email, new MemberType(memberTypeId), new MemberGroup(memberGroupId));
         }
