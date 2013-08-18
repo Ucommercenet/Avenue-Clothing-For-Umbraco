@@ -6,7 +6,7 @@
 @using umbraco.MacroEngines
 @helper DisplayListProducts(IEnumerable<UCommerce.EntitiesV2.Product> products, UCommerce.EntitiesV2.Category category)
     {
-    foreach (var product in products)
+    foreach (var product in products.Where(x => x.DisplayOnSite))
     {
     @DisplayListItemProduct(product, category)
     }
