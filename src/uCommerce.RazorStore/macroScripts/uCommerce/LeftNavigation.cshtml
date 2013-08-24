@@ -7,7 +7,7 @@
     if (categories.Any())
     {
         <ul class="nav nav-list">
-            @foreach (var category in categories)
+            @foreach (var category in categories.OrderBy(x => x.SortOrder))
             {
 				if(category.DisplayOnSite == true)
 				{
