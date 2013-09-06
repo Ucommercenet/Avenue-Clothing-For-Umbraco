@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
+using UCommerce.Infrastructure;
+using UCommerce.Search.Indexers;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
@@ -24,9 +27,19 @@ namespace UCommerce.RazorStore.Installer.Helpers
             EnablePaymentMethodForCatalog(catalogGroup);
             EnableShippingMethodForCatalog(catalogGroup);
             CreateCatalogue(catalog);
+			new Thread(TriggerIndexing).Start();
         }
 
-        private ProductCatalogGroup CreateCatalogGroup()
+
+		/// <summary>
+		/// Kicks off async indexing to search enable newly created products.
+		/// </summary>
+	    private void TriggerIndexing()
+	    {
+			new ManualObjectFactory().Resolve<ScratchIndexer>().Index();
+	    }
+
+	    private ProductCatalogGroup CreateCatalogGroup()
         {
             var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == _catalogGroupName) ?? new ProductCatalogGroupFactory().NewWithDefaults(_catalogGroupName);
             group.ProductReviewsRequireApproval = true;

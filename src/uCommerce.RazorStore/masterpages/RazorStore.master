@@ -36,7 +36,7 @@
                     <a class="brand span3" href="/" >Avenue Clothing</a>
                     <form id="search-form" class="navbar-search form-search pull-left" action="/search.aspx">
                     <div class="input-append">
-                        <input id="site-search" type="text" name="search" class="search-query" placeholder="Search the store">
+                        <input id="site-search" type="text" name="search" type="text" class="search-query" placeholder="Search the store">
                         <button type="submit" class="btn"><i class="icon-grey-search"></i></button>
                     </div>
                     </form>
@@ -57,6 +57,9 @@
                     <div class="well sidebar-nav" id="main-nav">
                         <umbraco:macro alias="ucLeftNavigation" runat="server" />
                     </div>
+					<div class="sidebar-nav" id="facets-nav">
+						<umbraco:macro alias="ucFacets" runat="server" />
+					</div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>
                             <li><i class="icon-grey-star"></i>5 star satisfaction</li>
@@ -105,6 +108,7 @@
         <script src="/scripts/ucommerce.servicestack.js"></script>
         <script src="/scripts/ucommerce.jquery.js"></script>
         <script src="/scripts/ucommerce.demostore.js"></script>
+		<script src="/scripts/uCommerce.facets.js"></script>
         <asp:ContentPlaceHolder runat="server" ID="cphScripts" />
     </body>
     </html>

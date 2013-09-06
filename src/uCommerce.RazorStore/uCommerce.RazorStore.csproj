@@ -85,11 +85,13 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UCommerce">
-      <HintPath>..\..\lib\uCommerce\3.6.0.13142\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce, Version=3.6.0.13142, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\4.0.0.13249\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure">
-      <HintPath>..\..\lib\uCommerce\3.6.0.13142\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=3.6.0.13142, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\4.0.0.13249\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
@@ -99,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\uCommerce\Extensions\FacetedQueryStringExtensions.cs" />
     <Compile Include="Pipelines\Checkout\CreateMemberForCustomerTask.cs" />
     <Compile Include="Services\IUCommerceApiService.cs" />
     <Compile Include="Services\uCommerceApiAppHost.cs" />
@@ -129,6 +132,7 @@
     <Content Include="scripts\uCommerce.demostore.checkout.js" />
     <Content Include="scripts\uCommerce.demostore.cart.js" />
     <Content Include="scripts\uCommerce.demostore.js" />
+    <Content Include="scripts\uCommerce.facets.js" />
     <Content Include="scripts\uCommerce.ServiceStack.js" />
     <Content Include="scripts\uCommerce.jQuery.js" />
     <Content Include="scripts\uCommerce.demostore.productpage.js" />
@@ -241,7 +245,9 @@
   <ItemGroup>
     <Content Include="masterpages\RazorStoreCheckout.master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="macroScripts\uCommerce\Facets.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStoreEmail.master" />
   </ItemGroup>

@@ -276,25 +276,25 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private void CreateShirtProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Shirt");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "CollarSize", "ShortText", true, true, "Collar Inches");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "Colour", "Colour", true, true, "Colour");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "CollarSize", "ShortText", true, true, true, "Collar Inches");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "Colour", "Colour", true, true, true, "Colour");
+	        AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, false, "Show On Homepage");
         }
 
         private void CreateShoeProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Shoe");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShoeSize", "ShortText", true, true, "Shoe Size");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShoeSize", "ShortText", true, true, true, "Shoe Size");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, false, "Show On Homepage");
         }
 
         private void CreateAccessoryProductDefinition()
         {
             var productDefinition = CreateProductDefinition("Accessory");
-            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, "Show On Homepage");
+            AddProductDefinitionFieldIfDoesntExist(productDefinition, "ShowOnHomepage", "Boolean", false, false, false, "Show On Homepage");
         }
 
-        private void AddProductDefinitionFieldIfDoesntExist(ProductDefinition definition, string name, string typeName, bool displayOnWebsite, bool variantProperty, string displayName)
+        private void AddProductDefinitionFieldIfDoesntExist(ProductDefinition definition, string name, string typeName, bool displayOnWebsite, bool variantProperty, bool promotoToFacet, string displayName)
         {
             if (definition.GetDefinitionFields().Any(f => f.Name == name))
                 return;
@@ -307,6 +307,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             field.DisplayOnSite = displayOnWebsite;
             field.IsVariantProperty = variantProperty;
             field.RenderInEditor = true;
+	        field.Facet = promotoToFacet;
 
             //Helpers.DoForEachCulture(language =>
             //    {
