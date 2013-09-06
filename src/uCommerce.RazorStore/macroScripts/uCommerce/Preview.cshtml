@@ -11,7 +11,7 @@
     }
     
     var basket = TransactionLibrary.GetBasket().PurchaseOrder;
-    var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+	var currency = basket.BillingCurrency;
     var billingAddress = TransactionLibrary.GetBillingInformation();
     var shipmentAddress = TransactionLibrary.GetShipmentInformation();
     var shipments = basket.Shipments;
