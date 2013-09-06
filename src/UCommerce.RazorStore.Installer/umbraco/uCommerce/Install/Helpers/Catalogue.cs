@@ -65,7 +65,15 @@ namespace UCommerce.RazorStore.Installer.Helpers
             catalog.DisplayOnWebSite = true;
             catalog.Deleted = false;
             catalog.ShowPricesIncludingVAT = true;
-            catalog.Save();
+			
+			// Versions of CatalogFactory prior to 3.6 did not
+			// add catalog to catalog group. Need to do it
+			// if not already done to make sure roles and 
+			// permissions are created properly.
+			if (!catalogGroup.ProductCatalogs.Contains(catalog))
+				catalogGroup.ProductCatalogs.Add(catalog);
+            
+			catalog.Save();
             
             var priceGroup = PriceGroup.SingleOrDefault(p => p.Name == "EUR 15 pct");
             if (priceGroup != null)

@@ -85,16 +85,11 @@ namespace UCommerce.RazorStore.Installer
                 }
             }
 
+			var installer1 = new ConfigurationInstaller();
+			installer1.AssignAccessPermissionsToDemoStore();
+
             pnlInstall.Visible = false;
             pnlThanks.Visible = true;
-        }
-
-        protected void btnAssignPermissions_Click(object sender, EventArgs e)
-        {
-            var installer = new ConfigurationInstaller();
-            installer.AssignAccessPermissionsToDemoStore();
-            pnlThanks.Visible = false;
-            pnlThanks2.Visible = true;
         }
     }
 }
