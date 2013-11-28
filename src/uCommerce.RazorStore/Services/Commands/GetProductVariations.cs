@@ -42,7 +42,7 @@
 
         public ICollection<ProductVariation> Variations { get; set; }
     }
-    public class GetProductVariationsService : ServiceBase<GetProductVariations>, IUCommerceApiService
+    public class GetProductVariationsService : ServiceBase<GetProductVariations>
     {
         protected override object Run(GetProductVariations request)
         {

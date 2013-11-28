@@ -18,7 +18,7 @@
 		public ResponseStatus ResponseStatus { get; set; }
 	}
 
-	public class AddToBasketService : ServiceBase<AddToBasket>, IUCommerceApiService
+	public class AddToBasketService : ServiceBase<AddToBasket>
 	{
 		protected override object Run(AddToBasket request)
 		{

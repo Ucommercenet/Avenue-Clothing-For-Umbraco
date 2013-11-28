@@ -53,7 +53,7 @@
 
         public LineItem UpdatedLine { get; set; }
     }
-    public class UpdateLineItemService : ServiceBase<UpdateLineItem>, IUCommerceApiService
+    public class UpdateLineItemService : ServiceBase<UpdateLineItem>
     {
         protected override object Run(UpdateLineItem request)
         {

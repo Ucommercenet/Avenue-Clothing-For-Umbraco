@@ -36,7 +36,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 		/// </summary>
 	    private void TriggerIndexing()
 	    {
-			new ManualObjectFactory().Resolve<ScratchIndexer>().Index();
+			ObjectFactory.Instance.Resolve<ScratchIndexer>().Index();
 	    }
 
 	    private ProductCatalogGroup CreateCatalogGroup()
@@ -44,7 +44,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == _catalogGroupName) ?? new ProductCatalogGroupFactory().NewWithDefaults(_catalogGroupName);
             group.ProductReviewsRequireApproval = true;
             group.Deleted = false;
-            group.CreateCustomersAsUmbracoMembers = false;
+            group.CreateCustomersAsMembers = false;
             group.DomainId = null;
             group.Save();
             group.OrderNumberSerie = GetDefaultOrderNumberSeries();
