@@ -231,7 +231,7 @@
     <Content Include="App_Code\uCommerce\Functions\Basket.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\uCommerce\Functions\Review.cshtml" />
+    <Content Include="App_Code\uCommerce\Helpers\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\uCommerce\Functions\Product.cshtml" />
