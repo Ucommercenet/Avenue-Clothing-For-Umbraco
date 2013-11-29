@@ -34,9 +34,9 @@
 
         basket.PurchaseOrder.Customer.Save();
 
-        var review = new ProductReview()
+        var review = new UCommerce.EntitiesV2.ProductReview()
                          {
-                             ProductCatalogGroup = SiteContext.Current.CatalogContext.CurrentCatalogGroup, 
+							 ProductCatalogGroup = SiteContext.Current.CatalogContext.CurrentCatalogGroup, 							 
                              ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"), 
                              CreatedOn = DateTime.Now, 
                              CreatedBy = "System", 
@@ -50,6 +50,6 @@
 
         product.AddProductReview(review);
         
-        PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
+        PipelineFactory.Create<UCommerce.EntitiesV2.ProductReview>("ProductReview").Execute(review);
     }
 }
