@@ -13,7 +13,7 @@
 
     if (filterProducts.Any())
     {
-        foreach (var product in filterProducts)
+        foreach (var product in filterProducts.Where(x => x.DisplayOnSite))
         {
             var listProduct = products.First(x => x.Sku == product.Sku && x.VariantSku == product.VariantSku);
             @DisplayListItemProduct(listProduct, category)
@@ -21,7 +21,7 @@
     }
     else
     {
-        foreach (var product in products)
+        foreach (var product in products.Where(x => x.DisplayOnSite))
         {
             @DisplayListItemProduct(product, category);
         }

@@ -67,6 +67,8 @@
         </div>
     </div>
 }
+@if(product.DisplayOnSite)
+{
 <div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
     <div class="span6">
         @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
@@ -177,3 +179,8 @@
         </div>
     }
 </div>
+}
+else
+{
+	<div>The item you are looking for is not available at the moment.</div>
+}
