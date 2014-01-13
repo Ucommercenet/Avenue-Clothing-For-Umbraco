@@ -281,7 +281,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void AddProductProperty(Product product, string dataFieldName, string value)
         {
-            if (product.ProductProperties.Any(p => p.ProductDefinitionField.Name == dataFieldName && p.Value == value))
+            if (product.ProductProperties.Any(p => p.ProductDefinitionField.Name == dataFieldName))
                 return;
 
             var field = GetProductDefinitionField(product, dataFieldName);
