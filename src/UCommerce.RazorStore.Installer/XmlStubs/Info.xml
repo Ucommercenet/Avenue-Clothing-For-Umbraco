@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
     <package>
-        <name>uCommerce Demo Store - Razor 1.0.3.13143</name>
-        <version>1.0.3.13124</version>
+        <name>Avenue Clothing Demo Store for uCommerce 5 - Razor 3.0.1.14013</name>
+        <version>3.0.1.14013</version>
         <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
-        <url>http://www.ucommerce.dk</url>
+        <url>http://www.ucommerce.net</url>
         <requirements>
             <major>4</major>
             <minor>9</minor>

@@ -49,8 +49,25 @@ namespace UCommerce.RazorStore.Installer
                 var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerce.dk");
                 if (group != null)
                 {
-                    group.Deleted = true;
-                    group.Save();
+					// Delete products in group
+					foreach (var relation in CategoryProductRelation.All().Where(x => group.ProductCatalogs.Contains(x.Category.ProductCatalog)).ToList())
+					{
+						var category = relation.Category;
+						var product = relation.Product;
+						category.RemoveProduct(product);
+						product.Delete();
+					}
+
+					// Delete catalogs
+					foreach (var catalog in group.ProductCatalogs)
+					{
+						catalog.Deleted = true;
+					}
+
+					// Delete group itself
+					group.Deleted = true;
+
+	                group.Save();
                 }
             }
 
@@ -85,16 +102,11 @@ namespace UCommerce.RazorStore.Installer
                 }
             }
 
+			var installer1 = new ConfigurationInstaller();
+			installer1.AssignAccessPermissionsToDemoStore();
+
             pnlInstall.Visible = false;
             pnlThanks.Visible = true;
-        }
-
-        protected void btnAssignPermissions_Click(object sender, EventArgs e)
-        {
-            var installer = new ConfigurationInstaller();
-            installer.AssignAccessPermissionsToDemoStore();
-            pnlThanks.Visible = false;
-            pnlThanks2.Visible = true;
         }
     }
 }

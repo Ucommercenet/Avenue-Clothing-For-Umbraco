@@ -165,4 +165,15 @@
         <scriptingFile>uCommerce/Search.cshtml</scriptingFile>
         <properties />
     </macro>
+	<macro>
+		<name>uCommerce Store Faceted Search</name>
+		<alias>ucFacets</alias>
+		<scriptType />
+		<scriptAssembly />
+		<xslt />
+		<useInEditor>False</useInEditor>
+		<refreshRate>0</refreshRate>
+		<scriptingFile>uCommerce/Facets.cshtml</scriptingFile>
+		<properties />
+	</macro>
 </Macros>

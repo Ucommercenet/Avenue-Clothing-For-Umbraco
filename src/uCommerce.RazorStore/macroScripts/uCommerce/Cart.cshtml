@@ -5,8 +5,8 @@
 @{
     var request = HttpContext.Current.Request;
     var basket = TransactionLibrary.GetBasket(true).PurchaseOrder;
-    var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
-
+	var currency = basket.BillingCurrency;
+	
     if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "update-and-continue"))
     {
 @* For this helper functions refer to /App_Code/uCommerce/Functions/Basket.cshtml *@

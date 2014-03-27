@@ -106,7 +106,7 @@
         public ResponseStatus ResponseStatus { get; set; }
         public Basket Basket { get; set; }
     }
-    public class GetBasketService : ServiceBase<GetBasket>, IUCommerceApiService
+    public class GetBasketService : ServiceBase<GetBasket>
     {
         protected override object Run(GetBasket request)
         {

@@ -12,8 +12,7 @@
     if (request.HttpMethod == "POST")
     {
 @* View /App_Code/uCommerce/Functions/Product.cshtml for this function *@
-        
-    var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
+        var variant = uCommerce.Functions.Product.GetVariantFromPostData(product, "variation-");
 @* View /App_Code/uCommerce/Functions/Basket.cshtml for this function *@
         itemAddedToCart = uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
         
@@ -34,11 +33,19 @@
     var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
     var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
 
+    // It would be better to write this explicitly
+    // IEnumerable<IGrouping<ProductDefinitionField, ProductProperty>> uniqueVariants = null;
+    // if (product.ProductDefinition.IsProductFamily())
+    // {
+    //    uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
+    //                     where v.ProductDefinitionField.DisplayOnSite
+    //                     group v by v.ProductDefinitionField
+    //                     into g
+    //                     select g;
+    // }
+ 
     var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
                          where v.ProductDefinitionField.DisplayOnSite
-                            && v.ProductDefinitionField.IsVariantProperty
-                            && !v.ProductDefinitionField.Deleted
-                            && v.Value != null && v.Value != String.Empty
                          group v by v.ProductDefinitionField into g
                          select g;
 }
@@ -60,6 +67,8 @@
         </div>
     </div>
 }
+@if(product.DisplayOnSite)
+{
 <div id="product-details" class="row-fluid" itemscope itemtype="http://schema.org/Product">
     <div class="span6">
         @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
@@ -170,3 +179,8 @@
         </div>
     }
 </div>
+}
+else
+{
+	<div>The item you are looking for is not available at the moment.</div>
+}

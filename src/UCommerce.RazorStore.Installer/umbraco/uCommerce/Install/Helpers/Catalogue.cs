@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
+using UCommerce.Infrastructure;
+using UCommerce.Search.Indexers;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
@@ -24,14 +27,24 @@ namespace UCommerce.RazorStore.Installer.Helpers
             EnablePaymentMethodForCatalog(catalogGroup);
             EnableShippingMethodForCatalog(catalogGroup);
             CreateCatalogue(catalog);
+			new Thread(TriggerIndexing).Start();
         }
 
-        private ProductCatalogGroup CreateCatalogGroup()
+
+		/// <summary>
+		/// Kicks off async indexing to search enable newly created products.
+		/// </summary>
+	    private void TriggerIndexing()
+	    {
+			ObjectFactory.Instance.Resolve<ScratchIndexer>().Index();
+	    }
+
+	    private ProductCatalogGroup CreateCatalogGroup()
         {
             var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == _catalogGroupName) ?? new ProductCatalogGroupFactory().NewWithDefaults(_catalogGroupName);
             group.ProductReviewsRequireApproval = true;
             group.Deleted = false;
-            group.CreateCustomersAsUmbracoMembers = false;
+            group.CreateCustomersAsMembers = false;
             group.DomainId = null;
             group.Save();
             group.OrderNumberSerie = GetDefaultOrderNumberSeries();
@@ -65,7 +78,15 @@ namespace UCommerce.RazorStore.Installer.Helpers
             catalog.DisplayOnWebSite = true;
             catalog.Deleted = false;
             catalog.ShowPricesIncludingVAT = true;
-            catalog.Save();
+			
+			// Versions of CatalogFactory prior to 3.6 did not
+			// add catalog to catalog group. Need to do it
+			// if not already done to make sure roles and 
+			// permissions are created properly.
+			if (!catalogGroup.ProductCatalogs.Contains(catalog))
+				catalogGroup.ProductCatalogs.Add(catalog);
+            
+			catalog.Save();
             
             var priceGroup = PriceGroup.SingleOrDefault(p => p.Name == "EUR 15 pct");
             if (priceGroup != null)
@@ -260,7 +281,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void AddProductProperty(Product product, string dataFieldName, string value)
         {
-            if (product.ProductProperties.Any(p => p.ProductDefinitionField.Name == dataFieldName && p.Value == value))
+            if (product.ProductProperties.Any(p => p.ProductDefinitionField.Name == dataFieldName))
                 return;
 
             var field = GetProductDefinitionField(product, dataFieldName);

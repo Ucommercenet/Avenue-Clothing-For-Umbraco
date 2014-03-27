@@ -58,7 +58,7 @@
 
         public ProductVariation Variant { get; set; }
     }
-    public class GetVariantSkuFromSelectionService : ServiceBase<GetVariantSkuFromSelection>, IUCommerceApiService
+    public class GetVariantSkuFromSelectionService : ServiceBase<GetVariantSkuFromSelection>
     {
         protected override object Run(GetVariantSkuFromSelection request)
         {

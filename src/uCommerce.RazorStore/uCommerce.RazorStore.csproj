@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UCommerce.RazorStore</RootNamespace>
     <AssemblyName>UCommerce.RazorStore</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
@@ -25,6 +25,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +45,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="businesslogic">
@@ -53,16 +57,24 @@
     <Reference Include="interfaces">
       <HintPath>..\..\lib\umbraco\interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack">
-      <HintPath>..\..\lib\ServiceStack\3.78\ServiceStack.dll</HintPath>
+    <Reference Include="ServiceStack, Version=3.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ServiceStack\3.9.55\ServiceStack.3.9.55\lib\net35\ServiceStack.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\lib\ServiceStack\3.78\ServiceStack.Interfaces.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces, Version=3.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ServiceStack\3.9.55\ServiceStack.Common.3.9.55\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="ServiceStack.ServiceInterface">
-      <HintPath>..\..\lib\ServiceStack\3.78\ServiceStack.ServiceInterface.dll</HintPath>
+    <Reference Include="ServiceStack.ServiceInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ServiceStack\3.9.55\ServiceStack.3.9.55\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
+      <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -74,22 +86,27 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UCommerce">
-      <HintPath>..\..\lib\uCommerce\3.6.0.13142\UCommerce.dll</HintPath>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UCommerce, Version=4.0.0.13249, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\5.0.0.13332\UCommerce.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure">
-      <HintPath>..\..\lib\uCommerce\3.6.0.13142\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=4.0.0.13249, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\5.0.0.13332\UCommerce.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UCommerce.Web.Api">
+      <HintPath>..\..\lib\uCommerce\5.0.0.13332\UCommerce.Web.Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
@@ -99,11 +116,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\uCommerce\Extensions\FacetedQueryStringExtensions.cs" />
     <Compile Include="Pipelines\Checkout\CreateMemberForCustomerTask.cs" />
-    <Compile Include="Services\IUCommerceApiService.cs" />
-    <Compile Include="Services\uCommerceApiAppHost.cs" />
-    <Compile Include="Services\uCommerceApiRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AssemblyTag.cs" />
     <Compile Include="Services\Commands\Search.cs" />
     <Compile Include="Services\Commands\GetVariantSkuFromSelection.cs" />
     <Compile Include="Services\Commands\GetProductVariations.cs" />
@@ -129,6 +145,7 @@
     <Content Include="scripts\uCommerce.demostore.checkout.js" />
     <Content Include="scripts\uCommerce.demostore.cart.js" />
     <Content Include="scripts\uCommerce.demostore.js" />
+    <Content Include="scripts\uCommerce.facets.js" />
     <Content Include="scripts\uCommerce.ServiceStack.js" />
     <Content Include="scripts\uCommerce.jQuery.js" />
     <Content Include="scripts\uCommerce.demostore.productpage.js" />
@@ -224,7 +241,7 @@
     <Content Include="App_Code\uCommerce\Functions\Basket.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\uCommerce\Functions\Review.cshtml" />
+    <Content Include="App_Code\uCommerce\Helpers\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\uCommerce\Functions\Product.cshtml" />
@@ -241,7 +258,9 @@
   <ItemGroup>
     <Content Include="masterpages\RazorStoreCheckout.master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="macroScripts\uCommerce\Facets.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="masterpages\RazorStoreEmail.master" />
   </ItemGroup>

@@ -1,14 +1,30 @@
-﻿@using UCommerce
+@using UCommerce
 @using UCommerce.Api
 @using UCommerce.Extensions
 @using UCommerce.EntitiesV2
 @using UCommerce.Runtime
+@using UCommerce.Search
 @using umbraco.MacroEngines
 @helper DisplayListProducts(IEnumerable<UCommerce.EntitiesV2.Product> products, UCommerce.EntitiesV2.Category category)
+{
+    var facetsForQuerying = Request.QueryString.ToFacets();
+
+    var filterProducts = category != null ? SearchLibrary.GetProductsFor(category, facetsForQuerying) : new List<UCommerce.Documents.Product>();
+
+    if (filterProducts.Any())
     {
-    foreach (var product in products)
+        foreach (var product in filterProducts.Where(x => x.DisplayOnSite))
+        {
+            var listProduct = products.First(x => x.Sku == product.Sku && x.VariantSku == product.VariantSku);
+            @DisplayListItemProduct(listProduct, category)
+        }       
+    }
+    else
     {
-    @DisplayListItemProduct(product, category)
+        foreach (var product in products.Where(x => x.DisplayOnSite))
+        {
+            @DisplayListItemProduct(product, category);
+        }
     }
 }
 @helper DisplayListItemProduct(UCommerce.EntitiesV2.Product product, UCommerce.EntitiesV2.Category category)

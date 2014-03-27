@@ -47,7 +47,7 @@
 
         public ICollection<ProductVariation> Variations { get; set; }
     }
-    public class SearchService : ServiceBase<Search>, IUCommerceApiService
+    public class SearchService : ServiceBase<Search>
     {
         protected override object Run(Search request)
         {

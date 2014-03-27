@@ -71,7 +71,7 @@ namespace UCommerce.RazorStore.Pipelines.Checkout
             Guard.Against.NullArgument(memberGroupId, String.Format("No member group configured for product catalog group {0}", group.Name));
             Guard.Against.NullArgument(memberTypeId, String.Format("No member type configured for product catalog group {0}", group.Name));
 
-            if (!purchaseOrder.ProductCatalogGroup.CreateCustomersAsUmbracoMembers || String.IsNullOrWhiteSpace(getPasswordFromOrder(purchaseOrder)))
+            if (!purchaseOrder.ProductCatalogGroup.CreateCustomersAsMembers || String.IsNullOrWhiteSpace(getPasswordFromOrder(purchaseOrder)))
                 return clearPasswordAndReturn(purchaseOrder, PipelineExecutionResult.Success);
 
             var customer = purchaseOrder.Customer;

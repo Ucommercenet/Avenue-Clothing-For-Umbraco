@@ -4,26 +4,27 @@
 @using UCommerce.Runtime
 @helper RenderNavigation(ICollection<Category> categories)
 {
-    if (!categories.Any())
+    if (categories.Any())
     {
-        return;
-    }
-    
-    <ul class="nav nav-list">
-        @foreach (var category in categories.Where(c => c.DisplayOnSite))
-        {
-            var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
-            var css = "";
-            if (currentCategory != null && currentCategory.CategoryId == category.CategoryId)
+        <ul class="nav nav-list">
+            @foreach (var category in categories)
             {
-                css = " class=\"on\"";
+				if(category.DisplayOnSite == true)
+				{
+					var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
+					var css = "";
+					if (currentCategory != null && currentCategory.CategoryId == category.CategoryId)
+					{
+						css = " class=\"on\"";
+					}
+					<li @Html.Raw(css)>
+						<a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
+						@RenderNavigation(category.Categories)
+					</li>
+				}
             }
-            <li @Html.Raw(css)>
-                <a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
-                @RenderNavigation(category.Categories)
-            </li>
-        }
-    </ul>
+        </ul>
+    }
 }
 
 
