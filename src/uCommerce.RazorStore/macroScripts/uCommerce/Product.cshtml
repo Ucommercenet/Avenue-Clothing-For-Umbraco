@@ -90,6 +90,8 @@
                 @product.DynamicProperty().Brand</h6>
             <small><em>@product.ShortDescription()</em></small>
         </header>
+        @if(product.AllowOrdering)
+        {
         <form method="post">
             <div class="span12 well">
                 <aside class="span5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -129,6 +131,9 @@
                 }
             </div>
         </form>
+        }else{
+            <p>Sorry, the item you are looking for is not currently available.</p>
+        }
         <div class="tabbable">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#product-description" data-toggle="tab">Details</a></li>
