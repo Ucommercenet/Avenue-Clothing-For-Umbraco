@@ -2,30 +2,27 @@
 @using UCommerce.EntitiesV2
 @using UCommerce.Extensions
 @using UCommerce.Runtime
-@helper RenderNavigation(ICollection<Category> categories)
+@helper RenderNavigation(ICollection<Category> categories, Category currentCategory)
 {
     if (categories.Any())
     {
-        <ul class="nav nav-list">
-            @foreach (var category in categories)
-            {
-				if(category.DisplayOnSite == true)
-				{
-					var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
-					var css = "";
-					if (currentCategory != null && currentCategory.CategoryId == category.CategoryId)
-					{
-						css = " class=\"on\"";
-					}
-					<li @Html.Raw(css)>
-						<a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
-						@RenderNavigation(category.Categories)
-					</li>
-				}
-            }
-        </ul>
+        return;
     }
+    <ul class="nav nav-list">
+        @foreach (var category in categories.Where(x => x.DisplayOnSite).OrderBy(x => x.SortOrder))
+        {
+            var css = "";
+            if (currentCategory != null && currentCategory.CategoryId == category.CategoryId)
+            {
+                css = " class=\"on\"";
+            }
+            <li @Html.Raw(css)>
+                <a href="@CatalogLibrary.GetNiceUrlForCategory(category)">@category.DisplayName()</a>
+                @RenderNavigation(category.Categories, currentCategory)
+            </li>
+        }
+    </ul>
 }
 
 
-@RenderNavigation(CatalogLibrary.GetRootCategories())
+@RenderNavigation(CatalogLibrary.GetRootCategories(), SiteContext.Current.CatalogContext.CurrentCategory)
