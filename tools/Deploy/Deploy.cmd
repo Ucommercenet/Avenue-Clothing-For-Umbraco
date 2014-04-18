@@ -1,9 +1,7 @@
-
 @echo off
 rem Run from Tools folder
 rem Usage
-rem echo "Usage CSR <machine to deploy to>"
-rem robocopy ..\src\csr\Vertica.DSG.CSR.WebSite \\%1\inetpub\wwwroot\CSR /e /purge /xf *.cs /xf *.??proj /xf *.vspscc /xd obj /xd _Resharper*
+rem Deploy ..\..\src\uCommerce.RazorStore c:\inetpub\MyStore
 IF /I [%1]==[] GOTO :MISSING_PARAM
 IF /I [%2]==[] GOTO :MISSING_PARAM
 
