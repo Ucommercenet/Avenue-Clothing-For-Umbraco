@@ -4,7 +4,7 @@
 @using UCommerce.Runtime
 @helper RenderNavigation(ICollection<Category> categories, Category currentCategory)
 {
-    if (categories.Any())
+    if (!categories.Any())
     {
         return;
     }
