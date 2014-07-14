@@ -110,7 +110,7 @@
     {
         protected override object Run(GetBasket request)
         {
-            var basket = TransactionLibrary.GetBasket(false);
+            var basket = TransactionLibrary.GetBasket(true);
             return new GetBasketResponse(basket);
         }
 
