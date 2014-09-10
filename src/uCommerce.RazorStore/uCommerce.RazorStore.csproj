@@ -94,17 +94,17 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UCommerce, Version=5.0.0.13332, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce, Version=6.2.0.14247, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\6.2.0.14247\UCommerce.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.2.2.14253\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=5.0.0.13332, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Infrastructure, Version=6.2.0.14247, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\6.2.0.14247\UCommerce.Infrastructure.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.2.2.14253\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Web.Api, Version=5.0.0.13332, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Web.Api, Version=6.2.0.14247, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\6.2.0.14247\UCommerce.Web.Api.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.2.2.14253\UCommerce.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
