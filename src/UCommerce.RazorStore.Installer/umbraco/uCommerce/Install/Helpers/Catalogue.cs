@@ -352,10 +352,11 @@ namespace UCommerce.RazorStore.Installer.Helpers
             if (!product.PriceGroupPrices.Any())
                 product.AddPriceGroupPrice(new PriceGroupPrice { Price = price, PriceGroup = category.ProductCatalog.PriceGroup });
 
-            product.Save();
+			// uCommerce checks whether the product already exists in the create
+			// when creating the new relation.
+			product.AddCategory(category, 0);
 
-            if (product.CategoryProductRelations.All(r => r.Category.CategoryId != category.CategoryId))
-                category.AddProduct(product, 0);
+			product.Save();
 
             return product;
         }
