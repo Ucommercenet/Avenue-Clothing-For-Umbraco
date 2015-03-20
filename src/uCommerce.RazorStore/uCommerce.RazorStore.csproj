@@ -94,20 +94,20 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UCommerce, Version=6.3.0.14269, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce, Version=6.6.3.15079, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\6.5.1.14323\UCommerce.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.6.3.15079\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=6.3.0.14269, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Infrastructure, Version=6.6.3.15079, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\6.5.1.14323\UCommerce.Infrastructure.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.6.3.15079\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="UCommerce.Umbraco">
-      <HintPath>..\..\lib\uCommerce\6.5.1.14323\UCommerce.Umbraco.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.6.3.15079\UCommerce.Umbraco.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Web.Api, Version=6.3.0.14269, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Web.Api, Version=6.6.3.15079, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\6.5.1.14323\UCommerce.Web.Api.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\6.6.3.15079\UCommerce.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
