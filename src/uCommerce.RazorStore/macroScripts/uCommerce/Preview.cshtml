@@ -18,7 +18,7 @@
 
     var subTotal = new Money(basket.SubTotal.Value, currency);
     var tax = new Money(basket.VAT.Value, currency);
-    var discount = new Money(basket.DiscountTotal.Value * -1, currency);
+    var discount = new Money(basket.DiscountTotal.Value, currency);
     var shippingTotal = new Money(basket.ShippingTotal.Value, currency);
     var paymentTotal = new Money(basket.PaymentTotal.Value, currency);
     var orderTotal = new Money(basket.OrderTotal.Value, currency);
@@ -129,7 +129,7 @@
         {
             <tr>
                 <td colspan="3">Order discounts: </td>
-                <td class="money">@discount</td>
+                <td class="money">@(discount.Value * -1)</td>
             </tr>
         }
         @if (shippingTotal.Value > 0)
