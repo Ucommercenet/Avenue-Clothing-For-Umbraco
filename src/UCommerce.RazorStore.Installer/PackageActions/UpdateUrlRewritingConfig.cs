@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
-using UCommerce.Umbraco7.Installer.PackageActions;
+using UCommerce.Umbraco.Installer.PackageActions;
 
 namespace UCommerce.RazorStore.Installer.PackageActions
 {

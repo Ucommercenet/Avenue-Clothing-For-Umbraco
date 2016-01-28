@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommerce.RazorStore", "uCommerce.RazorStore\UCommerce.RazorStore.csproj", "{F8F50DF5-68DC-4268-B132-F3730BE6E80F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommerce.RazorStore.Installer", "UCommerce.RazorStore.Installer\UCommerce.RazorStore.Installer.csproj", "{5DC07961-B0F6-4F6F-9A3A-81CD7BB3B707}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommerce.RazorStore.Installer.Tests", "UCommerce.RazorStore.Installer.Tests\UCommerce.RazorStore.Installer.Tests.csproj", "{8863DAEB-0EAA-4D9A-ABCA-43C36BFE3E61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{E322E75D-0ACC-4BDC-8C94-2390EABD1BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

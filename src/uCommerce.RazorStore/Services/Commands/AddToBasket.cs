@@ -22,7 +22,7 @@
 	{
 		protected override object Run(AddToBasket request)
 		{
-			TransactionLibrary.AddToBasket(request.Quantity, request.Sku, request.VariantSku, request.AddToExistingLine, true, request.CatalogId);
+			TransactionLibrary.AddToBasket(request.Quantity, request.Sku, request.VariantSku, addToExistingLine: true, executeBasketPipeline: true);
 			return new AddToBasketResponse();
 		}
 	}

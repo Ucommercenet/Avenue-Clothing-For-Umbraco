@@ -70,25 +70,26 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UCommerce, Version=6.6.3.15079, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=6.6.3.15079, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Infrastructure, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=6.6.3.15079, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Installer, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Umbraco7">
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco7.dll</HintPath>
+    <Reference Include="UCommerce.Umbraco">
+      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Umbraco7.Installer">
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco7.Installer.dll</HintPath>
+    <Reference Include="UCommerce.Umbraco.Installer">
+      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Web.Api">
+    <Reference Include="UCommerce.Web.Api, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
