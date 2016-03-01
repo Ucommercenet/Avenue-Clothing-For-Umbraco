@@ -1,5 +1,7 @@
-﻿@using UCommerce.EntitiesV2
+﻿@using UCommerce.Content
+@using UCommerce.EntitiesV2
 @using UCommerce.Extensions
+@using UCommerce.Infrastructure
 @using UCommerce.Runtime
 @using umbraco.MacroEngines
 @using UCommerce.Api
@@ -73,8 +75,8 @@
     <div class="span6">
         @if (!string.IsNullOrEmpty(product.PrimaryImageMediaId))
         {
-            dynamic mediaItem = new DynamicMedia(product.PrimaryImageMediaId);
-            <img src="@mediaItem.umbracoFile" />
+            var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(product.PrimaryImageMediaId).Url;
+            <img src="@media" />
         }
     </div>
     <section class="span6">

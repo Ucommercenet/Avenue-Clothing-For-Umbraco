@@ -1,5 +1,7 @@
-﻿@using UCommerce.EntitiesV2
+﻿@using UCommerce.Content
+@using UCommerce.EntitiesV2
 @using UCommerce.Extensions
+@using UCommerce.Infrastructure
 @using UCommerce.Runtime
 @using umbraco.MacroEngines
 @{
@@ -9,8 +11,8 @@
     <div class="hero-unit">
         @if (!string.IsNullOrEmpty(category.ImageMediaId))
         {
-            dynamic mediaItem = new DynamicMedia(category.ImageMediaId);
-            <img src="@mediaItem.umbracoFile" alt="@category.DisplayName()" />
+            var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(category.ImageMediaId).Url;
+            <img src="@media" />
         }
     </div>
 </div>

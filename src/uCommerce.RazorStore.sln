@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCommerce.RazorStore.Installer.Tests", "UCommerce.RazorStore.Installer.Tests\UCommerce.RazorStore.Installer.Tests.csproj", "{8863DAEB-0EAA-4D9A-ABCA-43C36BFE3E61}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{E322E75D-0ACC-4BDC-8C94-2390EABD1BFB}"
+	ProjectSection(SolutionItems) = preProject
+		..\tools\Deploy\DemoStoreDeploy.cmd = ..\tools\Deploy\DemoStoreDeploy.cmd
+		..\tools\Deploy\Deploy.cmd = ..\tools\Deploy\Deploy.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

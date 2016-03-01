@@ -1,7 +1,9 @@
 @using UCommerce
 @using UCommerce.Api
+@using UCommerce.Content
 @using UCommerce.Extensions
 @using UCommerce.EntitiesV2
+@using UCommerce.Infrastructure
 @using UCommerce.Runtime
 @using UCommerce.Search
 @using umbraco.MacroEngines
@@ -35,8 +37,8 @@
         <div class="product-image">
             @if (!string.IsNullOrEmpty(product.ThumbnailImageMediaId))
             {
-                dynamic mediaItem = new DynamicMedia(product.ThumbnailImageMediaId);
-                <a href="@url"><img src="@mediaItem.umbracoFile" /></a>
+                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(product.ThumbnailImageMediaId).Url;
+                <a href="@url"><img src="@media" /></a>
             }
             @if (product.ProductReviews.Any())
             {
