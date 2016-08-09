@@ -308,7 +308,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\DemoStoreDeploy.cmd"'
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\DemoStoreDeploy.cmd"
 "$(SolutionDir)..\tools\deploy\Deploy.cmd"</PostBuildEvent>
   </PropertyGroup>
 </Project>
