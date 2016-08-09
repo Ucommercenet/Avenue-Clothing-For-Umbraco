@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.MasterClass.Website.Models;
+using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class BillingController : System.Web.Mvc.Controller
-	{
+	public class BillingController : RenderMvcController
+    {
 		public ActionResult Index()
 		{
 			var addressDetails = new AddressDetailsViewModel();

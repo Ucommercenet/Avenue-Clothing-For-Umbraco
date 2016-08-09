@@ -6,11 +6,11 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.MasterClass.Website.Models;
-
+using Umbraco.Web.Mvc;
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class BasketController : System.Web.Mvc.Controller
-	{
+	public class BasketController : RenderMvcController
+    {
 		public ActionResult Index()
 		{
 			PurchaseOrder basket = UCommerce.Api.TransactionLibrary.GetBasket(false).PurchaseOrder;

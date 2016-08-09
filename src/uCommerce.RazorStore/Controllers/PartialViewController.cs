@@ -7,11 +7,12 @@ using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.Extensions;
 using UCommerce.MasterClass.Website.Models;
+using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class PartialViewController : System.Web.Mvc.Controller
-	{
+	public class PartialViewController : RenderMvcController
+    {
 		public ActionResult CategoryNavigation()
 		{
 			var categoryNavigation = new CategoryNavigationViewModel();

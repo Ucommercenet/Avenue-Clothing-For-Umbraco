@@ -10,11 +10,12 @@ using UCommerce.Extensions;
 using UCommerce.MasterClass.Website.Models;
 using UCommerce.Runtime;
 using UCommerce.Search.Indexers;
+using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class CategoryController : System.Web.Mvc.Controller
-	{
+	public class CategoryController : RenderMvcController
+    {
 		public ActionResult Index()
 		{
 			var categoryViewModel = new CategoryViewModel();

@@ -9,11 +9,12 @@ using UCommerce.EntitiesV2.Queries.Marketing;
 using UCommerce.Extensions;
 using UCommerce.MasterClass.Website.Models;
 using UCommerce.Runtime;
+using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class ProductController : System.Web.Mvc.Controller
-	{
+	public class ProductController : RenderMvcController
+    {
 		public ActionResult Index()
 		{
 			var currentProduct = UCommerce.Runtime.SiteContext.Current.CatalogContext.CurrentProduct;

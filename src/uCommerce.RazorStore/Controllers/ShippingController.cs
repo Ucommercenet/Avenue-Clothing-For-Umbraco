@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.MasterClass.Website.Models;
+using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class ShippingController : System.Web.Mvc.Controller
-	{
+	public class ShippingController : RenderMvcController
+    {
 		public ActionResult Index()
 		{
 			var shipping = new ShippingViewModel();
