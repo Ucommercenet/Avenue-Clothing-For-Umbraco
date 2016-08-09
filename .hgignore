@@ -31,3 +31,5 @@ _ReSharper*
 *_ToPackage*
 *nrcunch*
 node_modules
+src/packages/*
+src/uCommerce.RazorStore/web.config
