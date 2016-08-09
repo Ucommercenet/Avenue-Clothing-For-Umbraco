@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<BuildDependsOn>
+			RestoreNpmPkgs;
+			$(BuildDependsOn)
+		</BuildDependsOn>
+	</PropertyGroup>
+  <PropertyGroup>
+    <NpmExec><![CDATA[
+      IF EXIST "%VS110COMNTOOLS%VsDevCmd.bat" (
+      call "%VS110COMNTOOLS%VsDevCmd.bat"
+      ) ELSE (
+      echo VS 11 Common Tools not found
+      )
+      IF EXIST "%VS120COMNTOOLS%VsDevCmd.bat" (
+      call "%VS120COMNTOOLS%VsDevCmd.bat"
+      ) ELSE (
+      echo VS 12 Common Tools not found
+      )
+      set PATH=$(MSBuildThisFileDirectory)..\tools\;%PATH%
+      "$(MSBuildThisFileDirectory)..\tools\npm" install
+      ]]></NpmExec>
+  </PropertyGroup>
+	<Target Name="RestoreNpmPkgs">
+		<Message Text="Restoring NPM packages..." Condition="'$(DONT_INSTALL_NPM)' == ''"/>
+    <Exec Command="$(NpmExec)" Condition="'$(DONT_INSTALL_NPM)' == ''" />
+		<Message Text="NPMs not installed, environment variable 'DONT_INSTALL_NPM' set." Condition="'$(DONT_INSTALL_NPM)' != ''" />
+		<Message Text="NPM packages restored!" Condition="'$(DONT_INSTALL_NPM)' == ''"/>
+    </Target>
+</Project>

@@ -30,3 +30,4 @@ _ReSharper*
 ._*
 *_ToPackage*
 *nrcunch*
+node_modules
