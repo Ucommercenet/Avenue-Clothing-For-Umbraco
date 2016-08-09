@@ -1,0 +1,16 @@
+{
+  "name": "ucommerce.razorstore",
+  "version": "1.0.0",
+  "description": "npm dependencies",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-sass": "^2.3.2",
+    "gulp-watch": "^4.3.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alice",
+  "license": "ISC"
+}
