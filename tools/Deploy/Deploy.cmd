@@ -26,6 +26,7 @@ robocopy "%path1%\App_Code" "%path2%\App_Code" /s
 robocopy "%path1%\macroScripts" "%path2%\macroScripts" /s
 robocopy "%path1%\css" "%path2%\css" /s
 robocopy "%path1%\Content" "%path2%\Content" /s
+robocopy "%path1%\scripts" "%path2%\scripts" /s
 robocopy "%path1%\img" "%path2%\img" /s
 robocopy "%path1%\js" "%path2%\js" /s
 robocopy "%path1%\masterpages" "%path2%\masterpages"
