@@ -9,9 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href="/css/ucommerce.bootstrap.css" rel="stylesheet">
-        <link href="/css/ucommerce.bootstrap-responsive.css" rel="stylesheet">
+       <%-- <link href="/css/ucommerce.bootstrap.css" rel="stylesheet">
+        <link href="/css/ucommerce.bootstrap-responsive.css" rel="stylesheet">--%>
+        <link rel="stylesheet" href="/Content/bootstrap.css"/>
         <link href="/css/ucommerce.demostore.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/tether.css"/>
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -28,22 +30,22 @@
   })();
 </script>
     </head>
-    <body>
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
+    
+        <div class="navbar navbar-fixed-top navbar-default">
+            <div class="container">
                 <div class="container-fluid">
-                    <div class="row-fluid">
-                    <a class="brand span3" href="/" >Avenue Clothing</a>
-                    <form id="search-form" class="navbar-search form-search pull-left" action="/search.aspx">
+                    <div class="row"><div class="navbar-header"><a class="span3 navbar-brand" href="/">Avenue Clothing</a></div>
+                    
+                    <form id="search-form" class="pull-left form-inline navbar-form" action="/search.aspx">
                     <div class="input-append">
-                        <input id="site-search" type="text" name="search" type="text" class="search-query" placeholder="Search the store">
-                        <button type="submit" class="btn"><i class="icon-grey-search"></i></button>
+                        <input id="site-search" type="text" name="search" class="search-query form-control" placeholder="Search the store">
+                        <button type="submit" class="btn btn-default"><i class="icon-grey-search"></i></button>
                     </div>
                     </form>
-                    <div class="nav-collapse pull-right">
-                        <ul class="nav">
+                    <div class="pull-right navbar-collapse">
+                        <ul class="nav navbar-nav">
                             <li>
-                                <umbraco:macro alias="ucMiniBasket" runat="server" />
+                                <umbraco:macro alias="ucMiniBasket" runat="server"></umbraco:macro>
                             </li>
                         </ul>
                     </div>
@@ -52,64 +54,71 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span3">
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
                     <div class="well sidebar-nav" id="main-nav">
-                        <umbraco:macro alias="ucLeftNavigation" runat="server" />
+                        <umbraco:macro alias="ucLeftNavigation" runat="server"></umbraco:macro>
                     </div>
 					<div class="sidebar-nav" id="facets-nav">
-						<umbraco:macro alias="ucFacets" runat="server" />
+						<umbraco:macro alias="ucFacets" runat="server"></umbraco:macro>
 					</div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>
                             <li><i class="icon-grey-star"></i>5 star satisfaction</li>
                             <li><i class="icon-truck"></i>Free delivery</li>
-                            <li>Payment Information<br />
-                            <img src="/img/ucommerce/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" title="We accept VISA, SOLO, PayPal, MasterCard" /></li>
+                            <li>Payment Information<br>
+                            <img src="/img/ucommerce/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" title="We accept VISA, SOLO, PayPal, MasterCard"></li>
                         </ol>
-                        <p id="powered-by-ucommerce"><a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank"><img src="/img/ucommerce/ucommerce.png" alt="Powered by uCommerce" /></a></p>
+                        <p id="powered-by-ucommerce"><a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank"><img src="/img/ucommerce/ucommerce.png" alt="Powered by uCommerce"></a></p>
                     </div>
                     <div class="well sidebar-nav" id="about">
                         <h5>About Avenue Clothing</h5>
                         <p>Avenue Clothing is an example store to demonstrate the simple -yet powerful e-commerce functionality uCommerce brings to Umbraco.</p>
                         <p>All products listed are from existing retailers but no orders will be fulfilled.</p>
-                        <p><a href="http://ucommerce.dk" class="btn" title="The most feature rich e-commerce package for Umbraco">Find Out More</a></p>
+                        <p><a href="http://ucommerce.dk" class="btn btn-default" title="The most feature rich e-commerce package for Umbraco">Find Out More</a></p>
                     </div>
                     <div class="well sidebar-nav" id="newsletter">
                         <h5>Keep up-to-date</h5>
                         <p>Sign up to our newsletter.</p>
                         <form action="http://thesitedoctor.createsend.com/t/y/s/xbjtk/" method="post" class="validate" id="newsletter-form">
                             <div class="input-append">
-                                <input type="email" name="cm-xbjtk-xbjtk" id="xbjtk-xbjtk" class="required email span9" />
-                                <button type="submit" class="btn">Go</button>
+                                <input type="email" name="cm-xbjtk-xbjtk" id="xbjtk-xbjtk" class="required email span9 form-control">
+                                <button type="submit" class="btn btn-default">Go</button>
                             </div>
 						</form>
                     </div>
                 </div>
-                <div class="span9">
-                    <asp:ContentPlaceHolder runat="server" ID="cphMain" />
+                <div class="col-sm-9 col-md-9">
+                    <asp:contentplaceholder runat="server" id="cphMain"></asp:contentplaceholder>
                 </div>
             </div>
             <hr>
             <footer>
-                <asp:ContentPlaceHolder runat="server" ID="cphFoot" />
-                <div class="span6">
-                    <p>&copy; <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank">uCommerce ApS</a></p>
+                <asp:contentplaceholder runat="server" id="cphFoot"></asp:contentplaceholder>
+                <div class="col-sm-6 col-md-6">
+                    <p>© <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank">uCommerce ApS</a></p>
                 </div>
-                <div class="span6 pull-right">
+                <div class="pull-right col-sm-6 col-md-6">
                     <p>Store demo'd by <a href="http://www.thesitedoctor.co.uk/" title="The Site Doctor - Herefordshire based Web Design, Development and IT Consultancy" target="_blank">The Site Doctor</a> 2012</p>
                 </div>
             </footer>
         </div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-        <script src="/scripts/ucommerce.bootstrap.js"></script>
+        <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>--%>
+<%--        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>--%>
+           <%--<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>--%>
+       <%--<script src="/scripts/ucommerce.bootstrap.js"></script>--%>
+        <script src="/scripts/jquery-3.0.0.js"></script>
+        <script src="/scripts/jquery-3.0.0.slim.js"></script>
+         <script src="/scripts/tether.js"></script>
+        <script src="/scripts/bootstrap.js"></script>
         <script src="/scripts/ucommerce.servicestack.js"></script>
-        <script src="/scripts/ucommerce.jquery.js"></script>
+        <%--<script src="/scripts/ucommerce.jquery.js"></script>--%>
         <script src="/scripts/ucommerce.demostore.js"></script>
 		<script src="/scripts/uCommerce.facets.js"></script>
-        <asp:ContentPlaceHolder runat="server" ID="cphScripts" />
-    </body>
+        <script src="/scripts/jquery.validate.min.js"></script>
+       
+ 
+        <asp:contentplaceholder runat="server" id="cphScripts"></asp:contentplaceholder>
+    
     </html>
 </asp:Content>

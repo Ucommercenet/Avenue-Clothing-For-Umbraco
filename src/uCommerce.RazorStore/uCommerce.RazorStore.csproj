@@ -359,6 +359,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\tether.css" />
+    <Content Include="css\tether.min.css" />
     <Content Include="css\uCommerce.bootstrap-responsive.css" />
     <Content Include="css\uCommerce.demostore.css" />
     <Content Include="img\uCommerce\cards.png" />
@@ -369,6 +371,15 @@
     <Content Include="img\uCommerce\return.png" />
     <Content Include="img\uCommerce\ucommerce.png" />
     <Content Include="npmPlaceholder.txt" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <None Include="scripts\jquery-3.0.0.intellisense.js" />
+    <Content Include="scripts\jquery-3.0.0.js" />
+    <Content Include="scripts\jquery-3.0.0.min.js" />
+    <Content Include="scripts\jquery-3.0.0.slim.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\tether.js" />
+    <Content Include="scripts\tether.min.js" />
     <Content Include="scripts\uCommerce.bootstrap.js" />
     <Content Include="scripts\uCommerce.demostore.checkout.js" />
     <Content Include="scripts\uCommerce.demostore.cart.js" />
