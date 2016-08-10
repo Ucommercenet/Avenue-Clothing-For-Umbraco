@@ -1,0 +1,28 @@
+﻿@using System.Web.Mvc.Html
+@using UCommerce.RazorStore.Models
+@*@Model UCommerce.RazorStore.Models.CategoryNavigationViewModel*@
+
+@{
+    Layout = null;
+}
+
+@helper DisplayCategories(IList<CategoryViewModel> categories)
+{
+    <ul>
+        @foreach (var category in categories)
+        {
+            <li>
+                <a href="@category.Url">
+                    <span>@category.Name</span>
+                </a>
+                @DisplayCategories(category.Categories)
+            </li>
+        }
+    </ul>
+}
+
+@DisplayCategories(Model.Categories)
+
+
+
+

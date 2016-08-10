@@ -7,7 +7,7 @@ using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Queries.Marketing;
 using UCommerce.Extensions;
-using UCommerce.MasterClass.Website.Models;
+using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using Umbraco.Web.Mvc;
 

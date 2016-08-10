@@ -22,10 +22,7 @@
             Sku = orderLine.Sku,
             VariantSku = orderLine.VariantSku
             
-        };
-        
-        
-        
+        };   
         
         @uCommerce.Helpers.Product.DisplayListProducts(products, category)
         foreach (var childCategory in category.Categories)

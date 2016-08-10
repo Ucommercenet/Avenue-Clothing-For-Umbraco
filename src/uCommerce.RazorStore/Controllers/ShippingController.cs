@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UCommerce.Api;
-using UCommerce.MasterClass.Website.Models;
+using UCommerce.RazorStore.Models;
 using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers

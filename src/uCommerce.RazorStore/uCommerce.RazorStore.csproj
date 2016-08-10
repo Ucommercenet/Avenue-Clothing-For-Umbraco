@@ -359,10 +359,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="css\tether.css" />
     <Content Include="css\tether.min.css" />
     <Content Include="css\uCommerce.bootstrap-responsive.css" />
     <Content Include="css\uCommerce.demostore.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\uCommerce\cards.png" />
     <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
     <Content Include="img\uCommerce\homepage-banner-blue-kittens.jpg" />
@@ -373,11 +375,19 @@
     <Content Include="npmPlaceholder.txt" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="scripts\jquery-3.0.0.intellisense.js" />
     <Content Include="scripts\jquery-3.0.0.js" />
     <Content Include="scripts\jquery-3.0.0.min.js" />
     <Content Include="scripts\jquery-3.0.0.slim.js" />
     <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\tether.js" />
     <Content Include="scripts\tether.min.js" />
     <Content Include="scripts\uCommerce.bootstrap.js" />
@@ -589,6 +599,9 @@
     <Content Include="Content\bootstrap\_utilities.scss" />
     <Content Include="Content\bootstrap\_variables.scss" />
     <Content Include="web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -635,7 +648,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Programming\Demo Store Accelerator - Local\src\uCommerce.RazorStore" "C:\Programming\Demo Store v2"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

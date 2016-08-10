@@ -17,13 +17,6 @@ gulp.task('sass', function() {
         .pipe(notify({ message: 'Sass has been processed.' }));
 });
 
-// gulp.task("sass-no", function(){
-//     gulp.src(config.sass)
-//         .pipe(sass().on("error", sass.logError))
-//         .pipe(gulp.dest('src/uCommerce.RazorStore/css/sass.css'))
-//         .pipe(notify({ message: 'Sass has been processed.' }));
-// });
-
 gulp.task('watch-sass', function() {
     gulp.watch('uCommerce.RazorStore/css/*.scss', ['sass']);  // If a file changes, re-run 'sass'
 });
