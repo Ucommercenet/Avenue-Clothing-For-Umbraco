@@ -4,10 +4,7 @@
 @{
     Layout = "";
 }
-
-@helper DisplayMiniBasket(MiniBasketViewModel miniBasket)
-    {
-        if (miniBasket == null || miniBasket.Total == null)
+        @if (Model.IsEmpty)
             {
                 <a href="/" id="empty-cart">Your Shopping Cart is empty</a>
             }
@@ -15,11 +12,10 @@
             {
                 <a href="/cart.aspx" id="mini-cart">
                     <i class="icon-shopping-cart icon-white"></i>
-                    <span class="item-qty">@miniBasket.NumberOfItems.ToString()</span> items in cart, total: <span class="order-total">@miniBasket.Total.ToString()</span>
+                    <span class="item-qty">@Model.NumberOfItems</span> items in cart, total: <span class="order-total">@Model.Total</span>
                 </a>
             }
-}
 
-@DisplayMiniBasket(Model)
+
 
 

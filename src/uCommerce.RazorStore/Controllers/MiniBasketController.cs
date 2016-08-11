@@ -17,18 +17,17 @@ namespace UCommerce.RazorStore.Controllers
         public ActionResult Index()
         {
             var miniBasket = new MiniBasketViewModel();
-            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
-            miniBasket.Total = new Money(0, currency);
-
-            PurchaseOrder basket = null;
+            miniBasket.IsEmpty = true;
 
             if (TransactionLibrary.HasBasket())
             {
-                basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
-                if (basket.OrderTotal.HasValue)
+                PurchaseOrder basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
+                var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
+                if (numberOfItems != 0)
                 {
-                    miniBasket.Total = new Money(basket.OrderTotal.Value, currency);
+                    miniBasket.Total = new Money(basket.OrderTotal.Value, basket.BillingCurrency);
                     miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
+                    miniBasket.IsEmpty = false;
                 }
             }
 
