@@ -29,8 +29,8 @@
     var availableShippingMethods = TransactionLibrary.GetShippingMethods(shippingCountry);
 }
 <form  method="post">
-    <div class="row-fluid well" >
-        <div class="span6">
+    <div class="row well" >
+        <div class="col-md-6">
             <h3>Shipping method</h3>
             <br/>
             @if (availableShippingMethods.Any())
@@ -48,6 +48,6 @@
             }
         </div>
     </div>
-    <a href="/cart/address.aspx" class="btn btn-small">Back to Address</a>
-    <button name="update-shipment" class="pull-right btn btn-large btn-success" type="submit">Continue to Confirmation <i class="icon-arrow-right icon-white"></i>
+    <a href="/cart/address.aspx" class="btn btn-secondary btn-sm">Back to Address</a>
+    <button name="update-shipment" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Confirmation <i class="icon-arrow-right icon-white"></i> </button>
 </form>

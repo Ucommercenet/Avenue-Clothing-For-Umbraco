@@ -34,14 +34,14 @@
 						{
 							if (val.Hits == 0)
 							{
-								<label class="disabled">
+								<label class="disabled facet">
 									<input type="checkbox" id="filter-@facet.Name-@val.Value" key="@facet.Name" class="filter" value="@val.Value" disabled="disabled">				
 									@val.Value (@val.Hits)
 								</label>
 							}
 							else
 							{
-								<label>
+								<label class="facet">
 									<input type="checkbox" id="filter-@facet.Name-@val.Value" key="@facet.Name" class="filter" value="@val.Value">				
 									@val.Value (@val.Hits)	
 								</label>

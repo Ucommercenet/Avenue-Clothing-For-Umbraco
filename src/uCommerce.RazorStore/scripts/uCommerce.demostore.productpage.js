@@ -67,10 +67,10 @@ function wireupRatings(radios) {
 	});
 };
 function setStarHoverState(label) {
-	label.addClass('icon-star').removeClass('icon-star-empty');
+	label.addClass('fa-star').removeClass('fa-star-o');
 }
 function setStarHoverOutState(label) {
-	label.addClass('icon-star-empty').removeClass('icon-star');
+	label.addClass('fa-star-o').removeClass('fa-star');
 }
 function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, variantInputs, quantityInput) {
 	addToCartButton.click(function (e) {
@@ -112,7 +112,7 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     		parent.append(alert);
                     		alert.slideDown();
                     	} else {
-                    		alert.effect("highlight", { color: '#FCF8E3' }, 500);
+                    		//alert.effect("highlight", { color: '#FCF8E3' }, 500);
                     	}
 
                     	// Incase there's already a timeout in place, clear it
@@ -159,7 +159,7 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
             	// If there is only a single item in the list then select it
             	var availableOptions = $('option', colour).not('option[value=""]').not(':disabled');
 
-            	if (selectedSize != '' && availableOptions.size() == 1 && userAction) {
+            	if (selectedSize != '' && availableOptions.length == 1 && userAction) {
             		colour.val(availableOptions.val());
             		//Fire these events manually to prevent a loop
             		updateVariationOptions(sku, size, colour, false);

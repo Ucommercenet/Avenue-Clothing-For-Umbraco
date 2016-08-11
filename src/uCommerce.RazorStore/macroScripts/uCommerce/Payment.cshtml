@@ -31,8 +31,8 @@
     var availableBillingMethods = TransactionLibrary.GetPaymentMethods(billingCountry);
 }
 <form  method="post">
-    <div class="row-fluid well">
-        <div class="span6">
+    <div class="row well">
+        <div class="col-md-6">
             <h3>Payment method</h3>
             <br/>
             @if (availableBillingMethods.Any())
@@ -50,6 +50,6 @@
             }
         </div>
     </div>
-    <a href="/cart/shipping.aspx" class="btn btn-small">Back to Shipping Method</a>
-    <button name="update-payment" class="pull-right btn btn-large btn-success" type="submit">Continue to Payment Page <i class="icon-arrow-right icon-white"></i></button>
+    <a href="/cart/shipping.aspx" class="btn btn-secondary btn-sm">Back to Shipping Method</a>
+    <button name="update-payment" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Payment Page <i class="icon-arrow-right icon-white"></i></button>
 </form>

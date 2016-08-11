@@ -12,7 +12,7 @@ using UCommerce.Runtime;
 using UCommerce.Search.Indexers;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.MasterClass.Website.Controllers
+namespace UCommerce.RazorStore.Controllers
 {
 	public class CategoryController : RenderMvcController
     {
@@ -29,7 +29,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			categoryViewModel.Products = MapProducts(productsInCategory);
 
-			return View("/views/category.cshtml",categoryViewModel);
+			return View("/Views/Category/Category.cshtml",categoryViewModel);
 		}
 
 		private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)

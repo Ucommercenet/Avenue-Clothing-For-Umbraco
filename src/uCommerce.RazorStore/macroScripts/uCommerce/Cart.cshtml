@@ -40,7 +40,7 @@
         orderTotal = new Money(basket.OrderTotal.Value, currency);
     }
 }
-<div class="row-fluid">
+<div class="row">
     @if (!basket.OrderLines.Any())
     {
         <div class="alert alert-info">
@@ -101,16 +101,16 @@
                 }
                 <tr>
                     <td rowspan="4">
-                        <div class="span6">
-                            <div class="input-append">
+                        <div class="col-md-6">
+                            <div class="input-group">
                                 <input type="text" name="voucher-code" />
-                                <button name="add-voucher" class="btn" type="submit"><i class="icon-plus icon-white"></i>Add Voucher</button>
+                                <button name="add-voucher" class="btn btn-secondary" type="submit"><i class="icon-plus icon-white"></i>Add Voucher</button>
                             </div>
                             <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
                         </div>
                     </td>
                     <td colspan="2" rowspan="4">
-                        <button name="update-basket" id="update-basket" class="btn update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
+                        <button name="update-basket" id="update-basket" class="btn btn-secondary update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
                     </td>
                     <td>Sub total:</td>
                     <td class="money order-subtotal">
@@ -141,8 +141,8 @@
                 </tr>
             </tbody>
         </table>
-        <div class="pull-right">
-            <button name="update-and-continue" class="btn btn-large btn-success" type="submit">Continue to Checkout <i class="icon-arrow-right icon-white"></i></button>
+        <div class="pull-xs-right">
+            <button name="update-and-continue" class="btn btn-secondary btn-large btn-success" type="submit">Continue to Checkout <i class="icon-arrow-right icon-white"></i></button>
         </div>
         </form>
     }
