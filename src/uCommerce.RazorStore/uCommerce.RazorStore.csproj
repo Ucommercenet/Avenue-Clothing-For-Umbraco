@@ -327,6 +327,7 @@
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MiniBasketController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PreviewController.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Models\AddToBasketViewModel.cs" />
     <Compile Include="Models\CategoryNavigationViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\MiniBasketViewModel.cs" />
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
@@ -603,6 +605,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
     <Content Include="Views\web.config" />
+    <Content Include="Views\MiniBasket\MiniBasket.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -613,6 +616,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
