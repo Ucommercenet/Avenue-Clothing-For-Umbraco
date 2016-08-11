@@ -31,7 +31,7 @@ namespace UCommerce.RazorStore.Controllers
                 }
             }
 
-            return View("/views/MiniBasket/MiniBasket.cshtml", miniBasket);
+            return View("/views/PartialView/MiniBasket.cshtml", miniBasket);
         }
     }
 }
