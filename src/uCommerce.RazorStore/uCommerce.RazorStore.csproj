@@ -361,7 +361,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\glyphicons-28-search.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="css\tether.css" />
     <Content Include="css\tether.min.css" />
     <Content Include="css\uCommerce.bootstrap-responsive.css" />
@@ -377,6 +380,11 @@
     <Content Include="npmPlaceholder.txt" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -603,8 +611,10 @@
     <Content Include="web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Category\Category.cshtml" />
+    <Content Include="Views\Layout.cshtml" />
+    <Content Include="Views\frontpage.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
-    <Content Include="Views\web.config" />
     <Content Include="Views\PartialView\MiniBasket.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -616,7 +626,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -653,7 +662,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Programming\Demo Store Accelerator - Local\src\uCommerce.RazorStore" "C:\Programming\Demo Store v2"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

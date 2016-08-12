@@ -3,4 +3,8 @@
     Layout = "Layout.cshtml";
 }
 
-Hello World!
+@Umbraco.RenderMacro("ucHomepageBanners")
+<div class="hero-unit">
+    @Umbraco.Field("content")
+</div>
+@Umbraco.RenderMacro("ucHomepageCatalog")

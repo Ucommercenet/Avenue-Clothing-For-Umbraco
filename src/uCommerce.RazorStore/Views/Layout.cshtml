@@ -1,7 +1,7 @@
-﻿@{
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
     Layout = null;
 }
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +108,7 @@
             <hr>
             <footer>
                 <asp:contentplaceholder runat="server" id="cphFoot"></asp:contentplaceholder>
-                @RenderSection("cphFoot", false);
+                @RenderSection("cphFoot", false)
                 <div class="col-sm-6 col-md-6">
                     <p>
                         © <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank">uCommerce ApS</a>
