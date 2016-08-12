@@ -60,7 +60,7 @@
                         <umbraco:macro alias="uCommerceCategoryNavigation" runat="server"></umbraco:macro>
                     </div>
 					<div class="sidebar-nav" id="facets-nav">
-						<umbraco:macro alias="ucFacets" runat="server"></umbraco:macro>
+						<umbraco:macro alias="uCommerceFacets" runat="server"></umbraco:macro>
 					</div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>
