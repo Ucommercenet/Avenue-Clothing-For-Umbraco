@@ -326,6 +326,7 @@
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MiniBasketController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
@@ -338,6 +339,9 @@
     <Compile Include="Models\AddToBasketViewModel.cs" />
     <Compile Include="Models\CategoryNavigationViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\FacetsDisplayedViewModel.cs" />
+    <Compile Include="Models\FacetValueViewModel.cs" />
+    <Compile Include="Models\FacetViewModel.cs" />
     <Compile Include="Models\MiniBasketViewModel.cs" />
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
@@ -616,6 +620,10 @@
     <Content Include="Views\frontpage.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
     <Content Include="Views\PartialView\MiniBasket.cshtml" />
+    <Content Include="Views\PartialView\Facets.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

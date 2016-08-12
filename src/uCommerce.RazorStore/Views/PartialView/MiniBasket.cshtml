@@ -4,17 +4,19 @@
 @{
     Layout = "";
 }
-        @if (Model.IsEmpty)
-            {
-                <a href="/" id="empty-cart">Your Shopping Cart is empty</a>
-            }
-        else
-            {
-                <a href="/cart.aspx" id="mini-cart">
-                    <i class="icon-shopping-cart icon-white"></i>
-                    <span class="item-qty">@Model.NumberOfItems</span> items in cart, total: <span class="order-total">@Model.Total</span>
-                </a>
-            }
+
+@if (Model.IsEmpty)
+    {
+        <a href="/" id="empty-cart">Your Shopping Cart is empty</a>
+    }
+
+  else
+    {
+        <a href="/cart.aspx" id="mini-cart">
+            <i class="icon-shopping-cart icon-white"></i>
+            <span class="item-qty">@Model.NumberOfItems</span> items in cart, total: <span class="order-total">@Model.Total</span>
+        </a>
+    }
 
 
 

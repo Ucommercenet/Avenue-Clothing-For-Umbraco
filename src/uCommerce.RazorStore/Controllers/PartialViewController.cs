@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -15,13 +12,13 @@ namespace UCommerce.MasterClass.Website.Controllers
     {
         public ActionResult CategoryNavigation()
         {
-            var categoryNavigation = new CategoryNavigationViewModel();
+            var categoryNavigationModel = new CategoryNavigationViewModel();
 
             ICollection<Category> rootCategories = CatalogLibrary.GetRootCategories();
 
-            categoryNavigation.Categories = MapCategories(rootCategories);
+            categoryNavigationModel.Categories = MapCategories(rootCategories);
 
-            return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigation);
+            return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);
         }
 
         private IList<CategoryViewModel> MapCategories(ICollection<Category> categoriesToMap)
@@ -33,9 +30,8 @@ namespace UCommerce.MasterClass.Website.Controllers
                 var categoryViewModel = new CategoryViewModel();
 
                 categoryViewModel.Name = category.DisplayName();
-                //categoryViewModel.Url = "/store/category?category=" + category.CategoryId;
-                categoryViewModel.Url = UCommerce.Api.CatalogLibrary.GetNiceUrlForCategory(category);
-                categoryViewModel.Categories = MapCategories(UCommerce.Api.CatalogLibrary.GetCategories(category));
+                categoryViewModel.Url = CatalogLibrary.GetNiceUrlForCategory(category);
+                categoryViewModel.Categories = MapCategories(CatalogLibrary.GetCategories(category));
 
                 categoriesToReturn.Add(categoryViewModel);
             }

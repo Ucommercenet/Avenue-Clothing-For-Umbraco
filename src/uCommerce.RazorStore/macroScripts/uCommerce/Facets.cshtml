@@ -26,13 +26,14 @@
 					{
 						continue;
 					}
+                    
 
 					<div class="well">
 						<legend>@facet.DisplayName</legend>
 
 						@foreach (var val in facetValues)
 						{
-							if (val.Hits == 0)
+                           if (val.Hits == 0)
 							{
 								<label class="disabled facet">
 									<input type="checkbox" id="filter-@facet.Name-@val.Value" key="@facet.Name" class="filter" value="@val.Value" disabled="disabled">				
