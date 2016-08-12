@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace UCommerce.MasterClass.Website.Models
+namespace UCommerce.RazorStore.Models
 {
 	public class CategoryViewModel
 	{
@@ -20,6 +20,7 @@ namespace UCommerce.MasterClass.Website.Models
 
 		public IList<CategoryViewModel> Categories { get; set; }
 
-		public IList<ProductViewModel> Products { get; set; } 
+		public IList<ProductViewModel> Products { get; set; }
+	  
 	}
 }

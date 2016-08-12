@@ -1,18 +1,21 @@
-﻿@using UCommerce.Content
+﻿@model UCommerce.RazorStore.Models.CategoryViewModel
+@using UCommerce.Content
 @using UCommerce.EntitiesV2
 @using UCommerce.Extensions
 @using UCommerce.Infrastructure
 @using UCommerce.Runtime
 @using umbraco.MacroEngines
+
 @{
     Category category = SiteContext.Current.CatalogContext.CurrentCategory;
+    Layout = null;
 }
 <div class="row">
     <div class="hero-unit">
-        @if (!string.IsNullOrEmpty(category.ImageMediaId))
+        @if (!string.IsNullOrEmpty(Model.ImageMediaUrl))
         {
-            var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(category.ImageMediaId).Url;
-            <img src="@media">
+          
+            <img src="@Model.ImageMediaUrl">
         }
     </div>
 </div>

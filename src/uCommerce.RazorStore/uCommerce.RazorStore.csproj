@@ -609,7 +609,12 @@
     <Content Include="web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Category\Category.cshtml" />
+    <Content Include="Views\Layout.cshtml" />
+    <Content Include="Views\frontpage.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

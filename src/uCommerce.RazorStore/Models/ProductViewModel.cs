@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using UCommerce.Api;
 
-namespace UCommerce.MasterClass.Website.Models
+namespace UCommerce.RazorStore.Models
 {
 	public class ProductViewModel
 	{

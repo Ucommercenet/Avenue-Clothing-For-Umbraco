@@ -8,10 +8,11 @@ using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Queries.Marketing;
 using UCommerce.Extensions;
 using UCommerce.MasterClass.Website.Models;
+using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.MasterClass.Website.Controllers
+namespace UCommerce.RazorStore.Controllers
 {
 	public class ProductController : RenderMvcController
     {

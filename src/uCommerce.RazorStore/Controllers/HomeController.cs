@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Umbraco.Web.Mvc;
 namespace UCommerce.MasterClass.Website.Controllers
 {
-	public class HomeController : System.Web.Mvc.Controller
+	public class HomeController : RenderMvcController
 	{
 		public ActionResult Index()
 		{

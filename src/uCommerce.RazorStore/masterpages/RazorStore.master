@@ -9,11 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-       <%-- <link href="/css/ucommerce.bootstrap.css" rel="stylesheet">
-        <link href="/css/ucommerce.bootstrap-responsive.css" rel="stylesheet">--%>
+        <link rel="stylesheet" href="/css/tether.css"/>
         <link rel="stylesheet" href="/Content/bootstrap.css"/>
         <link href="/css/ucommerce.demostore.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/tether.css"/>
+        
         <link rel="stylesheet" href="/css/font-awesome.min.css"/>
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -31,7 +30,7 @@
   })();
 </script>
     </head>
-    
+    <body>
         <div class="navbar navbar-fixed-top">
             <div class="container">
               
@@ -104,9 +103,7 @@
                 </div>
             </footer>
         </div>
-        <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>--%>
-<%--        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>--%>
-           <%--<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>--%>
+    
            <script src="/scripts/jquery-3.0.0.slim.js"></script>
         <script src="/scripts/jquery-3.0.0.js"></script>
         <script src="/scripts/jquery.validate.min.js"></script>
@@ -119,6 +116,6 @@
         <script src="/scripts/ucommerce.bootstrap.js"></script>
  
         <asp:contentplaceholder runat="server" id="cphScripts"></asp:contentplaceholder>
-    
+    </body>
     </html>
 </asp:Content>

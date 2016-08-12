@@ -8,13 +8,14 @@ using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Queries.Marketing;
 using UCommerce.Extensions;
 using UCommerce.MasterClass.Website.Models;
+using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Search.Indexers;
 using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-	public class CategoryController : RenderMvcController
+	public class CategoryController : SurfaceController
     {
 		public ActionResult Index()
 		{
