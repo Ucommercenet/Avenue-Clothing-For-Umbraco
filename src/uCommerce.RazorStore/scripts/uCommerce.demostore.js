@@ -66,12 +66,12 @@ function updateCartTotals() {
         tot.text(basket.FormattedOrderTotal);
 
         // Pulse the cart so it catches the user's attention
-        var highlight = [qty, sub, tax, disc, tot];
-        $(highlight).effect("highlight", {}, 500);
+        //var highlight = [qty, sub, tax, disc, tot];
+        //$(highlight).effect("highlight", {}, 500);
     });
 };
 function prepCart() {
-    var icn = $("<i>", { "class": "icon-shopping-cart icon-white" });
+    var icn = $("<i>", { "class": "fa fa-shopping-cart icon-white" });
     var qty = $("<span>", { "class": "item-qty" });
     var tot = $("<span>", { "class": "order-total" });
     var cart = $("<a>", { 'href': '/cart.aspx', "id": "mini-cart" });

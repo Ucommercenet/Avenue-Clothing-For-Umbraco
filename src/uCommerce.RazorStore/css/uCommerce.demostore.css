@@ -3,11 +3,12 @@
 body {
     padding-top: 60px;
     padding-bottom: 40px;
+    font-size: 0.91rem;
 }
 .sidebar-nav {
     padding: 9px 0;
 }
-.container-fluid {
+.container {
     max-width:1200px;
     margin-left: auto;
     margin-right: auto;
@@ -15,7 +16,11 @@ body {
 h1, h2, h3, h4, h5, h6, p {
     color:#767676;
 }
-.well {
+
+h1 {
+    font-size: 60px;
+}
+.well, .card .card-block {
     background-color: #f5f5f5;
     border: 1px solid #ebebeb;
     -webkit-border-radius: 0;
@@ -24,6 +29,8 @@ h1, h2, h3, h4, h5, h6, p {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+        padding: 19px;
+    margin-bottom: 20px;
 }
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     -webkit-border-radius: 0;
@@ -36,26 +43,41 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     border-radius: 0;
     padding: 0;
     background: 0 none;
+    margin-bottom: 15px;
 }
-.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+
+.hero-unit img {
+    width: 100%;
+}
+
+.navbar-fixed-top {
     background: #4a95c5;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    padding: 5px 10px 0px 10px;
 }
-.navbar .brand, .navbar .nav > li > a {
-    color: #fff;
-    text-shadow: none;
-}
-.navbar .brand {
-    font-family: Arial, Helvetica, sans-serif;
+
+.navbar-brand {
+     font-family: Arial, Helvetica, sans-serif;
     background: url("../../img/ucommerce/logo.png") 0 6px no-repeat;
     padding-left: 40px;
+    color: #ffffff;
 }
+.navbar-brand, .navbar .nav > li > a {
+    text-shadow: none;
+    color: #ffffff;
+}
+
 .navbar-search .search-query {
     padding: 3px 14px;
     border: 0 none;
 }
+
+#site-search {
+    font-size: 0.8rem;
+}
+
 .btn {
     padding: 3px 14px;
     color: #fff;
@@ -120,18 +142,83 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .icon-truck {
   background-position: 0 0;
 }
-.icon-grey-search {
-  background-position: -24px 0;
-}
+
 .icon-grey-star {
   background-position: -96px 0;
 }
+
+legend {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.col-md-5.control-group {
+    padding: 4px 6px 4px 6px;
+    margin-bottom: 10px;
+}
+
+.col-md-6.well {
+    width: 48.93617021276595%;
+    margin-left: 7px;
+}
+
+.input.col-md-12 {
+        border: 1px solid #cccccc;
+}
+label {
+    margin-bottom: 5px;
+}
+
+label.radio {
+    display: block;
+}
+
+div.row.well {
+    width: 101.3%;
+}
+
+.breadcrumb {
+    margin-left: -15px;
+}
+
+/*.col-md-12.product-list {
+    padding-left: 0px;
+}*/
+
+.alert.alert-info {
+    margin-left: -15px;
+}
+
+.facet {
+    display: block;
+}
+
+.pull-xs-right.navbar-collapse {
+    line-height: 2rem;
+}
+
+.rating > label {
+    margin-bottom: 0px;
+}
+
+
 /* Common
 -------------------------------------------*/
-#search-form {}
+#search-form {
+    font-size: 0.8rem;
+}
     #search-form .btn {
         background-color: #fff;
         border: 0 none;
+        font-size: 1.3rem;
+        margin-left: -5px;
+    }
+    #search-form .btn > i {
+        opacity: 0.5;
+        color: black;
+    }
+
+    #main-nav {
+        padding: 5px 0 5px 0;
     }
 #main-nav ul {
 }
@@ -143,9 +230,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
             padding: 5px 15px;
             text-shadow: none;
         }
-            #main-nav li ul li a{
-                padding: 0px 15px;
-            }
+        #main-nav li ul li{
+            padding: 0px 15px;
+        }
         #main-nav .nav > li > a:hover {
             text-decoration: underline;
             background-color: transparent;
@@ -154,6 +241,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
         #main-nav .nav li.on > a:hover{
             color: #fff;
             background-color:#4a95c5;
+            display: block;
         }
 #why-buy {
 }
@@ -193,6 +281,31 @@ td.money {
     text-align: center;
     background-color: #F5F5F5;
     margin-bottom:10px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0px;
+}
+
+div.product.col-sm-4.col-md-4 {
+            width: 100%;
+        }
+
+#homepage-catalog {
+    width: 120%;
+}
+
+@media(min-width:768px) {
+    .product-list .product {
+        margin-left: 0;
+    }
+    div.product.col-sm-4.col-md-4 {
+            width: 30%;
+        }
+}
+@media(min-width:1200px) {
+     .product-list .product {
+         margin-left: 30px;
+    }
 }
 .product-list .product:nth-child(3n+1) {
     clear:left;
@@ -205,6 +318,13 @@ td.money {
         position: relative;
         max-width: 300px;
     }
+
+    .product-list .product .product-image img {
+        margin: 0 auto;
+        height: auto;
+        width: 100%;
+    }
+
         .product-list .product .product-image .ratings {
             width:100%;
             position: absolute;
@@ -234,13 +354,15 @@ td.money {
         .product-list .product .view-details a{
             padding: 0 0 0 14px;
             border: 0 none;
-            line-height: 28px;
+            line-height: 33px;
         }
         .product-list .product .view-details span{
             background-color: #294A64;
             padding: 6px 14px;
             margin-left: 4px;
         }
+
+        
 /* Product Details Page
 -------------------------------------------*/
 #product-details {
@@ -298,6 +420,23 @@ td.money {
     #product-details .review .review-comment header {
         font-size: 0.85em;
     }
+    .page-header {
+        border-bottom: 1px solid #eeeeee;
+        margin: 20px 0 30px;
+    }
+label {
+    display: block;
+}
+.control-tag>div>input, .control-tag>div>textarea {
+	width:100%;
+}
+#uniqueVariants {
+    margin-bottom: 19px;
+}
+
+.tag-default {
+    background-color: transparent;
+}
 /* Cart Page
 -------------------------------------------*/
 #cart {
@@ -329,6 +468,12 @@ td.money {
     background: transparent;
     border: 0;
     -webkit-appearance: none;
+
+}
+
+#mini-cart:hover {
+    text-decoration: none;
+    color:#005580;
 }
 /* Address page
 -------------------------------------------*/

@@ -2,7 +2,7 @@
 @{
     var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && Convert.ToBoolean(pp.Value))));
 }
-<div class="row-fluid">
+<div class="row" id="homepage-catalog">
     <div class="span12">
         @uCommerce.Helpers.Product.DisplayListProducts(products, null)
     </div>

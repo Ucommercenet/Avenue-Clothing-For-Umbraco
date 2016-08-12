@@ -20,6 +20,7 @@ namespace UCommerce.RazorStore.Models
 
 		public IList<CategoryViewModel> Categories { get; set; }
 
-		public IList<ProductViewModel> Products { get; set; } 
+		public IList<ProductViewModel> Products { get; set; }
+	  
 	}
 }
