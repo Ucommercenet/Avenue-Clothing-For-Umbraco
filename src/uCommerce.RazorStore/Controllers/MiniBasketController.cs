@@ -30,7 +30,7 @@ namespace UCommerce.RazorStore.Controllers
                     miniBasket.IsEmpty = false;
                 }
             }
-            return View("/views/PartialView/MiniBasket.cshtml", miniBasket);
+            return View("/Views/PartialView/MiniBasket.cshtml", miniBasket);
         }
     }
 }
