@@ -338,6 +338,7 @@
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AddToBasketViewModel.cs" />
+    <Compile Include="Models\BreadcrumbsViewModel.cs" />
     <Compile Include="Models\CategoryNavigationViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\FacetsDisplayedViewModel.cs" />
