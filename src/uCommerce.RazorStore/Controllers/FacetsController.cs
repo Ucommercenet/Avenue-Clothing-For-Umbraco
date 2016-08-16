@@ -92,7 +92,7 @@ namespace UCommerce.RazorStore.Controllers
             foreach (var facet in facetsInCategory)
             {
                 var facetViewModel = new FacetViewModel();
-                facetViewModel.Name = facet.Name;
+                facetViewModel.Name = facet.DisplayName;
 
                 if (!facet.FacetValues.Any())
                 {

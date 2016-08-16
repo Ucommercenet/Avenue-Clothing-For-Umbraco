@@ -614,8 +614,6 @@
     <Content Include="Content\bootstrap\_variables.scss" />
     <Content Include="web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Category\Category.cshtml" />
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\frontpage.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
@@ -624,6 +622,9 @@
     <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\Catalog.cshtml" />
+    <Content Include="Views\BillingShippingAddress.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -670,7 +671,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Programming\Demo Store Accelerator - Local\src\uCommerce.RazorStore" "C:\Programming\Demo Store v2"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

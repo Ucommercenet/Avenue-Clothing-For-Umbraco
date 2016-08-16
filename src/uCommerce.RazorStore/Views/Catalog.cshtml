@@ -1,0 +1,41 @@
+﻿@using UCommerce.RazorStore.Models
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<CategoryViewModel>
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<div class="row">
+    <div class="hero-unit">
+        @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
+        {
+            <img src="@Model.BannerImageUrl">
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="product-list col-sm-12 col-md-12">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product col-sm-4 col-md-4 col-xs-2">
+                <div class="product-image">
+                    @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
+                    {
+                        <a href="@product.Url"><img src="@product.ThumbnailImageUrl"></a>
+                    }
+                </div>
+
+                <p class="item-name"><a href="@product.Url">@product.Name</a></p>
+                <p class="item-price">@(product.PriceCalculation.YourPrice != null ? product.PriceCalculation.YourPrice.Amount.ToString() : "")</p>
+                <p class="btn-group view-details">
+                    <a href="@product.Url" class="btn btn-default">
+                        View more <span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </p>
+            </div>
+        }
+    </div>
+</div>
