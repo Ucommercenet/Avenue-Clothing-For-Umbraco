@@ -1,0 +1,12 @@
+﻿@using UCommerce.RazorStore.Controllers
+@using Umbraco.Web
+@{
+    Layout = null;
+}
+@using (Html.BeginUmbracoForm("Index", "Voucher"))
+{
+        <div class="input-group">
+            <input type="text" name="voucher" />
+            <button name="add-voucher" class="btn btn-secondary" type="submit"><i class="icon-plus icon-white"></i>Add Voucher</button>
+        </div>
+}
