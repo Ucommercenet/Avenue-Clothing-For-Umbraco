@@ -4,19 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UCommerce.Api;
+using UCommerce.Content;
 using UCommerce.EntitiesV2;
+using Umbraco.Web.Mvc;
 using UCommerce.EntitiesV2.Queries.Marketing;
 using UCommerce.Extensions;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
+using UCommerce.Search.Facets;
 using UCommerce.Search.Indexers;
-using Umbraco.Web.Mvc;
+using UCommerce.RazorStore.Controllers;
+using Umbraco.Web.Models;
 
-namespace UCommerce.MasterClass.Website.Controllers
+namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
-        public ActionResult Index()
+        public ActionResult Index(RenderModel model)
+        //public ActionResult Index()
+
         {
             var categoryViewModel = new CategoryViewModel();
 
@@ -24,14 +31,28 @@ namespace UCommerce.MasterClass.Website.Controllers
 
             categoryViewModel.Name = currentCategory.DisplayName();
             categoryViewModel.Description = currentCategory.Description();
-            //new
             categoryViewModel.Products = MapProducts(CatalogLibrary.GetProducts(currentCategory));
+            
+            if (!HasBannerImage(currentCategory))
+            {
+                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentCategory.ImageMediaId).Url;
+                categoryViewModel.BannerImageUrl = media;
+            }
 
-            var productsInCategory = UCommerce.Api.CatalogLibrary.GetProducts(currentCategory);
+            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
-            categoryViewModel.Products = MapProducts(productsInCategory);
+            var productsInCategory = SearchLibrary.GetProductsFor(currentCategory, facetsForQuerying).Select( x => x.Id).ToList();
+            var productRepository = ObjectFactory.Instance.Resolve<IRepository<Product>>();
+            var productsForMapping = productRepository.Select(x => productsInCategory.Contains(x.ProductId)).ToList();
+            
+            categoryViewModel.Products = MapProducts(productsForMapping);
+            
+            return base.View("/Views/Catalog.cshtml", categoryViewModel);
+        }
 
-            return View("/views/category.cshtml", categoryViewModel);
+        private bool HasBannerImage(Category category)
+        {      
+            return string.IsNullOrEmpty(category.ImageMediaId);
         }
 
         private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
@@ -44,9 +65,11 @@ namespace UCommerce.MasterClass.Website.Controllers
 
                 productViewModel.Sku = product.Sku;
                 productViewModel.Name = product.DisplayName();
-                productViewModel.Url = "/store/product?product=" + product.ProductId;
-
+                productViewModel.Url = CatalogLibrary.GetNiceUrlForProduct(product);
                 productViewModel.PriceCalculation = CatalogLibrary.CalculatePrice(product);
+
+                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(product.ThumbnailImageMediaId).Url;
+                productViewModel.ThumbnailImageUrl = media;
 
                 productViews.Add(productViewModel);
             }
@@ -54,4 +77,5 @@ namespace UCommerce.MasterClass.Website.Controllers
             return productViews;
         }
     }
+
 }

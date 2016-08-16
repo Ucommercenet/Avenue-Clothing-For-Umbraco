@@ -1,5 +1,6 @@
 ﻿@using UCommerce.EntitiesV2
 @using UCommerce.Api
+
 @{
     var request = HttpContext.Current.Request;
     if (request.HttpMethod == "POST" && request.Form.AllKeys.Any(x => x == "update-addresses"))
@@ -50,6 +51,7 @@
     <option value="@country.CountryId" @(address.Country != null && address.Country.Equals(country) ? "selected" : string.Empty)>@country.Name</option>
         }
 }
+
 <form method="post" class="validate">
 <div class="row">
     <div class="col-md-6 well">

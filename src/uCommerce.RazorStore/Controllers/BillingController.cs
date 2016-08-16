@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -16,8 +13,8 @@ namespace UCommerce.MasterClass.Website.Controllers
 		{
 			var addressDetails = new AddressDetailsViewModel();
 
-			var shippingInformation = UCommerce.Api.TransactionLibrary.GetShippingInformation();
-			var billingInformation = UCommerce.Api.TransactionLibrary.GetBillingInformation();
+			var shippingInformation = TransactionLibrary.GetShippingInformation();
+			var billingInformation = TransactionLibrary.GetBillingInformation();
 			
 			addressDetails.BillingAddress.FirstName = billingInformation.FirstName;
 			addressDetails.BillingAddress.LastName = billingInformation.LastName;
@@ -49,7 +46,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			addressDetails.AvailableCountries = Country.All().ToList().Select(x => new SelectListItem() {Text = x.Name, Value = x.CountryId.ToString()}).ToList();
 
-			return View("/views/AddressDetails.cshtml", addressDetails);
+			return View("/Views/BillingShippingAddress.cshtml", addressDetails);
 		}
 
 		[HttpPost]
