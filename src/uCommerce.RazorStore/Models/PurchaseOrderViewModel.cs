@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Umbraco.Web;
+using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
-	public class PurchaseOrderViewModel
+	public class PurchaseOrderViewModel : RenderModel
 	{
-		public PurchaseOrderViewModel()
+		public PurchaseOrderViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
 		{
 			OrderLines = new List<OrderlineViewModel>();
 		}

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,7 +30,7 @@ namespace UCommerce.RazorStore.Controllers
                     miniBasket.IsEmpty = false;
                 }
             }
-            return View("/views/PartialView/MiniBasket.cshtml", miniBasket);
+            return View("/Views/PartialView/MiniBasket.cshtml", miniBasket);
         }
     }
 }
