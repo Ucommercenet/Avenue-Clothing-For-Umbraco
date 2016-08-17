@@ -22,6 +22,7 @@
                         } else
                         {
                             @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value)
+                            @shippingMethod.Text
                         }
                     </label>
                 }

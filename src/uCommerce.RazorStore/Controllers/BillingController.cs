@@ -89,7 +89,7 @@ namespace UCommerce.RazorStore.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-		    return View("/Views/Shipping.cshtml");
+		    return Redirect("/basket/shipping");
 		}
 	}
 }

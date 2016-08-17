@@ -6,40 +6,50 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.MasterClass.Website.Controllers
+namespace UCommerce.RazorStore.Controllers
 {
 	public class PaymentController : RenderMvcController
     {
-		public ActionResult Index()
+		public ActionResult Index(RenderModel model)
 		{
-			var paymentViewModel = new PaymentViewModel();
-			paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
+            var paymentViewModel = new PaymentViewModel();
+            paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
 
-			PurchaseOrder basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
+            PurchaseOrder basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
 
-			Country shippingCountry = TransactionLibrary.GetShippingInformation().Country;
+            Country shippingCountry = TransactionLibrary.GetShippingInformation().Country;
 
-			var availablePaymentMethods = TransactionLibrary.GetPaymentMethods(shippingCountry);
+            var availablePaymentMethods = TransactionLibrary.GetPaymentMethods(shippingCountry);
 
-			var existingPayment = basket.Payments.FirstOrDefault();
+            var existingPayment = basket.Payments.FirstOrDefault();
 
-			paymentViewModel.SelectedPaymentMethodId = existingPayment != null
-				? existingPayment.PaymentMethod.PaymentMethodId
-				: -1;
+            paymentViewModel.SelectedPaymentMethodId = existingPayment != null
+                ? existingPayment.PaymentMethod.PaymentMethodId
+                : -1;
 
-			foreach (var availablePaymentMethod in availablePaymentMethods)
-			{
-				var option = new SelectListItem();
-				option.Text = availablePaymentMethod.Name;
-				option.Value = availablePaymentMethod.PaymentMethodId.ToString();
-				option.Selected = availablePaymentMethod.PaymentMethodId == paymentViewModel.SelectedPaymentMethodId;
+         
 
-				paymentViewModel.AvailablePaymentMethods.Add(option);
-			}
+            foreach (var availablePaymentMethod in availablePaymentMethods)
+            {
+                var option = new SelectListItem();
+                var payment = basket.Payments.FirstOrDefault();
+                decimal feePercent = availablePaymentMethod.FeePercent;
+                var fee = availablePaymentMethod.GetFeeForCurrency(basket.BillingCurrency);
+                var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency);
 
-			return View("/Views/Payment.cshtml", paymentViewModel);
+                option.Text = availablePaymentMethod.Name + " (" + formattedFee + " + " + feePercent.ToString("0.00") + "%)";
+                option.Value = availablePaymentMethod.PaymentMethodId.ToString();
+                option.Selected = availablePaymentMethod.PaymentMethodId == paymentViewModel.SelectedPaymentMethodId;
+
+                paymentViewModel.AvailablePaymentMethods.Add(option);
+            }
+
+		    paymentViewModel.ShippingCountry = shippingCountry.Name;
+
+            return View("/Views/Payment.cshtml", paymentViewModel);
 		}
 
 		[HttpPost]
@@ -53,7 +63,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-			return Redirect("/store/checkout/preview");
+			return Redirect("/basket/preview");
 		}
 
 	}
