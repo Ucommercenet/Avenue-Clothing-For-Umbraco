@@ -50,6 +50,8 @@ namespace UCommerce.RazorStore.Controllers
 			return base.View("/Views/BillingShippingAddress.cshtml", addressDetails);
 		}
 
+        //private iShippingSameAsBilling ()
+
 		[HttpPost]
 		public ActionResult Index(AddressDetailsViewModel addressDetails)
 		{
@@ -67,6 +69,8 @@ namespace UCommerce.RazorStore.Controllers
 				addressDetails.BillingAddress.State,
 				addressDetails.BillingAddress.Attention,
 				addressDetails.BillingAddress.CountryId);
+
+            
 
 			TransactionLibrary.EditShippingInformation(
 				addressDetails.ShippingAddress.FirstName,
