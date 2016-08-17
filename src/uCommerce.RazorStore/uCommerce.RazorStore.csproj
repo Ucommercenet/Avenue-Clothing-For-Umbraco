@@ -631,6 +631,7 @@
     <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
     <Content Include="Views\PartialView\Voucher.cshtml" />
     <Content Include="Views\Basket.cshtml" />
+    <Content Include="Views\Shipping.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

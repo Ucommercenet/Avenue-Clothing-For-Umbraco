@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.MasterClass.Website.Controllers
+namespace UCommerce.RazorStore.Controllers
 {
 	public class ShippingController : RenderMvcController
     {
-		public ActionResult Index()
+		public ActionResult Index(RenderModel model)
 		{
 			var shipping = new ShippingViewModel();
 			shipping.AvailableShippingMethods = new List<SelectListItem>();
@@ -28,17 +29,23 @@ namespace UCommerce.MasterClass.Website.Controllers
 				selectedShippingMethodId = selectedShippingMethod.ShippingMethodId;
 			}
 
+		    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+
 			foreach (var availableShippingMethod in availableShippingMethods)
 			{
+			    var price = availableShippingMethod.GetPriceForCurrency(basket.BillingCurrency);
+                var formattedprice = new Money((price == null ? 0 : price.Price), basket.BillingCurrency);
+
 				shipping.AvailableShippingMethods.Add(new SelectListItem()
 				{
 					Selected = selectedShippingMethodId == availableShippingMethod.ShippingMethodId,
-					Text = availableShippingMethod.Name,
+					Text = availableShippingMethod.Name + "(" + formattedprice + ")",
 					Value = availableShippingMethod.ShippingMethodId.ToString()
 				});
 			}
+		    shipping.ShippingCountry = shippingInformation.Country.Name;
 			
-			return View("/Views/Shipping.cshtml", shipping);
+			return base.View("/Views/Shipping.cshtml", shipping);
 		}
 
 		[HttpPost]
