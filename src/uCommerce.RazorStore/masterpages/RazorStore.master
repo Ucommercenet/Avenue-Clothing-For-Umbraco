@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="/css/tether.css"/>
         <link rel="stylesheet" href="/Content/bootstrap.css"/>
         <link href="/css/ucommerce.demostore.css" rel="stylesheet">
-        
         <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+
         <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
