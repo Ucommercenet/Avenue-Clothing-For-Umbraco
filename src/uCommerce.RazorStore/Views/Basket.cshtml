@@ -15,60 +15,56 @@
         <form method="post">
             <table class="table table-striped" id="cart">
                 <thead>
-                    <tr>
-                        <th class="span7">Description</th>
-                        <th class="span1 money">Price</th>
-                        <th class="span1 money">VAT</th>
-                        <th class="span2">Quantity</th>
-                        <th class="span1 money">Total</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th class="span7">Description</th>
+                    <th class="span1 money">Price</th>
+                    <th class="span1 money">VAT</th>
+                    <th class="span2">Quantity</th>
+                    <th class="span1 money">Total</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @for (var i = 0; i < Model.OrderLines.Count; i++)
-                    {
-                        var line = Model.OrderLines[i];
-                        <tr class="order-line">
-                            
-                            @Html.HiddenFor(model => model.OrderLines[i].Sku)
-                            @Html.HiddenFor(model => model.OrderLines[i].VariantSku)
-                            @Html.HiddenFor(model => model.OrderLines[i].OrderLineId)
+                @for (var i = 0; i < Model.OrderLines.Count; i++)
+                {
+                    var line = Model.OrderLines[i];
+                    <tr class="order-line">
 
-                            <td><a href="@line.ProductUrl">@line.ProductName</a></td>
-                            <td class="money">
-                                @if (@line.Discount.HasValue && @line.Discount > 0)
-                                {
-                                    <span style="text-decoration: line-through">
+                        @Html.HiddenFor(model => model.OrderLines[i].Sku)
+                        @Html.HiddenFor(model => model.OrderLines[i].VariantSku)
+                        @Html.HiddenFor(model => model.OrderLines[i].OrderLineId)
+
+                        <td><a href="@line.ProductUrl">@line.ProductName</a></td>
+                        <td class="money">
+                            @if (@line.Discount.HasValue && @line.Discount > 0)
+                            {
+                                <span style="text-decoration: line-through">
                                         @line.Price
                                     </span>
-                                    @line.PriceWithDiscount
-                                }
-                                else
-                                {
-                                    @line.Price
-                                }
-                            </td>
-                            <td class="money">
-                                @line.Tax
-                            </td>
-                            <td>
-                                @Html.TextBoxFor(model => model.OrderLines[i].Quantity, new {@class = "qty"})
-                            </td>
-                            <td>
-                                @line.Total
-                            </td>
-                            <td>
-                                <button type="submit" value="@line.OrderLineId" name="RemoveOrderlineId" class="line-remove">×</button>
-                            </td>
-                        </tr>
-                    }
+                                @line.PriceWithDiscount
+                            }
+                            else
+                            {
+                                @line.Price
+                            }
+                        </td>
+                        <td class="money">
+                            @line.Tax
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.OrderLines[i].Quantity, new {@class = "qty"})
+                        </td>
+                        <td>
+                            @line.Total
+                        </td>
+                        <td>
+                            <button type="submit" value="@line.OrderLineId" name="RemoveOrderlineId" class="line-remove">×</button>
+                        </td>
+                    </tr>
+                }
                 <tr>
 
                     <td rowspan="4">
-                        <div class="col-md-6">
-                            @Umbraco.RenderMacro("uCommerceVoucher")
-                            <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
-                        </div>
                     </td>
                     <td colspan="2" rowspan="4">
                         <button name="update-basket" id="update-basket" class="btn btn-secondary update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
@@ -79,32 +75,36 @@
                     </td>
                     <td>&nbsp;</td>
                 </tr>
-                    <tr>
-                        <td>VAT:</td>
-                        <td class="money order-tax">
-                            @Model.TaxTotal
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>Discounts:</td>
-                        <td class="money order-discounts">
-                            @Model.DiscountTotal
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>Order total:</td>
-                        <td class="money order-total">
-                            @Model.OrderTotal
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
+                <tr>
+                    <td>VAT:</td>
+                    <td class="money order-tax">
+                        @Model.TaxTotal
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Discounts:</td>
+                    <td class="money order-discounts">
+                        @Model.DiscountTotal
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Order total:</td>
+                    <td class="money order-total">
+                        @Model.OrderTotal
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
                 </tbody>
             </table>
             <div class="pull-xs-right">
                 <button name="update-and-continue" class="btn btn-secondary btn-large btn-success" type="submit">Continue to Checkout <i class="icon-arrow-right icon-white"></i></button>
             </div>
         </form>
+        <div class="col-md-6" id="voucher-form">
+            @Umbraco.RenderMacro("uCommerceVoucher")
+            <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
+        </div>
     }
 </div>

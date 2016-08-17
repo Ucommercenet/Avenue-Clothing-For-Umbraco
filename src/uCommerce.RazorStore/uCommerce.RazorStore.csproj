@@ -325,6 +325,7 @@
     <Content Include="App_Code\uCommerce\Extensions\FacetedQueryStringExtensions.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\BreadcrumbsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -334,9 +335,11 @@
     <Compile Include="Controllers\PreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
+    <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AddToBasketViewModel.cs" />
+    <Compile Include="Models\BreadcrumbsViewModel.cs" />
     <Compile Include="Models\CategoryNavigationViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\FacetsDisplayedViewModel.cs" />
@@ -625,6 +628,9 @@
     <Content Include="Views\web.config" />
     <Content Include="Views\Catalog.cshtml" />
     <Content Include="Views\BillingShippingAddress.cshtml" />
+    <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
+    <Content Include="Views\PartialView\Voucher.cshtml" />
+    <Content Include="Views\Basket.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -671,7 +677,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Programming\Demo Store Accelerator - Local\src\uCommerce.RazorStore" "C:\Programming\Demo Store v2"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
