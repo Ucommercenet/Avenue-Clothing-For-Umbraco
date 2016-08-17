@@ -1,6 +1,6 @@
 ﻿@using UCommerce.RazorStore.Models
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<AddressViewModel>
-    
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<AddressDetailsViewModel>
+
 @{
     Layout = "Layout.cshtml";
 }
@@ -14,132 +14,135 @@
             <div class="col-md-12 control-group">
                 <div class="col-md-5 control-group">
                     <label>First name</label>
-                    <input type="text" class="col-md-12 required" name="billing-firstname" value="@billingAddress.FirstName" placeholder="First name" />
+                    <input type="text" class="col-md-12 required" name="billing-firstname" value="@Model.BillingAddress.FirstName" placeholder="First name" />
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Last name</label>
-                    <input type="text" class="col-md-12 required" name="billing-lastname" value="@billingAddress.LastName" placeholder="Last name" />
+                    <input type="text" class="col-md-12 required" name="billing-lastname" value="@Model.BillingAddress.LastName" placeholder="Last name" />
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>E-mail</label>
-                    <input type="text" class="col-md-12 required email" name="billing-email" value="@billingAddress.EmailAddress" placeholder="E-mail" />
+                    <input type="text" class="col-md-12 required email" name="billing-email" value="@Model.BillingAddress.EmailAddress" placeholder="E-mail" />
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Company</label>
-                    <input type="text" class="col-md-12" name="billing-company" value="@billingAddress.CompanyName" placeholder="Company" />
+                    <input type="text" class="col-md-12" name="billing-company" value="@Model.BillingAddress.CompanyName" placeholder="Company" />
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Attention</label>
-                    <input type="text" class="col-md-12" name="billing-attention" value="@billingAddress.Attention" placeholder="Attention" />
+                    <input type="text" class="col-md-12" name="billing-attention" value="@Model.BillingAddress.Attention" placeholder="Attention" />
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Street</label>
-                    <input type="text" class="col-md-12 required" name="billing-line1" value="@billingAddress.Line1" placeholder="Street" />
+                    <input type="text" class="col-md-12 required" name="billing-line1" value="@Model.BillingAddress.Line1" placeholder="Street" />
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Street 2</label>
-                    <input type="text" class="col-md-12" name="billing-line2" value="@billingAddress.Line2" placeholder="Street 2" />
+                    <input type="text" class="col-md-12" name="billing-line2" value="@Model.BillingAddress.Line2" placeholder="Street 2" />
                 </div>
                 <div class="col-md-5 control-group">
                     <label>City</label>
-                    <input type="text" class="col-md-12" name="billing-city" value="@billingAddress.City" placeholder="City" />
+                    <input type="text" class="col-md-12" name="billing-city" value="@Model.BillingAddress.City" placeholder="City" />
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Postal code</label>
-                    <input type="text" class="col-md-12 required" name="billing-postcode" value="@billingAddress.PostalCode" placeholder="Postal code" />
+                    <input type="text" class="col-md-12 required" name="billing-postcode" value="@Model.BillingAddress.PostalCode" placeholder="Postal code" />
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Country</label>
                     <select name="billing-country" class="col-md-12 required">
-                        @RenderCountrySelectOptions(billingAddress)
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>Phone</label>
-                    <input type="text" class="col-md-12" name="billing-phone" value="@billingAddress.PhoneNumber" placeholder="Phone" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>Mobile phone</label>
-                    <input type="text" class="col-md-12" name="billing-mobile" value="@billingAddress.MobilePhoneNumber" placeholder="Mobile phone" />
-                </div>
+                        @foreach ()
+                </select>
             </div>
         </div>
-        <div class="col-md-6 well">
-            <legend>Shipping address</legend>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>First name</label>
-                    <input type="text" class="col-md-12 required" name="shipping-firstname" value="@shipmentAddress.FirstName" placeholder="First name" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>Last name</label>
-                    <input type="text" class="col-md-12 required" name="shipping-lastname" value="@shipmentAddress.LastName" placeholder="Last name" />
-                </div>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>Phone</label>
+                <input type="text" class="col-md-12" name="billing-phone" value="@Model.BillingAddress.PhoneNumber" placeholder="Phone" />
             </div>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>E-mail</label>
-                    <input type="text" class="col-md-12 required email" name="shipping-email" value="@shipmentAddress.EmailAddress" placeholder="E-mail" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>Company</label>
-                    <input type="text" class="col-md-12" name="shipping-company" value="@shipmentAddress.CompanyName" placeholder="Company" />
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>Attention</label>
-                    <input type="text" class="col-md-12" name="shipping-attention" value="@shipmentAddress.Attention" placeholder="Attention" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>Street</label>
-                    <input type="text" class="col-md-12 required" name="shipping-line1" value="@shipmentAddress.Line1" placeholder="Street" />
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>Street 2</label>
-                    <input type="text" class="col-md-12" name="shipping-line2" value="@shipmentAddress.Line2" placeholder="Street 2" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>City</label>
-                    <input type="text" class="col-md-12" name="shipping-city" value="@shipmentAddress.City" placeholder="City" />
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>Postal code</label>
-                    <input type="text" class="col-md-12 required" name="shipping-postcode" value="@shipmentAddress.PostalCode" placeholder="Postal code" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>Country</label>
-                    <select name="shipping-country" class="col-md-12 required">
-                        @RenderCountrySelectOptions(shipmentAddress)
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-5 control-group">
-                    <label>Phone</label>
-                    <input type="text" class="col-md-12" name="shipping-phone" value="@shipmentAddress.PhoneNumber" placeholder="Phone" />
-                </div>
-                <div class="col-md-5 control-group">
-                    <label>Mobile phone</label>
-                    <input type="text" class="col-md-12" name="shipping-mobile" value="@shipmentAddress.MobilePhoneNumber" placeholder="Mobile phone" />
-                </div>
+            <div class="col-md-5 control-group">
+                <label>Mobile phone</label>
+                <input type="text" class="col-md-12" name="billing-mobile" value="@Model.BillingAddress.MobilePhoneNumber" placeholder="Mobile phone" />
             </div>
         </div>
     </div>
-    <a href="/cart.aspx" class="btn btn-secondary btn-sm">Back to Cart</a>
-    <button name="update-addresses" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Billing <i class="icon-arrow-right icon-white"></i></button>
+    <div class="col-md-6 well">
+        <legend>Shipping address</legend>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>First name</label>
+                <input type="text" class="col-md-12 required" name="shipping-firstname" value="@Model.ShippingAddress.FirstName" placeholder="First name" />
+            </div>
+            <div class="col-md-5 control-group">
+                <label>Last name</label>
+                <input type="text" class="col-md-12 required" name="shipping-lastname" value="@Model.ShippingAddress.LastName" placeholder="Last name" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>E-mail</label>
+                <input type="text" class="col-md-12 required email" name="shipping-email" value="@Model.ShippingAddress.EmailAddress" placeholder="E-mail" />
+            </div>
+            <div class="col-md-5 control-group">
+                <label>Company</label>
+                <input type="text" class="col-md-12" name="shipping-company" value="@Model.ShippingAddress.CompanyName" placeholder="Company" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>Attention</label>
+                <input type="text" class="col-md-12" name="shipping-attention" value="@Model.ShippingAddress.Attention" placeholder="Attention" />
+            </div>
+            <div class="col-md-5 control-group">
+                <label>Street</label>
+                <input type="text" class="col-md-12 required" name="shipping-line1" value="@Model.ShippingAddress.Line1" placeholder="Street" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>Street 2</label>
+                <input type="text" class="col-md-12" name="shipping-line2" value="@Model.ShippingAddress.Line2" placeholder="Street 2" />
+            </div>
+            <div class="col-md-5 control-group">
+                <label>City</label>
+                <input type="text" class="col-md-12" name="shipping-city" value="@Model.ShippingAddress.City" placeholder="City" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>Postal code</label>
+                <input type="text" class="col-md-12 required" name="shipping-postcode" value="@Model.ShippingAddress.PostalCode" placeholder="Postal code" />
+            </div>
+            <div class="col-md-5 control-group">
+
+                @foreach (var country in Model.AvailableCountries)
+                {
+                    <label>Country</label>
+                    <select name="shipping-country" class="col-md-12 required"></select>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-5 control-group">
+                <label>Phone</label>
+                <input type="text" class="col-md-12" name="shipping-phone" value="@Model.ShippingAddress.PhoneNumber" placeholder="Phone" />
+            </div>
+            <div class="col-md-5 control-group">
+                <label>Mobile phone</label>
+                <input type="text" class="col-md-12" name="shipping-mobile" value="@Model.ShippingAddress.MobilePhoneNumber" placeholder="Mobile phone" />
+            </div>
+        </div>
+    </div>
+</div>
+<a href="/cart.aspx" class="btn btn-secondary btn-sm">Back to Cart</a>
+<button name="update-addresses" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Billing <i class="icon-arrow-right icon-white"></i></button>
 </form>
