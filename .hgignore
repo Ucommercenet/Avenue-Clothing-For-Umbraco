@@ -37,3 +37,4 @@ src/uCommerce.RazorStore/App_Data/NuGetBackup/20160809-171625/CopyLogs/UmbracoBi
 src/uCommerce.RazorStore/web.Release.config
 src/uCommerce.RazorStore/web.Debug.config
 packages
+src/.vs/config/applicationhost.config
