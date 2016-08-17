@@ -3,13 +3,14 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace UCommerce.MasterClass.Website.Controllers
 {
 	public class BillingController : RenderMvcController
     {
-		public ActionResult Index()
+		public ActionResult Index(RenderModel model)
 		{
 			var addressDetails = new AddressDetailsViewModel();
 
@@ -46,7 +47,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			addressDetails.AvailableCountries = Country.All().ToList().Select(x => new SelectListItem() {Text = x.Name, Value = x.CountryId.ToString()}).ToList();
 
-			return View("/Views/BillingShippingAddress.cshtml", addressDetails);
+			return base.View("/Views/BillingShippingAddress.cshtml", addressDetails);
 		}
 
 		[HttpPost]
@@ -84,7 +85,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-			return Redirect("/store/checkout/shipping");
+			return Redirect("/store/checkout/shipping/");
 		}
 	}
 }

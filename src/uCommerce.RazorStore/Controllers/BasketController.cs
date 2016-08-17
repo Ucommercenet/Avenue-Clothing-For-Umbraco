@@ -52,12 +52,12 @@ namespace UCommerce.RazorStore.Controllers
                 if (model.RemoveOrderlineId == orderLine.OrderLineId)
                     newQuantity = 0;
 
-                UCommerce.Api.TransactionLibrary.UpdateLineItem(orderLine.OrderLineId, newQuantity);
+                TransactionLibrary.UpdateLineItem(orderLine.OrderLineId, newQuantity);
             }
 
-            UCommerce.Api.TransactionLibrary.ExecuteBasketPipeline();
+            TransactionLibrary.ExecuteBasketPipeline();
 
-            return Redirect(this.CurrentPage.Url);
+            return View("/basket/address");
         }
     }
 
