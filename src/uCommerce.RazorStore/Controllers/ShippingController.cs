@@ -54,7 +54,7 @@ namespace UCommerce.RazorStore.Controllers
 			TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, overwriteExisting: true);
 			TransactionLibrary.ExecuteBasketPipeline();
 			
-			return Redirect("/store/checkout/payment");
+			return Redirect("/basket/shipping");
 		}
 	}
 }

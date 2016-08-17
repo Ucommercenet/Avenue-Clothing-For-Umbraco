@@ -6,7 +6,7 @@ using UCommerce.RazorStore.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.MasterClass.Website.Controllers
+namespace UCommerce.RazorStore.Controllers
 {
 	public class BillingController : RenderMvcController
     {
@@ -85,7 +85,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-			return Redirect("/store/checkout/shipping/");
+		    return View("/Views/Shipping.cshtml");
 		}
 	}
 }
