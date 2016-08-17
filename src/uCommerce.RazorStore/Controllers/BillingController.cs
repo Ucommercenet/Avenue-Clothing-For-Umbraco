@@ -10,7 +10,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 {
 	public class BillingController : RenderMvcController
     {
-		public ActionResult Index(RenderModel moder)
+		public ActionResult Index(RenderModel model)
 		{
 			var addressDetails = new AddressDetailsViewModel();
 
@@ -85,7 +85,7 @@ namespace UCommerce.MasterClass.Website.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-			return Redirect("/store/checkout/shipping");
+			return Redirect("/store/checkout/shipping/");
 		}
 	}
 }
