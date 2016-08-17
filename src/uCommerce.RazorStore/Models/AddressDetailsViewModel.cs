@@ -17,6 +17,8 @@ namespace UCommerce.RazorStore.Models
 
 		public AddressViewModel BillingAddress { get; set; }
 
+        public bool IsShippingSameAsBilling { get; set; }
+
 		public IList<SelectListItem> AvailableCountries { get; set; }
 	}
 }

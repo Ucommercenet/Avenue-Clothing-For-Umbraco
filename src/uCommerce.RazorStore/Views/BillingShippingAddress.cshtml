@@ -12,61 +12,62 @@
             <div class="col-md-12 control-group">
                 <div class="col-md-5 control-group">
                     <label>First name</label>
-                    <input type="text" class="col-md-12 required" name="billing-firstname" value="@Model.BillingAddress.FirstName" placeholder="First name" />
+                    @Html.TextBoxFor(x => x.BillingAddress.FirstName, new { @class = "col-md-12 required" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Last name</label>
-                    <input type="text" class="col-md-12 required" name="billing-lastname" value="@Model.BillingAddress.LastName" placeholder="Last name" />
+                    @Html.TextBoxFor(x => x.BillingAddress.LastName, new { @class = "col-md-12 required" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>E-mail</label>
-                    <input type="text" class="col-md-12 required email" name="billing-email" value="@Model.BillingAddress.EmailAddress" placeholder="E-mail" />
+                    @Html.TextBoxFor(x => x.BillingAddress.EmailAddress, new { @class = "col-md-12 required email" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Company</label>
-                    <input type="text" class="col-md-12" name="billing-company" value="@Model.BillingAddress.CompanyName" placeholder="Company" />
+                    @Html.TextBoxFor(x => x.BillingAddress.CompanyName, new { @class = "col-md-12" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Attention</label>
-                    <input type="text" class="col-md-12" name="billing-attention" value="@Model.BillingAddress.Attention" placeholder="Attention" />
+                    @Html.TextBoxFor(x => x.BillingAddress.Attention, new { @class = "col-md-12" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Street</label>
-                    <input type="text" class="col-md-12 required" name="billing-line1" value="@Model.BillingAddress.Line1" placeholder="Street" />
+                    @Html.TextBoxFor(x => x.BillingAddress.Line1, new { @class = "col-md-12 required" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Street 2</label>
-                    <input type="text" class="col-md-12" name="billing-line2" value="@Model.BillingAddress.Line2" placeholder="Street 2" />
+                    @Html.TextBoxFor(x => x.BillingAddress.Line2, new { @class = "col-md-12" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>City</label>
-                    <input type="text" class="col-md-12" name="billing-city" value="@Model.BillingAddress.City" placeholder="City" />
+                    @Html.TextBoxFor(x => x.BillingAddress.City, new { @class = "col-md-12" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Postal code</label>
-                    <input type="text" class="col-md-12 required" name="billing-postcode" value="@Model.BillingAddress.PostalCode" placeholder="Postal code" />
+                    @Html.TextBoxFor(x => x.BillingAddress.PostalCode, new { @class = "col-md-12 required" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Country</label>
-                    @Html.DropDownList("Countries", Model.AvailableCountries)
+                    @Html.DropDownList("BillingAddress.CountryId", Model.AvailableCountries)
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Phone</label>
-                    <input type="text" class="col-md-12" name="billing-phone" value="@Model.BillingAddress.PhoneNumber" placeholder="Phone" />
-                </div>
+                    @Html.TextBoxFor(x => x.BillingAddress.PhoneNumber, new { @class = "col-md-12" })
+                                    </div>
                 <div class="col-md-5 control-group">
                     <label>Mobile phone</label>
-                    <input type="text" class="col-md-12" name="billing-mobile" value="@Model.BillingAddress.MobilePhoneNumber" placeholder="Mobile phone" />
+                    @Html.TextBoxFor(x => x.BillingAddress.MobilePhoneNumber, new { @class = "col-md-12" })
+
                 </div>
             </div>
         </div>
@@ -75,65 +76,69 @@
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>First name</label>
-                    <input type="text" class="col-md-12 required" name="shipping-firstname" value="@Model.ShippingAddress.FirstName" placeholder="First name" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.FirstName, new { @class = "col-md-12 required" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Last name</label>
-                    <input type="text" class="col-md-12 required" name="shipping-lastname" value="@Model.ShippingAddress.LastName" placeholder="Last name" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.LastName, new { @class = "col-md-12 required" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>E-mail</label>
-                    <input type="text" class="col-md-12 required email" name="shipping-email" value="@Model.ShippingAddress.EmailAddress" placeholder="E-mail" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.EmailAddress, new { @class = "col-md-12 required email" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Company</label>
-                    <input type="text" class="col-md-12" name="shipping-company" value="@Model.ShippingAddress.CompanyName" placeholder="Company" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.CompanyName, new { @class = "col-md-12 required" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Attention</label>
-                    <input type="text" class="col-md-12" name="shipping-attention" value="@Model.ShippingAddress.Attention" placeholder="Attention" />
-                </div>
+                    @Html.TextBoxFor(x => x.ShippingAddress.Attention, new { @class = "col-md-12 required" })
+                                    </div>
                 <div class="col-md-5 control-group">
                     <label>Street</label>
-                    <input type="text" class="col-md-12 required" name="shipping-line1" value="@Model.ShippingAddress.Line1" placeholder="Street" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.Line1, new { @class = "col-md-12 required" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Street 2</label>
-                    <input type="text" class="col-md-12" name="shipping-line2" value="@Model.ShippingAddress.Line2" placeholder="Street 2" />
-                </div>
+                    @Html.TextBoxFor(x => x.ShippingAddress.Line2, new { @class = "col-md-12" })
+               </div>
                 <div class="col-md-5 control-group">
                     <label>City</label>
-                    <input type="text" class="col-md-12" name="shipping-city" value="@Model.ShippingAddress.City" placeholder="City" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.City, new { @class = "col-md-12" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Postal code</label>
-                    <input type="text" class="col-md-12 required" name="shipping-postcode" value="@Model.ShippingAddress.PostalCode" placeholder="Postal code" />
+                    @*<input type="text" class="col-md-12 required" name="shipping-postcode" value="@Model.ShippingAddress.PostalCode" placeholder="Postal code" />*@
+                    @Html.TextBoxFor(x => x.ShippingAddress.PostalCode, new { @class = "col-md-12 required" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Country</label>
-                    @Html.DropDownList("Countries", Model.AvailableCountries)
+                    @Html.DropDownList("ShippingAddress.CountryId", Model.AvailableCountries)
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-5 control-group">
                     <label>Phone</label>
-                    <input type="text" class="col-md-12" name="shipping-phone" value="@Model.ShippingAddress.PhoneNumber" placeholder="Phone" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.PhoneNumber, new { @class = "col-md-12" })
                 </div>
                 <div class="col-md-5 control-group">
                     <label>Mobile phone</label>
-                    <input type="text" class="col-md-12" name="shipping-mobile" value="@Model.ShippingAddress.MobilePhoneNumber" placeholder="Mobile phone" />
+                    @Html.TextBoxFor(x => x.ShippingAddress.MobilePhoneNumber, new { @class = "col-md-12" })
                 </div>
             </div>
         </div>
     </div>
     <a href="/cart.aspx" class="btn btn-secondary btn-sm">Back to Cart</a>
+
     <button name="update-addresses" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Billing <i class="icon-arrow-right icon-white"></i></button>
+    @*<input type="submit" value="Continue to select shipping method" />*@
+
 </form>

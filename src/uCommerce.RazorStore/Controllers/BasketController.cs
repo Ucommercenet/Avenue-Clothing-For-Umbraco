@@ -57,7 +57,7 @@ namespace UCommerce.RazorStore.Controllers
 
             TransactionLibrary.ExecuteBasketPipeline();
 
-            return View("/basket/address");
+            return Redirect("/basket/address");
         }
     }
 
