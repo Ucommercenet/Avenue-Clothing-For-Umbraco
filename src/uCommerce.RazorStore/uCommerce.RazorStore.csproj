@@ -384,7 +384,6 @@
     <Content Include="img\uCommerce\logo.png" />
     <Content Include="img\uCommerce\return.png" />
     <Content Include="img\uCommerce\ucommerce.png" />
-    <Content Include="npmPlaceholder.txt" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />

@@ -165,7 +165,7 @@ legend {
         border: 1px solid #cccccc;
 }
 label {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 label.radio {
@@ -259,6 +259,13 @@ div.row.well {
         }
             #why-buy ol li i{
                 margin-right: 10px;
+            }
+          
+            #why-buy p a img {
+                height: auto;
+                width: 100%;
+                min-width: 100px;
+                max-width: 230px;
             }
 #powered-by-ucommerce {
     padding: 20px 20px 10px;
@@ -478,6 +485,10 @@ label {
 
 #voucher-form {
     margin-top: -191px;
+}
+
+.address-line {
+    line-height: 1.5rem;
 }
 /* Address page
 -------------------------------------------*/
