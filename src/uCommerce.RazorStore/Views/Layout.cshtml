@@ -52,7 +52,7 @@
                     <div class="pull-xs-right navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li>
-                                @Umbraco.RenderMacro("ucMiniBasket")
+                                @Umbraco.RenderMacro("uCommerceMiniBasket")
                             </li>
                         </ul>
                     </div>
@@ -64,10 +64,10 @@
             <div class="row">
                 <div class="col-sm-3 col-md-3">
                     <div class="well sidebar-nav" id="main-nav">
-                        @Umbraco.RenderMacro("ucLeftNavigation")
+                        @Umbraco.RenderMacro("uCommerceCategoryNavigation")
                     </div>
                     <div class="sidebar-nav" id="facets-nav">
-                        @Umbraco.RenderMacro("ucFacets")
+                        @Umbraco.RenderMacro("uCommerceFacets")
                     </div>
                     <div class="well sidebar-nav" id="why-buy">
                         <ol>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="col-sm-9 col-md-9">
-                    @Umbraco.RenderMacro("ucBreadcrumb")
+                    @Umbraco.RenderMacro("uCommerceBreadcrumbs")
                     @RenderBody()
                 </div>
             </div>

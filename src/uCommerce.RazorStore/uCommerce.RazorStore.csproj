@@ -327,6 +327,7 @@
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\BreadcrumbsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ConfirmationController.cs" />
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MiniBasketController.cs" />
@@ -633,6 +634,10 @@
     <Content Include="Views\Shipping.cshtml" />
     <Content Include="Views\Payment.cshtml" />
     <Content Include="Views\Preview.cshtml" />
+    <Content Include="Views\Confirmation.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Category.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -642,6 +647,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Confirmation\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

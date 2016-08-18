@@ -89,11 +89,11 @@ namespace UCommerce.RazorStore.Controllers
 		}
 		
 		[HttpPost]
-		public ActionResult Post()
+		public ActionResult Index()
 		{
 			TransactionLibrary.RequestPayments();
 
-		    return Redirect("/basket/preview");
+		    return Redirect("/basket/confirmation");
 		}
 	}
 }
