@@ -384,7 +384,6 @@
     <Content Include="img\uCommerce\logo.png" />
     <Content Include="img\uCommerce\return.png" />
     <Content Include="img\uCommerce\ucommerce.png" />
-    <Content Include="npmPlaceholder.txt" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -631,6 +630,9 @@
     <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
     <Content Include="Views\PartialView\Voucher.cshtml" />
     <Content Include="Views\Basket.cshtml" />
+    <Content Include="Views\Shipping.cshtml" />
+    <Content Include="Views\Payment.cshtml" />
+    <Content Include="Views\Preview.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -680,7 +682,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Programming\Demo Store Accelerator - Local\src\uCommerce.RazorStore" "C:\Programming\Demo Store v2"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
