@@ -50,103 +50,60 @@ namespace UCommerce.MasterClass.Website.Controllers
             return base.View("/Views/BillingShippingAddress.cshtml", addressDetails);
         }
 
-        //private iShippingSameAsBilling ()
-
         [HttpPost]
         public ActionResult Index(AddressDetailsViewModel addressDetails)
         {
-            AddressViewModel billingAddress = addressDetails.BillingAddress;
-            AddressViewModel shippingAddress = addressDetails.ShippingAddress;
-
-
-            TransactionLibrary.EditBillingInformation(
-                billingAddress.FirstName,
-                billingAddress.LastName,
-                billingAddress.EmailAddress,
-                billingAddress.PhoneNumber,
-                billingAddress.MobilePhoneNumber,
-                billingAddress.CompanyName,
-                billingAddress.Line1,
-                billingAddress.Line2,
-                billingAddress.PostalCode,
-                billingAddress.City,
-                billingAddress.State,
-                billingAddress.Attention,
-                billingAddress.CountryId);
-
-            //TransactionLibrary.EditBillingInformation(
-            //	addressDetails.BillingAddress.FirstName,
-            //	addressDetails.BillingAddress.LastName,
-            //	addressDetails.BillingAddress.EmailAddress,
-            //	addressDetails.BillingAddress.PhoneNumber,
-            //	addressDetails.BillingAddress.MobilePhoneNumber,
-            //	addressDetails.BillingAddress.CompanyName,
-            //	addressDetails.BillingAddress.Line1,
-            //	addressDetails.BillingAddress.Line2,
-            //	addressDetails.BillingAddress.PostalCode,
-            //	addressDetails.BillingAddress.City,
-            //	addressDetails.BillingAddress.State,
-            //	addressDetails.BillingAddress.Attention,
-            //	addressDetails.BillingAddress.CountryId);
-
             if (addressDetails.IsShippingAddressDifferent)
             {
-
-                TransactionLibrary.EditShippingInformation(
-             shippingAddress.FirstName,
-             shippingAddress.LastName,
-             shippingAddress.EmailAddress,
-             shippingAddress.PhoneNumber,
-             shippingAddress.MobilePhoneNumber,
-             shippingAddress.CompanyName,
-             shippingAddress.Line1,
-             shippingAddress.Line2,
-             shippingAddress.PostalCode,
-             shippingAddress.City,
-             shippingAddress.State,
-             shippingAddress.Attention,
-             shippingAddress.CountryId);
+                EditBillingInformation(addressDetails.BillingAddress);
+                EditShippingInformation(addressDetails.ShippingAddress);
             }
+
             else
             {
-                    TransactionLibrary.EditShippingInformation(
-                billingAddress.FirstName,
-                billingAddress.LastName,
-                billingAddress.EmailAddress,
-                billingAddress.PhoneNumber,
-                billingAddress.MobilePhoneNumber,
-                billingAddress.CompanyName,
-                billingAddress.Line1,
-                billingAddress.Line2,
-                billingAddress.PostalCode,
-                billingAddress.City,
-                billingAddress.State,
-                billingAddress.Attention,
-                billingAddress.CountryId);
+                EditBillingInformation(addressDetails.BillingAddress);
+                EditShippingInformation(addressDetails.BillingAddress);
             }
-
-            //             TransactionLibrary.EditShippingInformation(
-            //                 addressDetails.ShippingAddress.FirstName,
-            //                 addressDetails.ShippingAddress.LastName,
-            //                 addressDetails.ShippingAddress.EmailAddress,
-            //                 addressDetails.ShippingAddress.PhoneNumber,
-            //                 addressDetails.ShippingAddress.MobilePhoneNumber,
-            //                 addressDetails.ShippingAddress.CompanyName,
-            //                 addressDetails.ShippingAddress.Line1,
-            //                 addressDetails.ShippingAddress.Line2,
-            //                 addressDetails.ShippingAddress.PostalCode,
-            //                 addressDetails.ShippingAddress.City,
-            //                 addressDetails.ShippingAddress.State,
-            //                 addressDetails.ShippingAddress.Attention,
-            //                 addressDetails.ShippingAddress.CountryId);
-            //         }
-            //         else {
-
-            //         }
-
+           
             TransactionLibrary.ExecuteBasketPipeline();
 
             return Redirect("/store/checkout/shipping/");
+        }
+
+        private void EditShippingInformation(AddressViewModel shippingAddress)
+        {
+            TransactionLibrary.EditShippingInformation(
+          shippingAddress.FirstName,
+          shippingAddress.LastName,
+          shippingAddress.EmailAddress,
+          shippingAddress.PhoneNumber,
+          shippingAddress.MobilePhoneNumber,
+          shippingAddress.CompanyName,
+          shippingAddress.Line1,
+          shippingAddress.Line2,
+          shippingAddress.PostalCode,
+          shippingAddress.City,
+          shippingAddress.State,
+          shippingAddress.Attention,
+          shippingAddress.CountryId);
+        }
+
+        private void EditBillingInformation(AddressViewModel billingAddress)
+        {
+            TransactionLibrary.EditBillingInformation(
+               billingAddress.FirstName,
+               billingAddress.LastName,
+               billingAddress.EmailAddress,
+               billingAddress.PhoneNumber,
+               billingAddress.MobilePhoneNumber,
+               billingAddress.CompanyName,
+               billingAddress.Line1,
+               billingAddress.Line2,
+               billingAddress.PostalCode,
+               billingAddress.City,
+               billingAddress.State,
+               billingAddress.Attention,
+               billingAddress.CountryId);
         }
     }
 }
