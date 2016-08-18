@@ -12,12 +12,13 @@ namespace UCommerce.RazorStore.Models
 			ShippingAddress = new AddressViewModel();
 			BillingAddress = new AddressViewModel();
 			AvailableCountries = new List<SelectListItem>();
-		}
+            IsShippingAddressDifferent = false;
+        }
 		public AddressViewModel ShippingAddress { get; set; }
 
 		public AddressViewModel BillingAddress { get; set; }
 
-        public bool IsShippingSameAsBilling { get; set; }
+        public bool IsShippingAddressDifferent { get; set; }
 
 		public IList<SelectListItem> AvailableCountries { get; set; }
 	}
