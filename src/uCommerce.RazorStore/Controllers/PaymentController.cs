@@ -30,17 +30,15 @@ namespace UCommerce.RazorStore.Controllers
                 ? existingPayment.PaymentMethod.PaymentMethodId
                 : -1;
 
-         
-
             foreach (var availablePaymentMethod in availablePaymentMethods)
             {
                 var option = new SelectListItem();
-                var payment = basket.Payments.FirstOrDefault();
                 decimal feePercent = availablePaymentMethod.FeePercent;
                 var fee = availablePaymentMethod.GetFeeForCurrency(basket.BillingCurrency);
                 var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency);
 
-                option.Text = availablePaymentMethod.Name + " (" + formattedFee + " + " + feePercent.ToString("0.00") + "%)";
+                option.Text = String.Format(" {0} ({1} + {2}%)", availablePaymentMethod.Name, formattedFee,
+                    feePercent.ToString("0.00"));
                 option.Value = availablePaymentMethod.PaymentMethodId.ToString();
                 option.Selected = availablePaymentMethod.PaymentMethodId == paymentViewModel.SelectedPaymentMethodId;
 

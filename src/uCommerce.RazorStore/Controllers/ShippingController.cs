@@ -17,19 +17,14 @@ namespace UCommerce.RazorStore.Controllers
 			var shipping = new ShippingViewModel();
 			shipping.AvailableShippingMethods = new List<SelectListItem>();
 
-			var shippingInformation = UCommerce.Api.TransactionLibrary.GetShippingInformation();
+			var shippingInformation = TransactionLibrary.GetShippingInformation();
 
 			var availableShippingMethods = TransactionLibrary.GetShippingMethods(shippingInformation.Country);
 
-			var selectedShippingMethod = TransactionLibrary.GetShippingMethod();
+            var basket = TransactionLibrary.GetBasket().PurchaseOrder;
 
-			int selectedShippingMethodId = -1;
-			if (selectedShippingMethod != null)
-			{
-				selectedShippingMethodId = selectedShippingMethod.ShippingMethodId;
-			}
-
-		    var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+            shipping.SelectedShippingMethodId = basket.Shipments.FirstOrDefault() != null
+                ? basket.Shipments.FirstOrDefault().ShippingMethod.ShippingMethodId : -1;
 
 			foreach (var availableShippingMethod in availableShippingMethods)
 			{
@@ -38,11 +33,12 @@ namespace UCommerce.RazorStore.Controllers
 
 				shipping.AvailableShippingMethods.Add(new SelectListItem()
 				{
-					Selected = selectedShippingMethodId == availableShippingMethod.ShippingMethodId,
-					Text = availableShippingMethod.Name + "(" + formattedprice + ")",
+					Selected = shipping.SelectedShippingMethodId == availableShippingMethod.ShippingMethodId,
+                    Text = String.Format(" {0} ({1})", availableShippingMethod.Name, formattedprice),
 					Value = availableShippingMethod.ShippingMethodId.ToString()
 				});
 			}
+
 		    shipping.ShippingCountry = shippingInformation.Country.Name;
 			
 			return base.View("/Views/Shipping.cshtml", shipping);
