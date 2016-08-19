@@ -1,6 +1,24 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using ClientDependency.Core.Mvc
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = null;
+    Html.RequiresJs("~/scripts/jquery-3.0.0.slim.js",1);
+    Html.RequiresJs("~/scripts/jquery-3.0.0.js",1);
+    Html.RequiresJs("~/scripts/jquery.validate.min.js", 1);
+    Html.RequiresJs("~/scripts/tether.min.js",1);
+    Html.RequiresJs("~/scripts/bootstrap.js",1);
+    Html.RequiresJs("~/scripts/ucommerce.servicestack.js",2);
+    Html.RequiresJs("~/scripts/ucommerce.jquery.js", 1);
+    Html.RequiresJs("~/scripts/ucommerce.demostore.js",2);
+    Html.RequiresJs("~/scripts/uCommerce.facets.js");
+    Html.RequiresJs("~/scripts/ucommerce.bootstrap.js", 1);
+    Html.RequiresJs("~/scripts/uCommerce.demostore.checkout.js",2);
+
+    Html.RequiresCss("~/css/tether.css",2);
+    Html.RequiresCss("~/Content/bootstrap.css",2);
+    Html.RequiresCss("~/css/ucommerce.demostore.css",2);
+    Html.RequiresCss("~/css/font-awesome.min.css",2);
+
 }
 <!DOCTYPE html>
 <html>
@@ -11,10 +29,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="/css/tether.css" />
-    <link rel="stylesheet" href="/Content/bootstrap.css" />
-    <link href="/css/ucommerce.demostore.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+
+    @Html.Raw(Html.RenderCssHere())
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -122,20 +138,10 @@
                 </div>
             </footer>
         </div>
-    
-    <script src="/scripts/jquery-3.0.0.slim.js"></script>
-    <script src="/scripts/jquery-3.0.0.js"></script>
-    <script src="/scripts/jquery.validate.min.js"></script>
-    <script src="/scripts/tether.js"></script>
-    <script src="/scripts/bootstrap.js"></script>
-    <script src="/scripts/ucommerce.servicestack.js"></script>
-    <script src="/scripts/ucommerce.jquery.js"></script>
-    <script src="/scripts/ucommerce.demostore.js"></script>
-    <script src="/scripts/uCommerce.facets.js"></script>
-    <script src="/scripts/ucommerce.bootstrap.js"></script>
-    <script src="/scripts/uCommerce.demostore.checkout.js"></script>
+  
+    @Html.Raw(Html.RenderJsHere())
 
 
-    @RenderSection("cphScripts",false);
+    @*@RenderSection("cphScripts",false);*@
 </body>
 </html>
