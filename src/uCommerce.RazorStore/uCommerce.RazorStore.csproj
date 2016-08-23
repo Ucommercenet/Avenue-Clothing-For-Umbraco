@@ -329,6 +329,7 @@
     <Compile Include="Controllers\ConfirmationController.cs" />
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomepageCatalogController.cs" />
     <Compile Include="Controllers\MiniBasketController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -544,6 +545,7 @@
     <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
     <Content Include="Views\Search.cshtml" />
+    <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -554,7 +556,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\HomepageCatalog\" />
+  </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
