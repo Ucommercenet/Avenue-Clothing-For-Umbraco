@@ -22,8 +22,6 @@ namespace UCommerce.RazorStore.Controllers
     public class CategoryController : RenderMvcController
     {
         public ActionResult Index(RenderModel model)
-        //public ActionResult Index()
-
         {
             var categoryViewModel = new CategoryViewModel();
 
