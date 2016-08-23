@@ -322,7 +322,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\uCommerce\Extensions\FacetedQueryStringExtensions.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\BreadcrumbsController.cs" />
@@ -335,6 +334,7 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
@@ -349,6 +349,7 @@
     <Compile Include="Models\MiniBasketViewModel.cs" />
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
+    <Compile Include="Models\ProductsViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\ShippingViewModel.cs" />
@@ -415,57 +416,11 @@
     <Content Include="scripts\uCommerce.ServiceStack.js" />
     <Content Include="scripts\uCommerce.jQuery.js" />
     <Content Include="scripts\uCommerce.demostore.productpage.js" />
-    <Content Include="masterpages\RazorStoreContent.master" />
-    <Content Include="macroScripts\uCommerce\LeftNavigation.cshtml" />
-    <Content Include="masterpages\RazorStoreFrontPage.master" />
-    <Content Include="masterpages\RazorStoreProduct.master" />
-    <Content Include="macroScripts\uCommerce\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\uCommerce.bootstrap.css" />
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings-white.png" />
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Breadcrumb.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Catalog.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreCatalog.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Cart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreCart.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreAddress.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Address.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Shipping.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Preview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Confirmation.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreConfirmation.master" />
-    <Content Include="masterpages\RazorStorePreview.master" />
-    <Content Include="masterpages\RazorStoreShipping.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Payment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStorePayment.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\images\umbraco\ucommerce-address.png" />
@@ -481,54 +436,6 @@
     <Content Include="umbraco\images\umbraco\ucommerce-product.png" />
     <Content Include="umbraco\images\umbraco\ucommerce-search.png" />
     <Content Include="umbraco\images\umbraco\ucommerce-shipping.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\MiniBasket.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStore.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\HomepageBanners.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\HomepageCatalog.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\ProductReview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\Product.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\Category.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Functions\Basket.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\Review.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Functions\Product.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Actions.Cart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Search.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreSearch.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreCheckout.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Facets.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreEmail.master" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />
@@ -616,7 +523,6 @@
     <Content Include="Content\bootstrap\_utilities.scss" />
     <Content Include="Content\bootstrap\_variables.scss" />
     <Content Include="web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\frontpage.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
@@ -636,8 +542,8 @@
     <Content Include="Views\Preview.cshtml" />
     <Content Include="Views\Confirmation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce Category.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
+    <Content Include="Views\Search.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -648,12 +554,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Confirmation\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\IdenticalShippingBillingAddress\" />
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

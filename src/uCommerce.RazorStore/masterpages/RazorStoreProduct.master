@@ -1,8 +1,0 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
-<%@ Register TagPrefix="umbraco" Namespace="umbraco.presentation.templateControls" Assembly="umbraco" %>
-<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
-    <umbraco:Macro runat="server" Alias="ucProduct"/>
-</asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/scripts/ucommerce.demostore.productpage.js"></script>
-</asp:Content>

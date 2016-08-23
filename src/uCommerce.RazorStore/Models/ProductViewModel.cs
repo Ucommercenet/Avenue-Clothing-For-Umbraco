@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using UCommerce.Api;
+using Umbraco.Web;
+using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
-	public class ProductViewModel
+	public class ProductViewModel: RenderModel
 	{
-		public ProductViewModel()
+		public ProductViewModel() :base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
 		{
 			Variants = new List<ProductViewModel>();
 		}

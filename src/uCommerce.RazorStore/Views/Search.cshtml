@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductsViewModel>
+@using UCommerce.RazorStore.Models
+@{
+    Layout = "Layout.cshtml";
+}
+<div class="row-fluid">
+    <div class="span12 product-list">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product col-sm-4 col-md-4 col-xs-2">
+                <div class="product-image">
+                    <a href="@product.Url"><img src="@product.ThumbnailImageUrl"/></a>
+                </div>
+                <p class="item-name"><a href="@product.Url">@product.Name</a>
+                </p>
+                    @if (product.PriceCalculation.ListPrice != null)
+                    {
+                        <p class="item-price">
+                            @product.PriceCalculation.YourPrice.Amount
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="item-price"></p>
+                    }
+                <p class="btn-group view-details">
+                    <a href="@product.Url" class="btn btn-default">View more <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span></a>
+                </p>
+            </div>
+        }
+    </div>
+</div>
