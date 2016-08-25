@@ -546,6 +546,7 @@
     <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
     <Content Include="Views\Search.cshtml" />
     <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Homepage Catalog.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -596,7 +597,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\Dev\Razor Demo Store Test"
+</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -77,7 +77,7 @@ namespace UCommerce.RazorStore.Installer
             }
             else
             {
-                var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceFrontPage");
+                var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "home");
                 if (docType != null)
                 {
                     var root = Document.GetDocumentsOfDocumentType(docType.Id);
