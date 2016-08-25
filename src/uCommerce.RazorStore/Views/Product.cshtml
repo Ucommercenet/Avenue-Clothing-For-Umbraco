@@ -1,0 +1,143 @@
+﻿@using System.Web.UI
+@using UCommerce.Runtime
+@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Api
+@using System.Linq
+@using System.Web
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductViewModel>
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<div id="product-details" class="row" itemscope itemtype="http://schema.org/Product">
+    <div class="col-md-5">
+        @if (!string.IsNullOrEmpty(Model.ThumbnailImageUrl))
+            {
+            <img src="@Model.ThumbnailImageUrl" />
+        }
+    </div>
+
+    <section class="col-md-7">
+        <header class="col-md-12 page-header">
+            @*@Html.DisplayTextFor(Model.Name)*@
+            <h1 itemprop="name">@Model.Name</h1>
+        </header>
+
+        @if (Model.IsOrderingAllowed)
+        {
+
+            <form method="post" action="@Url.Action("Index", "ProductController")">
+                <div class="col-md-12 well">
+                    <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        <p class="item-price" itemprop="price">@Model.PriceCalculation.YourPrice.Amount</p>
+                        <p class="item-tax"><small>Inc. @Model.TaxCalculation</small></p>
+                    </aside>
+
+                    @if (Model.Properties.Any())
+                    {
+                        <div class="col-md-7">
+
+                            @foreach (var prop in Model.Properties)
+                            {
+                                var controlName = string.Format("variation-{0}", prop.PropertyName.ToLower());
+                                <label for="@controlName">@prop.PropertyName</label>
+                                <select name="@controlName" id="@controlName" class="variant margin-bottom">
+                                    <option value="">-- Please Select --</option>
+                                    @foreach (var value in prop.Values)
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                            }
+
+                        </div>
+                    }
+
+                    @if (IsPost && Request["add-to-basket"].IsEmpty())
+                    {
+                    <div class="alert alert-success item-added">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>
+                    </div>
+                    }
+
+
+                    @*@if (itemAddedToCart.HasValue && itemAddedToCart.Value)
+                        {
+                            <div class="alert alert-success item-added">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>
+                            </div>
+                        }*@
+                    <input name="Sku" id="product-sku" type="hidden" value="@Model.Sku" />
+                    <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
+                    <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId" />
+
+                    <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
+                    <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+
+
+                    @*<input type = "hidden" name = "Model.Sku" value = "@Model.Sku" />
+                        <input type = "hidden" name = "Model.Variants" value = "@Model.Variants" />
+
+                             <input name = "add-to-basket" id = "add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />*@
+
+                </div>
+            </form>
+
+        }
+        else
+        {
+            <p>Sorry, the item you are looking for is not currently available.</p>
+        }
+        
+      <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#product-description" class="nav-link active" data-toggle="tab">Details</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#delivery-info" class="nav-link" data-toggle="tab">Delivery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#returns-info" class="nav-link" data-toggle="tab">Returns</a>
+                </li>
+                <li class="nav-item"><a href="#customer-reviews" class="nav-link" data-toggle="tab">Reviews</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div itemprop="description" id="product-description" class="tab-pane active" role="tabpanel">
+                    @Html.Raw(Model.LongDescription)
+                </div>
+                <div id="delivery-info" class="tab-pane" role="tabpanel">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="returns-info" class="tab-pane" role="tabpanel">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="customer-reviews" class="tab-pane" role="tabpanel">
+
+
+                    @*@if (Model.Reviews.Any())
+                    {
+                        <h5>Latest Reviews</h5>
+                        foreach (var review in Model.Reviews)
+                        { @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml
+        for this helper 
+                            @uCommerce.Helpers.ProductReview.DisplayReview(review)
+                        }
+                    }
+                    else
+                    {
+                        <p>No-one has reviewed this product yet.</p>} 
+     View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper 
+                    @uCommerce.Helpers.ProductReview.DisplayReviewForm(product)*@
+            
+            
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

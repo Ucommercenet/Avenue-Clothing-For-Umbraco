@@ -19,38 +19,33 @@
         itemAddedToCart = uCommerce.Functions.Basket.AddToBasket("add-to-basket", "quantity-to-add", variant);
         
 @* View /App_Code/uCommerce/Functions/Review.cshtml for this function *@
-        uCommerce.Functions.Review.LeaveReview(product, "review-name", "review-email", "review-rating", "review-headline", "review-text");
-    }
-    else if (request.HttpMethod == "GET")
-    {
-        if (!String.IsNullOrWhiteSpace(request.QueryString["item-added"]))
-        {
-            itemAddedToCart = true;
-        }
-    }
-
-    var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
-    var price = CatalogLibrary.CalculatePrice(product);
-
-    var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
-    var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
-
-    // It would be better to write this explicitly
-    // IEnumerable<IGrouping<ProductDefinitionField, ProductProperty>> uniqueVariants = null;
-    // if (product.ProductDefinition.IsProductFamily())
-    // {
-    //    uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
-    //                     where v.ProductDefinitionField.DisplayOnSite
-    //                     group v by v.ProductDefinitionField
-    //                     into g
-    //                     select g;
-    // }
- 
-    var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
-                         where v.ProductDefinitionField.DisplayOnSite
-                         group v by v.ProductDefinitionField into g
-                         select g;
+    uCommerce.Functions.Review.LeaveReview(product, "review-name", "review-email", "review-rating", "review-headline", "review-text");
 }
+else if (request.HttpMethod == "GET")
+{
+    if (!String.IsNullOrWhiteSpace(request.QueryString["item-added"]))
+    {
+        itemAddedToCart = true;
+    }
+}
+
+var inBasket = basket.PurchaseOrder.OrderLines.Any(o => o.Sku == product.Sku);
+var price = CatalogLibrary.CalculatePrice(product);
+
+var productIncludesTax = SiteContext.Current.CatalogContext.CurrentCatalog.ShowPricesIncludingVAT ? "<abbr title=\"Including\">Inc.</abbr>" : "<abbr title=\"Excluding\">Exc.</abbr>";
+var relatedProducts = @product.GetRelatedProducts().SelectMany(x => x.Value).ToList();
+
+// It would be better to write this explicitly
+// IEnumerable<IGrouping<ProductDefinitionField, ProductProperty>> uniqueVariants = null;
+if (product.ProductDefinition.IsProductFamily())
+{
+   var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
+                     where v.ProductDefinitionField.DisplayOnSite
+                     group v by v.ProductDefinitionField
+                     into g
+                     select g;
+}
+
 @if (inBasket)
 {
     <div class="row">

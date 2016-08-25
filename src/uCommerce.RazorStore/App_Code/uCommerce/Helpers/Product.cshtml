@@ -43,7 +43,7 @@ var price = CatalogLibrary.CalculatePrice(product);
             @if (product.ProductReviews.Any())
             {
                 @* View /App_Code/ReviewHelpers.cshtml for this helper *@
-                <p class="ratings">@uCommerce.Helpers.ProductReview.DisplayStars(product.Rating)</p>
+                @*<p class="ratings">@uCommerce.Helpers.ProductReview.DisplayStars(product.Rating)</p>*@
             }
            
         </div>
