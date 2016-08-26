@@ -336,6 +336,7 @@
     <Compile Include="Controllers\PreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
@@ -351,6 +352,8 @@
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\ProductsViewModel.cs" />
+    <Compile Include="Models\ProductPropertiesViewModel.cs" />
+    <Compile Include="Models\ProductReviewViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\ShippingViewModel.cs" />
@@ -393,6 +396,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="css\bootstrap.min.css.map" />
+    <Content Include="macroScripts\uCommerce\ProductReviews.cshtml" />
     <Content Include="css\bootstrap\bootstrap-flex.scss" />
     <Content Include="css\bootstrap\bootstrap-grid.scss" />
     <Content Include="css\bootstrap\bootstrap-reboot.scss" />
@@ -546,6 +550,9 @@
     <Content Include="Views\Search.cshtml" />
     <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Homepage Catalog.cshtml" />
+    <Content Include="Views\Product.cshtml" />
+    <Content Include="Views\PartialView\ProductReview.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerceProductReviews.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -1,0 +1,134 @@
+﻿@using UCommerce.RazorStore.Models
+@using UCommerce.Api
+@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Runtime
+
+@model uCommerce.RazorStore.Models.ProductViewModel
+
+@{
+    Layout = null;
+}
+
+@if (Model.Reviews.Any())
+{
+    foreach (var review in Model.Reviews)
+    {
+        <section itemprop="review" itemscope itemtype="http://schema.org/Review" class="review">
+            <header>
+                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
+                    @DisplayStars(review.Rating)
+                </div>
+                <p itemprop="name" class="review-headline">@review.ReviewHeadline</p>
+            </header>
+            <aside class="review-by">
+                <p>
+                    by <span itemprop="author">@review.Customer.FirstName</span> on
+                    <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+                </p>
+            </aside>
+            <p itemprop="description">@review.ReviewText</p>
+            <meta itemprop="ratingValue" content="@review.Rating">
+            <meta itemprop="worstRating" content="1">
+            <meta itemprop="bestRating" content="5">
+            <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
+            @DisplayReviewComments(review.Comments)
+        </section>
+    }
+}
+
+@helper DisplayReviewForm(UCommerce.EntitiesV2.Product product)
+{
+    <form method="post" class="validate form-horizontal">
+        <h5>Send Us Your Review</h5>
+        <div class="control-group">
+            <label class="control-label" for="review-rating">Rating</label>
+            <div class="controls rating">
+                <label><input type="radio" name="review-rating" value="1" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="review-rating" value="2" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="review-rating" value="3" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="review-rating" value="4" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="review-rating" value="5" /><i class="fa fa-star"></i></label>
+            </div>
+        </div>
+        <div id="review-form">
+            <div class="control-group">
+                <br />
+                <tag tag-default="tag-default" class="control-tag tag-default" for="review-name">
+                    Your Name
+                    <div class="controls">
+                        <input type="text" id="review-name" name="review-name" placeholder="Name"
+                               class="required span12" />
+                    </div>
+                </tag>
+            </div>
+            <div class="control-group">
+                <tag tag-default="tag-default" class="control-tag tag-default" for="review-email">
+                    Your Email
+                    <div class="controls">
+                        <input type="text" id="review-email" name="review-email" placeholder="Email"
+                               class="required span12" />
+                    </div>
+                </tag>
+            </div>
+            <div class="control-group">
+                <tag tag-default="tag-default" class="control-tag tag-default" for="review-headline">
+                    Review Title
+                    <div class="controls">
+                        <input type="text" id="review-headline" name="review-headline" placeholder="Title"
+                               class="required span12" />
+                    </div>
+                </tag>
+            </div>
+            <div class="control-group">
+                <tag tag-default="tag-default" class="control-tag tag-default" for="review-text">
+                    Comments
+                    <div class="controls">
+                        <textarea rows="3" id="review-text" name="review-text" placeholder="Your review"
+                                  class="required span12"></textarea>
+                    </div>
+                </tag>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary" name="review-product">Save</button>
+                    <input type="hidden" name="reviewed-product-sku" id="@product.Sku" />
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+@helper DisplayStars(double? rating)
+{
+if (rating.HasValue)
+{
+        <span class="star-rating">
+            @for (var i = 20; i <= 100; i = i + 20)
+            {
+                if (rating >= i)
+                {
+                    <i class="fa fa-star"></i>
+                }
+                else
+                {
+                    <i class="fa fa-star-o"></i>
+                }
+            }
+        </span>
+}
+}
+
+
+@helper DisplayReviewComments(IEnumerable<UCommerce.EntitiesV2.ProductReviewComment> comments)
+{
+foreach (var comment in comments)
+{
+        <section class="review-comment">
+            <article itemprop="description">@comment.Comment</article>
+            <header>
+                by <span itemprop="author">@comment.Customer.FirstName</span> on <abbr title="@comment.CreatedOn.ToString("u")">@comment.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+            </header>
+        </section>
+}
+}

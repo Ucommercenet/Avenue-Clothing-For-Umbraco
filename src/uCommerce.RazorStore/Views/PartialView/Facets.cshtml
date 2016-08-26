@@ -9,7 +9,6 @@
         <legend>@facet.Name</legend>
         @foreach (var value in facet.FacetValues)
         {
-
             <label>
                 <input type="checkbox" id="filter-@facet.Name-@value.FacetValueName" key="@facet.Name" class="filter" value="@value.FacetValueName">
                 @value.FacetValueName (@value.FacetValueHits)

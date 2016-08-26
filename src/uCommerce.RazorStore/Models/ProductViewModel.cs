@@ -8,15 +8,16 @@ using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
-	public class ProductViewModel: RenderModel
+	public class ProductViewModel : RenderModel
 	{
-		public ProductViewModel() :base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
-		{
+		public ProductViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+        {
 			Variants = new List<ProductViewModel>();
+            Properties = new List<ProductPropertiesViewModel>();
 		}
-		public bool IsVariant { get; set; }
+        public bool IsVariant { get; set; }
 
-		public string Name { get; set; }
+        public string Name { get; set; }
 
 		public string Url { get; set; }
 
@@ -32,5 +33,18 @@ namespace UCommerce.RazorStore.Models
 
         public string ThumbnailImageUrl { get; set; }
 
+        //new 
+
+        public IList<ProductPropertiesViewModel> Properties { get; set; }
+
+        public IList<ProductReviewViewModel> Reviews { get; set; }
+
+        public string TaxCalculation { get; set; }
+
+        public bool IsOrderingAllowed { get; set; }
+        
+
+
+        }
+
     }
-}
