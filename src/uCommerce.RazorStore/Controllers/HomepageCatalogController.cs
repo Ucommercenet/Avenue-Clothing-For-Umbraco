@@ -18,11 +18,11 @@ namespace UCommerce.RazorStore.Controllers
         public ActionResult Index()
         {
             var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && Convert.ToBoolean(pp.Value))));
-            ProductsViewModel productsVM = new ProductsViewModel();
+            ProductsViewModel productsViewModel = new ProductsViewModel();
 
             foreach (var p in products)
             {
-                productsVM.Products.Add(new ProductViewModel()
+                productsViewModel.Products.Add(new ProductViewModel()
                 {
                     Name = p.Name,
                     PriceCalculation = CatalogLibrary.CalculatePrice(p),
@@ -34,7 +34,7 @@ namespace UCommerce.RazorStore.Controllers
                 });
             }
         
-            return View("/Views/PartialView/HomepageCatalog.cshtml", productsVM);
+            return View("/Views/PartialView/HomepageCatalog.cshtml", productsViewModel);
         }
     }
 }

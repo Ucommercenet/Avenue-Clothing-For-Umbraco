@@ -22,7 +22,7 @@ namespace UCommerce.RazorStore.Controllers
         {
             var keyword = System.Web.HttpContext.Current.Request.QueryString["search"];
             IEnumerable<Product> products = new List<Product>();
-            ProductsViewModel productsVM = new ProductsViewModel();
+            ProductsViewModel productsViewModel = new ProductsViewModel();
 
             if (!string.IsNullOrWhiteSpace(keyword))
             {
@@ -43,7 +43,7 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var product in products.Where(x=> x.DisplayOnSite))
             {
-                productsVM.Products.Add(new ProductViewModel()
+                productsViewModel.Products.Add(new ProductViewModel()
                 {
                     Url = CatalogLibrary.GetNiceUrlForProduct(product),
                     Name = product.DisplayName(),
@@ -56,7 +56,7 @@ namespace UCommerce.RazorStore.Controllers
                 });
             }
         
-            return base.View("/Views/Search.cshtml", productsVM);
+            return base.View("/Views/Search.cshtml", productsViewModel);
         }
     }
 }

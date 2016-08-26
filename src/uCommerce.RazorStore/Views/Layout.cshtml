@@ -8,14 +8,13 @@
     Html.RequiresJs("~/scripts/tether.min.js",1);
     Html.RequiresJs("~/scripts/bootstrap.js",1);
     Html.RequiresJs("~/scripts/ucommerce.servicestack.js",2);
-    Html.RequiresJs("~/scripts/ucommerce.jquery.js", 1);
     Html.RequiresJs("~/scripts/ucommerce.demostore.js",2);
     Html.RequiresJs("~/scripts/uCommerce.facets.js");
     Html.RequiresJs("~/scripts/ucommerce.bootstrap.js", 1);
     Html.RequiresJs("~/scripts/uCommerce.demostore.checkout.js",2);
 
     Html.RequiresCss("~/css/tether.css",2);
-    Html.RequiresCss("~/Content/bootstrap.css",2);
+    Html.RequiresCss("~/css/bootstrap.min.css", 2);
     Html.RequiresCss("~/css/ucommerce.demostore.css",2);
     Html.RequiresCss("~/css/font-awesome.min.css",2);
 
@@ -31,8 +30,6 @@
     <meta name="author" content="">
 
     @Html.Raw(Html.RenderCssHere())
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/uCommerce.demostore.css"/>
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

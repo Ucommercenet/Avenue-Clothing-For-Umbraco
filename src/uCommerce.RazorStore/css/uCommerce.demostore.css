@@ -244,10 +244,13 @@ div.row.well {
 }
 
     #main-nav ul {
+        list-style-type: none;
+        padding-left: 0px;
     }
 
     #main-nav li {
         color: #767676;
+        list-style-type: none;
     }
 
         #main-nav li a {

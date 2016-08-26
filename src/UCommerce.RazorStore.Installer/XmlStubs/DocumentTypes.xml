@@ -17,11 +17,11 @@
       <DefaultTemplate />
     </Info>
     <Structure>
-      <DocumentType>shipping</DocumentType>
       <DocumentType>billing</DocumentType>
+      <DocumentType>confirmation</DocumentType>
       <DocumentType>payment</DocumentType>
       <DocumentType>preview</DocumentType>
-      <DocumentType>confirmation</DocumentType>
+      <DocumentType>shipping</DocumentType>
     </Structure>
     <GenericProperties />
     <Tabs />
@@ -59,7 +59,9 @@
       <AllowedTemplates />
       <DefaultTemplate />
     </Info>
-    <Structure />
+    <Structure>
+      <DocumentType>product</DocumentType>
+    </Structure>
     <GenericProperties />
     <Tabs />
   </DocumentType>
@@ -97,8 +99,8 @@
       <DefaultTemplate />
     </Info>
     <Structure>
-      <DocumentType>basket</DocumentType>
       <DocumentType>category</DocumentType>
+      <DocumentType>basket</DocumentType>
       <DocumentType>search</DocumentType>
     </Structure>
     <GenericProperties />
@@ -136,6 +138,26 @@
       <Master>basket</Master>
       <Compositions>
         <Composition>basket</Composition>
+      </Compositions>
+      <AllowedTemplates />
+      <DefaultTemplate />
+    </Info>
+    <Structure />
+    <GenericProperties />
+    <Tabs />
+  </DocumentType>
+  <DocumentType>
+    <Info>
+      <Name>Product</Name>
+      <Alias>product</Alias>
+      <Icon>icon-t-shirt</Icon>
+      <Thumbnail>folder.png</Thumbnail>
+      <Description />
+      <AllowAtRoot>False</AllowAtRoot>
+      <IsListView>False</IsListView>
+      <Master>category</Master>
+      <Compositions>
+        <Composition>category</Composition>
       </Compositions>
       <AllowedTemplates />
       <DefaultTemplate />
@@ -194,10 +216,8 @@
       <AllowAtRoot>False</AllowAtRoot>
       <IsListView>False</IsListView>
       <Compositions />
-      <AllowedTemplates>
-        <Template>RazorStoreEmail</Template>
-      </AllowedTemplates>
-      <DefaultTemplate>RazorStoreEmail</DefaultTemplate>
+      <AllowedTemplates />
+      <DefaultTemplate />
     </Info>
     <Structure />
     <GenericProperties>
@@ -237,7 +257,7 @@
     </GenericProperties>
     <Tabs>
       <Tab>
-        <Id>13</Id>
+        <Id>12</Id>
         <Caption>Email</Caption>
         <SortOrder>0</SortOrder>
       </Tab>

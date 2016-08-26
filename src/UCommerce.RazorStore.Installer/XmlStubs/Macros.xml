@@ -8,7 +8,7 @@
     <scriptingFile>~/Views/MacroPartials/uCommerce CategoryNavigation.cshtml</scriptingFile>
     <xslt />
     <useInEditor>False</useInEditor>
-    <dontRender>True</dontRender>
+    <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
     <cacheByMember>False</cacheByMember>
     <cacheByPage>False</cacheByPage>
@@ -22,7 +22,7 @@
     <scriptingFile>~/Views/MacroPartials/uCommerce Facets.cshtml</scriptingFile>
     <xslt />
     <useInEditor>False</useInEditor>
-    <dontRender>True</dontRender>
+    <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
     <cacheByMember>False</cacheByMember>
     <cacheByPage>False</cacheByPage>
@@ -36,7 +36,7 @@
     <scriptingFile>~/Views/MacroPartials/uCommerce Mini Basket.cshtml</scriptingFile>
     <xslt />
     <useInEditor>False</useInEditor>
-    <dontRender>True</dontRender>
+    <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
     <cacheByMember>False</cacheByMember>
     <cacheByPage>False</cacheByPage>
@@ -50,7 +50,7 @@
     <scriptingFile>~/Views/MacroPartials/uCommerce Voucher.cshtml</scriptingFile>
     <xslt />
     <useInEditor>False</useInEditor>
-    <dontRender>True</dontRender>
+    <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
     <cacheByMember>False</cacheByMember>
     <cacheByPage>False</cacheByPage>
@@ -64,7 +64,7 @@
     <scriptingFile>~/Views/MacroPartials/uCommerce Homepage Catalog.cshtml</scriptingFile>
     <xslt />
     <useInEditor>False</useInEditor>
-    <dontRender>True</dontRender>
+    <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
     <cacheByMember>False</cacheByMember>
     <cacheByPage>False</cacheByPage>
@@ -78,7 +78,7 @@
     <scriptingFile>~/Views/MacroPartials/uCommerce Breadcrumbs.cshtml</scriptingFile>
     <xslt />
     <useInEditor>False</useInEditor>
-    <dontRender>True</dontRender>
+    <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
     <cacheByMember>False</cacheByMember>
     <cacheByPage>False</cacheByPage>
