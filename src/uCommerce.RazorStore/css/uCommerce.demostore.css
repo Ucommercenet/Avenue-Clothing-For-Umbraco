@@ -73,6 +73,10 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     color: #ffffff;
 }
 
+.navbar-brand:hover {
+    color: #ffffff;
+}
+
 .navbar-brand, .navbar .nav > li > a {
     text-shadow: none;
     color: #ffffff;

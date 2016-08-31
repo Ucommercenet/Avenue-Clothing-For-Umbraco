@@ -39,7 +39,7 @@ namespace UCommerce.RazorStore.Controllers
 
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
-            var productsInCategory = SearchLibrary.GetProductsFor(currentCategory, facetsForQuerying).Select( x => x.Id).ToList();
+            List<int> productsInCategory = SearchLibrary.GetProductsFor(currentCategory, facetsForQuerying).Select( x => x.Id).ToList();
             var productRepository = ObjectFactory.Instance.Resolve<IRepository<Product>>();
             var productsForMapping = productRepository.Select(x => productsInCategory.Contains(x.ProductId)).ToList();
             
