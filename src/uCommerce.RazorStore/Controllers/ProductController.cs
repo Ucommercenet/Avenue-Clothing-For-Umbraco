@@ -21,7 +21,21 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ProductController : RenderMvcController
     {
-        public ActionResult Index(RenderModel model,  bool addToBasket = false)
+        public ActionResult Index(RenderModel model)
+        {
+            return RenderView(false);
+        }
+
+        [HttpPost]
+        public ActionResult Index(AddToBasketViewModel model)
+        {
+            string variant = GetVariantFromPostData(model.Sku, "variation-");
+            TransactionLibrary.AddToBasket(1, model.Sku, variant);
+
+            return RenderView(true);
+        }
+
+        private ActionResult RenderView(bool addedToBasket)
         {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
 
@@ -64,17 +78,16 @@ namespace UCommerce.RazorStore.Controllers
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
 
-            if (addToBasket == true)
-            {
-                ViewBag.addToBasket = true;
-            }
+            bool isInBasket = TransactionLibrary.GetBasket(false).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
 
-            if (TransactionLibrary.GetBasket(false).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku))
+            ProductPageViewModel productPageViewModel = new ProductPageViewModel()
             {
-                productViewModel.IsInBasket = true;
-            }
+                ProductViewModel = productViewModel,
+                AddedToBasket = addedToBasket,
+                ItemAlreadyExists = isInBasket
+            };
 
-            return base.View("/Views/Product.cshtml", productViewModel);
+            return View("/Views/Product.cshtml", productPageViewModel);
         }
 
         private IList<ProductViewModel> MapVariants(ICollection<Product> variants)
@@ -119,15 +132,6 @@ namespace UCommerce.RazorStore.Controllers
             return productProperties;
         }
 
-        [HttpPost]
-        public ActionResult Index(AddToBasketViewModel model)
-        {
-            string variant = GetVariantFromPostData(model.Sku, "variation-");
-            TransactionLibrary.AddToBasket(1, model.Sku, variant);
-
-            //return Redirect(System.Web.HttpContext.Current.Request.Url.ToString());
-            return Index(new RenderModel(CurrentPage), true);
-        }
 
 
         private string GetVariantFromPostData(string sku, string prefix)
@@ -159,17 +163,6 @@ namespace UCommerce.RazorStore.Controllers
             return variantSku;
         }
 
-        private ActionResult RenderView(ProductViewModel model, bool addedToBasket, bool isAlreadyInBasket)
-        {
-
-            ProductPageViewModel productPageViewModel = new ProductPageViewModel()
-            {
-                ProductViewModel = model,
-                AddedToBasket = addedToBasket,
-                ItemAlreadyExists = isAlreadyInBasket
-            };
-
-            return View("/Views/Product.cshtml", productPageViewModel);
-        }
+    
     }
 }

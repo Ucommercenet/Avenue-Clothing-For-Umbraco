@@ -9,8 +9,13 @@ using Umbraco.Web.Models;
 namespace UCommerce.RazorStore.Models
 {
 
-    public class ProductPageViewModel
+    public class ProductPageViewModel: RenderModel
     {
+        public ProductPageViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+        {
+            
+        }
+
         public ProductViewModel ProductViewModel { get; set; }
 
         public bool AddedToBasket { get; set; }
