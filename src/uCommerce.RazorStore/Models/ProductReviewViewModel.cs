@@ -13,6 +13,8 @@ namespace UCommerce.RazorStore.Models
         public string Comments { get; set; }
         public int? Rating { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         //Check REview model in uCommerce for star rating
     }
 }

@@ -396,7 +396,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="css\bootstrap.min.css.map" />
-    <Content Include="macroScripts\uCommerce\ProductReviews.cshtml" />
     <Content Include="css\bootstrap\bootstrap-flex.scss" />
     <Content Include="css\bootstrap\bootstrap-grid.scss" />
     <Content Include="css\bootstrap\bootstrap-reboot.scss" />

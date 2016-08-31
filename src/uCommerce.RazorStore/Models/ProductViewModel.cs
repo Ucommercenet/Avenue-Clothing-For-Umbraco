@@ -8,12 +8,23 @@ using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
+
+    public class ProductPageViewModel
+    {
+        public ProductViewModel ProductViewModel { get; set; }
+
+        public bool AddedToBasket { get; set; }
+
+        public bool ItemAlreadyExists { get; set; } 
+    }
+
 	public class ProductViewModel : RenderModel
 	{
 		public ProductViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
         {
 			Variants = new List<ProductViewModel>();
             Properties = new List<ProductPropertiesViewModel>();
+
 		}
         public bool IsVariant { get; set; }
 
@@ -42,9 +53,7 @@ namespace UCommerce.RazorStore.Models
         public string TaxCalculation { get; set; }
 
         public bool IsOrderingAllowed { get; set; }
-        
-
-
-        }
 
     }
+
+}

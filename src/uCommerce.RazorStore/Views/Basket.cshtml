@@ -7,7 +7,7 @@
     @if (Model.OrderLines.Count == 0)
     {
         <div class="alert alert-info">
-            <p>Your cart is empty. Please <a href="/shop.aspx">return to our store and add some items</a>.</p>
+            <p>Your cart is empty. Please <a href="/">return to our store and add some items</a>.</p>
         </div>
     }
     else
@@ -99,8 +99,8 @@
                 </tbody>
             </table>
             <div class="pull-xs-right">
-                <button name="update-and-continue" class="btn btn-secondary btn-large btn-success" type="submit">Continue to Checkout <i class="icon-arrow-right icon-white"></i></button>
-            </div>
+                <a href="/basket/address" class="btn btn-secondary btn-large btn-success">  Continue to Checkout <i class="fa fa-arrow-right icon-white"></i></a>
+    </div>
         </form>
         <div class="col-md-6" id="voucher-form">
             @Umbraco.RenderMacro("uCommerceVoucher")

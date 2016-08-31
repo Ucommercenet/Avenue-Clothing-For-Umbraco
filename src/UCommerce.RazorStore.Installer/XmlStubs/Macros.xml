@@ -84,4 +84,18 @@
     <cacheByPage>False</cacheByPage>
     <properties />
   </macro>
+  <macro>
+    <name>uCommerce Product Reviews</name>
+    <alias>uCommerceProductReviews</alias>
+    <scriptType />
+    <scriptAssembly />
+    <scriptingFile>~/Views/MacroPartials/uCommerceProductReviews.cshtml</scriptingFile>
+    <xslt />
+    <useInEditor>False</useInEditor>
+    <dontRender>True</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
 </Macros>

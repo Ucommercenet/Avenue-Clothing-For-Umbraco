@@ -5,41 +5,55 @@
 @using UCommerce.Api
 @using System.Linq
 @using System.Web
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductViewModel>
+@using UCommerce.Search.Indexers.ProductIndexers
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductPageViewModel>
 
 @{
     Layout = "Layout.cshtml";
 }
 
+@if (Model.ItemAlreadyExists)
+{
+    <div class="row-fluid">
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/basket.aspx">View Your Cart</a></p>
+        </div>
+    </div>
+}
+
 <div id="product-details" class="row" itemscope itemtype="http://schema.org/Product">
     <div class="col-md-5">
-        @if (!string.IsNullOrEmpty(Model.ThumbnailImageUrl))
+        @if (!string.IsNullOrEmpty(Model.ProductViewModel.ThumbnailImageUrl))
             {
-            <img src="@Model.ThumbnailImageUrl" />
+            <img src="@Model.ProductViewModel.ThumbnailImageUrl" />
         }
     </div>
+
+  
 
     <section class="col-md-7">
         <header class="col-md-12 page-header">
             @*@Html.DisplayTextFor(Model.Name)*@
-            <h1 itemprop="name">@Model.Name</h1>
+            <h1 itemprop="name">@Model.ProductViewModel.Name</h1>
         </header>
 
-        @if (Model.IsOrderingAllowed)
+        @if (Model.ProductViewModel.IsOrderingAllowed)
         {
 
-            <form method="post" action="@Url.Action("Index", "ProductController")">
+            <form method="post" action="@Url.Action("Index", "Product")">
                 <div class="col-md-12 well">
                     <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                        <p class="item-price" itemprop="price">@Model.PriceCalculation.YourPrice.Amount</p>
-                        <p class="item-tax"><small>Inc. @Model.TaxCalculation</small></p>
+                        <p class="item-price" itemprop="price">@Model.ProductViewModel.PriceCalculation.YourPrice.Amount</p>
+                        <p class="item-tax"><small>Inc. @Model.ProductViewModel.TaxCalculation</small>
+                        </p>
                     </aside>
 
-                    @if (Model.Properties.Any())
+                    @if (Model.ProductViewModel.Properties.Count > 0)
                     {
                         <div class="col-md-7">
 
-                            @foreach (var prop in Model.Properties)
+                            @foreach (var prop in Model.ProductViewModel.Properties)
                             {
                                 var controlName = string.Format("variation-{0}", prop.PropertyName.ToLower());
                                 <label for="@controlName">@prop.PropertyName</label>
@@ -55,36 +69,26 @@
                         </div>
                     }
 
-                    @if (IsPost && Request["add-to-basket"].IsEmpty())
+                    
+
+                    <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku"/>
+                    <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1"/>
+                    <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId"/>
+
+                    <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action -->
+                    <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket"/>
+                    
+                    @if (ViewBag.addToBasket != null)
                     {
-                    <div class="alert alert-success item-added">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>
-                    </div>
+                        <div class="alert alert-success item-added">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <p>
+                                Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.
+                            </p>
+                        </div>
                     }
-
-
-                    @*@if (itemAddedToCart.HasValue && itemAddedToCart.Value)
-                        {
-                            <div class="alert alert-success item-added">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>
-                            </div>
-                        }*@
-                    <input name="Sku" id="product-sku" type="hidden" value="@Model.Sku" />
-                    <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
-                    <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId" />
-
-                    <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action  -->
-                    <input name="add-to-basket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
-
-
-                    @*<input type = "hidden" name = "Model.Sku" value = "@Model.Sku" />
-                        <input type = "hidden" name = "Model.Variants" value = "@Model.Variants" />
-
-                             <input name = "add-to-basket" id = "add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />*@
-
                 </div>
+                
             </form>
 
         }
@@ -92,8 +96,10 @@
         {
             <p>Sorry, the item you are looking for is not currently available.</p>
         }
+
         
-      <div class="tabbable">
+                   
+        <div class="tabbable">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a href="#product-description" class="nav-link active" data-toggle="tab">Details</a>
@@ -109,7 +115,7 @@
 
             <div class="tab-content">
                 <div itemprop="description" id="product-description" class="tab-pane active" role="tabpanel">
-                    @Html.Raw(Model.LongDescription)
+                    @Html.Raw(Model.ProductViewModel.LongDescription)
                 </div>
                 <div id="delivery-info" class="tab-pane" role="tabpanel">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
@@ -119,22 +125,65 @@
                 </div>
                 <div id="customer-reviews" class="tab-pane" role="tabpanel">
 
-
-                    @*@if (Model.Reviews.Any())
+                    @if (Model.ProductViewModel.Reviews.Count > 0)
                     {
                         <h5>Latest Reviews</h5>
-                        foreach (var review in Model.Reviews)
-                        { @* View /App_Code/uCommerce/Helpers/ProductReview.cshtml
-        for this helper 
-                            @uCommerce.Helpers.ProductReview.DisplayReview(review)
+                        foreach (var review in Model.ProductViewModel.Reviews)
+                        {
+                            <section itemprop="reviewRating" itemscope itemtype="http://schema.org/Review" class="review">
+                                <header>
+                                    <div itemrop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
+                                        @if (review.Rating.HasValue)
+                                        {
+                                            <span class="star-rating">
+                                                @for (var i = 20; i <= 100; i = i + 20)
+                                                {
+                                                    if (review.Rating >= i)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-star-o"></i>
+                                                    }
+                                                }
+                                            </span>
+                                        }
+                                    </div>
+                                    <p itemprop="name" class="review-headline">@review.Title</p>
+                                </header>
+                                <aside class="review-by">
+                                    <p>by <span itemprop="author">@review.Name</span> on
+                                        <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+                                    </p>
+                                </aside>
+                                <p itemprop="description">@review.Comments</p>
+                                <meta itemprop="ratingValue" content="@review.Rating">
+                                <meta itemprop="worstRating" content="1">
+                                <meta itemprop="bestRating" content="5">
+                                <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")"/>
+
+                            </section>
                         }
+
                     }
                     else
                     {
-                        <p>No-one has reviewed this product yet.</p>} 
-     View /App_Code/uCommerce/Helpers/ProductReview.cshtml for this helper 
-                    @uCommerce.Helpers.ProductReview.DisplayReviewForm(product)*@
-            
+                        <p>No-one has reviewed this product yet.</p>
+                        <h2>Send us your Review</h2>
+                        <div class="control-group">
+                            <label class="control-label">Rating</label>
+                            <div class="controls rating">
+                                <label><input type="radio" name="review-rating" value="1"/><i class="fa fa-star-o"></i></label>
+                                <label><input type="radio" name="review-rating" value="2"/><i class="fa fa-star-o"></i></label>
+                                <label><input type="radio" name="review-rating" value="3"/><i class="fa fa-star-o"></i></label>
+                                <label><input type="radio" name="review-rating" value="4"/><i class="fa fa-star-o"></i></label>
+                                <label><input type="radio" name="review-rating" value="5"/><i class="fa fa-star-o"></i></label>
+                            </div>
+                        </div>
+                     
+                    }
+
             
                 </div>
             </div>
