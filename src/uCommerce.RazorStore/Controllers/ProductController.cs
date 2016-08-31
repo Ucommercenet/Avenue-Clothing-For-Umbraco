@@ -78,7 +78,7 @@ namespace UCommerce.RazorStore.Controllers
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
 
-            bool isInBasket = TransactionLibrary.GetBasket(false).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
+            bool isInBasket = TransactionLibrary.GetBasket(true).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
 
             ProductPageViewModel productPageViewModel = new ProductPageViewModel()
             {
