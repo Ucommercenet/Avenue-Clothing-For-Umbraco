@@ -14,5 +14,7 @@ namespace UCommerce.RazorStore.Models
         }
         public IList<FacetValueViewModel> FacetValues { get; set; }
         public string Name { get; set; }
+
+        public string DisplayName { get; set; }
     }
 }

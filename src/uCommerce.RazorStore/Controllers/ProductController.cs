@@ -23,6 +23,20 @@ namespace UCommerce.RazorStore.Controllers
     {
         public ActionResult Index(RenderModel model)
         {
+            return RenderView(false);
+        }
+
+        [HttpPost]
+        public ActionResult Index(AddToBasketViewModel model)
+        {
+            string variant = GetVariantFromPostData(model.Sku, "variation-");
+            TransactionLibrary.AddToBasket(1, model.Sku, variant);
+
+            return RenderView(true);
+        }
+
+        private ActionResult RenderView(bool addedToBasket)
+        {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
 
             var productViewModel = new ProductViewModel();
@@ -30,7 +44,7 @@ namespace UCommerce.RazorStore.Controllers
             productViewModel.Sku = currentProduct.Sku;
             productViewModel.PriceCalculation = UCommerce.Api.CatalogLibrary.CalculatePrice(currentProduct);
             productViewModel.Name = currentProduct.DisplayName();
-            productViewModel.LongDescription = currentProduct.ShortDescription();
+            productViewModel.LongDescription = currentProduct.LongDescription();
             productViewModel.IsVariant = false;
             productViewModel.IsOrderingAllowed = currentProduct.AllowOrdering;
             productViewModel.TaxCalculation = CatalogLibrary.CalculatePrice(currentProduct).YourTax.ToString();
@@ -42,18 +56,38 @@ namespace UCommerce.RazorStore.Controllers
             }
 
             productViewModel.Properties = MapProductProperties(currentProduct);
-
-            //if (currentProduct.ProductReviews.Any())
-            //{
-            //    productViewModel.Reviews = MapReviews(currentProduct);
-            //}
+            productViewModel.Reviews = new List<ProductReviewViewModel>();
+            if (currentProduct.ProductReviews.Count > 0)
+            {
+                foreach (var review in currentProduct.ProductReviews)
+                {
+                    productViewModel.Reviews.Add(new ProductReviewViewModel()
+                    {
+                        Name = review.CreatedBy,
+                        Title = review.ReviewHeadline,
+                        Email = review.Customer.EmailAddress,
+                        Rating = review.Rating,
+                        Comments = review.ReviewText,
+                        CreatedOn = review.CreatedOn
+                    });
+                }
+            }
 
             if (currentProduct.ProductDefinition.IsProductFamily())
             {
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
 
-            return base.View("/Views/Product.cshtml", productViewModel);
+            bool isInBasket = TransactionLibrary.GetBasket(true).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
+
+            ProductPageViewModel productPageViewModel = new ProductPageViewModel()
+            {
+                ProductViewModel = productViewModel,
+                AddedToBasket = addedToBasket,
+                ItemAlreadyExists = isInBasket
+            };
+
+            return View("/Views/Product.cshtml", productPageViewModel);
         }
 
         private IList<ProductViewModel> MapVariants(ICollection<Product> variants)
@@ -98,32 +132,6 @@ namespace UCommerce.RazorStore.Controllers
             return productProperties;
         }
 
-        //private IList<ProductReviewViewModel> MapReviews(Product product)
-        //{
-        //    var reviews = new List<ProductReviewViewModel>();
-        //    foreach (var review in product.ProductReviews)
-        //    {
-        //        ProductReviewViewModel reviewModel = new ProductReviewViewModel();
-        //        reviewModel.Name = review.Customer.FirstName + " " + review.Customer.LastName;
-        //        reviewModel.Title = review.ReviewHeadline;
-        //        reviewModel.Comments = review.ReviewText;
-        //        reviewModel.Rating = review.Rating;
-
-        //        reviews.Add(reviewModel);
-        //    }
-
-        //    return reviews;
-        //}
-
-        [HttpPost]
-        public ActionResult Index(AddToBasketViewModel model)
-        {
-            string variant = GetVariantFromPostData(model.Sku, "variation-");
-            TransactionLibrary.AddToBasket(1, model.Sku, variant);
-            //return View(new RenderModel(UmbracoContext.Current.PublishedContentRequest.PublishedContent));
-            //return View("/Views/Product.cshtml");
-            return base.RedirectToAction("Index", "Product");
-        }
 
 
         private string GetVariantFromPostData(string sku, string prefix)
@@ -155,5 +163,6 @@ namespace UCommerce.RazorStore.Controllers
             return variantSku;
         }
 
+    
     }
 }

@@ -1,3 +1,5 @@
+// <binding Clean='clean' AfterBuild='postbuild'/>
+
 var gulp  = require('gulp'),
     gutil = require('gulp-util');
 var sass  = require('gulp-sass');

@@ -6,7 +6,7 @@
 @foreach (var facet in @Model.Facets)
 {
     <div class="well">
-        <legend>@facet.Name</legend>
+        <legend>@facet.DisplayName</legend>
         @foreach (var value in facet.FacetValues)
         {
             <label>
