@@ -74,7 +74,7 @@ function prepCart() {
     var icn = $("<i>", { "class": "fa fa-shopping-cart icon-white" });
     var qty = $("<span>", { "class": "item-qty" });
     var tot = $("<span>", { "class": "order-total" });
-    var cart = $("<a>", { 'href': '/cart.aspx', "id": "mini-cart" });
+    var cart = $("<a>", { 'href': '/basket', "id": "mini-cart" });
 
     cart.append(icn).append(qty).append(" items in cart, total: ").append(tot);
     $('#empty-cart').replaceWith(cart);

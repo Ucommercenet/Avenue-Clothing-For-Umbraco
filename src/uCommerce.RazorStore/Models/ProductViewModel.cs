@@ -11,8 +11,11 @@ namespace UCommerce.RazorStore.Models
 
     public class ProductPageViewModel: RenderModel
     {
-        public ProductPageViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent){
-    }
+        public ProductPageViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+        {
+            
+        }
+
         public ProductViewModel ProductViewModel { get; set; }
 
         public bool AddedToBasket { get; set; }
@@ -20,10 +23,9 @@ namespace UCommerce.RazorStore.Models
         public bool ItemAlreadyExists { get; set; } 
     }
 
-
-	public class ProductViewModel 
+	public class ProductViewModel : RenderModel
 	{
-		public ProductViewModel()
+		public ProductViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
         {
 			Variants = new List<ProductViewModel>();
             Properties = new List<ProductPropertiesViewModel>();

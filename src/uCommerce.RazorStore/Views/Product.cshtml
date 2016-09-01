@@ -5,11 +5,13 @@
 @using UCommerce.Api
 @using System.Linq
 @using System.Web
+@using ClientDependency.Core.Mvc
 @using UCommerce.Search.Indexers.ProductIndexers
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductPageViewModel>
 
 @{
     Layout = "Layout.cshtml";
+    Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 2);
 }
 
 @if (Model.ItemAlreadyExists)
@@ -79,7 +81,7 @@
                     <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action -->
                     <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
 
-                    @if (ViewBag.addToBasket != null)
+                    @if (Model.AddedToBasket)
                     {
                         <div class="alert alert-success item-added">
                             <button type="button" class="close" data-dismiss="alert">×</button>

@@ -127,6 +127,7 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
             },
             function (data) {
             	var variant = data.Variant;
+                if(variant != null){
             	$.uCommerce.addToBasket(
                     {
                         catalogId: catalogIdInput.val(),
@@ -143,7 +144,7 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     		// Add an alert box so the customer knows they've added an item to the cart
                     		alert = $('<div />', {
                     			"class": "alert alert-success item-added",
-                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/cart.aspx">Click here to view your cart</a>.</p>'
+                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>'
                     		}).hide();
                     		parent.append(alert);
                     		alert.slideDown();
@@ -162,6 +163,7 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     	}, 5000);
                     }
                 );
+                }
             });
 		return false;
 	});

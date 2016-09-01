@@ -103,8 +103,24 @@
       <DocumentType>basket</DocumentType>
       <DocumentType>search</DocumentType>
     </Structure>
-    <GenericProperties />
-    <Tabs />
+    <GenericProperties>
+      <GenericProperty>
+        <Name>Content</Name>
+        <Alias>content</Alias>
+        <Type>Umbraco.TinyMCEv3</Type>
+        <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+        <Tab>Content</Tab>
+        <SortOrder>0</SortOrder>
+        <Mandatory>False</Mandatory>
+      </GenericProperty>
+    </GenericProperties>
+    <Tabs>
+      <Tab>
+        <Id>13</Id>
+        <Caption>Content</Caption>
+        <SortOrder>0</SortOrder>
+      </Tab>
+    </Tabs>
   </DocumentType>
   <DocumentType>
     <Info>

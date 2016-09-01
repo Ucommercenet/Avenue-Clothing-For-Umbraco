@@ -47,7 +47,7 @@ namespace UCommerce.RazorStore.Controllers
                 facet.Name = parameter.Key;
                 foreach (var value in parameter.Value.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    facet.FacetValues.Add(new FacetValue() { Value = value });
+                    facet.FacetValues.Add(new FacetValue() { Value = value});
                 }
                 facetsForQuerying.Add(facet);
             }
@@ -92,7 +92,8 @@ namespace UCommerce.RazorStore.Controllers
             foreach (var facet in facetsInCategory)
             {
                 var facetViewModel = new FacetViewModel();
-                facetViewModel.Name = facet.DisplayName;
+                facetViewModel.Name = facet.Name;
+                facetViewModel.DisplayName = facet.DisplayName;
 
                 if (!facet.FacetValues.Any())
                 {
