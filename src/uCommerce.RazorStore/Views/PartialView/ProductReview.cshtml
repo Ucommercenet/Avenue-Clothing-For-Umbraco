@@ -3,12 +3,19 @@
 @using UCommerce.EntitiesV2
 @using UCommerce.Extensions
 @using UCommerce.Runtime
+@using ClientDependency.Core.Mvc
+@using Umbraco.Web
 
-@model UCommerce.RazorStore.Models.ProductViewModel
+
+
+@model ProductViewModel
 
 @{
     Layout = null;
+    Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 2);
 }
+
+
 
 @if (Model.Reviews.Any())
 {
@@ -19,45 +26,58 @@
                 <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
                     @DisplayStars(review.Rating)
                 </div>
-                <p itemprop="name" class="review-headline">@review.ReviewHeadline</p>
+                <p itemprop="name" class="review-headline">@review.Title</p>
             </header>
             <aside class="review-by">
                 <p>
-                    by <span itemprop="author">@review.Customer.FirstName</span> on
+                    by <span itemprop="author">@review.Name</span> on
                     <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
                 </p>
             </aside>
-            <p itemprop="description">@review.ReviewText</p>
+            <p itemprop="description">@review.Comments</p>
             <meta itemprop="ratingValue" content="@review.Rating">
             <meta itemprop="worstRating" content="1">
             <meta itemprop="bestRating" content="5">
             <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
-            @DisplayReviewComments(review.Comments)
+            @DisplayReviewComments(Model)
         </section>
-    }
+              }
 }
-
-@helper DisplayReviewForm(UCommerce.EntitiesV2.Product product)
+else
 {
-    <form method="post" class="validate form-horizontal">
+    <p>No-one has reviewed this product yet.</p>
+ 
+}
+@DisplayReviewForm(Model)
+
+
+
+
+@helper DisplayReviewForm(ProductViewModel product)
+{
+    @*<form action="@Url.Action("Index", "MyController")" method="post" class="validate form-horizontal"  >*@
+    using (Html.BeginUmbracoForm("Index", "Review"))
+    {
+
         <h5>Send Us Your Review</h5>
         <div class="control-group">
             <label class="control-label" for="review-rating">Rating</label>
             <div class="controls rating">
-                <label><input type="radio" name="review-rating" value="1" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="review-rating" value="2" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="review-rating" value="3" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="review-rating" value="4" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="review-rating" value="5" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="Rating" value="1" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="Rating" value="2" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="Rating" value="3" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="Rating" value="4" /><i class="fa fa-star"></i></label>
+                <label><input type="radio" name="Rating" value="5" /><i class="fa fa-star"></i></label>
             </div>
         </div>
-        <div id="review-form">
+
+        <div id="review-form" class="">
             <div class="control-group">
                 <br />
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-name">
                     Your Name
                     <div class="controls">
-                        <input type="text" id="review-name" name="review-name" placeholder="Name"
+                        <input type="text" id="review-name" name="Name" placeholder="Name"
                                class="required span12" />
                     </div>
                 </tag>
@@ -66,7 +86,7 @@
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-email">
                     Your Email
                     <div class="controls">
-                        <input type="text" id="review-email" name="review-email" placeholder="Email"
+                        <input type="text" id="review-email" name="Email" placeholder="Email"
                                class="required span12" />
                     </div>
                 </tag>
@@ -75,7 +95,7 @@
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-headline">
                     Review Title
                     <div class="controls">
-                        <input type="text" id="review-headline" name="review-headline" placeholder="Title"
+                        <input type="text" id="review-headline" name="Title" placeholder="Title"
                                class="required span12" />
                     </div>
                 </tag>
@@ -84,7 +104,7 @@
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-text">
                     Comments
                     <div class="controls">
-                        <textarea rows="3" id="review-text" name="review-text" placeholder="Your review"
+                        <textarea rows="3" id="review-text" name="Comments" placeholder="Your review"
                                   class="required span12"></textarea>
                     </div>
                 </tag>
@@ -96,8 +116,7 @@
                 </div>
             </div>
         </div>
-    </form>
-}
+    }}
 
 @helper DisplayStars(double? rating)
 {
@@ -108,11 +127,11 @@ if (rating.HasValue)
             {
                 if (rating >= i)
                 {
-                    <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
                 }
                 else
                 {
-                    <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
                 }
             }
         </span>
@@ -120,15 +139,17 @@ if (rating.HasValue)
 }
 
 
-@helper DisplayReviewComments(IEnumerable<UCommerce.EntitiesV2.ProductReviewComment> comments)
+@helper DisplayReviewComments(ProductViewModel product)
 {
-foreach (var comment in comments)
+foreach (var review in product.Reviews)
 {
         <section class="review-comment">
-            <article itemprop="description">@comment.Comment</article>
+            <article itemprop="description">@review.Comments</article>
             <header>
-                by <span itemprop="author">@comment.Customer.FirstName</span> on <abbr title="@comment.CreatedOn.ToString("u")">@comment.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+                by <span itemprop="author">@review.Name</span> on
+                <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
             </header>
         </section>
 }
+
 }

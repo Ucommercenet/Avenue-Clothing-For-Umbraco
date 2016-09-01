@@ -1,9 +1,43 @@
 ﻿var _itemAddedAlert = null;
-$(function () {
+
+
+function wireupRatings(radios) {
+    $('#review-form').addClass("display-none");
+    $('label', radios).each(function () {
+        var t = $(this);
+        t.addClass('off');
+        $('input:radio', t).addClass("display-none");
+        setStarHoverOutState($('i', t));
+        t.hover(function () {
+            var parent = $(this);
+            var labels = parent.prevAll('label');
+            setStarHoverState($('i', labels));
+            setStarHoverState($('i', parent));
+        }, function () {
+            var parent = $(this);
+            var labels = parent.prevAll('label');
+            if (!parent.hasClass('selected')) {
+                setStarHoverOutState($('i', labels));
+                setStarHoverOutState($('i', parent));
+            }
+        });
+        t.click(function () {
+            var parent = $(this);
+            parent.addClass('selected');
+            $('#review-form').slideDown();
+        });
+    });
+};
+
+
+
+wireupRatings($('.rating'));
+
+(function ($) {
 	relateVariations($('#product-sku'), $('#variation-collarsize'), $('#variation-colour'), $('#add-to-basket'));
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
 	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
-	wireupRatings($('.rating'));
+
 });
 function relateVariations(sku, size, colour) {
 	updateVariationOptions(sku, size, colour, true);
@@ -39,33 +73,35 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 		addToCartButton.removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
 	}
 };
-function wireupRatings(radios) {
-	$('#review-form').hide();
-	$('label', radios).each(function () {
-		var t = $(this);
-		t.addClass('off');
-		$('input:radio', t).hide();
-		setStarHoverOutState($('i', t));
-		t.hover(function () {
-			var parent = $(this);
-			var labels = parent.prevAll('label');
-			setStarHoverState($('i', labels));
-			setStarHoverState($('i', parent));
-		}, function () {
-			var parent = $(this);
-			var labels = parent.prevAll('label');
-			if (!parent.hasClass('selected')) {
-				setStarHoverOutState($('i', labels));
-				setStarHoverOutState($('i', parent));
-			}
-		});
-		t.click(function () {
-			var parent = $(this);
-			parent.addClass('selected');
-			$('#review-form').slideDown();
-		});
-	});
-};
+//function wireupRatings(radios) {
+//    $('#review-form').hide();
+//	$('label', radios).each(function () {
+//		var t = $(this);
+//		t.addClass('off');
+//		$('input:radio', t).hide();
+//		setStarHoverOutState($('i', t));
+//		t.hover(function () {
+//			var parent = $(this);
+//			var labels = parent.prevAll('label');
+//			setStarHoverState($('i', labels));
+//			setStarHoverState($('i', parent));
+//		}, function () {
+//			var parent = $(this);
+//			var labels = parent.prevAll('label');
+//			if (!parent.hasClass('selected')) {
+//				setStarHoverOutState($('i', labels));
+//				setStarHoverOutState($('i', parent));
+//			}
+//		});
+//		t.click(function () {
+//			var parent = $(this);
+//			parent.addClass('selected');
+//			$('#review-form').slideDown();
+//		});
+//	});
+//};
+
+
 function setStarHoverState(label) {
 	label.addClass('fa-star').removeClass('fa-star-o');
 }

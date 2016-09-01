@@ -25,6 +25,7 @@ namespace UCommerce.RazorStore.Controllers
         {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
 
+            var productPageViewModel = new ProductPageViewModel();
             var productViewModel = new ProductViewModel();
 
             productViewModel.Sku = currentProduct.Sku;
@@ -42,39 +43,41 @@ namespace UCommerce.RazorStore.Controllers
             }
 
             productViewModel.Properties = MapProductProperties(currentProduct);
-            productViewModel.Reviews = new List<ProductReviewViewModel>();
-            if (currentProduct.ProductReviews.Count > 0)
-            {
-                foreach (var review in currentProduct.ProductReviews)
-                {
-                    productViewModel.Reviews.Add(new ProductReviewViewModel()
-                    {
-                        Name = review.CreatedBy,
-                        Title = review.ReviewHeadline,
-                        Email = review.Customer.EmailAddress,
-                        Rating = review.Rating,
-                        Comments = review.ReviewText,
-                        CreatedOn = review.CreatedOn
-                    });
-                }
-            }
+            //productViewModel.Reviews = new List<ProductReviewViewModel>();
+            //if (currentProduct.ProductReviews.Count > 0)
+            //{
+            //    foreach (var review in currentProduct.ProductReviews)
+            //    {
+            //        productViewModel.Reviews.Add(new ProductReviewViewModel()
+            //        {
+            //            Name = review.CreatedBy,
+            //            Title = review.ReviewHeadline,
+            //            Email = review.Customer.EmailAddress,
+            //            Rating = review.Rating,
+            //            Comments = review.ReviewText,
+            //            CreatedOn = review.CreatedOn
+            //        });
+            //    }
+            //}
 
             if (currentProduct.ProductDefinition.IsProductFamily())
             {
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
 
+            productPageViewModel.ProductViewModel = productViewModel;
+
             if (addToBasket == true)
             {
                 ViewBag.addToBasket = true;
             }
 
-            if (TransactionLibrary.GetBasket(false).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku))
-            {
-                productViewModel.IsInBasket = true;
-            }
+            //if (TransactionLibrary.GetBasket(false).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku))
+            //{
+            //    productViewModel.IsInBasket = true;
+            //}
 
-            return base.View("/Views/Product.cshtml", productViewModel);
+            return base.View("/Views/Product.cshtml", productPageViewModel);
         }
 
         private IList<ProductViewModel> MapVariants(ICollection<Product> variants)

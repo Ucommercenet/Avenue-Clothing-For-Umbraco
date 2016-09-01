@@ -9,8 +9,10 @@ using Umbraco.Web.Models;
 namespace UCommerce.RazorStore.Models
 {
 
-    public class ProductPageViewModel
+    public class ProductPageViewModel: RenderModel
     {
+        public ProductPageViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent){
+    }
         public ProductViewModel ProductViewModel { get; set; }
 
         public bool AddedToBasket { get; set; }
@@ -18,12 +20,14 @@ namespace UCommerce.RazorStore.Models
         public bool ItemAlreadyExists { get; set; } 
     }
 
-	public class ProductViewModel : RenderModel
+
+	public class ProductViewModel 
 	{
-		public ProductViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+		public ProductViewModel()
         {
 			Variants = new List<ProductViewModel>();
             Properties = new List<ProductPropertiesViewModel>();
+            Reviews = new List<ProductReviewViewModel>();
 
 		}
         public bool IsVariant { get; set; }

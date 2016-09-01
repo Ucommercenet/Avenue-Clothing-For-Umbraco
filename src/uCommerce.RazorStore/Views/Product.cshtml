@@ -30,7 +30,7 @@
         }
     </div>
 
-  
+
 
     <section class="col-md-7">
         <header class="col-md-12 page-header">
@@ -45,7 +45,8 @@
                 <div class="col-md-12 well">
                     <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                         <p class="item-price" itemprop="price">@Model.ProductViewModel.PriceCalculation.YourPrice.Amount</p>
-                        <p class="item-tax"><small>Inc. @Model.ProductViewModel.TaxCalculation</small>
+                        <p class="item-tax">
+                            <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
                         </p>
                     </aside>
 
@@ -69,15 +70,15 @@
                         </div>
                     }
 
-                    
 
-                    <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku"/>
-                    <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1"/>
-                    <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId"/>
+
+                    <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
+                    <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
+                    <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId" />
 
                     <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action -->
-                    <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket"/>
-                    
+                    <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+
                     @if (ViewBag.addToBasket != null)
                     {
                         <div class="alert alert-success item-added">
@@ -88,7 +89,7 @@
                         </div>
                     }
                 </div>
-                
+
             </form>
 
         }
@@ -97,8 +98,8 @@
             <p>Sorry, the item you are looking for is not currently available.</p>
         }
 
-        
-                   
+
+
         <div class="tabbable">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -124,8 +125,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
                 </div>
                 <div id="customer-reviews" class="tab-pane" role="tabpanel">
-
-                    @if (Model.ProductViewModel.Reviews.Count > 0)
+                    @Umbraco.RenderMacro("uCommerceProductReviews")
+                </div>
+                @*@if (Model.ProductViewModel.Reviews.Count > 0)
                     {
                         <h5>Latest Reviews</h5>
                         foreach (var review in Model.ProductViewModel.Reviews)
@@ -161,31 +163,15 @@
                                 <meta itemprop="ratingValue" content="@review.Rating">
                                 <meta itemprop="worstRating" content="1">
                                 <meta itemprop="bestRating" content="5">
-                                <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")"/>
+                                <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")"/>*@
 
-                            </section>
-                        }
+    </section>
+    
 
-                    }
-                    else
-                    {
-                        <p>No-one has reviewed this product yet.</p>
-                        <h2>Send us your Review</h2>
-                        <div class="control-group">
-                            <label class="control-label">Rating</label>
-                            <div class="controls rating">
-                                <label><input type="radio" name="review-rating" value="1"/><i class="fa fa-star-o"></i></label>
-                                <label><input type="radio" name="review-rating" value="2"/><i class="fa fa-star-o"></i></label>
-                                <label><input type="radio" name="review-rating" value="3"/><i class="fa fa-star-o"></i></label>
-                                <label><input type="radio" name="review-rating" value="4"/><i class="fa fa-star-o"></i></label>
-                                <label><input type="radio" name="review-rating" value="5"/><i class="fa fa-star-o"></i></label>
-                            </div>
-                        </div>
-                     
-                    }
 
-            
-                </div>
+
+
+</div>
             </div>
         </div>
     </section>
