@@ -11,7 +11,7 @@
 
 @{
     Layout = "Layout.cshtml";
-    Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 2);
+    Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
 }
 
 @if (Model.ItemAlreadyExists)
@@ -36,7 +36,6 @@
 
     <section class="col-md-7">
         <header class="col-md-12 page-header">
-            @*@Html.DisplayTextFor(Model.Name)*@
             <h1 itemprop="name">@Model.ProductViewModel.Name</h1>
         </header>
 
@@ -72,13 +71,7 @@
                         </div>
                     }
 
-
-
                     <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
-                    <input name="quantity-to-add" id="quantity-to-add" type="hidden" value="1" />
-                    <input name="catalog-id" id="catalog-id" type="hidden" value="@SiteContext.Current.CatalogContext.CurrentCatalog.ProductCatalogId" />
-
-                    <!-- We have to default the button to "success" for those customers who don't have JavaScript enabled -in which case it will still be a clear call to action -->
                     <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
 
                     @if (Model.AddedToBasket)
@@ -129,52 +122,7 @@
                 <div id="customer-reviews" class="tab-pane" role="tabpanel">
                     @Umbraco.RenderMacro("uCommerceProductReviews")
                 </div>
-                @*@if (Model.ProductViewModel.Reviews.Count > 0)
-                    {
-                        <h5>Latest Reviews</h5>
-                        foreach (var review in Model.ProductViewModel.Reviews)
-                        {
-                            <section itemprop="reviewRating" itemscope itemtype="http://schema.org/Review" class="review">
-                                <header>
-                                    <div itemrop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
-                                        @if (review.Rating.HasValue)
-                                        {
-                                            <span class="star-rating">
-                                                @for (var i = 20; i <= 100; i = i + 20)
-                                                {
-                                                    if (review.Rating >= i)
-                                                    {
-                                                        <i class="fa fa-star"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="fa fa-star-o"></i>
-                                                    }
-                                                }
-                                            </span>
-                                        }
-                                    </div>
-                                    <p itemprop="name" class="review-headline">@review.Title</p>
-                                </header>
-                                <aside class="review-by">
-                                    <p>by <span itemprop="author">@review.Name</span> on
-                                        <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
-                                    </p>
-                                </aside>
-                                <p itemprop="description">@review.Comments</p>
-                                <meta itemprop="ratingValue" content="@review.Rating">
-                                <meta itemprop="worstRating" content="1">
-                                <meta itemprop="bestRating" content="5">
-                                <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")"/>*@
-
-    </section>
-    
-
-
-
-
-</div>
+              </div>
             </div>
-        </div>
     </section>
 </div>

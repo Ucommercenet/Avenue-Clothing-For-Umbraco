@@ -38,6 +38,7 @@ namespace UCommerce.RazorStore.Controllers
                 reviewModel.Name = review.Customer.FirstName + " " + review.Customer.LastName;
                 reviewModel.Email = review.Customer.EmailAddress;
                 reviewModel.Title = review.ReviewHeadline;
+                reviewModel.CreatedOn = review.CreatedOn;
                 reviewModel.Comments = review.ReviewText;
                 reviewModel.Rating = review.Rating;
 
