@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.Content;
 using UCommerce.EntitiesV2;
 using Umbraco.Web.Mvc;
-using UCommerce.EntitiesV2.Queries.Marketing;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Search.Facets;
-using UCommerce.Search.Indexers;
-using UCommerce.RazorStore.Controllers;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Controllers
