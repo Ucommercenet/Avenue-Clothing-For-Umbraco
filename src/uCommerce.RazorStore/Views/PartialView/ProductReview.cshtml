@@ -39,14 +39,12 @@
             <meta itemprop="worstRating" content="1">
             <meta itemprop="bestRating" content="5">
             <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
-            @DisplayReviewComments(Model)
         </section>
-              }
+    }
 }
 else
 {
     <p>No-one has reviewed this product yet.</p>
- 
 }
 @DisplayReviewForm(Model)
 
@@ -56,20 +54,20 @@ else
 @helper DisplayReviewForm(ProductViewModel product)
 {
     @*<form action="@Url.Action("Index", "MyController")" method="post" class="validate form-horizontal"  >*@
-    using (Html.BeginUmbracoForm("Index", "Review"))
-    {
+using (Html.BeginUmbracoForm("Index", "Review"))
+{
 
-        <h5>Send Us Your Review</h5>
-        <div class="control-group">
-            <label class="control-label" for="review-rating">Rating</label>
-            <div class="controls rating">
-                <label><input type="radio" name="Rating" value="1" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="Rating" value="2" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="Rating" value="3" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="Rating" value="4" /><i class="fa fa-star"></i></label>
-                <label><input type="radio" name="Rating" value="5" /><i class="fa fa-star"></i></label>
-            </div>
+    <h5>Send Us Your Review</h5>
+    <div class="control-group">
+        <label class="control-label" for="review-rating">Rating</label>
+        <div class="controls rating">
+            <label><input type="radio" name="Rating" value="1" /><i class="fa fa-star"></i></label>
+            <label><input type="radio" name="Rating" value="2" /><i class="fa fa-star"></i></label>
+            <label><input type="radio" name="Rating" value="3" /><i class="fa fa-star"></i></label>
+            <label><input type="radio" name="Rating" value="4" /><i class="fa fa-star"></i></label>
+            <label><input type="radio" name="Rating" value="5" /><i class="fa fa-star"></i></label>
         </div>
+    </div>
 
         <div id="review-form" class="">
             <div class="control-group">
@@ -116,7 +114,7 @@ else
                 </div>
             </div>
         </div>
-    }}
+}}
 
 @helper DisplayStars(double? rating)
 {
@@ -127,29 +125,14 @@ if (rating.HasValue)
             {
                 if (rating >= i)
                 {
-            <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                 }
                 else
                 {
-            <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
                 }
             }
         </span>
 }
 }
 
-
-@helper DisplayReviewComments(ProductViewModel product)
-{
-foreach (var review in product.Reviews)
-{
-        <section class="review-comment">
-            <article itemprop="description">@review.Comments</article>
-            <header>
-                by <span itemprop="author">@review.Name</span> on
-                <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
-            </header>
-        </section>
-}
-
-}

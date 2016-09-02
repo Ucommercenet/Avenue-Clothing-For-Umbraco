@@ -35,11 +35,11 @@ namespace UCommerce.RazorStore.Controllers
             return RenderView(true);
         }
 
+
         private ActionResult RenderView(bool addedToBasket)
         {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
 
-            var productPageViewModel = new ProductPageViewModel();
             var productViewModel = new ProductViewModel();
 
             productViewModel.Sku = currentProduct.Sku;
@@ -57,23 +57,7 @@ namespace UCommerce.RazorStore.Controllers
             }
 
             productViewModel.Properties = MapProductProperties(currentProduct);
-            //productViewModel.Reviews = new List<ProductReviewViewModel>();
-            //if (currentProduct.ProductReviews.Count > 0)
-            //{
-            //    foreach (var review in currentProduct.ProductReviews)
-            //    {
-            //        productViewModel.Reviews.Add(new ProductReviewViewModel()
-            //        {
-            //            Name = review.CreatedBy,
-            //            Title = review.ReviewHeadline,
-            //            Email = review.Customer.EmailAddress,
-            //            Rating = review.Rating,
-            //            Comments = review.ReviewText,
-            //            CreatedOn = review.CreatedOn
-            //        });
-            //    }
-            //}
-
+         
             if (currentProduct.ProductDefinition.IsProductFamily())
             {
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
@@ -83,7 +67,7 @@ namespace UCommerce.RazorStore.Controllers
 
 
             ProductPageViewModel productPageViewModel = new ProductPageViewModel()
-            //{
+            {
                 ProductViewModel = productViewModel,
                 AddedToBasket = addedToBasket,
                 ItemAlreadyExists = isInBasket
@@ -134,18 +118,10 @@ namespace UCommerce.RazorStore.Controllers
             return productProperties;
         }
 
-        [HttpPost]
-        public ActionResult Index(AddToBasketViewModel model)
-        {
-            string variant = GetVariantFromPostData(model.Sku, "variation-");
-            TransactionLibrary.AddToBasket(1, model.Sku, variant);
 
-            //return Redirect(System.Web.HttpContext.Current.Request.Url.ToString());
-            return Index(new RenderModel(CurrentPage), true);
-        }
+   
 
-
-        private string GetVariantFromPostData(string sku, string prefix)
+    private string GetVariantFromPostData(string sku, string prefix)
         {
 
             var request = System.Web.HttpContext.Current.Request;
