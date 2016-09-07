@@ -600,7 +600,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Programming\Demo Store Accelerator - Local\src\uCommerce.RazorStore" "C:\Programming\Demo Store v2"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
