@@ -1,7 +1,9 @@
-﻿@using UCommerce.RazorStore.Models
+﻿@using UCommerce.RazorStore.Models;
+@using ClientDependency;
+@using ClientDependency.Core.Mvc
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<CategoryViewModel>
-
 @{
+    Html.RequiresJs("~/Scripts/uCommerce.category.js");
     Layout = "Layout.cshtml";
 }
 
@@ -14,6 +16,8 @@
     </div>
 </div>
 
+@Html.HiddenFor(x => x.CatalogId, new {id ="catalog-id"})
+@Html.HiddenFor(x=>x.CategoryId, new {id="category-id"})
 <div class="row">
     <div class="product-list col-sm-12 col-md-12">
         @foreach (var product in Model.Products)
@@ -27,11 +31,11 @@
                 </div>
 
                 <p class="item-name"><a href="@product.Url">@product.Name</a></p>
-                <p class="item-price">@(product.PriceCalculation.YourPrice != null ? product.PriceCalculation.YourPrice.Amount.ToString() : "")</p>
+                <p class="item-price" data-productSku="@product.Sku"></p>
                 <p class="btn-group view-details">
                     <a href="@product.Url" class="btn btn-default">
                         View more <span>
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <i class="fa fa-shopping-cart icon-white" aria-hidden="true"></i>
                         </span>
                     </a>
                 </p>

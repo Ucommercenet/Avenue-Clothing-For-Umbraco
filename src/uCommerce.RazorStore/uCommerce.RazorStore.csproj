@@ -360,12 +360,16 @@
     <Compile Include="Pipelines\Checkout\CreateMemberForCustomerTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssemblyTag.cs" />
+    <Compile Include="Services\Commands\GetProductInformation.cs" />
     <Compile Include="Services\Commands\Search.cs" />
     <Compile Include="Services\Commands\GetVariantSkuFromSelection.cs" />
     <Compile Include="Services\Commands\GetProductVariations.cs" />
     <Compile Include="Services\Commands\UpdateLineItem.cs" />
     <Compile Include="Services\Model\Basket.cs" />
     <Compile Include="Services\Commands\GetBasket.cs" />
+    <Compile Include="Services\Model\CurrencyViewModel.cs" />
+    <Compile Include="Services\Model\PriceCalculationViewModel.cs" />
+    <Compile Include="Services\Model\ProductInformation.cs" />
     <Compile Include="Services\Model\ProductVariation.cs" />
     <Compile Include="Services\Model\ProductProperty.cs" />
     <Compile Include="Services\Model\LineItem.cs" />
@@ -494,6 +498,7 @@
     <Content Include="scripts\tether.js" />
     <Content Include="scripts\tether.min.js" />
     <Content Include="scripts\uCommerce.bootstrap.js" />
+    <Content Include="scripts\uCommerce.category.js" />
     <Content Include="scripts\uCommerce.demostore.checkout.js" />
     <Content Include="scripts\uCommerce.demostore.cart.js" />
     <Content Include="scripts\uCommerce.demostore.js" />

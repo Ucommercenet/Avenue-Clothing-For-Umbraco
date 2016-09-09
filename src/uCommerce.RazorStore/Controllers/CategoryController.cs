@@ -8,6 +8,7 @@ using Umbraco.Web.Mvc;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.RazorStore.Services.Commands;
 using UCommerce.Runtime;
 using UCommerce.Search.Facets;
 using Umbraco.Web.Models;
@@ -24,8 +25,9 @@ namespace UCommerce.RazorStore.Controllers
 
             categoryViewModel.Name = currentCategory.DisplayName();
             categoryViewModel.Description = currentCategory.Description();
-            categoryViewModel.Products = MapProducts(CatalogLibrary.GetProducts(currentCategory));
-            
+            categoryViewModel.CatalogId = currentCategory.ProductCatalog.Id;
+            categoryViewModel.CategoryId = currentCategory.Id;
+
             if (!HasBannerImage(currentCategory))
             {
                 var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentCategory.ImageMediaId).Url;
@@ -34,11 +36,7 @@ namespace UCommerce.RazorStore.Controllers
 
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
-            List<int> productsInCategory = SearchLibrary.GetProductsFor(currentCategory, facetsForQuerying).Select( x => x.Id).ToList();
-            var productRepository = ObjectFactory.Instance.Resolve<IRepository<Product>>();
-            var productsForMapping = productRepository.Select(x => productsInCategory.Contains(x.ProductId)).ToList();
-            
-            categoryViewModel.Products = MapProducts(productsForMapping);
+            categoryViewModel.Products = MapProducts(SearchLibrary.GetProductsFor(currentCategory, facetsForQuerying));
             
             return base.View("/Views/Catalog.cshtml", categoryViewModel);
         }
@@ -48,7 +46,7 @@ namespace UCommerce.RazorStore.Controllers
             return string.IsNullOrEmpty(category.ImageMediaId);
         }
 
-        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
+        private IList<ProductViewModel> MapProducts(ICollection<Documents.Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
@@ -57,12 +55,8 @@ namespace UCommerce.RazorStore.Controllers
                 var productViewModel = new ProductViewModel();
 
                 productViewModel.Sku = product.Sku;
-                productViewModel.Name = product.DisplayName();
-                productViewModel.Url = CatalogLibrary.GetNiceUrlForProduct(product);
-                productViewModel.PriceCalculation = CatalogLibrary.CalculatePrice(product);
-
-                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(product.ThumbnailImageMediaId).Url;
-                productViewModel.ThumbnailImageUrl = media;
+                productViewModel.Name = product.Name;
+                productViewModel.ThumbnailImageUrl = product.ThumbnailImageUrl;
 
                 productViews.Add(productViewModel);
             }
