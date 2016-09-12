@@ -20,8 +20,8 @@ namespace UCommerce.RazorStore.Controllers
         public ActionResult Index(RenderModel model)
         {
             var categoryViewModel = new CategoryViewModel();
-
             var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
+
 
             categoryViewModel.Name = currentCategory.DisplayName();
             categoryViewModel.Description = currentCategory.Description();
@@ -34,15 +34,13 @@ namespace UCommerce.RazorStore.Controllers
                 categoryViewModel.BannerImageUrl = media;
             }
 
-            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+            categoryViewModel.Products = MapProductsInCategories(currentCategory);
 
-            categoryViewModel.Products = MapProducts(SearchLibrary.GetProductsFor(currentCategory, facetsForQuerying));
-            
             return base.View("/Views/Catalog.cshtml", categoryViewModel);
         }
 
         private bool HasBannerImage(Category category)
-        {      
+        {
             return string.IsNullOrEmpty(category.ImageMediaId);
         }
 
@@ -63,6 +61,20 @@ namespace UCommerce.RazorStore.Controllers
 
             return productViews;
         }
-    }
 
+        private IList<ProductViewModel> MapProductsInCategories(Category category)
+        {
+            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+            var productsInCategory = new List<ProductViewModel>();
+
+            foreach (var subcategory in category.Categories)
+            {
+                productsInCategory.AddRange(MapProductsInCategories(subcategory));
+            }
+
+            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category, facetsForQuerying)));
+
+            return productsInCategory;
+        }
+    }
 }
