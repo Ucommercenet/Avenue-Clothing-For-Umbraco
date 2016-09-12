@@ -387,6 +387,7 @@
     <Content Include="css\uCommerce.bootstrap-responsive.css" />
     <Content Include="css\uCommerce.demostore.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\spinner.gif" />
     <Content Include="img\uCommerce\cards.png" />
     <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
     <Content Include="img\uCommerce\homepage-banner-blue-kittens.jpg" />

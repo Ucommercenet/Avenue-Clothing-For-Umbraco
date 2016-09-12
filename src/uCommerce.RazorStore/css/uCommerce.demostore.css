@@ -584,3 +584,8 @@ label {
     font-size: smaller;
     color: red;
 }
+
+.product-spinner {
+    width: 40px;
+    height: 40px;
+}
