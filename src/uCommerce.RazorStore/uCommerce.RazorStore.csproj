@@ -360,12 +360,16 @@
     <Compile Include="Pipelines\Checkout\CreateMemberForCustomerTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssemblyTag.cs" />
+    <Compile Include="Services\Commands\GetProductInformation.cs" />
     <Compile Include="Services\Commands\Search.cs" />
     <Compile Include="Services\Commands\GetVariantSkuFromSelection.cs" />
     <Compile Include="Services\Commands\GetProductVariations.cs" />
     <Compile Include="Services\Commands\UpdateLineItem.cs" />
     <Compile Include="Services\Model\Basket.cs" />
     <Compile Include="Services\Commands\GetBasket.cs" />
+    <Compile Include="Services\Model\CurrencyViewModel.cs" />
+    <Compile Include="Services\Model\PriceCalculationViewModel.cs" />
+    <Compile Include="Services\Model\ProductInformation.cs" />
     <Compile Include="Services\Model\ProductVariation.cs" />
     <Compile Include="Services\Model\ProductProperty.cs" />
     <Compile Include="Services\Model\LineItem.cs" />
@@ -383,6 +387,8 @@
     <Content Include="css\uCommerce.bootstrap-responsive.css" />
     <Content Include="css\uCommerce.demostore.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\loader.gif" />
+    <Content Include="img\loading-spin.svg" />
     <Content Include="img\uCommerce\cards.png" />
     <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
     <Content Include="img\uCommerce\homepage-banner-blue-kittens.jpg" />
@@ -494,6 +500,7 @@
     <Content Include="scripts\tether.js" />
     <Content Include="scripts\tether.min.js" />
     <Content Include="scripts\uCommerce.bootstrap.js" />
+    <Content Include="scripts\uCommerce.category.js" />
     <Content Include="scripts\uCommerce.demostore.checkout.js" />
     <Content Include="scripts\uCommerce.demostore.cart.js" />
     <Content Include="scripts\uCommerce.demostore.js" />
@@ -534,9 +541,7 @@
     <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
-    <Content Include="Views\web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Views\web.config" />
     <Content Include="Views\Catalog.cshtml" />
     <Content Include="Views\BillingShippingAddress.cshtml" />
     <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
@@ -602,7 +607,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Alice\Web Dev\uCommerce\Razor Store Repo\src\uCommerce.RazorStore" "C:\Programming\Demo store testing"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

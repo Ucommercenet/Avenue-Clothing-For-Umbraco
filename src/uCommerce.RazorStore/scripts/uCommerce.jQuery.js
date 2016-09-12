@@ -39,6 +39,15 @@ var uCommerce = uCommerce || {};
                 var extendedOptions = $.extend(defaults, options);
                 callServiceStack({ AddToBasket: extendedOptions }, onSuccess, onError);
             },
+            getProductInformation: function(options, onSuccess, onError) {
+                var defaults = {
+                    Sku: '',
+                    CatalogId: -1,
+                    CategoryId: -1
+                };
+                var extendedOptions = $.extend(defaults, options);
+                callServiceStack({ GetProductInformation: extendedOptions }, onSuccess, onError);
+            },
             updateLineItem: function(options, onSuccess, onError) {
                  var defaults = {
                     orderLineId: 0, 
