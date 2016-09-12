@@ -8,7 +8,7 @@
 
 @{
     Layout = null;
-    //Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 2);
+    Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
 }
 
 
@@ -66,44 +66,44 @@ using (Html.BeginUmbracoForm("Index", "Review"))
     </div>
 
         <div id="review-form" class="">
-            <div class="control-group">
+            <div class="control-group margin-top">
                 <br />
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-name">
                     Your Name
                     <div class="controls">
-                        <input type="text" id="review-name" name="Name" placeholder="Name"
-                               class="required span12" />
+                        <input type="text" id="review-name" name="Name" placeholder=""
+                               class="required span12 form-control" />
                     </div>
                 </tag>
             </div>
-            <div class="control-group">
+            <div class="control-group margin-top">
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-email">
                     Your Email
                     <div class="controls">
-                        <input type="text" id="review-email" name="Email" placeholder="Email"
-                               class="required span12" />
+                        <input type="text" id="review-email" name="Email" placeholder=""
+                               class="required span12 form-control" />
                     </div>
                 </tag>
             </div>
-            <div class="control-group">
+            <div class="control-group margin-top">
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-headline">
                     Review Title
                     <div class="controls">
-                        <input type="text" id="review-headline" name="Title" placeholder="Title"
-                               class="required span12" />
+                        <input type="text" id="review-headline" name="Title" placeholder=""
+                               class="required span12 form-control" />
                     </div>
                 </tag>
             </div>
-            <div class="control-group">
+            <div class="control-group margin-top">
                 <tag tag-default="tag-default" class="control-tag tag-default" for="review-text">
                     Comments
                     <div class="controls">
-                        <textarea rows="3" id="review-text" name="Comments" placeholder="Your review"
-                                  class="required span12"></textarea>
+                        <textarea rows="3" id="review-text" name="Comments" placeholder="Describe your experience with the product"
+                                  class="required span12 form-control"></textarea>
                     </div>
                 </tag>
             </div>
-            <div class="control-group">
+            <div class="control-group margin-top">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary" name="review-product">Save</button>
                     <input type="hidden" name="reviewed-product-sku" id="@product.Sku" />

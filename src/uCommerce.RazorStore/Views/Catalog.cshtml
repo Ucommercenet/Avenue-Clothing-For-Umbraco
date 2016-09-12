@@ -7,11 +7,11 @@
     Layout = "Layout.cshtml";
 }
 
-<div class="row">
+<div class="row margin-bottom">
     <div class="hero-unit">
         @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
         {
-            <img src="@Model.BannerImageUrl">
+            <img class="col-sm-9" src="@Model.BannerImageUrl">
         }
     </div>
 </div>

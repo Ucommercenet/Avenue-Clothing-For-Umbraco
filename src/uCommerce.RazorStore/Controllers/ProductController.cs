@@ -29,8 +29,7 @@ namespace UCommerce.RazorStore.Controllers
 
             return RenderView(true);
         }
-
-
+        
         private ActionResult RenderView(bool addedToBasket)
         {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
@@ -59,8 +58,7 @@ namespace UCommerce.RazorStore.Controllers
             }
 
             bool isInBasket = TransactionLibrary.GetBasket(true).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
-
-
+            
             ProductPageViewModel productPageViewModel = new ProductPageViewModel()
             {
                 ProductViewModel = productViewModel,
@@ -82,10 +80,10 @@ namespace UCommerce.RazorStore.Controllers
                 productModel.Name = currentVariant.DisplayName();
                 productModel.LongDescription = currentVariant.LongDescription();
                 productModel.IsVariant = true;
-
-
+                
                 variantModels.Add(productModel);
             }
+
             return variantModels;
         }
 
@@ -112,13 +110,9 @@ namespace UCommerce.RazorStore.Controllers
 
             return productProperties;
         }
-
-
-   
-
-    private string GetVariantFromPostData(string sku, string prefix)
+        
+        private string GetVariantFromPostData(string sku, string prefix)
         {
-
             var request = System.Web.HttpContext.Current.Request;
             var keys = request.Form.AllKeys.Where(k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
             var properties = keys.Select(k => new { Key = k.Replace(prefix, string.Empty), Value = Request.Form[k] }).ToList();
@@ -136,6 +130,7 @@ namespace UCommerce.RazorStore.Controllers
                       .All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
                 variantSku = variant.VariantSku;
             }
+           
             // Only use the current product where there are no variants
             else if (!product.Variants.Any())
             {
@@ -144,7 +139,5 @@ namespace UCommerce.RazorStore.Controllers
 
             return variantSku;
         }
-
-    
     }
 }

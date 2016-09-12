@@ -71,7 +71,7 @@ function updateCartTotals() {
     });
 };
 function prepCart() {
-    var icn = $("<i>", { "class": "fa fa-shopping-cart icon-white" });
+    var icn = $("<i>", { "class": "fa fa-shopping-cart icon-white margin-right-small" });
     var qty = $("<span>", { "class": "item-qty" });
     var tot = $("<span>", { "class": "order-total" });
     var cart = $("<a>", { 'href': '/basket', "id": "mini-cart" });
