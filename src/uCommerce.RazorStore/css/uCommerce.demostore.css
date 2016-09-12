@@ -631,3 +631,7 @@ li.dropdown-item.active > a {
 p.btn-group.view-details {
     color: #ffffff;
 }
+
+.item-discounted-price {
+    margin-bottom: 5px;
+}

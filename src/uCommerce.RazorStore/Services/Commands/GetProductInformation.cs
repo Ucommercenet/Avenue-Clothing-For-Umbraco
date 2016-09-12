@@ -17,7 +17,7 @@ namespace UCommerce.RazorStore.Services.Commands
         public int? CategoryId { get; set; }
     }
     public class GetProductInformationResponse : IHasResponseStatus
-    { 
+    {
         public GetProductInformationResponse() { }
         public GetProductInformationResponse(ProductInformation productInformation)
         {
@@ -33,18 +33,18 @@ namespace UCommerce.RazorStore.Services.Commands
     }
 
     public class GetProductInformationService : ServiceBase<GetProductInformation>
+    {
+        protected override object Run(GetProductInformation request)
         {
-            protected override object Run(GetProductInformation request)
-            {
-                ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
-                Product product = CatalogLibrary.GetProduct(request.Sku);
-                Category category = CatalogLibrary.GetCategory(request.CategoryId.Value);
-                string niceUrl = CatalogLibrary.GetNiceUrlForProduct(product, category, catalog);
+            ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
+            Product product = CatalogLibrary.GetProduct(request.Sku);
+            Category category = CatalogLibrary.GetCategory(request.CategoryId.Value);
+            string niceUrl = CatalogLibrary.GetNiceUrlForProduct(product, category, catalog);
 
-                PriceCalculation priceCalculation = CatalogLibrary.CalculatePrice(product);
+            PriceCalculation priceCalculation = CatalogLibrary.CalculatePrice(product);
 
-                Currency currency = priceCalculation.YourPrice.Amount.Currency;    
-                            
+            Currency currency = priceCalculation.YourPrice.Amount.Currency;
+
             ProductInformation productInformation = new ProductInformation()
             {
                 NiceUrl = niceUrl,
@@ -55,7 +55,7 @@ namespace UCommerce.RazorStore.Services.Commands
                         Amount = new MoneyViewModel()
                         {
                             Value = priceCalculation.Discount.Amount.Value,
-                            DisplayValue = new Money(priceCalculation.Discount.Amount.Value,currency).ToString()
+                            DisplayValue = new Money(priceCalculation.Discount.Amount.Value, currency).ToString()
                         },
                         AmountExclTax = new MoneyViewModel()
                         {
@@ -68,7 +68,7 @@ namespace UCommerce.RazorStore.Services.Commands
                             DisplayValue = new Money(priceCalculation.Discount.AmountInclTax.Value, currency).ToString()
                         }
                     },
-                    isDiscounted = priceCalculation.IsDiscounted,
+                    IsDiscounted = priceCalculation.IsDiscounted,
                     YourPrice = new PriceViewModel()
                     {
                         Amount = new MoneyViewModel()
@@ -86,13 +86,30 @@ namespace UCommerce.RazorStore.Services.Commands
                             Value = priceCalculation.YourPrice.AmountExclTax.Value,
                             DisplayValue = new Money(priceCalculation.YourPrice.AmountExclTax.Value, currency).ToString()
                         }
+                    },
+                    ListPrice = new PriceViewModel()
+                    {
+                        Amount = new MoneyViewModel()
+                        {
+                            Value = priceCalculation.ListPrice.Amount.Value,
+                            DisplayValue = new Money(priceCalculation.ListPrice.Amount.Value, currency).ToString()
+                        },
+                        AmountExclTax = new MoneyViewModel()
+                        {
+                            Value = priceCalculation.ListPrice.AmountExclTax.Value,
+                            DisplayValue = new Money(priceCalculation.ListPrice.AmountExclTax.Value, currency).ToString()
+                        },
+                        AmountInclTax = new MoneyViewModel()
+                        {
+                            Value = priceCalculation.ListPrice.AmountInclTax.Value,
+                            DisplayValue = new Money(priceCalculation.ListPrice.AmountInclTax.Value, currency).ToString()
+                        }
                     }
                 }
             };
-
-                productInformation.Sku = product.Sku;
+            productInformation.Sku = product.Sku;
 
             return new GetProductInformationResponse(productInformation);
-            }
         }
+    }
 }

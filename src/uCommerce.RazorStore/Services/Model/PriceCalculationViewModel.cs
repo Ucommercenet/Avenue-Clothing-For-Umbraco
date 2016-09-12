@@ -8,7 +8,7 @@ namespace UCommerce.RazorStore.Services.Model
 
         public PriceViewModel Discount { get; set; }
 
-        public bool isDiscounted { get; set; }
+        public bool IsDiscounted { get; set; }
 
         public PriceViewModel ListPrice { get; set; }
 
