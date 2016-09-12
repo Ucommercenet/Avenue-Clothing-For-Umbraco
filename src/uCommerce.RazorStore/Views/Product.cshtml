@@ -36,7 +36,7 @@
 
     <section class="col-md-7">
         <header class="col-md-12 page-header">
-            <h1 itemprop="name">@Model.ProductViewModel.Name</h1>
+            <h2 itemprop="name"><b>@Model.ProductViewModel.Name</b></h2>
         </header>
 
         @if (Model.ProductViewModel.IsOrderingAllowed)
@@ -59,7 +59,7 @@
                             {
                                 var controlName = string.Format("variation-{0}", prop.PropertyName.ToLower());
                                 <label for="@controlName">@prop.PropertyName</label>
-                                <select name="@controlName" id="@controlName" class="variant margin-bottom">
+                                <select name="@controlName" id="@controlName" class="variant margin-bottom form-control">
                                     <option value="">-- Please Select --</option>
                                     @foreach (var value in prop.Values)
                                     {
@@ -94,22 +94,21 @@
         }
 
 
-
-        <div class="tabbable">
-            <ul class="nav nav-tabs">
+        <section class="tabbable">
+           <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a href="#product-description" class="nav-link active" data-toggle="tab">Details</a>
+                    <a href="#product-description" class="nav-link active" data-toggle="tab" role="tab">Details</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#delivery-info" class="nav-link" data-toggle="tab">Delivery</a>
+                    <a href="#delivery-info" class="nav-link" data-toggle="tab" role="tab">Delivery</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#returns-info" class="nav-link" data-toggle="tab">Returns</a>
+                    <a href="#returns-info" class="nav-link" data-toggle="tab" role="tab">Returns</a>
                 </li>
-                <li class="nav-item"><a href="#customer-reviews" class="nav-link" data-toggle="tab">Reviews</a></li>
+                <li class="nav-item"><a href="#customer-reviews" class="nav-link" data-toggle="tab" role="tab">Reviews</a></li>
             </ul>
 
-            <div class="tab-content">
+            <div class="tab-content margin-top">
                 <div itemprop="description" id="product-description" class="tab-pane active" role="tabpanel">
                     @Html.Raw(Model.ProductViewModel.LongDescription)
                 </div>
@@ -122,7 +121,7 @@
                 <div id="customer-reviews" class="tab-pane" role="tabpanel">
                     @Umbraco.RenderMacro("uCommerceProductReviews")
                 </div>
-              </div>
             </div>
+          </section>
     </section>
 </div>
