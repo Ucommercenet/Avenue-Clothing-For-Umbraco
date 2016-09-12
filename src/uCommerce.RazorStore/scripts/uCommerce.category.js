@@ -19,7 +19,7 @@
             function (data) {
                 if (data.PriceCalculation.IsDiscounted) {
                     document.querySelector("p[data-productsku='" + data.Sku + "']").innerHTML = data.PriceCalculation.ListPrice.Amount.DisplayValue;
-                    $('#' + data.Sku).find('.item-price').css('text-decoration', 'line-through').css('margin-bottom', '5px');
+                    $('#' + data.Sku).find('.item-price').addClass('strike-through-price');
                     $('<p class="item-discounted-price">' + data.PriceCalculation.YourPrice.Amount.DisplayValue + '</p>').insertAfter($('#' + data.Sku).find('.item-price'));
                 } else {
                     document.querySelector("p[data-productsku='" + data.Sku + "']").innerHTML = data.PriceCalculation.YourPrice.Amount.DisplayValue;

@@ -634,4 +634,12 @@ p.btn-group.view-details {
 
 .item-discounted-price {
     margin-bottom: 5px;
+    font-weight: 600;
+  
+}
+
+.strike-through-price {
+    text-decoration: line-through;
+    margin-bottom: 5px;
+        opacity: 0.5;
 }
