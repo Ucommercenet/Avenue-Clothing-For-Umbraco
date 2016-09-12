@@ -63,7 +63,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     -moz-box-shadow: none;
     box-shadow: none;
     padding: 5px 10px 0px 10px;
-    z-index: 0;
+    z-index: 500;
 }
 
 .navbar-brand {
