@@ -22,7 +22,7 @@
     <div class="product-list col-sm-12 col-md-12">
         @foreach (var product in Model.Products)
         {
-            <div class="product col-sm-4 col-md-4 col-xs-2">
+            <div class="product col-sm-4 col-md-4 col-xs-2" id="@product.Sku">
                 <div class="product-image">
                     @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
                     {

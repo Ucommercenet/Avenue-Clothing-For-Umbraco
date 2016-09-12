@@ -628,4 +628,6 @@ li.dropdown-item.active > a {
     color: #fff;
 }
 
- 
+p.btn-group.view-details {
+    color: #ffffff;
+}
