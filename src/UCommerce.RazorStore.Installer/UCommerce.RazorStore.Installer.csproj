@@ -116,7 +116,9 @@
     </Content>
     <Content Include="XmlStubs\DocumentTypes.xml" />
     <Content Include="XmlStubs\Documents.xml" />
-    <Content Include="XmlStubs\Info.xml" />
+    <Content Include="XmlStubs\Info.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Accessories.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Tops.jpg" />
