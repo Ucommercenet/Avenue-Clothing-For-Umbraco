@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.Content;
@@ -8,7 +7,6 @@ using Umbraco.Web.Mvc;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
-using UCommerce.RazorStore.Services.Commands;
 using UCommerce.Runtime;
 using UCommerce.Search.Facets;
 using Umbraco.Web.Models;
@@ -17,16 +15,19 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
-        public ActionResult Index(RenderModel model)
+        public override ActionResult Index(RenderModel model)
         {
-            var categoryViewModel = new CategoryViewModel();
             var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
 
+            var categoryViewModel = new CategoryViewModel
+            {
+                Name = currentCategory.DisplayName(),
+                Description = currentCategory.Description(),
+                CatalogId = currentCategory.ProductCatalog.Id,
+                CategoryId = currentCategory.Id,
+                Products = MapProductsInCategories(currentCategory)
+            };
 
-            categoryViewModel.Name = currentCategory.DisplayName();
-            categoryViewModel.Description = currentCategory.Description();
-            categoryViewModel.CatalogId = currentCategory.ProductCatalog.Id;
-            categoryViewModel.CategoryId = currentCategory.Id;
 
             if (!HasBannerImage(currentCategory))
             {
@@ -34,9 +35,7 @@ namespace UCommerce.RazorStore.Controllers
                 categoryViewModel.BannerImageUrl = media;
             }
 
-            categoryViewModel.Products = MapProductsInCategories(currentCategory);
-
-            return base.View("/Views/Catalog.cshtml", categoryViewModel);
+            return View("/Views/Catalog.cshtml", categoryViewModel);
         }
 
         private bool HasBannerImage(Category category)
@@ -50,11 +49,13 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var product in productsInCategory)
             {
-                var productViewModel = new ProductViewModel();
+                var productViewModel = new ProductViewModel
+                {
+                    Sku = product.Sku,
+                    Name = product.Name,
+                    ThumbnailImageUrl = product.ThumbnailImageUrl
+                };
 
-                productViewModel.Sku = product.Sku;
-                productViewModel.Name = product.Name;
-                productViewModel.ThumbnailImageUrl = product.ThumbnailImageUrl;
 
                 productViews.Add(productViewModel);
             }
