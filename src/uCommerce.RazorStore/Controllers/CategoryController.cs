@@ -6,6 +6,7 @@ using UCommerce.Infrastructure;
 using UCommerce.Publishing.Model;
 using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search.Facets;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Controllers
@@ -62,7 +63,7 @@ namespace UCommerce.RazorStore.Controllers
 
         private IList<ProductViewModel> MapProductsInCategories(Category category)
         {
-            //IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
 
             foreach (var childCategory in GetChildCategories(category.Guid))
@@ -70,10 +71,8 @@ namespace UCommerce.RazorStore.Controllers
                 productsInCategory.AddRange(MapProductsInCategories(childCategory));
             }
 
-            var products = GetProductsInCategory(category.Guid);
+            var products = GetProductsInCategoryWithFacets(category.Guid, facetsForQuerying);
             productsInCategory.AddRange(MapProducts(products));
-            // TODO: Take facets into acount.
-            //productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category, facetsForQuerying)));
 
             return productsInCategory;
         }
@@ -86,10 +85,10 @@ namespace UCommerce.RazorStore.Controllers
             return currentCategory;
         }
 
-        private IList<Product> GetProductsInCategory(Guid categoryId)
+        private IList<Product> GetProductsInCategoryWithFacets(Guid categoryId, IList<Facet> facets)
         {
             var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-            return catalogLibrary.GetProducts(categoryId);
+            return catalogLibrary.GetProducts(categoryId, facets);
         }
 
         private IList<Category> GetChildCategories(Guid categoryGuid)
