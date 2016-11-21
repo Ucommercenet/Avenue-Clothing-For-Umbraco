@@ -274,6 +274,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Installer.dll</HintPath>
     </Reference>
+    <Reference Include="UCommerce.Publishing">
+      <HintPath>..\..\lib\uCommerce\Publishing\UCommerce.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Publishing.Elastic">
+      <HintPath>..\..\lib\uCommerce\Publishing\UCommerce.Publishing.Elastic.dll</HintPath>
+    </Reference>
     <Reference Include="UCommerce.Umbraco">
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco.dll</HintPath>
     </Reference>
@@ -607,7 +613,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "C:\Projects\uCommerce Razor Store\src\uCommerce.RazorStore" "C:\inetpub\Umbraco754\website"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

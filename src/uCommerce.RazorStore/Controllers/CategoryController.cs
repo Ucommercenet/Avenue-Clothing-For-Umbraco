@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using UCommerce.Api;
-using UCommerce.Content;
-using UCommerce.EntitiesV2;
 using Umbraco.Web.Mvc;
-using UCommerce.Extensions;
 using UCommerce.Infrastructure;
+using UCommerce.Publishing.Model;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
-using UCommerce.Runtime;
-using UCommerce.Search.Facets;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Controllers
@@ -17,21 +14,21 @@ namespace UCommerce.RazorStore.Controllers
     {
         public override ActionResult Index(RenderModel model)
         {
-            var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
+            var currentCategory = GetCurrentCategory();
 
             var categoryViewModel = new CategoryViewModel
             {
-                Name = currentCategory.DisplayName(),
-                Description = currentCategory.Description(),
-                CatalogId = currentCategory.ProductCatalog.Id,
-                CategoryId = currentCategory.Id,
+                Name = currentCategory.DisplayName,
+                Description = currentCategory.Description,
+                CatalogId = currentCategory.CatalogId,
+                CategoryId = currentCategory.CategoryId,
                 Products = MapProductsInCategories(currentCategory)
             };
 
 
             if (!HasBannerImage(currentCategory))
             {
-                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentCategory.ImageMediaId).Url;
+                var media = currentCategory.PrimaryImageUrl;
                 categoryViewModel.BannerImageUrl = media;
             }
 
@@ -40,10 +37,10 @@ namespace UCommerce.RazorStore.Controllers
 
         private bool HasBannerImage(Category category)
         {
-            return string.IsNullOrEmpty(category.ImageMediaId);
+            return string.IsNullOrEmpty(category.PrimaryImageUrl);
         }
 
-        private IList<ProductViewModel> MapProducts(ICollection<Documents.Product> productsInCategory)
+        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
@@ -65,17 +62,40 @@ namespace UCommerce.RazorStore.Controllers
 
         private IList<ProductViewModel> MapProductsInCategories(Category category)
         {
-            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+            //IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
 
-            foreach (var subcategory in category.Categories)
+            foreach (var childCategory in GetChildCategories(category.Guid))
             {
-                productsInCategory.AddRange(MapProductsInCategories(subcategory));
+                productsInCategory.AddRange(MapProductsInCategories(childCategory));
             }
 
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category, facetsForQuerying)));
+            var products = GetProductsInCategory(category.Guid);
+            productsInCategory.AddRange(MapProducts(products));
+            // TODO: Take facets into acount.
+            //productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category, facetsForQuerying)));
 
             return productsInCategory;
+        }
+
+        private Category GetCurrentCategory()
+        {
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+            var currentCategory = catalogContext.CurrentCategory;
+
+            return currentCategory;
+        }
+
+        private IList<Product> GetProductsInCategory(Guid categoryId)
+        {
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+            return catalogLibrary.GetProducts(categoryId);
+        }
+
+        private IList<Category> GetChildCategories(Guid categoryGuid)
+        {
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+            return catalogLibrary.GetCategories(categoryGuid);
         }
     }
 }
