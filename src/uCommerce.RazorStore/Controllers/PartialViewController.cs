@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using UCommerce.Api;
-using UCommerce.EntitiesV2;
-using UCommerce.Extensions;
+using UCommerce.Infrastructure;
+using UCommerce.Publishing.Model;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
 using Umbraco.Web.Mvc;
 
@@ -10,11 +11,18 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class PartialViewController : SurfaceController
     {
+        private ICatalogLibrary CatalogLibrary { get; set; }
+
+        public PartialViewController()
+        {
+            CatalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        }
+
         public ActionResult CategoryNavigation()
         {
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
-            ICollection<Category> rootCategories = CatalogLibrary.GetRootCategories();
+            ICollection<Category> rootCategories = GetRootCategories();
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
@@ -27,16 +35,32 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var category in categoriesToMap)
             {
-                var categoryViewModel = new CategoryViewModel();
-
-                categoryViewModel.Name = category.DisplayName();
-                categoryViewModel.Url = CatalogLibrary.GetNiceUrlForCategory(category);
-                categoryViewModel.Categories = MapCategories(CatalogLibrary.GetCategories(category));
+                var categoryViewModel = new CategoryViewModel
+                {
+                    Name = category.DisplayName,
+                    Url = GetNiceUrlFor(category),
+                    Categories = MapCategories(GetCategories(category))
+                };
 
                 categoriesToReturn.Add(categoryViewModel);
             }
 
             return categoriesToReturn;
+        }
+
+        private IList<Category> GetRootCategories()
+        {
+            return CatalogLibrary.GetRootCategories();
+        }
+
+        private string GetNiceUrlFor(Category category)
+        {
+            return CatalogLibrary.GetNiceUrlForCategory(category);
+        }
+
+        private IList<Category> GetCategories(Category category)
+        {
+            return CatalogLibrary.GetCategories(category.Guid);
         }
     }
 }
