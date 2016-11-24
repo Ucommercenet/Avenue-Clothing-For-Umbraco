@@ -4,9 +4,11 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.Content;
 using UCommerce.Infrastructure;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using Umbraco.Web.Mvc;
+using ICatalogContext = UCommerce.Publishing.Runtime.ICatalogContext;
 
 namespace UCommerce.RazorStore.Controllers
 {
@@ -15,7 +17,12 @@ namespace UCommerce.RazorStore.Controllers
         // GET: HomepageCatalog
         public ActionResult Index()
         {
-            var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && Convert.ToBoolean(pp.Value))));
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+
+            var currentCatalogId = catalogContext.CurrentCatalogId;
+            var products = catalogLibrary.FindProductsWhere(currentCatalogId, "ShowOnHomepage", true);
+
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
             foreach (var p in products)
@@ -23,12 +30,12 @@ namespace UCommerce.RazorStore.Controllers
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
                     Name = p.Name,
-                    PriceCalculation = CatalogLibrary.CalculatePrice(p),
-                    Url = CatalogLibrary.GetNiceUrlForProduct(p),
+                    PriceCalculation = catalogLibrary.CalculatePrice(currentCatalogId, p),
+                    Url = catalogLibrary.GetNiceUrlForProduct(p),
                     Sku = p.Sku,
-                    IsVariant = p.IsVariant,
+                    IsVariant = false,
                     VariantSku = p.VariantSku,
-                    ThumbnailImageUrl = ObjectFactory.Instance.Resolve<IImageService>().GetImage(p.ThumbnailImageMediaId).Url
+                    ThumbnailImageUrl = p.ThumbnailImageUrl
                 });
             }
         
