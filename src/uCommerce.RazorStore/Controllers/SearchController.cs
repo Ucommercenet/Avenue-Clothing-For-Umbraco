@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UCommerce.Api;
-using UCommerce.EntitiesV2;
-using UCommerce.Extensions;
 using UCommerce.Infrastructure;
+using UCommerce.Publishing.Model;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using IImageService = UCommerce.Content.IImageService;
 
 namespace UCommerce.RazorStore.Controllers
 {
@@ -21,34 +19,26 @@ namespace UCommerce.RazorStore.Controllers
             IEnumerable<Product> products = new List<Product>();
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
+            var searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+
             if (!string.IsNullOrWhiteSpace(keyword))
             {
-                products = Product.Find(p =>
-                                        p.VariantSku == null
-                                        && p.DisplayOnSite
-                                        &&
-                                            (
-                                            p.Sku.Contains(keyword)
-                                            || p.Name.Contains(keyword)
-                                            || p.ProductDescriptions.Any(d => d.DisplayName.Contains(keyword)
-                                            || d.ShortDescription.Contains(keyword)
-                                            || d.LongDescription.Contains(keyword)
-                                            )
-                                        )
-                                    );
+                products = searchLibrary.FindProducts(keyword);
             }
 
             foreach (var product in products.Where(x=> x.DisplayOnSite))
             {
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
-                    Url = CatalogLibrary.GetNiceUrlForProduct(product),
-                    Name = product.DisplayName(),
+                    Url = catalogLibrary.GetNiceUrlForProduct(product),
+                    Name = product.DisplayName,
                     Sku = product.Sku,
-                    IsVariant = product.IsVariant,
-                    LongDescription = product.LongDescription(),
-                    PriceCalculation = CatalogLibrary.CalculatePrice(product),
-                    ThumbnailImageUrl = ObjectFactory.Instance.Resolve<IImageService>().GetImage(product.ThumbnailImageMediaId).Url,
+                    IsVariant = false,
+                    LongDescription = product.LongDescription,
+                    PriceCalculation = catalogLibrary.CalculatePrice(catalogContext.CurrentCatalogId, product),
+                    ThumbnailImageUrl = product.ThumbnailImageUrl,
                     VariantSku = product.VariantSku
                 });
             }
