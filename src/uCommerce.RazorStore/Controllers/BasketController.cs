@@ -57,7 +57,9 @@ namespace UCommerce.RazorStore.Controllers
 
             TransactionLibrary.ExecuteBasketPipeline();
 
-            return Redirect("/basket");
+            var shop = model.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            return Redirect(basket.Url);
         }
     }
 

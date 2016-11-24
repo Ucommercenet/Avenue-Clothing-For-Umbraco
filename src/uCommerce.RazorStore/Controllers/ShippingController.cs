@@ -48,8 +48,11 @@ namespace UCommerce.RazorStore.Controllers
 		{
 			TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, overwriteExisting: true);
 			TransactionLibrary.ExecuteBasketPipeline();
-			
-			return Redirect("/basket/payment");
-		}
+
+            var shop = shipping.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            var payment = basket.FirstChild(x => x.DocumentTypeAlias.Equals("payment"));
+            return Redirect(payment.Url);
+        }
 	}
 }

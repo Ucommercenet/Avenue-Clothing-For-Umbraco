@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
@@ -90,7 +91,11 @@ namespace UCommerce.RazorStore.Controllers
 		{
 			TransactionLibrary.RequestPayments();
 
-		    return Redirect("/basket/confirmation");
-		}
+            var current = UmbracoContext.PublishedContentRequest.PublishedContent;
+            var shop = current.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            var confirmation = basket.FirstChild(x => x.DocumentTypeAlias.Equals("confirmation"));
+            return Redirect(confirmation.Url);
+        }
 	}
 }

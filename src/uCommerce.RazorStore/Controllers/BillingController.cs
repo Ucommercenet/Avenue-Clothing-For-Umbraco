@@ -67,7 +67,10 @@ namespace UCommerce.RazorStore.Controllers
            
             TransactionLibrary.ExecuteBasketPipeline();
 
-		    return Redirect("/basket/shipping");
+            var shop = addressDetails.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            var shipping = basket.FirstChild(x => x.DocumentTypeAlias.Equals("shipping"));
+            return Redirect(shipping.Url);
         }
 
         private void EditShippingInformation(AddressViewModel shippingAddress)
