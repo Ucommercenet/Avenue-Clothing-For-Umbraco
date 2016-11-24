@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
