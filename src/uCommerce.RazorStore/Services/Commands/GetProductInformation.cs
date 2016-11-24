@@ -5,7 +5,9 @@ using System.Web;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.ServiceModel;
 using UCommerce.Api;
-using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
+using UCommerce.Publishing.Model;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Services.Model;
 
 namespace UCommerce.RazorStore.Services.Commands
@@ -36,14 +38,17 @@ namespace UCommerce.RazorStore.Services.Commands
     {
         protected override object Run(GetProductInformation request)
         {
-            ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
-            Product product = CatalogLibrary.GetProduct(request.Sku);
-            Category category = CatalogLibrary.GetCategory(request.CategoryId.Value);
-            string niceUrl = CatalogLibrary.GetNiceUrlForProduct(product, category, catalog);
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
 
-            PriceCalculation priceCalculation = CatalogLibrary.CalculatePrice(product);
+            int catalogId = catalogContext.CurrentCatalogId;
+            Category category = catalogLibrary.GetCategory(request.CategoryId.Value);
+            Product product = catalogLibrary.GetProduct(request.Sku);
+            string niceUrl = catalogLibrary.GetNiceUrlForProduct(catalogId, category, product);
 
-            Currency currency = priceCalculation.YourPrice.Amount.Currency;
+            PriceCalculation priceCalculation = catalogLibrary.CalculatePrice(catalogId, product);
+
+            EntitiesV2.Currency currency = priceCalculation.YourPrice.Amount.Currency;
 
             ProductInformation productInformation = new ProductInformation()
             {
