@@ -2,16 +2,12 @@
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 
-
-
 @model ProductViewModel
 
 @{
     Layout = null;
     Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
 }
-
-
 
 @if (Model.Reviews.Any())
 {

@@ -13,7 +13,7 @@ namespace UCommerce.RazorStore.Controllers
 		public ActionResult Index(RenderModel m)
 		{
 			PurchaseOrderViewModel model = MapOrder();
-			return base.View("/Views/preview.cshtml", model);
+			return base.View("/Views/Preview.cshtml", model);
 		}
 
 		private PurchaseOrderViewModel MapOrder()

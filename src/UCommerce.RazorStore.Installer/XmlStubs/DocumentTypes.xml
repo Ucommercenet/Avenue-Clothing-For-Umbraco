@@ -102,6 +102,7 @@
       <DocumentType>category</DocumentType>
       <DocumentType>basket</DocumentType>
       <DocumentType>search</DocumentType>
+      <DocumentType>uCommerceEmail</DocumentType>
     </Structure>
     <GenericProperties>
       <GenericProperty>
@@ -116,7 +117,7 @@
     </GenericProperties>
     <Tabs>
       <Tab>
-        <Id>13</Id>
+        <Id>12</Id>
         <Caption>Content</Caption>
         <SortOrder>0</SortOrder>
       </Tab>
@@ -226,16 +227,18 @@
     <Info>
       <Name>uCommerce Email</Name>
       <Alias>uCommerceEmail</Alias>
-      <Icon>ucommerce-email.png</Icon>
+      <Icon>icon-paper-plane-alt</Icon>
       <Thumbnail>folder.png</Thumbnail>
       <Description />
-      <AllowAtRoot>False</AllowAtRoot>
+      <AllowAtRoot>True</AllowAtRoot>
       <IsListView>False</IsListView>
       <Compositions />
       <AllowedTemplates />
       <DefaultTemplate />
     </Info>
-    <Structure />
+    <Structure>
+      <DocumentType>uCommerceEmail</DocumentType>
+    </Structure>
     <GenericProperties>
       <GenericProperty>
         <Name>Hide in navigation</Name>
@@ -243,6 +246,17 @@
         <Type>Umbraco.TrueFalse</Type>
         <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
         <Tab />
+        <SortOrder>0</SortOrder>
+        <Mandatory>False</Mandatory>
+        <Validation />
+        <Description><![CDATA[]]></Description>
+      </GenericProperty>
+      <GenericProperty>
+        <Name>Header</Name>
+        <Alias>header</Alias>
+        <Type>Umbraco.TinyMCEv3</Type>
+        <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+        <Tab>Email</Tab>
         <SortOrder>0</SortOrder>
         <Mandatory>False</Mandatory>
         <Validation />
@@ -259,21 +273,10 @@
         <Validation />
         <Description><![CDATA[]]></Description>
       </GenericProperty>
-      <GenericProperty>
-        <Name>Header</Name>
-        <Alias>header</Alias>
-        <Type>Umbraco.TinyMCEv3</Type>
-        <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
-        <Tab>Email</Tab>
-        <SortOrder>0</SortOrder>
-        <Mandatory>False</Mandatory>
-        <Validation />
-        <Description><![CDATA[]]></Description>
-      </GenericProperty>
     </GenericProperties>
     <Tabs>
       <Tab>
-        <Id>12</Id>
+        <Id>13</Id>
         <Caption>Email</Caption>
         <SortOrder>0</SortOrder>
       </Tab>
