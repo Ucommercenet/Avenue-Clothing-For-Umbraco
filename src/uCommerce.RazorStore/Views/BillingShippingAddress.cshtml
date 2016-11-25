@@ -42,7 +42,7 @@
                     @Html.TextBoxFor(x => x.BillingAddress.Line1, new { @class = "col-md-12 form-control required margin-bottom" })
 
                     <label>City</label>
-                    @Html.TextBoxFor(x => x.BillingAddress.City, new { @class = "col-md-12 form-control margin-bottom" })
+                    @Html.TextBoxFor(x => x.BillingAddress.City, new { @class = "col-md-12 form-control required margin-bottom" })
 
                     <label>Country</label>
                     @Html.DropDownList("BillingAddress.CountryId", Model.AvailableCountries, new { @class = "countryDropdownCheckout margin-bottom form-control" })
@@ -91,7 +91,7 @@
                     @Html.TextBoxFor(x => x.ShippingAddress.Line1, new { @class = "col-md-12 form-control required margin-bottom" })
 
                     <label>City</label>
-                    @Html.TextBoxFor(x => x.ShippingAddress.City, new { @class = "col-md-12 form-control margin-bottom" })
+                    @Html.TextBoxFor(x => x.ShippingAddress.City, new { @class = "col-md-12 form-control required margin-bottom" })
 
                     <label>Country</label>
                     @Html.DropDownList("ShippingAddress.CountryId", Model.AvailableCountries, new { @class = "countryDropdownCheckout margin-bottom form-control" })
