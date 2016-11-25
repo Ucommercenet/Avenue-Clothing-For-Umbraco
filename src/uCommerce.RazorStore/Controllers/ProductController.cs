@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
-using UCommerce.Content;
-using UCommerce.EntitiesV2;
-using UCommerce.Extensions;
 using UCommerce.Infrastructure;
+using UCommerce.Publishing.Model;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
-using UCommerce.Runtime;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
@@ -24,7 +22,7 @@ namespace UCommerce.RazorStore.Controllers
         [HttpPost]
         public ActionResult Index(AddToBasketViewModel model)
         {
-            string variant = GetVariantFromPostData(model.Sku, "variation-");
+            string variant = GetVariantFromPostData("variation-");
             TransactionLibrary.AddToBasket(1, model.Sku, variant);
 
             return RenderView(true);
@@ -32,27 +30,28 @@ namespace UCommerce.RazorStore.Controllers
         
         private ActionResult RenderView(bool addedToBasket)
         {
-            Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
 
-            var productViewModel = new ProductViewModel();
+            Product<Variant> currentProduct = catalogContext.CurrentProduct;
 
-            productViewModel.Sku = currentProduct.Sku;
-            productViewModel.PriceCalculation = UCommerce.Api.CatalogLibrary.CalculatePrice(currentProduct);
-            productViewModel.Name = currentProduct.DisplayName();
-            productViewModel.LongDescription = currentProduct.LongDescription();
-            productViewModel.IsVariant = false;
-            productViewModel.IsOrderingAllowed = currentProduct.AllowOrdering;
-            productViewModel.TaxCalculation = CatalogLibrary.CalculatePrice(currentProduct).YourTax.ToString();
+            var priceCalculation = catalogLibrary.CalculatePrice(catalogContext.CurrentCatalogId, currentProduct);
 
-            if (!string.IsNullOrEmpty(currentProduct.PrimaryImageMediaId))
+            var productViewModel = new ProductViewModel
             {
-                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentProduct.PrimaryImageMediaId).Url;
-                productViewModel.ThumbnailImageUrl = media;
-            }
+                Sku = currentProduct.Sku,
+                PriceCalculation = priceCalculation,
+                Name = currentProduct.DisplayName,
+                LongDescription = currentProduct.LongDescription,
+                IsVariant = false,
+                IsOrderingAllowed = currentProduct.AllowOrdering,
+                TaxCalculation = priceCalculation.YourTax.ToString(),
+                ThumbnailImageUrl = currentProduct.ThumbnailImageUrl,
+                Properties = MapProductProperties(currentProduct)
+            };
 
-            productViewModel.Properties = MapProductProperties(currentProduct);
-         
-            if (currentProduct.ProductDefinition.IsProductFamily())
+
+            if (currentProduct.Variants.Any())
             {
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
@@ -69,7 +68,7 @@ namespace UCommerce.RazorStore.Controllers
             return View("/Views/Product.cshtml", productPageViewModel);
         }
 
-        private IList<ProductViewModel> MapVariants(ICollection<Product> variants)
+        private IList<ProductViewModel> MapVariants(ICollection<Variant> variants)
         {
             var variantModels = new List<ProductViewModel>();
             foreach (var currentVariant in variants)
@@ -77,8 +76,8 @@ namespace UCommerce.RazorStore.Controllers
                 ProductViewModel productModel = new ProductViewModel();
                 productModel.Sku = currentVariant.Sku;
                 productModel.VariantSku = currentVariant.VariantSku;
-                productModel.Name = currentVariant.DisplayName();
-                productModel.LongDescription = currentVariant.LongDescription();
+                productModel.Name = currentVariant.DisplayName;
+                productModel.LongDescription = currentVariant.LongDescription;
                 productModel.IsVariant = true;
                 
                 variantModels.Add(productModel);
@@ -87,19 +86,18 @@ namespace UCommerce.RazorStore.Controllers
             return variantModels;
         }
 
-        private IList<ProductPropertiesViewModel> MapProductProperties(Product product)
+        private IList<ProductPropertiesViewModel> MapProductProperties(Product<Variant> product)
         {
             var productProperties = new List<ProductPropertiesViewModel>();
 
-            var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
-                                 where v.ProductDefinitionField.DisplayOnSite
-                                 group v by v.ProductDefinitionField into g
+            var uniqueVariants = from v in product.Variants.SelectMany(p => p.Properties)
+                                 group v by v.Name into g
                                  select g;
 
             foreach (var prop in uniqueVariants)
             {
                 var productPropertiesViewModel = new ProductPropertiesViewModel();
-                productPropertiesViewModel.PropertyName = prop.Key.Name;
+                productPropertiesViewModel.PropertyName = prop.Key;
 
                 foreach (var value in prop.Select(p => p.Value).Distinct())
                 {
@@ -111,23 +109,24 @@ namespace UCommerce.RazorStore.Controllers
             return productProperties;
         }
         
-        private string GetVariantFromPostData(string sku, string prefix)
+        private string GetVariantFromPostData(string prefix)
         {
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+
             var request = System.Web.HttpContext.Current.Request;
             var keys = request.Form.AllKeys.Where(k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
             var properties = keys.Select(k => new { Key = k.Replace(prefix, string.Empty), Value = Request.Form[k] }).ToList();
 
-            Product product = SiteContext.Current.CatalogContext.CurrentProduct;
+            Product<Variant> product = catalogContext.CurrentProduct;
             string variantSku = null;
 
             // If there are variant values we'll need to find the selected variant
-            if (!product.IsVariant && properties.Any())
+            if (product.Variants.Any())
             {
-                var variant = product.Variants.FirstOrDefault(v => v.ProductProperties
-                      .Where(pp => pp.ProductDefinitionField.DisplayOnSite
-                          && pp.ProductDefinitionField.IsVariantProperty
-                          && !pp.ProductDefinitionField.Deleted)
-                      .All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+                var variant = product.Variants.FirstOrDefault(v => v.Properties
+                      .All(p => properties.Any(kv => kv.Key.Equals(p.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+
+                if (variant == null) { throw new InvalidOperationException("Could not find the correct variant"); }
                 variantSku = variant.VariantSku;
             }
            
