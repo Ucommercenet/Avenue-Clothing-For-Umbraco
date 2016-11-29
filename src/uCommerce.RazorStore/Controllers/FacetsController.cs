@@ -1,15 +1,16 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using UCommerce.Api;
-using UCommerce.EntitiesV2;
-using UCommerce.Runtime;
 using UCommerce.Search.Facets;
 using Umbraco.Web.Mvc;
 using System.Collections.Specialized;
 using System.Linq;
 using System;
+using UCommerce.Infrastructure;
+using UCommerce.Publishing.Model;
+using UCommerce.Publishing.Runtime;
 using UCommerce.RazorStore.Models;
+using ICatalogContext = UCommerce.Publishing.Runtime.ICatalogContext;
 
 namespace UCommerce.RazorStore.Controllers
 {
@@ -62,13 +63,16 @@ namespace UCommerce.RazorStore.Controllers
         // GET: Facets
         public ActionResult Index()
         {
-            var category = SiteContext.Current.CatalogContext.CurrentCategory;
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+
+            var category = catalogContext.CurrentCategory;
             var facetValueOutputModel = new FacetsDisplayedViewModel();
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
             if (ShouldDisplayFacets(category))
             {
-                IList<Facet> facets = SearchLibrary.GetFacetsFor(category, facetsForQuerying);
+                IList<Facet> facets = catalogLibrary.GetFacetsFor(category.Guid, facetsForQuerying);
                 if (facets.Any(x => x.FacetValues.Any(y => y.Hits > 0)))
                 {
                     facetValueOutputModel.Facets = MapFacets(facets);
@@ -80,7 +84,8 @@ namespace UCommerce.RazorStore.Controllers
 
         private bool ShouldDisplayFacets(Category category)
         {
-            var product = SiteContext.Current.CatalogContext.CurrentProduct;
+            var catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+            var product = catalogContext.CurrentProduct;
 
             return category != null && product == null;
         }
