@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 namespace UCommerce.RazorStore.Controllers
@@ -57,7 +59,9 @@ namespace UCommerce.RazorStore.Controllers
 
             TransactionLibrary.ExecuteBasketPipeline();
 
-            return Redirect("/basket");
+            var shop = model.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            return Redirect(basket.Url);
         }
     }
 
