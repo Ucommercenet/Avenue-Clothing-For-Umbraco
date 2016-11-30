@@ -43,6 +43,8 @@ namespace UCommerce.RazorStore.Controllers
 
         private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
+            var catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
             foreach (var product in productsInCategory)
@@ -51,6 +53,7 @@ namespace UCommerce.RazorStore.Controllers
                 {
                     Sku = product.Sku,
                     Name = product.Name,
+                    Url = catalogLibrary.GetNiceUrlForProduct(product),
                     ThumbnailImageUrl = product.ThumbnailImageUrl
                 };
 
