@@ -45,6 +45,12 @@ namespace UCommerce.RazorStore.Controllers
                 paymentViewModel.AvailablePaymentMethods.Add(option);
             }
 
+		    if (paymentViewModel.AvailablePaymentMethods.Any() && paymentViewModel.AvailablePaymentMethods.All(x => !x.Selected))
+		    {
+                // Always make sure, that one payment method is selected.
+		        paymentViewModel.AvailablePaymentMethods.First().Selected = true;
+		    }
+
 		    paymentViewModel.ShippingCountry = shippingCountry.Name;
 
             return View("/Views/Payment.cshtml", paymentViewModel);
