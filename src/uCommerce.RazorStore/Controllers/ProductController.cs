@@ -16,6 +16,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ProductController : RenderMvcController
     {
+        [HttpGet]
         public ActionResult Index(RenderModel model)
         {
             return RenderView(false);

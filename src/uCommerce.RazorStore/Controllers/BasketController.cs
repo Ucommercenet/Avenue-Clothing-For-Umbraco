@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -10,6 +11,7 @@ namespace UCommerce.RazorStore.Controllers
 {
 	public class BasketController : RenderMvcController
     {
+        [System.Web.Mvc.HttpGet]
 		public override ActionResult Index(RenderModel model)
 		{
 			PurchaseOrder basket = TransactionLibrary.GetBasket().PurchaseOrder;
@@ -44,7 +46,7 @@ namespace UCommerce.RazorStore.Controllers
 		    return View("/Views/Basket.cshtml", basketModel);
 		}
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Index(PurchaseOrderViewModel model)
         {
             foreach (var orderLine in model.OrderLines)

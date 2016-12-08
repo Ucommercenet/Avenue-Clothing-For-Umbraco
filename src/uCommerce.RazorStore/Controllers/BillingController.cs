@@ -11,6 +11,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class BillingController : RenderMvcController
     {
+        [HttpGet]
         public ActionResult Index(RenderModel model)
         {
             var addressDetails = new AddressDetailsViewModel();

@@ -11,7 +11,8 @@ namespace UCommerce.RazorStore.Controllers
 {
 	public class PreviewController : RenderMvcController
     {
-		public ActionResult Index(RenderModel m)
+        [HttpGet]
+        public override ActionResult Index(RenderModel m)
 		{
 			PurchaseOrderViewModel model = MapOrder();
 			return base.View("/Views/Preview.cshtml", model);

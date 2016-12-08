@@ -12,7 +12,8 @@ namespace UCommerce.RazorStore.Controllers
 {
 	public class ShippingController : RenderMvcController
     {
-		public ActionResult Index(RenderModel model)
+        [HttpGet]
+        public ActionResult Index(RenderModel model)
 		{
 			var shipping = new ShippingViewModel();
 			shipping.AvailableShippingMethods = new List<SelectListItem>();

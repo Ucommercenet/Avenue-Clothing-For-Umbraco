@@ -13,7 +13,8 @@ namespace UCommerce.RazorStore.Controllers
 {
 	public class PaymentController : RenderMvcController
     {
-		public ActionResult Index(RenderModel model)
+        [HttpGet]
+        public override ActionResult Index(RenderModel model)
 		{
             var paymentViewModel = new PaymentViewModel();
             paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
