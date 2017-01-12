@@ -338,6 +338,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
+    <Compile Include="Controllers\uCommerceEmailController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
@@ -559,6 +560,7 @@
     <Content Include="Views\Product.cshtml" />
     <Content Include="Views\PartialView\ProductReview.cshtml" />
     <Content Include="Views\MacroPartials\uCommerceProductReviews.cshtml" />
+    <Content Include="Views\uCommerceEmail.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -569,7 +571,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\uCommerceEmail\" />
+  </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -607,7 +611,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "D:\Dev\uCommerce Razor Store\src\uCommerce.RazorStore" "D:\inetpub\Razer Demo Store"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\Umbraco754\Website"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -116,7 +116,9 @@
     </Content>
     <Content Include="XmlStubs\DocumentTypes.xml" />
     <Content Include="XmlStubs\Documents.xml" />
-    <Content Include="XmlStubs\Info.xml" />
+    <Content Include="XmlStubs\Info.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Accessories.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Tops.jpg" />

@@ -29,9 +29,7 @@ robocopy "%path1%\Views" "%path2%\Views" /s
 robocopy "%path1%\img" "%path2%\img" /s
 robocopy "%path1%\js" "%path2%\js" /s
 robocopy "%path1%\bin" "%path2%\bin" uCommerce.RazorStore.dll
-robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
-robocopy "%path1%\umbraco\ucommerce\install" "%path2%\umbraco\ucommerce\install" DemoStoreInstaller.ascx
-
+REM robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
 
 GOTO :DONE
 

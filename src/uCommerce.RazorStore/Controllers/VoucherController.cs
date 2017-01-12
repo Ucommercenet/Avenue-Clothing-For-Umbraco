@@ -8,6 +8,7 @@ namespace UCommerce.RazorStore.Controllers
     public class VoucherController : SurfaceController
     {
         // GET: Voucher
+        [HttpGet]
         public ActionResult Index()
         {
             return View("/Views/PartialView/Voucher.cshtml");

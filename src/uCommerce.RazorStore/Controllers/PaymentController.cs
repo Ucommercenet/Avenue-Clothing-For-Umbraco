@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
+using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
@@ -12,7 +13,8 @@ namespace UCommerce.RazorStore.Controllers
 {
 	public class PaymentController : RenderMvcController
     {
-		public ActionResult Index(RenderModel model)
+        [HttpGet]
+        public override ActionResult Index(RenderModel model)
 		{
             var paymentViewModel = new PaymentViewModel();
             paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
@@ -44,6 +46,12 @@ namespace UCommerce.RazorStore.Controllers
                 paymentViewModel.AvailablePaymentMethods.Add(option);
             }
 
+		    if (paymentViewModel.AvailablePaymentMethods.Any() && paymentViewModel.AvailablePaymentMethods.All(x => !x.Selected))
+		    {
+                // Always make sure, that one payment method is selected.
+		        paymentViewModel.AvailablePaymentMethods.First().Selected = true;
+		    }
+
 		    paymentViewModel.ShippingCountry = shippingCountry.Name;
 
             return View("/Views/Payment.cshtml", paymentViewModel);
@@ -60,8 +68,11 @@ namespace UCommerce.RazorStore.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-			return Redirect("/basket/preview");
-		}
+            var shop = payment.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            var preview = basket.FirstChild(x => x.DocumentTypeAlias.Equals("preview"));
+            return Redirect(preview.Url);
+        }
 
 	}
 }
