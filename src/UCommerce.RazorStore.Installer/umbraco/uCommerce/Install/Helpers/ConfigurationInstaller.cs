@@ -128,6 +128,29 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 return;
 
             var emailType = EmailProfileInformation.FirstOrDefault(p => p.EmailType.Name == "OrderConfirmation");
+            if (emailType.EmailProfile.EmailContents.All(x => x.CultureCode != "en-US"))
+            {
+                
+                EmailContent newEmailContent = new EmailContent();
+                newEmailContent.EmailProfile = emailType.EmailProfile;
+                newEmailContent.CultureCode = "en-US";
+                newEmailContent.EmailType = emailType.EmailType;
+                newEmailContent.Subject = "Order Confirmation";
+
+                emailType.EmailProfile.EmailContents.Add(newEmailContent);
+            }
+            if (emailType.EmailProfile.EmailContents.All(x => x.CultureCode != "en-GB"))
+            {
+
+                EmailContent newEmailContent = new EmailContent();
+                newEmailContent.EmailProfile = emailType.EmailProfile;
+                newEmailContent.CultureCode = "en-GB";
+                newEmailContent.EmailType = emailType.EmailType;
+                newEmailContent.Subject = "Order Confirmation";
+
+                emailType.EmailProfile.EmailContents.Add(newEmailContent);
+            }
+
             foreach (var content in emailType.EmailProfile.EmailContents)
             {
                 content.ContentId = emailContent.Id.ToString();

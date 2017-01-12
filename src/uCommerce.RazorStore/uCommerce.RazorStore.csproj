@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F8F50DF5-68DC-4268-B132-F3730BE6E80F}</ProjectGuid>
-    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UCommerce.RazorStore</RootNamespace>
@@ -27,6 +27,9 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,14 +51,129 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="businesslogic">
-      <HintPath>..\..\lib\umbraco\businesslogic.dll</HintPath>
+    <Reference Include="AutoMapper, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="cms">
-      <HintPath>..\..\lib\umbraco\cms.dll</HintPath>
+    <Reference Include="AutoMapper.Net4, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="interfaces">
-      <HintPath>..\..\lib\umbraco\interfaces.dll</HintPath>
+    <Reference Include="businesslogic, Version=1.0.5948.18144, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\businesslogic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClientDependency.Core, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency.1.8.4\lib\net45\ClientDependency.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClientDependency.Core.Mvc, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency-Mvc5.1.8.0.0\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="cms, Version=1.0.5948.18144, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\cms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="controls, Version=1.0.5948.18145, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CookComputing.XmlRpcV2, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL">
+      <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Examine, Version=0.1.68.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Examine.0.1.68.0\lib\Examine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageProcessor, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.2.3.3.0\lib\net45\ImageProcessor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageProcessor.Web, Version=4.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.Web.4.5.3.0\lib\net45\ImageProcessor.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="interfaces, Version=1.0.5948.18141, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MarkdownSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdown.1.14.4\lib\net45\MarkdownSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=1.0.1559.20655, Culture=neutral">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MiniProfiler, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Semver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\semver.1.1.2\lib\net45\Semver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack, Version=3.7.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -72,12 +190,46 @@
       <HintPath>..\..\lib\ServiceStack\3.9.55\ServiceStack.3.9.55\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\SQLCE4Umbraco.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\System.Data.SqlServerCe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe.Entity, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\System.Data.SqlServerCe.Entity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -89,11 +241,27 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TidyNet, Version=1.0.0.0, Culture=neutral">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\TidyNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="UCommerce, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.dll</HintPath>
@@ -116,32 +284,112 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Web.Api.dll</HintPath>
     </Reference>
-    <Reference Include="umbraco">
-      <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
+    <Reference Include="umbraco, Version=1.0.5948.18146, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\umbraco.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.MacroEngines">
-      <HintPath>..\..\lib\umbraco\umbraco.MacroEngines.dll</HintPath>
+    <Reference Include="Umbraco.Core, Version=1.0.5948.18141, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\Umbraco.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="umbraco.DataLayer, Version=1.0.5948.18143, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\umbraco.DataLayer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="umbraco.editorControls, Version=1.0.5948.18148, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\umbraco.editorControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="umbraco.MacroEngines, Version=1.0.5948.18149, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\umbraco.MacroEngines.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="umbraco.providers, Version=1.0.5948.18146, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\umbraco.providers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Umbraco.Web.UI, Version=1.0.5948.18150, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\Umbraco.Web.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UmbracoExamine, Version=0.7.0.18144, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.4.3\lib\UmbracoExamine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UrlRewritingNet.UrlRewriter, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UrlRewritingNet.2.0.7\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\uCommerce\Extensions\FacetedQueryStringExtensions.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\BreadcrumbsController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ConfirmationController.cs" />
+    <Compile Include="Controllers\FacetsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomepageCatalogController.cs" />
+    <Compile Include="Controllers\MiniBasketController.cs" />
+    <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PreviewController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\ShippingController.cs" />
+    <Compile Include="Controllers\uCommerceEmailController.cs" />
+    <Compile Include="Controllers\VoucherController.cs" />
+    <Compile Include="Models\AddressDetailsViewModel.cs" />
+    <Compile Include="Models\AddressViewModel.cs" />
+    <Compile Include="Models\AddToBasketViewModel.cs" />
+    <Compile Include="Models\BreadcrumbsViewModel.cs" />
+    <Compile Include="Models\CategoryNavigationViewModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\FacetsDisplayedViewModel.cs" />
+    <Compile Include="Models\FacetValueViewModel.cs" />
+    <Compile Include="Models\FacetViewModel.cs" />
+    <Compile Include="Models\MiniBasketViewModel.cs" />
+    <Compile Include="Models\OrderlineViewModel.cs" />
+    <Compile Include="Models\PaymentViewModel.cs" />
+    <Compile Include="Models\ProductsViewModel.cs" />
+    <Compile Include="Models\ProductPropertiesViewModel.cs" />
+    <Compile Include="Models\ProductReviewViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ShippingViewModel.cs" />
     <Compile Include="Pipelines\Checkout\CreateMemberForCustomerTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssemblyTag.cs" />
+    <Compile Include="Services\Commands\GetProductInformation.cs" />
     <Compile Include="Services\Commands\Search.cs" />
     <Compile Include="Services\Commands\GetVariantSkuFromSelection.cs" />
     <Compile Include="Services\Commands\GetProductVariations.cs" />
     <Compile Include="Services\Commands\UpdateLineItem.cs" />
     <Compile Include="Services\Model\Basket.cs" />
     <Compile Include="Services\Commands\GetBasket.cs" />
+    <Compile Include="Services\Model\CurrencyViewModel.cs" />
+    <Compile Include="Services\Model\PriceCalculationViewModel.cs" />
+    <Compile Include="Services\Model\ProductInformation.cs" />
     <Compile Include="Services\Model\ProductVariation.cs" />
     <Compile Include="Services\Model\ProductProperty.cs" />
     <Compile Include="Services\Model\LineItem.cs" />
     <Compile Include="Services\Commands\AddToBasket.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="css\glyphicons-28-search.png" />
+    <Content Include="css\sass.css" />
+    <Content Include="css\Site.css" />
+    <Content Include="css\tether.css" />
+    <Content Include="css\tether.min.css" />
     <Content Include="css\uCommerce.bootstrap-responsive.css" />
     <Content Include="css\uCommerce.demostore.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\loader.gif" />
+    <Content Include="img\loading-spin.svg" />
     <Content Include="img\uCommerce\cards.png" />
     <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
     <Content Include="img\uCommerce\homepage-banner-blue-kittens.jpg" />
@@ -149,7 +397,111 @@
     <Content Include="img\uCommerce\logo.png" />
     <Content Include="img\uCommerce\return.png" />
     <Content Include="img\uCommerce\ucommerce.png" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="css\bootstrap.min.css.map" />
+    <Content Include="css\bootstrap\bootstrap-flex.scss" />
+    <Content Include="css\bootstrap\bootstrap-grid.scss" />
+    <Content Include="css\bootstrap\bootstrap-reboot.scss" />
+    <Content Include="css\bootstrap\bootstrap.scss" />
+    <Content Include="css\bootstrap\mixins\_alert.scss" />
+    <Content Include="css\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="css\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="css\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="css\bootstrap\mixins\_buttons.scss" />
+    <Content Include="css\bootstrap\mixins\_cards.scss" />
+    <Content Include="css\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="css\bootstrap\mixins\_forms.scss" />
+    <Content Include="css\bootstrap\mixins\_gradients.scss" />
+    <Content Include="css\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="css\bootstrap\mixins\_grid.scss" />
+    <Content Include="css\bootstrap\mixins\_hover.scss" />
+    <Content Include="css\bootstrap\mixins\_image.scss" />
+    <Content Include="css\bootstrap\mixins\_list-group.scss" />
+    <Content Include="css\bootstrap\mixins\_lists.scss" />
+    <Content Include="css\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="css\bootstrap\mixins\_navbar-align.scss" />
+    <Content Include="css\bootstrap\mixins\_pagination.scss" />
+    <Content Include="css\bootstrap\mixins\_progress.scss" />
+    <Content Include="css\bootstrap\mixins\_pulls.scss" />
+    <Content Include="css\bootstrap\mixins\_reset-filter.scss" />
+    <Content Include="css\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="css\bootstrap\mixins\_resize.scss" />
+    <Content Include="css\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="css\bootstrap\mixins\_size.scss" />
+    <Content Include="css\bootstrap\mixins\_tab-focus.scss" />
+    <Content Include="css\bootstrap\mixins\_table-row.scss" />
+    <Content Include="css\bootstrap\mixins\_tag.scss" />
+    <Content Include="css\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="css\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="css\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="css\bootstrap\utilities\_background.scss" />
+    <Content Include="css\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="css\bootstrap\utilities\_display.scss" />
+    <Content Include="css\bootstrap\utilities\_flex.scss" />
+    <Content Include="css\bootstrap\utilities\_pulls.scss" />
+    <Content Include="css\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="css\bootstrap\utilities\_spacing.scss" />
+    <Content Include="css\bootstrap\utilities\_text.scss" />
+    <Content Include="css\bootstrap\utilities\_visibility.scss" />
+    <Content Include="css\bootstrap\_alert.scss" />
+    <Content Include="css\bootstrap\_animation.scss" />
+    <Content Include="css\bootstrap\_breadcrumb.scss" />
+    <Content Include="css\bootstrap\_button-group.scss" />
+    <Content Include="css\bootstrap\_buttons.scss" />
+    <Content Include="css\bootstrap\_card.scss" />
+    <Content Include="css\bootstrap\_carousel.scss" />
+    <Content Include="css\bootstrap\_close.scss" />
+    <Content Include="css\bootstrap\_code.scss" />
+    <Content Include="css\bootstrap\_custom-forms.scss" />
+    <Content Include="css\bootstrap\_custom.scss" />
+    <Content Include="css\bootstrap\_dropdown.scss" />
+    <Content Include="css\bootstrap\_forms.scss" />
+    <Content Include="css\bootstrap\_grid.scss" />
+    <Content Include="css\bootstrap\_images.scss" />
+    <Content Include="css\bootstrap\_input-group.scss" />
+    <Content Include="css\bootstrap\_jumbotron.scss" />
+    <Content Include="css\bootstrap\_list-group.scss" />
+    <Content Include="css\bootstrap\_media.scss" />
+    <Content Include="css\bootstrap\_mixins.scss" />
+    <Content Include="css\bootstrap\_modal.scss" />
+    <Content Include="css\bootstrap\_nav.scss" />
+    <Content Include="css\bootstrap\_navbar.scss" />
+    <Content Include="css\bootstrap\_normalize.scss" />
+    <Content Include="css\bootstrap\_pagination.scss" />
+    <Content Include="css\bootstrap\_popover.scss" />
+    <Content Include="css\bootstrap\_print.scss" />
+    <Content Include="css\bootstrap\_progress.scss" />
+    <Content Include="css\bootstrap\_reboot.scss" />
+    <Content Include="css\bootstrap\_responsive-embed.scss" />
+    <Content Include="css\bootstrap\_tables.scss" />
+    <Content Include="css\bootstrap\_tags.scss" />
+    <Content Include="css\bootstrap\_tooltip.scss" />
+    <Content Include="css\bootstrap\_type.scss" />
+    <Content Include="css\bootstrap\_utilities.scss" />
+    <Content Include="css\bootstrap\_variables.scss" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <None Include="scripts\jquery-3.0.0.intellisense.js" />
+    <Content Include="scripts\jquery-3.0.0.js" />
+    <Content Include="scripts\jquery-3.0.0.min.js" />
+    <Content Include="scripts\jquery-3.0.0.slim.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="scripts\tether.js" />
+    <Content Include="scripts\tether.min.js" />
     <Content Include="scripts\uCommerce.bootstrap.js" />
+    <Content Include="scripts\uCommerce.category.js" />
     <Content Include="scripts\uCommerce.demostore.checkout.js" />
     <Content Include="scripts\uCommerce.demostore.cart.js" />
     <Content Include="scripts\uCommerce.demostore.js" />
@@ -157,57 +509,11 @@
     <Content Include="scripts\uCommerce.ServiceStack.js" />
     <Content Include="scripts\uCommerce.jQuery.js" />
     <Content Include="scripts\uCommerce.demostore.productpage.js" />
-    <Content Include="masterpages\RazorStoreContent.master" />
-    <Content Include="macroScripts\uCommerce\LeftNavigation.cshtml" />
-    <Content Include="masterpages\RazorStoreFrontPage.master" />
-    <Content Include="masterpages\RazorStoreProduct.master" />
-    <Content Include="macroScripts\uCommerce\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\uCommerce.bootstrap.css" />
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings-white.png" />
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Breadcrumb.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Catalog.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreCatalog.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Cart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreCart.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreAddress.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Address.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Shipping.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Preview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Confirmation.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreConfirmation.master" />
-    <Content Include="masterpages\RazorStorePreview.master" />
-    <Content Include="masterpages\RazorStoreShipping.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Payment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStorePayment.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\images\umbraco\ucommerce-address.png" />
@@ -225,53 +531,50 @@
     <Content Include="umbraco\images\umbraco\ucommerce-shipping.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\uCommerce\MiniBasket.cshtml" />
+    <None Include=".bin\node.cmd" />
+    <Content Include="css\sass.scss" />
+    <Content Include="web.config" />
+    <Content Include="Views\Layout.cshtml" />
+    <Content Include="Views\frontpage.cshtml" />
+    <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
+    <Content Include="Views\PartialView\MiniBasket.cshtml" />
+    <Content Include="Views\PartialView\Facets.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\Catalog.cshtml" />
+    <Content Include="Views\BillingShippingAddress.cshtml" />
+    <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
+    <Content Include="Views\PartialView\Voucher.cshtml" />
+    <Content Include="Views\Basket.cshtml" />
+    <Content Include="Views\Shipping.cshtml" />
+    <Content Include="Views\Payment.cshtml" />
+    <Content Include="Views\Preview.cshtml" />
+    <Content Include="Views\Confirmation.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
+    <Content Include="Views\Search.cshtml" />
+    <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerce Homepage Catalog.cshtml" />
+    <Content Include="Views\Product.cshtml" />
+    <Content Include="Views\PartialView\ProductReview.cshtml" />
+    <Content Include="Views\MacroPartials\uCommerceProductReviews.cshtml" />
+    <Content Include="Views\uCommerceEmail.cshtml" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="masterpages\RazorStore.master" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="macroScripts\uCommerce\HomepageBanners.cshtml" />
+    <Folder Include="Views\uCommerceEmail\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\HomepageCatalog.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\ProductReview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\Product.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\Category.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Functions\Basket.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Helpers\Review.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Code\uCommerce\Functions\Product.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Actions.Cart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Search.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreSearch.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreCheckout.master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="macroScripts\uCommerce\Facets.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="masterpages\RazorStoreEmail.master" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -308,7 +611,15 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\DemoStoreDeploy.cmd"
-"$(SolutionDir)..\tools\deploy\Deploy.cmd"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\Umbraco754\Website"</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Gulp.js.1.0.2\build\gulp.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Gulp.js.1.0.2\build\gulp.js.targets'))" />
+    <Error Condition="!Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Npm.js.2.13.1.0\build\npm.js.targets'))" />
+  </Target>
+  <Import Project="..\packages\Gulp.js.1.0.2\build\gulp.js.targets" Condition="Exists('..\packages\Gulp.js.1.0.2\build\gulp.js.targets')" />
+  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
 </Project>

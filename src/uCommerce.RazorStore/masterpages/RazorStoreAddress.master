@@ -1,7 +1,0 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStoreContent.master" AutoEventWireup="true" %>
-<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="cphMain">
-    <umbraco:Macro ID="Macro1" runat="server" Alias="ucAddressEdit"/>
-</asp:content>
-<asp:Content runat="server" ContentPlaceHolderID="cphScripts">
-    <script src="/scripts/ucommerce.demostore.checkout.js"></script>
-</asp:Content>

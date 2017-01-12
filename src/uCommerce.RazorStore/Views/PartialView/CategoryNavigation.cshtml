@@ -1,0 +1,27 @@
+﻿@using UCommerce.RazorStore.Models
+@model CategoryNavigationViewModel 
+
+@{
+    Layout = null;
+}
+
+@helper DisplayCategories(IList<CategoryViewModel> categories)
+{
+    <ul>
+        @foreach (var category in categories)
+        {
+            <li>
+                <a href="@category.Url">
+                    <span>@category.Name</span>
+                </a>
+                @DisplayCategories(category.Categories)
+            </li>
+        }
+    </ul>
+}
+
+@DisplayCategories(Model.Categories)
+
+
+
+

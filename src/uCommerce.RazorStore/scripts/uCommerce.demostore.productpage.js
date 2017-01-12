@@ -1,10 +1,13 @@
 ﻿var _itemAddedAlert = null;
+
 $(function () {
 	relateVariations($('#product-sku'), $('#variation-collarsize'), $('#variation-colour'), $('#add-to-basket'));
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
 	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
+
 });
+
 function relateVariations(sku, size, colour) {
 	updateVariationOptions(sku, size, colour, true);
 	size.change(function () {
@@ -26,6 +29,36 @@ function enableAddToCartWhenSelected(addToCartButton, variantInputs) {
 		updateAddToCartButton(addToCartButton, variantInputs);
 	});
 };
+
+function wireupRatings(radios) {
+    $('#review-form').addClass("display-none");
+    $('label', radios).each(function () {
+        var t = $(this);
+        t.addClass('off');
+        $('input:radio', t).addClass("display-none");
+        setStarHoverOutState($('i', t));
+        t.hover(function () {
+            var parent = $(this);
+            var labels = parent.prevAll('label');
+            setStarHoverState($('i', labels));
+            setStarHoverState($('i', parent));
+        }, function () {
+            var parent = $(this);
+            var labels = parent.prevAll('label');
+            if (!parent.hasClass('selected')) {
+                setStarHoverOutState($('i', labels));
+                setStarHoverOutState($('i', parent));
+            }
+        });
+        t.click(function () {
+            var parent = $(this);
+            parent.addClass('selected');
+            $('#review-form').slideDown();
+        });
+    });
+};
+
+
 function updateAddToCartButton(addToCartButton, variantInputs) {
 	if (variantInputs.length == 0)
 		return;
@@ -39,38 +72,12 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 		addToCartButton.removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
 	}
 };
-function wireupRatings(radios) {
-	$('#review-form').hide();
-	$('label', radios).each(function () {
-		var t = $(this);
-		t.addClass('off');
-		$('input:radio', t).hide();
-		setStarHoverOutState($('i', t));
-		t.hover(function () {
-			var parent = $(this);
-			var labels = parent.prevAll('label');
-			setStarHoverState($('i', labels));
-			setStarHoverState($('i', parent));
-		}, function () {
-			var parent = $(this);
-			var labels = parent.prevAll('label');
-			if (!parent.hasClass('selected')) {
-				setStarHoverOutState($('i', labels));
-				setStarHoverOutState($('i', parent));
-			}
-		});
-		t.click(function () {
-			var parent = $(this);
-			parent.addClass('selected');
-			$('#review-form').slideDown();
-		});
-	});
-};
+
 function setStarHoverState(label) {
-	label.addClass('icon-star').removeClass('icon-star-empty');
+	label.addClass('fa-star').removeClass('fa-star-o');
 }
 function setStarHoverOutState(label) {
-	label.addClass('icon-star-empty').removeClass('icon-star');
+	label.addClass('fa-star-o').removeClass('fa-star');
 }
 function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, variantInputs, quantityInput) {
 	addToCartButton.click(function (e) {
@@ -91,6 +98,7 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
             },
             function (data) {
             	var variant = data.Variant;
+                if(variant != null){
             	$.uCommerce.addToBasket(
                     {
                         catalogId: catalogIdInput.val(),
@@ -107,12 +115,12 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     		// Add an alert box so the customer knows they've added an item to the cart
                     		alert = $('<div />', {
                     			"class": "alert alert-success item-added",
-                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/cart.aspx">Click here to view your cart</a>.</p>'
+                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>'
                     		}).hide();
                     		parent.append(alert);
                     		alert.slideDown();
                     	} else {
-                    		alert.effect("highlight", { color: '#FCF8E3' }, 500);
+                    		//alert.effect("highlight", { color: '#FCF8E3' }, 500);
                     	}
 
                     	// Incase there's already a timeout in place, clear it
@@ -126,6 +134,7 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     	}, 5000);
                     }
                 );
+                }
             });
 		return false;
 	});
@@ -159,7 +168,7 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
             	// If there is only a single item in the list then select it
             	var availableOptions = $('option', colour).not('option[value=""]').not(':disabled');
 
-            	if (selectedSize != '' && availableOptions.size() == 1 && userAction) {
+            	if (selectedSize != '' && availableOptions.length == 1 && userAction) {
             		colour.val(availableOptions.val());
             		//Fire these events manually to prevent a loop
             		updateVariationOptions(sku, size, colour, false);

@@ -1912,9 +1912,9 @@
         .on('keypress', $.proxy(this.keypress, this))
         .on('keyup',    $.proxy(this.keyup, this))
 
-      if ($.browser.chrome || $.browser.webkit || $.browser.msie) {
-        this.$element.on('keydown', $.proxy(this.keydown, this))
-      }
+      //if ($.browser.chrome || $.browser.webkit || $.browser.msie) {
+      //  this.$element.on('keydown', $.proxy(this.keydown, this))
+      //}
 
       this.$menu
         .on('click', $.proxy(this.click, this))
@@ -2016,7 +2016,7 @@
     source: []
   , items: 8
   , menu: '<ul class="typeahead dropdown-menu"></ul>'
-  , item: '<li><a href="#"></a></li>'
+  , item: '<li class="dropdown-item"><a href="#"></a></li>'
   , minLength: 1
   }
 
@@ -2035,4 +2035,10 @@
     })
   })
 
+    //HTMLTableSectionElement for Bootstrap4
+   $('ul.nav.nav-tabs li a')
+        .click(function(e) {
+            $('ul.nav.nav-tabs').find('*').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
 }(window.jQuery);

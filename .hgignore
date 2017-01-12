@@ -30,3 +30,9 @@ _ReSharper*
 ._*
 *_ToPackage*
 *nrcunch*
+node_modules
+src/packages/*
+src/uCommerce.RazorStore/App_Data/NuGetBackup/20160809-171625/CopyLogs/UmbracoBinBackup.log
+packages
+src/.vs/config/applicationhost.config
+src/uCommerce.RazorStore/npm-debug.log

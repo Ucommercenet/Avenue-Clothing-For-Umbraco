@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Layout.cshtml";
+}
+
+<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+        <div class="item active carousel-item">
+            <img src="/img/ucommerce/homepage-banner-black-wonderland.jpg" />
+        </div>
+        <div class="item carousel-item">
+            <img src="/img/ucommerce/homepage-banner-blue-kittens.jpg" />
+        </div>
+        <div class="item carousel-item">
+            <img src="/img/ucommerce/homepage-banner-purple-wonderland.jpg" />
+        </div>
+    </div> <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="icon-prev" aria-hidden="true"></span></a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="icon-next" aria-hidden="true"></span></a>
+</div>
+<div class="hero-unit">
+    @Umbraco.Field("content")
+</div>
+@Umbraco.RenderMacro("uCommerceHomepageCatalog")

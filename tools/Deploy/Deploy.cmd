@@ -22,15 +22,14 @@ IF /I %lastChar%==\  set path2=%path2:~0,-1%
 echo %path1%
 echo %path2%
 
-robocopy "%path1%\App_Code" "%path2%\App_Code" /s
-robocopy "%path1%\macroScripts" "%path2%\macroScripts" /s
 robocopy "%path1%\css" "%path2%\css" /s
+robocopy "%path1%\fonts" "%path2%\fonts" /s
+robocopy "%path1%\scripts" "%path2%\scripts" /s
+robocopy "%path1%\Views" "%path2%\Views" /s
 robocopy "%path1%\img" "%path2%\img" /s
 robocopy "%path1%\js" "%path2%\js" /s
-robocopy "%path1%\masterpages" "%path2%\masterpages"
 robocopy "%path1%\bin" "%path2%\bin" uCommerce.RazorStore.dll
-robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
-robocopy "%path1%\umbraco\ucommerce\install" "%path2%\umbraco\ucommerce\install" DemoStoreInstaller.ascx
+REM robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
 
 GOTO :DONE
 

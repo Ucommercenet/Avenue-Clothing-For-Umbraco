@@ -1,0 +1,16 @@
+﻿$blue: #75A48B;
+$red:#EC2F39;
+
+
+@mixin colourSquare($color) {
+  background-color: $color;
+}
+
+body {
+  @include colourSquare($red);
+}
+h2{
+    @include colourSquare($blue);
+    font:600;
+}
+

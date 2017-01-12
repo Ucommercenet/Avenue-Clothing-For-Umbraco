@@ -1,9 +1,0 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/RazorStore.master" AutoEventWireup="true" %>
-<asp:Content runat="server" ContentPlaceHolderID="cphMain">
-    <umbraco:macro runat="server" alias="ucHomepageBanners" />
-    <div class="hero-unit">
-        <umbraco:Item field="content" runat="server" />
-    </div>
-    <umbraco:macro runat="server" alias="ucHomepageCatalog" />
-    <!--/row-->
-</asp:Content>

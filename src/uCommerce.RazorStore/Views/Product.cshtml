@@ -1,0 +1,127 @@
+﻿@using System.Web.UI
+@using UCommerce.Runtime
+@using UCommerce.EntitiesV2
+@using UCommerce.Extensions
+@using UCommerce.Api
+@using System.Linq
+@using System.Web
+@using ClientDependency.Core.Mvc
+@using UCommerce.Search.Indexers.ProductIndexers
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductPageViewModel>
+
+@{
+    Layout = "Layout.cshtml";
+    Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
+}
+
+@if (Model.ItemAlreadyExists)
+{
+    <div class="row-fluid">
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/basket.aspx">View Your Cart</a></p>
+        </div>
+    </div>
+}
+
+<div id="product-details" class="row" itemscope itemtype="http://schema.org/Product">
+    <div class="col-md-5">
+        @if (!string.IsNullOrEmpty(Model.ProductViewModel.ThumbnailImageUrl))
+            {
+            <img src="@Model.ProductViewModel.ThumbnailImageUrl" />
+        }
+    </div>
+
+
+
+    <section class="col-md-7">
+        <header class="col-md-12 page-header">
+            <h2 itemprop="name"><b>@Model.ProductViewModel.Name</b></h2>
+        </header>
+
+        @if (Model.ProductViewModel.IsOrderingAllowed)
+        {
+
+            <form method="post" action="@Url.Action("Index", "Product")">
+                <div class="col-md-12 well">
+                    <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        <p class="item-price" itemprop="price">@Model.ProductViewModel.PriceCalculation.YourPrice.Amount</p>
+                        <p class="item-tax">
+                            <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
+                        </p>
+                    </aside>
+
+                    @if (Model.ProductViewModel.Properties.Count > 0)
+                    {
+                        <div class="col-md-7">
+
+                            @foreach (var prop in Model.ProductViewModel.Properties)
+                            {
+                                var controlName = string.Format("variation-{0}", prop.PropertyName.ToLower());
+                                <label for="@controlName">@prop.PropertyName</label>
+                                <select name="@controlName" id="@controlName" class="variant margin-bottom form-control">
+                                    <option value="">-- Please Select --</option>
+                                    @foreach (var value in prop.Values)
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                            }
+
+                        </div>
+                    }
+
+                    <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
+                    <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+
+                    @if (Model.AddedToBasket)
+                    {
+                        <div class="alert alert-success item-added">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <p>
+                                Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.
+                            </p>
+                        </div>
+                    }
+                </div>
+
+            </form>
+
+        }
+        else
+        {
+            <p>Sorry, the item you are looking for is not currently available.</p>
+        }
+
+
+        <section class="tabbable">
+           <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a href="#product-description" class="nav-link active" data-toggle="tab" role="tab">Details</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#delivery-info" class="nav-link" data-toggle="tab" role="tab">Delivery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#returns-info" class="nav-link" data-toggle="tab" role="tab">Returns</a>
+                </li>
+                <li class="nav-item"><a href="#customer-reviews" class="nav-link" data-toggle="tab" role="tab">Reviews</a></li>
+            </ul>
+
+            <div class="tab-content margin-top">
+                <div itemprop="description" id="product-description" class="tab-pane active" role="tabpanel">
+                    @Html.Raw(Model.ProductViewModel.LongDescription)
+                </div>
+                <div id="delivery-info" class="tab-pane" role="tabpanel">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="returns-info" class="tab-pane" role="tabpanel">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
+                </div>
+                <div id="customer-reviews" class="tab-pane" role="tabpanel">
+                    @Umbraco.RenderMacro("uCommerceProductReviews")
+                </div>
+            </div>
+          </section>
+    </section>
+</div>
