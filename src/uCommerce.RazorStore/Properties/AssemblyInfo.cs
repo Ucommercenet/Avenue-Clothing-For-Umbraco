@@ -7,9 +7,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("uCommerce.RazorStore")]
 [assembly: AssemblyDescription("Assembly containing the functionality for the uCommerce Demo Razor Store")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Site Doctor Ltd")]
+[assembly: AssemblyCompany("uCommerce")]
 [assembly: AssemblyProduct("uCommerce.RazorStore")]
-[assembly: AssemblyCopyright("Copyright © uCommerce and The Site Doctor 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
