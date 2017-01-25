@@ -114,7 +114,9 @@
     <Content Include="XmlStubs\Macros.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="XmlStubs\DocumentTypes.xml" />
+    <Content Include="XmlStubs\DocumentTypes.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XmlStubs\Documents.xml" />
     <Content Include="XmlStubs\Info.xml">
       <SubType>Designer</SubType>

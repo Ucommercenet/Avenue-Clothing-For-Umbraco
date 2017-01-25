@@ -12,7 +12,7 @@ namespace UCommerce.RazorStore.Controllers
     public class BillingController : RenderMvcController
     {
         [HttpGet]
-        public ActionResult Index(RenderModel model)
+        public override ActionResult Index(RenderModel model)
         {
             var addressDetails = new AddressDetailsViewModel();
 
@@ -71,8 +71,9 @@ namespace UCommerce.RazorStore.Controllers
 
             var shop = addressDetails.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
             var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            var shipping = basket.FirstChild(x => x.DocumentTypeAlias.Equals("shipping"));
-            return Redirect(shipping.Url);
+            //var shipping = basket.FirstChild(x => x.DocumentTypeAlias.Equals("shipping"));
+            //return Redirect(shipping.Url);
+            return Redirect(null);
         }
 
         private void EditShippingInformation(AddressViewModel shippingAddress)

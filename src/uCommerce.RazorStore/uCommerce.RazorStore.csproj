@@ -539,7 +539,9 @@
   <ItemGroup>
     <None Include=".bin\node.cmd" />
     <Content Include="css\sass.scss" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\frontpage.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
@@ -619,7 +621,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\Umbraco754\Website"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir) C:\Programming\Sites\UmbracoAcc"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

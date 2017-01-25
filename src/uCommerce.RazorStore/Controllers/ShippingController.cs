@@ -13,7 +13,7 @@ namespace UCommerce.RazorStore.Controllers
 	public class ShippingController : RenderMvcController
     {
         [HttpGet]
-        public ActionResult Index(RenderModel model)
+        public override ActionResult Index(RenderModel model)
 		{
 			var shipping = new ShippingViewModel();
 			shipping.AvailableShippingMethods = new List<SelectListItem>();
@@ -53,8 +53,9 @@ namespace UCommerce.RazorStore.Controllers
 
             var shop = shipping.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
             var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            var payment = basket.FirstChild(x => x.DocumentTypeAlias.Equals("payment"));
-            return Redirect(payment.Url);
+            //var payment = basket.FirstChild(x => x.DocumentTypeAlias.Equals("payment"));
+            //return Redirect(payment.Url);
+            return Redirect(null);
         }
 	}
 }

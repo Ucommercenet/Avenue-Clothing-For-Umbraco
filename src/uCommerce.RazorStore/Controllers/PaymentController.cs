@@ -70,9 +70,10 @@ namespace UCommerce.RazorStore.Controllers
 
             var shop = payment.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
             var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            var preview = basket.FirstChild(x => x.DocumentTypeAlias.Equals("preview"));
-            return Redirect(preview.Url);
+            //var preview = basket.FirstChild(x => x.DocumentTypeAlias.Equals("preview"));
+            //return Redirect(preview.Url);   
+            return Redirect(null);
         }
 
-	}
+    }
 }

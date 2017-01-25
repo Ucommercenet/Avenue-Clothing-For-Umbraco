@@ -95,8 +95,10 @@ namespace UCommerce.RazorStore.Controllers
             var current = UmbracoContext.PublishedContentRequest.PublishedContent;
             var shop = current.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
             var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            var confirmation = basket.FirstChild(x => x.DocumentTypeAlias.Equals("confirmation"));
-            return Redirect(confirmation.Url);
+            //var confirmation = basket.FirstChild(x => x.DocumentTypeAlias.Equals("confirmation"));
+            //return Redirect(confirmation.Url);
+            return Redirect(null);
+
         }
-	}
+    }
 }
