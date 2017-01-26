@@ -67,9 +67,7 @@ namespace UCommerce.RazorStore.Controllers
 				overwriteExisting: true);
 
 			TransactionLibrary.ExecuteBasketPipeline();
-
-
-
+            
             var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
             var preview = root.Descendants("preview").FirstOrDefault();
             return Redirect(preview.Url);

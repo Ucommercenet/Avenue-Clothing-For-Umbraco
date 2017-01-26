@@ -95,7 +95,6 @@ namespace UCommerce.RazorStore.Controllers
             var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
             var confirmation = root.Descendants("confirmation").FirstOrDefault();
             return Redirect(confirmation.Url);
-
         }
     }
 }
