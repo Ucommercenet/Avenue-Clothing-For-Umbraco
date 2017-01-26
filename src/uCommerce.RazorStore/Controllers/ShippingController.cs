@@ -13,7 +13,7 @@ namespace UCommerce.RazorStore.Controllers
 	public class ShippingController : RenderMvcController
     {
         [HttpGet]
-        public ActionResult Index(RenderModel model)
+        public override ActionResult Index(RenderModel model)
 		{
 			var shipping = new ShippingViewModel();
 			shipping.AvailableShippingMethods = new List<SelectListItem>();
@@ -51,9 +51,8 @@ namespace UCommerce.RazorStore.Controllers
 			TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, overwriteExisting: true);
 			TransactionLibrary.ExecuteBasketPipeline();
 
-            var shop = shipping.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
-            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            var payment = basket.FirstChild(x => x.DocumentTypeAlias.Equals("payment"));
+            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+            var payment = root.Descendants("payment").FirstOrDefault();
             return Redirect(payment.Url);
         }
 	}

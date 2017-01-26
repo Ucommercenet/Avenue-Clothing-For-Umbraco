@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
@@ -12,7 +13,7 @@ namespace UCommerce.RazorStore.Controllers
     public class BillingController : RenderMvcController
     {
         [HttpGet]
-        public ActionResult Index(RenderModel model)
+        public override ActionResult Index(RenderModel model)
         {
             var addressDetails = new AddressDetailsViewModel();
 
@@ -69,9 +70,8 @@ namespace UCommerce.RazorStore.Controllers
            
             TransactionLibrary.ExecuteBasketPipeline();
 
-            var shop = addressDetails.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
-            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            var shipping = basket.FirstChild(x => x.DocumentTypeAlias.Equals("shipping"));
+            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+            var shipping = root.Descendants("shipping").FirstOrDefault();
             return Redirect(shipping.Url);
         }
 

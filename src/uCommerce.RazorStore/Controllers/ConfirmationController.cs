@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Net.Mail;
+using System.Web.Mvc;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
@@ -6,9 +8,9 @@ namespace UCommerce.RazorStore.Controllers
     public class ConfirmationController : RenderMvcController
     {
         // GET: Confirmation
-        public ActionResult Index()
+        public override ActionResult Index(RenderModel model)
         {
-            return View("/Views/Confirmation.cshtml");
+          return View("/Views/Confirmation.cshtml");
         }
     }
 }
