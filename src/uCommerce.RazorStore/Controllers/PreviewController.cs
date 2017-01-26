@@ -92,12 +92,9 @@ namespace UCommerce.RazorStore.Controllers
 		{
 			TransactionLibrary.RequestPayments();
 
-            var current = UmbracoContext.PublishedContentRequest.PublishedContent;
-            var shop = current.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
-            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            //var confirmation = basket.FirstChild(x => x.DocumentTypeAlias.Equals("confirmation"));
-            //return Redirect(confirmation.Url);
-            return Redirect(null);
+            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+            var confirmation = root.Descendants("confirmation").FirstOrDefault();
+            return Redirect(confirmation.Url);
 
         }
     }

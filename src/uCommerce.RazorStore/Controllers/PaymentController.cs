@@ -68,11 +68,11 @@ namespace UCommerce.RazorStore.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-            var shop = payment.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
-            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
-            //var preview = basket.FirstChild(x => x.DocumentTypeAlias.Equals("preview"));
-            //return Redirect(preview.Url);   
-            return Redirect(null);
+
+
+            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+            var preview = root.Descendants("preview").FirstOrDefault();
+            return Redirect(preview.Url);
         }
 
     }
