@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Actions>
+  <Action runat="install" alias="InstallDefaultAcceleratorData" />
 	<Action runat="install" alias="UpdateWebConfigAppSettings" targetConfig="~/web.config" />
 	<Action runat="install" alias="UpdateUrlRewritingConfig" targetConfig="~/config/UrlRewriting.config" sourceConfig="~/umbraco/ucommerce/install/uCommerce.DemoStore.UrlRewriting.config" />
 	<Action runat="install" alias="MergeConfigFiles" targetConfig="~/umbraco/ucommerce/configuration/custom.config" sourceConfig="~/umbraco/ucommerce/install/custom.config" />
+
+
 </Actions>

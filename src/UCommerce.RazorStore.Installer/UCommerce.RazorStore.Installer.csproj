@@ -151,6 +151,7 @@
     <Content Include="umbraco\uCommerce\Install\InstallDemoData.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PackageActions\InstallDefaultAcceleratorData.cs" />
     <Compile Include="PackageActions\UpdateWebConfigAppSettings.cs" />
     <Compile Include="PackageActions\MergeConfigFiles.cs" />
     <Compile Include="PackageActions\PackageActionsHelpers.cs" />

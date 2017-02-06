@@ -550,7 +550,9 @@
     <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Catalog.cshtml" />
     <Content Include="Views\BillingShippingAddress.cshtml" />
     <Content Include="Views\PartialView\Breadcrumbs.cshtml" />

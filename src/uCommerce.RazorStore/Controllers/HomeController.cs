@@ -10,5 +10,7 @@ namespace UCommerce.RazorStore.Controllers
 		{
 			return View("/views/frontpage.cshtml");
 		}
+
+
 	}
 }

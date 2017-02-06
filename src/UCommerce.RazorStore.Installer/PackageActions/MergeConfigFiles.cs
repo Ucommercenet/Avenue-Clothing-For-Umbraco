@@ -1,4 +1,8 @@
-﻿namespace UCommerce.RazorStore.Installer.PackageActions
+﻿using System.Linq;
+using UCommerce.EntitiesV2;
+using UCommerce.RazorStore.Installer.Helpers;
+
+namespace UCommerce.RazorStore.Installer.PackageActions
 {
     using System;
     using System.Xml;
