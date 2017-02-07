@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
     <package>
-        <name>Avenue Clothing Demo Store for uCommerce 7 - Accelerator 5.0.2.17012</name>
-        <version>5.0.2.17012</version>
+        <name>Avenue Clothing Demo Store for uCommerce 7 - Accelerator 5.0.3.17038</name>
+        <version>5.0.3.17038</version>
         <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
         <url>http://www.ucommerce.net</url>
         <requirements>
@@ -16,8 +16,8 @@
         <website>http://ucommerce.net</website>
     </author>
     <readme>
-        <![CDATA[Thank you for installing the uCommerce demo store. By default this package will install an example store structure and Razor templates. 
+        <![CDATA[Thank you for installing the uCommerce accelerator. By default this package will install an example store structure, Razor templates, settings, categories and products. 
 
-At the end of the installer you will be given the opportunity to install the example settings, categories and products.]]>
+]]>
     </readme>
 </info>
