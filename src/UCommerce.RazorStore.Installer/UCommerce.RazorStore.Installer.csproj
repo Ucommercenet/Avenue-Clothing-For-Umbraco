@@ -122,7 +122,6 @@
     <Content Include="XmlStubs\Info.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Accessories.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Tops.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Category\Formal.jpg" />
@@ -149,7 +148,6 @@
     <Content Include="umbraco\uCommerce\Install\Files\Product\LBAS.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Product\LBAT.jpg" />
     <Content Include="umbraco\uCommerce\Install\Files\Product\PMMSFSS-LE.jpg" />
-    <Content Include="umbraco\uCommerce\Install\InstallDemoData.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PackageActions\InstallDefaultAcceleratorData.cs" />
@@ -160,19 +158,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />
-    <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.cs">
-      <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="umbraco\uCommerce\Install\DemoStoreInstaller.ascx.designer.cs">
-      <DependentUpon>DemoStoreInstaller.ascx</DependentUpon>
-    </Compile>
     <Compile Include="umbraco\uCommerce\Install\Helpers\GenericHelpers.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Node.cs" />
-    <Compile Include="umbraco\uCommerce\Install\InstallDemoData.aspx.cs">
-      <DependentUpon>InstallDemoData.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="umbraco\uCommerce\Install\Helpers\Media.cs" />
   </ItemGroup>
   <ItemGroup>
