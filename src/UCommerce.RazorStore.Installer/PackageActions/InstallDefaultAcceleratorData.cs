@@ -6,7 +6,6 @@ using umbraco.cms.businesslogic.web;
 using umbraco.interfaces;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Installer.Helpers;
-using Umbraco.Core;
 using helper = umbraco.cms.businesslogic.packager.standardPackageActions.helper;
 
 namespace UCommerce.RazorStore.Installer.PackageActions
@@ -16,65 +15,81 @@ namespace UCommerce.RazorStore.Installer.PackageActions
     {
         public bool Execute(string packageName, XmlNode xmlData)
         {
-            //
             var installer = new ConfigurationInstaller();
             installer.Configure();
+
             // Install Demo store Catalog
             var installer2 = new CatalogueInstaller("avenue-clothing.com", "Demo Store");
             installer2.Configure();
 
-            var server = HttpContext.Current.Server;
-            var mediaService = new MediaService(server.MapPath(umbraco.IO.SystemDirectories.Media),
-                server.MapPath("~/umbraco/ucommerce/install/files/"));
+            CreateMediaContent();
 
-            var categories = Category.All().ToList();
-            var products = Product.All().ToList();
+	        DeleteOldUCommerceData();
 
-            mediaService.InstallCategoryImages(categories);
-            mediaService.InstallProductImages(products);
-            var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerce.dk");
-            if (group != null)
-            {
-                // Delete products in group
-                foreach (
-                    var relation in
-                    CategoryProductRelation.All()
-                        .Where(x => group.ProductCatalogs.Contains(x.Category.ProductCatalog))
-                        .ToList())
-                {
-                    var category = relation.Category;
-                    var product = relation.Product;
-                    category.RemoveProduct(product);
-                    product.Delete();
-                }
+	        PublishContent();
 
-                // Delete catalogs
-                foreach (var catalog in group.ProductCatalogs)
-                {
-                    catalog.Deleted = true;
-                }
-
-                // Delete group itself
-                group.Deleted = true;
-
-                group.Save();
-            }
-            var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "home");
-            if (docType != null)
-            {
-                var root = Document.GetDocumentsOfDocumentType(docType.Id);
-                foreach (var document in root)
-                {
-                    Node.PublishChildDocs(document);
-                }
-                library.RefreshContent();
-            }
-
-            return true;
+	        return true;
         }
 
+	    private void CreateMediaContent()
+	    {
+		    var server = HttpContext.Current.Server;
+		    var mediaService = new MediaService(server.MapPath(umbraco.IO.SystemDirectories.Media),
+			    server.MapPath("~/umbraco/ucommerce/install/files/"));
 
-        public string Alias()
+		    var categories = Category.All().ToList();
+		    var products = Product.All().ToList();
+
+		    mediaService.InstallCategoryImages(categories);
+		    mediaService.InstallProductImages(products);
+	    }
+
+	    private void PublishContent()
+	    {
+		    var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "home");
+		    if (docType != null)
+		    {
+			    var root = Document.GetDocumentsOfDocumentType(docType.Id);
+			    foreach (var document in root)
+			    {
+				    Node.PublishChildDocs(document);
+			    }
+			    library.RefreshContent();
+		    }
+	    }
+
+	    private void DeleteOldUCommerceData()
+	    {
+		    var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerce.dk");
+		    if (group != null)
+		    {
+			    // Delete products in group
+			    foreach (
+				    var relation in
+					    CategoryProductRelation.All()
+						    .Where(x => group.ProductCatalogs.Contains(x.Category.ProductCatalog))
+						    .ToList())
+			    {
+				    var category = relation.Category;
+				    var product = relation.Product;
+				    category.RemoveProduct(product);
+				    product.Delete();
+			    }
+
+			    // Delete catalogs
+			    foreach (var catalog in group.ProductCatalogs)
+			    {
+				    catalog.Deleted = true;
+			    }
+
+			    // Delete group itself
+			    group.Deleted = true;
+			    group.Save();
+		    }
+	    }
+
+
+	    public string Alias()
         {
             return "InstallDefaultAcceleratorData";
         }

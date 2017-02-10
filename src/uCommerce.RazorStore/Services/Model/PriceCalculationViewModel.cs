@@ -33,8 +33,8 @@ namespace UCommerce.RazorStore.Services.Model
         public MoneyViewModel(decimal value, CurrencyViewModel currency) {}
         public MoneyViewModel(decimal value, CultureInfo cultureInfo, CurrencyViewModel currency) {}
 
-        public CultureInfo Culture { get; }
-        public CurrencyViewModel Currency { get; }
+        public CultureInfo Culture { get; set; }
+        public CurrencyViewModel Currency { get; set; }
         public decimal Value { get; set; }
         public string DisplayValue { get; set; }
 
