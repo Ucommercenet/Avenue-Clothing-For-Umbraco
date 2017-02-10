@@ -28,7 +28,7 @@ robocopy src\UCommerce.RazorStore.Installer\bin package\_ToPackage\files\bin UCo
 robocopy src\UCommerce.RazorStore.Installer\XmlStubs package\_ToPackage *.xml /FFT /Z /XA:H /W:5
 
 rem Package the various files
-tools\deploy\PackageGen.exe -name="package\uCommerce_Demo_Store_-_Razor_5.0.3.17038.zip" -guid="61fc5d84-9cc2-4d36-93a8-bfe0d076b219" -path="package\_ToPackage" -control="/umbraco/ucommerce/install/DemoStoreInstaller.ascx"
+tools\deploy\PackageGen.exe -name="package\uCommerce_Demo_Store_-_Razor_5.0.3.17038.zip" -guid="61fc5d84-9cc2-4d36-93a8-bfe0d076b219" -path="package\_ToPackage"
 
 GOTO :DONE
 
