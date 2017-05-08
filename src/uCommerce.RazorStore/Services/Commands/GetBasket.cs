@@ -1,4 +1,7 @@
-﻿namespace UCommerce.RazorStore.Services.Commands
+﻿using Umbraco.Core;
+using Umbraco.Web;
+
+namespace UCommerce.RazorStore.Services.Commands
 {
     using System.Collections.Generic;
 
@@ -99,8 +102,9 @@
             if (String.IsNullOrWhiteSpace(mediaId))
                 return String.Empty;
 
-            dynamic mediaItem = new DynamicMedia(mediaId);
-            return mediaItem.umbracoFile;
+            var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
+            var image = umbracoHelper.Media(mediaId);     
+            return image.url;
         }
 
         public ResponseStatus ResponseStatus { get; set; }
