@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
+using UCommerce.Catalog.Status;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
@@ -34,15 +35,18 @@ namespace UCommerce.RazorStore.Controllers
             var reviews = new List<ProductReviewViewModel>();
             foreach (var review in product.ProductReviews)
             {
-                ProductReviewViewModel reviewModel = new ProductReviewViewModel();
-                reviewModel.Name = review.Customer.FirstName + " " + review.Customer.LastName;
-                reviewModel.Email = review.Customer.EmailAddress;
-                reviewModel.Title = review.ReviewHeadline;
-                reviewModel.CreatedOn = review.CreatedOn;
-                reviewModel.Comments = review.ReviewText;
-                reviewModel.Rating = review.Rating;
+                if (review.ProductReviewStatus.ProductReviewStatusId != (int) ProductReviewStatusCode.Approved)
+                {
+                    ProductReviewViewModel reviewModel = new ProductReviewViewModel();
+                    reviewModel.Name = review.Customer.FirstName + " " + review.Customer.LastName;
+                    reviewModel.Email = review.Customer.EmailAddress;
+                    reviewModel.Title = review.ReviewHeadline;
+                    reviewModel.CreatedOn = review.CreatedOn;
+                    reviewModel.Comments = review.ReviewText;
+                    reviewModel.Rating = review.Rating;
 
-                reviews.Add(reviewModel);
+                    reviews.Add(reviewModel);
+                }
             }
 
             return reviews;
