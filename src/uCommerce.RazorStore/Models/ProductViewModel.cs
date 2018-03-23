@@ -34,6 +34,8 @@ namespace UCommerce.RazorStore.Models
 		}
         public bool IsVariant { get; set; }
 
+        public bool IsProductFamily { get; set; }
+
         public string Name { get; set; }
 
 		public string Url { get; set; }

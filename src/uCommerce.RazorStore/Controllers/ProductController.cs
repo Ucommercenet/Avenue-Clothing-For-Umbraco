@@ -44,6 +44,7 @@ namespace UCommerce.RazorStore.Controllers
             productViewModel.IsVariant = false;
             productViewModel.IsOrderingAllowed = currentProduct.AllowOrdering;
             productViewModel.TaxCalculation = CatalogLibrary.CalculatePrice(currentProduct).YourTax.ToString();
+            productViewModel.IsProductFamily = currentProduct.ProductDefinition.IsProductFamily();
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageMediaId))
             {

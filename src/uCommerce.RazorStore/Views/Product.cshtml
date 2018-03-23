@@ -51,7 +51,7 @@
                         </p>
                     </aside>
 
-                    @if (Model.ProductViewModel.Properties.Count > 0)
+                    @if (Model.ProductViewModel.Properties.Count > 0 && Model.ProductViewModel.IsProductFamily)
                     {
                         <div class="col-md-7">
 
@@ -73,7 +73,6 @@
 
                     <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
                     <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
-
                     @if (Model.AddedToBasket)
                     {
                         <div class="alert alert-success item-added">
