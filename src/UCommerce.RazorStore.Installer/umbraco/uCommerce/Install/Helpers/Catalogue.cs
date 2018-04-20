@@ -349,8 +349,12 @@ namespace UCommerce.RazorStore.Installer.Helpers
                             });
                 });
 
-            if (!product.PriceGroupPrices.Any())
-                product.AddPriceGroupPrice(new PriceGroupPrice { Price = price, PriceGroup = category.ProductCatalog.PriceGroup });
+            //TODO: Use Reflection for the old way and 
+            //if (!product.PriceGroupPrices.Any())
+            //    product.AddPriceGroupPrice(new PriceGroupPrice { Price = price, PriceGroup = category.ProductCatalog.PriceGroup });
+            //if(new priceEngine
+            CreatePricesForProduct(category, price, product);
+
 
 			// uCommerce checks whether the product already exists in the create
 			// when creating the new relation.
@@ -359,6 +363,18 @@ namespace UCommerce.RazorStore.Installer.Helpers
 			product.Save();
 
             return product;
+        }
+
+        private void CreatePricesForProduct(Category category, decimal amount, Product product)
+        {
+            var price = new Price() {Amount = amount, Guid = Guid.NewGuid(), PriceGroup = category.ProductCatalog.PriceGroup};
+            product.ProductPrices.Add(new ProductPrice()
+            {
+                Guid = Guid.NewGuid(),
+                MinimumQuantity = 1,
+                Price = price,
+                Product = product
+            });
         }
 
         private Product CreateVariantOnProduct(Product product, string variantSku, string name)

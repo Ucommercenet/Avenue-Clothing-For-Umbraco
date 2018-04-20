@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UCommerce.RazorStore</RootNamespace>
     <AssemblyName>UCommerce.RazorStore</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
@@ -30,6 +30,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -175,6 +176,10 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Raven.Goggles.Extensions, Version=1.0.0.18094, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Apps\Raven.Goggles\Raven.Goggles\Raven.Goggles.Extensions\bin\Debug\Raven.Goggles.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Semver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\semver.1.1.2\lib\net45\Semver.dll</HintPath>
       <Private>True</Private>
@@ -198,7 +203,6 @@
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\SQLCE4Umbraco.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\System.Data.SqlServerCe.dll</HintPath>
@@ -214,7 +218,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -262,32 +265,44 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="TidyNet, Version=1.0.0.0, Culture=neutral">
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\TidyNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Admin">
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Admin.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Infrastructure, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Infrastructure.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Installer, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Installer.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Umbraco">
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco.dll</HintPath>
+    <Reference Include="UCommerce.NHibernate">
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Umbraco.Installer">
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Umbraco.Installer.dll</HintPath>
+    <Reference Include="UCommerce.Pipelines">
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Web.Api, Version=6.8.2.15287, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Presentation, Version=7.14.0.18060, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.0.0.16028\UCommerce.Web.Api.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.SystemHttp">
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.SystemHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Transactions.Payments">
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Transactions.Payments.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Web.Api, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="umbraco, Version=1.0.5261.28133, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\umbraco.dll</HintPath>
