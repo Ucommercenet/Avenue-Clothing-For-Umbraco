@@ -170,7 +170,6 @@
     <Compile Include="PackageActions\UpdateWebConfigAppSettings.cs" />
     <Compile Include="PackageActions\MergeConfigFiles.cs" />
     <Compile Include="PackageActions\PackageActionsHelpers.cs" />
-    <Compile Include="PackageActions\UpdateUrlRewritingConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />
@@ -185,11 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Web.IIS7.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.UrlRewriting.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

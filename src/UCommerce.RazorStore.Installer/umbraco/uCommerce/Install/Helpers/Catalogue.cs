@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
@@ -349,23 +350,41 @@ namespace UCommerce.RazorStore.Installer.Helpers
                             });
                 });
 
-            //TODO: Use Reflection for the old way and 
-            //if (!product.PriceGroupPrices.Any())
-            //    product.AddPriceGroupPrice(new PriceGroupPrice { Price = price, PriceGroup = category.ProductCatalog.PriceGroup });
-            //if(new priceEngine
-            CreatePricesForProduct(category, price, product);
+            Type priceGroupPriceType = Type.GetType("UCommerce.EntitiesV2.PriceGroupPrice, Ucommerce");
+            if (priceGroupPriceType != null)
+            {
+                CreatePriceGroupPricesForProduct(category, price, priceGroupPriceType, product);
+            }
+            else
+            {
+                CreateProductPricesForProduct(category, price, product);
+            }
 
-
-			// uCommerce checks whether the product already exists in the create
-			// when creating the new relation.
-			product.AddCategory(category, 0);
+            // uCommerce checks whether the product already exists in the create
+            // when creating the new relation.
+            product.AddCategory(category, 0);
 
 			product.Save();
 
             return product;
         }
 
-        private void CreatePricesForProduct(Category category, decimal amount, Product product)
+        private void CreatePriceGroupPricesForProduct(Category category, decimal price, Type priceGroupPriceType,
+            Product product)
+        {
+            dynamic dynamicProduct = product;
+            dynamic priceGroupPrice = Activator.CreateInstance(priceGroupPriceType);
+
+            priceGroupPrice.Price = price;
+            priceGroupPrice.PriceGroup = category.ProductCatalog.PriceGroup;
+
+            if (dynamicProduct.PriceGroupPrices.Count == 0)
+            {
+                dynamicProduct.AddPriceGroupPrice(priceGroupPrice);
+            }
+        }
+
+        private void CreateProductPricesForProduct(Category category, decimal amount, Product product)
         {
             var price = new Price() {Amount = amount, Guid = Guid.NewGuid(), PriceGroup = category.ProductCatalog.PriceGroup};
             product.ProductPrices.Add(new ProductPrice()
