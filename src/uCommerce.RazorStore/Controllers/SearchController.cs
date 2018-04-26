@@ -21,8 +21,6 @@ namespace UCommerce.RazorStore.Controllers
             IEnumerable<Product> products = new List<Product>();
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
-            var k = Raven.Goggles.Extensions.API.SearchLibrary.ProductsFullTextSearch(keyword);
-
             if (!string.IsNullOrWhiteSpace(keyword))
             {
                 products = Product.Find(p =>
