@@ -176,10 +176,6 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Goggles.Extensions, Version=1.0.0.18094, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Apps\Raven.Goggles\Raven.Goggles\Raven.Goggles.Extensions\bin\Debug\Raven.Goggles.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="Semver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\semver.1.1.2\lib\net45\Semver.dll</HintPath>
       <Private>True</Private>
@@ -269,40 +265,45 @@
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\TidyNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Admin">
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Admin.dll</HintPath>
-    </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Admin, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Infrastructure.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Admin.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Infrastructure, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Installer.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.NHibernate">
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="UCommerce.Pipelines">
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Pipelines.dll</HintPath>
-    </Reference>
-    <Reference Include="UCommerce.Presentation, Version=7.14.0.18060, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Installer, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Presentation.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.SystemHttp">
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.SystemHttp.dll</HintPath>
-    </Reference>
-    <Reference Include="UCommerce.Transactions.Payments">
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Transactions.Payments.dll</HintPath>
-    </Reference>
-    <Reference Include="UCommerce.Web.Api, Version=7.0.0.16028, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.NHibernate, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\uCommerce\7.16.0.18109.beta\UCommerce.Web.Api.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Pipelines, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Presentation, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.SystemHttp, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.SystemHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Transactions.Payments, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Transactions.Payments.dll</HintPath>
+    </Reference>
+    <Reference Include="UCommerce.Web.Api, Version=7.16.0.18109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\uCommerce\7.16.0.18116\UCommerce.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="umbraco, Version=1.0.5261.28133, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\umbraco.dll</HintPath>
@@ -357,7 +358,7 @@
     <Compile Include="Controllers\MiniBasketController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
-    <Compile Include="Controllers\PreviewController.cs" />
+    <Compile Include="Controllers\BasketPreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
@@ -575,7 +576,7 @@
     <Content Include="Views\Basket.cshtml" />
     <Content Include="Views\Shipping.cshtml" />
     <Content Include="Views\Payment.cshtml" />
-    <Content Include="Views\Preview.cshtml" />
+    <Content Include="Views\BasketPreview.cshtml" />
     <Content Include="Views\Confirmation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
@@ -638,7 +639,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\U7Dev\Website"
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\U7\Website"
 </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
