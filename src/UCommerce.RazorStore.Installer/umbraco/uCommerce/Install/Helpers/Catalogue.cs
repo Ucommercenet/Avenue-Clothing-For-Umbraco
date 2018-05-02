@@ -37,7 +37,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 		/// </summary>
 	    private void TriggerIndexing()
 	    {
-			ObjectFactory.Instance.Resolve<ScratchIndexer>().Index();
+			ObjectFactory.Instance.Resolve<IScratchIndexer>().Index();
 	    }
 
 	    private ProductCatalogGroup CreateCatalogGroup()
