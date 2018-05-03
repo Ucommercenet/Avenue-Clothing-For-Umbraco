@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
     <package>
-        <name>Avenue Clothing Demo Store for uCommerce 7 - Accelerator 5.0.4.17130</name>
-        <version>5.0.4.17130</version>
+        <name>Avenue Clothing Demo Store for uCommerce 7 - Accelerator 5.0.5.18121</name>
+        <version>5.0.5.18121</version>
         <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
         <url>http://www.ucommerce.net</url>
         <requirements>
@@ -12,7 +12,7 @@
         </requirements>
     </package>
     <author>
-        <name>uCommerce</name>
+        <name>Ucommerce</name>
         <website>http://ucommerce.net</website>
     </author>
     <readme>

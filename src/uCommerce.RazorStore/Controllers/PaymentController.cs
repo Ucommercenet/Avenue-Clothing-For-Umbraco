@@ -68,10 +68,8 @@ namespace UCommerce.RazorStore.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-
-
             var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var preview = root.Descendants("preview").FirstOrDefault();
+            var preview = root.Descendants("basketPreview").FirstOrDefault();
             return Redirect(preview.Url);
         }
 
