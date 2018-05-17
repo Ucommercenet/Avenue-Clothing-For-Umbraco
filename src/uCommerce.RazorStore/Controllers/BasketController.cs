@@ -30,7 +30,7 @@ namespace UCommerce.RazorStore.Controllers
 			        Tax = new Money(orderLine.VAT, basket.BillingCurrency).ToString(),
 			        Price = new Money(orderLine.Price, basket.BillingCurrency).ToString(),
 			        ProductUrl = CatalogLibrary.GetNiceUrlForProduct(CatalogLibrary.GetProduct(orderLine.Sku)),
-			        PriceWithDiscount = new Money(orderLine.Price - orderLine.Discount, basket.BillingCurrency).ToString(),
+			        PriceWithDiscount = new Money(orderLine.Price - orderLine.UnitDiscount.GetValueOrDefault(), basket.BillingCurrency).ToString(),
 			        OrderLineId = orderLine.OrderLineId
 			    };
 
