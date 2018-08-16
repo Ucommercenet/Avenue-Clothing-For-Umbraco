@@ -74,39 +74,39 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UCommerce, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Admin, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Admin, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Admin.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Infrastructure, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Installer, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.NHibernate, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.NHibernate, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Pipelines, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Pipelines, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Presentation, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Presentation, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.SystemHttp, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.SystemHttp, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.SystemHttp.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Transactions.Payments, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Transactions.Payments, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Transactions.Payments.dll</HintPath>
     </Reference>
@@ -114,7 +114,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Umbraco7.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Web.Api, Version=7.16.0.18116, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UCommerce.Web.Api, Version=7.18.0.18185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Web.Api.dll</HintPath>
     </Reference>
