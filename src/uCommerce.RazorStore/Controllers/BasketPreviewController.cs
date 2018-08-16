@@ -92,6 +92,13 @@ namespace UCommerce.RazorStore.Controllers
 		public ActionResult Index()
 		{
 		    var payment = TransactionLibrary.GetBasket().PurchaseOrder.Payments.First();
+		    if (payment.PaymentMethod.PaymentMethodServiceName == null)
+		    {
+		        var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+		        var confirmation = root.Descendants("confirmation").FirstOrDefault();
+		        return Redirect(confirmation.Url);
+            }
+
 		    string paymentUrl = TransactionLibrary.GetPaymentPageUrl(payment);
 		    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 		    return Redirect(paymentUrl);
