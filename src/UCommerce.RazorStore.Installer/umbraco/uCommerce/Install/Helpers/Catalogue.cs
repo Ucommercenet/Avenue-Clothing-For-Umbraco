@@ -363,21 +363,6 @@ namespace UCommerce.RazorStore.Installer.Helpers
             return product;
         }
 
-        private void CreatePriceGroupPricesForProduct(Category category, decimal price, Type priceGroupPriceType,
-            Product product)
-        {
-            dynamic dynamicProduct = product;
-            dynamic priceGroupPrice = Activator.CreateInstance(priceGroupPriceType);
-
-            priceGroupPrice.Price = price;
-            priceGroupPrice.PriceGroup = category.ProductCatalog.PriceGroup;
-
-            if (dynamicProduct.PriceGroupPrices.Count == 0)
-            {
-                dynamicProduct.AddPriceGroupPrice(priceGroupPrice);
-            }
-        }
-
         private void CreateProductPricesForProduct(Category category, decimal amount, Product product)
         {
             var price = new Price() {Amount = amount, Guid = Guid.NewGuid(), PriceGroup = category.ProductCatalog.PriceGroup};
