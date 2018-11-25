@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace UCommerce.RazorStore.Services.Model
+namespace UCommerce.RazorStore.Api.Model
 {
-	public class Basket
+    public class Basket
     {
 
         public decimal? SubTotal { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace UCommerce.RazorStore.Services.Model
+namespace UCommerce.RazorStore.Api.Model
 {
     public class PriceCalculationViewModel
     {

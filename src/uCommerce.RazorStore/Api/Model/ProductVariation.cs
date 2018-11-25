@@ -1,7 +1,7 @@
-namespace UCommerce.RazorStore.Services.Model
-{
-    using System.Collections.Generic;
+using System.Collections.Generic;
 
+namespace UCommerce.RazorStore.Api.Model
+{
     public class ProductVariation
     {
         public string Sku { get; set; }

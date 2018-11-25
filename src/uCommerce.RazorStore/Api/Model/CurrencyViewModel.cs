@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using ServiceStack.DataAccess;
 
-namespace UCommerce.RazorStore.Services.Model
+namespace UCommerce.RazorStore.Api.Model
 {
     public class CurrencyViewModel
     {
