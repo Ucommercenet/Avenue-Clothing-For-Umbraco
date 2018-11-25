@@ -46,7 +46,13 @@ var uCommerce = uCommerce || {};
                     CategoryId: -1
                 };
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ GetProductInformation: extendedOptions }, onSuccess, onError);
+
+                $.post('razorstore/products/getproductinformation', extendedOptions)
+                .done(function () {
+                        console.log('success');
+                    }).fail(function() {
+                        console.log('fail');
+                });
             },
             updateLineItem: function(options, onSuccess, onError) {
                  var defaults = {
@@ -58,15 +64,6 @@ var uCommerce = uCommerce || {};
             }
         }
     });
-    $.uCommerce.defaults = {
-        servicepath: '/ucommerceapi',
-        protocol: location.protocol,
-        host: location.host
-    };
-    function callServiceStack(request, onSuccess, onError) {
-        var gateway = new servicestack.ClientGateway($.uCommerce.defaults.protocol + "//" + $.uCommerce.defaults.host + $.uCommerce.defaults.servicepath + '/');
-        gateway.postToService(request, onSuccess, onError);
-    }
 })(jQuery);
 
 

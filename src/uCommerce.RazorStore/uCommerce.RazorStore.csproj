@@ -471,7 +471,6 @@
     <Content Include="scripts\uCommerce.demostore.cart.js" />
     <Content Include="scripts\uCommerce.demostore.js" />
     <Content Include="scripts\uCommerce.facets.js" />
-    <Content Include="scripts\uCommerce.ServiceStack.js" />
     <Content Include="scripts\uCommerce.jQuery.js" />
     <Content Include="scripts\uCommerce.demostore.productpage.js" />
   </ItemGroup>
@@ -481,6 +480,7 @@
     <Content Include="img\uCommerce\ucommerce.glyphicons-halflings.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\uCommerce.ServiceStack.js" />
     <Content Include="umbraco\images\umbraco\ucommerce-address.png" />
     <Content Include="umbraco\images\umbraco\ucommerce-cart.png" />
     <Content Include="umbraco\images\umbraco\ucommerce-catalog.png" />
