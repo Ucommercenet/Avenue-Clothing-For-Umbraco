@@ -12,7 +12,8 @@ namespace UCommerce.RazorStore.Api
     public class ProductController : ApiController
     {
         [Route("razorstore/products/getproductvariations")]
-        public IHttpActionResult GetProductVariations(GetProductVariationsRequest request)
+        [HttpPost]
+        public IHttpActionResult GetProductVariations([FromBody] GetProductVariationsRequest request)
         {
             var product = CatalogLibrary.GetProduct(request.ProductSku);
 
@@ -33,7 +34,8 @@ namespace UCommerce.RazorStore.Api
         }
 
         [Route("razorstore/products/getvariantskufromselection")]
-        public IHttpActionResult GetVariantSkuFromSelectionRequest(GetVariantSkuFromSelectionRequest request)
+        [HttpPost]
+        public IHttpActionResult GetVariantSkuFromSelectionRequest([FromBody] GetVariantSkuFromSelectionRequest request)
         {
             var product = CatalogLibrary.GetProduct(request.ProductSku);
             UCommerce.EntitiesV2.Product variant = null;
@@ -65,7 +67,8 @@ namespace UCommerce.RazorStore.Api
 
 
         [Route("razorstore/products/getproductinformation")]
-        public IHttpActionResult GetProductInformation(GetProductInformationRequest request)
+        [HttpPost]
+        public IHttpActionResult GetProductInformation([FromBody] GetProductInformationRequest request)
         {
             ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
             Product product = CatalogLibrary.GetProduct(request.Sku);

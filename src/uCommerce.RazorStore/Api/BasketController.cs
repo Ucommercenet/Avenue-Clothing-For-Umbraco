@@ -17,14 +17,14 @@ namespace UCommerce.RazorStore.Api
     {
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]
-        public IHttpActionResult AddToBasket(AddToBasketRequet request)
+        public IHttpActionResult AddToBasket([FromBody] AddToBasketRequet request)
         {
             TransactionLibrary.AddToBasket(request.Quantity, request.Sku, request.VariantSku, addToExistingLine: true, executeBasketPipeline: true);
             return Ok();
         }
 
         [Route("razorstore/basket/updateLineitem")]
-        public IHttpActionResult UpdateLineItem(UpdateLineItemRequest request)
+        public IHttpActionResult UpdateLineItem([FromBody] UpdateLineItemRequest request)
         {
             TransactionLibrary.UpdateLineItem(request.OrderLineId, request.NewQuantity);
             TransactionLibrary.ExecuteBasketPipeline();
