@@ -30,7 +30,7 @@ namespace UCommerce.RazorStore.Api
                 })
             }).ToList();
 
-            return Json(variations);
+            return Json(new { Variations = variations});
         }
 
         [Route("razorstore/products/getvariantskufromselection")]
@@ -42,7 +42,7 @@ namespace UCommerce.RazorStore.Api
 
             if (product.Variants.Any() && request.VariantProperties.Any()) // If there are variant values we'll need to find the selected variant
             {
-                variant = product.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite && pp.ProductDefinitionField.IsVariantProperty && !pp.ProductDefinitionField.Deleted && pp.Value != null && pp.Value != String.Empty).All(p => request.VariantProperties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+                variant = product.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite && pp.ProductDefinitionField.IsVariantProperty && !pp.ProductDefinitionField.Deleted && pp.Value != null && pp.Value != String.Empty).All(p => request.VariantProperties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.ToString().Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
             }
             else if (!product.Variants.Any()) // Only use the current product where there are no variants
             {
@@ -62,7 +62,7 @@ namespace UCommerce.RazorStore.Api
                 })
             };
 
-            return Json(variant);
+            return Json(new {Variant = variantModel});
         }
 
 

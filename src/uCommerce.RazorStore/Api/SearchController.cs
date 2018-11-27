@@ -27,7 +27,10 @@ namespace UCommerce.RazorStore.Api
             );
 
 
-            return Json(MapResult(products));
+            return Json(new
+            {
+                Variations = MapResult(products)
+            });
         }
 
         private IList<ProductVariation> MapResult(IList<UCommerce.EntitiesV2.Product> products)

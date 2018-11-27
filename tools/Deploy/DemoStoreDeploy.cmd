@@ -18,12 +18,12 @@ rem Copy over the store files which will be included in the XML
 robocopy src\uCommerce.RazorStore package\_ToPackage\files *.css *.master /s /FFT /Z /XA:H /W:5
 
 rem Copy over the store files which will be zipped
-robocopy src\uCommerce.RazorStore package\_ToPackage\files uCommerceApiRegistration.cs FacetedQueryStringExtensions.cs *.cshtml *.js *.png *.jpg *.jpeg *.gif *.eot *.svq *.ttf *.woff *.woff2 *.otf /s /FFT /Z /XA:H /W:5
+robocopy src\uCommerce.RazorStore package\_ToPackage\files uCommerceApiRegistration.cs FacetedQueryStringExtensions.cs *.cshtml *.js *.png *.jpg *.jpeg *.gif *.eot *.svq *.ttf *.woff *.woff2 *.otf /s /FFT /Z /XA:H /W:5 /xf *packages.config
 robocopy src\UCommerce.RazorStore\bin package\_ToPackage\files\bin uCommerce.RazorStore.dll /FFT /Z /XA:H /W:5
 
 
 rem Copy over the installer files
-robocopy src\UCommerce.RazorStore.Installer package\_ToPackage\files *.ascx *.js *.png *.jpg *.jpeg *.gif *.config /s /FFT /Z /XA:H /W:5
+robocopy src\UCommerce.RazorStore.Installer package\_ToPackage\files *.ascx *.js *.png *.jpg *.jpeg *.gif *.config /s /FFT /Z /XA:H /W:5 /xf *packages.config
 robocopy src\UCommerce.RazorStore.Installer\bin package\_ToPackage\files\bin  UCommerce.RazorStore.Installer.dll XmlConfigMerge.dll /FFT /Z /XA:H /W:5
 robocopy src\UCommerce.RazorStore.Installer\XmlStubs package\_ToPackage *.xml /FFT /Z /XA:H /W:5
 

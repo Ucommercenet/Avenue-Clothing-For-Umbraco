@@ -107,7 +107,7 @@ namespace UCommerce.RazorStore.Api
                 basket.LineItems.Add(lineItem);
             }
 
-            return Json(basket);
+            return Json(new { Basket = basket});
         }
 
         private string GetImageUrlForProduct(Product product)
