@@ -101,9 +101,6 @@
     <Reference Include="UCommerce.SystemWeb, Version=7.19.0.18260, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\uCommerce.Core.7.19.0.18260\lib\net45\UCommerce.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Web.Api, Version=7.19.0.18260, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.7.19.0.18260\lib\net45\UCommerce.Web.Api.dll</HintPath>
-    </Reference>
     <Reference Include="umbraco">
       <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
     </Reference>
