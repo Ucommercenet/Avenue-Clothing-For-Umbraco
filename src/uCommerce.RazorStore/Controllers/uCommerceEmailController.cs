@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UCommerce;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
@@ -22,7 +23,7 @@ namespace UCommerce.RazorStore.Controllers
             var basketModel = new PurchaseOrderViewModel();
 
             basketModel.BillingAddress = basket.BillingAddress;
-            basketModel.ShipmentAddress = basket.BillingAddress;
+            basketModel.ShipmentAddress = basket.GetShippingAddress(Constants.DefaultShipmentAddressName);
 
             foreach (var orderLine in basket.OrderLines)
             {

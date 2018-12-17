@@ -7,6 +7,7 @@ using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
 using UCommerce.Search.Indexers;
+using UCommerce.Security;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
@@ -28,6 +29,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             EnablePaymentMethodForCatalog(catalogGroup);
             EnableShippingMethodForCatalog(catalogGroup);
             CreateCatalogue(catalog);
+            ObjectFactory.Instance.Resolve<IEnsureRolesAreUpToDateService>().EnsureRolesAreUpToDate();
 			new Thread(TriggerIndexing).Start();
         }
 
