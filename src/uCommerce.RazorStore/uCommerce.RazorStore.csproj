@@ -540,6 +540,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Pipelines\Checkout\" />
     <Folder Include="Views\uCommerceEmail\" />
   </ItemGroup>
   <ItemGroup />

@@ -97,6 +97,7 @@
     </Reference>
     <Reference Include="UCommerce.SystemHttp, Version=7.19.0.18260, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\uCommerce.Core.7.19.0.18260\lib\net45\UCommerce.SystemHttp.dll</HintPath>
+      <HintPath>..\..\lib\uCommerce\7.18.0.18185\UCommerce.Umbraco7.dll</HintPath>
     </Reference>
     <Reference Include="UCommerce.SystemWeb, Version=7.19.0.18260, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\uCommerce.Core.7.19.0.18260\lib\net45\UCommerce.SystemWeb.dll</HintPath>
