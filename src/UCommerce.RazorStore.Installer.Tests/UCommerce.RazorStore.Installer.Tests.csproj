@@ -52,9 +52,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MergeConfigFileTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\UCommerce.RazorStore.Installer\UCommerce.RazorStore.Installer.csproj">
       <Project>{5DC07961-B0F6-4F6F-9A3A-81CD7BB3B707}</Project>
       <Name>UCommerce.RazorStore.Installer</Name>

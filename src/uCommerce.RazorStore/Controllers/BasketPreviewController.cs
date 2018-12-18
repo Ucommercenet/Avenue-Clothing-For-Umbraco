@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -90,12 +91,17 @@ namespace UCommerce.RazorStore.Controllers
 		[HttpPost]
 		public ActionResult Index()
 		{
-			TransactionLibrary.RequestPayments();
+		    var payment = TransactionLibrary.GetBasket().PurchaseOrder.Payments.First();
+		    if (payment.PaymentMethod.PaymentMethodServiceName == null)
+		    {
+		        var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+		        var confirmation = root.Descendants("confirmation").FirstOrDefault();
+		        return Redirect(confirmation.Url);
+            }
 
-            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var confirmation = root.Descendants("confirmation").FirstOrDefault();
-            return Redirect(confirmation.Url);
-
+		    string paymentUrl = TransactionLibrary.GetPaymentPageUrl(payment);
+		    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+		    return Redirect(paymentUrl);
         }
     }
 }

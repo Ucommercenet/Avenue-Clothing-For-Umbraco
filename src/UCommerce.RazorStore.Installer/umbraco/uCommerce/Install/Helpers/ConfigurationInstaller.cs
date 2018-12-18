@@ -168,10 +168,10 @@ namespace UCommerce.RazorStore.Installer.Helpers
         {
             var shippingMethod = ShippingMethod.SingleOrDefault(x => x.Name == name) ?? new ShippingMethodFactory().NewWithDefaults(name);
 
-            var shippingMethodPrice = shippingMethod.ShippingMethodPrices.FirstOrDefault(p => p.Currency.ISOCode == currency.ISOCode);
+            var shippingMethodPrice = shippingMethod.ShippingMethodPrices.FirstOrDefault(p => p.PriceGroup.Currency.ISOCode == currency.ISOCode);
             if (shippingMethodPrice == null)
             {
-                shippingMethodPrice = new ShippingMethodPrice() { Currency = currency };
+                shippingMethodPrice = new ShippingMethodPrice() { PriceGroup = priceGroup };
                 shippingMethod.AddShippingMethodPrice(shippingMethodPrice);
             }
             shippingMethodPrice.Price = shippingFee;
@@ -203,10 +203,10 @@ namespace UCommerce.RazorStore.Installer.Helpers
             paymentMethod.Deleted = false;
             paymentMethod.FeePercent = feePercentage;
             
-            var method = paymentMethod.PaymentMethodFees.FirstOrDefault(p => p.Currency.ISOCode == currency.ISOCode);
+            var method = paymentMethod.PaymentMethodFees.FirstOrDefault(p => p.PriceGroup.Currency.ISOCode == currency.ISOCode);
             if (method == null)
             {
-                method = new PaymentMethodFee() { Currency = currency };
+                method = new PaymentMethodFee() { PriceGroup = priceGroup };
                 paymentMethod.AddPaymentMethodFee(method);
             }
             method.Fee = fee;
@@ -218,6 +218,20 @@ namespace UCommerce.RazorStore.Installer.Helpers
             {
                 paymentMethod.AddEligibleCountry(country);
             }
+
+            var defaultPaymentMethodService = Definition.SingleOrDefault(x => x.Name == "Default Payment Method Service");
+            if (defaultPaymentMethodService != null)
+            {
+                paymentMethod.Definition = defaultPaymentMethodService;
+                var acceptUrl = paymentMethod.GetProperty("AcceptUrl");
+
+                if (acceptUrl != null)
+                    acceptUrl.SetValue("/basket/confirmation/");
+            }
+
+            paymentMethod.PaymentMethodServiceName = "Default Payment Method Service";
+            paymentMethod.Pipeline = "Checkout";
+
             paymentMethod.Save();
             return paymentMethod;
         }

@@ -1,0 +1,61 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : 25 November 2018 19.23.29
+   Source : C:\projects\Umbraco razor store\src\uCommerce.RazorStore\bin\
+     Dest : C:\projects\Umbraco razor store\src\uCommerce.RazorStore\App_Data\NuGetBackup\20181125-192329\bin\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	                  31	C:\projects\Umbraco razor store\src\uCommerce.RazorStore\bin\
+	    New File  		  118784	businesslogic.dll  0%  100%  
+	    New File  		  516096	cms.dll  0%   25%   50%   76%  100%  
+	    New File  		   51712	controls.dll  0%  100%  
+	    New File  		   24576	interfaces.dll  0%  100%  
+	    New File  		  258048	log4net.dll  0%   50%  100%  
+	    New File  		   11264	Microsoft.ApplicationBlocks.Data.dll  0%  100%  
+	    New File  		   19968	SQLCE4Umbraco.dll  0%  100%  
+	    New File  		  185544	System.Net.Http.Formatting.dll  0%   70%  100%  
+	    New File  		  471240	System.Web.Http.dll  0%   27%   55%   83%  100%  
+	    New File  		   82120	System.Web.Http.WebHost.dll  0%  100%  
+	    New File  		  506976	System.Web.Mvc.dll  0%   25%   51%   77%  100%  
+	    New File  		  192512	TidyNet.dll  0%   68%  100%  
+	    New File  		  440832	UCommerce.Admin.dll  0%   29%   59%   89%  100%  
+	    New File  		 1038848	UCommerce.dll  0%   25%   50%   75%  100%  
+	    New File  		   56320	UCommerce.Infrastructure.dll  0%  100%  
+	    New File  		   38400	UCommerce.Installer.dll  0%  100%  
+	    New File  		   11264	UCommerce.NHibernate.dll  0%  100%  
+	    New File  		   86016	UCommerce.Pipelines.dll  0%  100%  
+	    New File  		  154624	UCommerce.Presentation.dll  0%   84%  100%  
+	    New File  		   59904	UCommerce.SystemHttp.dll  0%  100%  
+	    New File  		    8192	UCommerce.SystemWeb.dll  0%  100%  
+	    New File  		    9216	UCommerce.Web.Api.dll  0%  100%  
+	    New File  		   2.0 m	Umbraco.Core.dll  0%   24%   49%   74%   99%  100%  
+	    New File  		   38912	umbraco.DataLayer.dll  0%  100%  
+	    New File  		   1.8 m	umbraco.dll  0%   13%   26%   40%   53%   67%   80%   94%  100%  
+	    New File  		  372736	umbraco.editorControls.dll  0%   35%   70%  100%  
+	    New File  		  131584	umbraco.MacroEngines.dll  0%   99%  100%  
+	    New File  		   37888	umbraco.providers.dll  0%  100%  
+	    New File  		   61440	Umbraco.Web.UI.dll  0%  100%  
+	    New File  		   50176	UmbracoExamine.dll  0%  100%  
+	    New File  		   22528	UrlRewritingNet.UrlRewriter.dll  0%  100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :        31        31         0         0         0         0
+   Bytes :    8.69 m    8.69 m         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :            79999368 Bytes/sec.
+   Speed :            4577.600 MegaBytes/min.
+   Ended : 25 November 2018 19.23.29
+

@@ -7,27 +7,64 @@ var uCommerce = uCommerce || {};
 //                    create: false
                 };
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ GetBasket: extendedOptions }, onSuccess, onError);
+                $.get('/ucommerceapi/razorstore/basket/getbasket', extendedOptions)
+                    .done(function (response) {
+                        onSuccess(response);
+                    }).fail(function () {
+                        onError(response);
+                    });
             },
-            getProductVariations: function(options, onSuccess, onError) {
+            getProductVariations: function (options, onSuccess, onError) {
+                console.log('getProductVariations');
+
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ GetProductVariations: extendedOptions }, onSuccess, onError);
+
+                $.post('/ucommerceapi/razorstore/products/getproductvariations', extendedOptions)
+                    .done(function (response) {
+                        onSuccess(response);
+                    }).fail(function () {
+                        onError(response);
+                    });
             },
             getSkuFromSelection: function(options, onSuccess, onError) {
+                console.log('sku from selection');
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ GetVariantSkuFromSelection: extendedOptions }, onSuccess, onError);
+                $.post('/ucommerceapi/razorstore/products/getvariantskufromselection', extendedOptions)
+                    .done(function (response) {
+                        onSuccess(response);
+                    }).fail(function () {
+                        onError(response);
+                    });
+
             },
             getVariantSkuFromSelection: function (options, onSuccess, onError) {
+                console.log('getVariantSkuFromSelection');
+
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ GetVariantSkuFromSelection: extendedOptions }, onSuccess, onError);
+                $.ajax({
+                    type: 'POST',
+                    url: '/ucommerceapi/razorstore/products/getvariantskufromselection',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: JSON.stringify(extendedOptions)
+                }).done(function (response) {
+                    onSuccess(response);
+                }).fail(function () {
+                    onError(response);
+                });
             },
             search: function(options, onSuccess, onError) {
                 var defaults = { };
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ Search: extendedOptions }, onSuccess, onError);
+                $.post('/ucommerceapi/razorstore/search', extendedOptions)
+                    .done(function (response) {
+                        onSuccess(response);
+                    }).fail(function () {
+                        onError(response);
+                    });
             },
             addToBasket: function(options, onSuccess, onError) {
                  var defaults = {
@@ -37,7 +74,13 @@ var uCommerce = uCommerce || {};
                     addToExistingLine: true
                 };
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ AddToBasket: extendedOptions }, onSuccess, onError);
+
+                $.post('/ucommerceapi/razorstore/basket/addToBasket', extendedOptions)
+                    .done(function (response) {
+                        onSuccess(response);
+                    }).fail(function () {
+                        onError(response);
+                    });
             },
             getProductInformation: function(options, onSuccess, onError) {
                 var defaults = {
@@ -46,7 +89,13 @@ var uCommerce = uCommerce || {};
                     CategoryId: -1
                 };
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ GetProductInformation: extendedOptions }, onSuccess, onError);
+
+                $.post('/ucommerceapi/razorstore/products/getproductinformation', extendedOptions)
+                .done(function (response) {
+                    onSuccess(response);
+                    }).fail(function() {
+                        onError(response);
+                    });
             },
             updateLineItem: function(options, onSuccess, onError) {
                  var defaults = {
@@ -58,15 +107,6 @@ var uCommerce = uCommerce || {};
             }
         }
     });
-    $.uCommerce.defaults = {
-        servicepath: '/ucommerceapi',
-        protocol: location.protocol,
-        host: location.host
-    };
-    function callServiceStack(request, onSuccess, onError) {
-        var gateway = new servicestack.ClientGateway($.uCommerce.defaults.protocol + "//" + $.uCommerce.defaults.host + $.uCommerce.defaults.servicepath + '/');
-        gateway.postToService(request, onSuccess, onError);
-    }
 })(jQuery);
 
 

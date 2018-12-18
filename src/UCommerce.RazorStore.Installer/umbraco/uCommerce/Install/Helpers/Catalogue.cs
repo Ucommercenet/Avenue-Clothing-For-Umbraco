@@ -7,6 +7,7 @@ using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
 using UCommerce.Search.Indexers;
+using UCommerce.Security;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
@@ -28,6 +29,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             EnablePaymentMethodForCatalog(catalogGroup);
             EnableShippingMethodForCatalog(catalogGroup);
             CreateCatalogue(catalog);
+            ObjectFactory.Instance.Resolve<IEnsureRolesAreUpToDateService>().EnsureRolesAreUpToDate();
 			new Thread(TriggerIndexing).Start();
         }
 
@@ -350,15 +352,9 @@ namespace UCommerce.RazorStore.Installer.Helpers
                             });
                 });
 
-            Type priceGroupPriceType = Type.GetType("UCommerce.EntitiesV2.PriceGroupPrice, Ucommerce");
-            if (priceGroupPriceType != null)
-            {
-                CreatePriceGroupPricesForProduct(category, price, priceGroupPriceType, product);
-            }
-            else
-            {
-                CreateProductPricesForProduct(category, price, product);
-            }
+           
+            CreateProductPricesForProduct(category, price, product);
+            
 
             // uCommerce checks whether the product already exists in the create
             // when creating the new relation.
@@ -367,21 +363,6 @@ namespace UCommerce.RazorStore.Installer.Helpers
 			product.Save();
 
             return product;
-        }
-
-        private void CreatePriceGroupPricesForProduct(Category category, decimal price, Type priceGroupPriceType,
-            Product product)
-        {
-            dynamic dynamicProduct = product;
-            dynamic priceGroupPrice = Activator.CreateInstance(priceGroupPriceType);
-
-            priceGroupPrice.Price = price;
-            priceGroupPrice.PriceGroup = category.ProductCatalog.PriceGroup;
-
-            if (dynamicProduct.PriceGroupPrices.Count == 0)
-            {
-                dynamicProduct.AddPriceGroupPrice(priceGroupPrice);
-            }
         }
 
         private void CreateProductPricesForProduct(Category category, decimal amount, Product product)
