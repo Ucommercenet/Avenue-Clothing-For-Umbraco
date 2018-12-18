@@ -218,6 +218,20 @@ namespace UCommerce.RazorStore.Installer.Helpers
             {
                 paymentMethod.AddEligibleCountry(country);
             }
+
+            var defaultPaymentMethodService = Definition.SingleOrDefault(x => x.Name == "Default Payment Method Service");
+            if (defaultPaymentMethodService != null)
+            {
+                paymentMethod.Definition = defaultPaymentMethodService;
+                var acceptUrl = paymentMethod.GetProperty("AcceptUrl");
+
+                if (acceptUrl != null)
+                    acceptUrl.SetValue("/basket/confirmation/");
+            }
+
+            paymentMethod.PaymentMethodServiceName = "Default Payment Method Service";
+            paymentMethod.Pipeline = "Checkout";
+
             paymentMethod.Save();
             return paymentMethod;
         }
