@@ -322,7 +322,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private static Category CreateCategory(ProductCatalog catalog, string name)
         {
             var definition = Definition.SingleOrDefault(d => d.Name == "Default Category Definition");
-            var category = Category.SingleOrDefault(c => c.Name == name) ?? new CategoryFactory().NewWithDefaults(catalog, definition, name);
+            var category = Category.SingleOrDefault(c => c.Name == name) ?? ObjectFactory.Instance.Resolve<ICategoryFactory>().NewWithDefaults(catalog, definition, name);
             category.DisplayOnSite = true;
 
             GenericHelpers.DoForEachCulture(language =>
