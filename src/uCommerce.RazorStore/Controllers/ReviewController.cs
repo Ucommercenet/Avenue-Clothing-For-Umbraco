@@ -65,7 +65,7 @@ namespace UCommerce.RazorStore.Controllers
 
             if (request.Form.AllKeys.All(x => x != "review-product"))
             {
-                return View();
+                return RedirectToAction("Index");
             }
 
             var name = formReview.Name;

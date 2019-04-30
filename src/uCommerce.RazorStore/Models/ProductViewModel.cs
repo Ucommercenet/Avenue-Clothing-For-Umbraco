@@ -4,14 +4,15 @@ using System.Linq;
 using System.Web;
 using UCommerce.Api;
 using Umbraco.Web;
+using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
 
-    public class ProductPageViewModel: RenderModel
+    public class ProductPageViewModel: ContentModel
     {
-        public ProductPageViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+        public ProductPageViewModel() : base(Current.UmbracoContext.PublishedRequest.PublishedContent)
         {
             
         }
@@ -23,9 +24,9 @@ namespace UCommerce.RazorStore.Models
         public bool ItemAlreadyExists { get; set; } 
     }
 
-	public class ProductViewModel : RenderModel
+	public class ProductViewModel : ContentModel
 	{
-		public ProductViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+		public ProductViewModel() : base(Current.UmbracoContext.PublishedRequest.PublishedContent)
         {
 			Variants = new List<ProductViewModel>();
             Properties = new List<ProductPropertiesViewModel>();

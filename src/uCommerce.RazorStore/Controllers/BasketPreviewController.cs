@@ -12,10 +12,10 @@ namespace UCommerce.RazorStore.Controllers
 	public class BasketpreviewController : RenderMvcController
     {
         [HttpGet]
-        public override ActionResult Index(RenderModel m)
+        public override ActionResult Index(ContentModel m)
 		{
 			PurchaseOrderViewModel model = MapOrder();
-			return base.View("/Views/Preview.cshtml", model);
+			return View("/Views/Preview.cshtml", model);
 		}
 
 		private PurchaseOrderViewModel MapOrder()
@@ -92,7 +92,7 @@ namespace UCommerce.RazorStore.Controllers
 		{
 			TransactionLibrary.RequestPayments();
 
-            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
+            var root = PublishedRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
             var confirmation = root.Descendants("confirmation").FirstOrDefault();
             return Redirect(confirmation.Url);
 

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Umbraco.Web;
+using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
-	public class PaymentViewModel: RenderModel
+	public class PaymentViewModel: ContentModel
 	{
-        public PaymentViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+        public PaymentViewModel() : base(Current.UmbracoContext.PublishedRequest.PublishedContent)
         {
 	        
 	    }

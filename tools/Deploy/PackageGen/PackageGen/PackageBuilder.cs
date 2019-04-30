@@ -99,6 +99,7 @@ namespace PackageGen
                 GetXmlStub("Languages"),
                 GetXmlStub("DataTypes"),
                 GetXmlStub("Actions"),
+                GetXmlStub("Media"),
                 new XElement("control", _installControl));
 
             var savePath = Path.Combine(_tempFolder.FullName, "package.xml");

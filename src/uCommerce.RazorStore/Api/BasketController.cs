@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Api.Model;
 using UCommerce.Runtime;
-using Umbraco.Web;
 using Basket = UCommerce.RazorStore.Api.Model.Basket;
 
 namespace UCommerce.RazorStore.Api
@@ -125,9 +123,10 @@ namespace UCommerce.RazorStore.Api
             if (String.IsNullOrWhiteSpace(mediaId))
                 return String.Empty;
 
-            var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
-            var image = umbracoHelper.Media(mediaId);
-            return image.url;
+            var umbracoHelper = Umbraco.Web.Composing.Current.UmbracoHelper;
+            //var image = umbracoHelper.Media(mediaId);
+            var image = umbracoHelper.Media(int.Parse(mediaId));
+            return image.Url;
         }
     }
 }

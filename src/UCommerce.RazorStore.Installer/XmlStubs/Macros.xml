@@ -3,10 +3,8 @@
   <macro>
     <name>uCommerce Category Navigation</name>
     <alias>uCommerceCategoryNavigation</alias>
-    <scriptType />
-    <scriptAssembly />
-    <scriptingFile>~/Views/MacroPartials/uCommerce CategoryNavigation.cshtml</scriptingFile>
-    <xslt />
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/uCommerce CategoryNavigation.cshtml</macroSource>
     <useInEditor>False</useInEditor>
     <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
@@ -17,10 +15,8 @@
   <macro>
     <name>uCommerce Facets</name>
     <alias>uCommerceFacets</alias>
-    <scriptType />
-    <scriptAssembly />
-    <scriptingFile>~/Views/MacroPartials/uCommerce Facets.cshtml</scriptingFile>
-    <xslt />
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/uCommerce Facets.cshtml</macroSource>
     <useInEditor>False</useInEditor>
     <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
@@ -31,10 +27,8 @@
   <macro>
     <name>uCommerce Mini Basket</name>
     <alias>uCommerceMiniBasket</alias>
-    <scriptType />
-    <scriptAssembly />
-    <scriptingFile>~/Views/MacroPartials/uCommerce Mini Basket.cshtml</scriptingFile>
-    <xslt />
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/uCommerce Mini Basket.cshtml</macroSource>
     <useInEditor>False</useInEditor>
     <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
@@ -45,10 +39,8 @@
   <macro>
     <name>uCommerce Voucher</name>
     <alias>uCommerceVoucher</alias>
-    <scriptType />
-    <scriptAssembly />
-    <scriptingFile>~/Views/MacroPartials/uCommerce Voucher.cshtml</scriptingFile>
-    <xslt />
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/uCommerce Voucher.cshtml</macroSource>
     <useInEditor>False</useInEditor>
     <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
@@ -59,10 +51,8 @@
   <macro>
     <name>uCommerce Homepage Catalog</name>
     <alias>uCommerceHomepageCatalog</alias>
-    <scriptType />
-    <scriptAssembly />
-    <scriptingFile>~/Views/MacroPartials/uCommerce Homepage Catalog.cshtml</scriptingFile>
-    <xslt />
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/uCommerce Homepage Catalog.cshtml</macroSource>
     <useInEditor>False</useInEditor>
     <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
@@ -73,10 +63,8 @@
   <macro>
     <name>uCommerce Breadcrumbs</name>
     <alias>uCommerceBreadcrumbs</alias>
-    <scriptType />
-    <scriptAssembly />
-    <scriptingFile>~/Views/MacroPartials/uCommerce Breadcrumbs.cshtml</scriptingFile>
-    <xslt />
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/uCommerce Breadcrumbs.cshtml</macroSource>
     <useInEditor>False</useInEditor>
     <dontRender>False</dontRender>
     <refreshRate>0</refreshRate>
@@ -87,10 +75,8 @@
      <macro>
       <name>uCommerce Product Reviews</name>
       <alias>uCommerceProductReviews</alias>
-      <scriptType />
-      <scriptAssembly />
-      <scriptingFile>~/Views/MacroPartials/uCommerceProductReviews.cshtml</scriptingFile>
-      <xslt />
+       <macroType>PartialView</macroType>
+      <macroSource>~/Views/MacroPartials/uCommerceProductReviews.cshtml</macroSource>
       <useInEditor>False</useInEditor>
       <dontRender>False</dontRender>
       <refreshRate>0</refreshRate>

@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
 using UCommerce.Security;
-using umbraco.cms.businesslogic.web;
+using Umbraco.Core.Composing;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
@@ -118,12 +119,13 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void ConfigureEmailContent()
         {
-            var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
+            //var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
+            var docType = Current.Services.ContentTypeService.Get("uCommerceEmail");
             if (docType == null)
                 return;
 
-            var emails = Document.GetDocumentsOfDocumentType(docType.Id);
-            var emailContent = emails.FirstOrDefault(e => e.Text == "Order Confirmation Email");
+            var emails = Current.Services.ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null);
+            var emailContent = emails.FirstOrDefault(e => e.Name == "Order Confirmation Email");
             if (emailContent == null)
                 return;
 
@@ -331,12 +333,6 @@ namespace UCommerce.RazorStore.Installer.Helpers
             field.IsVariantProperty = variantProperty;
             field.RenderInEditor = true;
 	        field.Facet = promotoToFacet;
-
-            //Helpers.DoForEachCulture(language =>
-            //    {
-            //        if (field.GetDescription(language) == null)
-            //            field.AddProductDefinitionFieldDescription(new ProductDefinitionFieldDescription { CultureCode = language, DisplayName = displayName, Description = displayName });
-            //    });
 
             definition.AddProductDefinitionField(field);
             definition.Save();

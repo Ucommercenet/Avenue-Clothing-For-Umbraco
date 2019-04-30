@@ -1,19 +1,18 @@
 ﻿using System.Linq;
 using System.Web;
-using System.Xml;
-using umbraco;
-using umbraco.cms.businesslogic.web;
-using umbraco.interfaces;
+using System.Xml.Linq;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Installer.Helpers;
-using helper = umbraco.cms.businesslogic.packager.standardPackageActions.helper;
+using Umbraco.Web.Composing;
 
 namespace UCommerce.RazorStore.Installer.PackageActions
 {
 
-    public class InstallDefaultAcceleratorData : IPackageAction
+    public class InstallDefaultAcceleratorData : Umbraco.Core.PackageActions.IPackageAction
     {
-        public bool Execute(string packageName, XmlNode xmlData)
+
+        public bool Execute(string packageName, XElement xmlData)
         {
             var installer = new ConfigurationInstaller();
             installer.Configure();
@@ -24,85 +23,75 @@ namespace UCommerce.RazorStore.Installer.PackageActions
 
             CreateMediaContent();
 
-	        DeleteOldUCommerceData();
+            DeleteOldUCommerceData();
 
-	        PublishContent();
+            PublishContent();
 
-	        return true;
+            return true;
         }
 
-	    private void CreateMediaContent()
-	    {
-		    var server = HttpContext.Current.Server;
-		    var mediaService = new MediaService(server.MapPath(umbraco.IO.SystemDirectories.Media),
-			    server.MapPath("~/umbraco/ucommerce/install/files/"));
+        private void CreateMediaContent()
+        {
+            var server = HttpContext.Current.Server;
+            var mediaService = new MediaService(server.MapPath(Umbraco.Core.IO.SystemDirectories.Media),
+                server.MapPath("~/umbraco/ucommerce/install/files/"));
 
-		    var categories = Category.All().ToList();
-		    var products = Product.All().ToList();
+            var categories = Category.All().ToList();
+            var products = Product.All().ToList();
 
-		    mediaService.InstallCategoryImages(categories);
-		    mediaService.InstallProductImages(products);
-	    }
+            mediaService.InstallCategoryImages(categories);
+            mediaService.InstallProductImages(products);
+        }
 
-	    private void PublishContent()
-	    {
-		    var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "home");
-		    if (docType != null)
-		    {
-			    var root = Document.GetDocumentsOfDocumentType(docType.Id);
-			    foreach (var document in root)
-			    {
-				    Node.PublishChildDocs(document);
-			    }
-			    library.RefreshContent();
-		    }
-	    }
+        private void PublishContent()
+        {
+            var docType = Current.Services.ContentTypeService.GetAll().FirstOrDefault(x => x.Alias == "home");
 
-	    private void DeleteOldUCommerceData()
-	    {
-		    var group = ProductCatalogGroup.SingleOrDefault(g => g.Name == "uCommerce.dk");
-		    if (group != null)
-		    {
-			    // Delete products in group
-			    foreach (
-				    var relation in
-					    CategoryProductRelation.All()
-						    .Where(x => group.ProductCatalogs.Contains(x.Category.ProductCatalog))
-						    .ToList())
-			    {
-				    var category = relation.Category;
-				    var product = relation.Product;
-				    category.RemoveProduct(product);
-				    product.Delete();
-			    }
+            if (docType != null)
+            {
+                var root = Current.Services.ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null).FirstOrDefault();
+                Current.Services.ContentService.SaveAndPublishBranch(root, true);
+            }
+        }
 
-			    // Delete catalogs
-			    foreach (var catalog in group.ProductCatalogs)
-			    {
-				    catalog.Deleted = true;
-			    }
+        private void DeleteOldUCommerceData()
+        {
+            var group = ObjectFactory.Instance.Resolve<IRepository<ProductCatalogGroup>>().SingleOrDefault(g => g.Name == "uCommerce.dk");
+            if (group != null)
+            {
+                // Delete products in group
+                var relations = CategoryProductRelation.All()
+                    .Where(x => group.ProductCatalogs.Contains(x.Category.ProductCatalog))
+                    .ToList();
+                foreach (var relation in relations)
+                {
+                    var category = relation.Category;
+                    var product = relation.Product;
+                    category.RemoveProduct(product);
+                    product.Delete();
+                }
 
-			    // Delete group itself
-			    group.Deleted = true;
-			    group.Save();
-		    }
-	    }
+                // Delete catalogs
+                foreach (var catalog in group.ProductCatalogs)
+                {
+                    catalog.Deleted = true;
+                }
 
+                // Delete group itself
+                group.Deleted = true;
+                group.Save();
+            }
+        }
 
-	    public string Alias()
+        public string Alias()
         {
             return "InstallDefaultAcceleratorData";
         }
 
-        public bool Undo(string packageName, XmlNode xmlData)
+        public bool Undo(string packageName, XElement xmlData)
         {
-            return true;
+            throw new System.NotImplementedException();
         }
 
-        public XmlNode SampleXml()
-        {
-            string sample = string.Format("<Action runat=\"install\" undo=\"false\" alias=\"{0}\" />", Alias());
-            return helper.parseStringToXmlNode(sample);
-        }
     }
 }

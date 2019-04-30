@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Umbraco.Web;
+using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 
 
 namespace UCommerce.RazorStore.Models
 {
-    public class CategoryViewModel: RenderModel
+    public class CategoryViewModel: ContentModel
     {
-        public CategoryViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+        public CategoryViewModel() : base(Current.UmbracoContext.PublishedRequest.PublishedContent)
         //public CategoryViewModel()
         {
             Categories = new List<CategoryViewModel>();
