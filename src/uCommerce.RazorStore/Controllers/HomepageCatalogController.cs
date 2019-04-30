@@ -6,6 +6,7 @@ using UCommerce.Content;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers

@@ -6,9 +6,9 @@ namespace UCommerce.RazorStore.Controllers
 	public class HomeController : RenderMvcController
 	{
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(ContentModel model)
 		{
-			return View("/views/frontpage.cshtml");
+			return View("/views/frontpage.cshtml", model.Content);
 		}
 
 
