@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using UCommerce.EntitiesV2;
+using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
@@ -80,7 +81,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 if (media == null)
                     continue;
 
-                c.ImageMediaId = media.Id.ToString();
+                c.ImageMediaId = media.GetUdi().Guid.ToString();
                 c.Save();
 
                 items.Add(media);
@@ -107,8 +108,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 if (media == null)
                     continue;
 
-                p.ThumbnailImageMediaId = media.Id.ToString();
-                p.PrimaryImageMediaId = media.Id.ToString();
+                p.ThumbnailImageMediaId = media.GetUdi().Guid.ToString();
+                p.PrimaryImageMediaId = media.GetUdi().Guid.ToString();
                 p.Save();
 
                 items.Add(media);

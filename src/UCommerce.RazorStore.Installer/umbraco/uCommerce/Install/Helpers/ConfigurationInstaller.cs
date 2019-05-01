@@ -5,6 +5,7 @@ using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
 using UCommerce.Security;
+using Umbraco.Core;
 using Umbraco.Core.Composing;
 
 namespace UCommerce.RazorStore.Installer.Helpers
@@ -113,13 +114,11 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var emailProfile = EmailProfile.SingleOrDefault(p => p.Name == name) ?? new EmailProfile();
             emailProfile.Name = name;
             emailProfile.Deleted = false;
-            //TODO: Finish configuring the profile
             emailProfile.Save();
         }
 
         private void ConfigureEmailContent()
         {
-            //var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
             var docType = Current.Services.ContentTypeService.Get("uCommerceEmail");
             if (docType == null)
                 return;
@@ -155,7 +154,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
             foreach (var content in emailType.EmailProfile.EmailContents)
             {
-                content.ContentId = emailContent.Id.ToString();
+                content.ContentId = emailContent.GetUdi().Guid.ToString();
                 content.Save();
             }
         }
