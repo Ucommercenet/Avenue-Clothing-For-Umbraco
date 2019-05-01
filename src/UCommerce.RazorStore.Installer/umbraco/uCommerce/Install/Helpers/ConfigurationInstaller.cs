@@ -7,11 +7,16 @@ using UCommerce.Infrastructure;
 using UCommerce.Security;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
+using Umbraco.Core.Services;
+using IUserService = UCommerce.Security.IUserService;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class ConfigurationInstaller
     {
+        public IContentTypeService ContentTypeService => Current.Services.ContentTypeService;
+        public IContentService ContentService => Current.Services.ContentService;
+        
         private Currency _defaultCurrency;
         private PriceGroup _defaultPriceGroup;
         private IList<Country> _countries = new List<Country>();
@@ -119,11 +124,11 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void ConfigureEmailContent()
         {
-            var docType = Current.Services.ContentTypeService.Get("uCommerceEmail");
+            var docType = ContentTypeService.Get("uCommerceEmail");
             if (docType == null)
                 return;
 
-            var emails = Current.Services.ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null);
+            var emails = ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null);
             var emailContent = emails.FirstOrDefault(e => e.Name == "Order Confirmation Email");
             if (emailContent == null)
                 return;

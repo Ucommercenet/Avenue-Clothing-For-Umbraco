@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Installer.Helpers;
+using Umbraco.Core.Services;
 using Umbraco.Web.Composing;
 
 namespace UCommerce.RazorStore.Installer.PackageActions
@@ -11,7 +12,9 @@ namespace UCommerce.RazorStore.Installer.PackageActions
 
     public class InstallDefaultAcceleratorData : Umbraco.Core.PackageActions.IPackageAction
     {
-
+        public IContentTypeService ContentTypeService => Current.Services.ContentTypeService;
+        public IContentService ContentService => Current.Services.ContentService;
+        
         public bool Execute(string packageName, XElement xmlData)
         {
             var installer = new ConfigurationInstaller();
@@ -45,12 +48,12 @@ namespace UCommerce.RazorStore.Installer.PackageActions
 
         private void PublishContent()
         {
-            var docType = Current.Services.ContentTypeService.GetAll().FirstOrDefault(x => x.Alias == "home");
+            var docType = ContentTypeService.GetAll().FirstOrDefault(x => x.Alias == "home");
 
             if (docType != null)
             {
-                var root = Current.Services.ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null).FirstOrDefault();
-                Current.Services.ContentService.SaveAndPublishBranch(root, true);
+                var root = ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null).FirstOrDefault();
+                ContentService.SaveAndPublishBranch(root, true);
             }
         }
 
