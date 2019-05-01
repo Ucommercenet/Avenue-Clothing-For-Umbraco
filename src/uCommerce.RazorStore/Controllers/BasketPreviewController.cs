@@ -92,8 +92,8 @@ namespace UCommerce.RazorStore.Controllers
 		{
 			TransactionLibrary.RequestPayments();
 
-            var root = PublishedRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var confirmation = root.Descendants("confirmation").FirstOrDefault();
+			var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+			var confirmation = parent.Children(x=>x.Name == "Confirmation").FirstOrDefault();
             return Redirect(confirmation.Url);
 
         }

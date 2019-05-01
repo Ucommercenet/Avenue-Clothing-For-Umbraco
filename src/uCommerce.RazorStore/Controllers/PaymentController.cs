@@ -68,8 +68,8 @@ namespace UCommerce.RazorStore.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-            var root = PublishedRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var preview = root.Descendants("basketPreview").FirstOrDefault();
+			var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+            var preview = parent.Children(x=>x.Name == "Preview").FirstOrDefault();
             return Redirect(preview.Url);
         }
 

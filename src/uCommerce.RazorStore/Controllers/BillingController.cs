@@ -69,8 +69,8 @@ namespace UCommerce.RazorStore.Controllers
            
             TransactionLibrary.ExecuteBasketPipeline();
 
-            var root = PublishedRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var shipping = root.Descendants("shipping").FirstOrDefault();
+            var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+            var shipping = parent.Children(x => x.Name == "Shipping").FirstOrDefault();
             return Redirect(shipping.Url);
         }
 

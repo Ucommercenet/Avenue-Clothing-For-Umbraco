@@ -52,8 +52,8 @@ namespace UCommerce.RazorStore.Controllers
 			TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, overwriteExisting: true);
 			TransactionLibrary.ExecuteBasketPipeline();
 
-            var root = PublishedRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var payment = root.Descendants("payment").FirstOrDefault();
+            var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+            var payment = parent.Children(x => x.Name == "Payment").FirstOrDefault();
             return Redirect(payment.Url);
         }
 	}
