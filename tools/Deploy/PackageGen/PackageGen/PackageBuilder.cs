@@ -111,7 +111,7 @@ namespace PackageGen
         private XElement CreateFilesStub()
         {
             WriteStubHeader("Files");
-            var extensionsToIgnore = new List<string>() { ".css", ".master" };
+            var extensionsToIgnore = new List<string>() { ".master" };
             var items = CreateXmlFromFileType("*.*", (file, contents) =>
                 {
                     if (extensionsToIgnore.Contains(file.Extension))
@@ -203,7 +203,7 @@ namespace PackageGen
                 var nameWithoutExt = Path.GetFileNameWithoutExtension(file.FullName);
                 return new XElement("Stylesheet",
                         new XElement("Name", nameWithoutExt),
-                        new XElement("FileName", nameWithoutExt),
+                        new XElement("FileName", file.Name),
                         new XElement("Content", new XCData(contents))
                     );
             });

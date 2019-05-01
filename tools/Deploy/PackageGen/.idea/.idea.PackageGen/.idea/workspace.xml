@@ -2,50 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2f14cc9-8cf2-4f1c-888e-9fdac5e5a871" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Media.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/PackageActions/InstallDefaultAcceleratorData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/PackageActions/InstallDefaultAcceleratorData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../src/gulpfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../src/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Admin.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Infrastructure.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Installer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.NHibernate.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Pipelines.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Presentation.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.SystemHttp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Transactions.Payments.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Umbraco7.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Web.Api.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../package/uCommerce_Demo_Store_-_Razor_5.0.7.19093.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/UCommerce.RazorStore.Installer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/UCommerce.RazorStore.Installer.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Info.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Macros.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Macros.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/Catalogue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/Catalogue.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/ConfigurationInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/ConfigurationInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/Media.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/Media.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/Node.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/Node.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Api/BasketController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Api/BasketController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BasketController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BasketController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/uCommerce.DemoStore.Web.IIS7.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/uCommerce.DemoStore.Web.config" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BasketPreviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BasketPreviewController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BillingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BillingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BreadcrumbsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BreadcrumbsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/CategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/CategoryController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ConfirmationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ConfirmationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/PaymentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/PaymentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ProductController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ReviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ReviewController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/SearchController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/SearchController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ShippingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/ShippingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/uCommerceEmailController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/uCommerceEmailController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/AddressDetailsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/AddressDetailsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/CategoryViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/CategoryViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/PaymentViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/PaymentViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/ProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/ProductViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/ProductsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/ProductsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/PurchaseOrderViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/PurchaseOrderViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/ShippingViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Models/ShippingViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/frontpage.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/frontpage.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/web.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/uCommerce.RazorStore.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/uCommerce.RazorStore.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/web.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DemoStoreDeploy.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../DemoStoreDeploy.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PackageGen.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../PackageGen.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PackageGen.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../PackageGen.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PackageGen/PackageBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PackageGen/PackageBuilder.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,11 +38,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="102">
               <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding>
                 <marker date="1497946635538" expanded="true" signature="20:390" ph="{...}" />
@@ -71,54 +54,54 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PackageGen/PackageBuilder.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="62" column="64" selection-start-line="62" selection-start-column="64" selection-end-line="62" selection-end-column="64" />
+            <state relative-caret-position="125">
+              <caret line="108" column="9" lean-forward="true" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
               <folding>
-                <marker date="1556641079120" expanded="true" signature="59:10332" ph="{...}" />
-                <marker date="1556641079120" expanded="false" signature="72:210" ph="..." />
-                <marker date="1556641079120" expanded="true" signature="243:10330" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="838:1157" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="1202:1574" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="1612:1785" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="1817:2080" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="2118:2539" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="2171:2348" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="2393:2529" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="2580:3466" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="3510:5092" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="3710:4855" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="4980:5048" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="5155:5372" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="5673:7406" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="5825:7172" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="6173:6334" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="7295:7363" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="7456:8281" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="7585:8057" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="8163:8234" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="8408:8506" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="8635:8868" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="8922:9526" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="9112:9369" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="9241:9329" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="9618:9756" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="9818:9966" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="9889:9956" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="10030:10177" ph="{...}" />
-                <marker date="1556641079120" expanded="true" signature="10228:10324" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="59:10319" ph="{...}" />
+                <marker date="1556713810263" expanded="false" signature="72:210" ph="..." />
+                <marker date="1556713810263" expanded="true" signature="243:10317" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="838:1157" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="1202:1574" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="1612:1785" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="1817:2080" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="2118:2539" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="2171:2348" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="2393:2529" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="2580:3466" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="3510:5084" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="3702:4847" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="4972:5040" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="5147:5364" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="5665:7398" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="5817:7164" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="6165:6326" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="7287:7355" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="7448:8268" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="7577:8044" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="8150:8221" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="8395:8493" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="8622:8855" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="8909:9513" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="9099:9356" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="9228:9316" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="9605:9743" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="9805:9953" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="9876:9943" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="10017:10164" ph="{...}" />
+                <marker date="1556713810263" expanded="true" signature="10215:10311" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PackageGen/Program.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="82" column="52" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="52" />
+            <state relative-caret-position="561">
+              <caret line="37" column="37" lean-forward="true" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
               <folding>
                 <marker date="1497946635553" expanded="true" signature="35:3504" ph="{...}" />
                 <marker date="1497946635553" expanded="false" signature="48:84" ph="..." />
@@ -143,12 +126,16 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>exe</find>
+      <find>.css</find>
     </findStrings>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PackageGen/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PackageGen/PackageBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PackageGen/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C8EA872B-C6C3-4547-B28C-904F5E42F85A/2c/05b89605/Path.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PackageGen/packages.config" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -168,18 +155,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
       <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="PackageGen" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="PackageGen" type="24d0babc:SolutionExplorerModelNode" />
               <item name="PackageGen" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
@@ -240,11 +222,12 @@
       <option name="presentableId" value="Default" />
       <updated>1556640988322</updated>
       <workItem from="1556640989562" duration="237000" />
+      <workItem from="1556709712852" duration="3436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="237000" />
+    <option name="totallyTimeSpent" value="3673000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -256,22 +239,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Image Layers" />
-      <window_info id="Capture Tool" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15724947" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="NuGet" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Unit Tests" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Performance Profiler" />
-      <window_info anchor="bottom" id="Build" weight="0.3290461" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -279,13 +253,22 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Errors In Solution" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Unit Tests Coverage" />
+      <window_info anchor="bottom" id="NuGet" order="7" weight="0.32953465" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" weight="0.32953465" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32953465" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Unit Tests" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.32953465" />
+      <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Build" order="15" visible="true" weight="0.328585" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="6" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,64 +285,17 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C8EA872B-C6C3-4547-B28C-904F5E42F85A/2c/05b89605/Path.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding>
-            <marker date="1497946635538" expanded="true" signature="20:390" ph="{...}" />
-            <marker date="1497946635538" expanded="true" signature="55:152" ph="/// Represents the Package.Xml manifest file used by Umbraco ... " />
-            <marker date="1497946635538" expanded="true" signature="180:388" ph="{...}" />
-            <marker date="1497946635538" expanded="true" signature="259:382" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PackageGen/PackageBuilder.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="62" column="64" selection-start-line="62" selection-start-column="64" selection-end-line="62" selection-end-column="64" />
-          <folding>
-            <marker date="1556641079120" expanded="true" signature="59:10332" ph="{...}" />
-            <marker date="1556641079120" expanded="false" signature="72:210" ph="..." />
-            <marker date="1556641079120" expanded="true" signature="243:10330" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="838:1157" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="1202:1574" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="1612:1785" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="1817:2080" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="2118:2539" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="2171:2348" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="2393:2529" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="2580:3466" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="3510:5092" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="3710:4855" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="4980:5048" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="5155:5372" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="5673:7406" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="5825:7172" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="6173:6334" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="7295:7363" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="7456:8281" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="7585:8057" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="8163:8234" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="8408:8506" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="8635:8868" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="8922:9526" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="9112:9369" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="9241:9329" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="9618:9756" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="9818:9966" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="9889:9956" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="10030:10177" ph="{...}" />
-            <marker date="1556641079120" expanded="true" signature="10228:10324" ph="{...}" />
-          </folding>
+        <state relative-caret-position="380">
+          <caret line="814" column="25" selection-start-line="814" selection-start-column="25" selection-end-line="814" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PackageGen/Program.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="82" column="52" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="52" />
+        <state relative-caret-position="561">
+          <caret line="37" column="37" lean-forward="true" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
           <folding>
             <marker date="1497946635553" expanded="true" signature="35:3504" ph="{...}" />
             <marker date="1497946635553" expanded="false" signature="48:84" ph="..." />
@@ -378,8 +314,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <marker date="1497946635538" expanded="true" signature="20:390" ph="{...}" />
+            <marker date="1497946635538" expanded="true" signature="55:152" ph="/// Represents the Package.Xml manifest file used by Umbraco ... " />
+            <marker date="1497946635538" expanded="true" signature="180:388" ph="{...}" />
+            <marker date="1497946635538" expanded="true" signature="259:382" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PackageGen/PackageBuilder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="108" column="9" lean-forward="true" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
+          <folding>
+            <marker date="1556713810263" expanded="true" signature="59:10319" ph="{...}" />
+            <marker date="1556713810263" expanded="false" signature="72:210" ph="..." />
+            <marker date="1556713810263" expanded="true" signature="243:10317" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="838:1157" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="1202:1574" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="1612:1785" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="1817:2080" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="2118:2539" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="2171:2348" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="2393:2529" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="2580:3466" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="3510:5084" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="3702:4847" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="4972:5040" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="5147:5364" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="5665:7398" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="5817:7164" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="6165:6326" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="7287:7355" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="7448:8268" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="7577:8044" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="8150:8221" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="8395:8493" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="8622:8855" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="8909:9513" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="9099:9356" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="9228:9316" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="9605:9743" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="9805:9953" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="9876:9943" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="10017:10164" ph="{...}" />
+            <marker date="1556713810263" expanded="true" signature="10215:10311" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="hg4idea.settings">
+    <option name="CHECK_INCOMING_OUTGOING" value="true" />
     <option name="RECENT_HG_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
 </project>
