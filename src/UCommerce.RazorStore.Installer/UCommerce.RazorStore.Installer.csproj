@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="umbraco\uCommerce\Apps\Intialize\Initialize.InstallAccelerator.config" />
     <Content Include="XmlStubs\Actions.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -153,8 +154,10 @@
     <Content Include="umbraco\uCommerce\Install\Files\Product\PMMSFSS-LE.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initialize\InstallAccelerator.cs" />
     <Compile Include="PackageActions\InstallDefaultAcceleratorData.cs" />
     <Compile Include="PackageActions\PackageActionsHelpers.cs" />
+    <Compile Include="PackageActions\UnloadAppDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />
