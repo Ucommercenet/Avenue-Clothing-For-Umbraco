@@ -154,7 +154,6 @@
     <Compile Include="Initialize\InstallAccelerator.cs" />
     <Compile Include="PackageActions\InstallDefaultAcceleratorData.cs" />
     <Compile Include="PackageActions\PackageActionsHelpers.cs" />
-    <Compile Include="PackageActions\UnloadAppDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />

@@ -23,11 +23,11 @@ namespace UCommerce.RazorStore.Installer.Initialize
             installer2.Configure();
 
             var defaultAcceleratorDataInstaller = new InstallDefaultAcceleratorData();
-            defaultAcceleratorDataInstaller.CreateMediaContent();
-
+//            defaultAcceleratorDataInstaller.CreateMediaContent();
+//
             defaultAcceleratorDataInstaller.DeleteOldUCommerceData();
-
-            defaultAcceleratorDataInstaller.PublishContent();
+//
+//            defaultAcceleratorDataInstaller.PublishContent();
 
             LoggingService.Log<InstallAccelerator>("Installing Avenue Clothing finished successfully.");
             return PipelineExecutionResult.Success;
