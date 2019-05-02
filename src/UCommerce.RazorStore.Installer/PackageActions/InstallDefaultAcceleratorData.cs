@@ -6,16 +6,34 @@ using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Installer.Helpers;
 using Umbraco.Core.Services;
 using Umbraco.Web.Composing;
-using Umbraco.Web.Routing;
 
 namespace UCommerce.RazorStore.Installer.PackageActions
 {
-    public class InstallDefaultAcceleratorData
+
+    public class InstallDefaultAcceleratorData : Umbraco.Core.PackageActions.IPackageAction
     {
         public IContentTypeService ContentTypeService => Current.Services.ContentTypeService;
         public IContentService ContentService => Current.Services.ContentService;
         
-        public virtual void CreateMediaContent()
+        public bool Execute(string packageName, XElement xmlData)
+        {
+            var installer = new ConfigurationInstaller();
+            installer.Configure();
+
+            // Install Demo store Catalog
+            var installer2 = new CatalogueInstaller("avenue-clothing.com", "Demo Store");
+            installer2.Configure();
+
+            CreateMediaContent();
+
+            DeleteOldUCommerceData();
+
+            PublishContent();
+
+            return true;
+        }
+
+        private void CreateMediaContent()
         {
             var server = HttpContext.Current.Server;
             var mediaService = new MediaService(server.MapPath(Umbraco.Core.IO.SystemDirectories.Media),
@@ -28,7 +46,7 @@ namespace UCommerce.RazorStore.Installer.PackageActions
             mediaService.InstallProductImages(products);
         }
 
-        public virtual void PublishContent()
+        private void PublishContent()
         {
             var docType = ContentTypeService.GetAll().FirstOrDefault(x => x.Alias == "home");
 
@@ -39,7 +57,7 @@ namespace UCommerce.RazorStore.Installer.PackageActions
             }
         }
 
-        public virtual void DeleteOldUCommerceData()
+        private void DeleteOldUCommerceData()
         {
             var group = ObjectFactory.Instance.Resolve<IRepository<ProductCatalogGroup>>().SingleOrDefault(g => g.Name == "uCommerce.dk");
             if (group != null)
@@ -67,5 +85,16 @@ namespace UCommerce.RazorStore.Installer.PackageActions
                 group.Save();
             }
         }
+
+        public string Alias()
+        {
+            return "InstallDefaultAcceleratorData";
+        }
+
+        public bool Undo(string packageName, XElement xmlData)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
