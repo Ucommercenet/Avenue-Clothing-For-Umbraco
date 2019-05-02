@@ -5,18 +5,12 @@ using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
 using UCommerce.Security;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Services;
 using IUserService = UCommerce.Security.IUserService;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class ConfigurationInstaller
     {
-        public IContentTypeService ContentTypeService => Current.Services.ContentTypeService;
-        public IContentService ContentService => Current.Services.ContentService;
-        
         private Currency _defaultCurrency;
         private PriceGroup _defaultPriceGroup;
         private IList<Country> _countries = new List<Country>();
@@ -106,7 +100,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private void ConfigureEmails()
         {
             ConfigureEmailProfiles();
-            ConfigureEmailContent();
+//            ConfigureEmailContent();
         }
 
         private void ConfigureEmailProfiles()
@@ -122,47 +116,47 @@ namespace UCommerce.RazorStore.Installer.Helpers
             emailProfile.Save();
         }
 
-        private void ConfigureEmailContent()
-        {
-            var docType = ContentTypeService.Get("uCommerceEmail");
-            if (docType == null)
-                return;
-
-            var emails = ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null);
-            var emailContent = emails.FirstOrDefault(e => e.Name == "Order Confirmation Email");
-            if (emailContent == null)
-                return;
-
-            var emailType = EmailProfileInformation.FirstOrDefault(p => p.EmailType.Name == "OrderConfirmation");
-            if (emailType.EmailProfile.EmailContents.All(x => x.CultureCode != "en-US"))
-            {
-                
-                EmailContent newEmailContent = new EmailContent();
-                newEmailContent.EmailProfile = emailType.EmailProfile;
-                newEmailContent.CultureCode = "en-US";
-                newEmailContent.EmailType = emailType.EmailType;
-                newEmailContent.Subject = "Order Confirmation";
-
-                emailType.EmailProfile.EmailContents.Add(newEmailContent);
-            }
-            if (emailType.EmailProfile.EmailContents.All(x => x.CultureCode != "en-GB"))
-            {
-
-                EmailContent newEmailContent = new EmailContent();
-                newEmailContent.EmailProfile = emailType.EmailProfile;
-                newEmailContent.CultureCode = "en-GB";
-                newEmailContent.EmailType = emailType.EmailType;
-                newEmailContent.Subject = "Order Confirmation";
-
-                emailType.EmailProfile.EmailContents.Add(newEmailContent);
-            }
-
-            foreach (var content in emailType.EmailProfile.EmailContents)
-            {
-                content.ContentId = emailContent.GetUdi().Guid.ToString();
-                content.Save();
-            }
-        }
+//        private void ConfigureEmailContent()
+//        {
+//            var docType = ContentTypeService.Get("uCommerceEmail");
+//            if (docType == null)
+//                return;
+//
+//            var emails = ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null);
+//            var emailContent = emails.FirstOrDefault(e => e.Name == "Order Confirmation Email");
+//            if (emailContent == null)
+//                return;
+//
+//            var emailType = EmailProfileInformation.FirstOrDefault(p => p.EmailType.Name == "OrderConfirmation");
+//            if (emailType.EmailProfile.EmailContents.All(x => x.CultureCode != "en-US"))
+//            {
+//                
+//                EmailContent newEmailContent = new EmailContent();
+//                newEmailContent.EmailProfile = emailType.EmailProfile;
+//                newEmailContent.CultureCode = "en-US";
+//                newEmailContent.EmailType = emailType.EmailType;
+//                newEmailContent.Subject = "Order Confirmation";
+//
+//                emailType.EmailProfile.EmailContents.Add(newEmailContent);
+//            }
+//            if (emailType.EmailProfile.EmailContents.All(x => x.CultureCode != "en-GB"))
+//            {
+//
+//                EmailContent newEmailContent = new EmailContent();
+//                newEmailContent.EmailProfile = emailType.EmailProfile;
+//                newEmailContent.CultureCode = "en-GB";
+//                newEmailContent.EmailType = emailType.EmailType;
+//                newEmailContent.Subject = "Order Confirmation";
+//
+//                emailType.EmailProfile.EmailContents.Add(newEmailContent);
+//            }
+//
+//            foreach (var content in emailType.EmailProfile.EmailContents)
+//            {
+//                content.ContentId = emailContent.GetUdi().Guid.ToString();
+//                content.Save();
+//            }
+//        }
 
         private void CreateShippingMethods()
         {

@@ -10,5 +10,4 @@ namespace UCommerce.RazorStore.Installer.Helpers
             Current.Services.ContentService.SaveAndPublishBranch(doc, true);
         }
     }
-
 }

@@ -65,44 +65,41 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UCommerce, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.Admin, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.Admin.dll</HintPath>
+    <Reference Include="UCommerce.Admin, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Admin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Infrastructure.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.Installer.dll</HintPath>
+    <Reference Include="UCommerce.Installer, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Installer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.NHibernate, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.NHibernate.dll</HintPath>
+    <Reference Include="UCommerce.NHibernate, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.Pipelines, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.Pipelines.dll</HintPath>
+    <Reference Include="UCommerce.Pipelines, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Pipelines.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.Presentation, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.Presentation.dll</HintPath>
+    <Reference Include="UCommerce.Presentation, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Presentation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.SystemHttp, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.SystemHttp.dll</HintPath>
+    <Reference Include="UCommerce.SystemHttp, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.SystemHttp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UCommerce.SystemWeb, Version=8.2.0.19119, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.2.0.19119\lib\net45\UCommerce.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Umbraco.Core">
-      <HintPath>..\packages\UmbracoCms.Core.8.0.1\lib\net472\Umbraco.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Umbraco.Examine">
-      <HintPath>..\packages\UmbracoCms.Web.8.0.1\lib\net472\Umbraco.Examine.dll</HintPath>
-    </Reference>
-    <Reference Include="Umbraco.Web">
-      <HintPath>..\packages\UmbracoCms.Web.8.0.1\lib\net472\Umbraco.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="Umbraco.Web.UI">
-      <HintPath>..\packages\UmbracoCms.Web.8.0.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
+    <Reference Include="UCommerce.SystemWeb, Version=8.1.0.19093, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.8.1.0.19093\lib\net45\UCommerce.SystemWeb.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="XmlConfigMerge">
       <HintPath>..\..\lib\XmlConfigMerge\XmlConfigMerge.dll</HintPath>
@@ -159,8 +156,6 @@
     <Compile Include="umbraco\uCommerce\Install\Helpers\Catalogue.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\ConfigurationInstaller.cs" />
     <Compile Include="umbraco\uCommerce\Install\Helpers\GenericHelpers.cs" />
-    <Compile Include="umbraco\uCommerce\Install\Helpers\Node.cs" />
-    <Compile Include="umbraco\uCommerce\Install\Helpers\Media.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
