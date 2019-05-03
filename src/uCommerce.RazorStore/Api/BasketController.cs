@@ -124,7 +124,7 @@ namespace UCommerce.RazorStore.Api
                 return String.Empty;
 
             var umbracoHelper = Umbraco.Web.Composing.Current.UmbracoHelper;
-            //var image = umbracoHelper.Media(mediaId);
+            
             var image = umbracoHelper.Media(Guid.Parse(mediaId));
             return image.Url;
         }
