@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using UCommerce.EntitiesV2;
 using Umbraco.Web;
+using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Models
 {
-	public class PurchaseOrderViewModel : RenderModel
+	public class PurchaseOrderViewModel : ContentModel
 	{
-		public PurchaseOrderViewModel() : base(UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+		public PurchaseOrderViewModel() : base(Current.UmbracoContext.PublishedRequest.PublishedContent)
 		{
 			OrderLines = new List<OrderlineViewModel>();
 		}

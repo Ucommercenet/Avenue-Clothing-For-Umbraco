@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
-using UCommerce.Extensions;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
+using UCommerce.Extensions;
 using Umbraco.Web;
 
 namespace UCommerce.RazorStore.Controllers
@@ -20,7 +21,7 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var category in SiteContext.Current.CatalogContext.CurrentCategories)
             {
-                var breadcrumb = new BreadcrumbsViewModel()
+                var breadcrumb = new BreadcrumbsViewModel
                 {
                     BreadcrumbName = category.DisplayName(),
                     BreadcrumbUrl = CatalogLibrary.GetNiceUrlForCategory(category)
@@ -31,7 +32,7 @@ namespace UCommerce.RazorStore.Controllers
 
             if (product != null)
             {
-                var breadcrumb = new BreadcrumbsViewModel()
+                var breadcrumb = new BreadcrumbsViewModel
                 {
                     BreadcrumbName = product.DisplayName(),
                     BreadcrumbUrl = CatalogLibrary.GetNiceUrlForProduct(product, lastCategory)
@@ -41,8 +42,8 @@ namespace UCommerce.RazorStore.Controllers
 
             if (product == null && lastCategory == null)
             {
-                var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
-                foreach (var level in currentNode.Ancestors().Where("Visible"))
+                var currentNode = CurrentPage;
+                foreach (var level in currentNode.Ancestors().Where(x=>x.IsVisible()))
                 {
                     var breadcrumb = new BreadcrumbsViewModel()
                     {

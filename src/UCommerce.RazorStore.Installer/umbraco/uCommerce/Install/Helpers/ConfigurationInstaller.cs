@@ -1,15 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
 using UCommerce.Infrastructure;
 using UCommerce.Security;
-using umbraco.cms.businesslogic.web;
+using Umbraco.Core;
+using Umbraco.Core.Composing;
+using Umbraco.Core.Services;
+using IUserService = UCommerce.Security.IUserService;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class ConfigurationInstaller
     {
+        public IContentTypeService ContentTypeService => Current.Services.ContentTypeService;
+        public IContentService ContentService => Current.Services.ContentService;
+        
         private Currency _defaultCurrency;
         private PriceGroup _defaultPriceGroup;
         private IList<Country> _countries = new List<Country>();
@@ -112,18 +119,17 @@ namespace UCommerce.RazorStore.Installer.Helpers
             var emailProfile = EmailProfile.SingleOrDefault(p => p.Name == name) ?? new EmailProfile();
             emailProfile.Name = name;
             emailProfile.Deleted = false;
-            //TODO: Finish configuring the profile
             emailProfile.Save();
         }
 
         private void ConfigureEmailContent()
         {
-            var docType = DocumentType.GetAllAsList().FirstOrDefault(t => t.Alias == "uCommerceEmail");
+            var docType = ContentTypeService.Get("uCommerceEmail");
             if (docType == null)
                 return;
 
-            var emails = Document.GetDocumentsOfDocumentType(docType.Id);
-            var emailContent = emails.FirstOrDefault(e => e.Text == "Order Confirmation Email");
+            var emails = ContentService.GetPagedOfType(docType.Id, 0, int.MaxValue, out var b, null);
+            var emailContent = emails.FirstOrDefault(e => e.Name == "Order Confirmation Email");
             if (emailContent == null)
                 return;
 
@@ -153,7 +159,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
             foreach (var content in emailType.EmailProfile.EmailContents)
             {
-                content.ContentId = emailContent.Id.ToString();
+                content.ContentId = emailContent.GetUdi().Guid.ToString();
                 content.Save();
             }
         }
@@ -218,20 +224,6 @@ namespace UCommerce.RazorStore.Installer.Helpers
             {
                 paymentMethod.AddEligibleCountry(country);
             }
-
-            var defaultPaymentMethodService = Definition.SingleOrDefault(x => x.Name == "Default Payment Method Service");
-            if (defaultPaymentMethodService != null)
-            {
-                paymentMethod.Definition = defaultPaymentMethodService;
-                var acceptUrl = paymentMethod.GetProperty("AcceptUrl");
-
-                if (acceptUrl != null)
-                    acceptUrl.SetValue("/basket/confirmation/");
-            }
-
-            paymentMethod.PaymentMethodServiceName = "Default Payment Method Service";
-            paymentMethod.Pipeline = "Checkout";
-
             paymentMethod.Save();
             return paymentMethod;
         }
@@ -345,12 +337,6 @@ namespace UCommerce.RazorStore.Installer.Helpers
             field.IsVariantProperty = variantProperty;
             field.RenderInEditor = true;
 	        field.Facet = promotoToFacet;
-
-            //Helpers.DoForEachCulture(language =>
-            //    {
-            //        if (field.GetDescription(language) == null)
-            //            field.AddProductDefinitionFieldDescription(new ProductDefinitionFieldDescription { CultureCode = language, DisplayName = displayName, Description = displayName });
-            //    });
 
             definition.AddProductDefinitionField(field);
             definition.Save();

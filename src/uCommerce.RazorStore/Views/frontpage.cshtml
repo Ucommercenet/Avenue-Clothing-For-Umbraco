@@ -1,4 +1,5 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using Umbraco.Web
+@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @{
     Layout = "Layout.cshtml";
 }
@@ -18,6 +19,6 @@
     <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="icon-next" aria-hidden="true"></span></a>
 </div>
 <div class="hero-unit">
-    @Umbraco.Field("content")
+    @Model.Value("content")
 </div>
 @Umbraco.RenderMacro("uCommerceHomepageCatalog")

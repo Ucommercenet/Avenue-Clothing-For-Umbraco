@@ -15,7 +15,7 @@ namespace UCommerce.RazorStore.Controllers
     public class SearchController : RenderMvcController
     {
         // GET: Search
-        public ActionResult Index(RenderModel model)
+        public ActionResult Index(ContentModel model)
         {
             var keyword = System.Web.HttpContext.Current.Request.QueryString["search"];
             IEnumerable<Product> products = new List<Product>();
@@ -53,7 +53,7 @@ namespace UCommerce.RazorStore.Controllers
                 });
             }
         
-            return base.View("/Views/Search.cshtml", productsViewModel);
+            return View("/Views/Search.cshtml", productsViewModel);
         }
     }
 }

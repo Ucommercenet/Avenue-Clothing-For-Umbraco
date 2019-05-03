@@ -14,7 +14,7 @@ namespace UCommerce.RazorStore.Controllers
 	public class PaymentController : RenderMvcController
     {
         [HttpGet]
-        public override ActionResult Index(RenderModel model)
+        public override ActionResult Index(ContentModel model)
 		{
             var paymentViewModel = new PaymentViewModel();
             paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
@@ -68,8 +68,8 @@ namespace UCommerce.RazorStore.Controllers
 
 			TransactionLibrary.ExecuteBasketPipeline();
 
-            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var preview = root.Descendants("basketPreview").FirstOrDefault();
+			var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+            var preview = parent.Children(x=>x.Name == "Preview").FirstOrDefault();
             return Redirect(preview.Url);
         }
 
