@@ -8,7 +8,7 @@ namespace UCommerce.RazorStore.Controllers
     public class ConfirmationController : RenderMvcController
     {
         // GET: Confirmation
-        public override ActionResult Index(RenderModel model)
+        public override ActionResult Index(ContentModel model)
         {
           return View("/Views/Confirmation.cshtml");
         }

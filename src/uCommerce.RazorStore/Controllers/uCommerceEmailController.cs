@@ -15,7 +15,7 @@ namespace UCommerce.RazorStore.Controllers
     public class uCommerceEmailController : RenderMvcController
     {
         // GET: uCommerceEmail
-        public override ActionResult Index(RenderModel model)
+        public override ActionResult Index(ContentModel model)
         {
           
             PurchaseOrder basket = TransactionLibrary.GetPurchaseOrder(Guid.Parse(Request.QueryString["orderGuid"]));
@@ -82,7 +82,7 @@ namespace UCommerce.RazorStore.Controllers
                 ViewBag.RowSpan++;
             }
 
-            return base.View("/Views/uCommerceEmail.cshtml", basketModel);
+            return View("/Views/uCommerceEmail.cshtml", basketModel);
         }
     }
 }

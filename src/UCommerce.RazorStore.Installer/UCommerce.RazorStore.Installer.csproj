@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UCommerce.RazorStore.Installer</RootNamespace>
     <AssemblyName>UCommerce.RazorStore.Installer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -50,15 +50,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="businesslogic">
-      <HintPath>..\..\lib\umbraco\businesslogic.dll</HintPath>
-    </Reference>
-    <Reference Include="cms">
-      <HintPath>..\..\lib\umbraco\cms.dll</HintPath>
-    </Reference>
-    <Reference Include="interfaces">
-      <HintPath>..\..\lib\umbraco\interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
@@ -66,55 +57,52 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UCommerce, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Admin, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Admin.dll</HintPath>
+    <Reference Include="UCommerce.Admin, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.Admin.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Installer.dll</HintPath>
+    <Reference Include="UCommerce.Installer, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.NHibernate, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.NHibernate.dll</HintPath>
+    <Reference Include="UCommerce.NHibernate, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Pipelines, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Pipelines.dll</HintPath>
+    <Reference Include="UCommerce.Pipelines, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Presentation, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.Presentation.dll</HintPath>
+    <Reference Include="UCommerce.Presentation, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.SystemHttp, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.SystemHttp.dll</HintPath>
+    <Reference Include="UCommerce.SystemHttp, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.SystemHttp.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.SystemWeb, Version=8.1.0.19088, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\UCommerce.Core.8.1.0.19093\lib\net45\UCommerce.SystemWeb.dll</HintPath>
+    <Reference Include="UCommerce.SystemWeb, Version=8.2.0.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.2.0.19157\lib\net45\UCommerce.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="umbraco">
-      <HintPath>..\..\lib\umbraco\umbraco.dll</HintPath>
+    <Reference Include="Umbraco.Core">
+      <HintPath>..\packages\UmbracoCms.Core.8.0.1\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
-    <Reference Include="umbraco.MacroEngines">
-      <HintPath>..\..\lib\umbraco\umbraco.MacroEngines.dll</HintPath>
+    <Reference Include="Umbraco.Examine">
+      <HintPath>..\packages\UmbracoCms.Web.8.0.1\lib\net472\Umbraco.Examine.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Web">
+      <HintPath>..\packages\UmbracoCms.Web.8.0.1\lib\net472\Umbraco.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Web.UI">
+      <HintPath>..\packages\UmbracoCms.Web.8.0.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="XmlConfigMerge">
       <HintPath>..\..\lib\XmlConfigMerge\XmlConfigMerge.dll</HintPath>
@@ -179,8 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Web.config" />
-    <None Include="umbraco\uCommerce\Install\uCommerce.DemoStore.Web.IIS7.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

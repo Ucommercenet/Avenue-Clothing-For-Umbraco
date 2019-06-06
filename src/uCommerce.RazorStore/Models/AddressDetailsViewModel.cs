@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Umbraco.Web;
+using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
+using Umbraco.Web.Routing;
 
 namespace UCommerce.RazorStore.Models
 {
-	public class AddressDetailsViewModel : RenderModel
+	public class AddressDetailsViewModel : ContentModel
 	{
-		public AddressDetailsViewModel() : base (UmbracoContext.Current.PublishedContentRequest.PublishedContent)
+		public AddressDetailsViewModel() : base (Current.UmbracoContext.PublishedRequest.PublishedContent)
         {
 			ShippingAddress = new AddressViewModel();
 			BillingAddress = new AddressViewModel();

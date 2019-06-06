@@ -1,18 +1,13 @@
-﻿using umbraco.BusinessLogic;
-using umbraco.cms.businesslogic.web;
+﻿using Umbraco.Core.Composing;
+using Umbraco.Core.Models;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class Node
     {
-        public static void PublishChildDocs(Document doc)
+        public static void PublishChildDocs(IContent doc)
         {
-            doc.Publish(User.GetUser(0));
-
-            foreach (var childDoc in doc.Children)
-            {
-                PublishChildDocs(childDoc);
-            }
+            Current.Services.ContentService.SaveAndPublishBranch(doc, true);
         }
     }
 

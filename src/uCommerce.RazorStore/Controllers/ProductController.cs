@@ -17,7 +17,7 @@ namespace UCommerce.RazorStore.Controllers
     public class ProductController : RenderMvcController
     {
         [HttpGet]
-        public ActionResult Index(RenderModel model)
+        public ActionResult Index(ContentModel model)
         {
             return RenderView(false);
         }
@@ -38,9 +38,9 @@ namespace UCommerce.RazorStore.Controllers
             var productViewModel = new ProductViewModel();
 
             productViewModel.Sku = currentProduct.Sku;
-            productViewModel.PriceCalculation = UCommerce.Api.CatalogLibrary.CalculatePrice(currentProduct);
+            productViewModel.PriceCalculation = CatalogLibrary.CalculatePrice(currentProduct);
             productViewModel.Name = currentProduct.DisplayName();
-            productViewModel.LongDescription = currentProduct.LongDescription();
+            productViewModel.LongDescription = currentProduct.DisplayName();
             productViewModel.IsVariant = false;
             productViewModel.IsOrderingAllowed = currentProduct.AllowOrdering;
             productViewModel.TaxCalculation = CatalogLibrary.CalculatePrice(currentProduct).YourTax.ToString();
@@ -79,7 +79,7 @@ namespace UCommerce.RazorStore.Controllers
                 ProductViewModel productModel = new ProductViewModel();
                 productModel.Sku = currentVariant.Sku;
                 productModel.VariantSku = currentVariant.VariantSku;
-                productModel.Name = currentVariant.DisplayName();
+                productModel.Name = currentVariant.DisplayName();;
                 productModel.LongDescription = currentVariant.LongDescription();
                 productModel.IsVariant = true;
                 

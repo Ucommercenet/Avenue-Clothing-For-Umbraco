@@ -15,14 +15,14 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
-        public override ActionResult Index(RenderModel model)
+        public override ActionResult Index(ContentModel model)
         {
             var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
 
             var categoryViewModel = new CategoryViewModel
             {
                 Name = currentCategory.DisplayName(),
-                Description = currentCategory.Description(),
+                Description = currentCategory.DisplayName(),
                 CatalogId = currentCategory.ProductCatalog.Id,
                 CategoryId = currentCategory.Id,
                 Products = MapProductsInCategories(currentCategory)

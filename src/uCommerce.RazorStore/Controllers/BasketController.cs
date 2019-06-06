@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Web.Http;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -7,12 +6,13 @@ using UCommerce.RazorStore.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+
 namespace UCommerce.RazorStore.Controllers
 {
 	public class BasketController : RenderMvcController
     {
-        [System.Web.Mvc.HttpGet]
-		public override ActionResult Index(RenderModel model)
+        [HttpGet]
+		public override ActionResult Index(ContentModel model)
 		{
 			PurchaseOrder basket = TransactionLibrary.GetBasket().PurchaseOrder;
 			var basketModel = new PurchaseOrderViewModel();
@@ -46,7 +46,7 @@ namespace UCommerce.RazorStore.Controllers
 		    return View("/Views/Basket.cshtml", basketModel);
 		}
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public ActionResult Index(PurchaseOrderViewModel model)
         {
             foreach (var orderLine in model.OrderLines)
@@ -61,8 +61,8 @@ namespace UCommerce.RazorStore.Controllers
 
             TransactionLibrary.ExecuteBasketPipeline();
 
-            var shop = model.Content.AncestorsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("home"));
-            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.DocumentTypeAlias.Equals("basket"));
+            var shop = model.Content.AncestorsOrSelf().FirstOrDefault(x => x.ContentType.Alias.Equals("home"));
+            var basket = shop.DescendantsOrSelf().FirstOrDefault(x => x.ContentType.Alias.Equals("basket"));
             return Redirect(basket.Url);
         }
     }

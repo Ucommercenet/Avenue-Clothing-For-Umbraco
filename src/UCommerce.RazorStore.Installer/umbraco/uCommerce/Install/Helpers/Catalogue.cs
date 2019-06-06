@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using UCommerce.EntitiesV2;
 using UCommerce.EntitiesV2.Factories;
@@ -322,7 +321,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
         private static Category CreateCategory(ProductCatalog catalog, string name)
         {
             var definition = Definition.SingleOrDefault(d => d.Name == "Default Category Definition");
-            var category = Category.SingleOrDefault(c => c.Name == name) ?? ObjectFactory.Instance.Resolve<ICategoryFactory>().NewWithDefaults(catalog, definition, name);
+            var categoryFactory = ObjectFactory.Instance.Resolve<ICategoryFactory>();
+            var category = Category.SingleOrDefault(c => c.Name == name) ?? categoryFactory.NewWithDefaults(catalog, definition, name);
             category.DisplayOnSite = true;
 
             GenericHelpers.DoForEachCulture(language =>
@@ -352,9 +352,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
                             });
                 });
 
-           
             CreateProductPricesForProduct(category, price, product);
-            
 
             // uCommerce checks whether the product already exists in the create
             // when creating the new relation.

@@ -12,7 +12,7 @@ namespace UCommerce.RazorStore.Controllers
     public class BillingController : RenderMvcController
     {
         [HttpGet]
-        public override ActionResult Index(RenderModel model)
+        public override ActionResult Index(ContentModel model)
         {
             var addressDetails = new AddressDetailsViewModel();
 
@@ -49,7 +49,7 @@ namespace UCommerce.RazorStore.Controllers
 
             addressDetails.AvailableCountries = Country.All().ToList().Select(x => new SelectListItem() { Text = x.Name, Value = x.CountryId.ToString() }).ToList();
 
-            return base.View("/Views/BillingShippingAddress.cshtml", addressDetails);
+            return View("/Views/BillingShippingAddress.cshtml", addressDetails);
         }
 
         [HttpPost]
@@ -69,8 +69,8 @@ namespace UCommerce.RazorStore.Controllers
            
             TransactionLibrary.ExecuteBasketPipeline();
 
-            var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-            var shipping = root.Descendants("shipping").FirstOrDefault();
+            var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+            var shipping = parent.Children(x => x.Name == "Shipping").FirstOrDefault();
             return Redirect(shipping.Url);
         }
 

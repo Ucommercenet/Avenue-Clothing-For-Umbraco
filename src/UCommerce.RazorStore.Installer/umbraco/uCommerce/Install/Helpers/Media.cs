@@ -5,22 +5,26 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using UCommerce.EntitiesV2;
-using umbraco.cms.businesslogic.media;
-using Media = umbraco.cms.businesslogic.media.Media;
-using User = umbraco.BusinessLogic.User;
+using Umbraco.Core;
+using Umbraco.Core.Composing;
+using Umbraco.Core.Models;
+using Umbraco.Core.Services;
+using File = System.IO.File;
 
 namespace UCommerce.RazorStore.Installer.Helpers
 {
     public class MediaService
     {
+        public IMediaService UmbracoMediaService => Current.Services.MediaService;
+        public IMediaTypeService MediaTypeService=> Current.Services.MediaTypeService;
+        
         private string _mediaFolder;
         private string _installFolder;
-        private Media _rootMediaNode;
+        private IMedia _rootMediaNode;
         private string _defaultFolderName;
-        private MediaType _folderType;
-        private MediaType _imageType;
+        private IMediaType _folderType;
+        private IMediaType _imageType;
         private List<string> _thumbnailExtensions = new List<string> { "jpeg", "jpg", "gif", "bmp", "png", "tiff", "tif" };
 
         public MediaService(string mediaFolder, string installFolder)
@@ -29,39 +33,43 @@ namespace UCommerce.RazorStore.Installer.Helpers
             _installFolder = installFolder;
 
             _defaultFolderName = "avenue-clothing.com";
-            _folderType = MediaType.GetByAlias("folder");
-            _imageType = MediaType.GetByAlias("image");
+            _folderType = MediaTypeService.Get("folder");
+            _imageType = MediaTypeService.Get("image");
 
             _rootMediaNode = GetRootMediaFolder();
         }
 
-        private Media GetRootMediaFolder()
+        private IMedia GetRootMediaFolder()
         {
             return GetOrCreateMediaFolder(_defaultFolderName, -1);
         }
 
-        private Media GetOrCreateMediaFolder(string folderName, int parentId)
+        private IMedia GetOrCreateMediaFolder(string folderName, int parentId)
         {
-            var folders = Media.GetMediaOfMediaType(_folderType.Id);
-            return folders.FirstOrDefault(f => f.Text == folderName && (f.ParentId == parentId || parentId == -1)) ?? CreateMediaFolder(folderName, parentId);
+            var folders = UmbracoMediaService.GetPagedOfType(_folderType.Id, 0, int.MaxValue,
+                out var size, null);
+            return folders.FirstOrDefault(f => f.Name == folderName && (f.ParentId == parentId || parentId == -1)) ?? CreateMediaFolder(folderName, parentId);
         }
 
-        private Media CreateMediaFolder(string folderName, int parentId)
+        private IMedia CreateMediaFolder(string folderName, int parentId)
         {
-            var media = Media.MakeNew(folderName, _folderType, new User(0), parentId);
+            var media = UmbracoMediaService.CreateMedia(folderName, parentId, "Folder");
+            UmbracoMediaService.Save(media);
             return media;
         }
 
-        private Media CreateMediaImage(string imageName, int parentId)
+        private IMedia CreateMediaImage(string imageName, int parentId)
         {
-            return Media.MakeNew(imageName, _imageType, new User(0), parentId);
+            var media = UmbracoMediaService.CreateMedia(imageName, parentId, _imageType.Alias);
+            UmbracoMediaService.Save(media, -1);
+            return media;
         }
 
-        public IEnumerable<Media> InstallCategoryImages(IEnumerable<Category> categories)
+        public IEnumerable<IMedia> InstallCategoryImages(IEnumerable<Category> categories)
         {
             var categoryImagesFolder = GetOrCreateMediaFolder("Category Images", _rootMediaNode.Id);
 
-            var items = new List<Media>();
+            var items = new List<IMedia>();
             foreach (var c in categories)
             {
                 if (!String.IsNullOrWhiteSpace(c.ImageMediaId))
@@ -72,7 +80,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 if (media == null)
                     continue;
 
-                c.ImageMediaId = media.Id.ToString();
+                c.ImageMediaId = media.GetUdi().Guid.ToString();
                 c.Save();
 
                 items.Add(media);
@@ -81,11 +89,11 @@ namespace UCommerce.RazorStore.Installer.Helpers
             return items;
         }
 
-        public IEnumerable<Media> InstallProductImages(IEnumerable<Product> products)
+        public IEnumerable<IMedia> InstallProductImages(IEnumerable<Product> products)
         {
             var productImagesFolder = GetOrCreateMediaFolder("Product Images", _rootMediaNode.Id);
 
-            var items = new List<Media>();
+            var items = new List<IMedia>();
             foreach (var p in products)
             {
                 if (!String.IsNullOrWhiteSpace(p.ThumbnailImageMediaId) && !String.IsNullOrWhiteSpace(p.ThumbnailImageMediaId))
@@ -99,8 +107,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
                 if (media == null)
                     continue;
 
-                p.ThumbnailImageMediaId = media.Id.ToString();
-                p.PrimaryImageMediaId = media.Id.ToString();
+                p.ThumbnailImageMediaId = media.GetUdi().Guid.ToString();
+                p.PrimaryImageMediaId = media.GetUdi().Guid.ToString();
                 p.Save();
 
                 items.Add(media);
@@ -109,7 +117,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             return items;
         }
 
-        private Media GetImageFromFolder(string folder, string filename, Media parent)
+        private IMedia GetImageFromFolder(string folder, string filename, IMedia parent)
         {
             var file = LookForFile(folder, filename);
             return file == null ? null : UmbracoSave(file, parent);
@@ -121,7 +129,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
             return File.Exists(path) ? new FileInfo(path) : null;
         }
 
-        private Media UmbracoSave(FileInfo file, Media parent)
+        private IMedia UmbracoSave(FileInfo file, IMedia parent)
         {
             if (file == null || !file.Exists)
                 return null;
@@ -141,17 +149,16 @@ namespace UCommerce.RazorStore.Installer.Helpers
             TrySetProperty(item, "umbracoExtension", ext);
             TrySetProperty(item, "umbracoBytes", file.Length.ToString());
             TrySetProperty(item, "umbracoFile", relativePath);
-			item.Save();
+
+            UmbracoMediaService.Save(item);
 
             if (_thumbnailExtensions.Contains(ext))
                 CreateImageProperties(new FileInfo(fullFilePath), item, ext);
 
-            item.XmlGenerate(new XmlDocument());
-
             return item;
         }
 
-        private void CreateImageProperties(FileInfo file, Media item, string ext)
+        private void CreateImageProperties(FileInfo file, IMedia item, string ext)
         {
             using (var fs = new FileStream(file.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
@@ -182,11 +189,11 @@ namespace UCommerce.RazorStore.Installer.Helpers
             return file.FullName.Replace("." + ext, "_thumb") + ".jpg";
         }
 
-        private static void TrySetProperty(Media m, string propertyName, string ext)
+        private static void TrySetProperty(IMedia m, string propertyName, string ext)
         {
             try
             {
-                m.getProperty(propertyName).Value = ext;
+                m.Properties.FirstOrDefault(x => x.Alias == propertyName).SetValue(ext);
             }
             catch
             {

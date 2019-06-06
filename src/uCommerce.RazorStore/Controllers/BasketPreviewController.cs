@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -13,10 +12,10 @@ namespace UCommerce.RazorStore.Controllers
 	public class BasketpreviewController : RenderMvcController
     {
         [HttpGet]
-        public override ActionResult Index(RenderModel m)
+        public override ActionResult Index(ContentModel m)
 		{
 			PurchaseOrderViewModel model = MapOrder();
-			return base.View("/Views/Preview.cshtml", model);
+			return View("/Views/Preview.cshtml", model);
 		}
 
 		private PurchaseOrderViewModel MapOrder()
@@ -91,17 +90,12 @@ namespace UCommerce.RazorStore.Controllers
 		[HttpPost]
 		public ActionResult Index()
 		{
-		    var payment = TransactionLibrary.GetBasket().PurchaseOrder.Payments.First();
-		    if (payment.PaymentMethod.PaymentMethodServiceName == null)
-		    {
-		        var root = UmbracoContext.PublishedContentRequest.PublishedContent.AncestorsOrSelf("home").FirstOrDefault();
-		        var confirmation = root.Descendants("confirmation").FirstOrDefault();
-		        return Redirect(confirmation.Url);
-            }
+			TransactionLibrary.RequestPayments();
 
-		    string paymentUrl = TransactionLibrary.GetPaymentPageUrl(payment);
-		    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-		    return Redirect(paymentUrl);
+			var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+			var confirmation = parent.Children(x=>x.Name == "Confirmation").FirstOrDefault();
+            return Redirect(confirmation.Url);
+
         }
     }
 }
