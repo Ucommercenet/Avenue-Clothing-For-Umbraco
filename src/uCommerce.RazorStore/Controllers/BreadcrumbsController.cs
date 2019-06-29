@@ -7,6 +7,7 @@ using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Extensions;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
 namespace UCommerce.RazorStore.Controllers
@@ -43,7 +44,7 @@ namespace UCommerce.RazorStore.Controllers
             if (product == null && lastCategory == null)
             {
                 var currentNode = CurrentPage;
-                foreach (var level in currentNode.Ancestors().Where(x=>x.IsVisible()))
+                foreach (var level in currentNode.Ancestors().Where(IsVisible))
                 {
                     var breadcrumb = new BreadcrumbsViewModel()
                     {
@@ -61,6 +62,11 @@ namespace UCommerce.RazorStore.Controllers
             }
 
             return View("/Views/PartialView/Breadcrumbs.cshtml", breadcrumbs);
+        }
+
+        protected virtual bool IsVisible(IPublishedContent x)
+        {
+            return x.Value("umbracoNaviHide", null, null, new Fallback(), true);
         }
     }
 }
