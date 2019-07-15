@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -14,7 +15,7 @@ namespace UCommerce.RazorStore.Controllers
         {
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
-            ICollection<Category> rootCategories = CatalogLibrary.GetRootCategories();
+            ICollection<Category> rootCategories = CatalogLibrary.GetRootCategories().Where(x=>x.DisplayOnSite).ToList();
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
@@ -31,7 +32,7 @@ namespace UCommerce.RazorStore.Controllers
 
                 categoryViewModel.Name = category.DisplayName();
                 categoryViewModel.Url = CatalogLibrary.GetNiceUrlForCategory(category);
-                categoryViewModel.Categories = MapCategories(CatalogLibrary.GetCategories(category));
+                categoryViewModel.Categories = MapCategories(CatalogLibrary.GetCategories(category).Where(x=>x.DisplayOnSite).ToList());
 
                 categoriesToReturn.Add(categoryViewModel);
             }
