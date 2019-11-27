@@ -12,7 +12,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class uCommerceEmailController : RenderMvcController
+    public class AvenueClothingMvcEmailController : RenderMvcController
     {
         // GET: uCommerceEmail
         public override ActionResult Index(ContentModel model)

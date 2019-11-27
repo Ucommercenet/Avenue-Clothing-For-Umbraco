@@ -8,7 +8,7 @@ using UCommerce.SystemHttp.Models;
 namespace UCommerce.RazorStore.Api
 {
     [RoutePrefix("ucommerceapi")]
-    public class SearchController : ApiController
+    public class AvenueClothingApiSearchController : ApiController
     {
         
         [Route("razorstore/search/")]

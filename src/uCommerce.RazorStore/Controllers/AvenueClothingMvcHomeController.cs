@@ -3,7 +3,7 @@ using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 namespace UCommerce.RazorStore.Controllers
 {
-	public class HomeController : RenderMvcController
+	public class AvenueClothingMvcHomeController : RenderMvcController
 	{
         [HttpGet]
         public ActionResult Index(ContentModel model)

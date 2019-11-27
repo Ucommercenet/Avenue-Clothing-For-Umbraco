@@ -12,7 +12,7 @@ using UCommerce.Pipelines;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class ReviewController : SurfaceController
+    public class AvenueClothingSurfaceReviewController : SurfaceController
     {
         // GET: Review
         [HttpGet]

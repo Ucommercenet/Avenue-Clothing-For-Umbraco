@@ -259,7 +259,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\BasketController.cs" />
+    <Compile Include="Api\AvenueClothingApiBasketController.cs" />
     <Compile Include="Api\Model\AddToBasketRequet.cs" />
     <Compile Include="Api\Model\GetProductInformationRequest.cs" />
     <Compile Include="Api\Model\GetProductInformationResponse.cs" />
@@ -267,26 +267,26 @@
     <Compile Include="Api\Model\GetVariantSkuFromSelectionRequest.cs" />
     <Compile Include="Api\Model\SearchRequest.cs" />
     <Compile Include="Api\Model\UpdateLineItemRequest.cs" />
-    <Compile Include="Api\ProductController.cs" />
-    <Compile Include="Api\SearchController.cs" />
-    <Compile Include="Controllers\BasketController.cs" />
-    <Compile Include="Controllers\BillingController.cs" />
-    <Compile Include="Controllers\BreadcrumbsController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\ConfirmationController.cs" />
-    <Compile Include="Controllers\FacetsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomepageCatalogController.cs" />
-    <Compile Include="Controllers\MiniBasketController.cs" />
-    <Compile Include="Controllers\PartialViewController.cs" />
-    <Compile Include="Controllers\PaymentController.cs" />
-    <Compile Include="Controllers\BasketPreviewController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\ReviewController.cs" />
-    <Compile Include="Controllers\ShippingController.cs" />
-    <Compile Include="Controllers\uCommerceEmailController.cs" />
-    <Compile Include="Controllers\VoucherController.cs" />
+    <Compile Include="Api\AvenueClothingApiProductController.cs" />
+    <Compile Include="Api\AvenueClothingApiSearchController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcBasketController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcBillingController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfaceBreadcrumbsController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcCategoryController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcConfirmationController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfaceFacetsController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcHomeController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfaceHomepageCatalogController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfaceMiniBasketController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfacePartialViewController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcPaymentController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcBasketpreviewController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcProductController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcSearchController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfaceReviewController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcShippingController.cs" />
+    <Compile Include="Controllers\AvenueClothingMvcEmailController.cs" />
+    <Compile Include="Controllers\AvenueClothingSurfaceVoucherController.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AddToBasketViewModel.cs" />
@@ -473,9 +473,9 @@
     </Content>
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\frontpage.cshtml" />
-    <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
-    <Content Include="Views\PartialView\MiniBasket.cshtml" />
-    <Content Include="Views\PartialView\Facets.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\CategoryNavigation.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\MiniBasket.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
@@ -484,8 +484,8 @@
     </Content>
     <Content Include="Views\Catalog.cshtml" />
     <Content Include="Views\BillingShippingAddress.cshtml" />
-    <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
-    <Content Include="Views\PartialView\Voucher.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\Breadcrumbs.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\Voucher.cshtml" />
     <Content Include="Views\Basket.cshtml" />
     <Content Include="Views\Shipping.cshtml" />
     <Content Include="Views\Payment.cshtml" />
@@ -493,10 +493,10 @@
     <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
     <Content Include="Views\Search.cshtml" />
-    <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\HomepageCatalog.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Homepage Catalog.cshtml" />
     <Content Include="Views\Product.cshtml" />
-    <Content Include="Views\PartialView\ProductReview.cshtml" />
+    <Content Include="Views\AvenueClothingSurfacePartialView\ProductReview.cshtml" />
     <Content Include="Views\MacroPartials\uCommerceProductReviews.cshtml" />
     <Content Include="Views\uCommerceEmail.cshtml" />
     <Content Include="Views\Preview.cshtml" />
@@ -513,7 +513,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\uCommerceEmail\" />
+    <Folder Include="Views\AvenueClothingMvcEmail\" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -552,7 +552,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\U8\Website"
+    <PostBuildEvent>"$(SolutionDir)..\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\u\Website"
 </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

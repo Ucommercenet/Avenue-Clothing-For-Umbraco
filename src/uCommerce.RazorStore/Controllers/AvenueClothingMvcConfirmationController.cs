@@ -5,7 +5,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class ConfirmationController : RenderMvcController
+    public class AvenueClothingMvcConfirmationController : RenderMvcController
     {
         // GET: Confirmation
         public override ActionResult Index(ContentModel model)

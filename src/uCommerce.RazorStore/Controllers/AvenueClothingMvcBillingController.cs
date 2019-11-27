@@ -9,7 +9,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class BillingController : RenderMvcController
+    public class AvenueClothingMvcBillingController : RenderMvcController
     {
         [HttpGet]
         public override ActionResult Index(ContentModel model)

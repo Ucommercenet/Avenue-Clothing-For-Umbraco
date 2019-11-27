@@ -11,7 +11,7 @@ using Basket = UCommerce.RazorStore.Api.Model.Basket;
 namespace UCommerce.RazorStore.Api
 {
     [RoutePrefix("ucommerceapi")]
-    public class BasketController : ApiController
+    public class AvenueClothingApiBasketController : ApiController
     {
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]

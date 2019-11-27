@@ -11,7 +11,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class HomepageCatalogController : SurfaceController
+    public class AvenueClothingSurfaceHomepageCatalogController : SurfaceController
     {
         // GET: HomepageCatalog
         public ActionResult Index()

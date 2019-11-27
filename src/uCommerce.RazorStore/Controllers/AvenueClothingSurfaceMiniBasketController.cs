@@ -7,7 +7,7 @@ using UCommerce.RazorStore.Models;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class MiniBasketController : SurfaceController
+    public class AvenueClothingSurfaceMiniBasketController : SurfaceController
     {
 // GET: MiniBasket
         public ActionResult Index()

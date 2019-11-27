@@ -12,7 +12,7 @@ using Umbraco.Web;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class BreadcrumbsController : SurfaceController
+    public class AvenueClothingSurfaceBreadcrumbsController : SurfaceController
     {
         public ActionResult Index()
         {

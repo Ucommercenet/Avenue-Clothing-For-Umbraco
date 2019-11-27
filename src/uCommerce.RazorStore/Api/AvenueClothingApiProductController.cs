@@ -9,7 +9,7 @@ using ProductProperty = UCommerce.RazorStore.Api.Model.ProductProperty;
 namespace UCommerce.RazorStore.Api
 {
     [RoutePrefix("ucommerceapi")]
-    public class ProductController : ApiController
+    public class AvenueClothingApiProductController : ApiController
     {
         [Route("razorstore/products/getproductvariations")]
         [HttpPost]
