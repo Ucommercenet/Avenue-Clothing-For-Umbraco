@@ -39,3 +39,4 @@ src/uCommerce.RazorStore/npm-debug.log
 src/.vs/uCommerce.RazorStore/v15/*
 tools/Deploy/PackageGen/.idea/*
 src/.idea/*
+package/
