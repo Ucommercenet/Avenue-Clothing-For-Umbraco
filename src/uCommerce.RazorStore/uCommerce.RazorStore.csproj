@@ -223,32 +223,32 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="UCommerce, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.dll</HintPath>
+    <Reference Include="UCommerce, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Admin, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.Admin.dll</HintPath>
+    <Reference Include="UCommerce.Admin, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.Admin.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Infrastructure, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.Infrastructure.dll</HintPath>
+    <Reference Include="UCommerce.Infrastructure, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Installer, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.Installer.dll</HintPath>
+    <Reference Include="UCommerce.Installer, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.Installer.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.NHibernate, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.NHibernate.dll</HintPath>
+    <Reference Include="UCommerce.NHibernate, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Pipelines, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.Pipelines.dll</HintPath>
+    <Reference Include="UCommerce.Pipelines, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.Presentation, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.Presentation.dll</HintPath>
+    <Reference Include="UCommerce.Presentation, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.SystemHttp, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.SystemHttp.dll</HintPath>
+    <Reference Include="UCommerce.SystemHttp, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.SystemHttp.dll</HintPath>
     </Reference>
-    <Reference Include="UCommerce.SystemWeb, Version=8.3.0.19193, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.8.3.0.19193\lib\net45\UCommerce.SystemWeb.dll</HintPath>
+    <Reference Include="UCommerce.SystemWeb, Version=8.4.0.19331, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uCommerce.Core.8.4.0.19331\lib\net45\UCommerce.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -269,24 +269,24 @@
     <Compile Include="Api\Model\UpdateLineItemRequest.cs" />
     <Compile Include="Api\AvenueClothingApiProductController.cs" />
     <Compile Include="Api\AvenueClothingApiSearchController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcBasketController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcBillingController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfaceBreadcrumbsController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcCategoryController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcConfirmationController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfaceFacetsController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcHomeController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfaceHomepageCatalogController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfaceMiniBasketController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfacePartialViewController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcPaymentController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcBasketpreviewController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcProductController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcSearchController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfaceReviewController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcShippingController.cs" />
-    <Compile Include="Controllers\AvenueClothingMvcEmailController.cs" />
-    <Compile Include="Controllers\AvenueClothingSurfaceVoucherController.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\BreadcrumbsController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ConfirmationController.cs" />
+    <Compile Include="Controllers\FacetsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomepageCatalogController.cs" />
+    <Compile Include="Controllers\MiniBasketController.cs" />
+    <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\BasketpreviewController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\ShippingController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AddToBasketViewModel.cs" />
@@ -473,9 +473,9 @@
     </Content>
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\frontpage.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\CategoryNavigation.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\MiniBasket.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\Facets.cshtml" />
+    <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
+    <Content Include="Views\PartialView\MiniBasket.cshtml" />
+    <Content Include="Views\PartialView\Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
@@ -484,8 +484,8 @@
     </Content>
     <Content Include="Views\Catalog.cshtml" />
     <Content Include="Views\BillingShippingAddress.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\Breadcrumbs.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\Voucher.cshtml" />
+    <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
+    <Content Include="Views\PartialView\Voucher.cshtml" />
     <Content Include="Views\Basket.cshtml" />
     <Content Include="Views\Shipping.cshtml" />
     <Content Include="Views\Payment.cshtml" />
@@ -493,10 +493,10 @@
     <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
     <Content Include="Views\Search.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\HomepageCatalog.cshtml" />
+    <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
     <Content Include="Views\MacroPartials\uCommerce Homepage Catalog.cshtml" />
     <Content Include="Views\Product.cshtml" />
-    <Content Include="Views\AvenueClothingSurfacePartialView\ProductReview.cshtml" />
+    <Content Include="Views\PartialView\ProductReview.cshtml" />
     <Content Include="Views\MacroPartials\uCommerceProductReviews.cshtml" />
     <Content Include="Views\uCommerceEmail.cshtml" />
     <Content Include="Views\Preview.cshtml" />
@@ -513,7 +513,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\AvenueClothingMvcEmail\" />
+    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
