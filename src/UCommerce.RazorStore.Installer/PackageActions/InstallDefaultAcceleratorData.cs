@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web;
 using System.Xml.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Installer.Helpers;
+using UCommerce.Search.Indexers;
 using Umbraco.Core.Services;
 using Umbraco.Web.Composing;
 
@@ -29,6 +31,8 @@ namespace UCommerce.RazorStore.Installer.PackageActions
             DeleteOldUCommerceData();
 
             PublishContent();
+
+            IndexEverything();
 
             return true;
         }
@@ -84,6 +88,11 @@ namespace UCommerce.RazorStore.Installer.PackageActions
                 group.Deleted = true;
                 group.Save();
             }
+        }
+
+        private void IndexEverything()
+        {
+            ObjectFactory.Instance.Resolve<IScratchIndexer>().Index();
         }
 
         public string Alias()

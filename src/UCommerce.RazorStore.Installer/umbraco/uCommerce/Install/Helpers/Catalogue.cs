@@ -29,17 +29,8 @@ namespace UCommerce.RazorStore.Installer.Helpers
             EnableShippingMethodForCatalog(catalogGroup);
             CreateCatalogue(catalog);
             ObjectFactory.Instance.Resolve<IEnsureRolesAreUpToDateService>().EnsureRolesAreUpToDate();
-			new Thread(TriggerIndexing).Start();
         }
 
-
-		/// <summary>
-		/// Kicks off async indexing to search enable newly created products.
-		/// </summary>
-	    private void TriggerIndexing()
-	    {
-			ObjectFactory.Instance.Resolve<IScratchIndexer>().Index();
-	    }
 
 	    private ProductCatalogGroup CreateCatalogGroup()
         {
