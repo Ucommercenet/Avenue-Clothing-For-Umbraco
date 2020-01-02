@@ -5,7 +5,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class AvenueClothingSurfaceVoucherController : SurfaceController
+    public class VoucherController : SurfaceController
     {
         // GET: Voucher
         [HttpGet]

@@ -11,7 +11,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-	public class AvenueClothingMvcPaymentController : RenderMvcController
+	public class PaymentController : RenderMvcController
     {
         [HttpGet]
         public override ActionResult Index(ContentModel model)

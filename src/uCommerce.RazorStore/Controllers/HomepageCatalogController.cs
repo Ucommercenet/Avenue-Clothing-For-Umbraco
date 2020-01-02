@@ -11,12 +11,12 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class AvenueClothingSurfaceHomepageCatalogController : SurfaceController
+    public class HomepageCatalogController : SurfaceController
     {
         // GET: HomepageCatalog
         public ActionResult Index()
         {
-            var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && Convert.ToBoolean(pp.Value))));
+            var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c => c.Products.Where(p => p.ProductProperties.Any(pp => pp.ProductDefinitionField.Name == "ShowOnHomepage" && !String.IsNullOrEmpty(pp.Value) && Convert.ToBoolean(pp.Value))));
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
             foreach (var p in products)

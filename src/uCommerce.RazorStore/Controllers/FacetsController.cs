@@ -57,7 +57,7 @@ namespace UCommerce.RazorStore.Controllers
 
     }
 
-    public class AvenueClothingSurfaceFacetsController : SurfaceController
+    public class FacetsController : SurfaceController
     {
         // GET: Facets
         public ActionResult Index()

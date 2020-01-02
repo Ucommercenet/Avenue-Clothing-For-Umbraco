@@ -13,7 +13,7 @@ using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class AvenueClothingMvcCategoryController : RenderMvcController
+    public class CategoryController : RenderMvcController
     {
         public override ActionResult Index(ContentModel model)
         {

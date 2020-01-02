@@ -9,7 +9,7 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class AvenueClothingSurfacePartialViewController : SurfaceController
+    public class PartialViewController : SurfaceController
     {
         public ActionResult CategoryNavigation()
         {

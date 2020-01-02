@@ -12,7 +12,7 @@ using IImageService = UCommerce.Content.IImageService;
 
 namespace UCommerce.RazorStore.Controllers
 {
-    public class AvenueClothingMvcSearchController : RenderMvcController
+    public class SearchController : RenderMvcController
     {
         // GET: Search
         public ActionResult Index(ContentModel model)
