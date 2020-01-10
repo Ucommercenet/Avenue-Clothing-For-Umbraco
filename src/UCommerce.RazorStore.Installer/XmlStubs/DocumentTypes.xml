@@ -122,7 +122,7 @@
       <DocumentType>category</DocumentType>
       <DocumentType>basket</DocumentType>
       <DocumentType>search</DocumentType>
-      <DocumentType>uCommerceEmail</DocumentType>
+      <DocumentType>Email</DocumentType>
     </Structure>
     <GenericProperties>
       <GenericProperty>
@@ -227,8 +227,8 @@
   </DocumentType>
   <DocumentType>
     <Info>
-      <Name>uCommerce Email</Name>
-      <Alias>uCommerceEmail</Alias>
+      <Name>Email</Name>
+      <Alias>Email</Alias>
       <Icon>icon-paper-plane-alt</Icon>
       <Thumbnail>folder.png</Thumbnail>
       <Description />
@@ -239,7 +239,7 @@
       <DefaultTemplate />
     </Info>
     <Structure>
-      <DocumentType>uCommerceEmail</DocumentType>
+      <DocumentType>Email</DocumentType>
     </Structure>
     <GenericProperties>
       <GenericProperty>
