@@ -124,7 +124,7 @@ namespace UCommerce.RazorStore.Installer.Helpers
 
         private void ConfigureEmailContent()
         {
-            var docType = ContentTypeService.Get("uCommerceEmail");
+            var docType = ContentTypeService.Get("Email");
             if (docType == null)
                 return;
 

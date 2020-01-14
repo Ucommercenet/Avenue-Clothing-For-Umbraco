@@ -17,12 +17,12 @@
         <product id="1070" key="e7f1aff7-b507-4bf9-928c-3734844e17a4" parentID="1069" level="3" creatorID="0" sortOrder="0" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Product" urlName="product" path="-1,1062,1069,1070" isDoc="" nodeType="1058" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="product" isPublished="true" />
       </category>
       <search id="1071" key="be4e717f-62b9-4d82-8088-7b794d16ab37" parentID="1062" level="2" creatorID="0" sortOrder="2" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Search" urlName="search" path="-1,1062,1071" isDoc="" nodeType="1059" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="search" isPublished="true" />
-      <uCommerceEmail id="1072" key="c6548cdf-08ee-4de0-b213-2f887f1456aa" parentID="1062" level="2" creatorID="0" sortOrder="3" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Emails" urlName="emails" path="-1,1062,1072" isDoc="" nodeType="1061" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="uCommerceEmail" isPublished="true">
+      <Email id="1072" key="c6548cdf-08ee-4de0-b213-2f887f1456aa" parentID="1062" level="2" creatorID="0" sortOrder="3" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Emails" urlName="emails" path="-1,1062,1072" isDoc="" nodeType="1061" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="Email" isPublished="true">
         <umbracoNaviHide>1</umbracoNaviHide>
-        <uCommerceEmail id="1073" key="859a94ce-98e2-4dbe-8e4d-6b2fb14c5e5c" parentID="1072" level="3" creatorID="0" sortOrder="0" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Order Confirmation Email" urlName="order-confirmation-email" path="-1,1062,1072,1073" isDoc="" nodeType="1061" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="uCommerceEmail" isPublished="true">
+        <Email id="1073" key="859a94ce-98e2-4dbe-8e4d-6b2fb14c5e5c" parentID="1072" level="3" creatorID="0" sortOrder="0" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Order Confirmation Email" urlName="order-confirmation-email" path="-1,1062,1072,1073" isDoc="" nodeType="1061" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="Email" isPublished="true">
           <umbracoNaviHide>1</umbracoNaviHide>
-        </uCommerceEmail>
-      </uCommerceEmail>
+        </Email>
+      </Email>
     </home>
   </DocumentSet>
 </Documents>
