@@ -1,0 +1,134 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.PurchaseOrderViewModel>
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<div class="alert alert-info">
+    <h1>Thank you for your order</h1>
+    <br />
+    <p>An order confirmation email has been sent to your email address</p>
+</div>
+<div>
+    <div class="row well">
+        <div class="col-md-6">
+            <h3>Billing address</h3>
+            <br />
+            <address>
+                <span class="address-line"><strong>@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</strong></span><br>
+                <span class="address-line">@Model.BillingAddress.Line1<br></span>
+                <span class="address-line">@Model.BillingAddress.PostalCode @Model.BillingAddress.City</span><br>
+                <span class="address-line">@Model.BillingAddress.Country.Name</span>
+                @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Attention))
+                {
+                    <span class="address-line"><text>att. </text> @Model.BillingAddress.Attention</span>
+                }<br>
+                <span class="address-line"><abbr title="Phone">P:</abbr>@Model.BillingAddress.PhoneNumber</span><br>
+                <span class="address-line"><abbr title="Mobile">M:</abbr>@Model.BillingAddress.MobilePhoneNumber </span><br>
+                <span class="address-line"><abbr title="Email">E:</abbr><a href="mailto:@Model.BillingAddress.EmailAddress">@Model.BillingAddress.EmailAddress</a></span>
+            </address>
+        </div>
+        <div class="col-md-6">
+            <h3>Shipping address</h3>
+            <br />
+            <address>
+                <span class="address-line"><strong>@Model.ShipmentAddress.FirstName @Model.ShipmentAddress.LastName</strong></span><br>
+                <span class="address-line">@Model.ShipmentAddress.CompanyName</span>
+                @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Attention))
+                {
+                    <span class="address-line"><text>att. </text> @Model.ShipmentAddress.Attention </span>
+                }<br />
+                <span class="address-line">@Model.ShipmentAddress.Line1</span><br>
+                <span class="address-line">@Model.ShipmentAddress.PostalCode @Model.ShipmentAddress.City</span><br>
+                <span class="address-line">@Model.ShipmentAddress.Country.Name</span><br>
+                <span class="address-line"><abbr title="Phone">P:</abbr>@Model.ShipmentAddress.PhoneNumber</span><br>
+                <span class="address-line"><abbr title="Mobile">M:</abbr>@Model.ShipmentAddress.MobilePhoneNumber</span><br>
+                <span class="address-line"><abbr title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.ShipmentAddress.EmailAddress</a></span>
+            </address>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Item no. </th>
+                    <th class="span8">Description</th>
+                    <th class="span1 money">Price</th>
+                    <th class="span1 money">VAT</th>
+                    <th class="span1 number">Quantity</th>
+                    <th class="span1 money">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lineItem in @Model.OrderLines)
+            {
+                    <tr>
+                        <td>@lineItem.Sku</td>
+                        <td>@lineItem.ProductName</td>
+                        <td class="money">
+                            @if (lineItem.Discount.HasValue && lineItem.Discount > 0)
+                            {
+                                <span style="text-decoration: line-through">
+                                    @lineItem.Price
+                                </span>
+                                @lineItem.PriceWithDiscount
+                            }
+                            else
+                            {
+                                @lineItem.Price
+                            }
+                        </td>
+                        <td class="money">@lineItem.Tax</td>
+                        <td class="number">@lineItem.Quantity</td>
+                        <td class="money">@lineItem.Total</td>
+                    </tr>
+                }
+                <tr>
+                    <td rowspan="@ViewBag.RowSpan" colspan="2"></td>
+                    <td colspan="3">Sub total: </td>
+                    <td class="money">
+                        @Model.SubTotal
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">VAT: </td>
+                    <td class="money">
+                        @Model.TaxTotal
+                    </td>
+                </tr>
+                @if (@Model.DiscountAmount != 0)
+            {
+                    <tr>
+                        <td colspan="3">Order discounts: </td>
+                        <td class="money">- @Model.DiscountTotal</td>
+                    </tr>
+                }
+                @if (@Model.ShipmentAmount != 0)
+            {
+                    <tr>
+                        <td colspan="3">
+                            Shipping
+                            <text> (via @Model.ShipmentName)</text>
+                        </td>
+                        <td class="money">@Model.ShippingTotal</td>
+                    </tr>
+                }
+                @if (@Model.PaymentAmount != 0)
+            {
+                    <tr>
+                        <td colspan="3">
+                            Payment
+                            <text> (@Model.PaymentName)</text>
+                        </td>
+                        <td class="money">@Model.PaymentTotal</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3">Order total: </td>
+                    <td class="money">@Model.OrderTotal</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,45 @@
+﻿@using UCommerce.RazorStore.Models;
+@using ClientDependency;
+@using ClientDependency.Core.Mvc
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<CategoryViewModel>
+@{
+    Layout = "Layout.cshtml";
+    Html.RequiresJs("~/Scripts/uCommerce.category.js");
+}
+
+<div class="row margin-bottom">
+    <div class="hero-unit">
+        @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
+        {
+            <img class="col-sm-9" src="@Model.BannerImageUrl">
+        }
+    </div>
+</div>
+
+@Html.HiddenFor(x => x.CatalogId, new {id ="catalog-id"})
+@Html.HiddenFor(x=>x.CategoryId, new {id="category-id"})
+<div class="row">
+    <div class="product-list col-sm-12 col-md-12">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product col-sm-4 col-md-4 col-xs-2" id="@product.Sku">
+                <div class="product-image">
+                    @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
+                    {
+                        <a href="@product.Url"><img src="@product.ThumbnailImageUrl"></a>
+                    }
+                </div>
+
+                <p class="item-name"><a href="@product.Url">@product.Name</a></p>
+                <p class="item-price" data-productSku="@product.Sku"></p>
+                <p class="btn-group view-details">
+                    <a href="@product.Url" class="btn btn-default">
+                        View more <span>
+                            <i class="fa fa-shopping-cart icon-white" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </p>
+            </div>
+        }
+    </div>
+</div>

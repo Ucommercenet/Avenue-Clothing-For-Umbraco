@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ShippingViewModel>
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<form method="post" class="col-sm-9 col-md-9">
+    <div class="row col-sm-12 col-md-12">
+        <div class="col-md-6">
+            <h3>Shipping method</h3>
+            <br />
+            @if (Model.AvailableShippingMethods.Count > 0)
+            {
+                foreach (var shippingMethod in Model.AvailableShippingMethods)
+                {
+                    <label class="radio">
+                        @if (shippingMethod.Selected)
+                        {
+                            @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value, new { @checked = "checked" })
+                            @shippingMethod.Text
+                        } else
+                        {
+                            @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value)
+                            @shippingMethod.Text
+                        }
+                    </label>
+                }
+            }
+            else
+            {
+                <p class="alert">WARNING: No shipping methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">UCommerce</a> administration area.</p>
+            }
+        </div>
+    </div>
+    <a href="/basket/address.aspx" class="btn btn-secondary">Back to Address</a>
+    <button name="update-shipment" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Payment Page <i class="icon-arrow-right icon-white"></i> </button>
+</form>

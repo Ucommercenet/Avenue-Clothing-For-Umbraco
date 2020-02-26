@@ -1,0 +1,23 @@
+﻿@using UCommerce.RazorStore.Models
+@model MiniBasketViewModel
+@{
+    Layout = "";
+}
+
+@if (Model.IsEmpty)
+    {
+        <a href="/store" id="empty-cart">Your Shopping Cart is empty</a>
+    }
+
+  else
+    {
+        <a href="/basket" id="mini-cart">
+            @*<i class="icon-shopping-cart icon-white"></i>*@
+            <i class="fa fa-shopping-cart icon-white margin-right-small"></i>
+            <span class="item-qty">@Model.NumberOfItems</span> items in cart, total: <span class="order-total">@Model.Total</span>
+        </a>
+    }
+
+
+
+

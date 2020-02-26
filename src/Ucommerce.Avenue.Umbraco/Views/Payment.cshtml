@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.PaymentViewModel>
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<form method="post">
+    <div class="row col-sm-12 col-md-12">
+        <div class="col-md-6">
+            <h3>Payment method</h3>
+            <br />
+            @if (@Model.AvailablePaymentMethods.Count > 0)
+            {
+                foreach (var paymentMethod in @Model.AvailablePaymentMethods)
+                {
+                    <label class="radio">
+                        @if (paymentMethod.Selected)
+                        {
+                            @Html.RadioButtonFor(x => x.SelectedPaymentMethodId, paymentMethod.Value, new {@checked = "checked"})
+                            <span>@paymentMethod.Text</span>
+                        }
+                        else
+                        {
+                            @Html.RadioButtonFor(x => x.SelectedPaymentMethodId, paymentMethod.Value)
+                            <span>@paymentMethod.Text</span>
+                        }
+                    </label>
+                }
+            }
+            else
+            {
+                <p class="alert">WARNING: No payment methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">UCommerce</a> administration area.</p>
+            }
+        </div>
+    </div>
+    <a href="/basket/shipping.aspx" class="btn btn-secondary">Back to Shipping Method</a>
+    <button name="update-payment" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Confirmation <i class="icon-arrow-right icon-white"></i></button>
+</form>
