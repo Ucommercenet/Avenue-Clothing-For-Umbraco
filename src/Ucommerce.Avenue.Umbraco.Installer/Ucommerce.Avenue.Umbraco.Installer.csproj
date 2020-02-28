@@ -320,23 +320,23 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Ucommerce.Api\Ucommerce.Api.csproj">
+    <ProjectReference Include="..\..\..\ucommerce\src\Ucommerce.Api\Ucommerce.Api.csproj">
       <Project>{519a70d0-e96f-48b5-b108-0610112ebacf}</Project>
       <Name>Ucommerce.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\UCommerce.Infrastructure\UCommerce.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\ucommerce\src\UCommerce.Infrastructure\UCommerce.Infrastructure.csproj">
       <Project>{890c80a7-f1dd-45e3-a784-34d8b7d0d8f0}</Project>
       <Name>UCommerce.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\UCommerce.Model\UCommerce.csproj">
+    <ProjectReference Include="..\..\..\ucommerce\src\UCommerce.Model\UCommerce.csproj">
       <Project>{40063813-4f14-4aaa-9098-b501d3fe5aa1}</Project>
       <Name>UCommerce</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Ucommerce.Search\UCommerce.Search.csproj">
+    <ProjectReference Include="..\..\..\ucommerce\src\Ucommerce.Search\UCommerce.Search.csproj">
       <Project>{7b9f69e8-527d-4a92-921f-2ee3cd2af492}</Project>
       <Name>UCommerce.Search</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\UCommerce.SystemHttp\UCommerce.SystemHttp.csproj">
+    <ProjectReference Include="..\..\..\ucommerce\src\UCommerce.SystemHttp\UCommerce.SystemHttp.csproj">
       <Project>{6c13a96e-cf6c-4ee6-bebf-c5914cd64d28}</Project>
       <Name>UCommerce.SystemHttp</Name>
     </ProjectReference>
