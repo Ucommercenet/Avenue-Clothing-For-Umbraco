@@ -16,7 +16,7 @@ namespace UCommerce.RazorStore.Controllers
             var catalogLibrary = ObjectFactory.Instance.Resolve<CatalogLibrary>();
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
-            IEnumerable<Category> rootCategories = catalogLibrary.GetRootCategories().Where(x=> x.Display).ToList();
+            IEnumerable<Category> rootCategories = catalogLibrary.GetRootCategories().ToList();
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
@@ -28,13 +28,24 @@ namespace UCommerce.RazorStore.Controllers
             var catalogLibrary = ObjectFactory.Instance.Resolve<CatalogLibrary>();
             var categoriesToReturn = new List<CategoryViewModel>();
 
+            var allSubCategoryIds = categoriesToMap.SelectMany(cat => cat.Categories).Distinct().ToList();
+            var subCategoriesById = catalogLibrary.GetCategories(allSubCategoryIds).ToDictionary(cat => cat.Guid);
+
             foreach (var category in categoriesToMap)
             {
-                var categoryViewModel = new CategoryViewModel();
-
-                categoryViewModel.Name = category.DisplayName;
-                // categoryViewModel.Url = CatalogLibrary.GetNiceUrlForCategory(category);
-                categoryViewModel.Categories = MapCategories(catalogLibrary.GetSubCategories(category.Guid).Where(x=> x.Display).ToList());
+                var categoryViewModel = new CategoryViewModel
+                {
+                    Name = category.DisplayName, 
+                    // TODO: Url = category.Slug
+                };
+                categoryViewModel.Categories = category.Categories
+                    .Select(id => subCategoriesById[id])
+                    .Select(cat => new CategoryViewModel
+                    {
+                        Name = cat.DisplayName,
+                        //TODO: Url = cat.Slug
+                    })
+                    .ToList();
 
                 categoriesToReturn.Add(categoryViewModel);
             }
