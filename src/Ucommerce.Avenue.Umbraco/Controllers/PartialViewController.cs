@@ -11,12 +11,13 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class PartialViewController : SurfaceController
     {
+        private ICatalogLibrary _catalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+
         public ActionResult CategoryNavigation()
         {
-            var catalogLibrary = ObjectFactory.Instance.Resolve<CatalogLibrary>();
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
-            IEnumerable<Category> rootCategories = catalogLibrary.GetRootCategories().ToList();
+            IEnumerable<Category> rootCategories = _catalogLibrary.GetRootCategories().ToList();
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
@@ -25,11 +26,10 @@ namespace UCommerce.RazorStore.Controllers
 
         private IList<CategoryViewModel> MapCategories(IEnumerable<Category> categoriesToMap)
         {
-            var catalogLibrary = ObjectFactory.Instance.Resolve<CatalogLibrary>();
             var categoriesToReturn = new List<CategoryViewModel>();
 
             var allSubCategoryIds = categoriesToMap.SelectMany(cat => cat.Categories).Distinct().ToList();
-            var subCategoriesById = catalogLibrary.GetCategories(allSubCategoryIds).ToDictionary(cat => cat.Guid);
+            var subCategoriesById = _catalogLibrary.GetCategories(allSubCategoryIds).ToDictionary(cat => cat.Guid);
 
             foreach (var category in categoriesToMap)
             {
