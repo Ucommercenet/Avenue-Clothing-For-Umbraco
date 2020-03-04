@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Ucommerce.Api;
 using UCommerce.Api;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
 using UCommerce.SystemHttp.Models;
 
@@ -10,7 +12,8 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiSearchController : ApiController
     {
-        
+        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+
         [Route("razorstore/search/")]
         [HttpPost]
         public IHttpActionResult Search([FromBody] SearchRequest request)
@@ -22,7 +25,9 @@ namespace UCommerce.RazorStore.Api
                 (
                     p.Sku.Contains(request.Keyword)
                     || p.Name.Contains(request.Keyword)
-                    || p.ProductDescriptions.Any(d => d.DisplayName.Contains(request.Keyword) || d.ShortDescription.Contains(request.Keyword) || d.LongDescription.Contains(request.Keyword))
+                    || p.ProductDescriptions.Any(d =>
+                        d.DisplayName.Contains(request.Keyword) || d.ShortDescription.Contains(request.Keyword) ||
+                        d.LongDescription.Contains(request.Keyword))
                 )
             );
 

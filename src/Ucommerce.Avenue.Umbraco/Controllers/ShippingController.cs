@@ -23,7 +23,7 @@ namespace UCommerce.RazorStore.Controllers
 
 			var availableShippingMethods = TransactionLibrary.GetShippingMethods(shippingInformation.Country);
 
-            var basket = TransactionLibrary.GetBasket().PurchaseOrder;
+            var basket = TransactionLibrary.GetBasket();
 
             shipping.SelectedShippingMethodId = basket.Shipments.FirstOrDefault() != null
                 ? basket.Shipments.FirstOrDefault().ShippingMethod.ShippingMethodId : -1;

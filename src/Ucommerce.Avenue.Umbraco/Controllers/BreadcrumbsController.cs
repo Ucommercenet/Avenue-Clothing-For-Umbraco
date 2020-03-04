@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using Umbraco.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Extensions;
+using UCommerce.Infrastructure;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
@@ -14,11 +16,13 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class BreadcrumbsController : SurfaceController
     {
+        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+
         public ActionResult Index()
         {
-           IList<BreadcrumbsViewModel> breadcrumbs = new List<BreadcrumbsViewModel>();
-           Category lastCategory = null;
-           Product product = SiteContext.Current.CatalogContext.CurrentProduct;
+            IList<BreadcrumbsViewModel> breadcrumbs = new List<BreadcrumbsViewModel>();
+            Category lastCategory = null;
+            Product product = SiteContext.Current.CatalogContext.CurrentProduct;
 
             foreach (var category in SiteContext.Current.CatalogContext.CurrentCategories)
             {
@@ -51,8 +55,9 @@ namespace UCommerce.RazorStore.Controllers
                         BreadcrumbName = level.Name,
                         BreadcrumbUrl = level.Url
                     };
-                breadcrumbs.Add(breadcrumb);
+                    breadcrumbs.Add(breadcrumb);
                 }
+
                 var currentBreadcrumb = new BreadcrumbsViewModel()
                 {
                     BreadcrumbName = currentNode.Name,

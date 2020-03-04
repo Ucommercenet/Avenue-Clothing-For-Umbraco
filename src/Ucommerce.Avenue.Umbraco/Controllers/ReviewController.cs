@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.Catalog.Status;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using Umbraco.Web.Mvc;
@@ -14,6 +16,8 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ReviewController : SurfaceController
     {
+        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+
         // GET: Review
         [HttpGet]
         public ActionResult Index()
@@ -56,7 +60,6 @@ namespace UCommerce.RazorStore.Controllers
         [HttpPost]
         public ActionResult Index(ProductReviewViewModel formReview)
         {
-
             var product = SiteContext.Current.CatalogContext.CurrentProduct;
             var category = SiteContext.Current.CatalogContext.CurrentCategory;
 
@@ -76,7 +79,8 @@ namespace UCommerce.RazorStore.Controllers
 
             if (basket.PurchaseOrder.Customer == null)
             {
-                basket.PurchaseOrder.Customer = new Customer() { FirstName = name, LastName = String.Empty, EmailAddress = email };
+                basket.PurchaseOrder.Customer = new Customer()
+                    {FirstName = name, LastName = String.Empty, EmailAddress = email};
             }
             else
             {
@@ -85,6 +89,7 @@ namespace UCommerce.RazorStore.Controllers
                 {
                     basket.PurchaseOrder.Customer.LastName = String.Empty;
                 }
+
                 basket.PurchaseOrder.Customer.EmailAddress = email;
             }
 
@@ -109,7 +114,6 @@ namespace UCommerce.RazorStore.Controllers
             PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
 
             return Redirect(CatalogLibrary.GetNiceUrlForProduct(product, category));
-
         }
     }
 }

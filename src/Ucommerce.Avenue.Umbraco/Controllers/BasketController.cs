@@ -18,7 +18,7 @@ namespace UCommerce.RazorStore.Controllers
         [HttpGet]
 		public override ActionResult Index(ContentModel model)
 		{
-			PurchaseOrder basket = TransactionLibrary.GetBasket().PurchaseOrder;
+			PurchaseOrder basket = TransactionLibrary.GetBasket();
 			var basketModel = new PurchaseOrderViewModel();
 
 			foreach (var orderLine in basket.OrderLines)

@@ -20,7 +20,7 @@ namespace UCommerce.RazorStore.Controllers
 
 		private PurchaseOrderViewModel MapOrder()
 		{
-			PurchaseOrder basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
+			PurchaseOrder basket = TransactionLibrary.GetBasket(false);
 
 			var basketModel = new PurchaseOrderViewModel();
 

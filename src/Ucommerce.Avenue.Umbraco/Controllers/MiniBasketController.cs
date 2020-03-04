@@ -17,7 +17,7 @@ namespace UCommerce.RazorStore.Controllers
 
             if (TransactionLibrary.HasBasket())
             {
-                PurchaseOrder basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
+                PurchaseOrder basket = TransactionLibrary.GetBasket(false);
                 var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                 if (numberOfItems != 0)
                 {

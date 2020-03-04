@@ -4,6 +4,7 @@ using System.Web.Http;
 using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
 using ProductProperty = UCommerce.RazorStore.Api.Model.ProductProperty;
 
@@ -12,11 +13,14 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiProductController : ApiController
     {
+        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+
         [Route("razorstore/products/getproductvariations")]
         [HttpPost]
         public IHttpActionResult GetProductVariations([FromBody] GetProductVariationsRequest request)
         {
-            var product = CatalogLibrary.GetProduct(request.ProductSku);
+            Search.Models.Product product =
+                CatalogLibrary.GetProduct(request.ProductSku);
 
             var variations = product.Variants.Select(variant => new ProductVariation
             {
@@ -31,7 +35,7 @@ namespace UCommerce.RazorStore.Api
                 })
             }).ToList();
 
-            return Json(new { Variations = variations});
+            return Json(new {Variations = variations});
         }
 
         [Route("razorstore/products/getvariantskufromselection")]
@@ -41,9 +45,18 @@ namespace UCommerce.RazorStore.Api
             var product = CatalogLibrary.GetProduct(request.ProductSku);
             UCommerce.EntitiesV2.Product variant = null;
 
-            if (product.Variants.Any() && request.VariantProperties.Any()) // If there are variant values we'll need to find the selected variant
+            if (product.Variants.Any() && request.VariantProperties.Any()
+            ) // If there are variant values we'll need to find the selected variant
             {
-                variant = product.Variants.FirstOrDefault(v => v.ProductProperties.Where(pp => pp.ProductDefinitionField.DisplayOnSite && pp.ProductDefinitionField.IsVariantProperty && !pp.ProductDefinitionField.Deleted && pp.Value != null && pp.Value != String.Empty).All(p => request.VariantProperties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.ToString().Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
+                variant = product.Variants.FirstOrDefault(v =>
+                    v.ProductProperties
+                        .Where(pp =>
+                            pp.ProductDefinitionField.DisplayOnSite && pp.ProductDefinitionField.IsVariantProperty &&
+                            !pp.ProductDefinitionField.Deleted && pp.Value != null && pp.Value != String.Empty).All(p =>
+                            request.VariantProperties.Any(kv =>
+                                kv.Key.Equals(p.ProductDefinitionField.Name,
+                                    StringComparison.InvariantCultureIgnoreCase) && kv.Value.ToString()
+                                    .Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
             }
             else if (!product.Variants.Any()) // Only use the current product where there are no variants
             {
@@ -76,7 +89,8 @@ namespace UCommerce.RazorStore.Api
             Category category = CatalogLibrary.GetCategory(request.CategoryId.Value);
             string niceUrl = CatalogLibrary.GetNiceUrlForProduct(product, category, catalog);
 
-            PriceCalculation priceCalculation = CatalogLibrary.CalculatePrice(product);
+            PriceCalculation priceCalculation =
+                CatalogLibrary.CalculatePrices(product);
 
             Currency currency = priceCalculation.YourPrice.Amount.Currency;
 
@@ -114,12 +128,14 @@ namespace UCommerce.RazorStore.Api
                         AmountInclTax = new MoneyViewModel()
                         {
                             Value = priceCalculation.YourPrice.AmountInclTax.Value,
-                            DisplayValue = new Money(priceCalculation.YourPrice.AmountInclTax.Value, currency).ToString()
+                            DisplayValue =
+                                new Money(priceCalculation.YourPrice.AmountInclTax.Value, currency).ToString()
                         },
                         AmountExclTax = new MoneyViewModel()
                         {
                             Value = priceCalculation.YourPrice.AmountExclTax.Value,
-                            DisplayValue = new Money(priceCalculation.YourPrice.AmountExclTax.Value, currency).ToString()
+                            DisplayValue =
+                                new Money(priceCalculation.YourPrice.AmountExclTax.Value, currency).ToString()
                         }
                     },
                     ListPrice = new PriceViewModel()
@@ -132,12 +148,14 @@ namespace UCommerce.RazorStore.Api
                         AmountExclTax = new MoneyViewModel()
                         {
                             Value = priceCalculation.ListPrice.AmountExclTax.Value,
-                            DisplayValue = new Money(priceCalculation.ListPrice.AmountExclTax.Value, currency).ToString()
+                            DisplayValue =
+                                new Money(priceCalculation.ListPrice.AmountExclTax.Value, currency).ToString()
                         },
                         AmountInclTax = new MoneyViewModel()
                         {
                             Value = priceCalculation.ListPrice.AmountInclTax.Value,
-                            DisplayValue = new Money(priceCalculation.ListPrice.AmountInclTax.Value, currency).ToString()
+                            DisplayValue =
+                                new Money(priceCalculation.ListPrice.AmountInclTax.Value, currency).ToString()
                         }
                     }
                 }

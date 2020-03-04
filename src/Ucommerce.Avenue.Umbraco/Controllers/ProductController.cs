@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.Content;
 using UCommerce.EntitiesV2;
@@ -16,6 +17,8 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ProductController : RenderMvcController
     {
+        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        
         [HttpGet]
         public ActionResult Index(ContentModel model)
         {
@@ -38,12 +41,12 @@ namespace UCommerce.RazorStore.Controllers
             var productViewModel = new ProductViewModel();
 
             productViewModel.Sku = currentProduct.Sku;
-            productViewModel.PriceCalculation = CatalogLibrary.CalculatePrice(currentProduct);
+            productViewModel.PriceCalculation = CatalogLibrary.CalculatePrices(currentProduct);
             productViewModel.Name = currentProduct.DisplayName();
             productViewModel.LongDescription = currentProduct.DisplayName();
             productViewModel.IsVariant = false;
             productViewModel.IsOrderingAllowed = currentProduct.AllowOrdering;
-            productViewModel.TaxCalculation = CatalogLibrary.CalculatePrice(currentProduct).YourTax.ToString();
+            productViewModel.TaxCalculation = CatalogLibrary.CalculatePrices(currentProduct).YourTax.ToString();
             productViewModel.IsProductFamily = currentProduct.ProductDefinition.IsProductFamily();
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageMediaId))
@@ -59,7 +62,7 @@ namespace UCommerce.RazorStore.Controllers
                 productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
 
-            bool isInBasket = TransactionLibrary.GetBasket(true).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
+            bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
             
             ProductPageViewModel productPageViewModel = new ProductPageViewModel()
             {

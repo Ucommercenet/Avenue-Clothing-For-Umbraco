@@ -19,7 +19,7 @@ namespace UCommerce.RazorStore.Controllers
             var paymentViewModel = new PaymentViewModel();
             paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
 
-            PurchaseOrder basket = TransactionLibrary.GetBasket(false).PurchaseOrder;
+            PurchaseOrder basket = TransactionLibrary.GetBasket(false);
 
             Country shippingCountry = TransactionLibrary.GetShippingInformation().Country;
 
