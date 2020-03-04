@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Api.Model;

@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
@@ -10,7 +12,9 @@ using Umbraco.Web.Mvc;
 namespace UCommerce.RazorStore.Controllers
 {
 	public class BasketController : RenderMvcController
-    {
+	{
+		public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+	    
         [HttpGet]
 		public override ActionResult Index(ContentModel model)
 		{
