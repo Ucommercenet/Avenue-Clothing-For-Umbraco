@@ -1,9 +1,11 @@
-﻿namespace UCommerce.RazorStore.Api.Model
+﻿using System;
+
+namespace UCommerce.RazorStore.Api.Model
 {
     public class GetProductInformationRequest
     {
-        public int? CatalogId { get; set; }
+        public Guid? CatalogId { get; set; }
         public string Sku { get; set; }
-        public int? CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
     }
 }

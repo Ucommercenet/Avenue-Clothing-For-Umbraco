@@ -12,6 +12,7 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiSearchController : ApiController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 
         [Route("razorstore/search/")]
@@ -49,13 +50,13 @@ namespace UCommerce.RazorStore.Api
                     Sku = product.Sku,
                     VariantSku = product.VariantSku,
                     ProductName = product.ProductDescriptions.First().DisplayName,
-                    Url = CatalogLibrary.GetNiceUrlForProduct(product),
                     Properties = product.ProductProperties.Select(prop => new ProductProperty()
                     {
                         Id = prop.Id,
                         Name = prop.ProductDefinitionField.Name,
                         Value = prop.Value
-                    })
+                    }),
+                    Url = UrlService.GetUrl(product)
                 });
             }
 

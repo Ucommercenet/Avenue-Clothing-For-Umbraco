@@ -16,6 +16,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ReviewController : SurfaceController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 
         // GET: Review
@@ -113,7 +114,7 @@ namespace UCommerce.RazorStore.Controllers
 
             PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
 
-            return Redirect(CatalogLibrary.GetNiceUrlForProduct(product, category));
+            return Redirect(UrlService.GetUrl(product, category));
         }
     }
 }

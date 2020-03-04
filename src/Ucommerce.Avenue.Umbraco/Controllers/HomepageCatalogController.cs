@@ -14,6 +14,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class HomepageCatalogController : SurfaceController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 
         // GET: HomepageCatalog
@@ -31,7 +32,7 @@ namespace UCommerce.RazorStore.Controllers
                 {
                     Name = p.Name,
                     PriceCalculation = CatalogLibrary.CalculatePrices(p),
-                    Url = CatalogLibrary.GetNiceUrlForProduct(p),
+                    Url = UrlService.GetUrl(p),
                     Sku = p.Sku,
                     IsVariant = p.IsVariant,
                     VariantSku = p.VariantSku,

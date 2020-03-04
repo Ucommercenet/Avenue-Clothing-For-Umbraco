@@ -8,12 +8,14 @@ using UCommerce.RazorStore.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+using Product = UCommerce.Search.Models.Product;
 
 namespace UCommerce.RazorStore.Controllers
 {
 	public class BasketController : RenderMvcController
 	{
 		public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+		public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
 	    
         [HttpGet]
 		public override ActionResult Index(ContentModel model)
@@ -33,7 +35,7 @@ namespace UCommerce.RazorStore.Controllers
 			        Discount = orderLine.Discount,
 			        Tax = new Money(orderLine.VAT, basket.BillingCurrency).ToString(),
 			        Price = new Money(orderLine.Price, basket.BillingCurrency).ToString(),
-			        ProductUrl = CatalogLibrary.GetNiceUrlForProduct(CatalogLibrary.GetProduct(orderLine.Sku)),
+			        ProductUrl = UrlService.GetUrl(CatalogLibrary.GetProduct(orderLine.Sku)),
 			        PriceWithDiscount = new Money(orderLine.Price - orderLine.UnitDiscount.GetValueOrDefault(), basket.BillingCurrency).ToString(),
 			        OrderLineId = orderLine.OrderLineId
 			    };

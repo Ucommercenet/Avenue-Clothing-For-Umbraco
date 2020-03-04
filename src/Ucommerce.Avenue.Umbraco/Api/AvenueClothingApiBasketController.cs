@@ -15,6 +15,7 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 
         [Route("razorstore/basket/addToBasket")]
@@ -87,7 +88,7 @@ namespace UCommerce.RazorStore.Api
             foreach (var line in purchaseOrder.OrderLines)
             {
                 var product = CatalogLibrary.GetProduct(line.Sku);
-                var url = CatalogLibrary.GetNiceUrlForProduct(product);
+                var url = UrlService.GetUrl(product);
                 var imageUrl = GetImageUrlForProduct(product);
                 var lineTotal = new Money(line.Total.Value, currency);
 

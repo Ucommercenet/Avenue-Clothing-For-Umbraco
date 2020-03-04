@@ -17,6 +17,7 @@ namespace UCommerce.RazorStore.Controllers
     public class BreadcrumbsController : SurfaceController
     {
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+		public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
 
         public ActionResult Index()
         {
@@ -29,7 +30,7 @@ namespace UCommerce.RazorStore.Controllers
                 var breadcrumb = new BreadcrumbsViewModel
                 {
                     BreadcrumbName = category.DisplayName(),
-                    BreadcrumbUrl = CatalogLibrary.GetNiceUrlForCategory(category)
+                    BreadcrumbUrl = UrlService.GetUrl(category)
                 };
                 lastCategory = category;
                 breadcrumbs.Add(breadcrumb);
@@ -40,7 +41,7 @@ namespace UCommerce.RazorStore.Controllers
                 var breadcrumb = new BreadcrumbsViewModel
                 {
                     BreadcrumbName = product.DisplayName(),
-                    BreadcrumbUrl = CatalogLibrary.GetNiceUrlForProduct(product, lastCategory)
+                    BreadcrumbUrl = UrlService.GetUrl(product, lastCategory)
                 };
                 breadcrumbs.Add(breadcrumb);
             }

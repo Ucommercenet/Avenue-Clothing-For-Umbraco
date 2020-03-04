@@ -15,6 +15,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class SearchController : RenderMvcController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 
         // GET: Search
@@ -45,7 +46,7 @@ namespace UCommerce.RazorStore.Controllers
             {
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
-                    Url = CatalogLibrary.GetNiceUrlForProduct(product),
+                    Url = UrlService.GetUrl(product),
                     Name = product.DisplayName(),
                     Sku = product.Sku,
                     IsVariant = product.IsVariant,

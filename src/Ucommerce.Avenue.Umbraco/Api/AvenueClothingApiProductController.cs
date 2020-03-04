@@ -3,9 +3,9 @@ using System.Linq;
 using System.Web.Http;
 using Ucommerce.Api;
 using UCommerce.Api;
-using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
+using UCommerce.Search.Models;
 using ProductProperty = UCommerce.RazorStore.Api.Model.ProductProperty;
 
 namespace UCommerce.RazorStore.Api
@@ -13,6 +13,7 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiProductController : ApiController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 
         [Route("razorstore/products/getproductvariations")]
@@ -22,17 +23,14 @@ namespace UCommerce.RazorStore.Api
             Search.Models.Product product =
                 CatalogLibrary.GetProduct(request.ProductSku);
 
-            var variations = product.Variants.Select(variant => new ProductVariation
+            if (!product.ProductFamily)
+                return NotFound();
+
+            var variations = CatalogLibrary.GetVariants(product).Select(variant => new ProductVariation
             {
                 Sku = variant.Sku,
                 VariantSku = variant.VariantSku,
                 ProductName = variant.Name,
-                Properties = variant.ProductProperties.Select(prop => new ProductProperty()
-                {
-                    Id = prop.Id,
-                    Name = prop.ProductDefinitionField.Name,
-                    Value = prop.Value
-                })
             }).ToList();
 
             return Json(new {Variations = variations});
@@ -42,10 +40,10 @@ namespace UCommerce.RazorStore.Api
         [HttpPost]
         public IHttpActionResult GetVariantSkuFromSelectionRequest([FromBody] GetVariantSkuFromSelectionRequest request)
         {
-            var product = CatalogLibrary.GetProduct(request.ProductSku);
-            UCommerce.EntitiesV2.Product variant = null;
+            Product product = CatalogLibrary.GetProduct(request.ProductSku);
+            Product variant = null;
 
-            if (product.Variants.Any() && request.VariantProperties.Any()
+            if (product.ProductFamily && request.VariantProperties.Any()
             ) // If there are variant values we'll need to find the selected variant
             {
                 variant = product.Variants.FirstOrDefault(v =>
@@ -68,12 +66,6 @@ namespace UCommerce.RazorStore.Api
                 Sku = variant.Sku,
                 VariantSku = variant.VariantSku,
                 ProductName = variant.Name,
-                Properties = variant.ProductProperties.Select(prop => new ProductProperty
-                {
-                    Id = prop.Id,
-                    Name = prop.ProductDefinitionField.Name,
-                    Value = prop.Value
-                })
             };
 
             return Json(new {Variant = variantModel});
@@ -87,10 +79,10 @@ namespace UCommerce.RazorStore.Api
             ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
             Product product = CatalogLibrary.GetProduct(request.Sku);
             Category category = CatalogLibrary.GetCategory(request.CategoryId.Value);
-            string niceUrl = CatalogLibrary.GetNiceUrlForProduct(product, category, catalog);
+            string niceUrl = UrlService.GetUrl(product, category, catalog);
 
             PriceCalculation priceCalculation =
-                CatalogLibrary.CalculatePrices(product);
+                CatalogLibrary.CalculatePrices(product).Items.First();
 
             Currency currency = priceCalculation.YourPrice.Amount.Currency;
 
