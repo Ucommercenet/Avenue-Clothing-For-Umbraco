@@ -1,49 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using UCommerce.Api;
+using Ucommerce.Api;
+using Ucommerce.Api.Search;
 using UCommerce.Content;
-using UCommerce.EntitiesV2;
 using Umbraco.Web.Mvc;
-using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
-using UCommerce.Runtime;
-using UCommerce.Search.Facets;
+using UCommerce.Search;
+using UCommerce.Search.FacetsV2;
+using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 
 namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
+        private IIndex<Category> Categories = ObjectFactory.Instance.Resolve<IIndex<Category>>();
+        private ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
+        private SearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<SearchLibrary>();
+
         public override ActionResult Index(ContentModel model)
         {
-            var currentCategory = SiteContext.Current.CatalogContext.CurrentCategory;
+            var currentCategory = SiteContext.CatalogContext.CurrentCategory;
 
             var categoryViewModel = new CategoryViewModel
             {
-                Name = currentCategory.DisplayName(),
-                Description = currentCategory.DisplayName(),
-                CatalogId = currentCategory.ProductCatalog.Id,
-                CategoryId = currentCategory.Id,
+                Name = currentCategory.DisplayName,
+                Description = currentCategory.DisplayName,
+                CatalogGuid = currentCategory.ProductCatalog,
+                CategoryGuid = currentCategory.Guid,
                 Products = MapProductsInCategories(currentCategory)
             };
 
-
-            if (!HasBannerImage(currentCategory))
-            {
-                var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentCategory.ImageMediaId).Url;
-                categoryViewModel.BannerImageUrl = media;
-            }
+            //TODO: we don't have ImageMediaId anymore, just skip the check and set the BannerImageUrl = categoryImageMediaUrl ??
+            //if (!HasBannerImage(currentCategory))
+            //{
+            //    var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentCategory.ImageMediaId).Url;
+            //    categoryViewModel.BannerImageUrl = media;
+            //}
 
             return View("/Views/Catalog.cshtml", categoryViewModel);
         }
 
-        private bool HasBannerImage(Category category)
-        {
-            return string.IsNullOrEmpty(category.ImageMediaId);
-        }
+        //private bool HasBannerImage(Category category)
+        //{
+        //    return string.IsNullOrEmpty(category.ImageMediaId);
+        //}
 
-        private IList<ProductViewModel> MapProducts(ICollection<Documents.Product> productsInCategory)
+        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
@@ -68,12 +72,13 @@ namespace UCommerce.RazorStore.Controllers
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
 
-            foreach (var subcategory in category.Categories)
+            foreach (var subCategoryGuid in category.Categories)
             {
-                productsInCategory.AddRange(MapProductsInCategories(subcategory));
+                var subCategory = Categories.Find().Where(c => c.Guid == subCategoryGuid).First();
+                productsInCategory.AddRange(MapProductsInCategories(subCategory));
             }
 
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category, facetsForQuerying)));
+            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
 
             return productsInCategory;
         }

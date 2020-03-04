@@ -16,8 +16,8 @@
     </div>
 </div>
 
-@Html.HiddenFor(x => x.CatalogId, new {id ="catalog-id"})
-@Html.HiddenFor(x=>x.CategoryId, new {id="category-id"})
+@Html.HiddenFor(x => x.CatalogGuid, new {id ="catalog-id"})
+@Html.HiddenFor(x=>x.CategoryGuid, new {id="category-id"})
 <div class="row">
     <div class="product-list col-sm-12 col-md-12">
         @foreach (var product in Model.Products)

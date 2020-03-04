@@ -5,7 +5,6 @@ using Umbraco.Web.Mvc;
 using System.Collections.Specialized;
 using System.Linq;
 using System;
-using Ucommerce.Api;
 using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -64,8 +63,8 @@ namespace UCommerce.RazorStore.Controllers
 
     public class FacetsController : SurfaceController
     {
-        public ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
-        public SearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<SearchLibrary>();
+        ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
+        SearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<SearchLibrary>();
 
         // GET: Facets
         public ActionResult Index()
@@ -112,7 +111,7 @@ namespace UCommerce.RazorStore.Controllers
                 {
                     if (value.Count > 0)
                     {
-                        FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, value.Count);
+                        FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, (int) value.Count);
                         facetViewModel.FacetValues.Add(facetVal);
                     }
                 }
