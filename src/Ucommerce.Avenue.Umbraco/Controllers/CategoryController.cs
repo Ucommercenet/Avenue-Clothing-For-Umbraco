@@ -15,7 +15,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
-        private readonly IIndex<Category> _categories = ObjectFactory.Instance.Resolve<IIndex<Category>>();
+        private readonly ICatalogLibrary _catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         private readonly ISiteContext _siteContext = ObjectFactory.Instance.Resolve<ISiteContext>();
         private readonly ISearchLibrary _searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
@@ -74,7 +74,7 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var subCategoryGuid in category.Categories)
             {
-                var subCategory = _categories.Find().Where(c => c.Guid == subCategoryGuid).First();
+                var subCategory = _catalogLibrary.GetCategory(subCategoryGuid);
                 productsInCategory.AddRange(MapProductsInCategories(subCategory));
             }
 
