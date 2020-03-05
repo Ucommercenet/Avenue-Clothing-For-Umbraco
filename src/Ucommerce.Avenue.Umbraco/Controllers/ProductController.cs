@@ -13,6 +13,8 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ProductController : RenderMvcController
     {
+        private ICatalogLibrary _catalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        
         [HttpGet]
         public ActionResult Index(ContentModel model)
         {
@@ -40,9 +42,19 @@ namespace UCommerce.RazorStore.Controllers
             productViewModel.IsProductFamily = currentProduct.ProductFamily;
             productViewModel.IsVariant = false;
 
-            // TODO:
-            // productViewModel.PriceCalculation = CatalogLibrary.CalculatePrice(currentProduct);
-            // productViewModel.TaxCalculation = CatalogLibrary.CalculatePrice(currentProduct).YourTax.ToString();
+            // Price calculations
+            var productGuids = new List<Guid>(){ currentProduct.Guid };
+            var productPriceCalculationResult = _catalogLibrary.CalculatePrices(productGuids);
+            var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
+            if (productPriceCalculationResultItem != null)
+            {
+                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString();
+                productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
+                {
+                    YourPrice = productPriceCalculationResultItem.PriceInclTax,
+                    ListPrice = productPriceCalculationResultItem.ListPriceInclTax
+                };
+            }
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
             {

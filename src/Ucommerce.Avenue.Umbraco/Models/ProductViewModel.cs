@@ -49,7 +49,7 @@ namespace UCommerce.RazorStore.Models
 
 		public string VariantSku { get; set; }
 
-		public PriceCalculation PriceCalculation { get; set; }
+		public ProductPriceCalculationViewModel PriceCalculation { get; set; }
 
         public string ThumbnailImageUrl { get; set; }
 
