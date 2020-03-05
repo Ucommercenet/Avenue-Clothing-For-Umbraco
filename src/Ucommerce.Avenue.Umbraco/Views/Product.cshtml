@@ -45,8 +45,7 @@
             <form method="post" action="@Url.Action("Index", "AvenueClothingApiProduct")">
                 <div class="col-md-12 well">
                     <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                       @* TODO: Take catalog ShowIncVAT setting into account *@
-                        <p class="item-price" itemprop="price">@Model.ProductViewModel.PriceCalculation.PriceInclTax</p>
+                        <p class="item-price" itemprop="price">@Model.ProductViewModel.PriceCalculation.YourPrice</p>
                         <p class="item-tax">
                             <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
                         </p>

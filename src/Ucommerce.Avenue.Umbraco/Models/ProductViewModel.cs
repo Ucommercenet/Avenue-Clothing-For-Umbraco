@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using UCommerce.Api;
-using UCommerce.Catalog.Models;
 using Umbraco.Web;
 using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
@@ -50,7 +49,7 @@ namespace UCommerce.RazorStore.Models
 
 		public string VariantSku { get; set; }
 
-		public ProductPriceCalculationResult.Item PriceCalculation { get; set; }
+		public ProductPriceCalculationViewModel PriceCalculation { get; set; }
 
         public string ThumbnailImageUrl { get; set; }
 
