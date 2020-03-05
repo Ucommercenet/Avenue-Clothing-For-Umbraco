@@ -24,8 +24,9 @@ namespace UCommerce.RazorStore.Controllers
         {
             var productIds = CatalogContext.CurrentCategories.SelectMany(c => c.Products).ToList();
 
+            // TODO: only where Showonhomepage == true
             var products = ProductIndex.Find()
-                .Where(p => productIds.Contains(p.Guid) && (bool) p["ShowOnHomePage"]).ToList();
+                .Where(p => productIds.Contains(p.Guid)).ToList();
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
