@@ -16,8 +16,8 @@
     </div>
 </div>
 
-@Html.HiddenFor(x => x.CatalogGuid, new {id ="catalog-id"})
-@Html.HiddenFor(x=>x.CategoryGuid, new {id="category-id"})
+@Html.HiddenFor(x => x.CatalogGuid, new {id = "catalog-id"})
+@Html.HiddenFor(x => x.CategoryGuid, new {id = "category-id"})
 <div class="row">
     <div class="product-list col-sm-12 col-md-12">
         @foreach (var product in Model.Products)
@@ -26,15 +26,20 @@
                 <div class="product-image">
                     @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
                     {
-                        <a href="@product.Url"><img src="@product.ThumbnailImageUrl"></a>
+                        <a href="@product.Url">
+                            <img src="@product.ThumbnailImageUrl">
+                        </a>
                     }
                 </div>
 
-                <p class="item-name"><a href="@product.Url">@product.Name</a></p>
+                <p class="item-name">
+                    <a href="@product.Url">@product.Name</a>
+                </p>
                 <p class="item-price" data-productSku="@product.Sku"></p>
                 <p class="btn-group view-details">
                     <a href="@product.Url" class="btn btn-default">
-                        View more <span>
+                        View more
+                        <span>
                             <i class="fa fa-shopping-cart icon-white" aria-hidden="true"></i>
                         </span>
                     </a>

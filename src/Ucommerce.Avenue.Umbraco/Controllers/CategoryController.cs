@@ -15,13 +15,13 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
-        private IIndex<Category> Categories = ObjectFactory.Instance.Resolve<IIndex<Category>>();
-        private ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
-        private ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
+        private readonly IIndex<Category> _categories = ObjectFactory.Instance.Resolve<IIndex<Category>>();
+        private readonly ISiteContext _siteContext = ObjectFactory.Instance.Resolve<ISiteContext>();
+        private readonly ISearchLibrary _searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
         public override ActionResult Index(ContentModel model)
         {
-            var currentCategory = SiteContext.CatalogContext.CurrentCategory;
+            var currentCategory = _siteContext.CatalogContext.CurrentCategory;
 
             var categoryViewModel = new CategoryViewModel
             {
@@ -74,11 +74,11 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var subCategoryGuid in category.Categories)
             {
-                var subCategory = Categories.Find().Where(c => c.Guid == subCategoryGuid).First();
+                var subCategory = _categories.Find().Where(c => c.Guid == subCategoryGuid).First();
                 productsInCategory.AddRange(MapProductsInCategories(subCategory));
             }
 
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
+            productsInCategory.AddRange(MapProducts(_searchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
 
             return productsInCategory;
         }

@@ -63,19 +63,19 @@ namespace UCommerce.RazorStore.Controllers
 
     public class FacetsController : SurfaceController
     {
-        ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
-        ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
+        readonly ISiteContext _siteContext = ObjectFactory.Instance.Resolve<ISiteContext>();
+        readonly ISearchLibrary _searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
         // GET: Facets
         public ActionResult Index()
         {
-            var category = SiteContext.CatalogContext.CurrentCategory;
+            var category = _siteContext.CatalogContext.CurrentCategory;
             var facetValueOutputModel = new FacetsDisplayedViewModel();
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
             if (ShouldDisplayFacets(category))
             {
-                IList<Facet> facets = SearchLibrary.GetFacetsFor(category.Guid, facetsForQuerying).Facets;
+                IList<Facet> facets = _searchLibrary.GetFacetsFor(category.Guid, facetsForQuerying).Facets;
                 if (facets.Any(x => x.FacetValues.Any(y => y.Count > 0)))
                 {
                     facetValueOutputModel.Facets = MapFacets(facets);
@@ -87,7 +87,7 @@ namespace UCommerce.RazorStore.Controllers
 
         private bool ShouldDisplayFacets(Category category)
         {
-            var product = SiteContext.CatalogContext.CurrentProduct;
+            var product = _siteContext.CatalogContext.CurrentProduct;
 
             return category != null && product == null;
         }
