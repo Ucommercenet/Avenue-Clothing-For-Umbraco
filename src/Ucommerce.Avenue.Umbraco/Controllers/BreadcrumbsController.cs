@@ -20,7 +20,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class BreadcrumbsController : SurfaceController
     {
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
 

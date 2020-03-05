@@ -14,7 +14,7 @@ namespace UCommerce.RazorStore.Api
     public class AvenueClothingApiSearchController : ApiController
     {
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
         [Route("razorstore/search/")]

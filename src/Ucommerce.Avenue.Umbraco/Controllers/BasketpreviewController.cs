@@ -12,7 +12,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class BasketpreviewController : RenderMvcController
     {
-        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
 
         [HttpGet]
         public override ActionResult Index(ContentModel m)

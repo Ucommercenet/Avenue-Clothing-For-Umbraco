@@ -18,7 +18,7 @@ namespace UCommerce.RazorStore.Controllers
     public class SearchController : RenderMvcController
     {
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
         // GET: Search

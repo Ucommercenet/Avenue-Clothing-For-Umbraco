@@ -15,18 +15,15 @@ namespace UCommerce.RazorStore.Controllers
     public class HomepageCatalogController : SurfaceController
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
         // GET: HomepageCatalog
         public ActionResult Index()
         {
-            var productIds = CatalogContext.CurrentCategories.SelectMany(c => c.Products).ToList();
-
-            // TODO: only where Showonhomepage == true
             var products = ProductIndex.Find()
-                .Where(p => productIds.Contains(p.Guid)).ToList();
+                .Where(p => (bool) p["ShowOnHomePage"] == true).ToList();
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
 

@@ -8,7 +8,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class VoucherController : SurfaceController
     {
-        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
 
         // GET: Voucher
         [HttpGet]

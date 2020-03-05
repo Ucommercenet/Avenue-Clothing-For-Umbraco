@@ -21,7 +21,7 @@ namespace UCommerce.RazorStore.Controllers
     public class ReviewController : SurfaceController
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
 

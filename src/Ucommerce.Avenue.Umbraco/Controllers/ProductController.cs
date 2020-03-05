@@ -15,7 +15,7 @@ namespace UCommerce.RazorStore.Controllers
     public class ProductController : RenderMvcController
     {
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
         
         [HttpGet]
         public ActionResult Index(ContentModel model)

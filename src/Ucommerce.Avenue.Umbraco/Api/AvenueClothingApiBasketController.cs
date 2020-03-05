@@ -18,9 +18,9 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
     {
-        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
         [Route("razorstore/basket/addToBasket")]

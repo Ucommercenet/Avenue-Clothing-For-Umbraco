@@ -19,7 +19,7 @@ namespace UCommerce.RazorStore.Api
     public class AvenueClothingApiProductController : ApiController
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
-        public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 

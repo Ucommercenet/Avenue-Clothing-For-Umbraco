@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
@@ -10,7 +11,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class MiniBasketController : SurfaceController
     {
-        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
 
         // GET: MiniBasket
         public ActionResult Index()
