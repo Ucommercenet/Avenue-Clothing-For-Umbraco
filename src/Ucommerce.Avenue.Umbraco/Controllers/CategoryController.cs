@@ -17,7 +17,7 @@ namespace UCommerce.RazorStore.Controllers
     {
         private IIndex<Category> Categories = ObjectFactory.Instance.Resolve<IIndex<Category>>();
         private ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
-        private SearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<SearchLibrary>();
+        private ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
         public override ActionResult Index(ContentModel model)
         {

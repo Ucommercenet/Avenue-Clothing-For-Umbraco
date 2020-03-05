@@ -64,7 +64,7 @@ namespace UCommerce.RazorStore.Controllers
     public class FacetsController : SurfaceController
     {
         ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
-        SearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<SearchLibrary>();
+        ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
         // GET: Facets
         public ActionResult Index()
