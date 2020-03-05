@@ -4,33 +4,37 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using Umbraco.Web.Mvc;
 using UCommerce.Api;
-using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
+using UCommerce.Search;
+using UCommerce.Search.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
+using CatalogContext = Ucommerce.Api.CatalogContext;
+using Product = UCommerce.Search.Models.Product;
 
 namespace UCommerce.RazorStore.Controllers
 {
     public class BreadcrumbsController : SurfaceController
     {
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-		public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
 
         public ActionResult Index()
         {
             IList<BreadcrumbsViewModel> breadcrumbs = new List<BreadcrumbsViewModel>();
             Category lastCategory = null;
-            Product product = SiteContext.Current.CatalogContext.CurrentProduct;
+            Product product = CatalogContext.CurrentProduct;
 
-            foreach (var category in SiteContext.Current.CatalogContext.CurrentCategories)
+            foreach (var category in CatalogContext.CurrentCategories)
             {
                 var breadcrumb = new BreadcrumbsViewModel
                 {
-                    BreadcrumbName = category.DisplayName(),
-                    BreadcrumbUrl = UrlService.GetUrl(category)
+                    BreadcrumbName = category.DisplayName,
+                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {category})
                 };
                 lastCategory = category;
                 breadcrumbs.Add(breadcrumb);
@@ -40,8 +44,9 @@ namespace UCommerce.RazorStore.Controllers
             {
                 var breadcrumb = new BreadcrumbsViewModel
                 {
-                    BreadcrumbName = product.DisplayName(),
-                    BreadcrumbUrl = UrlService.GetUrl(product, lastCategory)
+                    BreadcrumbName = product.DisplayName,
+                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {lastCategory},
+                        new[] {product})
                 };
                 breadcrumbs.Add(breadcrumb);
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
@@ -7,6 +8,7 @@ using UCommerce.EntitiesV2;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using IImageService = UCommerce.Content.IImageService;
@@ -15,12 +17,15 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class SearchController : RenderMvcController
     {
-        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
 
         // GET: Search
         public ActionResult Index(ContentModel model)
         {
+            // TODO: Rewrite completely to NOT use the DB for full text searching 
+            
             var keyword = System.Web.HttpContext.Current.Request.QueryString["search"];
             IEnumerable<Product> products = new List<Product>();
             ProductsViewModel productsViewModel = new ProductsViewModel();
@@ -46,12 +51,12 @@ namespace UCommerce.RazorStore.Controllers
             {
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
-                    Url = UrlService.GetUrl(product),
+                    // Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
                     Name = product.DisplayName(),
                     Sku = product.Sku,
                     IsVariant = product.IsVariant,
                     LongDescription = product.LongDescription(),
-                    PriceCalculation = CatalogLibrary.CalculatePrices(product),
+                    // PriceCalculation = CatalogLibrary.CalculatePrices(new List<Guid>{product.Guid}),
                     ThumbnailImageUrl = ObjectFactory.Instance.Resolve<IImageService>()
                         .GetImage(product.ThumbnailImageMediaId).Url,
                     VariantSku = product.VariantSku

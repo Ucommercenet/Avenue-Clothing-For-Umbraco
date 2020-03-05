@@ -8,15 +8,19 @@ using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
 using UCommerce.Runtime;
+using UCommerce.Search;
 using Basket = UCommerce.RazorStore.Api.Model.Basket;
+using CatalogContext = Ucommerce.Api.CatalogContext;
 
 namespace UCommerce.RazorStore.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
     {
-        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
 
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]
@@ -35,7 +39,7 @@ namespace UCommerce.RazorStore.Api
 
             var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+            Currency currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
             var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), currency);
 
             var updatedLine = new LineItem()
@@ -60,7 +64,7 @@ namespace UCommerce.RazorStore.Api
         [HttpGet]
         public IHttpActionResult GetBasket()
         {
-            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+            var currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
             var purchaseOrder = TransactionLibrary.GetBasket(false);
 
             var subTotal = new Money(purchaseOrder.SubTotal.Value, currency);
@@ -88,8 +92,8 @@ namespace UCommerce.RazorStore.Api
             foreach (var line in purchaseOrder.OrderLines)
             {
                 var product = CatalogLibrary.GetProduct(line.Sku);
-                var url = UrlService.GetUrl(product);
-                var imageUrl = GetImageUrlForProduct(product);
+                var url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
+                var imageUrl = product.PrimaryImageUrl;
                 var lineTotal = new Money(line.Total.Value, currency);
 
                 var lineItem = new LineItem

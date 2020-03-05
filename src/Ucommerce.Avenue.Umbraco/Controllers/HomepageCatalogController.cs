@@ -1,29 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Api;
-using UCommerce.Content;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
-using UCommerce.Runtime;
-using Umbraco.Web.Models;
+using UCommerce.Search;
+using UCommerce.Search.Models;
 using Umbraco.Web.Mvc;
+using CatalogContext = Ucommerce.Api.CatalogContext;
 
 namespace UCommerce.RazorStore.Controllers
 {
     public class HomepageCatalogController : SurfaceController
     {
-        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
         // GET: HomepageCatalog
         public ActionResult Index()
         {
-            var products = SiteContext.Current.CatalogContext.CurrentCatalog.Categories.SelectMany(c =>
-                c.Products.Where(p => p.ProductProperties.Any(pp =>
-                    pp.ProductDefinitionField.Name == "ShowOnHomepage" && !String.IsNullOrEmpty(pp.Value) &&
-                    Convert.ToBoolean(pp.Value))));
+            var productIds = CatalogContext.CurrentCategories.SelectMany(c => c.Products).ToList();
+
+            var products = ProductIndex.Find()
+                .Where(p => productIds.Contains(p.Guid) && (bool) p["ShowOnHomePage"]).ToList();
+
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
             foreach (var p in products)
@@ -31,13 +34,12 @@ namespace UCommerce.RazorStore.Controllers
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
                     Name = p.Name,
-                    PriceCalculation = CatalogLibrary.CalculatePrices(p),
-                    Url = UrlService.GetUrl(p),
+                    PriceCalculation = CatalogLibrary.CalculatePrices(new List<Guid> {p.Guid}).Items.FirstOrDefault(),
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {p}),
                     Sku = p.Sku,
-                    IsVariant = p.IsVariant,
+                    IsVariant = !String.IsNullOrWhiteSpace(p.VariantSku),
                     VariantSku = p.VariantSku,
-                    ThumbnailImageUrl = ObjectFactory.Instance.Resolve<IImageService>()
-                        .GetImage(p.ThumbnailImageMediaId).Url
+                    ThumbnailImageUrl = p.ThumbnailImageUrl
                 });
             }
 

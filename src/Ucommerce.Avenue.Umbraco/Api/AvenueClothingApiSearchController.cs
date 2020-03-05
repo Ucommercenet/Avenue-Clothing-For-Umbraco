@@ -5,6 +5,7 @@ using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
+using UCommerce.Search;
 using UCommerce.SystemHttp.Models;
 
 namespace UCommerce.RazorStore.Api
@@ -12,13 +13,16 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiSearchController : ApiController
     {
-        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
 
         [Route("razorstore/search/")]
         [HttpPost]
         public IHttpActionResult Search([FromBody] SearchRequest request)
         {
+            // TODO: 
+            
             var products = UCommerce.EntitiesV2.Product.Find(p =>
                 p.VariantSku == null
                 && p.DisplayOnSite
@@ -56,7 +60,8 @@ namespace UCommerce.RazorStore.Api
                         Name = prop.ProductDefinitionField.Name,
                         Value = prop.Value
                     }),
-                    Url = UrlService.GetUrl(product)
+                    // TODO: re-implement
+                    // Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product})
                 });
             }
 

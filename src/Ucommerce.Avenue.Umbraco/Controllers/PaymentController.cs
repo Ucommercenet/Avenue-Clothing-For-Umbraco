@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
@@ -11,11 +12,13 @@ using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
-	public class PaymentController : RenderMvcController
+    public class PaymentController : RenderMvcController
     {
+        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+
         [HttpGet]
         public override ActionResult Index(ContentModel model)
-		{
+        {
             var paymentViewModel = new PaymentViewModel();
             paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
 
@@ -46,32 +49,32 @@ namespace UCommerce.RazorStore.Controllers
                 paymentViewModel.AvailablePaymentMethods.Add(option);
             }
 
-		    if (paymentViewModel.AvailablePaymentMethods.Any() && paymentViewModel.AvailablePaymentMethods.All(x => !x.Selected))
-		    {
+            if (paymentViewModel.AvailablePaymentMethods.Any() &&
+                paymentViewModel.AvailablePaymentMethods.All(x => !x.Selected))
+            {
                 // Always make sure, that one payment method is selected.
-		        paymentViewModel.AvailablePaymentMethods.First().Selected = true;
-		    }
+                paymentViewModel.AvailablePaymentMethods.First().Selected = true;
+            }
 
-		    paymentViewModel.ShippingCountry = shippingCountry.Name;
+            paymentViewModel.ShippingCountry = shippingCountry.Name;
 
             return View("/Views/Payment.cshtml", paymentViewModel);
-		}
-
-		[HttpPost]
-		public ActionResult Index(PaymentViewModel payment)
-		{
-			TransactionLibrary.CreatePayment(
-				paymentMethodId: payment.SelectedPaymentMethodId, 
-				requestPayment: false, 
-				amount: -1, 
-				overwriteExisting: true);
-
-			TransactionLibrary.ExecuteBasketPipeline();
-
-			var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
-            var preview = parent.Children(x=>x.Name == "Preview").FirstOrDefault();
-            return Redirect(preview.Url);
         }
 
+        [HttpPost]
+        public ActionResult Index(PaymentViewModel payment)
+        {
+            TransactionLibrary.CreatePayment(
+                paymentMethodId: payment.SelectedPaymentMethodId,
+                requestPayment: false,
+                amount: -1,
+                overwriteExisting: true);
+
+            TransactionLibrary.ExecuteBasketPipeline();
+
+            var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+            var preview = parent.Children(x => x.Name == "Preview").FirstOrDefault();
+            return Redirect(preview.Url);
+        }
     }
 }

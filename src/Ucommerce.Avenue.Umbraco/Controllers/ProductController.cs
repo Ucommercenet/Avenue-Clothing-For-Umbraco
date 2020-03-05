@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using UCommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
@@ -13,6 +15,7 @@ namespace UCommerce.RazorStore.Controllers
     public class ProductController : RenderMvcController
     {
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
+        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
         
         [HttpGet]
         public ActionResult Index(ContentModel model)

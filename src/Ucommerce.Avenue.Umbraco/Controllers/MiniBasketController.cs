@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using Umbraco.Web.Mvc;
 using UCommerce.RazorStore.Models;
 
@@ -9,7 +10,9 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class MiniBasketController : SurfaceController
     {
-// GET: MiniBasket
+        public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
+
+        // GET: MiniBasket
         public ActionResult Index()
         {
             var miniBasket = new MiniBasketViewModel();
@@ -26,8 +29,8 @@ namespace UCommerce.RazorStore.Controllers
                     miniBasket.IsEmpty = false;
                 }
             }
+
             return View("/Views/PartialView/MiniBasket.cshtml", miniBasket);
         }
     }
 }
-    
