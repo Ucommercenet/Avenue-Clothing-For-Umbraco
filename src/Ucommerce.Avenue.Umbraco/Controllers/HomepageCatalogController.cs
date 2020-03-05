@@ -14,7 +14,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class HomepageCatalogController : SurfaceController
     {
-        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
@@ -29,17 +29,27 @@ namespace UCommerce.RazorStore.Controllers
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
-            foreach (var p in products)
+            // Price calculations
+            var productGuids = products.Select(p => p.Guid).ToList();
+            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
+            var pricesPerProductId = productPriceCalculationResult.Items.ToDictionary(item => item.ProductGuid);
+
+            foreach (var product in products)
             {
+                var productPriceCalculationResultItem = pricesPerProductId[product.Guid];
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
-                    Name = p.Name,
-                    PriceCalculation = CatalogLibrary.CalculatePrices(new List<Guid> {p.Guid}).Items.FirstOrDefault(),
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {p}),
-                    Sku = p.Sku,
-                    IsVariant = !String.IsNullOrWhiteSpace(p.VariantSku),
-                    VariantSku = p.VariantSku,
-                    ThumbnailImageUrl = p.ThumbnailImageUrl
+                    Name = product.Name,
+                    PriceCalculation = new ProductPriceCalculationViewModel()
+                    {
+                        YourPrice = productPriceCalculationResultItem.PriceInclTax,
+                        ListPrice = productPriceCalculationResultItem.ListPriceInclTax
+                    },
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
+                    Sku = product.Sku,
+                    IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
+                    VariantSku = product.VariantSku,
+                    ThumbnailImageUrl = product.ThumbnailImageUrl
                 });
             }
 

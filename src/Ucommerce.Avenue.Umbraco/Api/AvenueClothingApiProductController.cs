@@ -18,7 +18,7 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiProductController : ApiController
     {
-        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();

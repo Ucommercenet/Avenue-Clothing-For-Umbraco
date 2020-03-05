@@ -20,7 +20,7 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ReviewController : SurfaceController
     {
-        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();

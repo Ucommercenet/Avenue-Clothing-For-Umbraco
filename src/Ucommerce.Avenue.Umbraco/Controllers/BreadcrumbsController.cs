@@ -22,7 +22,7 @@ namespace UCommerce.RazorStore.Controllers
     {
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
 
         public ActionResult Index()
         {

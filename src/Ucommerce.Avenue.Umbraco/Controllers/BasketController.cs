@@ -18,7 +18,7 @@ namespace UCommerce.RazorStore.Controllers
 		public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
 		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 		public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
-		public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
+		public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
 	    
         [HttpGet]
 		public override ActionResult Index(ContentModel model)

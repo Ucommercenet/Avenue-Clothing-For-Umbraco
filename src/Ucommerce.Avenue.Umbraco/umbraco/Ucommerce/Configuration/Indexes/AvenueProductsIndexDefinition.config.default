@@ -4,7 +4,7 @@
     <components>
         <component id="AvenueProductsIndexDefinition"
                    service="UCommerce.Search.IIndexDefinition`1[[UCommerce.Search.Models.Product, UCommerce.Search]], UCommerce.Search"
-                   type="Ucommerce.Avenue.Umbraco.Search, Ucommerce.Avenue.Umbraco">
+                   type="Ucommerce.Avenue.Umbraco.Search.AvenueProductIndexDefinition, uCommerce.RazorStore">
         </component>
     </components>
 </configuration>
