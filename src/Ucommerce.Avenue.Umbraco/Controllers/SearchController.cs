@@ -19,7 +19,7 @@ namespace UCommerce.RazorStore.Controllers
     {
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
         // GET: Search
         public ActionResult Index(ContentModel model)

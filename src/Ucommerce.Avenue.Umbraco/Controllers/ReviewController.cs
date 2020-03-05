@@ -14,6 +14,7 @@ using Umbraco.Web.Mvc;
 using UCommerce.Pipelines;
 using UCommerce.Search;
 using CatalogContext = Ucommerce.Api.CatalogContext;
+using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
 namespace UCommerce.RazorStore.Controllers
 {
@@ -21,7 +22,7 @@ namespace UCommerce.RazorStore.Controllers
     {
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
 
         // GET: Review

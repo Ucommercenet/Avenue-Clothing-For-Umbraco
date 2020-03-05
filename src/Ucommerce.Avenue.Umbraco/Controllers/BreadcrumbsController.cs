@@ -13,6 +13,7 @@ using UCommerce.Search.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using CatalogContext = Ucommerce.Api.CatalogContext;
+using ICatalogContext = Ucommerce.Api.ICatalogContext;
 using Product = UCommerce.Search.Models.Product;
 
 namespace UCommerce.RazorStore.Controllers
@@ -20,7 +21,7 @@ namespace UCommerce.RazorStore.Controllers
     public class BreadcrumbsController : SurfaceController
     {
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
 
         public ActionResult Index()

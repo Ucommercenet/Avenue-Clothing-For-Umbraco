@@ -20,7 +20,7 @@ namespace UCommerce.RazorStore.Api
     {
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
         [Route("razorstore/products/getproductvariations")]

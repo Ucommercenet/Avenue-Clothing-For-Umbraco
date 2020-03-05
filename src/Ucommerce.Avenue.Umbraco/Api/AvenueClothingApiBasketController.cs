@@ -11,6 +11,7 @@ using UCommerce.Runtime;
 using UCommerce.Search;
 using Basket = UCommerce.RazorStore.Api.Model.Basket;
 using CatalogContext = Ucommerce.Api.CatalogContext;
+using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
 namespace UCommerce.RazorStore.Api
 {
@@ -20,7 +21,7 @@ namespace UCommerce.RazorStore.Api
         public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
         public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
         public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-        public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]

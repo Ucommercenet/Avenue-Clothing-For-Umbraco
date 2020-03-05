@@ -16,7 +16,7 @@ namespace UCommerce.RazorStore.Controllers
 	public class BasketController : RenderMvcController
 	{
 		public CatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<CatalogLibrary>();
-		public CatalogContext CatalogContext => ObjectFactory.Instance.Resolve<CatalogContext>();
+		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 		public TransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<TransactionLibrary>();
 		public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
 	    
