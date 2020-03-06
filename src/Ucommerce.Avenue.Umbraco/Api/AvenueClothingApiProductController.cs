@@ -23,9 +23,9 @@ namespace UCommerce.RazorStore.Api
         [HttpPost]
         public IHttpActionResult GetProductVariations([FromBody] GetProductVariationsRequest request)
         {
-            var product = _catalogLibrary.Find(request.ProductSku);
+            var product = _catalogLibrary.GetProduct(request.ProductSku);
 
-            var variants = _catalogLibrary.GetVariants(product.Guid);
+            var variants = _catalogLibrary.GetVariants(product);
             var variations = variants.Select(variant => new ProductVariation
             {
                 Sku = variant.Sku,
@@ -47,7 +47,7 @@ namespace UCommerce.RazorStore.Api
         [HttpPost]
         public IHttpActionResult GetVariantSkuFromSelectionRequest([FromBody] GetVariantSkuFromSelectionRequest request)
         {
-            var product = _catalogLibrary.Find(request.ProductSku);
+            var product = _catalogLibrary.GetProduct(request.ProductSku);
             Product variant = null;
 
             if (product.Variants.Any() && request.VariantProperties.Any()) // If there are variant values we'll need to find the selected variant
@@ -89,7 +89,7 @@ namespace UCommerce.RazorStore.Api
         public IHttpActionResult GetProductInformation([FromBody] GetProductInformationRequest request)
         {
             ProductCatalog catalog = _catalogLibrary.GetCatalog(request.CatalogId);
-            Product product = _catalogLibrary.Find(request.Sku);
+            Product product = _catalogLibrary.GetProduct(request.Sku);
             Category category = _catalogLibrary.GetCategory(request.CategoryId);
             string niceUrl = _urlService.GetUrl(catalog, new[] {category}, new[] {product});
 
