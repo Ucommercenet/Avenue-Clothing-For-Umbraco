@@ -2,11 +2,9 @@
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.Search;
-using UCommerce.Content;
 using Umbraco.Web.Mvc;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
-using UCommerce.Search;
 using UCommerce.Search.FacetsV2;
 using UCommerce.Search.Models;
 using Umbraco.Web.Models;
@@ -15,20 +13,20 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class CategoryController : RenderMvcController
     {
-        private readonly ICatalogLibrary _catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        private readonly ISiteContext _siteContext = ObjectFactory.Instance.Resolve<ISiteContext>();
-        private readonly ISearchLibrary _searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
+        public ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
         public override ActionResult Index(ContentModel model)
         {
-            var currentCategory = _siteContext.CatalogContext.CurrentCategory;
+            var currentCategory = SiteContext.CatalogContext.CurrentCategory;
 
             var categoryViewModel = new CategoryViewModel
             {
                 Name = currentCategory.DisplayName,
-                Description = currentCategory.DisplayName,
-                CatalogGuid = currentCategory.ProductCatalog,
-                CategoryGuid = currentCategory.Guid,
+                Description = currentCategory.Description,
+                CatalogId = currentCategory.ProductCatalog,
+                CategoryId = currentCategory.Guid,
                 Products = MapProductsInCategories(currentCategory)
             };
 
@@ -39,7 +37,7 @@ namespace UCommerce.RazorStore.Controllers
 
             return View("/Views/Catalog.cshtml", categoryViewModel);
         }
-        
+
         private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
@@ -67,11 +65,11 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var subCategoryGuid in category.Categories)
             {
-                var subCategory = _catalogLibrary.GetCategory(subCategoryGuid);
+                var subCategory = CatalogLibrary.GetCategory(subCategoryGuid);
                 productsInCategory.AddRange(MapProductsInCategories(subCategory));
             }
 
-            productsInCategory.AddRange(MapProducts(_searchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
+            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
 
             return productsInCategory;
         }

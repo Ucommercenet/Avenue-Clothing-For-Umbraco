@@ -29,9 +29,9 @@ namespace UCommerce.RazorStore.Models
 
         public string BannerImageUrl { get; set; }
         
-        public Guid CategoryGuid { get; set; }
+        public Guid CategoryId { get; set; }
 
-        public Guid CatalogGuid { get; set; }
+        public Guid CatalogId { get; set; }
 
 
     }

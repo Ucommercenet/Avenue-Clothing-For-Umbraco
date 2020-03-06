@@ -25,7 +25,6 @@ namespace UCommerce.RazorStore.Controllers
             IEnumerable<Product> products = new List<Product>();
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
-            //TODO: test this
             if (!string.IsNullOrWhiteSpace(keyword))
             {
                 products = ProductIndex.Find()

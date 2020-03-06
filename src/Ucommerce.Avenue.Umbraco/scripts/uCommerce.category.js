@@ -12,8 +12,8 @@
         currentJQelement.prepend('<img src="/img/loader.gif" class="product-spinner">');
 
         $.uCommerce.getProductInformation({
-            CatalogGuid: catalogId,
-            CategoryGuid: categoryId,
+            CatalogId: catalogId,
+            CategoryId: categoryId,
             Sku: currentSku
         },
             function (data) {

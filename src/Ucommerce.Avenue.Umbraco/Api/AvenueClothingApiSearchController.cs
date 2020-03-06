@@ -51,15 +51,7 @@ namespace UCommerce.RazorStore.Api
                     Sku = product.Sku,
                     VariantSku = product.VariantSku,
                     ProductName = product.DisplayName,
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { product }),
-                    //TODO: is it used?
-
-                    //Properties = product.ProductProperties.Select(prop => new ProductProperty()
-                    //{
-                    //    Id = prop.Id,
-                    //    Name = prop.ProductDefinitionField.Name,
-                    //    Value = prop.Value
-                    //})
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { product })
                 });
             }
 
