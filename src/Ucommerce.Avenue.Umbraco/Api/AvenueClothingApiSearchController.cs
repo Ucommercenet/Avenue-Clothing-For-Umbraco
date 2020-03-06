@@ -6,6 +6,7 @@ using UCommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
 using UCommerce.Search;
+using UCommerce.Search.Models;
 using UCommerce.SystemHttp.Models;
 
 namespace UCommerce.RazorStore.Api
@@ -13,28 +14,24 @@ namespace UCommerce.RazorStore.Api
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiSearchController : ApiController
     {
-        public ISlugService UrlService => ObjectFactory.Instance.Resolve<ISlugService>();
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
         [Route("razorstore/search/")]
         [HttpPost]
         public IHttpActionResult Search([FromBody] SearchRequest request)
         {
-            // TODO: 
-            
-            var products = UCommerce.EntitiesV2.Product.Find(p =>
-                p.VariantSku == null
-                && p.DisplayOnSite
-                &&
-                (
-                    p.Sku.Contains(request.Keyword)
-                    || p.Name.Contains(request.Keyword)
-                    || p.ProductDescriptions.Any(d =>
-                        d.DisplayName.Contains(request.Keyword) || d.ShortDescription.Contains(request.Keyword) ||
-                        d.LongDescription.Contains(request.Keyword))
-                )
-            );
+            var products = ProductIndex.Find()
+                .Where(p => p.VariantSku == null
+                            && (
+                                p.Sku.Contains(request.Keyword)
+                                || p.Name.Contains(request.Keyword)
+                                || p.DisplayName.Contains(request.Keyword)
+                                || p.LongDescription.Contains(request.Keyword)
+                                || p.ShortDescription.Contains(request.Keyword)
+                            ))
+                .ToList();
 
 
             return Json(new
@@ -43,7 +40,7 @@ namespace UCommerce.RazorStore.Api
             });
         }
 
-        private IList<ProductVariation> MapResult(IList<UCommerce.EntitiesV2.Product> products)
+        private IList<ProductVariation> MapResult(ResultSet<Product> products)
         {
             var variations = new List<ProductVariation>();
 
@@ -53,15 +50,16 @@ namespace UCommerce.RazorStore.Api
                 {
                     Sku = product.Sku,
                     VariantSku = product.VariantSku,
-                    ProductName = product.ProductDescriptions.First().DisplayName,
-                    Properties = product.ProductProperties.Select(prop => new ProductProperty()
-                    {
-                        Id = prop.Id,
-                        Name = prop.ProductDefinitionField.Name,
-                        Value = prop.Value
-                    }),
-                    // TODO: re-implement
-                    // Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product})
+                    ProductName = product.DisplayName,
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { product }),
+                    //TODO: is it used?
+
+                    //Properties = product.ProductProperties.Select(prop => new ProductProperty()
+                    //{
+                    //    Id = prop.Id,
+                    //    Name = prop.ProductDefinitionField.Name,
+                    //    Value = prop.Value
+                    //})
                 });
             }
 
