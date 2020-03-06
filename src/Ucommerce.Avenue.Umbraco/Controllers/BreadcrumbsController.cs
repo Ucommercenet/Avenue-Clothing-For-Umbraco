@@ -1,31 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using Umbraco.Web.Mvc;
 using UCommerce.Api;
-using UCommerce.EntitiesV2;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Extensions;
+using UCommerce.Infrastructure;
+using UCommerce.Search;
+using UCommerce.Search.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
+using CatalogContext = Ucommerce.Api.CatalogContext;
+using ICatalogContext = Ucommerce.Api.ICatalogContext;
+using Product = UCommerce.Search.Models.Product;
 
 namespace UCommerce.RazorStore.Controllers
 {
     public class BreadcrumbsController : SurfaceController
     {
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+
         public ActionResult Index()
         {
-           IList<BreadcrumbsViewModel> breadcrumbs = new List<BreadcrumbsViewModel>();
-           Category lastCategory = null;
-           Product product = SiteContext.Current.CatalogContext.CurrentProduct;
+            IList<BreadcrumbsViewModel> breadcrumbs = new List<BreadcrumbsViewModel>();
+            Category lastCategory = null;
+            Product product = CatalogContext.CurrentProduct;
 
-            foreach (var category in SiteContext.Current.CatalogContext.CurrentCategories)
+            foreach (var category in CatalogContext.CurrentCategories)
             {
                 var breadcrumb = new BreadcrumbsViewModel
                 {
-                    BreadcrumbName = category.DisplayName(),
-                    BreadcrumbUrl = CatalogLibrary.GetNiceUrlForCategory(category)
+                    BreadcrumbName = category.DisplayName,
+                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {category})
                 };
                 lastCategory = category;
                 breadcrumbs.Add(breadcrumb);
@@ -35,8 +45,9 @@ namespace UCommerce.RazorStore.Controllers
             {
                 var breadcrumb = new BreadcrumbsViewModel
                 {
-                    BreadcrumbName = product.DisplayName(),
-                    BreadcrumbUrl = CatalogLibrary.GetNiceUrlForProduct(product, lastCategory)
+                    BreadcrumbName = product.DisplayName,
+                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {lastCategory},
+                        new[] {product})
                 };
                 breadcrumbs.Add(breadcrumb);
             }
@@ -51,8 +62,9 @@ namespace UCommerce.RazorStore.Controllers
                         BreadcrumbName = level.Name,
                         BreadcrumbUrl = level.Url
                     };
-                breadcrumbs.Add(breadcrumb);
+                    breadcrumbs.Add(breadcrumb);
                 }
+
                 var currentBreadcrumb = new BreadcrumbsViewModel()
                 {
                     BreadcrumbName = currentNode.Name,

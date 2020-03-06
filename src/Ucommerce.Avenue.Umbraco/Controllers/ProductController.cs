@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using UCommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search.Models;
@@ -13,7 +14,8 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class ProductController : RenderMvcController
     {
-        private ICatalogLibrary _catalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
         
         [HttpGet]
         public ActionResult Index(ContentModel model)
@@ -44,7 +46,7 @@ namespace UCommerce.RazorStore.Controllers
 
             // Price calculations
             var productGuids = new List<Guid>(){ currentProduct.Guid };
-            var productPriceCalculationResult = _catalogLibrary.CalculatePrices(productGuids);
+            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
             var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
             if (productPriceCalculationResultItem != null)
             {
@@ -69,9 +71,7 @@ namespace UCommerce.RazorStore.Controllers
                 // productViewModel.Variants = MapVariants(currentProduct.Variants);
             }
 
-            // TODO:
-            // bool isInBasket = TransactionLibrary.GetBasket(true).PurchaseOrder.OrderLines.Any(x => x.Sku == currentProduct.Sku);
-            bool isInBasket = false;
+            bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
             
             ProductPageViewModel productPageViewModel = new ProductPageViewModel()
             {

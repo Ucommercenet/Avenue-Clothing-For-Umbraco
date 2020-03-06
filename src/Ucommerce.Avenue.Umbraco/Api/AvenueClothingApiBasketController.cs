@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
 using UCommerce.Runtime;
+using UCommerce.Search;
 using Basket = UCommerce.RazorStore.Api.Model.Basket;
+using CatalogContext = Ucommerce.Api.CatalogContext;
+using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
 namespace UCommerce.RazorStore.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
     {
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]
         public IHttpActionResult AddToBasket([FromBody] AddToBasketRequet request)
         {
-            TransactionLibrary.AddToBasket(request.Quantity, request.Sku, request.VariantSku, addToExistingLine: true, executeBasketPipeline: true);
+            TransactionLibrary.AddToBasket(request.Quantity, request.Sku, request.VariantSku, addToExistingLine: true,
+                executeBasketPipeline: true);
             return Ok();
         }
 
@@ -27,9 +38,9 @@ namespace UCommerce.RazorStore.Api
             TransactionLibrary.UpdateLineItem(request.OrderLineId, request.NewQuantity);
             TransactionLibrary.ExecuteBasketPipeline();
 
-            var orderLine = TransactionLibrary.GetBasket().PurchaseOrder.OrderLines.First(l => l.OrderLineId == request.OrderLineId);
+            var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
+            Currency currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
             var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), currency);
 
             var updatedLine = new LineItem()
@@ -54,9 +65,9 @@ namespace UCommerce.RazorStore.Api
         [HttpGet]
         public IHttpActionResult GetBasket()
         {
-            var currency = SiteContext.Current.CatalogContext.CurrentCatalog.PriceGroup.Currency;
-            var purchaseOrder = TransactionLibrary.GetBasket(false).PurchaseOrder;
-            
+            var currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            var purchaseOrder = TransactionLibrary.GetBasket(false);
+
             var subTotal = new Money(purchaseOrder.SubTotal.Value, currency);
             var taxTotal = new Money(purchaseOrder.TaxTotal.Value, currency);
             var discountTotal = new Money(purchaseOrder.DiscountTotal.Value, currency);
@@ -82,8 +93,8 @@ namespace UCommerce.RazorStore.Api
             foreach (var line in purchaseOrder.OrderLines)
             {
                 var product = CatalogLibrary.GetProduct(line.Sku);
-                var url = CatalogLibrary.GetNiceUrlForProduct(product);
-                var imageUrl = GetImageUrlForProduct(product);
+                var url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
+                var imageUrl = product.PrimaryImageUrl;
                 var lineTotal = new Money(line.Total.Value, currency);
 
                 var lineItem = new LineItem
@@ -105,7 +116,7 @@ namespace UCommerce.RazorStore.Api
                 basket.LineItems.Add(lineItem);
             }
 
-            return Json(new { Basket = basket});
+            return Json(new {Basket = basket});
         }
 
         private string GetImageUrlForProduct(Product product)
@@ -124,7 +135,7 @@ namespace UCommerce.RazorStore.Api
                 return String.Empty;
 
             var umbracoHelper = Umbraco.Web.Composing.Current.UmbracoHelper;
-            
+
             var image = umbracoHelper.Media(Guid.Parse(mediaId));
             return image.Url;
         }

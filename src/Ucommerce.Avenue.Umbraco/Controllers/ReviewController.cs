@@ -2,30 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Lucene.Net.Search;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.Catalog.Status;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using Umbraco.Web.Mvc;
 using UCommerce.Pipelines;
+using UCommerce.Search;
+using CatalogContext = Ucommerce.Api.CatalogContext;
+using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
 namespace UCommerce.RazorStore.Controllers
 {
     public class ReviewController : SurfaceController
     {
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
+
         // GET: Review
         [HttpGet]
         public ActionResult Index()
         {
-            Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
+            Search.Models.Product currentProduct = CatalogContext.CurrentProduct;
             var mappedProduct = new ProductViewModel();
 
-            if (currentProduct.ProductReviews.Any())
-            {
-                mappedProduct.Sku = currentProduct.Sku;
-                mappedProduct.Reviews = MapReviews(currentProduct);
-            }
+            // TODO: re-implement after reviews are added
+            // if (currentProduct.ProductReviews.Any())
+            // {
+            //     mappedProduct.Sku = currentProduct.Sku;
+            //     mappedProduct.Reviews = MapReviews(currentProduct);
+            // }
 
             return View("/Views/PartialView/ProductReview.cshtml", mappedProduct);
         }
@@ -56,12 +68,11 @@ namespace UCommerce.RazorStore.Controllers
         [HttpPost]
         public ActionResult Index(ProductReviewViewModel formReview)
         {
-
-            var product = SiteContext.Current.CatalogContext.CurrentProduct;
-            var category = SiteContext.Current.CatalogContext.CurrentCategory;
+            var product = CatalogContext.CurrentProduct;
+            var category = CatalogContext.CurrentCategory;
 
             var request = System.Web.HttpContext.Current.Request;
-            var basket = SiteContext.Current.OrderContext.GetBasket();
+            var basket = OrderContext.GetBasket();
 
             if (request.Form.AllKeys.All(x => x != "review-product"))
             {
@@ -76,7 +87,8 @@ namespace UCommerce.RazorStore.Controllers
 
             if (basket.PurchaseOrder.Customer == null)
             {
-                basket.PurchaseOrder.Customer = new Customer() { FirstName = name, LastName = String.Empty, EmailAddress = email };
+                basket.PurchaseOrder.Customer = new Customer()
+                    {FirstName = name, LastName = String.Empty, EmailAddress = email};
             }
             else
             {
@@ -85,31 +97,32 @@ namespace UCommerce.RazorStore.Controllers
                 {
                     basket.PurchaseOrder.Customer.LastName = String.Empty;
                 }
+
                 basket.PurchaseOrder.Customer.EmailAddress = email;
             }
 
             basket.PurchaseOrder.Customer.Save();
 
-            var review = new ProductReview()
-            {
-                ProductCatalogGroup = SiteContext.Current.CatalogContext.CurrentCatalogGroup,
-                ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"),
-                CreatedOn = DateTime.Now,
-                CreatedBy = "System",
-                Product = product,
-                Customer = basket.PurchaseOrder.Customer,
-                Rating = rating,
-                ReviewHeadline = reviewHeadline,
-                ReviewText = reviewText,
-                Ip = request.UserHostName
-            };
+            // TODO: Implement using 
+            // var review = new ProductReview()
+            // {
+            //     ProductCatalogGroup = CatalogContext.CurrentCatalogGroup,
+            //     ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"),
+            //     CreatedOn = DateTime.Now,
+            //     CreatedBy = "System",
+            //     Product = product,
+            //     Customer = basket.PurchaseOrder.Customer,
+            //     Rating = rating,
+            //     ReviewHeadline = reviewHeadline,
+            //     ReviewText = reviewText,
+            //     Ip = request.UserHostName
+            // };
+            //
+            // product.AddProductReview(review);
 
-            product.AddProductReview(review);
+            // PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
 
-            PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
-
-            return Redirect(CatalogLibrary.GetNiceUrlForProduct(product, category));
-
+            return Redirect(UrlService.GetUrl(CatalogContext.CurrentCatalog, new []{category}, new []{product}));
         }
     }
 }

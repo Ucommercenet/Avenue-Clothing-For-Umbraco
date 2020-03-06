@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
@@ -11,6 +12,8 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class BillingController : RenderMvcController
     {
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
+
         [HttpGet]
         public override ActionResult Index(ContentModel model)
         {
@@ -31,7 +34,8 @@ namespace UCommerce.RazorStore.Controllers
             addressDetails.BillingAddress.State = billingInformation.State;
             addressDetails.BillingAddress.Attention = billingInformation.Attention;
             addressDetails.BillingAddress.CompanyName = billingInformation.CompanyName;
-            addressDetails.BillingAddress.CountryId = billingInformation.Country != null ? billingInformation.Country.CountryId : -1;
+            addressDetails.BillingAddress.CountryId =
+                billingInformation.Country != null ? billingInformation.Country.CountryId : -1;
 
             addressDetails.ShippingAddress.FirstName = shippingInformation.FirstName;
             addressDetails.ShippingAddress.LastName = shippingInformation.LastName;
@@ -45,9 +49,11 @@ namespace UCommerce.RazorStore.Controllers
             addressDetails.ShippingAddress.State = shippingInformation.State;
             addressDetails.ShippingAddress.Attention = shippingInformation.Attention;
             addressDetails.ShippingAddress.CompanyName = shippingInformation.CompanyName;
-            addressDetails.ShippingAddress.CountryId = shippingInformation.Country != null ? shippingInformation.Country.CountryId : -1;
+            addressDetails.ShippingAddress.CountryId =
+                shippingInformation.Country != null ? shippingInformation.Country.CountryId : -1;
 
-            addressDetails.AvailableCountries = Country.All().ToList().Select(x => new SelectListItem() { Text = x.Name, Value = x.CountryId.ToString() }).ToList();
+            addressDetails.AvailableCountries = Country.All().ToList()
+                .Select(x => new SelectListItem() {Text = x.Name, Value = x.CountryId.ToString()}).ToList();
 
             return View("/Views/BillingShippingAddress.cshtml", addressDetails);
         }
@@ -66,7 +72,7 @@ namespace UCommerce.RazorStore.Controllers
                 EditBillingInformation(addressDetails.BillingAddress);
                 EditShippingInformation(addressDetails.BillingAddress);
             }
-           
+
             TransactionLibrary.ExecuteBasketPipeline();
 
             var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
@@ -76,38 +82,39 @@ namespace UCommerce.RazorStore.Controllers
 
         private void EditShippingInformation(AddressViewModel shippingAddress)
         {
-            TransactionLibrary.EditShippingInformation(
-          shippingAddress.FirstName,
-          shippingAddress.LastName,
-          shippingAddress.EmailAddress,
-          shippingAddress.PhoneNumber,
-          shippingAddress.MobilePhoneNumber,
-          shippingAddress.CompanyName,
-          shippingAddress.Line1,
-          shippingAddress.Line2,
-          shippingAddress.PostalCode,
-          shippingAddress.City,
-          shippingAddress.State,
-          shippingAddress.Attention,
-          shippingAddress.CountryId);
+            TransactionLibrary.EditShipmentInformation(
+                Constants.DefaultShipmentAddressName,
+                shippingAddress.FirstName,
+                shippingAddress.LastName,
+                shippingAddress.EmailAddress,
+                shippingAddress.PhoneNumber,
+                shippingAddress.MobilePhoneNumber,
+                shippingAddress.CompanyName,
+                shippingAddress.Line1,
+                shippingAddress.Line2,
+                shippingAddress.PostalCode,
+                shippingAddress.City,
+                shippingAddress.State,
+                shippingAddress.Attention,
+                shippingAddress.CountryId);
         }
 
         private void EditBillingInformation(AddressViewModel billingAddress)
         {
             TransactionLibrary.EditBillingInformation(
-               billingAddress.FirstName,
-               billingAddress.LastName,
-               billingAddress.EmailAddress,
-               billingAddress.PhoneNumber,
-               billingAddress.MobilePhoneNumber,
-               billingAddress.CompanyName,
-               billingAddress.Line1,
-               billingAddress.Line2,
-               billingAddress.PostalCode,
-               billingAddress.City,
-               billingAddress.State,
-               billingAddress.Attention,
-               billingAddress.CountryId);
+                billingAddress.FirstName,
+                billingAddress.LastName,
+                billingAddress.EmailAddress,
+                billingAddress.PhoneNumber,
+                billingAddress.MobilePhoneNumber,
+                billingAddress.CompanyName,
+                billingAddress.Line1,
+                billingAddress.Line2,
+                billingAddress.PostalCode,
+                billingAddress.City,
+                billingAddress.State,
+                billingAddress.Attention,
+                billingAddress.CountryId);
         }
     }
 }
