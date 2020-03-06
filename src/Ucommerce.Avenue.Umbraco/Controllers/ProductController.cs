@@ -53,8 +53,8 @@ namespace UCommerce.RazorStore.Controllers
                 productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString();
                 productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
                 {
-                    YourPrice = productPriceCalculationResultItem.PriceInclTax,
-                    ListPrice = productPriceCalculationResultItem.ListPriceInclTax
+                    YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
+                    ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
                 };
             }
 
@@ -73,7 +73,7 @@ namespace UCommerce.RazorStore.Controllers
 
             bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
             
-            ProductPageViewModel productPageViewModel = new ProductPageViewModel()
+            var productPageViewModel = new ProductPageViewModel
             {
                 ProductViewModel = productViewModel,
                 AddedToBasket = addedToBasket,
@@ -88,13 +88,15 @@ namespace UCommerce.RazorStore.Controllers
             var variantModels = new List<ProductViewModel>();
             foreach (var currentVariant in variants)
             {
-                ProductViewModel productModel = new ProductViewModel();
-                productModel.Sku = currentVariant.Sku;
-                productModel.VariantSku = currentVariant.VariantSku;
-                productModel.Name = currentVariant.DisplayName;;
-                productModel.LongDescription = currentVariant.LongDescription;
-                productModel.IsVariant = true;
-                
+                var productModel = new ProductViewModel
+                {
+                    Sku = currentVariant.Sku,
+                    VariantSku = currentVariant.VariantSku,
+                    Name = currentVariant.DisplayName,
+                    LongDescription = currentVariant.LongDescription,
+                    IsVariant = true
+                };
+
                 variantModels.Add(productModel);
             }
 
