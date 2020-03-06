@@ -2,7 +2,7 @@
 {
     public class ProductPriceCalculationViewModel
     {
-        public decimal ListPrice { get; set; }
-        public decimal YourPrice { get; set; }
+        public string ListPrice { get; set; }
+        public string YourPrice { get; set; }
     }
 }

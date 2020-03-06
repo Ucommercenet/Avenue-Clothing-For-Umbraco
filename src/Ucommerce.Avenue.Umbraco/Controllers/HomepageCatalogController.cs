@@ -23,14 +23,15 @@ namespace UCommerce.RazorStore.Controllers
         public ActionResult Index()
         {
             var products = ProductIndex.Find()
-                .Where(p => (bool) p["ShowOnHomePage"] == true).ToList();
+                .Where(p => (bool)p["ShowOnHomepage"] == true)
+                .ToList();
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
             // Price calculations
             var productGuids = products.Select(p => p.Guid).ToList();
             var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
-            var pricesPerProductId = productPriceCalculationResult.Items.ToDictionary(item => item.ProductGuid);
+            var pricesPerProductId = productPriceCalculationResult.Items.ToLookup(item => item.ProductGuid);
 
             foreach (var product in products)
             {
@@ -40,8 +41,8 @@ namespace UCommerce.RazorStore.Controllers
                     Name = product.Name,
                     PriceCalculation = new ProductPriceCalculationViewModel()
                     {
-                        YourPrice = productPriceCalculationResultItem.PriceInclTax,
-                        ListPrice = productPriceCalculationResultItem.ListPriceInclTax
+                        YourPrice = productPriceCalculationResultItem.First().PriceInclTax.ToString("C"),
+                        ListPrice = productPriceCalculationResultItem.First().ListPriceInclTax.ToString("C")
                     },
                     Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
                     Sku = product.Sku,
