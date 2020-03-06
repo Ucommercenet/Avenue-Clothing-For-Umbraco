@@ -32,21 +32,14 @@ namespace UCommerce.RazorStore.Controllers
                 Products = MapProductsInCategories(currentCategory)
             };
 
-            //TODO: we don't have ImageMediaId anymore, just skip the check and set the BannerImageUrl = categoryImageMediaUrl ??
-            //if (!HasBannerImage(currentCategory))
-            //{
-            //    var media = ObjectFactory.Instance.Resolve<IImageService>().GetImage(currentCategory.ImageMediaId).Url;
-            //    categoryViewModel.BannerImageUrl = media;
-            //}
+            if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
+            {
+                categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+            }
 
             return View("/Views/Catalog.cshtml", categoryViewModel);
         }
-
-        //private bool HasBannerImage(Category category)
-        //{
-        //    return string.IsNullOrEmpty(category.ImageMediaId);
-        //}
-
+        
         private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
