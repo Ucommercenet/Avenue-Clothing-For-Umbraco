@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
@@ -91,11 +92,19 @@ namespace UCommerce.RazorStore.Controllers
 		public ActionResult Index()
 		{
 			TransactionLibrary.RequestPayments();
-
-			var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
-			var confirmation = parent.Children(x=>x.Name == "Confirmation").FirstOrDefault();
-            return Redirect(confirmation.Url);
-
+			
+			var payment = TransactionLibrary.GetBasket().PurchaseOrder.Payments.First();
+			
+			if (payment.PaymentMethod.PaymentMethodServiceName == null)
+			{
+				var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
+				var confirmation = parent.Children(x => x.Name == "Confirmation").FirstOrDefault();
+				return Redirect(confirmation.Url);
+			}
+			
+			string paymentUrl = TransactionLibrary.GetPaymentPageUrl(payment);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            return Redirect(paymentUrl);
         }
     }
 }
