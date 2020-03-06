@@ -13,10 +13,10 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class SearchController : RenderMvcController
     {
-        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
-        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        readonly ICatalogContext _catalogContext = ObjectFactory.Instance.Resolve<ICatalogContext>();
+        readonly ICatalogLibrary _catalogLibrary = ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        readonly IIndex<Product> _productIndex = ObjectFactory.Instance.Resolve<IIndex<Product>>();
+        readonly IUrlService _urlService = ObjectFactory.Instance.Resolve<IUrlService>();
 
         // GET: Search
         public ActionResult Index(ContentModel model)
@@ -28,7 +28,7 @@ namespace UCommerce.RazorStore.Controllers
             //TODO: test this
             if (!string.IsNullOrWhiteSpace(keyword))
             {
-                products = ProductIndex.Find()
+                products = _productIndex.Find()
                     .Where(p => p.VariantSku == null &&
                                 (
                                     p.Sku.Contains(keyword)
@@ -40,7 +40,7 @@ namespace UCommerce.RazorStore.Controllers
                     .ToList();
             }
 
-            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(products.Select(p => p.Guid).ToList());
+            var productPriceCalculationResult = _catalogLibrary.CalculatePrices(products.Select(p => p.Guid).ToList());
             var pricesPerProductId = productPriceCalculationResult.Items.ToDictionary(item => item.ProductGuid);
 
             foreach (var product in products)
@@ -48,7 +48,7 @@ namespace UCommerce.RazorStore.Controllers
                 var productPriceCalculationResultItem = pricesPerProductId[product.Guid];
                 productsViewModel.Products.Add(new ProductViewModel
                 {
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
+                    Url = _urlService.GetUrl(_catalogContext.CurrentCatalog, new[] {product}),
                     Name = product.DisplayName,
                     Sku = product.Sku,
                     IsVariant = !string.IsNullOrWhiteSpace(product.VariantSku),
