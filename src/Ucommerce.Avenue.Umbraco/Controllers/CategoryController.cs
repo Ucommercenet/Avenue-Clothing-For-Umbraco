@@ -63,10 +63,11 @@ namespace UCommerce.RazorStore.Controllers
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
 
-            foreach (var subCategoryGuid in category.Categories)
+            var subCategories = CatalogLibrary.GetCategories(category.Categories);
+
+            foreach (var subCategory in subCategories)
             {
-                var subCategory = CatalogLibrary.GetCategory(subCategoryGuid);
-                productsInCategory.AddRange(MapProductsInCategories(subCategory));
+                productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(subCategory.Guid, facetsForQuerying).Results));
             }
 
             productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));

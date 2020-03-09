@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using Ucommerce.Api;
-using UCommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
 using UCommerce.Search;
 using UCommerce.Search.Models;
-using UCommerce.SystemHttp.Models;
 
 namespace UCommerce.RazorStore.Api
 {
@@ -28,8 +25,8 @@ namespace UCommerce.RazorStore.Api
                                 p.Sku.Contains(request.Keyword)
                                 || p.Name.Contains(request.Keyword)
                                 || p.DisplayName == Match.FullText(request.Keyword)
-                                || p.LongDescription.Contains(request.Keyword)
-                                || p.ShortDescription.Contains(request.Keyword)
+                                || p.LongDescription == Match.FullText(request.Keyword)
+                                || p.ShortDescription == Match.FullText(request.Keyword)
                             ))
                 .ToList();
 
