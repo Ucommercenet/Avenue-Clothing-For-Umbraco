@@ -32,7 +32,7 @@ namespace UCommerce.RazorStore.Controllers
                                 (
                                     p.Sku.Contains(keyword)
                                     || p.Name.Contains(keyword)
-                                    || p.DisplayName.Contains(keyword)
+                                    || p.DisplayName == Match.FullText(keyword)
                                     || p.ShortDescription.Contains(keyword)
                                     || p.LongDescription.Contains(keyword)
                                 ))

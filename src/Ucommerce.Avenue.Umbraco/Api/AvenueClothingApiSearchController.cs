@@ -27,7 +27,7 @@ namespace UCommerce.RazorStore.Api
                             && (
                                 p.Sku.Contains(request.Keyword)
                                 || p.Name.Contains(request.Keyword)
-                                || p.DisplayName.Contains(request.Keyword)
+                                || p.DisplayName == Match.FullText(request.Keyword)
                                 || p.LongDescription.Contains(request.Keyword)
                                 || p.ShortDescription.Contains(request.Keyword)
                             ))
