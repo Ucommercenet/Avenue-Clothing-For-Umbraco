@@ -20,14 +20,13 @@ namespace UCommerce.RazorStore.Api
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
         [Route("razorstore/products/getproductvariations")]
         [HttpPost]
         public IHttpActionResult GetProductVariations([FromBody] GetProductVariationsRequest request)
         {
-            Search.Models.Product product =
+            var product =
                 CatalogLibrary.GetProduct(request.ProductSku);
 
             if (!product.ProductFamily)
@@ -47,7 +46,7 @@ namespace UCommerce.RazorStore.Api
         [HttpPost]
         public IHttpActionResult GetVariantSkuFromSelectionRequest([FromBody] GetVariantSkuFromSelectionRequest request)
         {
-            Product product = CatalogLibrary.GetProduct(request.ProductSku);
+            var product = CatalogLibrary.GetProduct(request.ProductSku);
             Product variant = null;
 
             if (product.ProductFamily && request.VariantProperties.Any()
