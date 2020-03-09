@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.Search;
@@ -64,10 +65,12 @@ namespace UCommerce.RazorStore.Controllers
             var productsInCategory = new List<ProductViewModel>();
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
+            var products = SearchLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying);
 
             foreach (var subCategory in subCategories)
             {
-                productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(subCategory.Guid, facetsForQuerying).Results));
+                var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
+                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
             }
 
             productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
