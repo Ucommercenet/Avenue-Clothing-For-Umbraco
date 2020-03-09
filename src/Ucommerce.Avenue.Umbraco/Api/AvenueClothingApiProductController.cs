@@ -20,14 +20,13 @@ namespace UCommerce.RazorStore.Api
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
         [Route("razorstore/products/getproductvariations")]
         [HttpPost]
         public IHttpActionResult GetProductVariations([FromBody] GetProductVariationsRequest request)
         {
-            Search.Models.Product product =
+            var product =
                 CatalogLibrary.GetProduct(request.ProductSku);
 
             if (!product.ProductFamily)
@@ -40,14 +39,14 @@ namespace UCommerce.RazorStore.Api
                 ProductName = variant.Name,
             }).ToList();
 
-            return Json(new {Variations = variations});
+            return Json(new { Variations = variations });
         }
 
         [Route("razorstore/products/getvariantskufromselection")]
         [HttpPost]
         public IHttpActionResult GetVariantSkuFromSelectionRequest([FromBody] GetVariantSkuFromSelectionRequest request)
         {
-            Product product = CatalogLibrary.GetProduct(request.ProductSku);
+            var product = CatalogLibrary.GetProduct(request.ProductSku);
             Product variant = null;
 
             if (product.ProductFamily && request.VariantProperties.Any()
@@ -72,7 +71,7 @@ namespace UCommerce.RazorStore.Api
                 ProductName = variant.Name,
             };
 
-            return Json(new {Variant = variantModel});
+            return Json(new { Variant = variantModel });
         }
 
 
@@ -82,21 +81,21 @@ namespace UCommerce.RazorStore.Api
         {
             ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
             Product product = CatalogLibrary.GetProduct(request.Sku);
-            Category category = CatalogLibrary.GetCategory(request.CategoryId.Value);
-            string niceUrl = UrlService.GetUrl(catalog, new[] {category}, new[] {product});
+            Category category = CatalogLibrary.GetCategory(request.CategoryId);
+            string niceUrl = UrlService.GetUrl(catalog, new[] { category }, new[] { product });
 
             ProductPriceCalculationResult.Item priceCalculation =
-                CatalogLibrary.CalculatePrices(new List<Guid> {product.Guid}).Items.First();
+                CatalogLibrary.CalculatePrices(new List<Guid> { product.Guid }).Items.First();
 
             Currency currency = Currency.Get(priceCalculation.CurrencyISOCode);
 
-            ProductInformation productInformation = new ProductInformation()
+            ProductInformation productInformation = new ProductInformation
             {
                 NiceUrl = niceUrl,
                 PriceCalculation = new PriceCalculationViewModel()
                 {
                     // TODO: Switch between excl and incl tax based on Catalog setting
-                    
+
                     Discount = new PriceViewModel()
                     {
                         Amount = new MoneyViewModel()

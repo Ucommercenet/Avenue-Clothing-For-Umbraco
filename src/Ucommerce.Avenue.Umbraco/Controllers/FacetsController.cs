@@ -1,15 +1,16 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using UCommerce.Api;
-using UCommerce.EntitiesV2;
-using UCommerce.Runtime;
-using UCommerce.Search.Facets;
 using Umbraco.Web.Mvc;
 using System.Collections.Specialized;
 using System.Linq;
 using System;
+using Ucommerce.Api.Search;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search.FacetsV2;
+using UCommerce.Search.Models;
+using ISiteContext = Ucommerce.Api.ISiteContext;
 
 namespace UCommerce.RazorStore.Controllers
 {
@@ -22,54 +23,60 @@ namespace UCommerce.RazorStore.Controllers
             {
                 parameters[queryString] = HttpContext.Current.Request.QueryString[queryString];
             }
+
             if (parameters.ContainsKey("umbDebugShowTrace"))
             {
                 parameters.Remove("umbDebugShowTrace");
             }
+
             if (parameters.ContainsKey("product"))
             {
                 parameters.Remove("product");
             }
+
             if (parameters.ContainsKey("category"))
             {
                 parameters.Remove("category");
             }
+
             if (parameters.ContainsKey("catalog"))
             {
                 parameters.Remove("catalog");
             }
+
             var facetsForQuerying = new List<Facet>();
 
             foreach (var parameter in parameters)
             {
-                var facet = new Facet();
-                facet.FacetValues = new List<FacetValue>();
-                facet.Name = parameter.Key;
-                foreach (var value in parameter.Value.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
+                var facet = new Facet {FacetValues = new List<FacetValue>(), Name = parameter.Key};
+                foreach (var value in parameter.Value.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    facet.FacetValues.Add(new FacetValue() { Value = value});
+                    facet.FacetValues.Add(new FacetValue() {Value = value});
                 }
+
                 facetsForQuerying.Add(facet);
             }
 
             return facetsForQuerying;
         }
-
     }
 
     public class FacetsController : SurfaceController
     {
+        readonly ISiteContext _siteContext = ObjectFactory.Instance.Resolve<ISiteContext>();
+        readonly ISearchLibrary _searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
+
         // GET: Facets
         public ActionResult Index()
         {
-            var category = SiteContext.Current.CatalogContext.CurrentCategory;
+            var category = _siteContext.CatalogContext.CurrentCategory;
             var facetValueOutputModel = new FacetsDisplayedViewModel();
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
             if (ShouldDisplayFacets(category))
             {
-                IList<Facet> facets = SearchLibrary.GetFacetsFor(category, facetsForQuerying);
-                if (facets.Any(x => x.FacetValues.Any(y => y.Hits > 0)))
+                IList<Facet> facets = _searchLibrary.GetFacetsFor(category.Guid, facetsForQuerying).Facets;
+                if (facets.Any(x => x.FacetValues.Any(y => y.Count > 0)))
                 {
                     facetValueOutputModel.Facets = MapFacets(facets);
                 }
@@ -80,7 +87,7 @@ namespace UCommerce.RazorStore.Controllers
 
         private bool ShouldDisplayFacets(Category category)
         {
-            var product = SiteContext.Current.CatalogContext.CurrentProduct;
+            var product = _siteContext.CatalogContext.CurrentProduct;
 
             return category != null && product == null;
         }
@@ -102,9 +109,9 @@ namespace UCommerce.RazorStore.Controllers
 
                 foreach (var value in facet.FacetValues)
                 {
-                    if (value.Hits > 0)
+                    if (value.Count > 0)
                     {
-                        FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, value.Hits);
+                        FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, (int) value.Count);
                         facetViewModel.FacetValues.Add(facetVal);
                     }
                 }
@@ -116,4 +123,3 @@ namespace UCommerce.RazorStore.Controllers
         }
     }
 }
-
