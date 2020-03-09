@@ -8,7 +8,7 @@ using UCommerce.Search;
 using UCommerce.Search.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class PartialViewController : SurfaceController
     {

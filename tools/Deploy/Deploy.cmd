@@ -11,7 +11,7 @@ set path1=%1
 set path1=%path1:"=%
 set lastChar=%path1:~-1%
 IF /I %lastChar%==\  set path1=%path1:~0,-1%
-w3
+
 REM First remove quotes around the string
 REM Remove trailing \ if it exists
 set path2=%2

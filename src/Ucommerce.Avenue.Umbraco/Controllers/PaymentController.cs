@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using UCommerce;
 using Ucommerce.Api;
-using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -11,7 +11,7 @@ using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class PaymentController : RenderMvcController
     {

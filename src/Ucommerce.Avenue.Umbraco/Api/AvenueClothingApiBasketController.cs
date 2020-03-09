@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using UCommerce;
 using Ucommerce.Api;
-using UCommerce.Api;
+using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Api.Model;
-using UCommerce.Runtime;
 using UCommerce.Search;
-using Basket = UCommerce.RazorStore.Api.Model.Basket;
-using CatalogContext = Ucommerce.Api.CatalogContext;
+using Basket = Ucommerce.Avenue.Umbraco.Api.Model.Basket;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
-namespace UCommerce.RazorStore.Api
+namespace Ucommerce.Avenue.Umbraco.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
@@ -134,7 +132,7 @@ namespace UCommerce.RazorStore.Api
             if (String.IsNullOrWhiteSpace(mediaId))
                 return String.Empty;
 
-            var umbracoHelper = Umbraco.Web.Composing.Current.UmbracoHelper;
+            var umbracoHelper = global::Umbraco.Web.Composing.Current.UmbracoHelper;
 
             var image = umbracoHelper.Media(Guid.Parse(mediaId));
             return image.Url;

@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.Catalog.Models;
 using UCommerce.EntitiesV2;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Api.Model;
 using UCommerce.Search;
 using Category = UCommerce.Search.Models.Category;
 using Product = UCommerce.Search.Models.Product;
 using ProductCatalog = UCommerce.Search.Models.ProductCatalog;
 
-namespace UCommerce.RazorStore.Api
+namespace Ucommerce.Avenue.Umbraco.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiProductController : ApiController

@@ -2,21 +2,18 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using Umbraco.Web.Mvc;
-using UCommerce.Api;
-using UCommerce.RazorStore.Models;
-using UCommerce.Runtime;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
+using UCommerce.RazorStore.Models;
 using UCommerce.Search;
 using UCommerce.Search.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
-using CatalogContext = Ucommerce.Api.CatalogContext;
+using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 using Product = UCommerce.Search.Models.Product;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class BreadcrumbsController : SurfaceController
     {
@@ -46,7 +43,7 @@ namespace UCommerce.RazorStore.Controllers
                 var breadcrumb = new BreadcrumbsViewModel
                 {
                     BreadcrumbName = product.DisplayName,
-                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {lastCategory},
+                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {lastCategory}.Compact().ToArray(),
                         new[] {product})
                 };
                 breadcrumbs.Add(breadcrumb);

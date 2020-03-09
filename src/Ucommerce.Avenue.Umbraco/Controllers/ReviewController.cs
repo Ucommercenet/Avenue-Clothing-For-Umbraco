@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Lucene.Net.Search;
 using Ucommerce.Api;
-using UCommerce.Api;
 using UCommerce.Catalog.Status;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
-using Umbraco.Web.Mvc;
-using UCommerce.Pipelines;
 using UCommerce.Search;
-using CatalogContext = Ucommerce.Api.CatalogContext;
+using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class ReviewController : SurfaceController
     {
@@ -29,7 +25,7 @@ namespace UCommerce.RazorStore.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Search.Models.Product currentProduct = CatalogContext.CurrentProduct;
+            UCommerce.Search.Models.Product currentProduct = CatalogContext.CurrentProduct;
             var mappedProduct = new ProductViewModel();
 
             // TODO: re-implement after reviews are added
