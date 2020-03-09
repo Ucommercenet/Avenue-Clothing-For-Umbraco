@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search;
 using UCommerce.Search.Models;
 using Umbraco.Web.Mvc;
 
@@ -11,13 +12,15 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class PartialViewController : SurfaceController
     {
-        private ICatalogLibrary _catalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
         public ActionResult CategoryNavigation()
         {
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
-            IEnumerable<Category> rootCategories = _catalogLibrary.GetRootCategories().ToList();
+            IEnumerable<Category> rootCategories = CatalogLibrary.GetRootCategories().ToList();
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
@@ -29,21 +32,21 @@ namespace UCommerce.RazorStore.Controllers
             var categoriesToReturn = new List<CategoryViewModel>();
 
             var allSubCategoryIds = categoriesToMap.SelectMany(cat => cat.Categories).Distinct().ToList();
-            var subCategoriesById = _catalogLibrary.GetCategories(allSubCategoryIds).ToDictionary(cat => cat.Guid);
+            var subCategoriesById = CatalogLibrary.GetCategories(allSubCategoryIds).ToDictionary(cat => cat.Guid);
 
             foreach (var category in categoriesToMap)
             {
                 var categoryViewModel = new CategoryViewModel
                 {
                     Name = category.DisplayName, 
-                    // TODO: Url = category.Slug
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { category })
                 };
                 categoryViewModel.Categories = category.Categories
                     .Select(id => subCategoriesById[id])
                     .Select(cat => new CategoryViewModel
                     {
                         Name = cat.DisplayName,
-                        //TODO: Url = cat.Slug
+                        Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { category, cat })
                     })
                     .ToList();
 

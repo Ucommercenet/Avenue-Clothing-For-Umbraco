@@ -1,30 +1,34 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
-using UCommerce.Api;
+using Ucommerce.Api;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Api.Model;
-using UCommerce.SystemHttp.Models;
+using UCommerce.Search;
+using UCommerce.Search.Models;
 
 namespace UCommerce.RazorStore.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiSearchController : ApiController
     {
-        
+        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
+
         [Route("razorstore/search/")]
         [HttpPost]
         public IHttpActionResult Search([FromBody] SearchRequest request)
         {
-            var products = UCommerce.EntitiesV2.Product.Find(p =>
-                p.VariantSku == null
-                && p.DisplayOnSite
-                &&
-                (
-                    p.Sku.Contains(request.Keyword)
-                    || p.Name.Contains(request.Keyword)
-                    || p.ProductDescriptions.Any(d => d.DisplayName.Contains(request.Keyword) || d.ShortDescription.Contains(request.Keyword) || d.LongDescription.Contains(request.Keyword))
-                )
-            );
+            var products = ProductIndex.Find()
+                .Where(p => p.VariantSku == null
+                            && (
+                                p.Sku.Contains(request.Keyword)
+                                || p.Name.Contains(request.Keyword)
+                                || p.DisplayName == Match.FullText(request.Keyword)
+                                || p.LongDescription == Match.FullText(request.Keyword)
+                                || p.ShortDescription == Match.FullText(request.Keyword)
+                            ))
+                .ToList();
 
 
             return Json(new
@@ -33,7 +37,7 @@ namespace UCommerce.RazorStore.Api
             });
         }
 
-        private IList<ProductVariation> MapResult(IList<UCommerce.EntitiesV2.Product> products)
+        private IList<ProductVariation> MapResult(ResultSet<Product> products)
         {
             var variations = new List<ProductVariation>();
 
@@ -43,14 +47,8 @@ namespace UCommerce.RazorStore.Api
                 {
                     Sku = product.Sku,
                     VariantSku = product.VariantSku,
-                    ProductName = product.ProductDescriptions.First().DisplayName,
-                    Url = CatalogLibrary.GetNiceUrlForProduct(product),
-                    Properties = product.ProductProperties.Select(prop => new ProductProperty()
-                    {
-                        Id = prop.Id,
-                        Name = prop.ProductDefinitionField.Name,
-                        Value = prop.Value
-                    })
+                    ProductName = product.DisplayName,
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { product })
                 });
             }
 

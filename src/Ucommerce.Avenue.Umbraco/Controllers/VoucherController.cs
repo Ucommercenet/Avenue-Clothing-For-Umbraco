@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Web.Mvc;
 using UCommerce.Api;
+using UCommerce.Infrastructure;
 using Umbraco.Web.Mvc;
 
 namespace UCommerce.RazorStore.Controllers
 {
     public class VoucherController : SurfaceController
     {
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
+
         // GET: Voucher
         [HttpGet]
         public ActionResult Index()
@@ -21,6 +24,5 @@ namespace UCommerce.RazorStore.Controllers
             TransactionLibrary.ExecuteBasketPipeline();
             return Redirect(this.CurrentPage.Url);
         }
-      
     }
 }

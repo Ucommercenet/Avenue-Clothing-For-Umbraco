@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using UCommerce;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Runtime;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
@@ -14,11 +16,13 @@ namespace UCommerce.RazorStore.Controllers
 {
     public class EmailController : RenderMvcController
     {
+        public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
+        
         // GET: uCommerceEmail
         public override ActionResult Index(ContentModel model)
         {
-          
-            PurchaseOrder basket = TransactionLibrary.GetPurchaseOrder(Guid.Parse(Request.QueryString["orderGuid"]));
+
+            PurchaseOrder basket = OrderContext.GetBasket(Guid.Parse(Request.QueryString["orderGuid"])).PurchaseOrder;
 
             var basketModel = new PurchaseOrderViewModel();
 

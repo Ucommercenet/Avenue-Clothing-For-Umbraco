@@ -1,20 +1,29 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.EntitiesV2;
+using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+using Product = UCommerce.Search.Models.Product;
 
 namespace UCommerce.RazorStore.Controllers
 {
 	public class BasketController : RenderMvcController
-    {
+	{
+		public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+		public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
+		public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+	    
         [HttpGet]
 		public override ActionResult Index(ContentModel model)
 		{
-			PurchaseOrder basket = TransactionLibrary.GetBasket().PurchaseOrder;
+			PurchaseOrder basket = TransactionLibrary.GetBasket();
 			var basketModel = new PurchaseOrderViewModel();
 
 			foreach (var orderLine in basket.OrderLines)
@@ -29,7 +38,7 @@ namespace UCommerce.RazorStore.Controllers
 			        Discount = orderLine.Discount,
 			        Tax = new Money(orderLine.VAT, basket.BillingCurrency).ToString(),
 			        Price = new Money(orderLine.Price, basket.BillingCurrency).ToString(),
-			        ProductUrl = CatalogLibrary.GetNiceUrlForProduct(CatalogLibrary.GetProduct(orderLine.Sku)),
+			        ProductUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { CatalogLibrary.GetProduct(orderLine.Sku) }),
 			        PriceWithDiscount = new Money(orderLine.Price - orderLine.UnitDiscount.GetValueOrDefault(), basket.BillingCurrency).ToString(),
 			        OrderLineId = orderLine.OrderLineId
 			    };

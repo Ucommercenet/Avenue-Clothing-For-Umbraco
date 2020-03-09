@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UCommerce.RazorStore</RootNamespace>
-    <AssemblyName>UCommerce.RazorStore</AssemblyName>
+    <RootNamespace>Ucommerce.Avenue.Umbraco</RootNamespace>
+    <AssemblyName>uCommerce.RazorStore</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
@@ -362,6 +362,7 @@
     <Compile Include="Api\Model\ProductVariation.cs" />
     <Compile Include="Api\Model\ProductProperty.cs" />
     <Compile Include="Api\Model\LineItem.cs" />
+    <Compile Include="Search\AvenueProductIndexDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\bootstrap.min.css" />
@@ -517,6 +518,7 @@
   <ItemGroup>
     <None Include=".bin\node.cmd" />
     <Content Include="css\sass.scss" />
+    <Content Include="umbraco\Ucommerce\Configuration\Indexes\AvenueProductsIndexDefinition.config.default" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -562,9 +564,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Email\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\ucommerce\src\Ucommerce.Api\Ucommerce.Api.csproj">
       <Project>{519a70d0-e96f-48b5-b108-0610112ebacf}</Project>
       <Name>Ucommerce.Api</Name>
@@ -585,6 +584,9 @@
       <Project>{6c13a96e-cf6c-4ee6-bebf-c5914cd64d28}</Project>
       <Name>UCommerce.SystemHttp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="umbraco\Ucommerce" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
