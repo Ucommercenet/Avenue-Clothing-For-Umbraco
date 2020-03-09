@@ -330,6 +330,7 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\BasketpreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RouterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
@@ -624,7 +625,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\..\Avenue-Clothing-For-Umbraco\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\u\Website"
+    <PostBuildEvent>"$(SolutionDir)..\..\Avenue-Clothing-For-Umbraco\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\u8dev\Website"
 </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
