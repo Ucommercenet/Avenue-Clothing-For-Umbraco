@@ -28,6 +28,8 @@ robocopy "%path1%\scripts" "%path2%\scripts" /s
 robocopy "%path1%\Views" "%path2%\Views" /s
 robocopy "%path1%\img" "%path2%\img" /s
 robocopy "%path1%\js" "%path2%\js" /s
+robocopy "%path1%\umbraco\Ucommerce\Configuration" "%path2%\umbraco\Ucommerce\Configuration" /s
+powershell -Command "Get-ChildItem %path2%\umbraco\Ucommerce\Configuration -include \"*.config.default\" -Exclude \"*custom.config.default\" -Recurse | Move-Item -Force -Destination {$_.Fullname -replace \".default\",\"\" }"
 robocopy "%path1%\bin" "%path2%\bin" uCommerce.RazorStore.dll
 REM robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
 
