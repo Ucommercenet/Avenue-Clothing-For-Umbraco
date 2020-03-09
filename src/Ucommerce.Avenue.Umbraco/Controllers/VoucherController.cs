@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Ucommerce.Api;
 using UCommerce.Api;
 using UCommerce.Infrastructure;
 using Umbraco.Web.Mvc;
