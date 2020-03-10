@@ -98,7 +98,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productProperties = new List<ProductPropertiesViewModel>();
             
             var uniqueVariants = 
-                from v in variants.SelectMany(p => p.UserDefinedFields)
+                from v in variants.SelectMany(p => p.GetUserDefinedFields())
                 group v by v.Key into g
                 select g;
             
