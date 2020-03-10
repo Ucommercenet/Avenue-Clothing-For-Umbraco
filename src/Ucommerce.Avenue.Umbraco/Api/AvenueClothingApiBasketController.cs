@@ -21,6 +21,8 @@ namespace Ucommerce.Avenue.Umbraco.Api
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
+        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
+
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]
         public IHttpActionResult AddToBasket([FromBody] AddToBasketRequet request)
@@ -38,7 +40,8 @@ namespace Ucommerce.Avenue.Umbraco.Api
 
             var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            Currency currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            Currency currency =
+                CurrencyRepository.SingleOrDefault(x => x.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
             var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), currency);
 
             var updatedLine = new LineItem()
@@ -63,7 +66,9 @@ namespace Ucommerce.Avenue.Umbraco.Api
         [HttpGet]
         public IHttpActionResult GetBasket()
         {
-            var currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            Currency currency =
+                CurrencyRepository.SingleOrDefault(x => x.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+
             var purchaseOrder = TransactionLibrary.GetBasket(false);
 
             var subTotal = new Money(purchaseOrder.SubTotal.Value, currency);
