@@ -49,7 +49,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
             if (productPriceCalculationResultItem != null)
             {
-                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString();
+                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString("C");
                 productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
                 {
                     YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),

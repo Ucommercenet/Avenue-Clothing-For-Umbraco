@@ -22,6 +22,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
+        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
 
         [Route("razorstore/products/getproductvariations")]
         [HttpPost]
@@ -81,86 +82,50 @@ namespace Ucommerce.Avenue.Umbraco.Api
         public IHttpActionResult GetProductInformation([FromBody] GetProductInformationRequest request)
         {
             ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
-            Product product = CatalogLibrary.GetProduct(request.Sku);
             Category category = CatalogLibrary.GetCategory(request.CategoryId);
+            Product product = CatalogLibrary.GetProduct(request.Sku);
             string niceUrl = UrlService.GetUrl(catalog, new[] { category }, new[] { product });
 
             ProductPriceCalculationResult.Item priceCalculation =
                 CatalogLibrary.CalculatePrices(new List<Guid> { product.Guid }).Items.First();
 
-            Currency currency = Currency.Get(priceCalculation.CurrencyISOCode);
+            Currency currency = CurrencyRepository.SingleOrDefault(x => x.ISOCode == priceCalculation.CurrencyISOCode);
 
+            var includeTax = catalog.ShowPricesIncludingTax;
             ProductInformation productInformation = new ProductInformation
             {
                 NiceUrl = niceUrl,
                 PriceCalculation = new PriceCalculationViewModel()
                 {
-                    // TODO: Switch between excl and incl tax based on Catalog setting
-
-                    Discount = new PriceViewModel()
-                    {
-                        Amount = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.DiscountExclTax,
-                            DisplayValue = new Money(priceCalculation.DiscountExclTax, currency).ToString()
-                        },
-                        AmountExclTax = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.DiscountExclTax,
-                            DisplayValue = new Money(priceCalculation.DiscountExclTax, currency).ToString()
-                        },
-                        AmountInclTax = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.DiscountInclTax,
-                            DisplayValue = new Money(priceCalculation.DiscountInclTax, currency).ToString()
-                        }
-                    },
                     IsDiscounted = priceCalculation.DiscountPercentage > 0M,
-                    YourPrice = new PriceViewModel()
-                    {
-                        Amount = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.PriceExclTax,
-                            DisplayValue = new Money(priceCalculation.PriceExclTax, currency).ToString()
-                        },
-                        AmountInclTax = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.PriceInclTax,
-                            DisplayValue =
-                                new Money(priceCalculation.PriceInclTax, currency).ToString()
-                        },
-                        AmountExclTax = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.PriceExclTax,
-                            DisplayValue =
-                                new Money(priceCalculation.PriceExclTax, currency).ToString()
-                        }
-                    },
-                    ListPrice = new PriceViewModel()
-                    {
-                        Amount = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.ListPriceExclTax,
-                            DisplayValue = new Money(priceCalculation.ListPriceExclTax, currency).ToString()
-                        },
-                        AmountExclTax = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.ListPriceInclTax,
-                            DisplayValue =
-                                new Money(priceCalculation.ListPriceInclTax, currency).ToString()
-                        },
-                        AmountInclTax = new MoneyViewModel()
-                        {
-                            Value = priceCalculation.ListPriceExclTax,
-                            DisplayValue =
-                                new Money(priceCalculation.ListPriceExclTax, currency).ToString()
-                        }
-                    }
+                    Discount = GetPriceViewModel(priceCalculation.DiscountExclTax, priceCalculation.DiscountInclTax, includeTax, currency),
+                    YourPrice = GetPriceViewModel(priceCalculation.PriceExclTax, priceCalculation.PriceInclTax, includeTax, currency),
+                    ListPrice = GetPriceViewModel(priceCalculation.ListPriceExclTax, priceCalculation.ListPriceInclTax, includeTax, currency),
                 }
             };
             productInformation.Sku = product.Sku;
 
             return Json(productInformation);
+        }
+
+        private PriceViewModel GetPriceViewModel(decimal priceExclTax, decimal priceInclTax, bool includeTax, Currency currency)
+        {
+            var price = includeTax ? priceInclTax : priceExclTax;
+            return new PriceViewModel()
+            {
+                Amount = GetMoneyViewModel(price, currency),
+                AmountExclTax = GetMoneyViewModel(priceExclTax, currency),
+                AmountInclTax = GetMoneyViewModel(priceInclTax, currency),
+            };
+        }
+
+        private MoneyViewModel GetMoneyViewModel(decimal price, Currency currency)
+        {
+            return new MoneyViewModel()
+            {
+                Value = price,
+                DisplayValue = new Money(price, currency).ToString()
+            };
         }
     }
 }

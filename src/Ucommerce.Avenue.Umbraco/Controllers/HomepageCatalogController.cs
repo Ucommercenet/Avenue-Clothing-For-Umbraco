@@ -33,17 +33,18 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             foreach (var product in products)
             {
-                var productPriceCalculationResultItem = pricesPerProductId[product.Guid];
+                var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
+                var productPriceCalculationResultItem = pricesPerProductId[product.Guid].First();
                 productsViewModel.Products.Add(new ProductViewModel()
                 {
+                    Sku = product.Sku,
                     Name = product.Name,
+                    Url = niceUrl,
                     PriceCalculation = new ProductPriceCalculationViewModel()
                     {
-                        YourPrice = productPriceCalculationResultItem.First().PriceInclTax.ToString("C"),
-                        ListPrice = productPriceCalculationResultItem.First().ListPriceInclTax.ToString("C")
+                        YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
+                        ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
                     },
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
-                    Sku = product.Sku,
                     IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
                     VariantSku = product.VariantSku,
                     ThumbnailImageUrl = product.ThumbnailImageUrl
