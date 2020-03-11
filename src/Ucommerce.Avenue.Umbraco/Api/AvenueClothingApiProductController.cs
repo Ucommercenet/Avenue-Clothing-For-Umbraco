@@ -13,6 +13,7 @@ using UCommerce.Search;
 using Category = UCommerce.Search.Models.Category;
 using Product = UCommerce.Search.Models.Product;
 using ProductCatalog = UCommerce.Search.Models.ProductCatalog;
+using ProductProperty = Ucommerce.Avenue.Umbraco.Api.Model.ProductProperty;
 
 namespace Ucommerce.Avenue.Umbraco.Api
 {
@@ -34,11 +35,22 @@ namespace Ucommerce.Avenue.Umbraco.Api
             if (!product.ProductFamily)
                 return NotFound();
 
-            var variations = CatalogLibrary.GetVariants(product).Select(variant => new ProductVariation
+            var variations = CatalogLibrary.GetVariants(product).Select(variant =>
             {
-                Sku = variant.Sku,
-                VariantSku = variant.VariantSku,
-                ProductName = variant.Name,
+                var properties = variant
+                    .GetUserDefinedFields().Select(field => new ProductProperty()
+                {
+                    Name = field.Key,
+                    Value = field.Value.ToString()
+                });
+                
+                return new ProductVariation
+                {
+                    Sku = variant.Sku,
+                    VariantSku = variant.VariantSku,
+                    ProductName = variant.Name,
+                    Properties = properties
+                };
             }).ToList();
 
             return Json(new { Variations = variations });
