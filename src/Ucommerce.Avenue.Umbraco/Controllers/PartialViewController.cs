@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
@@ -42,7 +43,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { category })
                 };
                 categoryViewModel.Categories = category.Categories
-                    .Select(id => subCategoriesById[id])
+                    .Select(id => subCategoriesById.TryGetValue(id, out var cat) ? cat : null)
+                    .Compact()
                     .Select(cat => new CategoryViewModel
                     {
                         Name = cat.DisplayName,

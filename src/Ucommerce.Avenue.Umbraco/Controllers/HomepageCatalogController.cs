@@ -21,7 +21,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         public ActionResult Index()
         {
             var products = ProductIndex.Find()
-                .Where(p => (bool)p["ShowOnHomepage"] == true)
+                .Where(p => (bool) p["ShowOnHomepage"] == true)
+                .Take(12)
                 .ToList();
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
@@ -34,21 +35,24 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             foreach (var product in products)
             {
                 var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
-                var productPriceCalculationResultItem = pricesPerProductId[product.Guid].First();
-                productsViewModel.Products.Add(new ProductViewModel()
+                var productPriceCalculationResultItem = pricesPerProductId[product.Guid].FirstOrDefault();
+                if (productPriceCalculationResultItem != null)
                 {
-                    Sku = product.Sku,
-                    Name = product.Name,
-                    Url = niceUrl,
-                    PriceCalculation = new ProductPriceCalculationViewModel()
+                    productsViewModel.Products.Add(new ProductViewModel()
                     {
-                        YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
-                        ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
-                    },
-                    IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
-                    VariantSku = product.VariantSku,
-                    ThumbnailImageUrl = product.ThumbnailImageUrl
-                });
+                        Sku = product.Sku,
+                        Name = product.Name,
+                        Url = niceUrl,
+                        PriceCalculation = new ProductPriceCalculationViewModel()
+                        {
+                            YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
+                            ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
+                        },
+                        IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
+                        VariantSku = product.VariantSku,
+                        ThumbnailImageUrl = product.ThumbnailImageUrl
+                    });
+                }
             }
 
             return View("/Views/PartialView/HomepageCatalog.cshtml", productsViewModel);
