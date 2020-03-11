@@ -57,7 +57,7 @@
 
                             @foreach (var prop in Model.ProductViewModel.Properties)
                             {
-                                var controlName = string.Format("variation-{0}", prop.PropertyName.ToLower());
+                                var controlName = string.Format("variation-{0}", prop.PropertyName);
                                 <label for="@controlName">@prop.PropertyName</label>
                                 <select name="@controlName" id="@controlName" class="variant margin-bottom form-control">
                                     <option value="">-- Please Select --</option>
