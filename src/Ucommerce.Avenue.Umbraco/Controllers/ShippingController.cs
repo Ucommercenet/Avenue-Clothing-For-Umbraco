@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using Umbraco.Web;
@@ -35,7 +36,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             foreach (var availableShippingMethod in availableShippingMethods)
             {
                 var price = availableShippingMethod.GetPriceForCurrency(basket.BillingCurrency);
-                var formattedprice = new Money((price == null ? 0 : price.Price), basket.BillingCurrency);
+                var formattedprice = new ApiMoney((price == null ? 0 : price.Price), basket.BillingCurrency.ISOCode);
 
                 shipping.AvailableShippingMethods.Add(new SelectListItem()
                 {

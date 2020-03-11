@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.Catalog.Models;
-using UCommerce.EntitiesV2;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.Search;
@@ -23,7 +22,6 @@ namespace Ucommerce.Avenue.Umbraco.Api
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
-        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
 
         [Route("razorstore/products/getproductvariations")]
         [HttpPost]
@@ -101,7 +99,6 @@ namespace Ucommerce.Avenue.Umbraco.Api
             ProductPriceCalculationResult.Item priceCalculation =
                 CatalogLibrary.CalculatePrices(new List<Guid> { product.Guid }).Items.First();
 
-            Currency currency = CurrencyRepository.SingleOrDefault(x => x.ISOCode == priceCalculation.CurrencyISOCode);
 
             var includeTax = catalog.ShowPricesIncludingTax;
             ProductInformation productInformation = new ProductInformation
@@ -110,17 +107,19 @@ namespace Ucommerce.Avenue.Umbraco.Api
                 PriceCalculation = new PriceCalculationViewModel()
                 {
                     IsDiscounted = priceCalculation.DiscountPercentage > 0M,
-                    Discount = GetPriceViewModel(priceCalculation.DiscountExclTax, priceCalculation.DiscountInclTax, includeTax, currency),
-                    YourPrice = GetPriceViewModel(priceCalculation.PriceExclTax, priceCalculation.PriceInclTax, includeTax, currency),
-                    ListPrice = GetPriceViewModel(priceCalculation.ListPriceExclTax, priceCalculation.ListPriceInclTax, includeTax, currency),
-                }
+                    Discount = GetPriceViewModel(priceCalculation.DiscountExclTax, priceCalculation.DiscountInclTax, includeTax,
+                        priceCalculation.CurrencyISOCode),
+                    YourPrice = GetPriceViewModel(priceCalculation.PriceExclTax, priceCalculation.PriceInclTax, includeTax, priceCalculation.CurrencyISOCode),
+                    ListPrice = GetPriceViewModel(priceCalculation.ListPriceExclTax, priceCalculation.ListPriceInclTax, includeTax,
+                        priceCalculation.CurrencyISOCode),
+                },
+                Sku = product.Sku
             };
-            productInformation.Sku = product.Sku;
 
             return Json(productInformation);
         }
 
-        private PriceViewModel GetPriceViewModel(decimal priceExclTax, decimal priceInclTax, bool includeTax, Currency currency)
+        private PriceViewModel GetPriceViewModel(decimal priceExclTax, decimal priceInclTax, bool includeTax, string currency)
         {
             var price = includeTax ? priceInclTax : priceExclTax;
             return new PriceViewModel()
@@ -131,12 +130,12 @@ namespace Ucommerce.Avenue.Umbraco.Api
             };
         }
 
-        private MoneyViewModel GetMoneyViewModel(decimal price, Currency currency)
+        private MoneyViewModel GetMoneyViewModel(decimal price, string currency)
         {
             return new MoneyViewModel()
             {
                 Value = price,
-                DisplayValue = new Money(price, currency).ToString()
+                DisplayValue = new ApiMoney(price, currency).ToString()
             };
         }
     }

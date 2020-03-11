@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -40,7 +40,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 var option = new SelectListItem();
                 decimal feePercent = availablePaymentMethod.FeePercent;
                 var fee = availablePaymentMethod.GetFeeForCurrency(basket.BillingCurrency);
-                var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency);
+                var formattedFee = new ApiMoney((fee == null ? 0 : fee.Fee), basket.BillingCurrency.ISOCode);
 
                 option.Text = String.Format(" {0} ({1} + {2}%)", availablePaymentMethod.Name, formattedFee,
                     feePercent.ToString("0.00"));

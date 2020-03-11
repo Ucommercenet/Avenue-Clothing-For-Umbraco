@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
@@ -20,8 +20,6 @@ namespace Ucommerce.Avenue.Umbraco.Api
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-
-        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
 
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]
@@ -40,9 +38,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
 
             var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            Currency currency =
-                CurrencyRepository.SingleOrDefault(x => x.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
-            var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), currency);
+            var lineTotal = new ApiMoney(orderLine.Total.GetValueOrDefault(), CatalogContext.CurrentPriceGroup.CurrencyISOCode);
 
             var updatedLine = new LineItem()
             {
@@ -66,15 +62,12 @@ namespace Ucommerce.Avenue.Umbraco.Api
         [HttpGet]
         public IHttpActionResult GetBasket()
         {
-            Currency currency =
-                CurrencyRepository.SingleOrDefault(x => x.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
-
             var purchaseOrder = TransactionLibrary.GetBasket(false);
 
-            var subTotal = new Money(purchaseOrder.SubTotal.Value, currency);
-            var taxTotal = new Money(purchaseOrder.TaxTotal.Value, currency);
-            var discountTotal = new Money(purchaseOrder.DiscountTotal.Value, currency);
-            var orderTotal = new Money(purchaseOrder.OrderTotal.Value, currency);
+            var subTotal = new ApiMoney(purchaseOrder.SubTotal.Value, CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            var taxTotal = new ApiMoney(purchaseOrder.TaxTotal.Value, CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            var discountTotal = new ApiMoney(purchaseOrder.DiscountTotal.Value, CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            var orderTotal = new ApiMoney(purchaseOrder.OrderTotal.Value, CatalogContext.CurrentPriceGroup.CurrencyISOCode);
 
             var basket = new Basket
             {
@@ -98,7 +91,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
                 var product = CatalogLibrary.GetProduct(line.Sku);
                 var url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
                 var imageUrl = product.PrimaryImageUrl;
-                var lineTotal = new Money(line.Total.Value, currency);
+                var lineTotal = new ApiMoney(line.Total.Value, CatalogContext.CurrentPriceGroup.CurrencyISOCode);
 
                 var lineItem = new LineItem
                 {
