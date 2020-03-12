@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -59,11 +60,12 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
             if (productPriceCalculationResultItem != null)
             {
-                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString();
+                productViewModel.TaxCalculation =
+                    new ApiMoney(productPriceCalculationResultItem.ListTax, productPriceCalculationResultItem.CurrencyISOCode).ToString();
                 productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
                 {
-                    YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
-                    ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
+                    YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
+                    ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
                 };
             }
 
@@ -71,7 +73,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             {
                 productViewModel.ThumbnailImageUrl = currentProduct.PrimaryImageUrl;
             }
-            
+
             var variants = CatalogLibrary.GetVariants(currentProduct);
 
             productViewModel.Properties = MapProductProperties(variants);
@@ -92,31 +94,33 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             return View("/Views/Product.cshtml", productPageViewModel);
         }
-        
+
         private IList<ProductPropertiesViewModel> MapProductProperties(ResultSet<Product> variants)
         {
             var productProperties = new List<ProductPropertiesViewModel>();
-            
-            var uniqueVariants = 
+
+            var uniqueVariants =
                 from v in variants.SelectMany(p => p.GetUserDefinedFields())
-                group v by v.Key into g
+                group v by v.Key
+                into g
                 select g;
-            
+
             foreach (var prop in uniqueVariants)
             {
                 var productPropertiesViewModel = new ProductPropertiesViewModel();
                 productPropertiesViewModel.PropertyName = prop.Key;
-            
+
                 foreach (var value in prop.Select(p => p.Value).Distinct())
                 {
                     productPropertiesViewModel.Values.Add(value.ToString());
                 }
+
                 productProperties.Add(productPropertiesViewModel);
             }
 
             return productProperties;
         }
-        
+
         private IList<ProductViewModel> MapVariants(ResultSet<Product> variants)
         {
             var variantModels = new List<ProductViewModel>();

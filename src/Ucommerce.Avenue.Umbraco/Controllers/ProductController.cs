@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search.Models;
@@ -49,11 +50,11 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
             if (productPriceCalculationResultItem != null)
             {
-                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString("C");
+                productViewModel.TaxCalculation = new ApiMoney(productPriceCalculationResultItem.ListTax, productPriceCalculationResultItem.CurrencyISOCode).ToString();
                 productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
                 {
-                    YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
-                    ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
+                    YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
+                    ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
                 };
             }
 
