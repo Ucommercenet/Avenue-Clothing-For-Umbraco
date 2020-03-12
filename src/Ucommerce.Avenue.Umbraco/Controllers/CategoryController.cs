@@ -3,14 +3,14 @@ using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.Search;
-using Umbraco.Web.Mvc;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search.FacetsV2;
 using UCommerce.Search.Models;
 using Umbraco.Web.Models;
+using Umbraco.Web.Mvc;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class CategoryController : RenderMvcController
     {

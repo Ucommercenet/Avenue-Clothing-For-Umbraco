@@ -1,18 +1,18 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System;
 using System.Collections.Generic;
-using Umbraco.Web.Mvc;
 using System.Collections.Specialized;
 using System.Linq;
-using System;
+using System.Web;
+using System.Web.Mvc;
 using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search.FacetsV2;
 using UCommerce.Search.Models;
+using Umbraco.Web.Mvc;
 using ISiteContext = Ucommerce.Api.ISiteContext;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public static class FacetedQueryStringExtensions
     {

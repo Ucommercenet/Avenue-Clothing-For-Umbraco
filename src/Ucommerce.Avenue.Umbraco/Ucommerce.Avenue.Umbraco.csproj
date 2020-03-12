@@ -330,6 +330,7 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\BasketpreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RouterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />
@@ -585,9 +586,7 @@
       <Name>UCommerce.SystemHttp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="umbraco\Ucommerce" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

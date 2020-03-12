@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class ProductController : RenderMvcController
     {
@@ -50,7 +49,7 @@ namespace UCommerce.RazorStore.Controllers
             var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
             if (productPriceCalculationResultItem != null)
             {
-                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString();
+                productViewModel.TaxCalculation = productPriceCalculationResultItem.ListTax.ToString("C");
                 productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
                 {
                     YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),

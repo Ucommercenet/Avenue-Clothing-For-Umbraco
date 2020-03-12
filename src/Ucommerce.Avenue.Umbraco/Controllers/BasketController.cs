@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using UCommerce;
 using Ucommerce.Api;
-using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -9,9 +9,8 @@ using UCommerce.Search;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using Product = UCommerce.Search.Models.Product;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
 	public class BasketController : RenderMvcController
 	{

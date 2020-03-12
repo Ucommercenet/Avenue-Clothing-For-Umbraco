@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
@@ -8,9 +7,8 @@ using UCommerce.RazorStore.Models;
 using UCommerce.Search;
 using UCommerce.Search.Models;
 using Umbraco.Web.Mvc;
-using CatalogContext = Ucommerce.Api.CatalogContext;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class HomepageCatalogController : SurfaceController
     {
@@ -23,7 +21,8 @@ namespace UCommerce.RazorStore.Controllers
         public ActionResult Index()
         {
             var products = ProductIndex.Find()
-                .Where(p => (bool)p["ShowOnHomepage"] == true)
+                .Where(p => (bool) p["ShowOnHomepage"] == true)
+                .Take(12)
                 .ToList();
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
@@ -35,21 +34,25 @@ namespace UCommerce.RazorStore.Controllers
 
             foreach (var product in products)
             {
-                var productPriceCalculationResultItem = pricesPerProductId[product.Guid];
-                productsViewModel.Products.Add(new ProductViewModel()
+                var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
+                var productPriceCalculationResultItem = pricesPerProductId[product.Guid].FirstOrDefault();
+                if (productPriceCalculationResultItem != null)
                 {
-                    Name = product.Name,
-                    PriceCalculation = new ProductPriceCalculationViewModel()
+                    productsViewModel.Products.Add(new ProductViewModel()
                     {
-                        YourPrice = productPriceCalculationResultItem.First().PriceInclTax.ToString("C"),
-                        ListPrice = productPriceCalculationResultItem.First().ListPriceInclTax.ToString("C")
-                    },
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
-                    Sku = product.Sku,
-                    IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
-                    VariantSku = product.VariantSku,
-                    ThumbnailImageUrl = product.ThumbnailImageUrl
-                });
+                        Sku = product.Sku,
+                        Name = product.Name,
+                        Url = niceUrl,
+                        PriceCalculation = new ProductPriceCalculationViewModel()
+                        {
+                            YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
+                            ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
+                        },
+                        IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
+                        VariantSku = product.VariantSku,
+                        ThumbnailImageUrl = product.ThumbnailImageUrl
+                    });
+                }
             }
 
             return View("/Views/PartialView/HomepageCatalog.cshtml", productsViewModel);

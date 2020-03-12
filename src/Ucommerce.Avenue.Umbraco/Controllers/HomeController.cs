@@ -1,7 +1,8 @@
 ﻿using System.Web.Mvc;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-namespace UCommerce.RazorStore.Controllers
+
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
 	public class HomeController : RenderMvcController
 	{

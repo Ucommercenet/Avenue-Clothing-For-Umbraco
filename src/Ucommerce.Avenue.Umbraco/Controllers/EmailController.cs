@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using UCommerce;
-using UCommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -12,7 +9,7 @@ using UCommerce.Runtime;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class EmailController : RenderMvcController
     {

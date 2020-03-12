@@ -1,8 +1,8 @@
 var uCommerce = uCommerce || {};
 (function ($) {
     $.extend({
-        uCommerce : {
-            getBasket: function(options, onSuccess, onError) {
+        uCommerce: {
+            getBasket: function (options, onSuccess, onError) {
                 var defaults = {
 //                    create: false
                 };
@@ -10,9 +10,9 @@ var uCommerce = uCommerce || {};
                 $.get('/ucommerceapi/razorstore/basket/getbasket', extendedOptions)
                     .done(function (response) {
                         onSuccess(response);
-                    }).fail(function () {
-                        onError(response);
-                    });
+                    }).fail(function (response) {
+                    if (onError) onError(response);
+                });
             },
             getProductVariations: function (options, onSuccess, onError) {
                 console.log('getProductVariations');
@@ -23,20 +23,20 @@ var uCommerce = uCommerce || {};
                 $.post('/ucommerceapi/razorstore/products/getproductvariations', extendedOptions)
                     .done(function (response) {
                         onSuccess(response);
-                    }).fail(function () {
-                        onError(response);
-                    });
+                    }).fail(function (response) {
+                    if (onError) onError(response);
+                });
             },
-            getSkuFromSelection: function(options, onSuccess, onError) {
+            getSkuFromSelection: function (options, onSuccess, onError) {
                 console.log('sku from selection');
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
                 $.post('/ucommerceapi/razorstore/products/getvariantskufromselection', extendedOptions)
                     .done(function (response) {
                         onSuccess(response);
-                    }).fail(function () {
-                        onError(response);
-                    });
+                    }).fail(function (response) {
+                    if (onError) onError(response);
+                });
 
             },
             getVariantSkuFromSelection: function (options, onSuccess, onError) {
@@ -52,23 +52,23 @@ var uCommerce = uCommerce || {};
                     data: JSON.stringify(extendedOptions)
                 }).done(function (response) {
                     onSuccess(response);
-                }).fail(function () {
-                    onError(response);
+                }).fail(function (response) {
+                    if (onError) onError(response);
                 });
             },
-            search: function(options, onSuccess, onError) {
-                var defaults = { };
+            search: function (options, onSuccess, onError) {
+                var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
                 $.post('/ucommerceapi/razorstore/search', extendedOptions)
                     .done(function (response) {
                         onSuccess(response);
-                    }).fail(function () {
-                        onError(response);
-                    });
+                    }).fail(function (response) {
+                    if (onError) onError(response);
+                });
             },
-            addToBasket: function(options, onSuccess, onError) {
-                 var defaults = {
-                    quantity: 1, 
+            addToBasket: function (options, onSuccess, onError) {
+                var defaults = {
+                    quantity: 1,
                     sku: '',
                     variantSku: '',
                     addToExistingLine: true
@@ -78,11 +78,11 @@ var uCommerce = uCommerce || {};
                 $.post('/ucommerceapi/razorstore/basket/addToBasket', extendedOptions)
                     .done(function (response) {
                         onSuccess(response);
-                    }).fail(function () {
-                        onError(response);
-                    });
+                    }).fail(function (response) {
+                    if (onError) onError(response);
+                });
             },
-            getProductInformation: function(options, onSuccess, onError) {
+            getProductInformation: function (options, onSuccess, onError) {
                 var defaults = {
                     Sku: '',
                     CatalogId: -1,
@@ -91,19 +91,19 @@ var uCommerce = uCommerce || {};
                 var extendedOptions = $.extend(defaults, options);
 
                 $.post('/ucommerceapi/razorstore/products/getproductinformation', extendedOptions)
-                .done(function (response) {
-                    onSuccess(response);
-                    }).fail(function() {
-                        onError(response);
-                    });
+                    .done(function (response) {
+                        onSuccess(response);
+                    }).fail(function (response) {
+                    if (onError) onError(response);
+                });
             },
-            updateLineItem: function(options, onSuccess, onError) {
-                 var defaults = {
-                    orderLineId: 0, 
+            updateLineItem: function (options, onSuccess, onError) {
+                var defaults = {
+                    orderLineId: 0,
                     newQuantity: 1
                 };
                 var extendedOptions = $.extend(defaults, options);
-                callServiceStack({ UpdateLineItem: extendedOptions }, onSuccess, onError);
+                callServiceStack({UpdateLineItem: extendedOptions}, onSuccess, onError);
             }
         }
     });

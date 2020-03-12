@@ -1,9 +1,8 @@
-﻿using System.Net.Mail;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace UCommerce.RazorStore.Controllers
+namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class ConfirmationController : RenderMvcController
     {

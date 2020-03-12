@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UCommerce.RazorStore.Api.Model
+namespace Ucommerce.Avenue.Umbraco.Api.Model
 {
     public class GetVariantSkuFromSelectionRequest
     {

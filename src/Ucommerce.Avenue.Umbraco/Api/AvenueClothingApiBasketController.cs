@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using UCommerce;
 using Ucommerce.Api;
-using UCommerce.Api;
+using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Api.Model;
-using UCommerce.Runtime;
 using UCommerce.Search;
-using Basket = UCommerce.RazorStore.Api.Model.Basket;
-using CatalogContext = Ucommerce.Api.CatalogContext;
+using Basket = Ucommerce.Avenue.Umbraco.Api.Model.Basket;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
-namespace UCommerce.RazorStore.Api
+namespace Ucommerce.Avenue.Umbraco.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
@@ -22,6 +20,8 @@ namespace UCommerce.RazorStore.Api
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+
+        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
 
         [Route("razorstore/basket/addToBasket")]
         [HttpPost]
@@ -40,7 +40,8 @@ namespace UCommerce.RazorStore.Api
 
             var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            Currency currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            Currency currency =
+                CurrencyRepository.SingleOrDefault(x => x.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
             var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), currency);
 
             var updatedLine = new LineItem()
@@ -65,7 +66,9 @@ namespace UCommerce.RazorStore.Api
         [HttpGet]
         public IHttpActionResult GetBasket()
         {
-            var currency = Currency.Get(CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            Currency currency =
+                CurrencyRepository.SingleOrDefault(x => x.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+
             var purchaseOrder = TransactionLibrary.GetBasket(false);
 
             var subTotal = new Money(purchaseOrder.SubTotal.Value, currency);
@@ -134,7 +137,7 @@ namespace UCommerce.RazorStore.Api
             if (String.IsNullOrWhiteSpace(mediaId))
                 return String.Empty;
 
-            var umbracoHelper = Umbraco.Web.Composing.Current.UmbracoHelper;
+            var umbracoHelper = global::Umbraco.Web.Composing.Current.UmbracoHelper;
 
             var image = umbracoHelper.Media(Guid.Parse(mediaId));
             return image.Url;
