@@ -66,9 +66,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var product = CatalogLibrary.GetProduct(formReview.ProductSku);
             var productV2 = Product.FirstOrDefault(x => x.Guid == product.Guid); 
 
-            // var category = CatalogContext.CurrentCategory;
-            //  var categoryV2 = Category.FirstOrDefault(x => x.Guid == category.Guid);
-
             var catalogGroup = CatalogContext.CurrentCatalogGroup;
             var catalogGroupV2 = ProductCatalogGroup.FirstOrDefault(x => x.Guid == catalogGroup.Guid);
 
