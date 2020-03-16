@@ -87,7 +87,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             {
                 ProductViewModel = productViewModel,
                 AddedToBasket = addedToBasket,
-                ItemAlreadyExists = isInBasket
+                ItemAlreadyExists = isInBasket,
             };
 
             return View("/Views/Product.cshtml", productPageViewModel);

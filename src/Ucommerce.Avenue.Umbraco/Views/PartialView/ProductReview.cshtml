@@ -102,7 +102,7 @@ using (Html.BeginUmbracoForm("Index", "Review"))
             <div class="control-group margin-top">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary" name="review-product">Save</button>
-                    <input type="hidden" name="reviewed-product-sku" id="@product.Sku" />
+                    <input type="hidden" id="reviewed-product-sku" name="ProductSku" value="@product.Sku" />
                 </div>
             </div>
         </div>
