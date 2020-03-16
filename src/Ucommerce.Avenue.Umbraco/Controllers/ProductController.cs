@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search;
 using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -13,14 +14,20 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class ProductController : RenderMvcController
     {
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
-        
+        private IIndex<Category> CategoryIndex => ObjectFactory.Instance.Resolve<IIndex<Category>>();
+        private IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
+
+
         [HttpGet]
-        public ActionResult Index(ContentModel model)
+        [Route("/demo-store/products/{product}")]
+        [Route("/demo-store/products/{product}/variants/{variant}")]
+        [Route("/demo-store/categories/{category}/products/{product}")]
+        [Route("/demo-store/categories/{category}/products/{product}/variants/{variant}")]
+        public ActionResult Show(ContentModel model, string category, string product, string variant)
         {
             return RenderView(false);
         }
+
 
         [HttpPost]
         public ActionResult Index(AddToBasketViewModel model)
@@ -30,7 +37,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             // TransactionLibrary.AddToBasket(1, model.Sku, variant);
             return RenderView(true);
         }
-        
+
         private ActionResult RenderView(bool addedToBasket)
         {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
@@ -44,7 +51,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             productViewModel.IsVariant = false;
 
             // Price calculations
-            var productGuids = new List<Guid>(){ currentProduct.Guid };
+            var productGuids = new List<Guid>() {currentProduct.Guid};
             var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
             var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
             if (productPriceCalculationResultItem != null)
@@ -63,7 +70,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             }
 
             productViewModel.Properties = MapProductProperties(currentProduct);
-         
+
             if (currentProduct.ProductFamily)
             {
                 // TODO:
@@ -71,7 +78,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             }
 
             bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
-            
+
             var productPageViewModel = new ProductPageViewModel
             {
                 ProductViewModel = productViewModel,
@@ -81,7 +88,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             return View("/Views/Product.cshtml", productPageViewModel);
         }
-        
+
         private IList<ProductViewModel> MapVariants(ICollection<Product> variants)
         {
             var variantModels = new List<ProductViewModel>();
@@ -126,12 +133,14 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             return productProperties;
         }
-        
+
         private string GetVariantFromPostData(string sku, string prefix)
         {
             var request = System.Web.HttpContext.Current.Request;
-            var keys = request.Form.AllKeys.Where(k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
-            var properties = keys.Select(k => new { Key = k.Replace(prefix, string.Empty), Value = Request.Form[k] }).ToList();
+            var keys = request.Form.AllKeys.Where(
+                k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
+            var properties = keys.Select(k => new {Key = k.Replace(prefix, string.Empty), Value = Request.Form[k]})
+                .ToList();
 
             Product product = SiteContext.Current.CatalogContext.CurrentProduct;
             string variantSku = null;

@@ -322,10 +322,12 @@
     <Compile Include="Controllers\BreadcrumbsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ConfirmationController.cs" />
+    <Compile Include="Controllers\FacetedQueryStringExtensions.cs" />
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomepageCatalogController.cs" />
     <Compile Include="Controllers\MiniBasketController.cs" />
+    <Compile Include="Controllers\MyContentFinder.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\BasketpreviewController.cs" />
