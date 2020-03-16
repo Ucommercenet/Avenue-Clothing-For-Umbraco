@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
@@ -24,7 +24,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                 if (numberOfItems != 0)
                 {
-                    miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency);
+                    miniBasket.Total = new ApiMoney(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
                     miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                     miniBasket.IsEmpty = false;
                 }

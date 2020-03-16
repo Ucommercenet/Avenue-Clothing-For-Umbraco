@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
@@ -54,8 +55,9 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     LongDescription = product.LongDescription,
                     PriceCalculation = new ProductPriceCalculationViewModel
                     {
-                        YourPrice = productPriceCalculationResultItem.PriceInclTax.ToString("C"),
-                        ListPrice = productPriceCalculationResultItem.ListPriceInclTax.ToString("C")
+                        YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
+                        ListPrice =
+                            new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
                     },
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
                     VariantSku = product.VariantSku
