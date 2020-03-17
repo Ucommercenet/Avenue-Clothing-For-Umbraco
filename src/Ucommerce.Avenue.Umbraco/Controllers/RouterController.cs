@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Api.Search;
+using UCommerce.Catalog.Models;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
@@ -36,7 +37,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 return RenderView(category);
             }
 
-            return Content("Nåt Faunt");
+            return HttpNotFound();
         }
 
 
@@ -61,11 +62,14 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             if (productPriceCalculationResultItem != null)
             {
                 productViewModel.TaxCalculation =
-                    new ApiMoney(productPriceCalculationResultItem.ListTax, productPriceCalculationResultItem.CurrencyISOCode).ToString();
+                    new ApiMoney(productPriceCalculationResultItem.ListTax,
+                        productPriceCalculationResultItem.CurrencyISOCode).ToString();
                 productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
                 {
-                    YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
-                    ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
+                    YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax,
+                        productPriceCalculationResultItem.CurrencyISOCode).ToString(),
+                    ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax,
+                        productPriceCalculationResultItem.CurrencyISOCode).ToString()
                 };
             }
 
@@ -164,7 +168,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             return View("/Views/Catalog.cshtml", categoryViewModel);
         }
 
-        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
+        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory,
+            ILookup<Guid, ProductPriceCalculationResult.Item> prices)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
@@ -174,14 +179,25 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 {
                     Sku = product.Sku,
                     Name = product.Name,
-                    ThumbnailImageUrl = product.ThumbnailImageUrl
+                    ThumbnailImageUrl = product.ThumbnailImageUrl,
+                    PriceCalculation = MapPrice(prices[product.Guid].FirstOrDefault())
                 };
-
 
                 productViews.Add(productViewModel);
             }
 
             return productViews;
+        }
+
+        private ProductPriceCalculationViewModel MapPrice(ProductPriceCalculationResult.Item price)
+        {
+            if (price == null) return new ProductPriceCalculationViewModel();
+
+            return new ProductPriceCalculationViewModel
+            {
+                ListPrice = new ApiMoney(price.ListPriceInclTax, price.CurrencyISOCode).ToString(),
+                YourPrice = new ApiMoney(price.PriceInclTax, price.CurrencyISOCode).ToString()
+            };
         }
 
         private IList<ProductViewModel> MapProductsInCategories(Category category)
@@ -191,15 +207,19 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
             var products = SearchLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying);
+            var prices = CatalogLibrary
+                .CalculatePrices(products.Select(p => p.Guid).ToList())
+                .Items
+                .ToLookup(p => p.ProductGuid);
 
             foreach (var subCategory in subCategories)
             {
                 var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
-                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
+                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList(), prices));
             }
 
             productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying)
-                .Results));
+                .Results, prices));
 
             return productsInCategory;
         }

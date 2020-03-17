@@ -84,7 +84,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         private void EditShippingInformation(AddressViewModel shippingAddress)
         {
             TransactionLibrary.EditShipmentInformation(
-                Constants.DefaultShipmentAddressName,
+                UCommerce.Constants.DefaultShipmentAddressName,
                 shippingAddress.FirstName,
                 shippingAddress.LastName,
                 shippingAddress.EmailAddress,

@@ -54,7 +54,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         [HttpPost]
         public ActionResult Index(ShippingViewModel shipping)
         {
-            TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, Constants.DefaultShipmentAddressName, overwriteExisting: true);
+            TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, UCommerce.Constants.DefaultShipmentAddressName, overwriteExisting: true);
             TransactionLibrary.ExecuteBasketPipeline();
 
             var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
