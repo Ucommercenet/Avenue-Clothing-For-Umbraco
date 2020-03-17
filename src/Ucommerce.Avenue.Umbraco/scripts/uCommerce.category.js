@@ -40,4 +40,4 @@
                 productButton.attr('href', data.NiceUrl);
             });
     }
-})()
+})();

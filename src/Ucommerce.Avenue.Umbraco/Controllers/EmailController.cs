@@ -25,7 +25,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var basketModel = new PurchaseOrderViewModel();
 
             basketModel.BillingAddress = basket.BillingAddress;
-            basketModel.ShipmentAddress = basket.GetShippingAddress(Constants.DefaultShipmentAddressName);
+            basketModel.ShipmentAddress = basket.GetShippingAddress(UCommerce.Constants.DefaultShipmentAddressName);
 
             foreach (var orderLine in basket.OrderLines)
             {

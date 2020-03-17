@@ -4,8 +4,8 @@
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<CategoryViewModel>
 @{
     Layout = "Layout.cshtml";
-    Html.RequiresJs("~/Scripts/uCommerce.category.js");
-}
+    // Html.RequiresJs("~/Scripts/uCommerce.category.js");
+}S
 
 <div class="row margin-bottom">
     <div class="hero-unit">
@@ -35,7 +35,9 @@
                 <p class="item-name">
                     <a href="@product.Url">@product.Name</a>
                 </p>
-                <p class="item-price" data-productSku="@product.Sku"></p>
+                <p class="item-price">
+                    @product.PriceCalculation.YourPrice
+                </p>
                 <p class="btn-group view-details">
                     <a href="@product.Url" class="btn btn-default">
                         View more

@@ -1,14 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using UCommerce;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Api.Search;
+using Ucommerce.Avenue.Umbraco.Api.Model;
+using UCommerce.Catalog.Models;
+using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
+using UCommerce.Infrastructure.Logging;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search;
 using UCommerce.Search.FacetsV2;
-using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+using Category = UCommerce.Search.Models.Category;
+using Product = UCommerce.Search.Models.Product;
 
 namespace Ucommerce.Avenue.Umbraco.Controllers
 {
@@ -17,29 +26,58 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
         public ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
+        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
+
+        private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
 
         public override ActionResult Index(ContentModel model)
         {
-            var currentCategory = SiteContext.CatalogContext.CurrentCategory;
-
-            var categoryViewModel = new CategoryViewModel
+            using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
             {
-                Name = currentCategory.DisplayName,
-                Description = currentCategory.Description,
-                CatalogId = currentCategory.ProductCatalog,
-                CategoryId = currentCategory.Guid,
-                Products = MapProductsInCategories(currentCategory)
-            };
+                var currentCategory = SiteContext.CatalogContext.CurrentCategory;
 
-            if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
-            {
-                categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+                var categoryViewModel = new CategoryViewModel
+                {
+                    Name = currentCategory.DisplayName,
+                    Description = currentCategory.Description,
+                    CatalogId = currentCategory.ProductCatalog,
+                    CategoryId = currentCategory.Guid,
+                    Products = MapProductsInCategories(currentCategory)
+                };
+
+                if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
+                {
+                    categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+                }
+
+                return View("/Views/Catalog.cshtml", categoryViewModel);
             }
-
-            return View("/Views/Catalog.cshtml", categoryViewModel);
         }
 
-        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
+        private IList<ProductViewModel> MapProductsInCategories(Category category)
+        {
+            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+            var productsInCategory = new List<ProductViewModel>();
+
+            var subCategories = CatalogLibrary.GetCategories(category.Categories);
+            var products = SearchLibrary.GetProductsFor(category.Categories, facetsForQuerying);
+            var prices = CatalogLibrary.CalculatePrices(products.Select(p => p.Guid).ToList()).Items
+                .ToLookup(p => p.ProductGuid);
+
+            foreach (var subCategory in subCategories)
+            {
+                var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
+                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList(), prices));
+            }
+
+            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying)
+                .Results, prices));
+
+            return productsInCategory;
+        }
+
+        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory,
+            ILookup<Guid, ProductPriceCalculationResult.Item> prices)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
@@ -49,7 +87,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 {
                     Sku = product.Sku,
                     Name = product.Name,
-                    ThumbnailImageUrl = product.ThumbnailImageUrl
+                    ThumbnailImageUrl = product.ThumbnailImageUrl,
+                    PriceCalculation = MapPrice(prices[product.Guid].FirstOrDefault())
                 };
 
 
@@ -59,23 +98,15 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             return productViews;
         }
 
-        private IList<ProductViewModel> MapProductsInCategories(Category category)
+        private ProductPriceCalculationViewModel MapPrice(ProductPriceCalculationResult.Item price)
         {
-            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
-            var productsInCategory = new List<ProductViewModel>();
+            if (price == null) return new ProductPriceCalculationViewModel();
 
-            var subCategories = CatalogLibrary.GetCategories(category.Categories);
-            var products = SearchLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying);
-
-            foreach (var subCategory in subCategories)
+            return new ProductPriceCalculationViewModel
             {
-                var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
-                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
-            }
-
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying).Results));
-
-            return productsInCategory;
+                ListPrice = new ApiMoney(price.ListPriceInclTax, price.CurrencyISOCode).ToString(),
+                YourPrice = new ApiMoney(price.PriceInclTax, price.CurrencyISOCode).ToString()
+            };
         }
     }
 }

@@ -37,11 +37,11 @@ namespace Ucommerce.Avenue.Umbraco.Api
             {
                 var properties = variant
                     .GetUserDefinedFields().Select(field => new ProductProperty()
-                {
-                    Name = field.Key,
-                    Value = field.Value.ToString()
-                });
-                
+                    {
+                        Name = field.Key,
+                        Value = field.Value.ToString()
+                    });
+
                 return new ProductVariation
                 {
                     Sku = variant.Sku,
@@ -51,7 +51,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
                 };
             }).ToList();
 
-            return Json(new { Variations = variations });
+            return Json(new {Variations = variations});
         }
 
         [Route("razorstore/products/getvariantskufromselection")]
@@ -83,7 +83,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
                 ProductName = variant.Name,
             };
 
-            return Json(new { Variant = variantModel });
+            return Json(new {Variant = variantModel});
         }
 
 
@@ -94,10 +94,10 @@ namespace Ucommerce.Avenue.Umbraco.Api
             ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
             Category category = CatalogLibrary.GetCategory(request.CategoryId);
             Product product = CatalogLibrary.GetProduct(request.Sku);
-            string niceUrl = UrlService.GetUrl(catalog, new[] { category }, new[] { product });
+            string niceUrl = UrlService.GetUrl(catalog, new[] {category}, new[] {product});
 
             ProductPriceCalculationResult.Item priceCalculation =
-                CatalogLibrary.CalculatePrices(new List<Guid> { product.Guid }).Items.First();
+                CatalogLibrary.CalculatePrices(new List<Guid> {product.Guid}).Items.First();
 
 
             var includeTax = catalog.ShowPricesIncludingTax;
