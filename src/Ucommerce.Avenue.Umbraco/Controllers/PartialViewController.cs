@@ -21,7 +21,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         {
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
-            IEnumerable<Category> rootCategories = CatalogLibrary.GetRootCategories(Constants.CatalogGuid).ToList();
+            IEnumerable<Category> rootCategories = CatalogLibrary.GetRootCategories().ToList();
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 

@@ -26,8 +26,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
         public ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
-        public IRepository<Currency> CurrencyRepository => ObjectFactory.Instance.Resolve<IRepository<Currency>>();
-
         private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
 
         public override ActionResult Index(ContentModel model)

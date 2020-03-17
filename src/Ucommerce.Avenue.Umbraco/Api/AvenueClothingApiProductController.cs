@@ -51,7 +51,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
                 };
             }).ToList();
 
-            return Json(new {Variations = variations});
+            return Json(new { Variations = variations });
         }
 
         [Route("razorstore/products/getvariantskufromselection")]

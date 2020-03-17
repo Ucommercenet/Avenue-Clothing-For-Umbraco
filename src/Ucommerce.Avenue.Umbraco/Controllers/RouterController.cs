@@ -205,11 +205,10 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
 
-            var catalog = CatalogLibrary.GetCatalog(Constants.CatalogGuid);
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
             var products = SearchLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying);
             var prices = CatalogLibrary
-                .CalculatePrices(products.Select(p => p.Guid).ToList(), new List<Guid> {catalog.DefaultPriceGroup})
+                .CalculatePrices(products.Select(p => p.Guid).ToList())
                 .Items
                 .ToLookup(p => p.ProductGuid);
 

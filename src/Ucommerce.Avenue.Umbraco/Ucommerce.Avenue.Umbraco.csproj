@@ -322,7 +322,6 @@
     <Compile Include="Controllers\BreadcrumbsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ConfirmationController.cs" />
-    <Compile Include="Controllers\Constants.cs" />
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomepageCatalogController.cs" />
