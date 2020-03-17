@@ -14,7 +14,9 @@ namespace UCommerce.RazorStore.Models
         public int? Rating { get; set; }
 
         public DateTime CreatedOn { get; set; }
+        
+        public string ProductSku { get; set; }
 
-        //Check REview model in uCommerce for star rating
+        //Check Review model in uCommerce for star rating
     }
 }

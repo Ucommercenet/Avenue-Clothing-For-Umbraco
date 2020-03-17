@@ -6,6 +6,7 @@ using Ucommerce.Api;
 using UCommerce.Catalog.Status;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
+using UCommerce.Pipelines;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Search;
@@ -16,25 +17,24 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class ReviewController : SurfaceController
     {
-        public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
+        private IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        private ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        private IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
+        private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
 
         // GET: Review
         [HttpGet]
         public ActionResult Index()
         {
-            UCommerce.Search.Models.Product currentProduct = CatalogContext.CurrentProduct;
+            var currentProduct = CatalogContext.CurrentProduct;
+            var currentProductV2 = Product.FirstOrDefault(x => x.Sku == currentProduct.Sku);
             var mappedProduct = new ProductViewModel();
-
-            // TODO: re-implement after reviews are added
-            // if (currentProduct.ProductReviews.Any())
-            // {
-            //     mappedProduct.Sku = currentProduct.Sku;
-            //     mappedProduct.Reviews = MapReviews(currentProduct);
-            // }
-
+            
+            if (currentProductV2.ProductReviews.Any())
+            {
+                mappedProduct.Reviews = MapReviews(currentProductV2);
+            }
+            mappedProduct.Sku = currentProduct.Sku;
             return View("/Views/PartialView/ProductReview.cshtml", mappedProduct);
         }
 
@@ -45,7 +45,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             {
                 if (review.ProductReviewStatus.ProductReviewStatusId != (int) ProductReviewStatusCode.Approved)
                 {
-                    ProductReviewViewModel reviewModel = new ProductReviewViewModel();
+                    var reviewModel = new ProductReviewViewModel();
                     reviewModel.Name = review.Customer.FirstName + " " + review.Customer.LastName;
                     reviewModel.Email = review.Customer.EmailAddress;
                     reviewModel.Title = review.ReviewHeadline;
@@ -56,7 +56,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     reviews.Add(reviewModel);
                 }
             }
-
             return reviews;
         }
 
@@ -64,8 +63,11 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         [HttpPost]
         public ActionResult Index(ProductReviewViewModel formReview)
         {
-            var product = CatalogContext.CurrentProduct;
-            var category = CatalogContext.CurrentCategory;
+            var product = CatalogLibrary.GetProduct(formReview.ProductSku);
+            var productV2 = Product.FirstOrDefault(x => x.Guid == product.Guid); 
+
+            var catalogGroup = CatalogContext.CurrentCatalogGroup;
+            var catalogGroupV2 = ProductCatalogGroup.FirstOrDefault(x => x.Guid == catalogGroup.Guid);
 
             var request = System.Web.HttpContext.Current.Request;
             var basket = OrderContext.GetBasket();
@@ -93,32 +95,29 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 {
                     basket.PurchaseOrder.Customer.LastName = String.Empty;
                 }
-
                 basket.PurchaseOrder.Customer.EmailAddress = email;
             }
-
             basket.PurchaseOrder.Customer.Save();
+            
+            var review = new ProductReview()
+            {
+                ProductCatalogGroup = catalogGroupV2,
+                ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"),
+                CreatedOn = DateTime.Now,
+                CreatedBy = "System",
+                Product = productV2,
+                Customer = basket.PurchaseOrder.Customer,
+                Rating = rating,
+                ReviewHeadline = reviewHeadline,
+                ReviewText = reviewText,
+                Ip = request.UserHostName
+            };
+            productV2.AddProductReview(review);
 
-            // TODO: Implement using 
-            // var review = new ProductReview()
-            // {
-            //     ProductCatalogGroup = CatalogContext.CurrentCatalogGroup,
-            //     ProductReviewStatus = ProductReviewStatus.SingleOrDefault(s => s.Name == "New"),
-            //     CreatedOn = DateTime.Now,
-            //     CreatedBy = "System",
-            //     Product = product,
-            //     Customer = basket.PurchaseOrder.Customer,
-            //     Rating = rating,
-            //     ReviewHeadline = reviewHeadline,
-            //     ReviewText = reviewText,
-            //     Ip = request.UserHostName
-            // };
-            //
-            // product.AddProductReview(review);
-
-            // PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
-
-            return Redirect(UrlService.GetUrl(CatalogContext.CurrentCatalog, new []{category}, new []{product}));
+            PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
+            
+            //TODO: Add Category to this url.
+            return Redirect(UrlService.GetUrl(CatalogContext.CurrentCatalog, new []{product}));
         }
     }
 }
