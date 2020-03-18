@@ -157,11 +157,12 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             return View("/Views/Catalog.cshtml", categoryViewModel);
         }
 
-        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory,
-            ILookup<Guid, ProductPriceCalculationResult.Item> prices)
+        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
+            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
             foreach (var product in productsInCategory)
             {
                 var productViewModel = new ProductViewModel
@@ -169,8 +170,12 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Sku = product.Sku,
                     Name = product.Name,
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
-                    PriceCalculation = MapPrice(prices[product.Guid].FirstOrDefault())
                 };
+                if (product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var unitPrice))
+                {
+                    productViewModel.Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString();
+                    productViewModel.Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString();
+                }
 
                 productViews.Add(productViewModel);
             }
@@ -178,16 +183,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             return productViews;
         }
 
-        private ProductPriceCalculationViewModel MapPrice(ProductPriceCalculationResult.Item price)
-        {
-            if (price == null) return new ProductPriceCalculationViewModel();
-
-            return new ProductPriceCalculationViewModel
-            {
-                ListPrice = new ApiMoney(price.ListPriceInclTax, price.CurrencyISOCode).ToString(),
-                YourPrice = new ApiMoney(price.PriceInclTax, price.CurrencyISOCode).ToString()
-            };
-        }
 
         private IList<ProductViewModel> MapProductsInCategories(Category category)
         {
@@ -201,10 +196,11 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             foreach (var subCategory in subCategories)
             {
                 var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
-                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList(), prices));
+                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
             }
 
-            productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid)).ToList()));
+            productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid))
+                .ToList()));
 
             return productsInCategory;
         }
