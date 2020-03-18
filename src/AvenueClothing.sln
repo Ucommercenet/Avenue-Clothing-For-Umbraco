@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{E322E7
 		..\tools\Deploy\Deploy.cmd = ..\tools\Deploy\Deploy.cmd
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvenueClothing", "Ucommerce.Avenue.Umbraco\AvenueClothing.csproj", "{F8F50DF5-68DC-4268-B132-F3730BE6E80F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvenueClothing", "AvenueClothing\AvenueClothing.csproj", "{F8F50DF5-68DC-4268-B132-F3730BE6E80F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvenueClothing.Installer", "Ucommerce.Avenue.Umbraco.Installer\AvenueClothing.Installer.csproj", "{5DC07961-B0F6-4F6F-9A3A-81CD7BB3B707}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvenueClothing.Installer", "AvenueClothing.Installer\AvenueClothing.Installer.csproj", "{5DC07961-B0F6-4F6F-9A3A-81CD7BB3B707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
