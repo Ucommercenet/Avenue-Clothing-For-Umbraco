@@ -45,6 +45,11 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
         protected virtual ActionResult RenderView(Product currentProduct, bool addedToBasket = false)
         {
+            // Price calculations
+            var unitPrice = currentProduct.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
+            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+
             var productViewModel = new ProductViewModel
             {
                 Sku = currentProduct.Sku,
@@ -52,26 +57,10 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 LongDescription = currentProduct.LongDescription,
                 IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductFamily,
-                IsVariant = false
+                IsVariant = false,
+                Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString(),
+                Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
             };
-
-            // Price calculations
-            var productGuids = new List<Guid>() {currentProduct.Guid};
-            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
-            var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
-            if (productPriceCalculationResultItem != null)
-            {
-                productViewModel.TaxCalculation =
-                    new ApiMoney(productPriceCalculationResultItem.ListTax,
-                        productPriceCalculationResultItem.CurrencyISOCode).ToString();
-                productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
-                {
-                    YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax,
-                        productPriceCalculationResultItem.CurrencyISOCode).ToString(),
-                    ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax,
-                        productPriceCalculationResultItem.CurrencyISOCode).ToString()
-                };
-            }
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
             {
@@ -206,11 +195,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productsInCategory = new List<ProductViewModel>();
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
-            var products = SearchLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying);
-            var prices = CatalogLibrary
-                .CalculatePrices(products.Select(p => p.Guid).ToList())
-                .Items
-                .ToLookup(p => p.ProductGuid);
+            var products =
+                SearchLibrary.GetProductsFor(category.Categories.Append(category.Guid).ToList(), facetsForQuerying);
 
             foreach (var subCategory in subCategories)
             {
@@ -218,8 +204,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList(), prices));
             }
 
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying)
-                .Results, prices));
+            productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid)).ToList()));
 
             return productsInCategory;
         }

@@ -348,7 +348,6 @@
     <Compile Include="Models\MiniBasketViewModel.cs" />
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
-    <Compile Include="Models\ProductPriceCalculationViewModel.cs" />
     <Compile Include="Models\ProductsViewModel.cs" />
     <Compile Include="Models\ProductPropertiesViewModel.cs" />
     <Compile Include="Models\ProductReviewViewModel.cs" />

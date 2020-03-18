@@ -14,9 +14,9 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 {
     public class ProductController : RenderMvcController
     {
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
-        
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+
         [HttpGet]
         public ActionResult Index(ContentModel model)
         {
@@ -31,40 +31,34 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             // TransactionLibrary.AddToBasket(1, model.Sku, variant);
             return RenderView(true);
         }
-        
+
         private ActionResult RenderView(bool addedToBasket)
         {
             Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
 
-            var productViewModel = new ProductViewModel();
-            productViewModel.Sku = currentProduct.Sku;
-            productViewModel.Name = currentProduct.DisplayName;
-            productViewModel.LongDescription = currentProduct.LongDescription;
-            productViewModel.IsOrderingAllowed = currentProduct.AllowOrdering;
-            productViewModel.IsProductFamily = currentProduct.ProductFamily;
-            productViewModel.IsVariant = false;
+            var unitPrice = currentProduct.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
+            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
-            // Price calculations
-            var productGuids = new List<Guid>(){ currentProduct.Guid };
-            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
-            var productPriceCalculationResultItem = productPriceCalculationResult.Items.FirstOrDefault();
-            if (productPriceCalculationResultItem != null)
+            var productViewModel = new ProductViewModel
             {
-                productViewModel.TaxCalculation = new ApiMoney(productPriceCalculationResultItem.ListTax, productPriceCalculationResultItem.CurrencyISOCode).ToString();
-                productViewModel.PriceCalculation = new ProductPriceCalculationViewModel()
-                {
-                    YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
-                    ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
-                };
-            }
-
+                Sku = currentProduct.Sku,
+                Name = currentProduct.DisplayName,
+                LongDescription = currentProduct.LongDescription,
+                IsOrderingAllowed = currentProduct.AllowOrdering,
+                IsProductFamily = currentProduct.ProductFamily,
+                IsVariant = false,
+                Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString(),
+                Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
+            };
+            
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
             {
                 productViewModel.ThumbnailImageUrl = currentProduct.PrimaryImageUrl;
             }
 
             productViewModel.Properties = MapProductProperties(currentProduct);
-         
+
             if (currentProduct.ProductFamily)
             {
                 // TODO:
@@ -72,7 +66,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             }
 
             bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
-            
+
             var productPageViewModel = new ProductPageViewModel
             {
                 ProductViewModel = productViewModel,
@@ -82,7 +76,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             return View("/Views/Product.cshtml", productPageViewModel);
         }
-        
+
         private IList<ProductViewModel> MapVariants(ICollection<Product> variants)
         {
             var variantModels = new List<ProductViewModel>();
@@ -127,12 +121,14 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             return productProperties;
         }
-        
+
         private string GetVariantFromPostData(string sku, string prefix)
         {
             var request = System.Web.HttpContext.Current.Request;
-            var keys = request.Form.AllKeys.Where(k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
-            var properties = keys.Select(k => new { Key = k.Replace(prefix, string.Empty), Value = Request.Form[k] }).ToList();
+            var keys = request.Form.AllKeys.Where(
+                k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
+            var properties = keys.Select(k => new { Key = k.Replace(prefix, string.Empty), Value = Request.Form[k] })
+                .ToList();
 
             Product product = SiteContext.Current.CatalogContext.CurrentProduct;
             string variantSku = null;
