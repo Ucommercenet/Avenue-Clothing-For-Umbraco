@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UCommerce.RazorStore.Installer</RootNamespace>
-    <AssemblyName>Ucommerce.Avenue.Umbraco.Installer</AssemblyName>
+    <AssemblyName>AvenueClothing.Installer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
