@@ -5,7 +5,7 @@ using UCommerce.Api;
 using UCommerce.Infrastructure;
 using Umbraco.Web.Mvc;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class VoucherController : SurfaceController
     {

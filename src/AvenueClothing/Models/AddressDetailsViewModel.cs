@@ -5,7 +5,7 @@ using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 using Umbraco.Web.Routing;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
 	public class AddressDetailsViewModel : ContentModel
 	{

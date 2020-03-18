@@ -8,7 +8,7 @@ using UCommerce.Infrastructure;
 using UCommerce.Search.Indexers;
 using UCommerce.Security;
 
-namespace UCommerce.RazorStore.Installer.Helpers
+namespace AvenueClothing.Installer.Helpers
 {
     public class CatalogueInstaller
     {

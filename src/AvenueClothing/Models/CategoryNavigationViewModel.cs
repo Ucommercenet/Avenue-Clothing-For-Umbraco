@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
 	public class CategoryNavigationViewModel
 	{

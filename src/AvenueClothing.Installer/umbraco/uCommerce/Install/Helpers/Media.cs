@@ -12,7 +12,7 @@ using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 using File = System.IO.File;
 
-namespace UCommerce.RazorStore.Installer.Helpers
+namespace AvenueClothing.Installer.Helpers
 {
     public class MediaService
     {

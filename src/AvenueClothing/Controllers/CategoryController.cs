@@ -5,7 +5,7 @@ using Ucommerce.Api;
 using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Logging;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 using UCommerce.Search;
 using UCommerce.Search.Facets;
 using UCommerce.Search.Slugs;
@@ -15,7 +15,7 @@ using Category = UCommerce.Search.Models.Category;
 using Money = Ucommerce.Api.PriceCalculation.Money;
 using Product = UCommerce.Search.Models.Product;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class CategoryController : RenderMvcController
     {

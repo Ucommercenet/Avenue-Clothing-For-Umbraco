@@ -5,7 +5,7 @@ using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 using UCommerce.Search;
 using UCommerce.Search.Slugs;
 using Umbraco.Web;
@@ -13,7 +13,7 @@ using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using Money = Ucommerce.Api.PriceCalculation.Money;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class BasketController : RenderMvcController
     {

@@ -7,14 +7,14 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 using UCommerce.Search.Facets;
 using UCommerce.Search.Models;
 using Umbraco.Core;
 using Umbraco.Web.Mvc;
 using ISiteContext = Ucommerce.Api.ISiteContext;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public static class FacetedQueryStringExtensions
     {

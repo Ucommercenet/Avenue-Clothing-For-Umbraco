@@ -2,7 +2,7 @@
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Globalization;
 
-namespace UCommerce.RazorStore.Installer.Helpers
+namespace AvenueClothing.Installer.Helpers
 {
     public class GenericHelpers
     {

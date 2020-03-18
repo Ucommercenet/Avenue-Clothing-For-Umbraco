@@ -3,12 +3,12 @@ using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 using UCommerce.Search.Models;
 using UCommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class PartialViewController : SurfaceController
     {

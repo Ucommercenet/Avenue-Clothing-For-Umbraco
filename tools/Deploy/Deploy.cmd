@@ -1,7 +1,7 @@
 @echo off
 rem Run from Tools folder
 rem Usage
-rem Deploy ..\..\src\uCommerce.RazorStore C:\Programming\Sites\UmbracoAcc
+rem Deploy ..\..\src\AvenueClothing C:\Programming\Sites\UmbracoAcc
 IF /I [%1]==[] GOTO :MISSING_PARAM
 IF /I [%2]==[] GOTO :MISSING_PARAM
 
@@ -28,7 +28,7 @@ robocopy "%path1%\scripts" "%path2%\scripts" /s
 robocopy "%path1%\Views" "%path2%\Views" /s
 robocopy "%path1%\img" "%path2%\img" /s
 robocopy "%path1%\js" "%path2%\js" /s
-robocopy "%path1%\bin" "%path2%\bin" uCommerce.RazorStore.dll
+robocopy "%path1%\bin" "%path2%\bin" AvenueClothing.dll
 REM robocopy "%path1%\bin" "%path2%\bin" ServiceStack*.*
 
 GOTO :DONE

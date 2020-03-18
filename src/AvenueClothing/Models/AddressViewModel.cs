@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
 	public class AddressViewModel
 	{

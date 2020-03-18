@@ -4,7 +4,7 @@ using Umbraco.Web;
 using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
 	public class PurchaseOrderViewModel : ContentModel
 	{

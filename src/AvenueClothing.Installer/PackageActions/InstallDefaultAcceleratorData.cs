@@ -4,12 +4,12 @@ using System.Web;
 using System.Xml.Linq;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Installer.Helpers;
+using AvenueClothing.Installer.Helpers;
 using UCommerce.Search.Indexers;
 using Umbraco.Core.Services;
 using Umbraco.Web.Composing;
 
-namespace UCommerce.RazorStore.Installer.PackageActions
+namespace AvenueClothing.Installer.PackageActions
 {
 
     public class InstallDefaultAcceleratorData : Umbraco.Core.PackageActions.IPackageAction

@@ -4,15 +4,15 @@ using System.Linq;
 using System.Web.Http;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using Ucommerce.Avenue.Umbraco.Api.Model;
+using AvenueClothing.Api.Model;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.Search;
 using UCommerce.Search.Slugs;
-using Basket = Ucommerce.Avenue.Umbraco.Api.Model.Basket;
+using Basket = AvenueClothing.Api.Model.Basket;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
-namespace Ucommerce.Avenue.Umbraco.Api
+namespace AvenueClothing.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Ucommerce.Avenue.Umbraco.Api.Model
+namespace AvenueClothing.Api.Model
 {
     public class PriceCalculationViewModel
     {

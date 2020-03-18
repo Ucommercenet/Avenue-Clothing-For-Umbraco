@@ -2,7 +2,7 @@
 using UCommerce.Search.Definitions;
 using UCommerce.Search.Extensions;
 
-namespace Ucommerce.Avenue.Umbraco.Search
+namespace AvenueClothing.Search
 {
     public class AvenueProductIndexDefinition : DefaultProductsIndexDefinition
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using UCommerce.Search.Facets;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
     public class FacetViewModel
     {

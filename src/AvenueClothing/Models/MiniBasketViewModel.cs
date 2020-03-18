@@ -1,6 +1,6 @@
 ﻿using Ucommerce.Api.PriceCalculation;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
     public class MiniBasketViewModel
     {      

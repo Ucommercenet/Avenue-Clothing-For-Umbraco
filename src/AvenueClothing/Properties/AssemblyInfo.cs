@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ucommerce.Avenue.Umbraco")]
+[assembly: AssemblyTitle("AvenueClothing")]
 [assembly: AssemblyDescription("Assembly containing the functionality for the uCommerce Demo Razor Store")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("uCommerce")]
-[assembly: AssemblyProduct("Ucommerce.Avenue.Umbraco")]
+[assembly: AssemblyProduct("AvenueClothing")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

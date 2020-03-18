@@ -7,14 +7,14 @@ using UCommerce.Catalog.Status;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.Pipelines;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 using UCommerce.Runtime;
 using UCommerce.Search;
 using UCommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class ReviewController : SurfaceController
     {

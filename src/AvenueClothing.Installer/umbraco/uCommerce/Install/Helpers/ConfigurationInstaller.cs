@@ -10,7 +10,7 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Services;
 using IUserService = UCommerce.Security.IUserService;
 
-namespace UCommerce.RazorStore.Installer.Helpers
+namespace AvenueClothing.Installer.Helpers
 {
     public class ConfigurationInstaller
     {

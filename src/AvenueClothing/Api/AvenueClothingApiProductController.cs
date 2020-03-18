@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using Ucommerce.Avenue.Umbraco.Api.Model;
+using AvenueClothing.Api.Model;
 using UCommerce.Catalog.Models;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
@@ -13,9 +13,9 @@ using UCommerce.Search.Slugs;
 using Category = UCommerce.Search.Models.Category;
 using Product = UCommerce.Search.Models.Product;
 using ProductCatalog = UCommerce.Search.Models.ProductCatalog;
-using ProductProperty = Ucommerce.Avenue.Umbraco.Api.Model.ProductProperty;
+using ProductProperty = AvenueClothing.Api.Model.ProductProperty;
 
-namespace Ucommerce.Avenue.Umbraco.Api
+namespace AvenueClothing.Api
 {
     [RoutePrefix("ucommerceapi")]
     public class AvenueClothingApiProductController : ApiController

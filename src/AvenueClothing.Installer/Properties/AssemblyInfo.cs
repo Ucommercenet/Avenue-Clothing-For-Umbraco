@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ucommerce.Avenue.Umbraco.Installer")]
+[assembly: AssemblyTitle("AvenueClothing.Installer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ucommerce.Avenue.Umbraco.Installer")]
+[assembly: AssemblyProduct("AvenueClothing.Installer")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

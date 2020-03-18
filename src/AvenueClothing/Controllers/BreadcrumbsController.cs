@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Models;
+using AvenueClothing.Models;
 using UCommerce.Search;
 using UCommerce.Search.Models;
 using UCommerce.Search.Slugs;
@@ -14,7 +14,7 @@ using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 using Product = UCommerce.Search.Models.Product;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class BreadcrumbsController : SurfaceController
     {

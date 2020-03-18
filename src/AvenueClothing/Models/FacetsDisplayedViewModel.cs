@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UCommerce.RazorStore.Models
+namespace AvenueClothing.Models
 {
     public class FacetsDisplayedViewModel
             {

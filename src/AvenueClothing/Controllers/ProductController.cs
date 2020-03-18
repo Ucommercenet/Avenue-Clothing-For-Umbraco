@@ -5,13 +5,13 @@ using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using UCommerce.Infrastructure;
-using UCommerce.RazorStore.Models;
 using UCommerce.Search;
+using AvenueClothing.Models;
 using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class ProductController : RenderMvcController
     {

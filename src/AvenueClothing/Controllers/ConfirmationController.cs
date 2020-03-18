@@ -2,7 +2,7 @@
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
-namespace Ucommerce.Avenue.Umbraco.Controllers
+namespace AvenueClothing.Controllers
 {
     public class ConfirmationController : RenderMvcController
     {
