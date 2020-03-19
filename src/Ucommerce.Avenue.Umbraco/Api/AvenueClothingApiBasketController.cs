@@ -38,7 +38,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
 
             var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            var lineTotal = new ApiMoney(orderLine.Total.GetValueOrDefault(), CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), CatalogContext.CurrentPriceGroup.CurrencyISOCode);
 
             var updatedLine = new LineItem()
             {
@@ -65,10 +65,10 @@ namespace Ucommerce.Avenue.Umbraco.Api
             var purchaseOrder = TransactionLibrary.GetBasket(false);
 
             var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-            var subTotal = new ApiMoney(purchaseOrder.SubTotal.Value, currencyIsoCode);
-            var taxTotal = new ApiMoney(purchaseOrder.TaxTotal.Value, currencyIsoCode);
-            var discountTotal = new ApiMoney(purchaseOrder.DiscountTotal.Value, currencyIsoCode);
-            var orderTotal = new ApiMoney(purchaseOrder.OrderTotal.Value, currencyIsoCode);
+            var subTotal = new Money(purchaseOrder.SubTotal.Value, currencyIsoCode);
+            var taxTotal = new Money(purchaseOrder.TaxTotal.Value, currencyIsoCode);
+            var discountTotal = new Money(purchaseOrder.DiscountTotal.Value, currencyIsoCode);
+            var orderTotal = new Money(purchaseOrder.OrderTotal.Value, currencyIsoCode);
 
             var basket = new Basket
             {
@@ -92,7 +92,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
                 var product = CatalogLibrary.GetProduct(line.Sku);
                 var url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
                 var imageUrl = product.PrimaryImageUrl;
-                var lineTotal = new ApiMoney(line.Total.Value, currencyIsoCode);
+                var lineTotal = new Money(line.Total.Value, currencyIsoCode);
 
                 var lineItem = new LineItem
                 {

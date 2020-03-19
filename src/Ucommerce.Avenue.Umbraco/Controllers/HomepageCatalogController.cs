@@ -40,8 +40,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Sku = product.Sku,
                     Name = product.Name,
                     Url = niceUrl,
-                    Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString(),
-                    Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString(),
+                    Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString(),
+                    Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
                     IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
                     VariantSku = product.VariantSku,
                     ThumbnailImageUrl = product.ThumbnailImageUrl

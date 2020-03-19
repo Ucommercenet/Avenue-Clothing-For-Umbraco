@@ -9,6 +9,7 @@ using UCommerce.RazorStore.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+using Money = Ucommerce.Api.PriceCalculation.Money;
 
 namespace Ucommerce.Avenue.Umbraco.Controllers
 {
@@ -39,13 +40,13 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 orderLineModel.Sku = orderLine.Sku;
                 orderLineModel.VariantSku = orderLine.VariantSku;
                 orderLineModel.Total =
-                    new ApiMoney(orderLine.Total.GetValueOrDefault(), orderLine.PurchaseOrder.BillingCurrency.ISOCode).ToString();
+                    new Money(orderLine.Total.GetValueOrDefault(), orderLine.PurchaseOrder.BillingCurrency.ISOCode).ToString();
                 orderLineModel.Tax =
-                    new ApiMoney(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString();
+                    new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString();
                 orderLineModel.Price =
-                    new ApiMoney(orderLine.Price, basket.BillingCurrency.ISOCode).ToString();
+                    new Money(orderLine.Price, basket.BillingCurrency.ISOCode).ToString();
                 orderLineModel.PriceWithDiscount =
-                    new ApiMoney(orderLine.Price - orderLine.Discount, basket.BillingCurrency.ISOCode).ToString();
+                    new Money(orderLine.Price - orderLine.Discount, basket.BillingCurrency.ISOCode).ToString();
                 orderLineModel.Quantity = orderLine.Quantity;
                 orderLineModel.Discount = orderLine.Discount;
 
@@ -53,16 +54,16 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             }
 
             basketModel.DiscountTotal =
-                new ApiMoney(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+                new Money(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.DiscountAmount = basket.DiscountTotal.GetValueOrDefault();
-            basketModel.SubTotal = new ApiMoney(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.SubTotal = new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.OrderTotal =
-                new ApiMoney(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.TaxTotal = new ApiMoney(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+                new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.TaxTotal = new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.ShippingTotal =
-                new ApiMoney(basket.ShippingTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+                new Money(basket.ShippingTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.PaymentTotal =
-                new ApiMoney(basket.PaymentTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+                new Money(basket.PaymentTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
 
 
             var shipment = basket.Shipments.FirstOrDefault();

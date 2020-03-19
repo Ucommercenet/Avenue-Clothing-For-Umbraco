@@ -48,8 +48,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductFamily,
                 IsVariant = false,
-                Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString(),
-                Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
+                Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
+                Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
             };
             
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))

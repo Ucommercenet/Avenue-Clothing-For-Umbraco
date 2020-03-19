@@ -58,8 +58,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductFamily,
                 IsVariant = false,
-                Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString(),
-                Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
+                Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
+                Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
             };
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
@@ -173,8 +173,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 };
                 if (product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var unitPrice))
                 {
-                    productViewModel.Price = new ApiMoney(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString();
-                    productViewModel.Tax = new ApiMoney(unitPrice * taxRate, currencyIsoCode).ToString();
+                    productViewModel.Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString();
+                    productViewModel.Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString();
                 }
 
                 productViews.Add(productViewModel);
