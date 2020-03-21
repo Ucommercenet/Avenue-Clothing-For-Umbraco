@@ -330,7 +330,6 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\BasketpreviewController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\RouterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShippingController.cs" />

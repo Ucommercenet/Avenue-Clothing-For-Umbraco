@@ -10,6 +10,7 @@ using UCommerce.Pipelines;
 using UCommerce.RazorStore.Models;
 using UCommerce.Runtime;
 using UCommerce.Search;
+using UCommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
@@ -117,7 +118,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             PipelineFactory.Create<ProductReview>("ProductReview").Execute(review);
             
             //TODO: Add Category to this url.
-            return Redirect(UrlService.GetUrl(CatalogContext.CurrentCatalog, new []{product}));
+            return Redirect(UrlService.GetUrl(CatalogContext.CurrentCatalog, product));
         }
     }
 }

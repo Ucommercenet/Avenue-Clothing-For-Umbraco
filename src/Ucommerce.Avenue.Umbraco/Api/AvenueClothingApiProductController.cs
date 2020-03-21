@@ -9,6 +9,7 @@ using UCommerce.Catalog.Models;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.Search;
+using UCommerce.Search.Slugs;
 using Category = UCommerce.Search.Models.Category;
 using Product = UCommerce.Search.Models.Product;
 using ProductCatalog = UCommerce.Search.Models.ProductCatalog;

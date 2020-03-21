@@ -6,6 +6,7 @@ using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search;
 using UCommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -16,6 +17,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
     {
         public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
 
         [HttpGet]
         public ActionResult Index(ContentModel model)
@@ -32,10 +34,10 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             return RenderView(true);
         }
 
-        private ActionResult RenderView(bool addedToBasket)
+        protected virtual ActionResult RenderView(bool addedToBasket = false)
         {
-            Product currentProduct = SiteContext.Current.CatalogContext.CurrentProduct;
-
+            Product currentProduct = CatalogContext.CurrentProduct;
+            // Price calculations
             var unitPrice = currentProduct.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
             var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
             var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
@@ -51,33 +53,35 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
                 Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
             };
-            
+
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
             {
                 productViewModel.ThumbnailImageUrl = currentProduct.PrimaryImageUrl;
             }
 
-            productViewModel.Properties = MapProductProperties(currentProduct);
+            var variants = CatalogLibrary.GetVariants(currentProduct);
+
+            productViewModel.Properties = MapProductProperties(variants);
 
             if (currentProduct.ProductFamily)
             {
-                // TODO:
-                // productViewModel.Variants = MapVariants(currentProduct.Variants);
+                productViewModel.Variants = MapVariants(variants);
             }
 
-            bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
+            // TODO:
+            // bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
 
             var productPageViewModel = new ProductPageViewModel
             {
                 ProductViewModel = productViewModel,
                 AddedToBasket = addedToBasket,
-                ItemAlreadyExists = isInBasket
+                ItemAlreadyExists = false //isInBasket
             };
 
             return View("/Views/Product.cshtml", productPageViewModel);
         }
 
-        private IList<ProductViewModel> MapVariants(ICollection<Product> variants)
+        private IList<ProductViewModel> MapVariants(IEnumerable<Product> variants)
         {
             var variantModels = new List<ProductViewModel>();
             foreach (var currentVariant in variants)
@@ -97,27 +101,28 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             return variantModels;
         }
 
-        private IList<ProductPropertiesViewModel> MapProductProperties(Product product)
+        private IList<ProductPropertiesViewModel> MapProductProperties(ResultSet<Product> variants)
         {
             var productProperties = new List<ProductPropertiesViewModel>();
 
-            // TODO:
-            // var uniqueVariants = from v in product.Variants.SelectMany(p => p.ProductProperties)
-            //                      where v.ProductDefinitionField.DisplayOnSite
-            //                      group v by v.ProductDefinitionField into g
-            //                      select g;
-            //
-            // foreach (var prop in uniqueVariants)
-            // {
-            //     var productPropertiesViewModel = new ProductPropertiesViewModel();
-            //     productPropertiesViewModel.PropertyName = prop.Key.Name;
-            //
-            //     foreach (var value in prop.Select(p => p.Value).Distinct())
-            //     {
-            //         productPropertiesViewModel.Values.Add(value);
-            //     }
-            //     productProperties.Add(productPropertiesViewModel);
-            // }
+            var uniqueVariants =
+                from v in variants.SelectMany(p => p.GetUserDefinedFields())
+                group v by v.Key
+                into g
+                select g;
+
+            foreach (var prop in uniqueVariants)
+            {
+                var productPropertiesViewModel = new ProductPropertiesViewModel();
+                productPropertiesViewModel.PropertyName = prop.Key;
+
+                foreach (var value in prop.Select(p => p.Value).Distinct())
+                {
+                    productPropertiesViewModel.Values.Add(value.ToString());
+                }
+
+                productProperties.Add(productPropertiesViewModel);
+            }
 
             return productProperties;
         }

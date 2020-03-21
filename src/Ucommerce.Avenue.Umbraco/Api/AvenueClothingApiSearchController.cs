@@ -5,6 +5,7 @@ using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.Infrastructure;
 using UCommerce.Search;
 using UCommerce.Search.Models;
+using UCommerce.Search.Slugs;
 
 namespace Ucommerce.Avenue.Umbraco.Api
 {
@@ -48,7 +49,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
                     Sku = product.Sku,
                     VariantSku = product.VariantSku,
                     ProductName = product.DisplayName,
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { product })
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, product )
                 });
             }
 

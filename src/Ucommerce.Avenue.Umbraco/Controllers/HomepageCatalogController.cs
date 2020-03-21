@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using UCommerce.Catalog.Models;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
 using UCommerce.Search.Models;
+using UCommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 
 namespace Ucommerce.Avenue.Umbraco.Controllers
@@ -30,7 +29,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             foreach (var product in products)
             {
-                var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
+                var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, product);
                 var unitPrice = product.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
                 var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
                 var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
