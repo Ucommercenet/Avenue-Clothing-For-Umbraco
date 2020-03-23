@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using Ucommerce.Api.Search;
-using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.Catalog.Models;
-using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Logging;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
+using UCommerce.Search.Extensions;
 using UCommerce.Search.FacetsV2;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -25,7 +22,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
     {
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ISiteContext SiteContext => ObjectFactory.Instance.Resolve<ISiteContext>();
-        public ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
         private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
 
         public override ActionResult Index(ContentModel model)
@@ -58,7 +54,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productsInCategory = new List<ProductViewModel>();
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
-            var products = SearchLibrary.GetProductsFor(category.Categories, facetsForQuerying);
+            var products = CatalogLibrary.GetProductsFor(category.Categories, facetsForQuerying.ToFacetDictionary());
             var prices = CatalogLibrary.CalculatePrices(products.Select(p => p.Guid).ToList()).Items
                 .ToLookup(p => p.ProductGuid);
 
@@ -68,7 +64,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList(), prices));
             }
 
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying)
+            productsInCategory.AddRange(MapProducts(CatalogLibrary.GetProductsFor(category.Guid, facetsForQuerying.ToFacetDictionary())
                 .Results, prices));
 
             return productsInCategory;

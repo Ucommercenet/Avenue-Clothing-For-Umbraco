@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using Ucommerce.Api.Search;
 using UCommerce.Catalog.Models;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
+using UCommerce.Search.Extensions;
 using UCommerce.Search.FacetsV2;
 using UCommerce.Search.Models;
 using Umbraco.Web.Mvc;
@@ -20,7 +20,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         private ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         private ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
-        public ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
 
 
         public ActionResult Index()
@@ -206,7 +205,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             var productsInCategory = new List<ProductViewModel>();
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
-            var products = SearchLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying);
+            var products = CatalogLibrary.GetProductsFor(subCategories.Select(x => x.Guid).ToList(), facetsForQuerying.ToFacetDictionary());
             var prices = CatalogLibrary
                 .CalculatePrices(products.Select(p => p.Guid).ToList())
                 .Items
@@ -218,7 +217,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList(), prices));
             }
 
-            productsInCategory.AddRange(MapProducts(SearchLibrary.GetProductsFor(category.Guid, facetsForQuerying)
+            productsInCategory.AddRange(MapProducts(CatalogLibrary.GetProductsFor(category.Guid, facetsForQuerying.ToFacetDictionary())
                 .Results, prices));
 
             return productsInCategory;

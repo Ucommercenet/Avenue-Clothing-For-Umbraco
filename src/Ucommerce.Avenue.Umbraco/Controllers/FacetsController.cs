@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
+using UCommerce.Search.Extensions;
 using UCommerce.Search.FacetsV2;
 using UCommerce.Search.Models;
 using Umbraco.Web.Mvc;
@@ -65,8 +65,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
     public class FacetsController : SurfaceController
     {
         private ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        readonly ISiteContext _siteContext = ObjectFactory.Instance.Resolve<ISiteContext>();
-        readonly ISearchLibrary _searchLibrary = ObjectFactory.Instance.Resolve<ISearchLibrary>();
+        private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
 
         // GET: Facets
         public ActionResult Index()
@@ -77,7 +76,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             if (ShouldDisplayFacets(category))
             {
-                IList<Facet> facets = _searchLibrary.GetFacetsFor(category.Guid, facetsForQuerying).Facets;
+                IList<Facet> facets = CatalogLibrary.GetProductsFor(category.Guid, facetsForQuerying.ToFacetDictionary()).Facets;
                 if (facets.Any(x => x.FacetValues.Any(y => y.Count > 0)))
                 {
                     facetValueOutputModel.Facets = MapFacets(facets);
@@ -89,7 +88,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
         private bool ShouldDisplayFacets(Category category)
         {
-            var product = _siteContext.CatalogContext.CurrentProduct;
+            var product = CatalogContext.CurrentProduct;
 
             return category != null && product == null;
         }
