@@ -15,7 +15,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
     public class HomepageCatalogController : SurfaceController
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
@@ -29,32 +28,24 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             ProductsViewModel productsViewModel = new ProductsViewModel();
 
-            // Price calculations
-            var productGuids = products.Select(p => p.Guid).ToList();
-            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(productGuids);
-            var pricesPerProductId = productPriceCalculationResult.Items.ToLookup(item => item.ProductGuid);
-
             foreach (var product in products)
             {
                 var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
-                var productPriceCalculationResultItem = pricesPerProductId[product.Guid].FirstOrDefault();
-                if (productPriceCalculationResultItem != null)
+                var unitPrice = product.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
+                var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+                var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+
+                productsViewModel.Products.Add(new ProductViewModel()
                 {
-                    productsViewModel.Products.Add(new ProductViewModel()
-                    {
-                        Sku = product.Sku,
-                        Name = product.Name,
-                        Url = niceUrl,
-                        PriceCalculation = new ProductPriceCalculationViewModel()
-                        {
-                            YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
-                            ListPrice = new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
-                        },
-                        IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
-                        VariantSku = product.VariantSku,
-                        ThumbnailImageUrl = product.ThumbnailImageUrl
-                    });
-                }
+                    Sku = product.Sku,
+                    Name = product.Name,
+                    Url = niceUrl,
+                    Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString(),
+                    Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
+                    IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
+                    VariantSku = product.VariantSku,
+                    ThumbnailImageUrl = product.ThumbnailImageUrl
+                });
             }
 
             return View("/Views/PartialView/HomepageCatalog.cshtml", productsViewModel);

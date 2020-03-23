@@ -85,58 +85,5 @@ namespace Ucommerce.Avenue.Umbraco.Api
 
             return Json(new {Variant = variantModel});
         }
-
-
-        [Route("razorstore/products/getproductinformation")]
-        [HttpPost]
-        public IHttpActionResult GetProductInformation([FromBody] GetProductInformationRequest request)
-        {
-            ProductCatalog catalog = CatalogLibrary.GetCatalog(request.CatalogId);
-            Category category = CatalogLibrary.GetCategory(request.CategoryId);
-            Product product = CatalogLibrary.GetProduct(request.Sku);
-            string niceUrl = UrlService.GetUrl(catalog, new[] {category}, new[] {product});
-
-            ProductPriceCalculationResult.Item priceCalculation =
-                CatalogLibrary.CalculatePrices(new List<Guid> {product.Guid}).Items.First();
-
-
-            var includeTax = catalog.ShowPricesIncludingTax;
-            ProductInformation productInformation = new ProductInformation
-            {
-                NiceUrl = niceUrl,
-                PriceCalculation = new PriceCalculationViewModel()
-                {
-                    IsDiscounted = priceCalculation.DiscountPercentage > 0M,
-                    Discount = GetPriceViewModel(priceCalculation.DiscountExclTax, priceCalculation.DiscountInclTax, includeTax,
-                        priceCalculation.CurrencyISOCode),
-                    YourPrice = GetPriceViewModel(priceCalculation.PriceExclTax, priceCalculation.PriceInclTax, includeTax, priceCalculation.CurrencyISOCode),
-                    ListPrice = GetPriceViewModel(priceCalculation.ListPriceExclTax, priceCalculation.ListPriceInclTax, includeTax,
-                        priceCalculation.CurrencyISOCode),
-                },
-                Sku = product.Sku
-            };
-
-            return Json(productInformation);
-        }
-
-        private PriceViewModel GetPriceViewModel(decimal priceExclTax, decimal priceInclTax, bool includeTax, string currency)
-        {
-            var price = includeTax ? priceInclTax : priceExclTax;
-            return new PriceViewModel()
-            {
-                Amount = GetMoneyViewModel(price, currency),
-                AmountExclTax = GetMoneyViewModel(priceExclTax, currency),
-                AmountInclTax = GetMoneyViewModel(priceInclTax, currency),
-            };
-        }
-
-        private MoneyViewModel GetMoneyViewModel(decimal price, string currency)
-        {
-            return new MoneyViewModel()
-            {
-                Value = price,
-                DisplayValue = new ApiMoney(price, currency).ToString()
-            };
-        }
     }
 }

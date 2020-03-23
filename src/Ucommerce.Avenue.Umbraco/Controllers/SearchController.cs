@@ -15,7 +15,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
     public class SearchController : RenderMvcController
     {
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
 
@@ -40,12 +39,12 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     .ToList();
             }
 
-            var productPriceCalculationResult = CatalogLibrary.CalculatePrices(products.Select(p => p.Guid).ToList());
-            var pricesPerProductId = productPriceCalculationResult.Items.ToLookup(item => item.ProductGuid);
+            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
             foreach (var product in products)
             {
-                var productPriceCalculationResultItem = pricesPerProductId[product.Guid].First();
+                var unitPrice = product.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
                 productsViewModel.Products.Add(new ProductViewModel
                 {
                     Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
@@ -53,12 +52,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Sku = product.Sku,
                     IsVariant = !string.IsNullOrWhiteSpace(product.VariantSku),
                     LongDescription = product.LongDescription,
-                    PriceCalculation = new ProductPriceCalculationViewModel
-                    {
-                        YourPrice = new ApiMoney(productPriceCalculationResultItem.PriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString(),
-                        ListPrice =
-                            new ApiMoney(productPriceCalculationResultItem.ListPriceInclTax, productPriceCalculationResultItem.CurrencyISOCode).ToString()
-                    },
+                    Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
+                    Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString(),
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
                     VariantSku = product.VariantSku
                 });

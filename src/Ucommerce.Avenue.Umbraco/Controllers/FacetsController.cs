@@ -76,7 +76,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             if (ShouldDisplayFacets(category))
             {
-                IList<Facet> facets = CatalogLibrary.GetProductsFor(category.Guid, facetsForQuerying.ToFacetDictionary()).Facets;
+                IList<Facet> facets = CatalogLibrary.GetProducts(category.Guid, facetsForQuerying.ToFacetDictionary()).Facets;
                 if (facets.Any(x => x.FacetValues.Any(y => y.Count > 0)))
                 {
                     facetValueOutputModel.Facets = MapFacets(facets);
