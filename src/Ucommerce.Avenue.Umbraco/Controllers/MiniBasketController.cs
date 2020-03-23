@@ -24,7 +24,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                 if (numberOfItems != 0)
                 {
-                    miniBasket.Total = new ApiMoney(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
+                    miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
                     miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                     miniBasket.IsEmpty = false;
                 }

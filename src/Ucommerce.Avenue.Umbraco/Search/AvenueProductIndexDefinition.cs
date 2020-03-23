@@ -18,7 +18,6 @@ namespace Ucommerce.Avenue.Umbraco.Search
             this.Facet("CollarSize");
             this.Facet("ShoeSize");
             
-            // TODO: Enable facets on prices once the DrillSidewaysHelpers knows how
             // this.Facet("UnitPrices", new FacetOptions
             // {
             //     Ranges = new List<Range>
