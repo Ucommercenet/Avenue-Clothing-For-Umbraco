@@ -37,10 +37,11 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         protected virtual ActionResult RenderView(bool addedToBasket = false)
         {
             Product currentProduct = CatalogContext.CurrentProduct;
+            
             // Price calculations
-            var unitPrice = currentProduct.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
-            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+            currentProduct.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
+            string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+            decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
             var productViewModel = new ProductViewModel
             {
@@ -50,8 +51,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductFamily,
                 IsVariant = false,
-                Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
-                Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString()
+                Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
+                Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : ""
             };
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))

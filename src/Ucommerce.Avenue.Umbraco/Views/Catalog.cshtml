@@ -11,7 +11,7 @@
     <div class="hero-unit">
         @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
         {
-            <img class="col-sm-9" src="@Model.BannerImageUrl" style="max-height: 350px;">
+            <img class="col-sm-9" src="@Model.BannerImageUrl" style="max-height: 350px; object-fit: cover;">
         }
     </div>
 </div>
@@ -27,7 +27,7 @@
                     @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
                     {
                         <a href="@product.Url">
-                            <img src="@product.ThumbnailImageUrl" style="max-height: 400px;">
+                            <img src="@product.ThumbnailImageUrl" style="width: 259px; height: 350px; object-fit: cover;">
                         </a>
                     }
                 </div>

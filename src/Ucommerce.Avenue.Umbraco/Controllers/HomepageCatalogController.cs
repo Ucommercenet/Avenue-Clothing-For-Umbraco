@@ -29,18 +29,18 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             foreach (var product in products)
             {
-                var niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, product);
-                var unitPrice = product.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
-                var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-                var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+                string niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, product);
+                product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
+                string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+                decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
-                productsViewModel.Products.Add(new ProductViewModel()
+                productsViewModel.Products.Add(new ProductViewModel
                 {
                     Sku = product.Sku,
                     Name = product.Name,
                     Url = niceUrl,
-                    Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString(),
-                    Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
+                    Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : "",
+                    Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
                     IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
                     VariantSku = product.VariantSku,
                     ThumbnailImageUrl = product.ThumbnailImageUrl

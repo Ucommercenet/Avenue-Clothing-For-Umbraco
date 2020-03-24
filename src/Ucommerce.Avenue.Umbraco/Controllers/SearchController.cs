@@ -40,12 +40,12 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     .ToList();
             }
 
-            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+            string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+            decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
             foreach (var product in products)
             {
-                var unitPrice = product.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
+                product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
                 productsViewModel.Products.Add(new ProductViewModel
                 {
                     Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, product),
@@ -53,8 +53,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Sku = product.Sku,
                     IsVariant = !string.IsNullOrWhiteSpace(product.VariantSku),
                     LongDescription = product.LongDescription,
-                    Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString(),
-                    Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString(),
+                    Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
+                    Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : "",
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
                     VariantSku = product.VariantSku
                 });

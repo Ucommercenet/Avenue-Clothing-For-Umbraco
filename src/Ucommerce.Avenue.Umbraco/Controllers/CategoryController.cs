@@ -81,7 +81,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 {
                     Sku = product.Sku,
                     Name = product.DisplayName,
-                    ThumbnailImageUrl = product.ThumbnailImageUrl,
+                    ThumbnailImageUrl = product.PrimaryImageUrl,
                     Url = _urlService.GetUrl(CatalogContext.CurrentCatalog, CatalogContext.CurrentCategories, product)
                 };
                 if (product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var unitPrice))
