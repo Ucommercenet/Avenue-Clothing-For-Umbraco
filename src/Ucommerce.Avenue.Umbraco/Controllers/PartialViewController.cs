@@ -2,11 +2,10 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
-using UCommerce.Search;
 using UCommerce.Search.Models;
+using UCommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 
 namespace Ucommerce.Avenue.Umbraco.Controllers
@@ -39,12 +38,13 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
             {
                 var categoryViewModel = new CategoryViewModel
                 {
-                    Name = category.DisplayName, 
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] { category })
+                    Name = category.DisplayName,
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog,
+                        CatalogContext.CurrentCategories.Union(new[] { category }))
                 };
                 categoryViewModel.Categories = category.Categories
-                    .Select(id => subCategoriesById.TryGetValue(id, out var cat) ? cat : null)
-                    .Compact()
+                    .Where(id => subCategoriesById.ContainsKey(id))
+                    .Select(id => subCategoriesById[id])
                     .Select(cat => new CategoryViewModel
                     {
                         Name = cat.DisplayName,

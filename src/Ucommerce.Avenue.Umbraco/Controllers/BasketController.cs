@@ -7,6 +7,7 @@ using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
+using UCommerce.Search.Slugs;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -39,7 +40,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Discount = orderLine.Discount,
                     Tax = new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString(),
                     Price = new Money(orderLine.Price, basket.BillingCurrency.ISOCode).ToString(),
-                    ProductUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {CatalogLibrary.GetProduct(orderLine.Sku)}),
+                    ProductUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, CatalogLibrary.GetProduct(orderLine.Sku)),
                     PriceWithDiscount = new Money(orderLine.Price - orderLine.UnitDiscount.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString(),
                     OrderLineId = orderLine.OrderLineId
                 };

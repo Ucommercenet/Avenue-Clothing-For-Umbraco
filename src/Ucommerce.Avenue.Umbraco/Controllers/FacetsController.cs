@@ -8,10 +8,10 @@ using Ucommerce.Api;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search.Extensions;
-using UCommerce.Search.FacetsV2;
+using UCommerce.Search.Facets;
 using UCommerce.Search.Models;
+using Umbraco.Core;
 using Umbraco.Web.Mvc;
-using ISiteContext = Ucommerce.Api.ISiteContext;
 
 namespace Ucommerce.Avenue.Umbraco.Controllers
 {
@@ -25,25 +25,9 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 parameters[queryString] = HttpContext.Current.Request.QueryString[queryString];
             }
 
-            if (parameters.ContainsKey("umbDebugShowTrace"))
-            {
-                parameters.Remove("umbDebugShowTrace");
-            }
-
-            if (parameters.ContainsKey("product"))
-            {
-                parameters.Remove("product");
-            }
-
-            if (parameters.ContainsKey("category"))
-            {
-                parameters.Remove("category");
-            }
-
-            if (parameters.ContainsKey("catalog"))
-            {
-                parameters.Remove("catalog");
-            }
+            parameters.RemoveAll(kvp =>
+                new [] { "umbDebugShowTrace", "product", "variant", "category", "categories", "catalog"}
+                    .Contains(kvp.Key));
 
             var facetsForQuerying = new List<Facet>();
 

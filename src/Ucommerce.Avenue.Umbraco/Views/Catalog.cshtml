@@ -5,13 +5,13 @@
 @{
     Layout = "Layout.cshtml";
     // Html.RequiresJs("~/Scripts/uCommerce.category.js");
-}S
+}
 
 <div class="row margin-bottom">
     <div class="hero-unit">
         @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
         {
-            <img class="col-sm-9" src="@Model.BannerImageUrl">
+            <img class="col-sm-9" src="@Model.BannerImageUrl" style="max-height: 350px;">
         }
     </div>
 </div>
@@ -27,7 +27,7 @@
                     @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
                     {
                         <a href="@product.Url">
-                            <img src="@product.ThumbnailImageUrl">
+                            <img src="@product.ThumbnailImageUrl" style="max-height: 400px;">
                         </a>
                     }
                 </div>

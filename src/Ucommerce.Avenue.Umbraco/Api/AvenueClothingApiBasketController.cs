@@ -8,6 +8,7 @@ using Ucommerce.Avenue.Umbraco.Api.Model;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.Search;
+using UCommerce.Search.Slugs;
 using Basket = Ucommerce.Avenue.Umbraco.Api.Model.Basket;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
@@ -90,7 +91,7 @@ namespace Ucommerce.Avenue.Umbraco.Api
             foreach (var line in purchaseOrder.OrderLines)
             {
                 var product = CatalogLibrary.GetProduct(line.Sku);
-                var url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product});
+                var url = UrlService.GetUrl(CatalogContext.CurrentCatalog, product);
                 var imageUrl = product.PrimaryImageUrl;
                 var lineTotal = new Money(line.Total.Value, currencyIsoCode);
 
