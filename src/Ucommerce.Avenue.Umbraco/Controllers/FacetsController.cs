@@ -8,7 +8,7 @@ using Ucommerce.Api;
 using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
-using UCommerce.Search.FacetsV2;
+using UCommerce.Search.Facets;
 using UCommerce.Search.Models;
 using Umbraco.Core;
 using Umbraco.Web.Mvc;

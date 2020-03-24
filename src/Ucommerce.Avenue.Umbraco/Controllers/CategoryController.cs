@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
 using Ucommerce.Api;
-using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Api.Search;
-using Ucommerce.Avenue.Umbraco.Api.Model;
-using UCommerce.Catalog.Models;
-using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Logging;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
-using UCommerce.Search.FacetsV2;
+using UCommerce.Search.Facets;
 using UCommerce.Search.Slugs;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -35,7 +29,23 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         {
             using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
             {
-                return RenderView();
+                var currentCategory = CatalogContext.CurrentCategory;
+
+                var categoryViewModel = new CategoryViewModel
+                {
+                    Name = currentCategory.DisplayName,
+                    Description = currentCategory.Description,
+                    CatalogId = currentCategory.ProductCatalog,
+                    CategoryId = currentCategory.Guid,
+                    Products = MapProductsInCategories(currentCategory)
+                };
+
+                if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
+                {
+                    categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+                }
+
+                return View("/Views/Catalog.cshtml", categoryViewModel);
             }
         }
 
