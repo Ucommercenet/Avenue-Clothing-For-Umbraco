@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using UCommerce.Search.Definitions;
+﻿using UCommerce.Search.Definitions;
 using UCommerce.Search.Extensions;
-using UCommerce.Search.FacetsV2;
 
 namespace Ucommerce.Avenue.Umbraco.Search
 {
