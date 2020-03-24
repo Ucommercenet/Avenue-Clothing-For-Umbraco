@@ -6,7 +6,6 @@
 @using System.Linq
 @using System.Web
 @using ClientDependency.Core.Mvc
-@using UCommerce.Search.Indexers.ProductIndexers
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<UCommerce.RazorStore.Models.ProductPageViewModel>
 
 @{
@@ -28,7 +27,7 @@
     <div class="col-md-5">
         @if (!string.IsNullOrEmpty(Model.ProductViewModel.ThumbnailImageUrl))
             {
-            <img src="@Model.ProductViewModel.ThumbnailImageUrl" />
+            <img src="@Model.ProductViewModel.ThumbnailImageUrl" style="max-width: 300px;" />
         }
     </div>
 
@@ -45,7 +44,7 @@
             <form method="post" action="@Url.Action("Index", "AvenueClothingApiProduct")">
                 <div class="col-md-12 well">
                     <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                        <p class="item-price" itemprop="price">@Model.ProductViewModel.PriceCalculation.YourPrice</p>
+                        <p class="item-price" itemprop="price">@Model.ProductViewModel.Price</p>
                         <p class="item-tax">
                             <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
                         </p>

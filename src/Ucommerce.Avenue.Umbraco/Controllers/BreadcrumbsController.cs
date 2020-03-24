@@ -7,6 +7,7 @@ using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
 using UCommerce.Search.Models;
+using UCommerce.Search.Slugs;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
@@ -43,8 +44,9 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 var breadcrumb = new BreadcrumbsViewModel
                 {
                     BreadcrumbName = product.DisplayName,
-                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {lastCategory}.Compact().ToArray(),
-                        new[] {product})
+                    BreadcrumbUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog,
+                        new[] {lastCategory}.Compact().ToArray(),
+                        product)
                 };
                 breadcrumbs.Add(breadcrumb);
             }

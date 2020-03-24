@@ -18,17 +18,19 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         {
             var miniBasket = new MiniBasketViewModel {IsEmpty = true};
 
-            if (TransactionLibrary.HasBasket())
-            {
-                PurchaseOrder basket = TransactionLibrary.GetBasket(false);
-                var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
-                if (numberOfItems != 0)
-                {
-                    miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
-                    miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
-                    miniBasket.IsEmpty = false;
-                }
-            }
+            // TODO: Re-enable when IOrderContext has been ported
+            //
+            // if (TransactionLibrary.HasBasket())
+            // {
+            //     PurchaseOrder basket = TransactionLibrary.GetBasket(false);
+            //     var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
+            //     if (numberOfItems != 0)
+            //     {
+            //         miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
+            //         miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
+            //         miniBasket.IsEmpty = false;
+            //     }
+            // }
 
             return View("/Views/PartialView/MiniBasket.cshtml", miniBasket);
         }

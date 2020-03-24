@@ -7,6 +7,7 @@ using UCommerce.Infrastructure;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
 using UCommerce.Search.Models;
+using UCommerce.Search.Slugs;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
@@ -47,7 +48,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 var unitPrice = product.UnitPrices[CatalogContext.CurrentPriceGroup.Name];
                 productsViewModel.Products.Add(new ProductViewModel
                 {
-                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, new[] {product}),
+                    Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, product),
                     Name = product.DisplayName,
                     Sku = product.Sku,
                     IsVariant = !string.IsNullOrWhiteSpace(product.VariantSku),
