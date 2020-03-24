@@ -28,7 +28,23 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
         {
             using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
             {
-                return RenderView();
+                var currentCategory = CatalogContext.CurrentCategory;
+
+                var categoryViewModel = new CategoryViewModel
+                {
+                    Name = currentCategory.DisplayName,
+                    Description = currentCategory.Description,
+                    CatalogId = currentCategory.ProductCatalog,
+                    CategoryId = currentCategory.Guid,
+                    Products = MapProductsInCategories(currentCategory)
+                };
+
+                if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
+                {
+                    categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+                }
+
+                return View("/Views/Catalog.cshtml", categoryViewModel);
             }
         }
 
