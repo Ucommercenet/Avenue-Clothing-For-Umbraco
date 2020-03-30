@@ -94,11 +94,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
                 foreach (var value in facet.FacetValues)
                 {
-                    if (value.Count > 0)
-                    {
-                        FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, (int) value.Count);
-                        facetViewModel.FacetValues.Add(facetVal);
-                    }
+                    FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, (int) value.Count);
+                    facetViewModel.FacetValues.Add(facetVal);
                 }
 
                 facets.Add(facetViewModel);
