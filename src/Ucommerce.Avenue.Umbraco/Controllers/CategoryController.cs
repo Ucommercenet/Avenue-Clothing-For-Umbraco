@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using Ucommerce.Api.Search;
 using UCommerce.Infrastructure;
 using UCommerce.Infrastructure.Logging;
 using UCommerce.RazorStore.Models;
 using UCommerce.Search;
+using UCommerce.Search.Extensions;
 using UCommerce.Search.Facets;
 using UCommerce.Search.Slugs;
 using Umbraco.Web.Models;
@@ -21,7 +21,6 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
     {
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        public ISearchLibrary SearchLibrary => ObjectFactory.Instance.Resolve<ISearchLibrary>();
         private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
         private IUrlService _urlService => ObjectFactory.Instance.Resolve<IUrlService>();
 
@@ -104,7 +103,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
             var products =
-                SearchLibrary.GetProductsFor(category.Categories.Append(category.Guid).ToList(), facetsForQuerying);
+                CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(), facetsForQuerying.ToFacetDictionary());
 
             foreach (var subCategory in subCategories)
             {
