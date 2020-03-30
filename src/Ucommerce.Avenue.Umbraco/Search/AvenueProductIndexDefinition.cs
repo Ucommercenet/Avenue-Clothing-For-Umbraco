@@ -11,7 +11,7 @@ namespace Ucommerce.Avenue.Umbraco.Search
             this.Field(p => p["CollarSize"], typeof(string));
             this.Field(p => p["ShoeSize"], typeof(string));
             this.Field(p => p["Colour"], typeof(string));
-            this.PricesField(p => p.UnitPrices.ToString());
+            this.PricesField(p => p.UnitPrices);
             this.Facet("Colour");
             this.Facet("CollarSize");
             this.Facet("ShoeSize");
