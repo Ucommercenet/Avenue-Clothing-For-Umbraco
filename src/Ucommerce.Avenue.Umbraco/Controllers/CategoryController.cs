@@ -103,7 +103,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
             var products =
-                CatalogLibrary.GetProductsFor(category.Categories.Append(category.Guid).ToList(), facetsForQuerying.ToFacetDictionary());
+                CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(), facetsForQuerying.ToFacetDictionary());
 
             foreach (var subCategory in subCategories)
             {
