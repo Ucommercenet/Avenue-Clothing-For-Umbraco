@@ -40,7 +40,7 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                 {
                     Name = category.DisplayName,
                     Url = UrlService.GetUrl(CatalogContext.CurrentCatalog,
-                        CatalogContext.CurrentCategories.Union(new[] { category }))
+                        new[] { category })
                 };
                 categoryViewModel.Categories = category.Categories
                     .Where(id => subCategoriesById.ContainsKey(id))

@@ -81,7 +81,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
                     Sku = product.Sku,
                     Name = product.DisplayName,
                     ThumbnailImageUrl = product.PrimaryImageUrl,
-                    Url = _urlService.GetUrl(CatalogContext.CurrentCatalog, CatalogContext.CurrentCategories, product)
+                    Url = _urlService.GetUrl(CatalogContext.CurrentCatalog,
+                        CatalogContext.CurrentCategories.Append(CatalogContext.CurrentCategory).Compact(), product)
                 };
                 if (product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var unitPrice))
                 {
@@ -103,7 +104,8 @@ namespace Ucommerce.Avenue.Umbraco.Controllers
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
             var products =
-                CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(), facetsForQuerying.ToFacetDictionary());
+                CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(),
+                    facetsForQuerying.ToFacetDictionary());
 
             foreach (var subCategory in subCategories)
             {
