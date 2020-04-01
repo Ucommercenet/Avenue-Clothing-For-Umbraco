@@ -5,7 +5,7 @@
 @foreach (var facet in @Model.Facets)
 {
     <div class="well">
-        <legend>@facet.DisplayName</legend>
+        <legend>@(string.IsNullOrEmpty(facet.DisplayName) ? facet.Name : facet.DisplayName)</legend>
         @foreach (var value in facet.FacetValues)
         {
             <label>
