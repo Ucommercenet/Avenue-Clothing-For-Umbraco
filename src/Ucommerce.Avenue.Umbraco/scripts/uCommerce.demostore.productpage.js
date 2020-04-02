@@ -1,7 +1,7 @@
 ﻿var _itemAddedAlert = null;
 
 $(function () {
-	relateVariations($('#product-sku'), $('#variation-collarsize'), $('#variation-colour'), $('#add-to-basket'));
+	relateVariations($('#product-sku'), $('#variation-CollarSize'), $('#variation-Colour'), $('#add-to-basket'));
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
 	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
