@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
-using Ucommerce.Api.PriceCalculation;
+using Ucommerce.Api;
 using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using AvenueClothing.Models;
-using UCommerce.Runtime;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using Money = Ucommerce.Api.PriceCalculation.Money;
@@ -20,30 +18,30 @@ namespace AvenueClothing.Controllers
         // GET: uCommerceEmail
         public override ActionResult Index(ContentModel model)
         {
-
             PurchaseOrder basket = OrderContext.GetBasket(Guid.Parse(Request.QueryString["orderGuid"])).PurchaseOrder;
 
-            var basketModel = new PurchaseOrderViewModel();
-
-            basketModel.BillingAddress = basket.BillingAddress;
-            basketModel.ShipmentAddress = basket.GetShippingAddress(UCommerce.Constants.DefaultShipmentAddressName);
+            var basketModel = new PurchaseOrderViewModel
+            {
+                BillingAddress = basket.BillingAddress,
+                ShipmentAddress = basket.GetShippingAddress(UCommerce.Constants.DefaultShipmentAddressName)
+            };
 
             foreach (var orderLine in basket.OrderLines)
             {
-                var orderLineModel = new OrderlineViewModel();
-                orderLineModel.ProductName = orderLine.ProductName;
-                orderLineModel.Sku = orderLine.Sku;
-                orderLineModel.VariantSku = orderLine.VariantSku;
-                orderLineModel.Total =
-                    new Money(orderLine.Total.GetValueOrDefault(), orderLine.PurchaseOrder.BillingCurrency.ISOCode).ToString();
-                orderLineModel.Tax =
-                    new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString();
-                orderLineModel.Price =
-                    new Money(orderLine.Price, basket.BillingCurrency.ISOCode).ToString();
-                orderLineModel.PriceWithDiscount =
-                    new Money(orderLine.Price - orderLine.Discount, basket.BillingCurrency.ISOCode).ToString();
-                orderLineModel.Quantity = orderLine.Quantity;
-                orderLineModel.Discount = orderLine.Discount;
+                var orderLineModel = new OrderlineViewModel
+                {
+                    ProductName = orderLine.ProductName,
+                    Sku = orderLine.Sku,
+                    VariantSku = orderLine.VariantSku,
+                    Total = new Money(orderLine.Total.GetValueOrDefault(),
+                        orderLine.PurchaseOrder.BillingCurrency.ISOCode).ToString(),
+                    Tax = new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString(),
+                    Price = new Money(orderLine.Price, basket.BillingCurrency.ISOCode).ToString(),
+                    PriceWithDiscount = new Money(orderLine.Price - orderLine.Discount, basket.BillingCurrency.ISOCode)
+                        .ToString(),
+                    Quantity = orderLine.Quantity,
+                    Discount = orderLine.Discount
+                };
 
                 basketModel.OrderLines.Add(orderLineModel);
             }

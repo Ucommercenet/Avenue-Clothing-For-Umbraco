@@ -18,19 +18,17 @@ namespace AvenueClothing.Controllers
         {
             var miniBasket = new MiniBasketViewModel {IsEmpty = true};
 
-            // TODO: Re-enable when IOrderContext has been ported
-            //
-            // if (TransactionLibrary.HasBasket())
-            // {
-            //     PurchaseOrder basket = TransactionLibrary.GetBasket(false);
-            //     var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
-            //     if (numberOfItems != 0)
-            //     {
-            //         miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
-            //         miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
-            //         miniBasket.IsEmpty = false;
-            //     }
-            // }
+            if (TransactionLibrary.HasBasket())
+            {
+                PurchaseOrder basket = TransactionLibrary.GetBasket(false);
+                var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
+                if (numberOfItems != 0)
+                {
+                    miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
+                    miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
+                    miniBasket.IsEmpty = false;
+                }
+            }
 
             return View("/Views/PartialView/MiniBasket.cshtml", miniBasket);
         }

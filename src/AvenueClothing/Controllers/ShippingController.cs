@@ -21,8 +21,7 @@ namespace AvenueClothing.Controllers
         [HttpGet]
         public override ActionResult Index(ContentModel model)
         {
-            var shipping = new ShippingViewModel();
-            shipping.AvailableShippingMethods = new List<SelectListItem>();
+            var shipping = new ShippingViewModel {AvailableShippingMethods = new List<SelectListItem>() };
 
             var shippingInformation = TransactionLibrary.GetShippingInformation();
 
@@ -31,18 +30,18 @@ namespace AvenueClothing.Controllers
             var basket = TransactionLibrary.GetBasket();
 
             shipping.SelectedShippingMethodId = basket.Shipments.FirstOrDefault() != null
-                ? basket.Shipments.FirstOrDefault().ShippingMethod.ShippingMethodId
+                ? basket.Shipments.First().ShippingMethod.ShippingMethodId
                 : -1;
 
             foreach (var availableShippingMethod in availableShippingMethods)
             {
                 var price = availableShippingMethod.GetPriceForCurrency(basket.BillingCurrency);
-                var formattedprice = new Money((price == null ? 0 : price.Price), basket.BillingCurrency.ISOCode);
+                var formattedPrice = new Money((price == null ? 0 : price.Price), basket.BillingCurrency.ISOCode);
 
                 shipping.AvailableShippingMethods.Add(new SelectListItem()
                 {
                     Selected = shipping.SelectedShippingMethodId == availableShippingMethod.ShippingMethodId,
-                    Text = String.Format(" {0} ({1})", availableShippingMethod.Name, formattedprice),
+                    Text = $@" {availableShippingMethod.Name} ({formattedPrice})",
                     Value = availableShippingMethod.ShippingMethodId.ToString()
                 });
             }
@@ -55,7 +54,8 @@ namespace AvenueClothing.Controllers
         [HttpPost]
         public ActionResult Index(ShippingViewModel shipping)
         {
-            TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId, UCommerce.Constants.DefaultShipmentAddressName, overwriteExisting: true);
+            TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId,
+                UCommerce.Constants.DefaultShipmentAddressName, overwriteExisting: true);
             TransactionLibrary.ExecuteBasketPipeline();
 
             var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");

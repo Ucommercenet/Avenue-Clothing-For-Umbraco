@@ -318,7 +318,7 @@ namespace AvenueClothing.Installer.Helpers
 
         private void AddShoeVariantToProduct(Product product, string size)
         {
-            var sku = string.Format("{0}-{1}", product.Sku, size);
+            var sku = string.Format(@"{0}-{1}", product.Sku, size);
             var variant = CreateVariantOnProduct(product, sku, size);
             AddProductProperty(variant, "ShoeSize", string.Format("UK {0}", size));
             variant.Save();

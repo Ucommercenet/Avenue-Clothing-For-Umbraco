@@ -39,7 +39,8 @@ namespace AvenueClothing.Api
 
             var orderLine = TransactionLibrary.GetBasket().OrderLines.First(l => l.OrderLineId == request.OrderLineId);
 
-            var lineTotal = new Money(orderLine.Total.GetValueOrDefault(), CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            var lineTotal = new Money(orderLine.Total.GetValueOrDefault(),
+                CatalogContext.CurrentPriceGroup.CurrencyISOCode);
 
             var updatedLine = new LineItem()
             {

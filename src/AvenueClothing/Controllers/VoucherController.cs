@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Api;
 using UCommerce.Infrastructure;
 using Umbraco.Web.Mvc;
 
@@ -10,6 +9,7 @@ namespace AvenueClothing.Controllers
     public class VoucherController : SurfaceController
     {
         public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
+        public IMarketingLibrary MarketingLibrary => ObjectFactory.Instance.Resolve<IMarketingLibrary>();
 
         // GET: Voucher
         [HttpGet]

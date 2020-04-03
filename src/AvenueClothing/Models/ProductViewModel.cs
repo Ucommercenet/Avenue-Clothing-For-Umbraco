@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using UCommerce.Api;
-using Umbraco.Web;
+﻿using System.Collections.Generic;
 using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
 

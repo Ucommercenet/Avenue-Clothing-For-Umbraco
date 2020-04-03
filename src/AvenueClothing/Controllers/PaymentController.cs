@@ -20,8 +20,7 @@ namespace AvenueClothing.Controllers
         [HttpGet]
         public override ActionResult Index(ContentModel model)
         {
-            var paymentViewModel = new PaymentViewModel();
-            paymentViewModel.AvailablePaymentMethods = new List<SelectListItem>();
+            var paymentViewModel = new PaymentViewModel {AvailablePaymentMethods = new List<SelectListItem>() };
 
             PurchaseOrder basket = TransactionLibrary.GetBasket(false);
 
@@ -42,8 +41,7 @@ namespace AvenueClothing.Controllers
                 var fee = availablePaymentMethod.GetFeeForCurrency(basket.BillingCurrency);
                 var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency.ISOCode);
 
-                option.Text = String.Format(" {0} ({1} + {2}%)", availablePaymentMethod.Name, formattedFee,
-                    feePercent.ToString("0.00"));
+                option.Text = $@" {availablePaymentMethod.Name} ({formattedFee} + {feePercent:0.00}%)";
                 option.Value = availablePaymentMethod.PaymentMethodId.ToString();
                 option.Selected = availablePaymentMethod.PaymentMethodId == paymentViewModel.SelectedPaymentMethodId;
 
