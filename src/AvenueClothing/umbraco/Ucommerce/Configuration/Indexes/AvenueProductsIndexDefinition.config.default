@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+    <components>
+        <component id="AvenueProductsIndexDefinition"
+                   service="UCommerce.Search.IIndexDefinition`1[[UCommerce.Search.Models.Product, UCommerce.Search]], UCommerce.Search"
+                   type="AvenueClothing.Search.AvenueProductIndexDefinition, AvenueClothing">
+        </component>
+    </components>
+</configuration>
