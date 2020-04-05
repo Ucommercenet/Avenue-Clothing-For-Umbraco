@@ -2,8 +2,8 @@
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Umbraco.Web.Mvc;
 

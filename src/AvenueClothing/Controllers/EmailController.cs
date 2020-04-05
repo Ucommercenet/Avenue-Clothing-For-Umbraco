@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -15,7 +15,7 @@ namespace AvenueClothing.Controllers
     {
         public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
         
-        // GET: uCommerceEmail
+        // GET: UcommerceEmail
         public override ActionResult Index(ContentModel model)
         {
             PurchaseOrder basket = OrderContext.GetBasket(Guid.Parse(Request.QueryString["orderGuid"])).PurchaseOrder;
@@ -23,7 +23,7 @@ namespace AvenueClothing.Controllers
             var basketModel = new PurchaseOrderViewModel
             {
                 BillingAddress = basket.BillingAddress,
-                ShipmentAddress = basket.GetShippingAddress(UCommerce.Constants.DefaultShipmentAddressName)
+                ShipmentAddress = basket.GetShippingAddress(Ucommerce.Constants.DefaultShipmentAddressName)
             };
 
             foreach (var orderLine in basket.OrderLines)
@@ -83,7 +83,7 @@ namespace AvenueClothing.Controllers
                 ViewBag.RowSpan++;
             }
 
-            return View("/Views/uCommerceEmail.cshtml", basketModel);
+            return View("/Views/UcommerceEmail.cshtml", basketModel);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Infrastructure;
+using Ucommerce.Infrastructure;
 using Umbraco.Web.Mvc;
 
 namespace AvenueClothing.Controllers

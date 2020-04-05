@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
+using Ucommerce;
 using Ucommerce.Api;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
@@ -84,7 +84,7 @@ namespace AvenueClothing.Controllers
         private void EditShippingInformation(AddressViewModel shippingAddress)
         {
             TransactionLibrary.EditShipmentInformation(
-                UCommerce.Constants.DefaultShipmentAddressName,
+                Ucommerce.Constants.DefaultShipmentAddressName,
                 shippingAddress.FirstName,
                 shippingAddress.LastName,
                 shippingAddress.EmailAddress,

@@ -7,8 +7,8 @@
     <ProjectGuid>{8863DAEB-0EAA-4D9A-ABCA-43C36BFE3E61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UCommerce.RazorStore.Installer.Tests</RootNamespace>
-    <AssemblyName>UCommerce.RazorStore.Installer.Tests</AssemblyName>
+    <RootNamespace>Ucommerce.RazorStore.Installer.Tests</RootNamespace>
+    <AssemblyName>Ucommerce.RazorStore.Installer.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="interfaces">
-      <HintPath>..\UCommerce.RazorStore.Installer\bin\interfaces.dll</HintPath>
+      <HintPath>..\Ucommerce.RazorStore.Installer\bin\interfaces.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
@@ -52,9 +52,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UCommerce.RazorStore.Installer\UCommerce.RazorStore.Installer.csproj">
+    <ProjectReference Include="..\Ucommerce.RazorStore.Installer\Ucommerce.RazorStore.Installer.csproj">
       <Project>{5DC07961-B0F6-4F6F-9A3A-81CD7BB3B707}</Project>
-      <Name>UCommerce.RazorStore.Installer</Name>
+      <Name>Ucommerce.RazorStore.Installer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

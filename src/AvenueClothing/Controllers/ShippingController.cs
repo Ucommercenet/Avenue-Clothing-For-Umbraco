@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
+using Ucommerce;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using UCommerce.Infrastructure;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
@@ -55,7 +55,7 @@ namespace AvenueClothing.Controllers
         public ActionResult Index(ShippingViewModel shipping)
         {
             TransactionLibrary.CreateShipment(shipping.SelectedShippingMethodId,
-                UCommerce.Constants.DefaultShipmentAddressName, overwriteExisting: true);
+                Ucommerce.Constants.DefaultShipmentAddressName, overwriteExisting: true);
             TransactionLibrary.ExecuteBasketPipeline();
 
             var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");

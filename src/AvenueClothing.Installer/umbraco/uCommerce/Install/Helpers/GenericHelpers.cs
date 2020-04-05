@@ -1,6 +1,6 @@
 ﻿using System;
-using UCommerce.Infrastructure;
-using UCommerce.Infrastructure.Globalization;
+using Ucommerce.Infrastructure;
+using Ucommerce.Infrastructure.Globalization;
 
 namespace AvenueClothing.Installer.Helpers
 {

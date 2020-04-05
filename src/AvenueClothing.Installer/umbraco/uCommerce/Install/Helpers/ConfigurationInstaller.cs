@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UCommerce.EntitiesV2;
-using UCommerce.EntitiesV2.Factories;
-using UCommerce.Infrastructure;
-using UCommerce.Security;
+using Ucommerce.EntitiesV2;
+using Ucommerce.EntitiesV2.Factories;
+using Ucommerce.Infrastructure;
+using Ucommerce.Security;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Services;
-using IUserService = UCommerce.Security.IUserService;
+using IUserService = Ucommerce.Security.IUserService;
 
 namespace AvenueClothing.Installer.Helpers
 {

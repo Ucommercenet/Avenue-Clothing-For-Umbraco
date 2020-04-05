@@ -372,18 +372,18 @@
     <Content Include="css\Site.css" />
     <Content Include="css\tether.css" />
     <Content Include="css\tether.min.css" />
-    <Content Include="css\uCommerce.bootstrap-responsive.css" />
-    <Content Include="css\uCommerce.demostore.css" />
+    <Content Include="css\Ucommerce.bootstrap-responsive.css" />
+    <Content Include="css\Ucommerce.demostore.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\loader.gif" />
     <Content Include="img\loading-spin.svg" />
-    <Content Include="img\uCommerce\cards.png" />
-    <Content Include="img\uCommerce\homepage-banner-black-wonderland.jpg" />
-    <Content Include="img\uCommerce\homepage-banner-blue-kittens.jpg" />
-    <Content Include="img\uCommerce\homepage-banner-purple-wonderland.jpg" />
-    <Content Include="img\uCommerce\logo.png" />
-    <Content Include="img\uCommerce\return.png" />
-    <Content Include="img\uCommerce\ucommerce.png" />
+    <Content Include="img\Ucommerce\cards.png" />
+    <Content Include="img\Ucommerce\homepage-banner-black-wonderland.jpg" />
+    <Content Include="img\Ucommerce\homepage-banner-blue-kittens.jpg" />
+    <Content Include="img\Ucommerce\homepage-banner-purple-wonderland.jpg" />
+    <Content Include="img\Ucommerce\logo.png" />
+    <Content Include="img\Ucommerce\return.png" />
+    <Content Include="img\Ucommerce\Ucommerce.png" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -484,35 +484,35 @@
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\tether.js" />
     <Content Include="scripts\tether.min.js" />
-    <Content Include="scripts\uCommerce.bootstrap.js" />
-    <Content Include="scripts\uCommerce.category.js" />
-    <Content Include="scripts\uCommerce.demostore.checkout.js" />
-    <Content Include="scripts\uCommerce.demostore.cart.js" />
-    <Content Include="scripts\uCommerce.demostore.js" />
-    <Content Include="scripts\uCommerce.facets.js" />
-    <Content Include="scripts\uCommerce.jQuery.js" />
-    <Content Include="scripts\uCommerce.demostore.productpage.js" />
+    <Content Include="scripts\Ucommerce.bootstrap.js" />
+    <Content Include="scripts\Ucommerce.category.js" />
+    <Content Include="scripts\Ucommerce.demostore.checkout.js" />
+    <Content Include="scripts\Ucommerce.demostore.cart.js" />
+    <Content Include="scripts\Ucommerce.demostore.js" />
+    <Content Include="scripts\Ucommerce.facets.js" />
+    <Content Include="scripts\Ucommerce.jQuery.js" />
+    <Content Include="scripts\Ucommerce.demostore.productpage.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\uCommerce.bootstrap.css" />
-    <Content Include="img\uCommerce\ucommerce.glyphicons-halflings-white.png" />
-    <Content Include="img\uCommerce\ucommerce.glyphicons-halflings.png" />
+    <Content Include="css\Ucommerce.bootstrap.css" />
+    <Content Include="img\Ucommerce\Ucommerce.glyphicons-halflings-white.png" />
+    <Content Include="img\Ucommerce\Ucommerce.glyphicons-halflings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\uCommerce.ServiceStack.js" />
-    <Content Include="umbraco\images\umbraco\ucommerce-address.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-cart.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-catalog.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-checkout.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-confirmation.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-email.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-frontpage.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-page.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-payment.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-preview.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-product.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-search.png" />
-    <Content Include="umbraco\images\umbraco\ucommerce-shipping.png" />
+    <Content Include="scripts\Ucommerce.ServiceStack.js" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-address.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-cart.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-catalog.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-checkout.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-confirmation.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-email.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-frontpage.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-page.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-payment.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-preview.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-product.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-search.png" />
+    <Content Include="umbraco\images\umbraco\Ucommerce-shipping.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />
@@ -526,9 +526,9 @@
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
     <Content Include="Views\PartialView\MiniBasket.cshtml" />
     <Content Include="Views\PartialView\Facets.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce CategoryNavigation.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce Facets.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce Mini Basket.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce CategoryNavigation.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Facets.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Mini Basket.cshtml" />
     <Content Include="Views\web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -540,15 +540,15 @@
     <Content Include="Views\Shipping.cshtml" />
     <Content Include="Views\Payment.cshtml" />
     <Content Include="Views\Confirmation.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce Breadcrumbs.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce Voucher.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Breadcrumbs.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Voucher.cshtml" />
     <Content Include="Views\Search.cshtml" />
     <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerce Homepage Catalog.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Homepage Catalog.cshtml" />
     <Content Include="Views\Product.cshtml" />
     <Content Include="Views\PartialView\ProductReview.cshtml" />
-    <Content Include="Views\MacroPartials\uCommerceProductReviews.cshtml" />
-    <Content Include="Views\uCommerceEmail.cshtml" />
+    <Content Include="Views\MacroPartials\UcommerceProductReviews.cshtml" />
+    <Content Include="Views\UcommerceEmail.cshtml" />
     <Content Include="Views\Preview.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -563,25 +563,25 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ucommerce\src\Ucommerce.Api\Ucommerce.Api.csproj">
+    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Api\Ucommerce.Api.csproj">
       <Project>{519a70d0-e96f-48b5-b108-0610112ebacf}</Project>
       <Name>Ucommerce.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ucommerce\src\UCommerce.Infrastructure\UCommerce.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Infrastructure\Ucommerce.Infrastructure.csproj">
       <Project>{890c80a7-f1dd-45e3-a784-34d8b7d0d8f0}</Project>
-      <Name>UCommerce.Infrastructure</Name>
+      <Name>Ucommerce.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ucommerce\src\UCommerce.Model\UCommerce.csproj">
+    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Model\Ucommerce.csproj">
       <Project>{40063813-4f14-4aaa-9098-b501d3fe5aa1}</Project>
-      <Name>UCommerce</Name>
+      <Name>Ucommerce</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ucommerce\src\Ucommerce.Search\UCommerce.Search.csproj">
+    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Search\Ucommerce.Search.csproj">
       <Project>{7b9f69e8-527d-4a92-921f-2ee3cd2af492}</Project>
-      <Name>UCommerce.Search</Name>
+      <Name>Ucommerce.Search</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ucommerce\src\UCommerce.SystemHttp\UCommerce.SystemHttp.csproj">
+    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.SystemHttp\Ucommerce.SystemHttp.csproj">
       <Project>{6c13a96e-cf6c-4ee6-bebf-c5914cd64d28}</Project>
-      <Name>UCommerce.SystemHttp</Name>
+      <Name>Ucommerce.SystemHttp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

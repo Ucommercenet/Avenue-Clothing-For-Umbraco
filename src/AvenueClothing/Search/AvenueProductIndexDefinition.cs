@@ -1,5 +1,5 @@
-﻿using UCommerce.Search.Definitions;
-using UCommerce.Search.Extensions;
+﻿using Ucommerce.Search.Definitions;
+using Ucommerce.Search.Extensions;
 
 namespace AvenueClothing.Search
 {

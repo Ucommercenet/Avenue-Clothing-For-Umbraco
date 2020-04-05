@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UCommerce.RazorStore.umbraco.OrderFlow {
+namespace Ucommerce.RazorStore.umbraco.OrderFlow {
     
     
     public partial class InvoicePage {

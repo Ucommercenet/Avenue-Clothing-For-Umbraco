@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UCommerce.EntitiesV2;
+using Ucommerce.EntitiesV2;
 using Umbraco.Web;
 using Umbraco.Web.Composing;
 using Umbraco.Web.Models;

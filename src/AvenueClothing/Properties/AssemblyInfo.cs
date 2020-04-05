@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AvenueClothing")]
-[assembly: AssemblyDescription("Assembly containing the functionality for the uCommerce Demo Razor Store")]
+[assembly: AssemblyDescription("Assembly containing the functionality for the Ucommerce Demo Razor Store")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("uCommerce")]
+[assembly: AssemblyCompany("Ucommerce")]
 [assembly: AssemblyProduct("AvenueClothing")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using UCommerce;
+using Ucommerce;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
