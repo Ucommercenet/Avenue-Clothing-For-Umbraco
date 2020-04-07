@@ -69,8 +69,11 @@ namespace AvenueClothing.Installer.Helpers
 
         private ProductCatalog CreateProductCatalog(ProductCatalogGroup catalogGroup)
         {
+            var definitionType = DefinitionType.FirstOrDefault(x => x.Name== "Product Catalogs");
+            var catalogDefinition = Definition.FirstOrDefault(x => x.DefinitionType == definitionType);
+
             var catalog = catalogGroup.ProductCatalogs.SingleOrDefault(c => c.Name == _catalogName) ??
-                          new ProductCatalogFactory().NewWithDefaults(catalogGroup, _catalogName);
+                          new ProductCatalogFactory().NewWithDefaults(catalogGroup, _catalogName, catalogDefinition.Guid);
 
             catalog.DisplayOnWebSite = true;
             catalog.Deleted = false;
