@@ -29,7 +29,7 @@ namespace AvenueClothing.Installer.PackageActions
         {
             var directory = Path.GetDirectoryName(path);
             var filename = Path.GetFileName(path);
-            var newPath = string.Format("{0}.{1}.backup", Path.Combine(directory, filename), DateTime.Now.Ticks);
+            var newPath = string.Format(@"{0}.{1}.backup", Path.Combine(directory, filename), DateTime.Now.Ticks);
             //Log.Add(LogTypes.Debug, -1, string.Format("MergeConfigFiles Backup Existing Config: {0} to: {1}", path, newPath));
             loadTargetConfigAsXml(path).Save(newPath);
         }

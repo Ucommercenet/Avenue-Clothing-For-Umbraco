@@ -7,9 +7,9 @@ namespace AvenueClothing.Models
 {
 	public class AddToBasketViewModel
 	{
-		public string Sku { get; set; }
+		public Guid Product { get; set; }
 
-		public string VariantSku { get; set; }
+		public Guid? Variant { get; set; }
 
 	}
 }

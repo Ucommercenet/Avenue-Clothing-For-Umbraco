@@ -65,7 +65,7 @@ namespace AvenueClothing.Api
             if (product.ProductFamily && request.VariantProperties.Any()
             ) // If there are variant values we'll need to find the selected variant
             {
-                var query = ProductsIndex.Find().Where(p => p.Sku == request.ProductSku);
+                var query = ProductsIndex.Find().Where(p => p.Sku == request.ProductSku && !p.ProductFamily);
                 request.VariantProperties.ForEach(property =>
                 {
                     query = query.Where(p => p[property.Key] == property.Value);
@@ -77,6 +77,11 @@ namespace AvenueClothing.Api
                 variant = product;
             }
 
+            if (variant == null)
+            {
+                return NotFound();
+            }
+            
             var variantModel = new ProductVariation
             {
                 Sku = variant.Sku,

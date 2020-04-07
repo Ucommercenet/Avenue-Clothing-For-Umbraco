@@ -28,16 +28,14 @@ namespace AvenueClothing.Controllers
         [HttpPost]
         public ActionResult Index(AddToBasketViewModel model)
         {
-            string variant = GetVariantFromPostData(model.Sku, "variation-");
-            // TODO:
-            // TransactionLibrary.AddToBasket(1, model.Sku, variant);
+            TransactionLibrary.AddToBasket(1, model.Product, model.Variant);
             return RenderView(true);
         }
 
         protected virtual ActionResult RenderView(bool addedToBasket = false)
         {
             Product currentProduct = CatalogContext.CurrentProduct;
-            
+
             // Price calculations
             currentProduct.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
             string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
@@ -69,14 +67,13 @@ namespace AvenueClothing.Controllers
                 productViewModel.Variants = MapVariants(variants);
             }
 
-            // TODO:
-            // bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
+            bool isInBasket = TransactionLibrary.GetBasket(true).OrderLines.Any(x => x.Sku == currentProduct.Sku);
 
             var productPageViewModel = new ProductPageViewModel
             {
                 ProductViewModel = productViewModel,
                 AddedToBasket = addedToBasket,
-                ItemAlreadyExists = false //isInBasket
+                ItemAlreadyExists = isInBasket
             };
 
             return View("/Views/Product.cshtml", productPageViewModel);
@@ -126,38 +123,6 @@ namespace AvenueClothing.Controllers
             }
 
             return productProperties;
-        }
-
-        private string GetVariantFromPostData(string sku, string prefix)
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var keys = request.Form.AllKeys.Where(
-                k => k.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
-            var properties = keys.Select(k => new { Key = k.Replace(prefix, string.Empty), Value = Request.Form[k] })
-                .ToList();
-
-            Product product = SiteContext.Current.CatalogContext.CurrentProduct;
-            string variantSku = null;
-
-            // TODO:
-            // // If there are variant values we'll need to find the selected variant
-            // if (!product.IsVariant && properties.Any())
-            // {
-            //     var variant = product.Variants.FirstOrDefault(v => v.ProductProperties
-            //           .Where(pp => pp.ProductDefinitionField.DisplayOnSite
-            //               && pp.ProductDefinitionField.IsVariantProperty
-            //               && !pp.ProductDefinitionField.Deleted)
-            //           .All(p => properties.Any(kv => kv.Key.Equals(p.ProductDefinitionField.Name, StringComparison.InvariantCultureIgnoreCase) && kv.Value.Equals(p.Value, StringComparison.InvariantCultureIgnoreCase))));
-            //     variantSku = variant.VariantSku;
-            // }
-            //
-            // // Only use the current product where there are no variants
-            // else if (!product.Variants.Any())
-            // {
-            //     variantSku = product.Sku;
-            // }
-
-            return variantSku;
         }
     }
 }

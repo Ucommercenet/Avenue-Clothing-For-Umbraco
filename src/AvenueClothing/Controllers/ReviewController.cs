@@ -8,8 +8,6 @@ using UCommerce.EntitiesV2;
 using UCommerce.Infrastructure;
 using UCommerce.Pipelines;
 using AvenueClothing.Models;
-using UCommerce.Runtime;
-using UCommerce.Search;
 using UCommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
