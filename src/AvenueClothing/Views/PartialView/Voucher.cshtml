@@ -1,0 +1,14 @@
+﻿@using Umbraco.Web
+@{
+    Layout = null;
+}
+@using (Html.BeginUmbracoForm("Index", "Voucher"))
+{
+    <div class="input-group">
+        <input type="text" name="voucher" class="form-control" placeholder="Enter code here" />
+        <span class="input-group-btn">
+            <button name="add-voucher" class="btn btn-secondary btn-nopadding" type="submit"><i class="icon-plus icon-white"></i>Add Voucher</button>
+    </span>
+    </div>
+  
+}
