@@ -34,8 +34,11 @@ namespace AvenueClothing.Installer.Helpers
 
         private ProductCatalogGroup CreateCatalogGroup()
         {
+            var groupDefinitionType = DefinitionType.SingleOrDefault(x => x.Name == "Product Catalog Groups");
+            var groupDefinition = Definition.SingleOrDefault(x => x.DefinitionType == groupDefinitionType);
             var group = ProductCatalogGroup.SingleOrDefault(c => c.Name == _catalogGroupName) ??
-                        new ProductCatalogGroupFactory().NewWithDefaults(_catalogGroupName);
+                        new ProductCatalogGroupFactory().NewWithDefaults(_catalogGroupName, groupDefinition.Guid);
+
             group.ProductReviewsRequireApproval = true;
             group.Deleted = false;
             group.CreateCustomersAsMembers = false;
@@ -69,9 +72,8 @@ namespace AvenueClothing.Installer.Helpers
 
         private ProductCatalog CreateProductCatalog(ProductCatalogGroup catalogGroup)
         {
-            var definitionType = DefinitionType.FirstOrDefault(x => x.Name== "Product Catalogs");
-            var catalogDefinition = Definition.FirstOrDefault(x => x.DefinitionType == definitionType);
-
+            var catalogDefinitionType = DefinitionType.SingleOrDefault(x => x.Name == "Product Catalogs");
+            var catalogDefinition = Definition.SingleOrDefault(x => x.DefinitionType == catalogDefinitionType);
             var catalog = catalogGroup.ProductCatalogs.SingleOrDefault(c => c.Name == _catalogName) ??
                           new ProductCatalogFactory().NewWithDefaults(catalogGroup, _catalogName, catalogDefinition.Guid);
 
