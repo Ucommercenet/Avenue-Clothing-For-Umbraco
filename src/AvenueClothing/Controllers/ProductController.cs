@@ -47,7 +47,7 @@ namespace AvenueClothing.Controllers
                 Name = currentProduct.DisplayName,
                 LongDescription = currentProduct.LongDescription,
                 IsOrderingAllowed = currentProduct.AllowOrdering,
-                IsProductFamily = currentProduct.ProductFamily,
+                IsProductFamily = currentProduct.ProductType == ProductType.ProductFamily,
                 IsVariant = false,
                 Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
                 Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : ""
@@ -62,7 +62,7 @@ namespace AvenueClothing.Controllers
 
             productViewModel.Properties = MapProductProperties(variants);
 
-            if (currentProduct.ProductFamily)
+            if (currentProduct.ProductType == ProductType.ProductFamily)
             {
                 productViewModel.Variants = MapVariants(variants);
             }

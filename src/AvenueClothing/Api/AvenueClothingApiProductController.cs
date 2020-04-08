@@ -9,6 +9,7 @@ using UCommerce.Catalog.Models;
 using UCommerce.Extensions;
 using UCommerce.Infrastructure;
 using UCommerce.Search;
+using UCommerce.Search.Models;
 using UCommerce.Search.Slugs;
 using Category = UCommerce.Search.Models.Category;
 using Product = UCommerce.Search.Models.Product;
@@ -31,7 +32,7 @@ namespace AvenueClothing.Api
             var product =
                 CatalogLibrary.GetProduct(request.ProductSku);
 
-            if (!product.ProductFamily)
+            if (product.ProductType != ProductType.ProductFamily)
                 return NotFound();
 
             var variations = CatalogLibrary.GetVariants(product).Select(variant =>
@@ -62,10 +63,10 @@ namespace AvenueClothing.Api
             var product = CatalogLibrary.GetProduct(request.ProductSku);
             Product variant = null;
 
-            if (product.ProductFamily && request.VariantProperties.Any()
+            if (product.ProductType == ProductType.ProductFamily && request.VariantProperties.Any()
             ) // If there are variant values we'll need to find the selected variant
             {
-                var query = ProductsIndex.Find().Where(p => p.Sku == request.ProductSku && !p.ProductFamily);
+                var query = ProductsIndex.Find().Where(p => p.Sku == request.ProductSku && p.ProductType == ProductType.Variant);
                 request.VariantProperties.ForEach(property =>
                 {
                     query = query.Where(p => p[property.Key] == property.Value);
