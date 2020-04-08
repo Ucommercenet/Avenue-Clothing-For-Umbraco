@@ -48,26 +48,6 @@ namespace AvenueClothing.Controllers
             }
         }
 
-        protected virtual ActionResult RenderView()
-        {
-            Category currentCategory = CatalogContext.CurrentCategory;
-            var categoryViewModel = new CategoryViewModel
-            {
-                Name = currentCategory.DisplayName,
-                Description = currentCategory.Description,
-                CatalogId = currentCategory.ProductCatalog,
-                CategoryId = currentCategory.Guid,
-                Products = MapProductsInCategories(currentCategory)
-            };
-
-            if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
-            {
-                categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
-            }
-
-            return View("/Views/Catalog.cshtml", categoryViewModel);
-        }
-
         private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
             IList<ProductViewModel> productViews = new List<ProductViewModel>();
