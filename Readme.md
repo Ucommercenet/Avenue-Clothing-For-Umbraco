@@ -1,7 +1,7 @@
 # Welcome to the Avenue Clothing Demo Store for Ucommerce
 
 ## Compatibility ##
-Ucommerce 8.3.1 and higher, Umbraco 8 and higher.
+Ucommerce 9.0.0 and higher, Umbraco 8 and higher.
 
 ## Folder Overview ##
 
@@ -10,19 +10,19 @@ Below is a quick overview of the important folders
 * lib - the folder which includes the various references we use
 * package - the location of the build package
 * src - where the magic is
-	* uCommerce.RazorStore - All the files for the Razor Store (this is where you will need to spend most of your time)
-	* UCommerce.RazorStore.Installer - All the logic we use to build the package and store programattically. The place to look if you're interested in learning more about using the uCommerce API
+	* AvenueClothing - All the files for the Avenue Clothing (this is where you will need to spend most of your time)
+	* AvenueClothing.Installer - All the logic we use to build the package and store programattically. The place to look if you're interested in learning more about using the Ucommerce API
 * tools - the various build scripts and tools we need to make the package
 
 ## How Do I Build The Package and install? ##
 
-If you want to customise the store in anyway it's really easy. If you're using Visual Studio you just need to build and **everything** will be built for you **automatically**!
+If you want to customise the store in any way, it's really easy. If you are using Visual Studio, you just need to build and **everything** will be built for you **automatically**!
 
 To use the *DemoStoreDeploy.cmd* script, just open a command prompt, go to directory to the {project root}\tools\deploy folder, and run the *DemoStoreDeploy.cmd*
 
 Example: 
 
-	cd: D:\uCommerce Razor Store\tools\deploy
+	cd: D:\Avenue-Clothing-For-Umbraco\tools\deploy
 	DemoStoreDeploy.cmd
 
 After the script runs, you will recieve a message saying: 
@@ -51,7 +51,7 @@ We've based the store's code on the [Twitter Bootstrap](http://twitter.github.co
 
 **THE INSTALLER**
 
-The installer contains a load of examples on how to use the uCommerce API to create:
+The installer contains a load of examples on how to use the Ucommerce API to create:
 
 * Product Catalogs and Groups
 * Price Groups
@@ -70,8 +70,8 @@ That's largely up to you. This project has been made completely Open Source unde
 
 Don't forget to let us know what you're up to.
 
-- [uCommerce website](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco") ([www.ucommerce.dk](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco"))
-- [uCommerce on twitter](https://twitter.com/ucommerce) ([@ucommerce](https://twitter.com/ucommerce"))
+- [Ucommerce website](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco") ([www.ucommerce.dk](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco"))
+- [Ucommerce on twitter](https://twitter.com/ucommerce) ([@ucommerce](https://twitter.com/ucommerce"))
 - [The Site Doctor on twitter](https://twitter.com/thesitedoc) ([@thesitedoc](https://twitter.com/thesitedoc"))
 - [S�ren on twitter](https://twitter.com/publicvoid_dk) ([@publicvoid_dk](https://twitter.com/publicvoid_dk"))
 - [Tim on twitter](https://twitter.com/timgaunt) ([@timgaunt](https://twitter.com/timgaunt"))
@@ -79,4 +79,4 @@ Don't forget to let us know what you're up to.
 
 
 Produced with love for you by [The Site Doctor](http://www.thesitedoctor.co.uk/ "The most feature rich e-commerce package for Umbraco") for 
-[uCommerce](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco")
+[Ucommerce](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco")
