@@ -517,7 +517,7 @@
   <ItemGroup>
     <None Include=".bin\node.cmd" />
     <Content Include="css\sass.scss" />
-    <Content Include="umbraco\Ucommerce\Apps\UCommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
+    <Content Include="umbraco\Ucommerce\Apps\Ucommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>

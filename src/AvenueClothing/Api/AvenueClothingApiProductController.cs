@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Ucommerce.Api;
-using Ucommerce.Api.PriceCalculation;
 using AvenueClothing.Api.Model;
-using Ucommerce.Catalog.Models;
 using Ucommerce.Extensions;
 using Ucommerce.Infrastructure;
 using Ucommerce.Search;
+using Ucommerce.Search.Models;
 using Ucommerce.Search.Slugs;
-using Category = Ucommerce.Search.Models.Category;
 using Product = Ucommerce.Search.Models.Product;
-using ProductCatalog = Ucommerce.Search.Models.ProductCatalog;
 using ProductProperty = AvenueClothing.Api.Model.ProductProperty;
 
 namespace AvenueClothing.Api
