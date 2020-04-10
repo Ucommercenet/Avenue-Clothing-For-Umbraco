@@ -13,12 +13,12 @@ namespace AvenueClothing.Controllers
 {
     public class EmailController : RenderMvcController
     {
-        public IOrderContext OrderContext => ObjectFactory.Instance.Resolve<IOrderContext>();
+        public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
         
         // GET: uCommerceEmail
         public override ActionResult Index(ContentModel model)
         {
-            PurchaseOrder basket = OrderContext.GetBasket(Guid.Parse(Request.QueryString["orderGuid"])).PurchaseOrder;
+            PurchaseOrder basket = TransactionLibrary.GetPurchaseOrder(Guid.Parse(Request.QueryString["orderGuid"]));
 
             var basketModel = new PurchaseOrderViewModel
             {
