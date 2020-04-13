@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Catalog.Status;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
-using UCommerce.Pipelines;
+using Ucommerce.Catalog.Status;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
+using Ucommerce.Pipelines;
 using AvenueClothing.Models;
-using UCommerce.Search.Slugs;
+using Ucommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 

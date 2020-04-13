@@ -5,11 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Infrastructure;
-using UCommerce.Search.Extensions;
+using Ucommerce.Infrastructure;
+using Ucommerce.Search.Extensions;
 using AvenueClothing.Models;
-using UCommerce.Search.Facets;
-using UCommerce.Search.Models;
+using Ucommerce.Search.Facets;
+using Ucommerce.Search.Models;
 using Umbraco.Core;
 using Umbraco.Web.Mvc;
 

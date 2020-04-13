@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using UCommerce.EntitiesV2;
-using UCommerce.EntitiesV2.Factories;
-using UCommerce.Infrastructure;
-using UCommerce.Search.Indexers;
-using UCommerce.Security;
+using Ucommerce.EntitiesV2;
+using Ucommerce.EntitiesV2.Factories;
+using Ucommerce.Infrastructure;
+using Ucommerce.Search.Indexers;
+using Ucommerce.Security;
 
 namespace AvenueClothing.Installer.Helpers
 {
@@ -420,7 +420,7 @@ namespace AvenueClothing.Installer.Helpers
 
             CreateProductPricesForProduct(category, price, product);
 
-            // uCommerce checks whether the product already exists in the create
+            // Ucommerce checks whether the product already exists in the create
             // when creating the new relation.
             product.AddCategory(category, 0);
 

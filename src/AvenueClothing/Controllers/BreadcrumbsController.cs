@@ -2,17 +2,17 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Extensions;
-using UCommerce.Infrastructure;
+using Ucommerce.Extensions;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
-using UCommerce.Search;
-using UCommerce.Search.Models;
-using UCommerce.Search.Slugs;
+using Ucommerce.Search;
+using Ucommerce.Search.Models;
+using Ucommerce.Search.Slugs;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
-using Product = UCommerce.Search.Models.Product;
+using Product = Ucommerce.Search.Models.Product;
 
 namespace AvenueClothing.Controllers
 {

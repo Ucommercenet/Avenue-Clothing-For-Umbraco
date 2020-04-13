@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Installer.Helpers;
-using UCommerce.Search.Indexers;
+using Ucommerce.Search.Indexers;
 using Umbraco.Core.Services;
 using Umbraco.Web.Composing;
 
@@ -28,7 +28,7 @@ namespace AvenueClothing.Installer.PackageActions
 
             CreateMediaContent();
 
-            DeleteOldUCommerceData();
+            DeleteOldUcommerceData();
 
             PublishContent();
 
@@ -41,7 +41,7 @@ namespace AvenueClothing.Installer.PackageActions
         {
             var server = HttpContext.Current.Server;
             var mediaService = new MediaService(server.MapPath(Umbraco.Core.IO.SystemDirectories.Media),
-                server.MapPath("~/umbraco/ucommerce/install/files/"));
+                server.MapPath("~/umbraco/Ucommerce/install/files/"));
 
             var categories = Category.All().ToList();
             var products = Product.All().ToList();
@@ -61,9 +61,9 @@ namespace AvenueClothing.Installer.PackageActions
             }
         }
 
-        private void DeleteOldUCommerceData()
+        private void DeleteOldUcommerceData()
         {
-            var group = ObjectFactory.Instance.Resolve<IRepository<ProductCatalogGroup>>().SingleOrDefault(g => g.Name == "uCommerce.dk");
+            var group = ObjectFactory.Instance.Resolve<IRepository<ProductCatalogGroup>>().SingleOrDefault(g => g.Name == "Ucommerce.dk");
             if (group != null)
             {
                 // Delete products in group

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using UCommerce.Presentation.Views.Orders;
-using UCommerce.Presentation.Web.Controls;
-using UCommerce.Presentation.Web.Pages;
+using Ucommerce.Presentation.Views.Orders;
+using Ucommerce.Presentation.Web.Controls;
+using Ucommerce.Presentation.Web.Pages;
 
-namespace UCommerce.RazorStore.umbraco.OrderFlow
+namespace Ucommerce.RazorStore.umbraco.OrderFlow
 {
 	public partial class InvoicePage : ViewEnabledControl<IEditOrderView>, ISection
 	{
