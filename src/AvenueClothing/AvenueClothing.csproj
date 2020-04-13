@@ -293,6 +293,54 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Ucommerce, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Admin, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Admin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Api, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Infrastructure, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Installer, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Installer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.NHibernate, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Pipelines, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Pipelines.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Presentation, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.Search, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.Search.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.SqlMultiReaderConnector, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.SqlMultiReaderConnector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.SystemHttp, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.SystemHttp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ucommerce.SystemWeb, Version=9.0.0.20104, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.0.0.20104\lib\net45\Ucommerce.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.4.0\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
@@ -561,28 +609,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Api\Ucommerce.Api.csproj">
-      <Project>{519a70d0-e96f-48b5-b108-0610112ebacf}</Project>
-      <Name>Ucommerce.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Infrastructure\Ucommerce.Infrastructure.csproj">
-      <Project>{890c80a7-f1dd-45e3-a784-34d8b7d0d8f0}</Project>
-      <Name>Ucommerce.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Model\Ucommerce.csproj">
-      <Project>{40063813-4f14-4aaa-9098-b501d3fe5aa1}</Project>
-      <Name>Ucommerce</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.Search\Ucommerce.Search.csproj">
-      <Project>{7b9f69e8-527d-4a92-921f-2ee3cd2af492}</Project>
-      <Name>Ucommerce.Search</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Ucommerce\src\Ucommerce.SystemHttp\Ucommerce.SystemHttp.csproj">
-      <Project>{6c13a96e-cf6c-4ee6-bebf-c5914cd64d28}</Project>
-      <Name>Ucommerce.SystemHttp</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
