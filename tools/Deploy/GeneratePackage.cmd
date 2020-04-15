@@ -17,8 +17,8 @@ REM deploy
 REM Deploy.cmd %1 %2
 call Deploy.cmd "%1" "%workingDir%"
 
-REM Overwrite the debug UCommerce.Umbraco.dll assembly copied in by Deploy process
-robocopy "%1\..\UCommerce.Umbraco\obj\release" "%workingPath%\bin" *.dll
+REM Overwrite the debug Ucommerce.Umbraco.dll assembly copied in by Deploy process
+robocopy "%1\..\Ucommerce.Umbraco\obj\release" "%workingPath%\bin" *.dll
 
 REM Pauses the script for a while
 REM PING 1.1.1.1 -n 1 -w 60000 >NUL
@@ -35,7 +35,7 @@ REM call CleanPackage.cmd %2 -q
 call CleanPackage.cmd "%workingDir%" -q
 
 REM Rename uninstall assembly
-move %workingDir%\bin\UCommerce.Uninstaller.dll %workingDir%\bin\UCommerce.Uninstaller.dll.tmp
+move %workingDir%\bin\Ucommerce.Uninstaller.dll %workingDir%\bin\Ucommerce.Uninstaller.dll.tmp
 
 REM Grab the current working directory as we're changing the directory in the next step
 SET currentDir=%CD%
@@ -56,17 +56,17 @@ REM Move back to the original dir
 cd %currentDir%
 
 REM Copy in XML definitions for package gen
-copy "%1\..\UCommerce.Umbraco\Installer\*.xml" "%workingDir%\umbraco\ucommerce\install\"
+copy "%1\..\Ucommerce.Umbraco\Installer\*.xml" "%workingDir%\umbraco\ucommerce\install\"
 
 REM Copy in default configs to be merged with Umbraco upon install
-copy "%1\..\UCommerce.Umbraco\Installer\*.config" "%workingDir%\umbraco\ucommerce\install\"
+copy "%1\..\Ucommerce.Umbraco\Installer\*.config" "%workingDir%\umbraco\ucommerce\install\"
 
 mkdir "%workingDir%\umbraco\ucommerce\install\LanguageText\"
-copy "%1\..\UCommerce.Umbraco\Installer\LanguageText\*.xml" "%workingDir%\umbraco\ucommerce\install\LanguageText\"
+copy "%1\..\Ucommerce.Umbraco\Installer\LanguageText\*.xml" "%workingDir%\umbraco\ucommerce\install\LanguageText\"
 
 REM Generate package.xml
 REM Generates manifest for included files and vendor package information
-UCommerce.PackageGen %workingDir%
+Ucommerce.PackageGen %workingDir%
 
 REM Clear destination file
 del %2

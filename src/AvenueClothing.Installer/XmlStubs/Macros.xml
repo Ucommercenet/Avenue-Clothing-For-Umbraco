@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Macros>
+  <macro>
+    <name>Ucommerce Category Navigation</name>
+    <alias>UcommerceCategoryNavigation</alias>
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/Ucommerce CategoryNavigation.cshtml</macroSource>
+    <useInEditor>False</useInEditor>
+    <dontRender>False</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
+  <macro>
+    <name>Ucommerce Facets</name>
+    <alias>UcommerceFacets</alias>
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/Ucommerce Facets.cshtml</macroSource>
+    <useInEditor>False</useInEditor>
+    <dontRender>False</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
+  <macro>
+    <name>Ucommerce Mini Basket</name>
+    <alias>UcommerceMiniBasket</alias>
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/Ucommerce Mini Basket.cshtml</macroSource>
+    <useInEditor>False</useInEditor>
+    <dontRender>False</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
+  <macro>
+    <name>Ucommerce Voucher</name>
+    <alias>UcommerceVoucher</alias>
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/Ucommerce Voucher.cshtml</macroSource>
+    <useInEditor>False</useInEditor>
+    <dontRender>False</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
+  <macro>
+    <name>Ucommerce Homepage Catalog</name>
+    <alias>UcommerceHomepageCatalog</alias>
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/Ucommerce Homepage Catalog.cshtml</macroSource>
+    <useInEditor>False</useInEditor>
+    <dontRender>False</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
+  <macro>
+    <name>Ucommerce Breadcrumbs</name>
+    <alias>UcommerceBreadcrumbs</alias>
+    <macroType>PartialView</macroType>
+    <macroSource>~/Views/MacroPartials/Ucommerce Breadcrumbs.cshtml</macroSource>
+    <useInEditor>False</useInEditor>
+    <dontRender>False</dontRender>
+    <refreshRate>0</refreshRate>
+    <cacheByMember>False</cacheByMember>
+    <cacheByPage>False</cacheByPage>
+    <properties />
+  </macro>
+     <macro>
+      <name>Ucommerce Product Reviews</name>
+      <alias>UcommerceProductReviews</alias>
+       <macroType>PartialView</macroType>
+      <macroSource>~/Views/MacroPartials/UcommerceProductReviews.cshtml</macroSource>
+      <useInEditor>False</useInEditor>
+      <dontRender>False</dontRender>
+      <refreshRate>0</refreshRate>
+      <cacheByMember>False</cacheByMember>
+      <cacheByPage>False</cacheByPage>
+      <properties />
+    </macro>
+</Macros>

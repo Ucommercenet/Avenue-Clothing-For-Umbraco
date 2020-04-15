@@ -13,12 +13,12 @@ gulp.task('hello-world', function(){
 
 //SASS
 gulp.task('sass', function() {
-    gulp.src('uCommerce.RazorStore/css/*.scss')
+    gulp.src('AvenueClothing/css/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('uCommerce.RazorStore/css/'))
+        .pipe(gulp.dest('AvenueClothing/css/'))
         .pipe(notify({ message: 'Sass has been processed.' }));
 });
 
 gulp.task('watch-sass', function() {
-    gulp.watch('uCommerce.RazorStore/css/*.scss', ['sass']);  // If a file changes, re-run 'sass'
+    gulp.watch('AvenueClothing/css/*.scss', ['sass']);  // If a file changes, re-run 'sass'
 });
