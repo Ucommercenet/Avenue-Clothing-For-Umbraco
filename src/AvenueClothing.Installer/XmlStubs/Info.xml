@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
     <package>
-        <name>Avenue Clothing for Umbraco 8 - 7.0.0.20104</name>
+        <name>Avenue Clothing for Umbraco 8 - 7.0.0.20106</name>
         <version>7.0.0</version>
         <license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
         <url>http://www.ucommerce.net</url>
@@ -16,7 +16,7 @@
         <website>http://ucommerce.net</website>
     </author>
     <readme>
-        <![CDATA[Thank you for installing the Ucommerce accelerator. By default this package will install an example store structure, Razor templates, settings, categories and products. 
+        <![CDATA[Thank you for installing the Ucommerce accelerator. By default this package will install an example store structure, Razor templates, settings, categories and products.
 
 ]]>
     </readme>
