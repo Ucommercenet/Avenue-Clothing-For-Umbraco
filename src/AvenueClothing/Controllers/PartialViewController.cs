@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Infrastructure;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
-using UCommerce.Search.Models;
-using UCommerce.Search.Slugs;
+using Ucommerce.Search.Models;
+using Ucommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
 
 namespace AvenueClothing.Controllers

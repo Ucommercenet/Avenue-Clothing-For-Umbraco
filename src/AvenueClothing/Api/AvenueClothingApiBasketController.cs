@@ -5,16 +5,16 @@ using System.Web.Http;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using AvenueClothing.Api.Model;
-using UCommerce.EntitiesV2;
-using UCommerce.Infrastructure;
-using UCommerce.Search;
-using UCommerce.Search.Slugs;
+using Ucommerce.EntitiesV2;
+using Ucommerce.Infrastructure;
+using Ucommerce.Search;
+using Ucommerce.Search.Slugs;
 using Basket = AvenueClothing.Api.Model.Basket;
 using ICatalogContext = Ucommerce.Api.ICatalogContext;
 
 namespace AvenueClothing.Api
 {
-    [RoutePrefix("ucommerceapi")]
+    [RoutePrefix("Ucommerceapi")]
     public class AvenueClothingApiBasketController : ApiController
     {
         public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();

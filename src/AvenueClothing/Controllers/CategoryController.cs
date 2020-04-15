@@ -2,18 +2,18 @@
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
-using UCommerce.Infrastructure;
-using UCommerce.Infrastructure.Logging;
+using Ucommerce.Infrastructure;
+using Ucommerce.Infrastructure.Logging;
 using AvenueClothing.Models;
-using UCommerce.Search;
-using UCommerce.Search.Extensions;
-using UCommerce.Search.Facets;
-using UCommerce.Search.Slugs;
+using Ucommerce.Search;
+using Ucommerce.Search.Extensions;
+using Ucommerce.Search.Facets;
+using Ucommerce.Search.Slugs;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using Category = UCommerce.Search.Models.Category;
+using Category = Ucommerce.Search.Models.Category;
 using Money = Ucommerce.Api.PriceCalculation.Money;
-using Product = UCommerce.Search.Models.Product;
+using Product = Ucommerce.Search.Models.Product;
 
 namespace AvenueClothing.Controllers
 {

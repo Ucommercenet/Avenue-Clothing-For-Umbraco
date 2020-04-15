@@ -4,7 +4,7 @@
     <home id="1062" key="22a88ee6-62ba-4b42-b848-2424353e89ef" parentID="-1" level="1" creatorID="0" sortOrder="0" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:51:59" nodeName="Store" urlName="store" path="-1,1062" isDoc="" nodeType="1052" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="home" isPublished="true">
       <content>
         <![CDATA[<h1>Welcome to Avenue Clothing</h1>
-<h6>This is an example store which runs on uCommerce. It is designed to demonstrate some of the functionality that comes out-of-the-box and help developers get started with the awesome feature rich e-commerce package for Umbraco.</h6>]]>
+<h6>This is an example store which runs on Ucommerce. It is designed to demonstrate some of the functionality that comes out-of-the-box and help developers get started with the awesome feature rich e-commerce package for Umbraco.</h6>]]>
       </content>
       <basket id="1063" key="da580418-718a-4540-ac20-474105d58946" parentID="1062" level="2" creatorID="0" sortOrder="0" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Basket" urlName="basket" path="-1,1062,1063" isDoc="" nodeType="1053" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="basket" isPublished="true">
         <shipping id="1064" key="de3028ee-1491-4280-887d-ac429a67292d" parentID="1063" level="3" creatorID="0" sortOrder="0" createDate="2018-05-01T13:51:47" updateDate="2018-05-01T13:52:00" nodeName="Shipping" urlName="shipping" path="-1,1062,1063,1064" isDoc="" nodeType="1060" creatorName="admin@admin.com" writerName="admin@admin.com" writerID="0" template="0" nodeTypeAlias="shipping" isPublished="true" />

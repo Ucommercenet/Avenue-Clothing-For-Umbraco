@@ -2,14 +2,14 @@
 using System.Web.Http;
 using Ucommerce.Api;
 using AvenueClothing.Api.Model;
-using UCommerce.Infrastructure;
-using UCommerce.Search;
-using UCommerce.Search.Models;
-using UCommerce.Search.Slugs;
+using Ucommerce.Infrastructure;
+using Ucommerce.Search;
+using Ucommerce.Search.Models;
+using Ucommerce.Search.Slugs;
 
 namespace AvenueClothing.Api
 {
-    [RoutePrefix("ucommerceapi")]
+    [RoutePrefix("Ucommerceapi")]
     public class AvenueClothingApiSearchController : ApiController
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();

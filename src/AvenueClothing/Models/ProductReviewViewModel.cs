@@ -17,6 +17,6 @@ namespace AvenueClothing.Models
         
         public string ProductSku { get; set; }
 
-        //Check Review model in uCommerce for star rating
+        //Check Review model in Ucommerce for star rating
     }
 }

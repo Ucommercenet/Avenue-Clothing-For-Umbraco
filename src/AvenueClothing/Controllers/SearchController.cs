@@ -3,11 +3,11 @@ using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
-using UCommerce.Infrastructure;
+using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
-using UCommerce.Search;
-using UCommerce.Search.Models;
-using UCommerce.Search.Slugs;
+using Ucommerce.Search;
+using Ucommerce.Search.Models;
+using Ucommerce.Search.Slugs;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
