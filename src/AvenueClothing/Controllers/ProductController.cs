@@ -6,6 +6,7 @@ using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Infrastructure;
 using Ucommerce.Search;
 using AvenueClothing.Models;
+using Ucommerce;
 using Ucommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;

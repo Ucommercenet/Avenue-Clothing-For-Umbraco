@@ -4,6 +4,7 @@ using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
+using Ucommerce;
 using Ucommerce.Search;
 using Ucommerce.Search.Models;
 using Ucommerce.Search.Slugs;
