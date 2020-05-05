@@ -7,7 +7,7 @@ using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using Money = Ucommerce.Api.PriceCalculation.Money;
+using Money = Ucommerce.Money;
 
 namespace AvenueClothing.Controllers
 {

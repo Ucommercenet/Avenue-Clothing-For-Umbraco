@@ -5,6 +5,7 @@ using Ucommerce.Api;
 using Ucommerce.Infrastructure;
 using Ucommerce.Infrastructure.Logging;
 using AvenueClothing.Models;
+using Ucommerce.Extensions;
 using Ucommerce.Search;
 using Ucommerce.Search.Extensions;
 using Ucommerce.Search.Facets;
@@ -12,7 +13,7 @@ using Ucommerce.Search.Slugs;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using Category = Ucommerce.Search.Models.Category;
-using Money = Ucommerce.Api.PriceCalculation.Money;
+using Money = Ucommerce.Money;
 using Product = Ucommerce.Search.Models.Product;
 
 namespace AvenueClothing.Controllers
