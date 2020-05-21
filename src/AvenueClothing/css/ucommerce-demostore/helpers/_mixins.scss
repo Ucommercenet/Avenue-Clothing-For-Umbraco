@@ -1,0 +1,249 @@
+@mixin reset-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@mixin button-base {
+    @include font-size($p);
+    background-color: $blue-medium;
+    border: 0;
+    border-radius: $radius-small;
+    color: $white;
+    display: block;
+    font-family: $font-main;
+    width: 100%;
+    line-height: 1;
+    overflow: hidden;
+    margin: 0 0 $spacing;
+    padding: $spacing*3/4;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: background $ts;
+    appearance: none;
+    -webkit-appearance: none;
+
+    #{$hover-states} {
+        background-color: $blue;
+        color: $white;
+    }
+}
+
+
+// Font sizes
+@mixin font-size($fs-map, $fs-breakpoints: $breakpoints) {
+    @each $fs-breakpoint, $fs-font-size in $fs-map {
+        @if $fs-breakpoint == default {
+            font-size: $fs-font-size;
+        }
+
+        @else {
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+
+            @media screen and (min-width: $fs-breakpoint) {
+                font-size: $fs-font-size;
+
+            }
+        }
+    }
+}
+
+// for elements that need to go full screen width
+@mixin full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+@mixin absolute-center {
+    margin: auto;
+    position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+}
+
+@mixin clearfix {
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+        flex-basis: 0;
+        order: 1;
+        width: 100%;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+@mixin cols() {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+
+@mixin hide {
+    opacity: 0;
+    overflow: hidden;
+    transform: scale(0);
+    transition: all 350ms ease;
+}
+
+@mixin show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+@mixin placeholder {
+    $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+
+    @each $placeholder in $placeholders {
+        &:#{$placeholder}-placeholder {
+            @content;
+        }
+    }
+}
+
+@mixin bullet {
+    position: relative;
+
+    &::before {
+        color: $blue-6;
+        content: '·';
+        display: inline-block;
+        font-family: $font-heading;
+        font-weight: bold;
+        font-size: 2rem;
+        line-height: 1;
+        padding-right: $spacing/2;
+        transform: translateY($spacing/3);
+    }
+}
+
+@mixin size($size) {
+    height: $size;
+    width: $size;
+}
+
+@mixin triangle-up($size, $color) {
+    width: 0;
+    height: 0;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+}
+
+@mixin triangle-down($size, $color) {
+    width: 0;
+    height: 0;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+}
+
+@mixin triangle-left($size, $color) {
+    width: 0;
+    height: 0;
+    border-top: $size solid transparent;
+    border-right: $size solid $color;
+    border-bottom: $size solid transparent;
+}
+
+@mixin triangle-right ($size, $color) {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $size 0 $size $size*1.5;
+    border-color: transparent transparent transparent $color;
+}
+
+@mixin visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+}
+
+// Media queries / breakpoints
+@mixin breakpoint($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "`#{$breakpoint}` could not be found in `$breakpoints` map.";
+    }
+}
+
+@mixin outline {
+    $colors: tomato orange gold YellowGreen RoyalBlue purple Magenta;
+
+    @each $breakpoint in $breakpoints {
+        $index: index($breakpoints, $breakpoint);
+        $color: nth($colors, $index);
+
+        // passing the just breakpoint name (but not the value) to the breakpoint mixin
+        @include breakpoint(nth($breakpoint, 1)) {
+            outline: 5px solid $color;
+
+            &::before {
+                content: nth($breakpoint, 1);
+                background: black;
+                color: white;
+                display: block;
+                position: absolute;
+                    top: 0;
+                    left: 0;
+                padding: 0.5rem;
+            }
+        }
+    }
+}
+
+@mixin scrollbars($size, $radius, $thumb, $track) {
+    cursor: pointer;
+    overflow-y: scroll;
+    scrollbar-width: $size;
+    -webkit-overflow-scrolling: auto;
+
+    &::-webkit-scrollbar {
+        width: $size;
+        -webkit-appearance: none;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track;
+        overflow: hidden;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb;
+        border: 3px solid $track;
+        border-radius: $radius;
+        min-height: 40px;
+        max-width: 80%;
+    }
+}

@@ -1,0 +1,21 @@
+.#{$theme} {
+    .navbar {
+        background: $white;
+        color: $black;
+
+        a {
+            color: currentColor;
+        }
+    }
+
+    .navbar-brand {
+        background: {
+            image: img-url($logo);
+            size: contain;
+            repeat: no-repeat;
+        }
+        width: 100%;
+        overflow: hidden;
+        text-indent: -2000vw;
+    }
+}

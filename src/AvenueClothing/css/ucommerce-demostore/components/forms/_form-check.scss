@@ -1,0 +1,118 @@
+
+$checkbox-size: 1rem;
+$checkable-bg: $white;
+$checkable-bg-checked: $white;
+$label-color: $black;
+
+@mixin checkable-base {
+    color: $label-color;
+    cursor: pointer;
+    display: block;
+    font-family: $font-main;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0 0 0.5rem 1px;
+    padding: 0.125rem 0 0 $checkbox-size + 0.5rem;
+    position: relative;
+    text-align: left;
+    text-transform: uppercase;
+
+    #{$hover-states} {
+        .cb {
+            &::before {
+                background-color: lighten($checkable-bg-checked, 30);
+
+            }
+
+            &::after {
+                transform: scale(1);
+            }
+        }
+    }
+}
+
+@mixin checkbox {
+    &::before {
+        background-color: $checkable-bg;
+        border: 1px solid $black;
+        content: '';
+        cursor: pointer;
+        display: block;
+        @include size($checkbox-size);
+        position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        transition: border $ts $tt;
+    }
+
+    // tick
+    &::after {
+        background: transparent img-url('icons/tick.svg') top 0.25rem left 0.2rem no-repeat;
+        background-size: 70%;
+        content: '';
+        cursor: pointer;
+        display: block;
+            @include size($checkbox-size);
+        font-weight: bold;
+        line-height: 1.1;
+        margin: auto;
+        position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        transform: scale(0);
+        text-align: center;
+        transition: all 250ms;
+    }
+}
+
+@mixin checkbox-checked {
+    &::before {
+        background-color: $checkable-bg-checked;
+    }
+
+    &::after {
+        transform: scale(1);
+    }
+}
+
+// default 'tick' style checkbox
+.form-check-label {
+    @include checkable-base;
+
+    input {
+        cursor: pointer;
+        position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+
+        &:checked {
+            ~.cb {
+                @include checkbox-checked;
+            }
+        }
+    }
+
+    .cb {
+        @include size($checkbox-size);
+        position: absolute;
+            top: 0;
+            left: 0;
+        opacity: 1;
+
+        @include checkbox;
+    }
+
+    .filter-tally {
+        color: $grey-6;
+        font-size: 0.7rem;
+    }
+}

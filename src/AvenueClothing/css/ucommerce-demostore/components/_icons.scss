@@ -1,0 +1,15 @@
+.#{$theme} {
+    .icon {
+        display: inline-block;
+        fill: currentColor;
+        height: 1.5rem;
+        width: 1.5rem;
+        position: relative;
+
+        svg {
+            fill: currentColor;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}

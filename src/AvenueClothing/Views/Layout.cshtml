@@ -7,7 +7,7 @@
     Html.RequiresJs("~/scripts/jquery-3.0.0.js", 1);
     Html.RequiresJs("~/scripts/jquery.validate.min.js", 1);
     Html.RequiresJs("~/scripts/tether.min.js", 1);
-    Html.RequiresJs("~/scripts/bootstrap.js", 1);
+    Html.RequiresJs("~/scripts/bootstrap.min.js", 1);
     Html.RequiresJs("~/scripts/uCommerce.jQuery.js", 2);
     Html.RequiresJs("~/scripts/ucommerce.servicestack.js", 2);
     Html.RequiresJs("~/scripts/ucommerce.demostore.js", 2);
@@ -38,7 +38,28 @@
     <![endif]-->
 
     @RenderSection("cphHead", false)
-    <script type="text/javascript">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/img/fav/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/fav/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/fav/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/fav/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/img/fav/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/img/fav/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/img/fav/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/img/fav/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/img/fav/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/img/fav/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/img/fav/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/img/fav/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/img/fav/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="&nbsp;" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/img/fav/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/img/fav/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/img/fav/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/img/fav/mstile-310x310.png" />
+
+    <!-- <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-x']);
         _gaq.push(['_trackPageview']);
@@ -47,59 +68,82 @@
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+        })()
+    </script>; -->
 </head>
-<body>
+<body class="theme-sdr">
+    <div class="container">
+        <header class="navbar sticky-top">
+            <a class="navbar-brand col-md-3" href="/">Avenue Clothing</a>
+            @*<nav id="main-nav" class="site-nav col-md-3" >
+                @Umbraco.RenderMacro("UcommerceCategoryNavigation")
+                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">toggle</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-    <div class="navbar navbar-fixed-top">
-        <div class="container">
+                </div> -->
+            </nav>*@
 
-            <div class="row">
-                <div class="navbar-header">
-                    <a class="col-md-3 navbar-brand" href="/">Avenue Clothing</a>
+            <form id="search-form" class="col-md-3 form-inline navbar-form" action="/search">
+                <div class="input-append input-group">
+                    <input id="site-search" type="text" name="search" class="form-control" placeholder="Search" />
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-link btn-search">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </span>
                 </div>
+            </form>
 
-                <form id="search-form" class="pull-xs-left form-inline navbar-form" action="/search">
-                    <div class="input-append input-group">
-                        <input id="site-search" type="text" name="search" class="form-control" placeholder="Search the store" />
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-link btn-search">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-
-                <div class="pull-xs-right navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            @Umbraco.RenderMacro("UcommerceMiniBasket")
-                        </li>
-                    </ul>
-                </div>
-
+            <div class="col-md-3 navbar-collapse">
+                @Umbraco.RenderMacro("UcommerceMiniBasket")
             </div>
+        </header>
+    </div>
+
+    <div class="bg-dark">
+        <div class="container">
+            <ol class="confidences pt-2 pb-2 d-flex justify-content-between text-light text-uppercase w-100">
+                <li>
+                    <span class="icon icon-star" aria-hidden="true" focusable="false" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/star.svg")))
+                    </span>
+                    5 star satisfaction
+                </li>
+                <li>
+                    <span class="icon icon-truck" aria-hidden="true" focusable="false" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/truck.svg")))
+                    </span>
+                    Next day delivery
+                </li>
+                <li>
+                    <span class="icon icon-box" aria-hidden="true" focusable="false" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/box.svg")))
+                    </span>
+                    Free returns
+                </li>
+                <li>
+                    <span class="icon icon-chat" aria-hidden="true" focusable="false" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/chat.svg")))
+                    </span>
+                    Live chat customer care
+                </li>
+            </ol>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
+
+
+
+    @*<div class="row">
+        <div class="container">
             <div class="col-sm-3 col-md-3">
-                <div class="well sidebar-nav" id="main-nav">
-                    @Umbraco.RenderMacro("UcommerceCategoryNavigation")
-                </div>
+
                 <div class="sidebar-nav" id="facets-nav">
                     @Umbraco.RenderMacro("UcommerceFacets")
                 </div>
-                <div class="well sidebar-nav" id="why-buy">
-                    <ol>
-                        <li><i class="fa fa-star"></i>5 star satisfaction</li>
-                        <li><i class="fa fa-truck"></i>Free delivery</li>
-                        <li>
-                            Payment Information<br>
-                            <img src="/img/ucommerce/cards.png" alt="We accept VISA, SOLO, PayPal, MasterCard" title="We accept VISA, SOLO, PayPal, MasterCard">
-                        </li>
-                    </ol>
+                <div class="well sidebar-nav" >
+
                     <p id="powered-by-ucommerce">
                         <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank"><img src="/img/ucommerce/ucommerce.png" alt="Powered by Ucommerce"></a>
                     </p>
@@ -129,7 +173,7 @@
 
             <div class="col-sm-9 col-md-9">
                 @Umbraco.RenderMacro("UcommerceBreadcrumbs")
-                @RenderBody()
+
             </div>
         </div>
         <hr>
@@ -147,7 +191,111 @@
                 </p>
             </div>
         </footer>
-    </div>
+    </div>*@
+     @RenderBody()
     @Html.Raw(Html.RenderJsHere())
+
+    <footer class="site-footer bg-dark text-light mt-4">
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-lg-4 pr-lg-5 pb-4 pb-lg-2">
+                    <p>
+                        <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank">
+                            <img class="logo-ucommerce" src="/img/site/logo-ucommerce.svg" alt="Powered by Ucommerce">
+                        </a>
+                    </p>
+                    <p>Avenue Clothing is an example store to demonstrate the simple – yet powerful e‑commerce functionality Ucommerce brings to Umbraco.</p>
+                    <p>All products listed are from existing retailers but no orders will be fulfilled.</p>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2 pb-4 pb-lg-2">
+                    <h6 class="mb-3 text-uppercase">Category Title</h6>
+                    <ul>
+                        <li><a href="#">Lorem Ipsum</a></li>
+                        <li><a href="#">Dolor Sit Amet </a></li>
+                        <li><a href="#">Consectetur Adipis</a></li>
+                        <li><a href="#">Cing Elit In</a></li>
+                        <li><a href="#">Dommodo Mal</a></li>
+                        <li><a href="#">Esuada Lorem</a></li>
+                        <li><a href="#">Cehicula</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2 pb-4 pb-lg-2">
+                    <h6 class="mb-3 text-uppercase">Category Title</h6>
+                    <ul>
+                        <li><a href="#">Lorem Ipsum</a></li>
+                        <li><a href="#">Dolor Sit Amet </a></li>
+                        <li><a href="#">Consectetur Adipis</a></li>
+                        <li><a href="#">Cing Elit In</a></li>
+                        <li><a href="#">Dommodo Mal</a></li>
+                        <li><a href="#">Esuada Lorem</a></li>
+                        <li><a href="#">Cehicula</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2 pb-4 pb-lg-2">
+                    <h6 class="mb-3 text-uppercase">Category Title</h6>
+                    <ul>
+                        <li><a href="#">Lorem Ipsum</a></li>
+                        <li><a href="#">Dolor Sit Amet </a></li>
+                        <li><a href="#">Consectetur Adipis</a></li>
+                        <li><a href="#">Cing Elit In</a></li>
+                        <li><a href="#">Dommodo Mal</a></li>
+                        <li><a href="#">Esuada Lorem</a></li>
+                        <li><a href="#">Cehicula</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2 pb-4 pb-lg-2">
+                    <h6 class="mb-3 text-uppercase">Follow Us</h6>
+                    <ul class="d-inline-flex d-lg-flex justify-content-between">
+                        <li class="pr-3">
+                            <a href="#">
+                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/social-instagram.svg")))
+                                <span class="visually-hidden">Instagram</span>
+                            </a>
+                        </li>
+                        <li class="pr-3">
+                            <a href="#">
+                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/social-facebook.svg")))
+                                <span class="visually-hidden">Facebook</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/social-twitter.svg")))
+                                <span class="visually-hidden">Twitter</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-xl-4 pb-2">
+                    <h6 class="mb-2 text-uppercase text-smaller">Payment Information</h6>
+                    <p><img class="payment-options" src="/img/site/credit-cards.svg" alt="Payment Information"></p>
+                </div>
+
+                <div class="w-auto col-xl-5 pb-4 pb-xl-2">
+                    <ul class="pipe-list d-inline-flex">
+                        <li>
+                            <span class="d-none d-sm-inline">Copyright </span>&copy;@DateTime.Now.Year <a href="http://ucommerce.dk/" title="The most feature rich e-commerce package for Umbraco" target="_blank">Ucommerce ApS</a>
+                        </li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-auto col-xl-3 pb-4 pb-xl-2">
+                    <p class="text-md-right">
+                        Store demo'd by <a href="http://www.thesitedoctor.co.uk/" title="The Site Doctor - Herefordshire based Web Design, Development and IT Consultancy" target="_blank"><strong>The Site Doctor</strong></a> 2020
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

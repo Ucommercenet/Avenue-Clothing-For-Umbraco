@@ -7,46 +7,81 @@
     // Html.RequiresJs("~/Scripts/uCommerce.category.js");
 }
 
-<div class="row margin-bottom">
-    <div class="hero-unit">
+<div class="row">
+    <div class="hero-unit mb-4">
         @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
         {
-            <img class="col-sm-9" src="@Model.BannerImageUrl" style="max-height: 350px; object-fit: cover;">
+            <img class="w-100" src="@Model.BannerImageUrl">
         }
+        <div class="container">
+            <h1 class="text-light text-uppercase">@Model.Name</h1>
+        </div>
     </div>
 </div>
 
 @Html.HiddenFor(x => x.CatalogId, new {id = "catalog-id"})
 @Html.HiddenFor(x => x.CategoryId, new {id = "category-id"})
 <div class="row">
-    <div class="product-list col-sm-12 col-md-12">
-        @foreach (var product in Model.Products)
-        {
-            <div class="product col-sm-4 col-md-4 col-xs-2" id="@product.Sku">
-                <div class="product-image">
-                    @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
-                    {
-                        <a href="@product.Url">
-                            <img src="@product.ThumbnailImageUrl" style="width: 259px; height: 350px; object-fit: cover;">
-                        </a>
-                    }
-                </div>
+    <div class="container">
+        <aside class="filterbar d-flex flex-wrap mb-4">
+            @Umbraco.RenderMacro("UcommerceFacets")
 
-                <p class="item-name">
-                    <a href="@product.Url">@product.Name</a>
-                </p>
-                <p class="item-price">
-                    @product.Price
-                </p>
-                <p class="btn-group view-details">
-                    <a href="@product.Url" class="btn btn-default">
-                        View more
-                        <span>
-                            <i class="fa fa-shopping-cart icon-white" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                </p>
+            <div class="dropdown  ml-lg-auto d-inline-flex align-items-center">
+                <select id="resultsToShow">
+                    <option>12</option>
+                    <option>24</option>
+                    <option>48</option>
+                    <option>96</option>
+                </select>
+                <label for="resultsToShow">Per page</label>
             </div>
-        }
+        </aside>
+
+        <div class="product-list">
+            @foreach (var product in Model.Products)
+            {
+                <a href="@product.Url" id="@product.Sku" class="product mb-3">
+                    <div class="product-image mb-3">
+                        @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
+                        {
+                            <img class="img-fluid" src="@product.ThumbnailImageUrl">
+                        }
+                    </div>
+
+                    <div class="mx-2">
+                        <p class="mb-1 text-truncate">
+                            @product.Name
+                        </p>
+                        <p class="mb-1">
+                            <strong>@product.Price</strong>
+                        </p>
+                    </div>
+                </a>
+            }
+        </div>
+
+        <nav class="page-navigation text-center mb-3" aria-label="Page navigation">
+            <h6 class="mb-3"><span class="text-uppercase">Showing</span> 12 of 60 items</h6>
+
+            <ul class="pagination mb-5 justify-content-center">
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">5</a>
+                </li>
+            </ul>
+
+            <div class="btn btn-outline-dark">load more products</div>
+        </nav>
     </div>
 </div>

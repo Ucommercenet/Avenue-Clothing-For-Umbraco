@@ -3,11 +3,17 @@
     Layout = null;
 }
 
-<ul class="breadcrumb">
+<ul class="breadcrumb bg-transparent">
     @foreach (var breadcrumb in Model)
     {
+        var textColorClass = "text-dark";
+
         <li class="breadcrumb-item">
-            <a href="@breadcrumb.BreadcrumbUrl">
+            @if(Model.LastOrDefault().Equals(breadcrumb))
+            {
+                 textColorClass = "text-light";
+            }
+            <a class="@textColorClass text-uppercase" href="@breadcrumb.BreadcrumbUrl">
                 @breadcrumb.BreadcrumbName
             </a>
         </li>

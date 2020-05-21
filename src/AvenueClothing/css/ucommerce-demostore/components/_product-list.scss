@@ -1,0 +1,40 @@
+.#{$theme} {
+    .product-list {
+        @include reset-list;
+        display: flex;
+            flex-wrap: wrap;
+
+        a {
+            color: $black;
+            flex: 1 1 0;
+            line-height: 1.2;
+            max-width: 276px;
+            position: relative;
+            padding: 0 2px;
+            text-decoration: none;
+            transition: all $ts $tt;
+
+
+            #{$hover-states} {
+
+                .product-image {
+                    filter: brightness(1.1);
+
+                    img {
+                        filter: brightness(1.1);
+                        transform: scale(1.01);
+                    }
+                }
+            }
+        }
+
+        .product-image {
+            overflow: hidden;
+
+
+            img {
+                transition: all $ts*2 $tt;
+            }
+        }
+    }
+}

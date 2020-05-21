@@ -1,0 +1,12 @@
+$theme: 'theme-sdr';
+$logo: 'logo.svg';
+
+.#{$theme} {
+    .bg-dark {
+        background-color: $grey-3 !important;
+    }
+
+    .bg-secondary {
+        background-color: $orange !important;
+    }
+}

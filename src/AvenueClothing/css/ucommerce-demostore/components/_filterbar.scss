@@ -1,0 +1,93 @@
+.#{$theme} {
+    .filterbar {
+        .dropdown {
+            display: block;
+            margin-right: 0.5rem;
+
+            &.open {
+                .dropdown-toggle {
+                    background-color: $white;
+                    border-color: $black;
+                    border-bottom-color: $white;
+                    z-index: 2;
+                }
+
+                .dropdown-menu {
+                    display: block;
+                    z-index: 1;
+                }
+            }
+        }
+
+        .dropdown-toggle {
+            background: $white;
+            border: thin solid $white;
+            font-weight: 500;
+            outline: none;
+            padding: 1rem 2rem;
+            position: relative;
+            text-transform: uppercase;
+
+            &:active {
+                border-color: $white;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: mix($white, $grey-d);
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+
+        .dropdown-menu {
+            border-radius: 0;
+            border: thin solid $black;
+            margin-top: -1px;
+            min-width: 14rem;
+            padding: 1.5rem 1rem;
+            transition: all $ts $tt;
+        }
+
+        select {
+            background: $white img-url('icons/chevron.svg') center right 1rem no-repeat;
+            border: thin solid $white;
+            outline: none;
+            margin-right: 0.5rem;
+            padding: 1rem 3rem 1rem 1rem;
+            transition: all $ts $tt;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            text-overflow: '';
+
+            &:hover {
+                background-color: mix($white, $grey-d);
+            }
+
+            &:focus,
+            &:active {
+                background-color: $white;
+                border-color: $black;
+            }
+
+            &::-ms-expand {
+                display: none;
+           }
+
+           +label {
+                font-size: 0.9rem;
+                font-weight: 500;
+                margin: 0;
+                position: relative;
+           }
+        }
+
+        label {
+            white-space: nowrap;
+        }
+    }
+}
