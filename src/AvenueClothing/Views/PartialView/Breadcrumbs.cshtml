@@ -2,20 +2,21 @@
 @{
     Layout = null;
 }
+<nav class="row" aria-label="breadcrumb">
+    <ol class="breadcrumb bg-transparent">
+        @foreach (var breadcrumb in Model)
+        {
+            var textColorClass = "text-dark";
 
-<ul class="breadcrumb bg-transparent">
-    @foreach (var breadcrumb in Model)
-    {
-        var textColorClass = "text-dark";
-
-        <li class="breadcrumb-item">
-            @if(Model.LastOrDefault().Equals(breadcrumb))
-            {
-                 textColorClass = "text-light";
-            }
-            <a class="@textColorClass text-uppercase" href="@breadcrumb.BreadcrumbUrl">
-                @breadcrumb.BreadcrumbName
-            </a>
-        </li>
-    }
-</ul>
+            <li class="breadcrumb-item">
+                @if(Model.LastOrDefault().Equals(breadcrumb))
+                {
+                    textColorClass = "text-light";
+                }
+                <a class="@textColorClass text-uppercase" href="@breadcrumb.BreadcrumbUrl">
+                    @breadcrumb.BreadcrumbName
+                </a>
+            </li>
+        }
+    </ol>
+</nav>

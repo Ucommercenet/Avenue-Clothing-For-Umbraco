@@ -1,0 +1,27 @@
+.#{$theme} {
+    .gallery__thumbs {
+        $space: 0.5rem;
+
+        display: flex;
+            flex-wrap: wrap;
+        margin: 0 $space*-0.5;
+        padding: $space 0;
+
+        a {
+            $size: calc(20% - #{$space});
+            flex: 0 0 $size;
+            margin: 0 $space/2 $space;
+
+            #{$hover-states} {
+                img {
+                    filter: brightness(1.1);
+                    transform: scale(1.01);
+                }
+            }
+        }
+
+        img {
+            transition: all $ts*2 $tt;
+        }
+    }
+}

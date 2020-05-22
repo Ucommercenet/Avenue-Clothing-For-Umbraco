@@ -1,0 +1,28 @@
+.#{$theme} {
+    .rating {
+        display: flex;
+        justify-content: flex-start;
+
+        #{$hover-states} {
+            .fa-star-o {
+                &::before {
+                    content: '\f005';
+                }
+            }
+        }
+
+        label {
+            cursor: pointer;
+
+            #{$hover-states} {
+                ~label {
+                    .fa-star-o {
+                        &::before {
+                            content: '\f006';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

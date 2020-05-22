@@ -6,14 +6,21 @@
 
 @if (Model.IsEmpty)
     {
-        <a href="/store" id="empty-cart">Your Shopping Cart is empty</a>
+        <a href="/store" class="minicart is-empty text-right" id="empty-cart">
+            <span class="icon icon-bag mr-1" aria-hidden="true" focusable="false" role="img">
+                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
+            </span>
+            Your Bag is Empty
+        </a>
     }
 
   else
     {
-        <a href="/basket" id="mini-cart">
+        <a href="/basket" class-"minicart has-items" id="mini-cart">
             @*<i class="icon-shopping-cart icon-white"></i>*@
-            <i class="fa fa-shopping-cart icon-white margin-right-small"></i>
+            <span class="icon icon-bag mr-1" aria-hidden="true" focusable="false" role="img">
+                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
+            </span>
             <span class="item-qty">@Model.NumberOfItems</span> items in cart, total: <span class="order-total">@Model.Total</span>
         </a>
     }

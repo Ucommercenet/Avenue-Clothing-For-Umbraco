@@ -1,5 +1,34 @@
 .#{$theme} {
-    .breadcrumbs {
+    .breadcrumb {
+        margin: 0;
+    }
 
+    .breadcrumb-item {
+        align-items: flex-end;
+        font-size: 0.82rem;
+        font-weight: 500;
+        line-height: 1;
+
+        +.breadcrumb-item {
+            padding-left: 0;
+
+            &::before {
+                background: transparent img-url('icons/chevron.svg') center  no-repeat;
+                background-size: 0.6rem;
+                content: "";
+                flex: 0 0 auto;
+                height: 0.8rem;
+                width: 1.5rem;
+                transform: rotate(-90deg);
+            }
+        }
+
+        &:last-child {
+            pointer-events: none;
+        }
+
+        a {
+            flex: 1;
+        }
     }
 }

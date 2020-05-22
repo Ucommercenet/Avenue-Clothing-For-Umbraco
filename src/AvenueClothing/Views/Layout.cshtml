@@ -59,7 +59,7 @@
     <meta name="msapplication-wide310x150logo" content="/img/fav/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="/img/fav/mstile-310x310.png" />
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-x']);
         _gaq.push(['_trackPageview']);
@@ -69,36 +69,41 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })()
-    </script>; -->
+    </script>
 </head>
 <body class="theme-sdr">
     <div class="container">
-        <header class="navbar sticky-top">
-            <a class="navbar-brand col-md-3" href="/">Avenue Clothing</a>
-            @*<nav id="main-nav" class="site-nav col-md-3" >
-                @Umbraco.RenderMacro("UcommerceCategoryNavigation")
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">toggle</span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <header class="d-flex flex-wrap flex-lg-nowrap align-items-center py-2 sticky-top">
+            <a class="navbar-brand" href="/">Avenue Clothing</a>
+            <nav id="main-nav" class="site-nav col-md-4 mr-auto" >
+                <ul class="d-flex justify-content-between text-uppercase text-dark">
+                    <li>
+                        <a href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a class="text-danger" href="#">Sale</a>
+                    </li>
+                </ul>
+            </nav>
 
-                </div> -->
-            </nav>*@
-
-            <form id="search-form" class="col-md-3 form-inline navbar-form" action="/search">
-                <div class="input-append input-group">
-                    <input id="site-search" type="text" name="search" class="form-control" placeholder="Search" />
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-link btn-search">
-                            <i class="fa fa-search" aria-hidden="true"></i>
+            <div class="navbar-form col-md-2">
+                <form id="search-form" class="bg-light" action="/search">
+                    <div class="input-append d-flex">
+                        <input id="site-search" type="text" name="search" class="form-control border-0 bg-transparent" placeholder="Search" />
+                        <button type="submit" class="btn-search">
+                            <span class="icon icon-small" aria-hidden="true" role="img">
+                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/mag-glass.svg")))
+                            </span>
+                            <span class="visually-hidden">Search site</span>
                         </button>
-                    </span>
-                </div>
-            </form>
-
-            <div class="col-md-3 navbar-collapse">
-                @Umbraco.RenderMacro("UcommerceMiniBasket")
+                    </div>
+                </form>
             </div>
+
+            @Umbraco.RenderMacro("UcommerceMiniBasket")
         </header>
     </div>
 
@@ -133,7 +138,7 @@
         </div>
     </div>
 
-
+    @Umbraco.RenderMacro("UcommerceCategoryNavigation")
 
     @*<div class="row">
         <div class="container">
@@ -195,7 +200,7 @@
      @RenderBody()
     @Html.Raw(Html.RenderJsHere())
 
-    <footer class="site-footer bg-dark text-light mt-4">
+    <footer class="site-footer bg-dark text-light">
         <div class="container">
             <div class="row pt-5">
                 <div class="col-lg-4 pr-lg-5 pb-4 pb-lg-2">

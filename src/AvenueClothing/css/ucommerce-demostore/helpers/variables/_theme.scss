@@ -6,7 +6,35 @@ $logo: 'logo.svg';
         background-color: $grey-3 !important;
     }
 
-    .bg-secondary {
+    .bg-black {
+        background-color: $black;
+    }
+
+    .bg-light {
+        background-color: $grey-e !important;
+    }
+
+    .bg-primary {
         background-color: $orange !important;
+    }
+
+    .bg-secondary {
+        background-color: $green !important;
+    }
+
+    .bg-success {
+        background-color: $green !important;
+    }
+
+    .bg-info {
+        background-color: mix($white, $orange, 80) !important;
+    }
+
+    .text-danger {
+        color: $red;
+    }
+
+    a {
+        color: $green;
     }
 }

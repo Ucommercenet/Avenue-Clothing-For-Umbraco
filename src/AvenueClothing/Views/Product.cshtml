@@ -4,6 +4,7 @@
 @{
     Layout = "Layout.cshtml";
     Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
+    string shortDesc = string.Join(" ", Model.ProductViewModel.LongDescription.Split(' ').Take(20));
 }
 
 @if (Model.ItemAlreadyExists)
@@ -16,7 +17,7 @@
     </div>
 }
 
-<div class="breadcrumbs bg-secondary">
+<div class="bg-primary mb-5">
     <div class="container">
         @Umbraco.RenderMacro("UcommerceBreadcrumbs")
     </div>
@@ -24,101 +25,191 @@
 
 <div class="container">
     <div id="product-details" class="row" itemscope itemtype="http://schema.org/Product">
-        <div class="col-md-7">
+        <div class="col-md-7 col-lg-8 pr-lg-5">
             @if (!string.IsNullOrEmpty(Model.ProductViewModel.ThumbnailImageUrl))
-                {
-                <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+            {
+                <div class="gallery mb-5">
+                    <div class="gallery__large">
+                        <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                    </div>
+                    <div class="gallery__thumbs">
+                        <a href="#">
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                        </a>
+                        <a href="#">
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                        </a>
+                        <a href="#">
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                        </a>
+                        <a href="#">
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                        </a>
+                        <a href="#">
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                        </a>
+                    </div>
+                </div>
             }
+
+            <h5 class="text-uppercase mb-4">Description</h5>
+            <div class="mb-4">
+                @Html.Raw(Model.ProductViewModel.LongDescription)
+            </div>
+
+            <button class="btn btn-accordion" type="button" data-toggle="collapse" data-target="#delivery" aria-expanded="false" aria-controls="delivery">
+                Delivery Info
+                <span class="icon icon-small mr-1" aria-hidden="true" focusable="false" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/chevron.svg")))
+                </span>
+            </button>
+            <div class="collapse" id="delivery">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+
+            <button class="btn btn-accordion" type="button" data-toggle="collapse" data-target="#returns" aria-expanded="false" aria-controls="returns">
+                Returns Info
+                <span class="icon icon-small mr-1" aria-hidden="true" focusable="false" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/chevron.svg")))
+                </span>
+            </button>
+            <div class="collapse mb-4" id="returns">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+
+            <div class="my-4">
+                @Umbraco.RenderMacro("UcommerceProductReviews")
+            </div>
         </div>
 
-        <section class="col-md-5 pl-5">
-            <header class="col-md-12 page-header">
-                <h2 itemprop="name"><b>@Model.ProductViewModel.Name</b></h2>
-            </header>
+        <section class="col-md-5 col-lg-4 pl-lg-5">
+            <h2 itemprop="name">
+                <b>@Model.ProductViewModel.Name</b>
+            </h2>
 
             @if (Model.ProductViewModel.IsOrderingAllowed)
             {
 
-                <form method="post" action="@Url.Action("Index", "Product")">
-                    <div class="col-md-12 well">
-                        <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                            <p class="item-price" itemprop="price">@Model.ProductViewModel.Price</p>
-                            <p class="item-tax">
+                <form class="mb-4" method="post" action="@Url.Action("Index", "Product")">
+
+                        <aside itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                            <p class="h5 mb-4 item-price" itemprop="price">@Model.ProductViewModel.Price</p>
+                            @*<p class="item-tax">
                                 <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
-                            </p>
+                            </p>*@
                         </aside>
 
                         @if (Model.ProductViewModel.Properties.Count > 0 && Model.ProductViewModel.IsProductFamily)
                         {
-                            <div class="col-md-7">
-
-                                @foreach (var prop in Model.ProductViewModel.Properties)
-                                {
-                                    var controlName = string.Format("variation-{0}", prop.PropertyName);
-                                    <label for="@controlName">@prop.PropertyName</label>
-                                    <select name="@controlName" id="@controlName" class="variant margin-bottom form-control">
-                                        <option value="">-- Please Select --</option>
-                                        @foreach (var value in prop.Values)
-                                        {
-                                            <option value="@value">@value</option>
-                                        }
-                                    </select>
-                                }
-
-                            </div>
+                            foreach (var prop in Model.ProductViewModel.Properties)
+                            {
+                                var controlName = string.Format("variation-{0}", prop.PropertyName);
+                                <label for="@controlName">@prop.PropertyName</label>
+                                <select name="@controlName" id="@controlName" class="form-control mb-3">
+                                    <option value="">-- Please Select --</option>
+                                    @foreach (var value in prop.Values)
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                            }
                         }
 
                         <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
-                        <input name="addtobasket" id="add-to-basket" class="btn btn-block btn-success" type="submit" value="Add to basket" />
+
+                        <button id="add-to-basket" class="btn btn-dark w-100" type="submit">
+                            <span class="icon icon-small mr-1" aria-hidden="true" focusable="false" role="img">
+                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
+                            </span>
+                            Add to bag
+                        </button>
+
                         @if (Model.AddedToBasket)
                         {
-                            <div class="alert alert-success item-added">
+                            <div class="alert alert-success item-added my-3">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                                 <p>
                                     Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.
                                 </p>
                             </div>
                         }
-                    </div>
-
                 </form>
-
             }
             else
             {
                 <p>Sorry, the item you are looking for is not currently available.</p>
             }
 
-
-            <section class="tabbable">
-            <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a href="#product-description" class="nav-link active" data-toggle="tab" role="tab">Details</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#delivery-info" class="nav-link" data-toggle="tab" role="tab">Delivery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#returns-info" class="nav-link" data-toggle="tab" role="tab">Returns</a>
-                    </li>
-                    <li class="nav-item"><a href="#customer-reviews" class="nav-link" data-toggle="tab" role="tab">Reviews</a></li>
-                </ul>
-
-                <div class="tab-content margin-top">
-                    <div itemprop="description" id="product-description" class="tab-pane active" role="tabpanel">
-                        @Html.Raw(Model.ProductViewModel.LongDescription)
-                    </div>
-                    <div id="delivery-info" class="tab-pane" role="tabpanel">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
-                    </div>
-                    <div id="returns-info" class="tab-pane" role="tabpanel">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Maecenas placerat elementum tristique.Ut ut pretium massa.Nullam mollis lobortis rutrum. Integer quis tellus enim. Donec viverra aliquam faucibus. Nam ac eros velit. Mauris vel adipiscing turpis. Mauris id tortor et augue tincidunt molestie in sed lectus.</p>
-                    </div>
-                    <div id="customer-reviews" class="tab-pane" role="tabpanel">
-                        @Umbraco.RenderMacro("UcommerceProductReviews")
-                    </div>
-                </div>
-            </section>
+            @Html.Raw(@shortDesc)
         </section>
+    </div>
+</div>
+
+<div class="bg-secondary pt-5 pb-3">
+    <div class="container text-white">
+        <h5 class="text-uppercase mb-4 text-spaced">Others also bought</h5>
+
+        <div class="product-list">
+            <a href="/demo-store/p/formal/jungle-by-night-mood-slim-fit-signature-shirt" id="JNMSFSS">
+                <div class="product-image mb-3">
+                        <img class="img-fluid" src="/media/1098/JNMSFSS.jpg">
+                </div>
+
+                <div class="mx-2">
+                    <p class="mb-1 text-truncate">
+                        Jungle by Night Mood Slim Fit Signature Shirt
+                    </p>
+                    <p class="mb-1">
+                        <strong>€205.85</strong>
+                    </p>
+                </div>
+            </a>
+            <a href="/demo-store/p/formal/pink-manga-mood-slim-fit-signature-shirt-limited-edition-100-pieces" id="PMMSFSS-LE" class="product mb-3">
+                <div class="product-image mb-3">
+                        <img class="img-fluid" src="/media/1097/PMMSFSS-LE.jpg">
+                </div>
+
+                <div class="mx-2">
+                    <p class="mb-1 text-truncate">
+                        Pink Manga Mood Slim Fit Signature Shirt - Limited Edition [100 pieces]
+                    </p>
+                    <p class="mb-1">
+                        <strong>€320.85</strong>
+                    </p>
+                </div>
+            </a>
+            <a href="/demo-store/p/formal/black-white-wonderland-mood-slim-fit-signature-shirt-limited-edition-200-pieces" id="BWWMSFSS-LE" class="product mb-3">
+                <div class="product-image mb-3">
+                        <img class="img-fluid" src="/media/1095/BWWMSFSS-LE.jpg">
+                </div>
+
+                <div class="mx-2">
+                    <p class="mb-1 text-truncate">
+                        Black &amp; White Wonderland Mood Slim Fit Signature Shirt - Limited Edition [200 pieces]
+                    </p>
+                    <p class="mb-1">
+                        <strong>€251.85</strong>
+                    </p>
+                </div>
+            </a>
+            <a href="/demo-store/p/formal/polo-ralph-lauren-blue-white-stripe-custom-fit-regent-poplin-dress-shirt" id="A02 WCJNK C0223 C421A" class="product mb-3">
+                <div class="product-image mb-3">
+                        <img class="img-fluid" src="/media/1102/A02 WCJNK C0223 C421A.jpg">
+                </div>
+
+                <div class="mx-2">
+                    <p class="mb-1 text-truncate">
+                        Polo Ralph Lauren Blue &amp; White Stripe Custom Fit Regent Poplin Dress Shirt
+                    </p>
+                    <p class="mb-1">
+                        <strong>€97.75</strong>
+                    </p>
+                </div>
+            </a>
+        </div>
     </div>
 </div>

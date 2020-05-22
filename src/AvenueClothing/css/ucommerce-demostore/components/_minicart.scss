@@ -1,0 +1,14 @@
+.#{$theme} {
+    .minicart {
+        &.minicart {
+            color: $grey-3;
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            #{$hover-states} {
+                text-decoration: none;
+            }
+        }
+
+    }
+}

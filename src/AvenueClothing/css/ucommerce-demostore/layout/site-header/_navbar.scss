@@ -1,12 +1,12 @@
 .#{$theme} {
-    .navbar {
-        background: $white;
-        color: $black;
+    // .navbar {
+    //     background: $white;
+    //     color: $black;
 
-        a {
-            color: currentColor;
-        }
-    }
+    //     a {
+    //         color: currentColor;
+    //     }
+    // }
 
     .navbar-brand {
         background: {
@@ -14,8 +14,45 @@
             size: contain;
             repeat: no-repeat;
         }
-        width: 100%;
+        min-width: 14rem;
         overflow: hidden;
         text-indent: -2000vw;
+    }
+
+    .site-nav {
+        ul {
+            @include reset-list;
+        }
+
+        a {
+            color: currentColor;
+        }
+    }
+
+    .category-nav {
+        &.collapsing {
+            position: static;
+        }
+    }
+
+    .navigation-dropdown-wrapper {
+        position: absolute;
+            left: 0;
+            right: 0;
+        z-index: 11;
+
+        ul {
+            @include reset-list;
+            font-family: $font-main;
+            font-size: 0.82rem;
+        }
+
+        a {
+            color: currentColor;
+            display: block;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
     }
 }

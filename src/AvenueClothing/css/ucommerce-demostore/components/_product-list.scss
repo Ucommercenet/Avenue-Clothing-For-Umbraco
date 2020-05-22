@@ -5,7 +5,7 @@
             flex-wrap: wrap;
 
         a {
-            color: $black;
+            color: currentColor;
             flex: 1 1 0;
             line-height: 1.2;
             max-width: 276px;
@@ -16,7 +16,6 @@
 
 
             #{$hover-states} {
-
                 .product-image {
                     filter: brightness(1.1);
 
@@ -30,7 +29,6 @@
 
         .product-image {
             overflow: hidden;
-
 
             img {
                 transition: all $ts*2 $tt;
