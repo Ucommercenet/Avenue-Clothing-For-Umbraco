@@ -1,4 +1,14 @@
 .#{$theme} {
+    .carousel {
+        position: relative;
+    }
+
+    .carousel-inner {
+        &.product-list {
+            flex-wrap: nowrap;
+        }
+    }
+
     .carousel-caption {
         top: 21vw;
         right: auto;
@@ -18,12 +28,12 @@
         left: 7vw;
         margin: 0;
 
-
         li {
             height: 9px;
             min-width: 34px;
             margin: 0 3px 0 0;
             opacity: 0.36;
+            transition: all $ts $tt;
 
             &:hover,
             &:focus {
@@ -33,6 +43,31 @@
             &.active{
                 background-color: $black;
                 opacity: 1;
+            }
+        }
+    }
+
+    .carousel-indicators-below {
+        .carousel-indicators {
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+
+            li {
+                background-color: $grey-e;
+                opacity: 1;
+
+                &:hover,
+                &:focus {
+                    background-color: darken($grey-e, 7);
+                }
+
+                &.active{
+                    background-color: $black;
+                }
             }
         }
     }

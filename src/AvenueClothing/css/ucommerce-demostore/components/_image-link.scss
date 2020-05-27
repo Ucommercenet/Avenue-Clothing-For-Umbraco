@@ -1,0 +1,39 @@
+.#{$theme} {
+    .h4 {
+        .caption {
+            bottom: 1.5rem;
+        }
+    }
+
+    .image-link {
+        // display: block;
+        position: relative;
+
+        #{$hover-states} {
+            img {
+                filter: brightness(1.1);
+            }
+        }
+
+        img {
+            transition: all $ts $tt;
+            width: 100%;
+        }
+    }
+
+    .caption {
+        color: $black;
+        font-family: $font-heading;
+        font-size: inherit;
+        letter-spacing: 0.25rem;
+        margin: 0 auto;
+        padding: 1rem;
+        position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+}
+

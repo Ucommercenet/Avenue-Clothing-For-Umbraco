@@ -1,0 +1,145 @@
+.#{$theme} {
+    .jumbotron {
+        background-color: $grey-f;
+        margin-top: 6rem;
+
+        .container {
+            display: flex;
+                align-items: center;
+            position: relative;
+        }
+
+        .cms-content {
+            background: img-url('site/bg-pattern.png') top center no-repeat;
+            background-size: cover;
+            color: $white;
+            padding: 5rem 1rem 1rem;
+
+            @include breakpoint(medium) {
+                padding: 9rem 6rem 6rem;
+            }
+
+            .container {
+                display: block;
+                position: static;
+            }
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            letter-spacing: 0;
+            padding-bottom: 4rem;
+            position: relative;
+            text-transform: uppercase;
+
+            @include breakpoint(medium) {
+                font-size: 3.75rem;
+            }
+
+            &::after {
+                border-top: 1px solid $white;
+                content: '';
+                width: 130vw;
+                position: absolute;
+                    bottom: 2rem;
+                    left: -100vw;
+            }
+        }
+
+        h6,
+        p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: normal;
+            line-height: 1.4;
+            max-width: 40rem;
+
+            @include breakpoint(medium) {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    .jt-1 {
+        position: absolute;
+            top: -1rem;
+        width: auto;
+        height: 120%;
+
+        @include breakpoint(medium) {
+            flex: 0 0 50%;
+            max-width: 50%;
+            margin-top: -2.5rem;
+            margin-bottom: -5rem;
+            position: relative;
+                top: auto;
+            height: auto;
+            width: 28%;
+        }
+    }
+
+    .jt-2 {
+        display: none;
+
+        @include breakpoint(medium) {
+            display: block;
+            flex: 0 0 40%;
+            max-width: 40%;
+            margin: 1.5rem 0 5rem -5rem;
+            height: auto;
+            position: relative;
+        }
+
+        @include breakpoint(large) {
+            flex: 0 0 35%;
+            max-width: 35%;
+            margin-top: 1rem;
+        }
+    }
+
+    .jt-lead {
+        background-color: $green;
+        flex: 0 0 60%;
+        align-self: flex-end;
+        color: $white;
+        margin: 1rem 0 1rem auto;
+        padding: 1.5rem 1.5rem 1rem;
+        position: relative;
+        z-index: 1;
+
+        @include breakpoint(small) {
+            flex: 0 0 66%;
+        }
+
+        @include breakpoint(medium) {
+            align-self: center;
+            margin: auto 0;
+            position: absolute;
+                right: 0;
+            width: 30%;
+            max-width: 24rem;
+        }
+
+        h6 {
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.25rem;
+            margin-bottom: 2rem;
+            position: relative;
+            text-transform: uppercase;
+
+            &::after {
+                border-top: 1px solid $white;
+                content: '';
+                width: 8rem;
+                position: absolute;
+                    bottom: -1rem;
+                    left: -3.5rem;
+            }
+        }
+
+        p {
+            font-size: 0.92rem;
+        }
+    }
+}

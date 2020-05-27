@@ -84,6 +84,7 @@ body {
 .#{$theme} {
     #{headings(1,5)} {
         font-family: $font-heading;
+        letter-spacing: 0.25rem;
     }
 
     h6 {
