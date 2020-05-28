@@ -12,9 +12,12 @@
         background: {
             image: img-url($logo);
             size: contain;
+            position: top left;
             repeat: no-repeat;
         }
-        min-width: 14rem;
+        min-width: 15rem;
+        margin-top: -0.3rem;
+        margin-right: 2rem;
         overflow: hidden;
         text-indent: -2000vw;
     }
@@ -26,6 +29,8 @@
 
         a {
             color: currentColor;
+            font-size: 0.86rem;
+            font-weight: 600;
         }
     }
 

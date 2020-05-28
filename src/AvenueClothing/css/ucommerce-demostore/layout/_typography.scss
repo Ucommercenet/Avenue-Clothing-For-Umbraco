@@ -84,7 +84,11 @@ body {
 .#{$theme} {
     #{headings(1,5)} {
         font-family: $font-heading;
-        letter-spacing: 0.25rem;
+        letter-spacing: 0.125rem;
+
+        @include breakpoint(large) {
+            letter-spacing: 0.25rem;
+        }
     }
 
     h6 {

@@ -27,11 +27,11 @@ using (Html.BeginUmbracoForm("Index", "Review"))
             <div class="control-group">
                 <label class="control-label" for="review-rating">Rating</label>
                 <div class="controls rating js-rating">
-                    <label><input class="d-none" type="radio" name="Rating" value="1" /><i class="fa fa-star-o"></i></label>
-                    <label><input class="d-none" type="radio" name="Rating" value="2" /><i class="fa fa-star-o"></i></label>
-                    <label><input class="d-none" type="radio" name="Rating" value="3" /><i class="fa fa-star-o"></i></label>
-                    <label><input class="d-none" type="radio" name="Rating" value="4" /><i class="fa fa-star-o"></i></label>
-                    <label><input class="d-none" type="radio" name="Rating" value="5" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="1" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="2" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="3" /><i class="fa fa-star-o"></i></label>
+                    <label><inpu type="radio" name="Rating" value="4" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="5" /><i class="fa fa-star-o"></i></label>
                 </div>
             </div>
 
@@ -82,31 +82,32 @@ using (Html.BeginUmbracoForm("Index", "Review"))
         </div>
     </div>
 }}
-<div class="bg-info pt-3 pb-1 px-3 mb-3">
 
-@if (Model.Reviews.Any())
+<div class="bg-info pt-2 pb-2 px-4 mb-3">
+    @if (Model.Reviews.Any())
     {
-        foreach (var review in Model.Reviews)
+        int numToTake = 3;
+        var initiallyDisplayedReviews = Model.Reviews.Take(numToTake);
+        var additionalReviews = Model.Reviews.Skip(numToTake).Take(Model.Reviews.Count() - numToTake);
+
+        foreach (var review in initiallyDisplayedReviews)
         {
-            <section itemprop="review" itemscope itemtype="http://schema.org/Review" class="review">
-                <header class="review-header">
-                    <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
-                        @DisplayStars(review.Rating)
-                    </div>
-                    <p itemprop="name" class="review-headline">@review.Title</p>
-                </header>
-                <aside class="review-by">
-                    <p>
-                        by <span itemprop="author">@review.Name</span> on
-                        <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
-                    </p>
-                </aside>
-                <p itemprop="description">@review.Comments</p>
-                <meta itemprop="ratingValue" content="@review.Rating">
-                <meta itemprop="worstRating" content="1">
-                <meta itemprop="bestRating" content="5">
-                <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
-            </section>
+            @DisplayReview(review)
+        }
+
+        if (additionalReviews.Count() > 0) {
+            <div class="text-center load-more">
+                <button class="btn btn-outline-dark my-3" type="button" data-toggle="collapse" data-target="#additionalReviews" aria-expanded="false" aria-controls="additionalReviews">
+                    Load more reviews
+                </button>
+            </div>
+
+            <div class="collapse additional-reviews" id="additionalReviews">
+                @foreach (var review in additionalReviews)
+                {
+                    @DisplayReview(review)
+                }
+            </div>
         }
     }
     else
@@ -115,13 +116,31 @@ using (Html.BeginUmbracoForm("Index", "Review"))
     }
 </div>
 
+@helper DisplayReview(ProductReviewViewModel review) {
+    <section itemprop="review" itemscope itemtype="http://schema.org/Review" class="review pt-3">
+        <header class="review-header mb-2">
+            <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars mb-1">
+
+            </div>
+            <strong itemprop="author">@review.Name</strong> &ndash;
+            <abbr class="small" title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+        </header>
+        <h6 itemprop="name">@review.Title</h6>
+        <p itemprop="description">@review.Comments</p>
+        <meta itemprop="ratingValue" content="@review.Rating">
+        <meta itemprop="worstRating" content="1">
+        <meta itemprop="bestRating" content="5">
+        <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
+    </section>
+}
+
 
 
 @helper DisplayStars(double? rating)
 {
-if (rating.HasValue)
-{
-        <span class="star-rating">
+    if (rating.HasValue)
+    {
+        <span class="star-rating rating-@rating">
             @for (var i = 20; i <= 100; i = i + 20)
             {
                 if (rating >= i)
@@ -134,6 +153,6 @@ if (rating.HasValue)
                 }
             }
         </span>
-}
+    }
 }
 

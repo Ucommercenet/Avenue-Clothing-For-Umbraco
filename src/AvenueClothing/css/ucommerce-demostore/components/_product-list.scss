@@ -8,11 +8,15 @@
             color: currentColor;
             flex: 1 1 0;
             line-height: 1.2;
-            max-width: 276px;
-            position: relative;
+            max-width: calc(50% - 4px);
             padding: 0 2px;
+            position: relative;
             text-decoration: none;
             transition: all $ts $tt;
+
+            @include breakpoint(medium) {
+                max-width: 276px;
+            }
 
 
             #{$hover-states} {

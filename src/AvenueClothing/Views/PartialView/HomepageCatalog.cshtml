@@ -2,11 +2,10 @@
 @{
     Layout = null;
 }
-
-<div class="product-list">
+<div class="product-list multi-item-carousel js-multi-item-carousel mb-5">
     @foreach (var product in Model.Products)
     {
-        <a href="@product.Url">
+        <a href="@product.Url" class="">
             <div class="product-image mb-3">
                 <img class="img-fluid" src="@product.ThumbnailImageUrl">
             </div>
@@ -24,5 +23,4 @@
             </div>
         </a>
     }
-
 </div>

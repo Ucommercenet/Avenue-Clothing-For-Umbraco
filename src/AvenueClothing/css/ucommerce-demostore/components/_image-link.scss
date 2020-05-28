@@ -1,7 +1,11 @@
 .#{$theme} {
     .h4 {
         .caption {
-            bottom: 1.5rem;
+            bottom: 1rem;
+
+            @include breakpoint(medium) {
+                bottom: 1.5rem;
+            }
         }
     }
 
@@ -25,15 +29,25 @@
         color: $black;
         font-family: $font-heading;
         font-size: inherit;
-        letter-spacing: 0.25rem;
+        line-height: 1.2;
         margin: 0 auto;
-        padding: 1rem;
+        padding: 0.75rem 0.5rem;
         position: absolute;
             bottom: 1rem;
             left: 1rem;
             right: 1rem;
         text-align: center;
+        text-shadow: 0px 0px 3px $white, 0px 0px 5px transparentize($white, 0.5), 0px 0px 10px  transparentize($white, 0.5);
         text-transform: uppercase;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.125rem;
+            padding: 1rem;
+        }
+
+        @include breakpoint(large) {
+            letter-spacing: 0.25rem;
+        }
     }
 }
 

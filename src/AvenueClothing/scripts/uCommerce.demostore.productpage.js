@@ -31,33 +31,20 @@ function enableAddToCartWhenSelected(addToCartButton, variantInputs) {
 };
 
 function wireupRatings(radios) {
-    $('#review-form').addClass("display-none");
-    $('label', radios).each(function () {
-        var t = $(this);
-        t.addClass('off');
-        $('input:radio', t).addClass("display-none");
-        setStarHoverOutState($('i', t));
-        t.hover(function () {
-            var parent = $(this);
-            var labels = parent.prevAll('label');
-            setStarHoverState($('i', labels));
-            setStarHoverState($('i', parent));
-        }, function () {
-            var parent = $(this);
-            var labels = parent.prevAll('label');
-            if (!parent.hasClass('selected')) {
-                setStarHoverOutState($('i', labels));
-                setStarHoverOutState($('i', parent));
-            }
-        });
-        t.click(function () {
-            var parent = $(this);
-            parent.addClass('selected');
-            $('#review-form').slideDown();
-        });
-    });
-};
+	var $ratings = $('.js-rating label');
 
+	$ratings.on('click', function(){
+		var currentIndex = $(this).index();
+
+		$ratings.each(function(){
+			if ($(this).index() <= currentIndex) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+	});
+};
 
 function updateAddToCartButton(addToCartButton, variantInputs) {
 	if (variantInputs.length == 0)
@@ -73,12 +60,7 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 	}
 };
 
-function setStarHoverState(label) {
-	label.addClass('fa-star').removeClass('fa-star-o');
-}
-function setStarHoverOutState(label) {
-	label.addClass('fa-star-o').removeClass('fa-star');
-}
+
 function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, variantInputs, quantityInput) {
 	addToCartButton.click(function (e) {
 		e.preventDefault();

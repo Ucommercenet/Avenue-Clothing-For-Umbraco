@@ -12,10 +12,11 @@
     </ol>
     <div class="carousel-inner">
         <a class="carousel-item active" href="#">
-            <img class="d-block w-100" alt="Spring Summer Collection 2020" srcset="
-                /img/site/slider/slider0-2x.jpg 1200w,
-                /img/site/slider/slider0-2x.jpg 1006w
-            " src="/img/site/slider/slider0-2x.jpg" >
+            <picture class="d-block w-100">
+                <source media="(max-width: 640px)" type="image/jpg"
+                srcset="/img/site/slider/slider0-1x.jpg">
+                <img src="/img/site/slider/slider0-2x.jpg" alt="Spring Summer Collection 2020">
+            </picture>
 
             <div class="carousel-caption">
                 <h5 class="mb-3">SpRing SummeR COLLECTION 2020</h5>
@@ -23,10 +24,11 @@
             </div>
         </a>
         <a class="carousel-item" href="#">
-            <img class="d-block w-100" alt="Spring Summer Collection 2020" srcset="
-                /img/site/slider/slider1-2x.jpg 1200w,
-                /img/site/slider/slider1-2x.jpg 1006w
-            " src="/img/site/slider/slider1-2x.jpg" >
+            <picture class="d-block w-100">
+                <source media="(max-width: 640px)" type="image/jpg"
+                srcset="/img/site/slider/slider1-1x.jpg">
+                <img src="/img/site/slider/slider1-2x.jpg" alt="Spring Summer Collection 2020">
+            </picture>
 
             <div class="carousel-caption">
                 <h5 class="mb-3">SpRing SummeR COLLECTION 2020</h5>
@@ -34,24 +36,17 @@
             </div>
         </a>m
         <a class="carousel-item" href="#">
-            <img class="d-block w-100" alt="Spring Summer Collection 2020" srcset="
-                /img/site/slider/slider2-2x.jpg 1200w,
-                /img/site/slider/slider2-2x.jpg 1006w
-            " src="/img/site/slider/slider2-2x.jpg" >
+            <picture class="d-block w-100">
+                <source media="(max-width: 640px)" type="image/jpg"
+                srcset="/img/site/slider/slider2-1x.jpg">
+                <img src="/img/site/slider/slider2-2x.jpg" alt="Spring Summer Collection 2020">
+            </picture>
 
             <div class="carousel-caption">
-                <h5 class="mb-3">SpRing SummeR COLLECTION 2020</h5>
+                <h5 class="mb-3">SpRing SummeR COLLECTION 2020 more text</h5>
                 <div class="btn btn-outline-light">shop now</div>
             </div>
         </a>
-    <!-- <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a> -->
     </div>
 </div>
 
@@ -68,7 +63,7 @@
         </a>
     </div>
 
-    <div class="row h5 px-2 pb-4">
+    <div class="row h5 px-2 pb-1 mb-md-2 pb-lg-4">
         <a class="image-link col-6 col-md-3 pb-4" href="#">
             <img src="/img/site/category-3.jpg" alt="Formal Tops">
             <span class="caption">Formal Tops</span>
@@ -96,10 +91,10 @@
 
     @Umbraco.RenderMacro("UcommerceHomepageCatalog")
 
-    <h2 class="mt-5">About Us</h2>
+    <h2 class="mt-5 pb-lg-5">About Us</h2>
 </div>
 
-<section class="jumbotron jumbotron-fluid p-0 mb-5">
+<section class="jumbotron jumbotron-fluid p-0 my-5">
     <div class="container">
         <img class="jt-1" alt=" "  src="/img/site/jumbotron/jt1.jpg" >
         <img class="jt-2" alt=" "  src="/img/site/jumbotron/jt2.jpg" >

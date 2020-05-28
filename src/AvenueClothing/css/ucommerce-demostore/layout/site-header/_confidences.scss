@@ -1,29 +1,59 @@
 .#{$theme} {
     .confidences {
-        @include reset-list;
+        display: flex;
+        justify-content: space-between;
 
-        li {
-            display: flex;
-                align-items: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            line-height: 1;
-            position: relative;
-            padding-left: 2rem;
+        &.slick-initialized {
+            .confidence-item {
+                opacity: 1;
+            }
+
+            @include breakpoint(large) {
+                .slick-list {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .confidence-item  {
+        flex: 0 0 100%;
+        display: flex;
+            align-items: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1;
+        opacity: 0;
+        position: relative;
+        // padding-left: 1.8rem;
+        text-align: center;
+        text-transform: uppercase;
+        transition: all $ts $tt;
+
+        @include breakpoint(medium) {
+            flex: 0 0 50%;
+        }
+
+        @include breakpoint(large) {
+            flex: 0 0 auto;
+            opacity: 1;
+            text-align: left;
         }
 
         .icon {
             width: 1.2rem;
             height: 1.2rem;
-            margin: auto 0;
-            position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
+            margin-right: 0.5rem;
+            // margin: auto 0;
+            // position: absolute;
+            //     top: 0;
+            //     bottom: 0;
+            //     left: 0;
         }
 
         .icon-truck {
-            top: 0.1rem;
+            // top: 0.1rem;
+            // left: -0.2rem;
             width: 1.6rem;
         }
     }
