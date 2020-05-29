@@ -87,11 +87,19 @@ body {
         letter-spacing: 0.125rem;
 
         @include breakpoint(large) {
-            letter-spacing: 0.25rem;
+            letter-spacing: 0.2rem;
         }
     }
 
     h6 {
         font-family: $font-main;
+    }
+
+    strong {
+        font-weight: 600;
+    }
+
+    .small {
+        line-height: 1.3;
     }
 }

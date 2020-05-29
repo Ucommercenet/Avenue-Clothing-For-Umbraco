@@ -1,6 +1,7 @@
 $theme: 'theme-sdr';
 $logo: 'logo.svg';
 $btn-min-width: 14.5rem;
+$confidences-height: 2.25rem;
 
 .#{$theme} {
     .bg-dark {
@@ -29,10 +30,6 @@ $btn-min-width: 14.5rem;
 
     .bg-info {
         background-color: mix($white, $orange, 80) !important;
-    }
-
-    .bg-transparent-white {
-        background: transparentize($white, 0.1);
     }
 
     .text-danger {

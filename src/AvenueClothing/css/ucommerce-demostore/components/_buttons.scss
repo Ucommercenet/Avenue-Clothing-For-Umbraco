@@ -27,6 +27,12 @@
         }
     }
 
+    .btn-sm {
+        line-height: 1;
+        min-width: 0;
+        padding: 0.25rem;
+    }
+
     .btn-dark {
         color: $white;
         background: $grey-3;
@@ -61,6 +67,30 @@
             border-color: $white;
         }
     }
+
+    .btn-outline-secondary {
+        color: $grey-6;
+        border-color: $grey-6;
+
+        #{$hover-states} {
+            color: $white;
+            background: $grey-6;
+            border-color: $grey-6;
+        }
+    }
+
+    .btn-success {
+        color: $white;
+        background: $green;
+        border-color: $green;
+
+        #{$hover-states} {
+            color: $white;
+            background: $green-hover;
+            border-color: $green-hover;
+        }
+    }
+
 
     .btn-accordion {
         background: $white;

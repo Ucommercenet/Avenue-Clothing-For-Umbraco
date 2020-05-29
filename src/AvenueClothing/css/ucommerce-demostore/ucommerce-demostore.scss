@@ -8,11 +8,14 @@
 @import "layout/typography",
         "layout/classes",
         "layout/images",
+        "layout/site-header/layout",
         "layout/site-header/navbar",
         "layout/site-header/confidences",
+        "layout/site-header/search",
         "layout/site-footer";
 
-@import "components/breadcrumbs",
+@import "components/alerts",
+        "components/breadcrumbs",
         "components/buttons",
         "components/card",
         "components/carousel",
@@ -32,4 +35,5 @@
         "components/forms/form-check",
         "components/forms/inputs",
         "components/forms/layout",
-        "components/forms/select";
+        "components/forms/select",
+        "components/forms/validation";

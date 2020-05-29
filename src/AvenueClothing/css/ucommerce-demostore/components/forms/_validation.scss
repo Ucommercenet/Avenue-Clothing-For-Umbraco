@@ -1,0 +1,42 @@
+.#{$theme} {
+    .single-line-form {
+        &.form-invalid {
+            button[type="submit"] {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+
+        &.form-valid {
+            button[type="submit"] {
+                background: $green;
+                border-color: $green;
+            }
+        }
+    }
+
+    .input-group {
+        .help-inline {
+            display: none !important;
+        }
+
+        &.invalid {
+            border-color: $red;
+
+            .help-inline {
+                display: block !important;
+            }
+        }
+    }
+
+    .help-inline {
+        background: $red;
+        border-radius: 0 0 3rem 3rem;
+        color: $white;
+        font-size: 0.8rem;
+        padding: 0.25rem 1.25rem;
+        position: absolute;
+            left: 0;
+            top: 100%;
+    }
+}

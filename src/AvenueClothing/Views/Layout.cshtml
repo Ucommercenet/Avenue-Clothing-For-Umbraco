@@ -24,7 +24,7 @@
 
 }
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -73,8 +73,8 @@
         })()
     </script>
 </head>
-<body class="theme-sdr">
-    <div class="sticky-top bg-transparent-white">
+<body class="theme-sdr d-flex flex-column h-100">
+    <div class="sticky-top header-container">
         <div class="container">
             <header class="d-flex flex-wrap flex-lg-nowrap align-items-center py-3 sticky-top">
 
@@ -86,7 +86,7 @@
                             <a class="px-3" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">Shop</a>
                         </li>
                         <li>
-                            <a class="px-3 href="#">About</a>
+                            <a class="px-3" href="https://ucommerce.net/" target="_blank">About</a>
                         </li>
                         <li>
                             <a class="px-3 text-danger" href="#">Sale</a>
@@ -203,10 +203,10 @@
             </div>
         </footer>
     </div>*@
-     @RenderBody()
+    @RenderBody()
     @Html.Raw(Html.RenderJsHere())
 
-    <footer class="site-footer bg-dark text-light">
+    <footer class="site-footer bg-dark text-light mt-auto">
         <div class="container">
             <div class="row pt-5">
                 <div class="col-lg-4 pr-lg-5 pb-4 pb-lg-2">

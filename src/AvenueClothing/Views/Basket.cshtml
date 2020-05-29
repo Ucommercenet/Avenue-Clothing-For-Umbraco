@@ -4,107 +4,209 @@
 }
 
 
+
+
     @if (Model.OrderLines.Count == 0)
     {
         <div class="alert alert-info">
-            <p>Your cart is empty. Please <a href="/">return to our store and add some items</a>.</p>
+            <div class="container">
+                <h5 class="pt-2 text-uppercase">Your cart is empty.</h5>
+                <p>Please <a href="/demo-store/">return to our store and add some items</a>.</p>
+            </div>
         </div>
+<!--
+<div class="container py-4">
+<h1 class="h2 text-uppercase">Cart</h1>
+<form method="post">
+<table class="table table-striped" id="cart">
+<thead>
+<tr>
+<th class="span7">Description</th>
+<th class="span1 money">Price</th>
+<th class="span1 money">VAT</th>
+<th class="span2">Quantity</th>
+<th class="span1 money">Total</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="order-line">
+<input id="OrderLines_0__Sku" name="OrderLines[0].Sku" type="hidden" value="074617">
+<input id="OrderLines_0__VariantSku" name="OrderLines[0].VariantSku" type="hidden" value="074617-8">
+<input id="OrderLines_0__OrderLineId" name="OrderLines[0].OrderLineId" type="hidden" value="184">
+<td><a href="/demo-store/p/paraboot-avoriazjannu-marron-brut-marron-brown-hiking-boot-shoes">Paraboot Avoriaz/Jannu Marron Brut Marron Brown Hiking Boot Shoes 8</a></td>
+<td class="money">
+€343.85 </td>
+ <td class="money">
+€51.58
+</td>
+<td>
+<input class="qty form-control no-padding" id="OrderLines_0__Quantity" name="OrderLines[0].Quantity" type="text" value="2">
+</td>
+<td>
+€790.86
+</td>
+<td>
+<button type="submit" value="184" name="RemoveOrderlineId" class="btn btn-link btn-sm line-remove">×</button>
+</td>
+</tr>
+<tr>
+<td rowspan="4">
+</td>
+<td colspan="2" rowspan="4">
+<button name="update-basket" id="update-basket" class="btn btn-outline-dark update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
+</td>
+<td>Sub total:</td>
+<td class="money order-subtotal">
+€687.70
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>VAT:</td>
+<td class="money order-tax">
+€103.16
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Discounts:</td>
+<td class="money order-discounts">
+€0.00
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Order total:</td>
+<td class="money order-total">
+€790.86
+</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="pull-xs-right text-right">
+<a href="/basket/address" class="btn btn-secondary btn-large btn-success"> Continue to Checkout <i class="fa fa-arrow-right icon-white"></i></a>
+</div>
+</form>
+<div class="col-md-7 pl-0 ">
+<div class="single-line-form" id="voucher-form">
+<form action="/basket" enctype="multipart/form-data" method="post"> <div class="input-group">
+<input type="text" name="voucher" class="form-control" placeholder="Enter code here">
+<span class="input-group-btn">
+<button name="add-voucher" class="btn btn-secondary btn-nopadding" type="submit"><i class="icon-plus icon-white"></i>Add Voucher</button>
+</span>
+</div>
+<input name="ufprt" type="hidden" value="61F96D02F9DFFC135BCDFD72E8420D81DF8DB4A1EF53F2D1C2766E51C964A5740A992A97ACA20D6A671107DB4B02B4AD2377169A7B5A2C960CB1D8D5BEF20B91946EEE0273BC05D7175E016F5717D2000BD82344041E45287DCCF165F46112FAFB768A6751260D6E40681B6032F4F2211EE6223EC13E5A93371F06D6AAC5E628"></form>
+                    <p class="small pt-2">
+                        <span class="label label-info">Tip!</span> Sign up to our mailing list and get 10% off your first order! <a href="#"><strong>Click here to get 10% off now</strong></a>!
+                    </p>
+</div>
+</div>
+</div>-->
     }
     else
     {
-        <form method="post">
-            <table class="table table-striped" id="cart">
-                <thead>
-                <tr>
-                    <th class="span7">Description</th>
-                    <th class="span1 money">Price</th>
-                    <th class="span1 money">VAT</th>
-                    <th class="span2">Quantity</th>
-                    <th class="span1 money">Total</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @for (var i = 0; i < Model.OrderLines.Count; i++)
-                {
-                    var line = Model.OrderLines[i];
-                    <tr class="order-line">
-
-                        @Html.HiddenFor(model => model.OrderLines[i].Sku)
-                        @Html.HiddenFor(model => model.OrderLines[i].VariantSku)
-                        @Html.HiddenFor(model => model.OrderLines[i].OrderLineId)
-
-                        <td><a href="@line.ProductUrl">@line.ProductName</a></td>
-                        <td class="money">
-                            @if (@line.Discount.HasValue && @line.Discount > 0)
-                            {
-                                <span style="text-decoration: line-through">
-                                        @line.Price
-                                    </span>
-                                @line.PriceWithDiscount
-                            }
-                            else
-                            {
-                                @line.Price
-                            }
-                        </td>
-                        <td class="money">
-                            @line.Tax
-                        </td>
-                        <td>
-                            @Html.TextBoxFor(model => model.OrderLines[i].Quantity, new {@class = "qty form-control no-padding" })
-                        </td>
-                        <td>
-                            @line.Total
-                        </td>
-                        <td>
-                            <button type="submit" value="@line.OrderLineId" name="RemoveOrderlineId" class="line-remove">×</button>
-                        </td>
+        <div class="container py-4">
+            <h1 class="h2 text-uppercase">Cart</h1>
+            <form method="post">
+                <table class="table table-striped" id="cart">
+                    <thead>
+                    <tr>
+                        <th class="span7">Description</th>
+                        <th class="span1 money">Price</th>
+                        <th class="span1 money">VAT</th>
+                        <th class="span2">Quantity</th>
+                        <th class="span1 money">Total</th>
+                        <th></th>
                     </tr>
-                }
-                <tr>
+                    </thead>
+                    <tbody>
+                    @for (var i = 0; i < Model.OrderLines.Count; i++)
+                    {
+                        var line = Model.OrderLines[i];
+                        <tr class="order-line">
 
-                    <td rowspan="4">
-                    </td>
-                    <td colspan="2" rowspan="4">
-                        <button name="update-basket" id="update-basket" class="btn btn-secondary update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
-                    </td>
-                    <td>Sub total:</td>
-                    <td class="money order-subtotal">
-                        @Model.SubTotal
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>VAT:</td>
-                    <td class="money order-tax">
-                        @Model.TaxTotal
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>Discounts:</td>
-                    <td class="money order-discounts">
-                        @Model.DiscountTotal
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>Order total:</td>
-                    <td class="money order-total">
-                        @Model.OrderTotal
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="pull-xs-right">
-                <a href="/basket/address" class="btn btn-secondary btn-large btn-success">  Continue to Checkout <i class="fa fa-arrow-right icon-white"></i></a>
-    </div>
-        </form>
-        <div class="col-md-6" id="voucher-form">
-            @Umbraco.RenderMacro("UcommerceVoucher")
-            <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
+                            @Html.HiddenFor(model => model.OrderLines[i].Sku)
+                            @Html.HiddenFor(model => model.OrderLines[i].VariantSku)
+                            @Html.HiddenFor(model => model.OrderLines[i].OrderLineId)
+
+                            <td><a href="@line.ProductUrl">@line.ProductName</a></td>
+                            <td class="money">
+                                @if (@line.Discount.HasValue && @line.Discount > 0)
+                                {
+                                    <span style="text-decoration: line-through">
+                                            @line.Price
+                                        </span>
+                                    @line.PriceWithDiscount
+                                }
+                                else
+                                {
+                                    @line.Price
+                                }
+                            </td>
+                            <td class="money">
+                                @line.Tax
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.OrderLines[i].Quantity, new {@class = "qty form-control no-padding" })
+                            </td>
+                            <td>
+                                @line.Total
+                            </td>
+                            <td>
+                                <button type="submit" value="@line.OrderLineId" name="RemoveOrderlineId" class="btn btn-link btn-smline-remove">×</button>
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+
+                        <td rowspan="4">
+                        </td>
+                        <td colspan="2" rowspan="4">
+                            <button name="update-basket" id="update-basket" class="btn btn-outline-dark update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
+                        </td>
+                        <td>Sub total:</td>
+                        <td class="money order-subtotal">
+                            @Model.SubTotal
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>VAT:</td>
+                        <td class="money order-tax">
+                            @Model.TaxTotal
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Discounts:</td>
+                        <td class="money order-discounts">
+                            @Model.DiscountTotal
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Order total:</td>
+                        <td class="money order-total">
+                            @Model.OrderTotal
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="pull-xs-right text-right">
+                    <a href="/basket/address" class="btn btn-secondary btn-large btn-success">  Continue to Checkout <i class="fa fa-arrow-right icon-white"></i></a>
+                </div>
+            </form>
+            <div class="col-md-6 pl-0">
+                <div class="single-line-form" id="voucher-form">
+                    @Umbraco.RenderMacro("UcommerceVoucher")
+                    <p class="small pt-2">
+                        <span class="label label-info">Tip!</span> Sign up to our mailing list and get 10% off your first order! <a href="#"><strong>Click here to get 10% off now</strong></a>!
+                    </p>
+                </div>
+            </div>
         </div>
     }
 

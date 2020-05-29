@@ -1,16 +1,44 @@
 ﻿$(function () {
+    var $body = $('body');
+    var throttleInterval = 250;
+
+    var condenseHeader = function() {
+        var scrollDistance = 10;
+        var currentDistance = $(window).scrollTop();
+        var scrolledClass = 'scrolled';
+
+        if (currentDistance < scrollDistance) {
+            $body.removeClass(scrolledClass);
+        } else {
+            $body.addClass(scrolledClass);
+        }
+    };
+
+    $(window).on('scroll', throttle( function() {
+        condenseHeader();
+    }, throttleInterval))
+
     $('form.validate').each(function () {
         $(this).validate({
             errorElement: "span",
             errorClass: "help-inline",
-            highlight: function (label) {
-                $(label).closest('.control-group').addClass('error');
+            highlight: function (input) {
+                var $input = $(input);
+                var $inputGroup = $input.closest('.input-group').removeClass('valid');
+
+
+                if ($input.val().length) {
+                    $inputGroup.addClass('invalid');
+                }  else {
+                    $inputGroup.removeClass('invalid');
+                }
+                $inputGroup.closest('form.validate').removeClass('form-valid').addClass('form-invalid');
             },
-            success: function (label) {
-                label.closest('.control-group').addClass('success');
+            success: function (input) {
+                $(input).closest('.input-group').removeClass('invalid').addClass('valid');
+                $(input).closest('form.validate').removeClass('form-invalid').addClass('form-valid');
             }
         });
-
     });
     $('#site-search').typeahead({
         minLength: 3,
@@ -82,37 +110,58 @@
     }
 
 
-
-    // if ($('.js-multi-item-carousel').length && $('.js-multi-item-carousel').children().length > 3) {
-    //     $('.js-multi-item-carousel').slick({
-    //         mobileFirst: true,
-    //         slidesToShow: 2,
-    //         slidesToScroll: 2,
-    //         autoplay: true,
-    //         arrows: false,
-    //         dots: true,
-    //         infinite: true,
-    //         responsive: [
-    //             {
-    //                 breakpoint: 760,
-    //                 settings: {
-    //                     slidesToShow: 3,
-    //                     slidesToScroll: 3,
-    //                     centerMode: true
-    //                 }
-    //             },
-    //             {
-    //                 breakpoint: 1024,
-    //                 settings: {
-    //                     slidesToShow: 4,
-    //                     slidesToScroll: 4,
-    //                     centerMode: false
-    //                 }
-    //             }
-    //         ]
-    //     });
-    // }
+    if ($('.js-multi-item-carousel').length && $('.js-multi-item-carousel').children().length > 3) {
+        $('.js-multi-item-carousel').slick({
+            mobileFirst: true,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            autoplay: true,
+            arrows: false,
+            dots: true,
+            infinite: true,
+            responsive: [
+                {
+                    breakpoint: 760,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        centerMode: true
+                    }
+                },
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                        centerMode: false
+                    }
+                }
+            ]
+        });
+    }
 });
+
+var throttle = function (fn, threshold, scope) {
+    var last;
+    var deferTimer;
+    return function () {
+        var context = scope || this;
+        var now = Number(new Date());
+        var args = arguments;
+        if (last && now < last + threshold) {
+            // hold on to it
+            clearTimeout(deferTimer);
+            deferTimer = setTimeout(function () {
+                last = now;
+                fn.apply(context, args);
+            }, threshold + last - now);
+        } else {
+            last = now;
+            fn.apply(context, args);
+        }
+    };
+};
+
 function updateCartTotals() {
     if ($('#empty-cart').length != 0) {
         prepCart();

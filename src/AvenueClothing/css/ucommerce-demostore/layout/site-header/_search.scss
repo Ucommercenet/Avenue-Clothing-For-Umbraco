@@ -1,0 +1,45 @@
+.#{$theme} {
+    &.scrolled {
+        .typeahead {
+
+        }
+    }
+
+    .typeahead {
+        background: $white-transparent;
+        border-radius: 0;
+        border: none;
+        margin-top: 1rem;
+        padding: 0;
+        position: fixed;
+        z-index: 12;
+
+        @include breakpoint(large) {
+            max-width: 25rem;
+        }
+
+        li {
+            padding: 0;
+        }
+
+        .active {
+            a {
+                background: $info;
+            }
+        }
+
+        a {
+            color: $black;
+            display: block;
+            overflow: hidden;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            #{$hover-states} {
+                background: $info;
+            }
+        }
+    }
+}
