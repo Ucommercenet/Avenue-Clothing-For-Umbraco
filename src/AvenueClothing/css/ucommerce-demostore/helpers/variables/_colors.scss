@@ -11,7 +11,7 @@ $white: #fff;
 $red: #C10000;
 $orange: #FF9400;
 $green: #70A996;
-$green-hover: lighten($green, 8);
+$green-hover: darken($green, 7);
 
 $danger: $red;
 $warning: #d38a81;

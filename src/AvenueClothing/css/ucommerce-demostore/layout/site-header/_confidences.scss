@@ -1,7 +1,8 @@
 .#{$theme} {
     .confidences {
         display: flex;
-        justify-content: space-between;
+            justify-content: space-between;
+        height: $confidences-height;
 
         &.slick-initialized {
             .confidence-item {
@@ -22,7 +23,7 @@
             align-items: center;
         font-size: 0.75rem;
         font-weight: 600;
-        line-height: 1;
+        line-height: $confidences-height;
         opacity: 0;
         position: relative;
         // padding-left: 1.8rem;
@@ -37,6 +38,7 @@
         @include breakpoint(large) {
             flex: 0 0 auto;
             opacity: 1;
+            line-height: 1;
             text-align: left;
         }
 

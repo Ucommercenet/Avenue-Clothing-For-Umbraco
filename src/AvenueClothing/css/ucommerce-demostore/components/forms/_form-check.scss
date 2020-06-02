@@ -20,11 +20,6 @@ $label-color: $black;
 
     #{$hover-states} {
         .cb {
-            &::before {
-                background-color: lighten($checkable-bg-checked, 30);
-
-            }
-
             &::after {
                 transform: scale(1);
             }
@@ -79,9 +74,20 @@ $label-color: $black;
     }
 }
 
-// default 'tick' style checkbox
 .form-check-label {
     @include checkable-base;
+
+    &.is-radio  {
+        .cb {
+            &::before {
+                border-radius: 50%;
+            }
+
+            &::after {
+                background-position: top 0.25rem left 0.15rem;
+            }
+        }
+    }
 
     input {
         cursor: pointer;

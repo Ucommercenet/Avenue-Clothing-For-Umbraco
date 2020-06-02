@@ -2,29 +2,30 @@
 @model MiniBasketViewModel
 @{
     Layout = "";
+    var defaultCssClasses = "minicart order-md-10";
+    var cartItemsText = Model.NumberOfItems == 1 ? "item" : "items";
 }
 
 @if (Model.IsEmpty)
     {
-        <a href="/store" class="minicart is-empty text-right" id="empty-cart">
-            <span class="icon icon-bag mr-1" aria-hidden="true" focusable="false" role="img">
+        <a href="/store" class="@defaultCssClasses is-empty text-right" id="empty-cart">
+            <span class="icon icon-bag" aria-hidden="true" focusable="false" role="img">
                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
             </span>
-            Your Bag is Empty
+            <span class="d-none d-md-inline">
+                Your Bag is Empty
+            </span>
         </a>
     }
 
   else
     {
-        <a href="/basket" class-"minicart has-items" id="mini-cart">
+        <a href="/basket" class="@defaultCssClasses has-items" id="mini-cart">
             @*<i class="icon-shopping-cart icon-white"></i>*@
-            <span class="icon icon-bag mr-1" aria-hidden="true" focusable="false" role="img">
+            <span class="icon icon-bag" aria-hidden="true" focusable="false" role="img">
                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
             </span>
-            <span class="item-qty">@Model.NumberOfItems</span> items in cart, total: <span class="order-total">@Model.Total</span>
+            <span class="item-qty">@Model.NumberOfItems</span>
+            <span class="d-none d-md-inline"> @cartItemsText in cart: <span class="order-total">@Model.Total</span></span>
         </a>
     }
-
-
-
-

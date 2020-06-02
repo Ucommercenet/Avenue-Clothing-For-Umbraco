@@ -5,11 +5,15 @@
         font-family: $font-secondary;
         font-size: 0.9rem;
         font-weight: 500;
-        letter-spacing: 0.2rem;
         line-height: 1.6;
         min-width: $btn-min-width;
         padding: 0.5rem 1rem;
         text-transform: uppercase;
+        vertical-align: middle;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.2rem;
+        }
 
         #{$hover-states} {
             box-shadow: none;
@@ -30,7 +34,11 @@
     .btn-sm {
         line-height: 1;
         min-width: 0;
-        padding: 0.25rem;
+        padding: 0.25rem 0.5rem;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.1rem;
+        }
     }
 
     .btn-dark {
@@ -51,8 +59,19 @@
 
         #{$hover-states} {
             color: $white;
-            background: $black;
-            border-color: $black;
+            background: $grey-3;
+            border-color: $grey-3;
+        }
+    }
+
+    .btn-outline-secondary {
+        color: $grey-6;
+        border-color: $grey-6;
+
+        #{$hover-states} {
+            color: $white;
+            background: $grey-6;
+            border-color: $grey-6;
         }
     }
 
@@ -79,7 +98,8 @@
         }
     }
 
-    .btn-success {
+    .btn-success,
+    .btn-primary {
         color: $white;
         background: $green;
         border-color: $green;
@@ -91,7 +111,6 @@
         }
     }
 
-
     .btn-accordion {
         background: $white;
         color: $grey-3;
@@ -102,11 +121,14 @@
         font-family: $font-main;
         font-size: 1rem;
         font-weight: 600;
-        letter-spacing: 0.05rem;
         outline: none;
         padding-top: 1rem;
         padding-bottom: 1rem;
         width: 100%;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.05rem;
+        }
 
         .icon {
             transition: transform $ts $tt;
@@ -129,6 +151,20 @@
         &[aria-expanded="true"] {
             .icon {
                 transform: rotate(180deg) translateY(-0.5rem);
+            }
+        }
+    }
+
+    .btn-link {
+        border: 0;
+        color: $green;
+
+        &.line-remove {
+            color: currentColor;
+            text-decoration: none;
+
+            #{$hover-states} {
+                color: $red;
             }
         }
     }

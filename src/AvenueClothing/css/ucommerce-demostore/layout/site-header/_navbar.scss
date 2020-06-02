@@ -1,16 +1,9 @@
 .#{$theme} {
-    // .navbar {
-    //     background: $white;
-    //     color: $black;
-
-    //     a {
-    //         color: currentColor;
-    //     }
-    // }
-
     &.scrolled {
-        .navigation-dropdown-wrapper {
-            transform: translateY(-$confidences-height);
+        .category-nav{
+            &.show {
+                top: $header-height;
+            }
         }
     }
 
@@ -21,14 +14,50 @@
             position: top left;
             repeat: no-repeat;
         }
-        min-width: 15rem;
+        min-width: 13rem;
         margin-top: -0.3rem;
-        margin-right: 2rem;
         overflow: hidden;
         text-indent: -2000vw;
+
+        @include breakpoint(small) {
+            min-width: 14rem;
+        }
+
+        @include breakpoint(medium) {
+            min-width: 15rem;
+        }
+    }
+
+    .navbar-toggler {
+        outline: none;
+
+        #{$hover-states} {
+            color: mix($green, $grey-3);
+        }
+
+        &[aria-expanded="true"] {
+            color: $green;
+        }
     }
 
     .site-nav {
+        background: $grey-e;
+        height: $confidences-height;
+        line-height: $confidences-height;
+        position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+        text-align: center;
+
+        @include breakpoint(large) {
+            background: transparent;
+            height: auto;
+            line-height: 1;
+            position: static;
+            text-align: left;
+        }
+
         ul {
             @include reset-list;
         }
@@ -37,22 +66,42 @@
             color: currentColor;
             font-size: 0.86rem;
             font-weight: 600;
+
+            #{$hover-states} {
+                color: $black;
+                outline: none;
+                text-decoration: none;
+            }
+
+            &[aria-expanded="true"] {
+                color: $black;
+                font-weight: 700;
+                outline: none;
+                text-decoration: none;
+            }
         }
     }
 
     .category-nav {
+        opacity: 0;
+        position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        transition: all $ts $tt;
+
         &.collapsing {
-            position: static;
+            z-index: 1;
+        }
+
+        &.show {
+            opacity: 1;
+            top: $header-height + $confidences-height;
+            z-index: 20;
         }
     }
 
     .navigation-dropdown-wrapper {
-        position: fixed;
-            left: 0;
-            right: 0;
-        z-index: 11;
-        transition: transform $ts $tt;
-
         ul {
             @include reset-list;
             font-family: $font-main;
@@ -65,6 +114,34 @@
             font-weight: 300;
             line-height: 1.2;
             margin-bottom: 0.5rem;
+
+            #{$hover-states} {
+                outline: none;
+            }
+        }
+    }
+
+    .navigation-dropdown-featured-item {
+        flex: 0 0 100%;
+
+        @include breakpoint(small) {
+            flex: 0 0 auto;
+        }
+    }
+
+    .navigation-dropdown-item {
+        flex: 0 0 auto;
+    }
+
+    .navbar-form {
+        position: absolute;
+            top: $header-height;
+            left: 0;
+            right: 0;
+
+        @include breakpoint(medium) {
+            display: block;
+            position: static;
         }
     }
 }

@@ -5,18 +5,16 @@
     Layout = null;
 }
 
-<nav id="category-nav" class="collapse category-nav">
+<nav id="category-nav" class="collapse category-nav" >
     <div class="navigation-dropdown-wrapper">
         <div class="container">
-            <div class="d-flex bg-white">
-
-
+            <div class="d-flex flex-wrap flex-md-nowrap bg-white">
                 @helper DisplayCategories(IList<CategoryViewModel> categories)
                 {
                     var featuredCategory = categories.FirstOrDefault();
                     var remainingCategories = categories.Skip(1).Take(4);
 
-                    <div class="bg-black text-white p-4">
+                    <div class="bg-black text-white p-4 navigation-dropdown-featured-item">
                         <h5 class="h6 mb-3">Featured</h5>
 
                         <ul>
@@ -31,7 +29,7 @@
 
                     foreach (var category in remainingCategories)
                     {
-                        <div class="p-4">
+                        <div class="p-4 navigation-dropdown-item">
                             <h5 class="h6 mb-3">@category.Name</h5>
 
                             <ul>

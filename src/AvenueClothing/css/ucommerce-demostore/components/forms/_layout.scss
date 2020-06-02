@@ -1,4 +1,8 @@
 .#{$theme} {
+    legend {
+        font-family: $font-heading;
+    }
+
     .single-line-form {
         max-width: 48rem;
 
@@ -30,6 +34,10 @@
 
             @include breakpoint(medium) {
                 padding: 0.5rem 3rem;
+            }
+
+            &.btn-sm {
+                font-size: 0.9rem
             }
         }
     }

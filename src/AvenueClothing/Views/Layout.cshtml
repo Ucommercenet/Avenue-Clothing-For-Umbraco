@@ -76,25 +76,24 @@
 <body class="theme-sdr d-flex flex-column h-100">
     <div class="sticky-top header-container">
         <div class="container">
-            <header class="d-flex flex-wrap flex-lg-nowrap align-items-center py-3 sticky-top">
+            <header class="d-flex flex-wrap flex-lg-nowrap align-items-center">
+                <button class="navbar-toggler border-0 p-0 mr-3 d-lg-none" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle site navigation">
+                    <span class="icon icon-small" aria-hidden="true" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/menu.svg")))
+                    </span>
+                </button>
 
-                <a class="navbar-brand" href="/">Avenue Clothing</a>
+                <a class="navbar-brand mr-auto mr-lg-4" href="/">Avenue Clothing</a>
 
-                <nav id="main-nav" class="site-nav col-md-3 mr-auto" >
-                    <ul class="d-flex justify-content-start text-uppercase text-dark">
-                        <li>
-                            <a class="px-3" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">Shop</a>
-                        </li>
-                        <li>
-                            <a class="px-3" href="https://ucommerce.net/" target="_blank">About</a>
-                        </li>
-                        <li>
-                            <a class="px-3 text-danger" href="#">Sale</a>
-                        </li>
-                    </ul>
-                </nav>
+                <button class="navbar-toggler border-0 mr-2 p-0 d-md-none" type="button" data-toggle="collapse" data-target="#navbar-form" aria-controls="navbar-form" aria-expanded="false" aria-label="Toggle search">
+                    <span class="icon icon-small" aria-hidden="true" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/mag-glass.svg")))
+                    </span>
+                </button>
 
-                <div class="navbar-form col-md-3">
+                @Umbraco.RenderMacro("UcommerceMiniBasket")
+
+                <div id="navbar-form" class="navbar-form col-md-3 collapse d-lg-block order-md-8 bg-white p-2 pl-0">
                     <form id="search-form" class="bg-light" action="/search">
                         <div class="input-append d-flex">
                             <input id="site-search" type="text" name="search" class="form-control border-0 bg-transparent" placeholder="Search" />
@@ -108,14 +107,26 @@
                     </form>
                 </div>
 
-                @Umbraco.RenderMacro("UcommerceMiniBasket")
+                <nav id="main-nav" class="site-nav col-lg-3 mr-lg-auto collapse d-lg-inline-flex align-items-center" >
+                    <ul class="d-flex justify-content-center justify-content-lg-start text-uppercase text-dark">
+                        <li>
+                            <a class="px-3" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">Shop</a>
+                        </li>
+                        <li>
+                            <a class="px-3" href="https://ucommerce.net/" target="_blank">About</a>
+                        </li>
+                        <li>
+                            <a class="px-3 text-danger" href="#">Sale</a>
+                        </li>
+                    </ul>
+                </nav>
             </header>
         </div>
     </div>
 
     <div class="bg-dark">
         <div class="container">
-            <div class="confidences pt-2 pb-2 text-white js-confidences">
+            <div class="confidences text-white js-confidences">
                 <div class="confidence-item">
                     <span class="icon icon-star" aria-hidden="true" focusable="false" role="img">
                         @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/star.svg")))

@@ -4,34 +4,35 @@
     Layout = "Layout.cshtml";
 }
 
-<form method="post" class="col-sm-9 col-md-9">
-    <div class="row col-sm-12 col-md-12">
-        <div class="col-md-6">
-            <h3>Shipping method</h3>
-            <br />
-            @if (Model.AvailableShippingMethods.Count > 0)
+<div class="container py-4">
+    <h1 class="h2 text-upper pb-4">Shipping method</h1>
+
+    <form method="post">
+        @if (Model.AvailableShippingMethods.Count > 0)
+        {
+            foreach (var shippingMethod in Model.AvailableShippingMethods)
             {
-                foreach (var shippingMethod in Model.AvailableShippingMethods)
-                {
-                    <label class="radio">
-                        @if (shippingMethod.Selected)
-                        {
-                            @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value, new { @checked = "checked" })
-                            @shippingMethod.Text
-                        } else
-                        {
-                            @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value)
-                            @shippingMethod.Text
-                        }
-                    </label>
-                }
+                <label class="form-check-label is-radio mb-3">
+                    @if (shippingMethod.Selected)
+                    {
+                        @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value, new { @checked = "checked" })
+                    } else
+                    {
+                        @Html.RadioButtonFor(x => x.SelectedShippingMethodId, shippingMethod.Value)
+                    }
+                    <span class="cb"></span>
+                    @shippingMethod.Text
+                </label>
             }
-            else
-            {
-                <p class="alert">WARNING: No shipping methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">Ucommerce</a> administration area.</p>
-            }
+        }
+        else
+        {
+            <p class="alert">WARNING: No shipping methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">Ucommerce</a> administration area.</p>
+        }
+
+        <div class="d-flex flex-wrap justify-content-between">
+            <a href="/basket/address.aspx" class="btn btn-outline-secondary mb-3 flex-grow-1 flex-md-grow-0">Back to Address</a>
+            <button name="update-shipment" type="submit" class="btn btn-primary btn-lg mb-3 flex-grow-1 flex-md-grow-0 ml-auto">Continue to Payment Page</button>
         </div>
-    </div>
-    <a href="/basket/address.aspx" class="btn btn-secondary">Back to Address</a>
-    <button name="update-shipment" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Payment Page <i class="icon-arrow-right icon-white"></i> </button>
-</form>
+    </form>
+</div>

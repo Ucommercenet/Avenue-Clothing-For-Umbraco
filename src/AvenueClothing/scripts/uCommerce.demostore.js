@@ -2,7 +2,7 @@
     var $body = $('body');
     var throttleInterval = 250;
 
-    var condenseHeader = function() {
+    function condenseHeader() {
         var scrollDistance = 10;
         var currentDistance = $(window).scrollTop();
         var scrolledClass = 'scrolled';
@@ -12,11 +12,49 @@
         } else {
             $body.addClass(scrolledClass);
         }
-    };
+    }
 
-    $(window).on('scroll', throttle( function() {
+    $('#main-nav').on('hidden.bs.collapse', function () {
+        hideCollapse('category-nav');
+    });
+
+    $('#main-nav').on('show.bs.collapse', function () {
+        hideCollapse('navbar-form');
+    });
+
+    $('#navbar-form').on('show.bs.collapse', function () {
+        hideCollapse('main-nav');
+        hideCollapse('category-nav');
+    });
+
+    function hideCollapse(elementId) {
+        $('#' + elementId + '').removeClass('show');
+        $('.navbar-toggler[data-target="' + elementId +'"]').addClass('collapsed').attr('aria-expanded','false');
+    }
+
+    $(window).on('scroll resize', throttle( function() {
         condenseHeader();
+        collapseSiteNav();
     }, throttleInterval))
+
+    function condenseHeader() {
+        var scrollDistance = 10;
+        var currentDistance = $(window).scrollTop();
+        var scrolledClass = 'scrolled';
+
+        if (currentDistance < scrollDistance) {
+            $body.removeClass(scrolledClass);
+        } else {
+            $body.addClass(scrolledClass);
+        }
+    }
+
+    function collapseSiteNav() {
+        $('#category-nav').removeClass('show');
+        $('#main-nav').removeClass('show');
+        $('#navbar-form').removeClass('show');
+        $('.navbar-toggler').addClass('collapsed').attr('aria-expanded','false');
+    }
 
     $('form.validate').each(function () {
         $(this).validate({
@@ -24,7 +62,7 @@
             errorClass: "help-inline",
             highlight: function (input) {
                 var $input = $(input);
-                var $inputGroup = $input.closest('.input-group').removeClass('valid');
+                var $inputGroup = $input.closest('.control-group').removeClass('valid');
 
 
                 if ($input.val().length) {
@@ -35,7 +73,7 @@
                 $inputGroup.closest('form.validate').removeClass('form-valid').addClass('form-invalid');
             },
             success: function (input) {
-                $(input).closest('.input-group').removeClass('invalid').addClass('valid');
+                $(input).closest('.control-group').removeClass('invalid').addClass('valid');
                 $(input).closest('form.validate').removeClass('form-invalid').addClass('form-valid');
             }
         });
