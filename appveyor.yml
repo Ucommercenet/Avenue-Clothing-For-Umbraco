@@ -1,0 +1,53 @@
+version: 1.0.{build}
+branches:
+  only:
+  - redesign-2020
+image: Visual Studio 2017
+environment:
+  AutoParameterizationWebConfigConnectionStrings: false
+  APPVEYOR_WAP_ARTIFACT_NAME: UAC
+  APPVEYOR_WAP_SKIP_ACLS: true
+  TSD_ARTIFACT_NAME: UAC
+  TSD_DEPLOY_SITE: true
+  TSD_SITE_NAME: umbracodemo1.ucommerce.net
+
+test: off
+  
+nuget:
+   account_feed: true
+   
+before_build:
+- cmd: nuget restore src\AvenueClothing.sln
+#- cmd: npm install -g gulp
+#- cmd: appveyor-retry npm install
+#- cmd: gulp build
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+
+build:
+  project: src\AvenueClothing.sln
+  publish_wap: true
+  verbosity: minimal
+
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: '#pingdom'
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false
+
+for:
+-
+ branches:
+  only:
+   - redesign-2020
+ configuration: Debug
+ deploy:
+    - provider: Environment
+      name: Amazon-UAT-WEB-01
