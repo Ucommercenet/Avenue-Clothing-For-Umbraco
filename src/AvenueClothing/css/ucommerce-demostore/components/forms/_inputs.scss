@@ -1,6 +1,9 @@
 .#{$theme} {
-    input {
+    input,
+    textarea {
+        border-radius: 0;
         color: $grey-3;
+        font-family: $font-main;
         font-size: 0.9rem;
     }
 }

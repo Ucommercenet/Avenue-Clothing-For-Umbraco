@@ -1,0 +1,72 @@
+.#{$theme} {
+    .multi-item-carousel {
+        &.product-list {
+            .slick-slide {
+                a {
+                    max-width: 100%;
+                }
+            }
+        }
+
+        .carousel-item {
+            display: block;
+                width: auto;
+            float: none;
+            margin: 0;
+        }
+
+        .carousel-indicators {
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+
+            li {
+                background-color: $grey-e;
+                opacity: 1;
+
+                &:hover,
+                &:focus {
+                    background-color: darken($grey-e, 7);
+                }
+
+                &.active{
+                    background-color: $black;
+                }
+            }
+        }
+
+        .slick-dots {
+            display: flex;
+            list-style: none;
+            margin: 2rem auto 0;
+            padding: 0;
+
+            &.slick-dots {
+                li {
+                    @include carousel-indicator;
+                    opacity: 0.1;
+                }
+            }
+
+            li {
+                background: $black;
+                position: relative;
+            }
+
+            button {
+                background: transparent;
+                border: 0;
+                position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                text-indent: -200vw;
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,20 +1,95 @@
 ﻿$(function () {
+    var $body = $('body');
+    var throttleInterval = 250;
+
+    function condenseHeader() {
+        var scrollDistance = 10;
+        var currentDistance = $(window).scrollTop();
+        var scrolledClass = 'scrolled';
+
+        if (currentDistance < scrollDistance) {
+            $body.removeClass(scrolledClass);
+        } else {
+            $body.addClass(scrolledClass);
+        }
+    }
+
+    $('#main-nav').on('hidden.bs.collapse', function () {
+        hideCollapse('category-nav');
+    });
+
+    $('#main-nav').on('show.bs.collapse', function () {
+        hideCollapse('navbar-form');
+    });
+
+    $('#navbar-form').on('show.bs.collapse', function () {
+        hideCollapse('main-nav');
+        hideCollapse('category-nav');
+    });
+
+    function hideCollapse(elementId) {
+        $('#' + elementId + '').removeClass('show');
+        $('.navbar-toggler[data-target="' + elementId +'"]').addClass('collapsed').attr('aria-expanded','false');
+    }
+
+    $(window).on('scroll resize', throttle( function() {
+        condenseHeader();
+        collapseSiteNav();
+    }, throttleInterval))
+
+    $(window).on('resize', throttle( function() {
+        setupConfidences();
+    }, throttleInterval))
+
+
+    function condenseHeader() {
+        var scrollDistance = 10;
+        var currentDistance = $(window).scrollTop();
+        var scrolledClass = 'scrolled';
+
+        if (currentDistance < scrollDistance) {
+            $body.removeClass(scrolledClass);
+        } else {
+            $body.addClass(scrolledClass);
+        }
+    }
+
+    function collapseSiteNav() {
+        $('#category-nav').removeClass('show');
+        $('#main-nav').removeClass('show');
+        $('#navbar-form').removeClass('show');
+        $('.navbar-toggler').addClass('collapsed').attr('aria-expanded','false');
+    }
+
     $('form.validate').each(function () {
         $(this).validate({
             errorElement: "span",
             errorClass: "help-inline",
-            highlight: function (label) {
-                $(label).closest('.control-group').addClass('error');
+            highlight: function (input) {
+                var $input = $(input);
+                var $inputGroup = $input.closest('.control-group').removeClass('valid');
+
+
+                if ($input.val().length) {
+                    $inputGroup.addClass('invalid');
+                }  else {
+                    $inputGroup.removeClass('invalid');
+                }
+                $inputGroup.closest('form.validate').removeClass('form-valid').addClass('form-invalid');
             },
-            success: function (label) {
-                label.closest('.control-group').addClass('success');
+            success: function (input) {
+                $(input).closest('.control-group').removeClass('invalid').addClass('valid');
+                $(input).closest('form.validate').removeClass('form-invalid').addClass('form-valid');
             }
         });
-
     });
+
+    var $searchForm = $('#search-form');
+
     $('#site-search').typeahead({
         minLength: 3,
         source: function (query, process) {
+            $searchForm.addClass('searching');
             $.uCommerce.search({ keyword: query }, function (resp) {
                 $.map(resp, function (data) {
                     var matches = [];
@@ -24,8 +99,11 @@
                     return process(matches);
                 });
             });
+            $searchForm.removeClass('searching');
         }
     });
+
+
     $('#newsletter-form').submit(function (e) {
         e.preventDefault();
         var form = $(this);
@@ -45,9 +123,102 @@
         });
         return false;
     });
+
+    var confidencesSettings = {
+        mobileFirst: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        speed: 2000,
+        arrows: false,
+        dots: false,
+        infinite: true,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 760,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: "unslick"
+            }
+        ]
+    };
+
+    var $slick_slider = $('.js-confidences');
+    setupConfidences();
+
+    function setupConfidences()
+    {
+        if (!$slick_slider.hasClass('slick-initialized') && $(window).width() < 1024) {
+            $slick_slider.slick(confidencesSettings);
+        }
+    }
+
+
+    if ($('.js-multi-item-carousel').length && $('.js-multi-item-carousel').children().length > 3) {
+        $('.js-multi-item-carousel').slick({
+            mobileFirst: true,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            autoplay: true,
+            arrows: false,
+            dots: true,
+            infinite: true,
+            responsive: [
+                {
+                    breakpoint: 760,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        centerMode: true
+                    }
+                },
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                        centerMode: false
+                    }
+                }
+            ]
+        });
+    }
 });
+
+var throttle = function (fn, threshold, scope) {
+    var last;
+    var deferTimer;
+    return function () {
+        var context = scope || this;
+        var now = Number(new Date());
+        var args = arguments;
+        if (last && now < last + threshold) {
+            // hold on to it
+            clearTimeout(deferTimer);
+            deferTimer = setTimeout(function () {
+                last = now;
+                fn.apply(context, args);
+            }, threshold + last - now);
+        } else {
+            last = now;
+            fn.apply(context, args);
+        }
+    };
+};
+
 function updateCartTotals() {
-    if ($('#empty-cart').length != 0) {
+    if ($('#empty-basket').length != 0) {
         prepCart();
     }
 
@@ -65,17 +236,17 @@ function updateCartTotals() {
         disc.text(basket.FormattedDiscountTotal);
         tot.text(basket.FormattedOrderTotal);
 
-        // Pulse the cart so it catches the user's attention
+        // Pulse the basket so it catches the user's attention
         //var highlight = [qty, sub, tax, disc, tot];
         //$(highlight).effect("highlight", {}, 500);
     });
 };
 function prepCart() {
-    var icn = $("<i>", { "class": "fa fa-shopping-cart icon-white margin-right-small" });
+    var icn = $("<i>", { "class": "fa fa-shopping-basket icon-white margin-right-small" });
     var qty = $("<span>", { "class": "item-qty" });
     var tot = $("<span>", { "class": "order-total" });
-    var cart = $("<a>", { 'href': '/basket', "id": "mini-cart" });
+    var basket = $("<a>", { 'href': '/basket', "id": "mini-basket" });
 
-    cart.append(icn).append(qty).append(" items in cart, total: ").append(tot);
-    $('#empty-cart').replaceWith(cart);
+    basket.append(icn).append(qty).append(" items in basket, total: ").append(tot);
+    $('#empty-basket').replaceWith(basket);
 };

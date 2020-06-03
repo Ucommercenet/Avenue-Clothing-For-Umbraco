@@ -1,0 +1,46 @@
+.#{$theme} {
+    &.scrolled {
+        .typeahead {
+
+        }
+    }
+
+    .typeahead {
+        background: $white-transparent;
+        border-radius: 0;
+        border: none;
+        margin-top: 0;
+        padding: 0;
+        position: fixed;
+        max-width: 90%;
+        z-index: $zi-search-dropdown;
+
+        @include breakpoint(large) {
+            max-width: 25rem;
+        }
+
+        li {
+            padding: 0;
+        }
+
+        .active {
+            a {
+                background: $info;
+            }
+        }
+
+        a {
+            color: $black;
+            display: block;
+            overflow: hidden;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            #{$hover-states} {
+                background: $info;
+            }
+        }
+    }
+}

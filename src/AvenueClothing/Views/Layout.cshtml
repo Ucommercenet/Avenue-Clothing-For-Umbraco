@@ -8,6 +8,7 @@
     Html.RequiresJs("~/scripts/jquery.validate.min.js", 1);
     Html.RequiresJs("~/scripts/tether.min.js", 1);
     Html.RequiresJs("~/scripts/bootstrap.min.js", 1);
+    Html.RequiresJs("~/scripts/slick.min.js", 1);
     Html.RequiresJs("~/scripts/uCommerce.jQuery.js", 2);
     Html.RequiresJs("~/scripts/ucommerce.servicestack.js", 2);
     Html.RequiresJs("~/scripts/ucommerce.demostore.js", 2);
@@ -17,12 +18,13 @@
 
     Html.RequiresCss("~/css/tether.css", 2);
     Html.RequiresCss("~/css/bootstrap.min.css", 2);
+    Html.RequiresCss("~/css/slick.min.css", 2);
     Html.RequiresCss("~/css/ucommerce.demostore.css", 2);
     Html.RequiresCss("~/css/font-awesome.min.css", 2);
 
 }
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -71,70 +73,88 @@
         })()
     </script>
 </head>
-<body class="theme-sdr">
-    <div class="container">
-        <header class="d-flex flex-wrap flex-lg-nowrap align-items-center py-2 sticky-top">
-            <a class="navbar-brand" href="/">Avenue Clothing</a>
-            <nav id="main-nav" class="site-nav col-md-4 mr-auto" >
-                <ul class="d-flex justify-content-between text-uppercase text-dark">
-                    <li>
-                        <a href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">Shop</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a class="text-danger" href="#">Sale</a>
-                    </li>
-                </ul>
-            </nav>
+<body class="theme-sdr d-flex flex-column h-100">
+    <div class="sticky-top header-container">
+        <div class="container">
+            <header class="d-flex flex-wrap flex-lg-nowrap align-items-center">
+                <button class="navbar-toggler border-0 p-0 mr-3 d-lg-none" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle site navigation">
+                    <span class="icon icon-small" aria-hidden="true" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/menu.svg")))
+                    </span>
+                </button>
 
-            <div class="navbar-form col-md-2">
-                <form id="search-form" class="bg-light" action="/search">
-                    <div class="input-append d-flex">
-                        <input id="site-search" type="text" name="search" class="form-control border-0 bg-transparent" placeholder="Search" />
-                        <button type="submit" class="btn-search">
-                            <span class="icon icon-small" aria-hidden="true" role="img">
-                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/mag-glass.svg")))
-                            </span>
-                            <span class="visually-hidden">Search site</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
+                <a class="navbar-brand mr-auto mr-lg-4" href="/">Avenue Clothing</a>
 
-            @Umbraco.RenderMacro("UcommerceMiniBasket")
-        </header>
+                <button class="navbar-toggler border-0 mr-2 p-0 d-md-none" type="button" data-toggle="collapse" data-target="#navbar-form" aria-controls="navbar-form" aria-expanded="false" aria-label="Toggle search">
+                    <span class="icon icon-small" aria-hidden="true" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/mag-glass.svg")))
+                    </span>
+                </button>
+
+                @Umbraco.RenderMacro("UcommerceMiniBasket")
+
+                <div id="navbar-form" class="navbar-form col-md-3 collapse d-lg-block order-md-8 bg-white p-2 pl-0 mr-lg-2">
+                    <form id="search-form" action="/search">
+                        <div class="input-append d-flex">
+                            <input id="site-search" type="text" name="search" class="form-control border-0 bg-transparent" placeholder="Search" />
+                            <button type="submit" class="btn-search">
+                                <span class="icon icon-small icon-default" role="img">
+                                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/mag-glass.svg")))
+                                </span>
+                                <span class="icon icon-small icon-active" aria-hidden="true" role="img">
+                                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/loader.svg")))
+                                </span>
+                                <span class="sr-only">Search site</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <nav id="main-nav" class="site-nav col-lg-3 mr-lg-auto collapse d-lg-inline-flex align-items-center" >
+                    <ul class="d-flex justify-content-center justify-content-lg-start text-uppercase text-dark">
+                        <li>
+                            <a class="px-3" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">Shop</a>
+                        </li>
+                        <li>
+                            <a class="px-3" href="https://ucommerce.net/" target="_blank">About</a>
+                        </li>
+                        <li>
+                            <a class="px-3 text-danger" href="#">Sale</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
     </div>
 
     <div class="bg-dark">
         <div class="container">
-            <ol class="confidences pt-2 pb-2 d-flex justify-content-between text-light text-uppercase w-100">
-                <li>
+            <div class="confidences text-white js-confidences">
+                <div class="confidence-item">
                     <span class="icon icon-star" aria-hidden="true" focusable="false" role="img">
                         @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/star.svg")))
                     </span>
                     5 star satisfaction
-                </li>
-                <li>
+                </div>
+                <div class="confidence-item">
                     <span class="icon icon-truck" aria-hidden="true" focusable="false" role="img">
                         @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/truck.svg")))
                     </span>
                     Next day delivery
-                </li>
-                <li>
+                </div>
+                <div class="confidence-item">
                     <span class="icon icon-box" aria-hidden="true" focusable="false" role="img">
                         @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/box.svg")))
                     </span>
                     Free returns
-                </li>
-                <li>
+                </div>
+                <div class="confidence-item">
                     <span class="icon icon-chat" aria-hidden="true" focusable="false" role="img">
                         @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/chat.svg")))
                     </span>
                     Live chat customer care
-                </li>
-            </ol>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -197,10 +217,10 @@
             </div>
         </footer>
     </div>*@
-     @RenderBody()
+    @RenderBody()
     @Html.Raw(Html.RenderJsHere())
 
-    <footer class="site-footer bg-dark text-light">
+    <footer class="site-footer bg-dark text-light mt-auto">
         <div class="container">
             <div class="row pt-5">
                 <div class="col-lg-4 pr-lg-5 pb-4 pb-lg-2">
@@ -258,19 +278,19 @@
                         <li class="pr-3">
                             <a href="#">
                                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/social-instagram.svg")))
-                                <span class="visually-hidden">Instagram</span>
+                                <span class="sr-only">Instagram</span>
                             </a>
                         </li>
                         <li class="pr-3">
                             <a href="#">
                                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/social-facebook.svg")))
-                                <span class="visually-hidden">Facebook</span>
+                                <span class="sr-only">Facebook</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/social-twitter.svg")))
-                                <span class="visually-hidden">Twitter</span>
+                                <span class="sr-only">Twitter</span>
                             </a>
                         </li>
                     </ul>

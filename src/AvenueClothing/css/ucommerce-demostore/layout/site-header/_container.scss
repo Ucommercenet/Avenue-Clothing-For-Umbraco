@@ -1,0 +1,24 @@
+.#{$theme} {
+    &.scrolled {
+        .header-container {
+            position: fixed;
+                left: 0;
+                right: 0;
+        }
+    }
+
+    .header-container {
+        background: $white-transparent;
+        flex-shrink: 0;
+
+        transition: background $ts $tt;
+
+        #{$hover-states} {
+            background: $white;
+        }
+
+        header {
+            min-height: $header-height;
+        }
+    }
+}

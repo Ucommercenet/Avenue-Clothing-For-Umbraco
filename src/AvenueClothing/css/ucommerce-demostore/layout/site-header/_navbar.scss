@@ -1,58 +1,90 @@
 .#{$theme} {
-    // .navbar {
-    //     background: $white;
-    //     color: $black;
-
-    //     a {
-    //         color: currentColor;
-    //     }
-    // }
-
     .navbar-brand {
         background: {
             image: img-url($logo);
             size: contain;
+            position: top left;
             repeat: no-repeat;
         }
-        min-width: 14rem;
+        min-width: 13rem;
+        margin-top: -0.3rem;
         overflow: hidden;
         text-indent: -2000vw;
+
+        @include breakpoint(small) {
+            min-width: 14rem;
+        }
+
+        @include breakpoint(medium) {
+            min-width: 15rem;
+        }
+    }
+
+    .navbar-toggler {
+        outline: none;
+
+        #{$hover-states} {
+            color: mix($green, $grey-3);
+        }
+
+        &[aria-expanded="true"] {
+            color: $green;
+        }
     }
 
     .site-nav {
-        ul {
-            @include reset-list;
-        }
-
-        a {
-            color: currentColor;
-        }
-    }
-
-    .category-nav {
-        &.collapsing {
-            position: static;
-        }
-    }
-
-    .navigation-dropdown-wrapper {
+        background: $grey-e;
+        height: $confidences-height;
+        line-height: $confidences-height;
         position: absolute;
+            top: 100%;
             left: 0;
             right: 0;
-        z-index: 11;
+        text-align: center;
+
+        @include breakpoint(large) {
+            background: transparent;
+            height: auto;
+            line-height: 1;
+            position: static;
+            text-align: left;
+        }
 
         ul {
             @include reset-list;
-            font-family: $font-main;
-            font-size: 0.82rem;
         }
 
         a {
             color: currentColor;
+            font-size: 0.86rem;
+            font-weight: 600;
+
+            #{$hover-states} {
+                color: $black;
+                outline: none;
+                text-decoration: none;
+            }
+
+            &[aria-expanded="true"] {
+                color: $black;
+                font-weight: 700;
+                outline: none;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .navbar-form {
+        background: $white-transparent;
+        position: absolute;
+            top: $header-height;
+            left: 0;
+            right: 0;
+
+        @include breakpoint(medium) {
+            background: transparent;
             display: block;
-            font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
+            position: static;
         }
     }
 }

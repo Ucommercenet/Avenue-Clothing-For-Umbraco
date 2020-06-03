@@ -5,45 +5,57 @@
     Layout = null;
 }
 
-<nav id="category-nav" class="collapse category-nav">
+<nav id="category-nav" class="collapse category-nav" >
     <div class="navigation-dropdown-wrapper">
-        <div class="container">
-            <div class="d-flex bg-white">
-                <div class="bg-black text-white p-4">
-                    <h5 class="h6 mb-3">Featured<h5>
-                    <ul>
-                        <li><a href="#">Lorem Ipsum Dolor Sit</a></li>
-                        <li><a href="#">Amet Consectetur</a></li>
-                        <li><a href="#">Adipiscing Slit</a></li>
-                        <li><a href="#">Sed Su </a></li>
-                        <li><a href="#">Suscipit Est</a></li>
-                        <li><a href="#">Quisque Vitae Tortor</a></li>
-                        <li><a href="#">Ac Nulla Dictum</a></li>
-                        <li><a href="#">Pulvinar Bibendum</a></li>
-                    </ul>
-                </div>
 
-                @helper DisplayCategories(IList<CategoryViewModel> categories)
-                {
-                    foreach (var category in categories)
+        <div class="container">
+            <div class="shadow">
+                <div class="d-flex flex-wrap flex-md-nowrap bg-white">
+                    @helper DisplayCategories(IList<CategoryViewModel> categories)
                     {
-                        <div class="p-4">
-                            <h5 class="h6 mb-3">@category.Name<h5>
+                        var featuredCategory = categories.FirstOrDefault();
+                        var remainingCategories = categories.Skip(1).Take(4);
+
+                        <div class="bg-black text-white p-4 navigation-dropdown-featured-item">
+                            <h5 class="h6 mb-3">Featured</h5>
 
                             <ul>
                                 <li>
-                                    <a href="@category.Url">
-                                        All @category.Name
+                                    <a href="@featuredCategory.Url">
+                                        All @featuredCategory.Name
                                     </a>
                                 </li>
-
-                                @DisplaySubcategories(category.Categories)
+                                @DisplaySubcategories(featuredCategory.Categories)
                             </ul>
                         </div>
-                    }
-                }
 
-                @DisplayCategories(Model.Categories)
+                        foreach (var category in remainingCategories)
+                        {
+                            <div class="p-4 navigation-dropdown-item">
+                                <h5 class="h6 mb-3">@category.Name</h5>
+
+                                <ul>
+                                    <li>
+                                        <a href="@category.Url">
+                                            All @category.Name
+                                        </a>
+                                    </li>
+
+                                    @DisplaySubcategories(category.Categories)
+                                </ul>
+                            </div>
+                        }
+                    }
+
+                    @DisplayCategories(Model.Categories)
+                </div>
+
+                <a class="btn-link close" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">
+                    <span class="icon icon-xs" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
+                    </span>
+                    <span class="sr-only">Close alert</span>
+                </a>
             </div>
         </div>
     </div>

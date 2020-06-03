@@ -1,0 +1,42 @@
+.#{$theme} {
+    .alert {
+        border: 0;
+        border-radius: 0;
+        font-weight: 300;
+
+        p {
+            line-height: 1.3;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        a {
+            color: currentColor;
+            font-weight: 400;
+
+            #{$hover-states} {
+
+            }
+        }
+
+        .close {
+            color: currentColor;
+            font-weight: 500;
+            position: absolute;
+                top: 0;
+                right: 0.5rem;
+            text-shadow: none;
+        }
+    }
+
+    .alert-success {
+        background: $green;
+        color: $white;
+    }
+
+    .alert-info {
+        background: $info;
+    }
+}

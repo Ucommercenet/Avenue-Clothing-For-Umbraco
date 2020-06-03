@@ -1,5 +1,8 @@
 $theme: 'theme-sdr';
 $logo: 'logo.svg';
+$btn-min-width: 14.5rem;
+$confidences-height: 2.25rem;
+$header-height: 3.75rem;
 
 .#{$theme} {
     .bg-dark {
@@ -36,5 +39,20 @@ $logo: 'logo.svg';
 
     a {
         color: $green;
+
+        #{$hover-states} {
+            // outline: 2px solid transparentize($green, 0.8);
+            text-decoration: underline;
+        }
+    }
+
+    .container {
+        @media (max-width: 1199px) {
+            max-width: 100%;
+        }
+    }
+
+    .shadow {
+        box-shadow: 0 0 5px 1px transparentize($black, 0.9) !important;
     }
 }

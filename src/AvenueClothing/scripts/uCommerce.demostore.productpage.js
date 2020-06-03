@@ -31,33 +31,20 @@ function enableAddToCartWhenSelected(addToCartButton, variantInputs) {
 };
 
 function wireupRatings(radios) {
-    $('#review-form').addClass("display-none");
-    $('label', radios).each(function () {
-        var t = $(this);
-        t.addClass('off');
-        $('input:radio', t).addClass("display-none");
-        setStarHoverOutState($('i', t));
-        t.hover(function () {
-            var parent = $(this);
-            var labels = parent.prevAll('label');
-            setStarHoverState($('i', labels));
-            setStarHoverState($('i', parent));
-        }, function () {
-            var parent = $(this);
-            var labels = parent.prevAll('label');
-            if (!parent.hasClass('selected')) {
-                setStarHoverOutState($('i', labels));
-                setStarHoverOutState($('i', parent));
-            }
-        });
-        t.click(function () {
-            var parent = $(this);
-            parent.addClass('selected');
-            $('#review-form').slideDown();
-        });
-    });
-};
+	var $ratings = $('.js-rating label');
 
+	$ratings.on('click', function(){
+		var currentIndex = $(this).index();
+
+		$ratings.each(function(){
+			if ($(this).index() <= currentIndex) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+	});
+};
 
 function updateAddToCartButton(addToCartButton, variantInputs) {
 	if (variantInputs.length == 0)
@@ -65,7 +52,7 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 
 	var empty = variantInputs.filter(function () { return this.value === ""; });
 
-	// If the user has made a valid selection enable the add to cart button
+	// If the user has made a valid selection enable the add to basket button
 	if (empty.length == 0) {
 		addToCartButton.removeClass('disabled').addClass('btn-success').removeAttr('disabled');
 	} else {
@@ -73,12 +60,7 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 	}
 };
 
-function setStarHoverState(label) {
-	label.addClass('fa-star').removeClass('fa-star-o');
-}
-function setStarHoverOutState(label) {
-	label.addClass('fa-star-o').removeClass('fa-star');
-}
+
 function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, variantInputs, quantityInput) {
 	addToCartButton.click(function (e) {
 		e.preventDefault();
@@ -112,10 +94,10 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     	var parent = addToCartButton.parent();
                     	var alert = parent.find(".item-added");
                     	if (alert.length == 0) {
-                    		// Add an alert box so the customer knows they've added an item to the cart
+                    		// Add an alert box so the customer knows they've added an item to the basket
                     		alert = $('<div />', {
                     			"class": "alert alert-success item-added",
-                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>'
+                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your basket. <a href="/basket">Click here to view your basket</a>.</p>'
                     		}).hide();
                     		parent.append(alert);
                     		alert.slideDown();

@@ -9,12 +9,12 @@
                     background-color: $white;
                     border-color: $black;
                     border-bottom-color: $white;
-                    z-index: 2;
+                    z-index: $zi-base + 1;
                 }
 
                 .dropdown-menu {
                     display: block;
-                    z-index: 1;
+                    z-index: $zi-base;
                 }
             }
         }

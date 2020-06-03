@@ -5,11 +5,15 @@
         font-family: $font-secondary;
         font-size: 0.9rem;
         font-weight: 500;
-        letter-spacing: 0.2rem;
         line-height: 1.6;
-        min-width: 14.5rem;
+        min-width: $btn-min-width;
         padding: 0.5rem 1rem;
         text-transform: uppercase;
+        vertical-align: middle;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.2rem;
+        }
 
         #{$hover-states} {
             box-shadow: none;
@@ -17,13 +21,27 @@
 
         &:disabled,
         &.disabled {
-            font-weight: 300;
+            font-weight: 400;
             opacity: 0.5;
             pointer-events: none;
+
+            @include breakpoint(medium) {
+                font-weight: 300;
+            }
         }
 
         &.border-thin {
             border-width: 1px;
+        }
+    }
+
+    .btn-sm {
+        line-height: 1;
+        min-width: 0;
+        padding: 0.25rem 0.5rem;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.1rem;
         }
     }
 
@@ -45,8 +63,19 @@
 
         #{$hover-states} {
             color: $white;
-            background: $black;
-            border-color: $black;
+            background: $grey-3;
+            border-color: $grey-3;
+        }
+    }
+
+    .btn-outline-secondary {
+        color: $grey-6;
+        border-color: $grey-6;
+
+        #{$hover-states} {
+            color: $white;
+            background: $grey-6;
+            border-color: $grey-6;
         }
     }
 
@@ -62,6 +91,30 @@
         }
     }
 
+    .btn-outline-secondary {
+        color: $grey-6;
+        border-color: $grey-6;
+
+        #{$hover-states} {
+            color: $white;
+            background: $grey-6;
+            border-color: $grey-6;
+        }
+    }
+
+    .btn-success,
+    .btn-primary {
+        color: $white;
+        background: $green;
+        border-color: $green;
+
+        #{$hover-states} {
+            color: $white;
+            background: $green-hover;
+            border-color: $green-hover;
+        }
+    }
+
     .btn-accordion {
         background: $white;
         color: $grey-3;
@@ -72,11 +125,14 @@
         font-family: $font-main;
         font-size: 1rem;
         font-weight: 600;
-        letter-spacing: 0.05rem;
         outline: none;
         padding-top: 1rem;
         padding-bottom: 1rem;
         width: 100%;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.05rem;
+        }
 
         .icon {
             transition: transform $ts $tt;
@@ -103,8 +159,46 @@
         }
     }
 
+    .btn-link {
+        border: 0;
+        color: $green;
+
+        &.line-remove {
+            color: currentColor;
+            text-decoration: none;
+
+            #{$hover-states} {
+                color: $red;
+            }
+        }
+    }
+
     .btn-search {
         background: transparent;
         border: 0;
+
+        .icon-active {
+            display: none;
+        }
+    }
+
+    .btn-hide-expanded {
+        &[aria-expanded="true"] {
+            display: none;
+        }
+    }
+
+    .searching {
+        .btn-search {
+            pointer-events: none;
+
+            .icon-active {
+                display: block;
+            }
+
+            .icon-default {
+                display: none;
+            }
+        }
     }
 }
