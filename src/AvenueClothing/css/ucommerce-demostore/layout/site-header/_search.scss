@@ -9,10 +9,11 @@
         background: $white-transparent;
         border-radius: 0;
         border: none;
-        margin-top: 1rem;
+        margin-top: 0;
         padding: 0;
         position: fixed;
-        z-index: 12;
+        max-width: 90%;
+        z-index: $zi-search-dropdown;
 
         @include breakpoint(large) {
             max-width: 25rem;

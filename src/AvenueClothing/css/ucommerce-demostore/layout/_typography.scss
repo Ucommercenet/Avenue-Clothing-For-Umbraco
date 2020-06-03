@@ -1,82 +1,63 @@
 @import url('https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700|Roboto:400,500&display=swap');
 
 @font-face {
-    font-family: 'baron_neueblack';
-    src: url('fonts/baronneue-black-webfont.woff2') format('woff2'),
-         url('fonts/baronneue-black-webfont.woff') format('woff');
-    font-weight: black;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'baron_neueblack_italic';
-    src: url('fonts/baronneue-blackitalic-webfont.woff2') format('woff2'),
-         url('fonts/baronneue-blackitalic-webfont.woff') format('woff');
-    font-weight: black;
-    font-style: italic;
-
-}
-
-@font-face {
-    font-family: 'baron_neuebold';
-    src: url('fonts/baronneue-bold-webfont.woff2') format('woff2'),
-         url('fonts/baronneue-bold-webfont.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'baron_neuebold_italic';
-    src: url('fonts/baronneue-bolditalic-webfont.woff2') format('woff2'),
-         url('fonts/baronneue-bolditalic-webfont.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'baron_neueitalic';
-    src: url('fonts/baronneue-italic-webfont.woff2') format('woff2'),
-         url('fonts/baronneue-italic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'baron_neueregular';
+    font-family: 'baron_neue';
     src: url('fonts/baronneue-regular-webfont.woff2') format('woff2'),
-         url('fonts/baronneue-regular-webfont.woff') format('woff');
-    font-weight: normal;
+        url('fonts/baronneue-regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-black-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-black-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-blackitalic-webfont.woff2') format('woff2'),
+     url('fonts/baronneue-blackitalic-webfont.woff') format('woff');
+    font-weight: 800;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'avenir_next';
-    src: url('fonts/AvenirNextLTPro-Bold.otf') format('opentype');
-    font-weight: bold;
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-bold-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-bold-webfont.woff') format('woff');
+    font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'avenir_next';
-    src: url('fonts/AvenirNextLTPro-Demi.otf') format('opentype');
-    font-weight: 600;
-    font-style: normal;
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-bolditalic-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-bolditalic-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
 }
 
 @font-face {
-    font-family: 'avenir_next';
-    src: url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-italic-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-italic-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
 }
 
-$font-heading: 'baron_neueregular', sans-serif;
+
+$font-heading: 'baron_neue', sans-serif;
 $font-main: 'Avenir Next', 'Prompt', sans-serif;
 $font-secondary: 'Roboto', sans-serif;
 
 body {
     &.#{$theme} {
         font-family: $font-main;
+        text-rendering: optimizeLegibility;
+        -webkit-font-feature-settings: "kern" 1;
     }
 
 }
@@ -84,6 +65,7 @@ body {
 .#{$theme} {
     #{headings(1,5)} {
         font-family: $font-heading;
+        font-weight: 400;
         letter-spacing: 0.125rem;
 
         @include breakpoint(large) {

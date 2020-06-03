@@ -7,7 +7,7 @@
 {
     <div class="alert alert-info">
         <div class="container">
-            <h5 class="pt-2 text-uppercase">Your cart is empty.</h5>
+            <h5 class="pt-2 text-uppercase">Your basket is empty.</h5>
             <p>Please <a href="/demo-store/">return to our store and add some items</a>.</p>
         </div>
     </div>
@@ -18,7 +18,7 @@ else
         <h1 class="h2 text-uppercase py-2">Your Order</h1>
 
         <form method="post" class="mb-5">
-            <table id="cart" class="table table-striped mb-4">
+            <table id="basket" class="table table-striped mb-4">
                 <thead>
                     <tr>
                         <th>Description</th>
@@ -72,7 +72,7 @@ else
                                 <span class="icon icon-xs" aria-hidden="true" role="img">
                                     @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/trash.svg")))
                                 </span>
-                                <span class="sr-only">Remove item from cart</span>
+                                <span class="sr-only">Remove item from basket</span>
                             </button>
                         </td>
                     </tr>

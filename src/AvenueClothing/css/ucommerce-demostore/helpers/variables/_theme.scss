@@ -41,7 +41,8 @@ $header-height: 3.75rem;
         color: $green;
 
         #{$hover-states} {
-            outline: 2px solid transparentize($green, 0.8);
+            // outline: 2px solid transparentize($green, 0.8);
+            text-decoration: underline;
         }
     }
 
@@ -49,5 +50,9 @@ $header-height: 3.75rem;
         @media (max-width: 1199px) {
             max-width: 100%;
         }
+    }
+
+    .shadow {
+        box-shadow: 0 0 5px 1px transparentize($black, 0.9) !important;
     }
 }

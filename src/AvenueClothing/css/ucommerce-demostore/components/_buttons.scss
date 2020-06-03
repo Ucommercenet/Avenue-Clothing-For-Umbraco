@@ -21,9 +21,13 @@
 
         &:disabled,
         &.disabled {
-            font-weight: 300;
+            font-weight: 400;
             opacity: 0.5;
             pointer-events: none;
+
+            @include breakpoint(medium) {
+                font-weight: 300;
+            }
         }
 
         &.border-thin {
@@ -172,5 +176,29 @@
     .btn-search {
         background: transparent;
         border: 0;
+
+        .icon-active {
+            display: none;
+        }
+    }
+
+    .btn-hide-expanded {
+        &[aria-expanded="true"] {
+            display: none;
+        }
+    }
+
+    .searching {
+        .btn-search {
+            pointer-events: none;
+
+            .icon-active {
+                display: block;
+            }
+
+            .icon-default {
+                display: none;
+            }
+        }
     }
 }

@@ -37,6 +37,11 @@
         collapseSiteNav();
     }, throttleInterval))
 
+    $(window).on('resize', throttle( function() {
+        setupConfidences();
+    }, throttleInterval))
+
+
     function condenseHeader() {
         var scrollDistance = 10;
         var currentDistance = $(window).scrollTop();
@@ -78,9 +83,13 @@
             }
         });
     });
+
+    var $searchForm = $('#search-form');
+
     $('#site-search').typeahead({
         minLength: 3,
         source: function (query, process) {
+            $searchForm.addClass('searching');
             $.uCommerce.search({ keyword: query }, function (resp) {
                 $.map(resp, function (data) {
                     var matches = [];
@@ -90,8 +99,11 @@
                     return process(matches);
                 });
             });
+            $searchForm.removeClass('searching');
         }
     });
+
+
     $('#newsletter-form').submit(function (e) {
         e.preventDefault();
         var form = $(this);
@@ -112,39 +124,44 @@
         return false;
     });
 
-    if ($('.js-confidences').length) {
-        var confidencesSettings = {
-            mobileFirst: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            speed: 2000,
-            arrows: false,
-            dots: false,
-            infinite: true,
-            responsive: [
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 760,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 1024,
-                    settings: "unslick"
+    var confidencesSettings = {
+        mobileFirst: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        speed: 2000,
+        arrows: false,
+        dots: false,
+        infinite: true,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2
                 }
-            ]
-        };
+            },
+            {
+                breakpoint: 760,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: "unslick"
+            }
+        ]
+    };
 
-        var $slick_slider = $('.js-confidences');
-        $slick_slider.slick(confidencesSettings);
+    var $slick_slider = $('.js-confidences');
+    setupConfidences();
+
+    function setupConfidences()
+    {
+        if (!$slick_slider.hasClass('slick-initialized') && $(window).width() < 1024) {
+            $slick_slider.slick(confidencesSettings);
+        }
     }
 
 
@@ -201,7 +218,7 @@ var throttle = function (fn, threshold, scope) {
 };
 
 function updateCartTotals() {
-    if ($('#empty-cart').length != 0) {
+    if ($('#empty-basket').length != 0) {
         prepCart();
     }
 
@@ -219,17 +236,17 @@ function updateCartTotals() {
         disc.text(basket.FormattedDiscountTotal);
         tot.text(basket.FormattedOrderTotal);
 
-        // Pulse the cart so it catches the user's attention
+        // Pulse the basket so it catches the user's attention
         //var highlight = [qty, sub, tax, disc, tot];
         //$(highlight).effect("highlight", {}, 500);
     });
 };
 function prepCart() {
-    var icn = $("<i>", { "class": "fa fa-shopping-cart icon-white margin-right-small" });
+    var icn = $("<i>", { "class": "fa fa-shopping-basket icon-white margin-right-small" });
     var qty = $("<span>", { "class": "item-qty" });
     var tot = $("<span>", { "class": "order-total" });
-    var cart = $("<a>", { 'href': '/basket', "id": "mini-cart" });
+    var basket = $("<a>", { 'href': '/basket', "id": "mini-basket" });
 
-    cart.append(icn).append(qty).append(" items in cart, total: ").append(tot);
-    $('#empty-cart').replaceWith(cart);
+    basket.append(icn).append(qty).append(" items in basket, total: ").append(tot);
+    $('#empty-basket').replaceWith(basket);
 };

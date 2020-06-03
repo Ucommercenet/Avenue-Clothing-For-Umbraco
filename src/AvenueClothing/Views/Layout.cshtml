@@ -93,13 +93,16 @@
 
                 @Umbraco.RenderMacro("UcommerceMiniBasket")
 
-                <div id="navbar-form" class="navbar-form col-md-3 collapse d-lg-block order-md-8 bg-white p-2 pl-0">
-                    <form id="search-form" class="bg-light" action="/search">
+                <div id="navbar-form" class="navbar-form col-md-3 collapse d-lg-block order-md-8 bg-white p-2 pl-0 mr-lg-2">
+                    <form id="search-form" action="/search">
                         <div class="input-append d-flex">
                             <input id="site-search" type="text" name="search" class="form-control border-0 bg-transparent" placeholder="Search" />
                             <button type="submit" class="btn-search">
-                                <span class="icon icon-small" aria-hidden="true" role="img">
+                                <span class="icon icon-small icon-default" role="img">
                                     @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/mag-glass.svg")))
+                                </span>
+                                <span class="icon icon-small icon-active" aria-hidden="true" role="img">
+                                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/loader.svg")))
                                 </span>
                                 <span class="sr-only">Search site</span>
                             </button>

@@ -52,7 +52,7 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 
 	var empty = variantInputs.filter(function () { return this.value === ""; });
 
-	// If the user has made a valid selection enable the add to cart button
+	// If the user has made a valid selection enable the add to basket button
 	if (empty.length == 0) {
 		addToCartButton.removeClass('disabled').addClass('btn-success').removeAttr('disabled');
 	} else {
@@ -94,10 +94,10 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     	var parent = addToCartButton.parent();
                     	var alert = parent.find(".item-added");
                     	if (alert.length == 0) {
-                    		// Add an alert box so the customer knows they've added an item to the cart
+                    		// Add an alert box so the customer knows they've added an item to the basket
                     		alert = $('<div />', {
                     			"class": "alert alert-success item-added",
-                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>'
+                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your basket. <a href="/basket">Click here to view your basket</a>.</p>'
                     		}).hide();
                     		parent.append(alert);
                     		alert.slideDown();

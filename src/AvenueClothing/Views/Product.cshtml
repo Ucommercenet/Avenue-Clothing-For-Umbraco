@@ -9,10 +9,20 @@
 
 @if (Model.ItemAlreadyExists)
 {
-    <div class="row-fluid">
-        <div class="alert alert-info">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <p><strong>Note!</strong> This item is already in your basket. <a class="btn btn-primary pull-right" href="/basket.aspx">View Your Cart</a></p>
+    <div class="alert alert-info mb-0">
+        <div class="container">
+            <button type="button" class="close" data-dismiss="alert">
+                <span class="icon icon-xs" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
+                </span>
+                <span class="sr-only">Close alert</span>
+            </button>
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <p class="m-0 p-0">
+                    <strong>Note!&nbsp;</strong>This item is already in your basket.
+                </p>
+                <a class="btn btn-light my-1" href="/basket.aspx"><strong>View Your Basket</strong></a>
+            </div>
         </div>
     </div>
 }
@@ -131,9 +141,14 @@
                         @if (Model.AddedToBasket)
                         {
                             <div class="alert alert-success item-added my-3">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span class="icon icon-xs" role="img">
+                                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
+                                    </span>
+                                    <span class="sr-only">Close alert</span>
+                                </button>
                                 <p>
-                                    Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.
+                                    Thanks, this item has been added to your basket. <a href="/basket">Click here to view your basket</a>.
                                 </p>
                             </div>
                         }

@@ -1,12 +1,4 @@
 .#{$theme} {
-    &.scrolled {
-        .category-nav{
-            &.show {
-                top: $header-height;
-            }
-        }
-    }
-
     .navbar-brand {
         background: {
             image: img-url($logo);
@@ -82,64 +74,15 @@
         }
     }
 
-    .category-nav {
-        opacity: 0;
-        position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-        transition: all $ts $tt;
-
-        &.collapsing {
-            z-index: 1;
-        }
-
-        &.show {
-            opacity: 1;
-            top: $header-height + $confidences-height;
-            z-index: 20;
-        }
-    }
-
-    .navigation-dropdown-wrapper {
-        ul {
-            @include reset-list;
-            font-family: $font-main;
-            font-size: 0.82rem;
-        }
-
-        a {
-            color: currentColor;
-            display: block;
-            font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-
-            #{$hover-states} {
-                outline: none;
-            }
-        }
-    }
-
-    .navigation-dropdown-featured-item {
-        flex: 0 0 100%;
-
-        @include breakpoint(small) {
-            flex: 0 0 auto;
-        }
-    }
-
-    .navigation-dropdown-item {
-        flex: 0 0 auto;
-    }
-
     .navbar-form {
+        background: $white-transparent;
         position: absolute;
             top: $header-height;
             left: 0;
             right: 0;
 
         @include breakpoint(medium) {
+            background: transparent;
             display: block;
             position: static;
         }
