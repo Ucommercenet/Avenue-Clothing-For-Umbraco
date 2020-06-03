@@ -5,6 +5,7 @@ using System.Web.Http;
 using Ucommerce.Api;
 using Ucommerce.Api.PriceCalculation;
 using AvenueClothing.Api.Model;
+using Ucommerce;
 using Ucommerce.EntitiesV2;
 using Ucommerce.Infrastructure;
 using Ucommerce.Search;

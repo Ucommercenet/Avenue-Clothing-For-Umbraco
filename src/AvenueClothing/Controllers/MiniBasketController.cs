@@ -5,6 +5,7 @@ using Ucommerce.Api.PriceCalculation;
 using Ucommerce.EntitiesV2;
 using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
+using Ucommerce;
 using Umbraco.Web.Mvc;
 
 namespace AvenueClothing.Controllers
