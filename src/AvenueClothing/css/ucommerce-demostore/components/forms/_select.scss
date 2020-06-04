@@ -34,4 +34,12 @@
             position: relative;
        }
     }
+
+    option {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: 0;
+        outline: 0;
+    }
 }

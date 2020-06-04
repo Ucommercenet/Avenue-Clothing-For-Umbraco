@@ -137,9 +137,18 @@
             </tbody>
         </table>
 
-        <div class="d-flex flex-wrap justify-content-between">
-            <a href="/basket/payment" class="btn btn-outline-secondary mb-3 flex-grow-1 flex-md-grow-0">Back to Payment Method</a>
-            <button name="send-order" type="submit" class="btn btn-primary btn-lg mb-3 flex-grow-1 flex-md-grow-0">Complete Order</button>
-        </div>
+        <footer class="page-footer d-flex flex-wrap justify-content-between">
+            <a href="/basket/payment" class="btn btn-outline-secondary mb-3">
+                <span class="icon icon-xs mr-1 rotate-180 transform-from-bottom" aria-hidden="true" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                </span>
+                <span class="d-none d-sm-inline">Back to </span>
+                Payment
+                <span class="d-none d-sm-inline"> Method</span>
+            </a>
+            <button name="send-order" type="submit" class="btn btn-primary mb-3">
+                Complete Order
+            </button>
+        </footer>
     </form>
 </div>

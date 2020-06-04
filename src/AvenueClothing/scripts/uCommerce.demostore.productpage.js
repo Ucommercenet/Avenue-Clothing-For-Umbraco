@@ -5,7 +5,6 @@ $(function () {
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
 	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
-
 });
 
 function relateVariations(sku, size, colour) {

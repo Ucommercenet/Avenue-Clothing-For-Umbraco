@@ -30,9 +30,21 @@
             <p class="alert">WARNING: No shipping methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">Ucommerce</a> administration area.</p>
         }
 
-        <div class="d-flex flex-wrap justify-content-between">
-            <a href="/basket/address.aspx" class="btn btn-outline-secondary mb-3 flex-grow-1 flex-md-grow-0">Back to Address</a>
-            <button name="update-shipment" type="submit" class="btn btn-primary btn-lg mb-3 flex-grow-1 flex-md-grow-0 ml-auto">Continue to Payment Page</button>
-        </div>
+        <footer class="page-footer d-flex flex-wrap justify-content-between">
+            <a href="/basket/address.aspx" class="btn btn-outline-secondary mb-3">
+                <span class="icon icon-xs mr-1 rotate-180 transform-from-bottom" aria-hidden="true" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                </span>
+                <span class="d-none d-sm-inline">Back to </span>
+                Address
+            </a>
+            <button name="update-shipment" type="submit" class="btn btn-primary mb-3">
+                <span class="d-none d-sm-inline">Continue to </span>
+                Payment Page
+                <span class="icon icon-xs ml-1 mb-1" aria-hidden="true" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                </span>
+            </button>
+        </footer>
     </form>
 </div>

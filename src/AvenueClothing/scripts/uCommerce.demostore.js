@@ -2,18 +2,6 @@
     var $body = $('body');
     var throttleInterval = 250;
 
-    function condenseHeader() {
-        var scrollDistance = 10;
-        var currentDistance = $(window).scrollTop();
-        var scrolledClass = 'scrolled';
-
-        if (currentDistance < scrollDistance) {
-            $body.removeClass(scrolledClass);
-        } else {
-            $body.addClass(scrolledClass);
-        }
-    }
-
     $('#main-nav').on('hidden.bs.collapse', function () {
         hideCollapse('category-nav');
     });
@@ -40,7 +28,6 @@
     $(window).on('resize', throttle( function() {
         setupConfidences();
     }, throttleInterval))
-
 
     function condenseHeader() {
         var scrollDistance = 10;
@@ -192,6 +179,23 @@
                     }
                 }
             ]
+        });
+    }
+
+    if ($('.js-slider-for').length) {
+        $('.js-slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.js-slider-nav'
+        });
+        $('.js-slider-nav').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: '.js-slider-for',
+            dots: false,
+            focusOnSelect: true
         });
     }
 });
