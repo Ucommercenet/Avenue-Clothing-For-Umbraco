@@ -36,12 +36,12 @@ namespace AvenueClothing.Controllers
                     ProductName = orderLine.ProductName,
                     Sku = orderLine.Sku,
                     VariantSku = orderLine.VariantSku,
-                    Total = new Money(orderLine.Total.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString(),
+                    Total = new Money(orderLine.Total.GetValueOrDefault(), basket.BillingCurrency).ToString(),
                     Discount = orderLine.Discount,
-                    Tax = new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString(),
-                    Price = new Money(orderLine.Price, basket.BillingCurrency.ISOCode).ToString(),
+                    Tax = new Money(orderLine.VAT, basket.BillingCurrency).ToString(),
+                    Price = new Money(orderLine.Price, basket.BillingCurrency).ToString(),
                     ProductUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, CatalogLibrary.GetProduct(orderLine.Sku)),
-                    PriceWithDiscount = new Money(orderLine.Price - orderLine.UnitDiscount.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString(),
+                    PriceWithDiscount = new Money(orderLine.Price - orderLine.UnitDiscount.GetValueOrDefault(), basket.BillingCurrency).ToString(),
                     OrderLineId = orderLine.OrderLineId
                 };
 
@@ -49,10 +49,10 @@ namespace AvenueClothing.Controllers
                 basketModel.OrderLines.Add(orderLineViewModel);
             }
 
-            basketModel.OrderTotal = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.DiscountTotal = new Money(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.TaxTotal = new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.SubTotal = new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.OrderTotal = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.DiscountTotal = new Money(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.TaxTotal = new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.SubTotal = new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
 
             return View("/Views/Basket.cshtml", basketModel);
         }
