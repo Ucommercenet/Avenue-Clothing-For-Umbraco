@@ -643,3 +643,11 @@ p.btn-group.view-details {
     margin-bottom: 5px;
         opacity: 0.5;
 }
+
+.editor-label {
+    margin-top: 10px;
+}
+
+input[type=submit].btn {
+    margin-top: 10px;
+}

@@ -1,0 +1,25 @@
+﻿@using AvenueClothing.Controllers
+@using Umbraco.Web
+@model AvenueClothing.Models.LoginViewModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        Welcome, @User.Identity.Name
+    </p>
+    <p>
+        @Html.ActionLink("Log out", "Logout", "Membership")
+    </p>
+}
+else
+{
+    using (Html.BeginUmbracoForm<MembershipController>("MemberLogin"))
+    {
+        <p>
+            @Html.EditorFor(x => Model)
+        </p>
+        <p>
+            <input type="submit" class="btn btn-secondary" value="Log in"/>
+        </p>
+    }
+}  

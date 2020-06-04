@@ -373,6 +373,7 @@
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomepageCatalogController.cs" />
+    <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Controllers\MiniBasketController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -392,6 +393,7 @@
     <Compile Include="Models\FacetsDisplayedViewModel.cs" />
     <Compile Include="Models\FacetValueViewModel.cs" />
     <Compile Include="Models\FacetViewModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MiniBasketViewModel.cs" />
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
@@ -566,6 +568,7 @@
     <None Include=".bin\node.cmd" />
     <Content Include="css\sass.scss" />
     <Content Include="umbraco\Ucommerce\Apps\Ucommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
+    <Content Include="Views\Membership\LoginForm.cshtml" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
