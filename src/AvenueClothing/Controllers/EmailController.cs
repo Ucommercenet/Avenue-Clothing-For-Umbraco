@@ -34,10 +34,10 @@ namespace AvenueClothing.Controllers
                     Sku = orderLine.Sku,
                     VariantSku = orderLine.VariantSku,
                     Total = new Money(orderLine.Total.GetValueOrDefault(),
-                        orderLine.PurchaseOrder.BillingCurrency.ISOCode).ToString(),
-                    Tax = new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString(),
-                    Price = new Money(orderLine.Price, basket.BillingCurrency.ISOCode).ToString(),
-                    PriceWithDiscount = new Money(orderLine.Price - orderLine.Discount, basket.BillingCurrency.ISOCode)
+                        orderLine.PurchaseOrder.BillingCurrency).ToString(),
+                    Tax = new Money(orderLine.VAT, basket.BillingCurrency).ToString(),
+                    Price = new Money(orderLine.Price, basket.BillingCurrency).ToString(),
+                    PriceWithDiscount = new Money(orderLine.Price - orderLine.Discount, basket.BillingCurrency)
                         .ToString(),
                     Quantity = orderLine.Quantity,
                     Discount = orderLine.Discount
@@ -46,13 +46,13 @@ namespace AvenueClothing.Controllers
                 basketModel.OrderLines.Add(orderLineModel);
             }
 
-            basketModel.DiscountTotal = new Money(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.DiscountTotal = new Money(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
             basketModel.DiscountAmount = basket.DiscountTotal.GetValueOrDefault();
-            basketModel.SubTotal = new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.OrderTotal = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.TaxTotal = new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.ShippingTotal = new Money(basket.ShippingTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.PaymentTotal = new Money(basket.PaymentTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.SubTotal = new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.OrderTotal = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.TaxTotal = new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.ShippingTotal = new Money(basket.ShippingTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
+            basketModel.PaymentTotal = new Money(basket.PaymentTotal.GetValueOrDefault(), basket.BillingCurrency).ToString();
 
 
             var shipment = basket.Shipments.FirstOrDefault();
