@@ -4,7 +4,6 @@
 @{
     Layout = "Layout.cshtml";
     Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
-    string shortDesc = string.Join(" ", Model.ProductViewModel.LongDescription.Split(' ').Take(20));
 }
 
 @if (Model.ItemAlreadyExists)
@@ -166,10 +165,14 @@
                     <p>Sorry, the item you are looking for is not currently available.</p>
                 }
 
-                @Html.Raw(@shortDesc)
+            @Html.Raw(Model.ProductViewModel.ShortDescription)
+        </section>
+    </div>
+</div>
 
-ion)
-rs also bought</h5>
+<div class="bg-secondary pt-5 pb-3">
+    <div class="container text-white">
+        <h5 class="text-uppercase mb-4 text-spaced">Others also bought</h5>
 
         <div class="product-list keep-rows-even">
             <a href="/demo-store/p/formal/jungle-by-night-mood-slim-fit-signature-shirt" id="JNMSFSS" class="product mb-3">
@@ -189,7 +192,7 @@ rs also bought</h5>
 
             <a href="/demo-store/p/formal/pink-manga-mood-slim-fit-signature-shirt-limited-edition-100-pieces" id="PMMSFSS-LE" class="product mb-3">
                 <div class="product-image mb-3">
-                        <img class="img-fluid" src="/media/1097/PMMSFSS-LE.jpg">
+                    <img class="img-fluid" src="/media/1097/PMMSFSS-LE.jpg">
                 </div>
 
                 <div class="mx-2">
@@ -217,7 +220,7 @@ rs also bought</h5>
             </a>
             <a href="/demo-store/p/formal/polo-ralph-lauren-blue-white-stripe-custom-fit-regent-poplin-dress-shirt" id="A02 WCJNK C0223 C421A" class="product mb-3">
                 <div class="product-image mb-3">
-                        <img class="img-fluid" src="/media/1102/A02 WCJNK C0223 C421A.jpg">
+                    <img class="img-fluid" src="/media/1102/A02 WCJNK C0223 C421A.jpg">
                 </div>
 
                 <div class="mx-2">
