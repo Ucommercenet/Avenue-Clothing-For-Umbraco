@@ -14,3 +14,7 @@
 .transform-from-bottom {
     transform-origin: bottom;
 }
+
+.stick-below-header {
+    top: $header-height;
+}
