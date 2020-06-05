@@ -34,14 +34,6 @@ build:
   publish_wap: true
   verbosity: minimal
 
-notifications:
-- provider: Slack
-  incoming_webhook: https://hooks.slack.com/services/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
-  channel: '#pingdom'
-  on_build_success: true
-  on_build_failure: true
-  on_build_status_changed: false
-
 for:
 -
  branches:
