@@ -2,6 +2,7 @@ version: 2.0.{build}
 branches:
   only:
   - redesign-2020
+  - deploy/*
 image: Visual Studio 2017
 environment:
   AutoParameterizationWebConfigConnectionStrings: false
@@ -39,6 +40,7 @@ for:
  branches:
   only:
    - redesign-2020
+   - deploy/staging
  configuration: Debug
  deploy:
     - provider: Environment
