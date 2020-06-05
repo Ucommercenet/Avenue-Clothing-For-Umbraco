@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.EntitiesV2;
 using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
@@ -24,7 +25,7 @@ namespace AvenueClothing.Controllers
                 var numberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                 if (numberOfItems != 0)
                 {
-                    miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency);
+                    miniBasket.Total = new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode);
                     miniBasket.NumberOfItems = basket.OrderLines.Sum(x => x.Quantity);
                     miniBasket.IsEmpty = false;
                 }

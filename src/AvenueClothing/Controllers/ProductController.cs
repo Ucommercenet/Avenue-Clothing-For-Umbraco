@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Infrastructure;
 using Ucommerce.Search;
 using AvenueClothing.Models;
@@ -37,7 +38,7 @@ namespace AvenueClothing.Controllers
 
             // Price calculations
             currentProduct.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
-            var currencyIsoCode = Ucommerce.EntitiesV2.Currency.FirstOrDefault(c => c.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+            string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
             decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
             var productViewModel = new ProductViewModel

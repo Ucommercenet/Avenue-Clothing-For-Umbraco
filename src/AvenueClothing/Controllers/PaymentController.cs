@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.EntitiesV2;
 using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
@@ -39,7 +40,7 @@ namespace AvenueClothing.Controllers
                 var option = new SelectListItem();
                 decimal feePercent = availablePaymentMethod.FeePercent;
                 var fee = availablePaymentMethod.GetFeeForCurrency(basket.BillingCurrency);
-                var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency);
+                var formattedFee = new Money((fee == null ? 0 : fee.Fee), basket.BillingCurrency.ISOCode);
 
                 option.Text = $@" {availablePaymentMethod.Name} ({formattedFee} + {feePercent:0.00}%)";
                 option.Value = availablePaymentMethod.PaymentMethodId.ToString();

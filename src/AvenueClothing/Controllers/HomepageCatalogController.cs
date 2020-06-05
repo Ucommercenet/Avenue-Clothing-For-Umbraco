@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ucommerce.Api;
+using Ucommerce.Api.PriceCalculation;
 using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
 using Ucommerce;
@@ -31,7 +32,7 @@ namespace AvenueClothing.Controllers
             {
                 string niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, product);
                 product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
-                var currencyIsoCode = Ucommerce.EntitiesV2.Currency.FirstOrDefault(c => c.ISOCode == CatalogContext.CurrentPriceGroup.CurrencyISOCode);
+                string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
                 decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
                 productsViewModel.Products.Add(new ProductViewModel
