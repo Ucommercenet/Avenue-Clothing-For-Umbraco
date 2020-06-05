@@ -4,7 +4,6 @@
 @{
     Layout = "Layout.cshtml";
     Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
-    string shortDesc = string.Join(" ", Model.ProductViewModel.LongDescription.Split(' ').Take(20));
 }
 
 @if (Model.ItemAlreadyExists)
@@ -164,7 +163,7 @@
                 <p>Sorry, the item you are looking for is not currently available.</p>
             }
 
-            @Html.Raw(@shortDesc)
+            @Html.Raw(Model.ProductViewModel.ShortDescription)
         </section>
     </div>
 </div>
