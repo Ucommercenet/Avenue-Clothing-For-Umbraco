@@ -2,9 +2,10 @@
 
 $(function () {
 	relateVariations($('#product-sku'), $('#variation-CollarSize'), $('#variation-Colour'), $('#add-to-basket'));
-	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
-	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
+	enableAddToCartWhenSelected($('#add-to-basket'), $('.js-variant'));
+	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.js-variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
+
 });
 
 function relateVariations(sku, size, colour) {
@@ -51,7 +52,7 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 
 	var empty = variantInputs.filter(function () { return this.value === ""; });
 
-	// If the user has made a valid selection enable the add to basket button
+	// If the user has made a valid selection enable the add to cart button
 	if (empty.length == 0) {
 		addToCartButton.removeClass('disabled').addClass('btn-success').removeAttr('disabled');
 	} else {
@@ -93,10 +94,10 @@ function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, varian
                     	var parent = addToCartButton.parent();
                     	var alert = parent.find(".item-added");
                     	if (alert.length == 0) {
-                    		// Add an alert box so the customer knows they've added an item to the basket
+                    		// Add an alert box so the customer knows they've added an item to the cart
                     		alert = $('<div />', {
                     			"class": "alert alert-success item-added",
-                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your basket. <a href="/basket">Click here to view your basket</a>.</p>'
+                    			html: '<button type="button" class="close" data-dismiss="alert">×</button><p>Thanks, this item has been added to your cart. <a href="/basket">Click here to view your cart</a>.</p>'
                     		}).hide();
                     		parent.append(alert);
                     		alert.slideDown();
@@ -153,7 +154,7 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
             		colour.val(availableOptions.val());
             		//Fire these events manually to prevent a loop
             		updateVariationOptions(sku, size, colour, false);
-            		updateAddToCartButton($('#add-to-basket'), $('.variant'));
+            		updateAddToCartButton($('#add-to-basket'), $('.js-variant'));
             	}
 
             	// Now call any functions that need to run after the updates
