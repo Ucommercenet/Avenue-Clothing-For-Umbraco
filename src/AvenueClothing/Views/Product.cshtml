@@ -4,6 +4,7 @@
 @{
     Layout = "Layout.cshtml";
     Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
+    string shortDesc = string.Join(" ", Model.ProductViewModel.LongDescription.Split(' ').Take(20));
 }
 
 @if (Model.ItemAlreadyExists)
@@ -101,76 +102,74 @@
         </div>
 
         <section class="col-md-5 col-lg-4 pl-lg-5">
-            <h2 itemprop="name">
-                <b>@Model.ProductViewModel.Name</b>
-            </h2>
 
-            @if (Model.ProductViewModel.IsOrderingAllowed)
-            {
+                <h2 itemprop="name">
+                    <b>@Model.ProductViewModel.Name</b>
+                </h2>
 
-                <form class="mb-4" method="post" action="@Url.Action("Index", "Product")">
+                @if (Model.ProductViewModel.IsOrderingAllowed)
+                {
+                    <div class="sticky-top bg-white pb-1">
+                        <form class="mb-4" method="post" action="@Url.Action("Index", "Product")">
 
-                        <aside itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                            <p class="h5 mb-4 item-price" itemprop="price">@Model.ProductViewModel.Price</p>
-                            @*<p class="item-tax">
-                                <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
-                            </p>*@
-                        </aside>
+                                <aside itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                    <p class="h5 mb-4 item-price" itemprop="price">@Model.ProductViewModel.Price</p>
+                                    @*<p class="item-tax">
+                                        <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
+                                    </p>*@
+                                </aside>
 
-                        @if (Model.ProductViewModel.Properties.Count > 0 && Model.ProductViewModel.IsProductFamily)
-                        {
-                            foreach (var prop in Model.ProductViewModel.Properties)
-                            {
-                                var controlName = string.Format("variation-{0}", prop.PropertyName);
-                                <label for="@controlName">@prop.PropertyName</label>
-                                <select name="@controlName" id="@controlName" class="form-control mb-3">
-                                    <option value="">-- Please Select --</option>
-                                    @foreach (var value in prop.Values)
+                                @if (Model.ProductViewModel.Properties.Count > 0 && Model.ProductViewModel.IsProductFamily)
+                                {
+                                    foreach (var prop in Model.ProductViewModel.Properties)
                                     {
-                                        <option value="@value">@value</option>
+                                        var controlName = string.Format("variation-{0}", prop.PropertyName);
+                                        <label for="@controlName">@prop.PropertyName</label>
+                                        <select name="@controlName" id="@controlName" class="form-control mb-3 js-variant">
+                                            <option value="">-- Please Select --</option>
+                                            @foreach (var value in prop.Values)
+                                            {
+                                                <option value="@value">@value</option>
+                                            }
+                                        </select>
                                     }
-                                </select>
-                            }
-                        }
+                                }
 
-                        <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
+                                <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
 
-                        <button id="add-to-basket" class="btn btn-dark hover-green w-100" type="submit">
-                            <span class="icon icon-small mr-1" aria-hidden="true" focusable="false" role="img">
-                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
-                            </span>
-                            Add to bag
-                        </button>
-
-                        @if (Model.AddedToBasket)
-                        {
-                            <div class="alert alert-success item-added my-3">
-                                <button type="button" class="close" data-dismiss="alert">
-                                    <span class="icon icon-xs" role="img">
-                                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
+                                <button id="add-to-basket" class="btn btn-dark hover-green w-100" type="submit">
+                                    <span class="icon icon-small mr-1" aria-hidden="true" focusable="false" role="img">
+                                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
                                     </span>
-                                    <span class="sr-only">Close alert</span>
+                                    Add to bag
                                 </button>
-                                <p>
-                                    Thanks, this item has been added to your basket. <a href="/basket">Click here to view your basket</a>.
-                                </p>
-                            </div>
-                        }
-                </form>
-            }
-            else
-            {
-                <p>Sorry, the item you are looking for is not currently available.</p>
-            }
 
-            @Html.Raw(Model.ProductViewModel.ShortDescription)
-        </section>
-    </div>
-</div>
+                                @if (Model.AddedToBasket)
+                                {
+                                    <div class="alert alert-success item-added my-3">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            <span class="icon icon-xs" role="img">
+                                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
+                                            </span>
+                                            <span class="sr-only">Close alert</span>
+                                        </button>
+                                        <p>
+                                            Thanks, this item has been added to your basket. <a href="/basket">Click here to view your basket</a>.
+                                        </p>
+                                    </div>
+                                }
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <p>Sorry, the item you are looking for is not currently available.</p>
+                }
 
-<div class="bg-secondary pt-5 pb-3">
-    <div class="container text-white">
-        <h5 class="text-uppercase mb-4 text-spaced">Others also bought</h5>
+                @Html.Raw(@shortDesc)
+
+ion)
+rs also bought</h5>
 
         <div class="product-list keep-rows-even">
             <a href="/demo-store/p/formal/jungle-by-night-mood-slim-fit-signature-shirt" id="JNMSFSS" class="product mb-3">

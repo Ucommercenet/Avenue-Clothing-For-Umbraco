@@ -47,7 +47,12 @@
         }
 
         .payment-options {
-            height: 1.16rem;
+            height: 1.6rem;
+
+            @include breakpoint(medium) {
+                height: 1.16rem;
+
+            }
         }
     }
 }
