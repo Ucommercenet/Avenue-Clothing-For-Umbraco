@@ -1,18 +1,35 @@
 .#{$theme} {
-    .gallery__thumbs {
+    .gallery-large {
+        @include reset-list;
+        // max-height: 50vh;
+        // overflow: hidden;
+
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .gallery-thumbs {
         $space: 0.5rem;
 
-        display: flex;
-            flex-wrap: wrap;
-        margin: 0 $space*-0.5;
-        padding: $space 0;
+        .slick-track {
+            display: flex;
+                flex-wrap: wrap;
+            margin: 0 $space*-0.5;
+            padding: $space 0;
+            width: calc(100% + #{$space}) !important;
+        }
 
-        a {
+        .slick-slide {
             $size: calc(20% - #{$space});
             flex: 0 0 $size;
             margin: 0 $space/2 $space;
+            width: $size !important;
 
             #{$hover-states} {
+                border: 0;
+
                 img {
                     filter: brightness(1.1);
                     transform: scale(1.01);
@@ -21,6 +38,7 @@
         }
 
         img {
+            cursor: pointer;
             transition: all $ts*2 $tt;
         }
     }

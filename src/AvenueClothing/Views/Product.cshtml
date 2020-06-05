@@ -38,28 +38,33 @@
         <div class="col-md-7 col-lg-8 pr-lg-5">
             @if (!string.IsNullOrEmpty(Model.ProductViewModel.ThumbnailImageUrl))
             {
-                <div class="gallery mb-5">
-                    <div class="gallery__large">
-                        <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+                <div class="gallery-large js-slider-for">
+
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+
+                            <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
+
                     </div>
-                    <div class="gallery__thumbs">
-                        <a href="#">
+                    <div class="gallery-thumbs mb-5 js-slider-nav">
+
                             <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
-                        </a>
-                        <a href="#">
+
                             <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
-                        </a>
-                        <a href="#">
+
                             <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
-                        </a>
-                        <a href="#">
+
                             <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
-                        </a>
-                        <a href="#">
+
                             <img src="@Model.ProductViewModel.ThumbnailImageUrl"/>
-                        </a>
+
                     </div>
-                </div>
+
             }
 
             <h5 class="text-uppercase mb-4">Description</h5>
@@ -131,7 +136,7 @@
 
                         <input name="Sku" id="product-sku" type="hidden" value="@Model.ProductViewModel.Sku" />
 
-                        <button id="add-to-basket" class="btn btn-dark w-100" type="submit">
+                        <button id="add-to-basket" class="btn btn-dark hover-green w-100" type="submit">
                             <span class="icon icon-small mr-1" aria-hidden="true" focusable="false" role="img">
                                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
                             </span>
@@ -168,10 +173,10 @@
     <div class="container text-white">
         <h5 class="text-uppercase mb-4 text-spaced">Others also bought</h5>
 
-        <div class="product-list">
-            <a href="/demo-store/p/formal/jungle-by-night-mood-slim-fit-signature-shirt" id="JNMSFSS">
+        <div class="product-list keep-rows-even">
+            <a href="/demo-store/p/formal/jungle-by-night-mood-slim-fit-signature-shirt" id="JNMSFSS" class="product mb-3">
                 <div class="product-image mb-3">
-                        <img class="img-fluid" src="/media/1098/JNMSFSS.jpg">
+                    <img class="img-fluid" src="/media/1098/JNMSFSS.jpg">
                 </div>
 
                 <div class="mx-2">
@@ -183,6 +188,7 @@
                     </p>
                 </div>
             </a>
+
             <a href="/demo-store/p/formal/pink-manga-mood-slim-fit-signature-shirt-limited-edition-100-pieces" id="PMMSFSS-LE" class="product mb-3">
                 <div class="product-image mb-3">
                         <img class="img-fluid" src="/media/1097/PMMSFSS-LE.jpg">
@@ -199,7 +205,7 @@
             </a>
             <a href="/demo-store/p/formal/black-white-wonderland-mood-slim-fit-signature-shirt-limited-edition-200-pieces" id="BWWMSFSS-LE" class="product mb-3">
                 <div class="product-image mb-3">
-                        <img class="img-fluid" src="/media/1095/BWWMSFSS-LE.jpg">
+                    <img class="img-fluid" src="/media/1095/BWWMSFSS-LE.jpg">
                 </div>
 
                 <div class="mx-2">

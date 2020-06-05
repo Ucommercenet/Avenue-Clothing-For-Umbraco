@@ -30,6 +30,14 @@
         &[aria-expanded="true"] {
             color: $green;
         }
+
+        &[data-target="#navbar-form"] {
+            background: $grey-f;
+
+            #{$hover-states} {
+                background: $grey-e;
+            }
+        }
     }
 
     .site-nav {
@@ -62,7 +70,6 @@
             #{$hover-states} {
                 color: $black;
                 outline: none;
-                text-decoration: none;
             }
 
             &[aria-expanded="true"] {
@@ -85,6 +92,10 @@
             background: transparent;
             display: block;
             position: static;
+        }
+
+        &.show {
+            box-shadow: $box-shadow;
         }
     }
 }

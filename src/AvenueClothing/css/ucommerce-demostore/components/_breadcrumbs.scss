@@ -9,26 +9,48 @@
         font-weight: 500;
         line-height: 1;
 
-        +.breadcrumb-item {
-            padding-left: 0;
+        &:last-child {
+            pointer-events: none;
 
-            &::before {
-                background: transparent img-url('icons/chevron.svg') center  no-repeat;
-                background-size: 0.6rem;
-                content: "";
-                flex: 0 0 auto;
-                height: 0.8rem;
-                width: 1.5rem;
-                transform: rotate(-90deg);
+            &::after {
+                display: none;
             }
         }
 
-        &:last-child {
-            pointer-events: none;
+        &::before {
+            display: none;
+        }
+
+        &::after {
+            background: transparent img-url('icons/chevron.svg') center no-repeat;
+            background-size: 0.6rem;
+            content: "";
+            flex: 0 0 auto;
+            height: 100%;
+            width: 1.5rem;
+            transform: rotate(-90deg);
+        }
+
+        +.breadcrumb-item {
+            padding-left: 0;
+
         }
 
         a {
             flex: 1;
+            padding: 0.15rem 0;
+            max-width: 21.25rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+            @include breakpoint(medium) {
+                max-width: 30rem;
+            }
+
+            @include breakpoint(large) {
+                max-width: none;
+            }
         }
     }
 }

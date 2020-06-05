@@ -1,8 +1,16 @@
+$filterbar-padding-y: 0.5rem;
+$filterbar-padding-lg-y: 1rem;
+
 .#{$theme} {
     .filterbar {
         .dropdown {
-            display: block;
-            margin-right: 0.5rem;
+            display: inline-flex;
+                align-items: flex-end;
+            margin-right: 0.25rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
 
             &.open {
                 .dropdown-toggle {
@@ -24,9 +32,13 @@
             border: thin solid $white;
             font-weight: 500;
             outline: none;
-            padding: 1rem 2rem;
+            padding: $filterbar-padding-y 2rem;
             position: relative;
             text-transform: uppercase;
+
+            @include breakpoint(medium) {
+                padding: $filterbar-padding-lg-y 2rem;
+            }
 
             &:active {
                 border-color: $white;
@@ -54,7 +66,11 @@
         select {
             border: thin solid $white;
             margin-right: 0.5rem;
-            padding: 1rem 3rem 1rem 1rem;
+            padding: $filterbar-padding-y 3rem $filterbar-padding-y 1rem;
+
+            @include breakpoint(medium) {
+                padding: $filterbar-padding-lg-y 3rem $filterbar-padding-lg-y 1rem;
+            }
         }
 
         label {

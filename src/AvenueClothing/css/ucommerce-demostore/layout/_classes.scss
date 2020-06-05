@@ -5,3 +5,12 @@
 .no-max-width {
     max-width: none !important;
 }
+
+.rotate-180 {
+    transform: rotate(180deg);
+    transform-origin: center;
+}
+
+.transform-from-bottom {
+    transform-origin: bottom;
+}

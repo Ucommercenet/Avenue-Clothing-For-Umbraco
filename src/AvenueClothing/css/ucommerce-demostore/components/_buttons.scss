@@ -17,6 +17,7 @@
 
         #{$hover-states} {
             box-shadow: none;
+            text-decoration: none;
         }
 
         &:disabled,
@@ -32,6 +33,31 @@
 
         &.border-thin {
             border-width: 1px;
+        }
+
+        &.hover-green {
+            #{$hover-states} {
+                background: $green;
+                border-color: $green;
+                color: $white;
+            }
+        }
+    }
+
+
+    button {
+        .icon-active {
+            display: none;
+        }
+
+        &[aria-expanded="true"] {
+            .icon-active {
+                display: block;
+            }
+
+            .icon-default {
+                display: none;
+            }
         }
     }
 
@@ -173,18 +199,18 @@
         }
     }
 
-    .btn-search {
-        background: transparent;
-        border: 0;
-
-        .icon-active {
+    .btn-hide-expanded {
+        &[aria-expanded="true"] {
             display: none;
         }
     }
 
-    .btn-hide-expanded {
-        &[aria-expanded="true"] {
-            display: none;
+    .btn-search {
+        background: transparent;
+        border: 0;
+
+        #{$hover-states} {
+            color: $green;
         }
     }
 

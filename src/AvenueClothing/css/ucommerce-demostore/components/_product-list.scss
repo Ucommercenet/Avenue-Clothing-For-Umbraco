@@ -11,6 +11,14 @@
                 flex: 1 1 auto;
             }
 
+        &.keep-rows-even {
+            a {
+                @include breakpoint(small) {
+                    max-width: 25%;
+                }
+            }
+        }
+
         a {
             color: currentColor;
             flex: 1 1 0;
@@ -32,7 +40,6 @@
                 // max-width: 276px;
                 max-width: 25%;
             }
-
 
             #{$hover-states} {
                 .product-image {

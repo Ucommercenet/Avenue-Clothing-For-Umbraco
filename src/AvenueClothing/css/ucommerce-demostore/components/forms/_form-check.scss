@@ -110,7 +110,7 @@ $label-color: $black;
     .cb {
         @include size($checkbox-size);
         position: absolute;
-            top: 0;
+            top: 0.1rem;
             left: 0;
         opacity: 1;
 
