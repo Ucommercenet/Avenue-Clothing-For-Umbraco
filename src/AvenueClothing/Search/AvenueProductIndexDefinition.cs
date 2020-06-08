@@ -1,4 +1,5 @@
-﻿using Ucommerce.Search.Definitions;
+﻿using System.Collections.Generic;
+using Ucommerce.Search.Definitions;
 using Ucommerce.Search.Extensions;
 
 namespace AvenueClothing.Search
@@ -11,10 +12,14 @@ namespace AvenueClothing.Search
             this.Field(p => p["CollarSize"], typeof(string));
             this.Field(p => p["ShoeSize"], typeof(string));
             this.Field(p => p["Colour"], typeof(string));
+            this.Field(p => p["TooEarlyFor"], typeof(List<string>));
+            
             this.PricesField(p => p.UnitPrices);
+            
             this.Facet("Colour");
             this.Facet("CollarSize");
             this.Facet("ShoeSize");
+            this.Facet("TooEarlyFor");
         }
     }
 }
