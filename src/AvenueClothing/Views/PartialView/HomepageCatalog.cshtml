@@ -12,26 +12,8 @@
 
             <div class="mx-2">
                 <p class="mb-1 text-truncate">
-                    @product.Name
+                    @product.Categories.FirstOrDefault().DisplayName
                 </p>
-                @if (product.Price != null)
-                {
-                    <p class="mb-1">
-                        <strong>@product.Price</strong>
-                    </p>
-                }
-            </div>
-        </a>
-    }
-
-    @foreach (var product in Model.Products)
-    {
-        <a href="@product.Url" class="">
-            <div class="product-image mb-3">
-                <img class="img-fluid" src="@product.ThumbnailImageUrl">
-            </div>
-
-            <div class="mx-2">
                 <p class="mb-1 text-truncate">
                     @product.Name
                 </p>
@@ -54,6 +36,9 @@
 
             <div class="mx-2">
                 <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
+                </p>
+                <p class="mb-1 text-truncate">
                     @product.Name
                 </p>
                 @if (product.Price != null)
@@ -66,7 +51,32 @@
         </a>
     }
 
-        @foreach (var product in Model.Products)
+    @foreach (var product in Model.Products)
+    {
+        <a href="@product.Url" class="">
+
+            <div class="product-image mb-3">
+                <img class="img-fluid" src="@product.ThumbnailImageUrl">
+            </div>
+
+            <div class="mx-2">
+                <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
+                </p>
+                <p class="mb-1 text-truncate">
+                    @product.Name
+                </p>
+                @if (product.Price != null)
+                {
+                    <p class="mb-1">
+                        <strong>@product.Price</strong>
+                    </p>
+                }
+            </div>
+        </a>
+    }
+
+    @foreach (var product in Model.Products)
     {
         <a href="@product.Url" class="">
             <div class="product-image mb-3">
@@ -74,6 +84,9 @@
             </div>
 
             <div class="mx-2">
+                <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
+                </p>
                 <p class="mb-1 text-truncate">
                     @product.Name
                 </p>

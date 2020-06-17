@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Umbraco.Web.Composing;
 using Umbraco.Web.Models;
+using Ucommerce.Search.Models;
 
 namespace AvenueClothing.Models
 {
@@ -29,6 +31,8 @@ namespace AvenueClothing.Models
 		public bool IsVariant { get; set; }
 
 		public bool IsProductFamily { get; set; }
+
+		public IList<Category> Categories { get; set; }
 
 		public string Name { get; set; }
 
