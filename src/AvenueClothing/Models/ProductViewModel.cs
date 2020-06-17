@@ -55,5 +55,6 @@ namespace AvenueClothing.Models
 		public string Tax { get; set; }
 
 		public string Price { get; set; }
+
 	}
 }

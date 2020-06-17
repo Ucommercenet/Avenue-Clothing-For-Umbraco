@@ -15,6 +15,7 @@ using Umbraco.Web.Mvc;
 using Category = Ucommerce.Search.Models.Category;
 using Money = Ucommerce.Money;
 using Product = Ucommerce.Search.Models.Product;
+using System;
 
 namespace AvenueClothing.Controllers
 {
@@ -27,17 +28,24 @@ namespace AvenueClothing.Controllers
 
         public override ActionResult Index(ContentModel model)
         {
-            using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
+
+            var page = Request.QueryString["pg"] ?? "1";
+            var pageSize = Request.QueryString["size"] ?? "5";
+
+            using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))            
             {
                 var currentCategory = CatalogContext.CurrentCategory;
-
+                int totalProductsCount;
                 var categoryViewModel = new CategoryViewModel
                 {
                     Name = currentCategory.DisplayName,
                     Description = currentCategory.Description,
                     CatalogId = currentCategory.ProductCatalog,
                     CategoryId = currentCategory.Guid,
-                    Products = MapProductsInCategories(currentCategory)
+                    Products = MapProductsInCategories(currentCategory, out totalProductsCount),
+                    TotalProducts = totalProductsCount,
+                    PageSize = Int32.Parse(pageSize),
+                    PageNumber = Int32.Parse(page)                    
                 };
 
                 if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
@@ -78,8 +86,13 @@ namespace AvenueClothing.Controllers
         }
 
 
-        private IList<ProductViewModel> MapProductsInCategories(Category category)
+        private IList<ProductViewModel> MapProductsInCategories(Category category, out int totalProducts)
         {
+
+            var page = Request.QueryString["pg"] ?? "1";
+            var pageSize = Request.QueryString["size"] ?? "5";
+            var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));
+
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
 
@@ -97,7 +110,11 @@ namespace AvenueClothing.Controllers
             productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid))
                 .ToList()));
 
+            totalProducts = productsInCategory.Count;
+            productsInCategory = productsInCategory.Skip(skip).Take(Int32.Parse(pageSize)).ToList();
+
             return productsInCategory;
         }
+    
     }
 }

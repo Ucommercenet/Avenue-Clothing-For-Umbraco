@@ -18,8 +18,8 @@
     </div>
 </div>
 
-@Html.HiddenFor(x => x.CatalogId, new {id = "catalog-id"})
-@Html.HiddenFor(x => x.CategoryId, new {id = "category-id"})
+@Html.HiddenFor(x => x.CatalogId, new { id = "catalog-id" })
+@Html.HiddenFor(x => x.CategoryId, new { id = "category-id" })
 
 <div class="container mb-4">
     <aside class="filterbar d-flex flex-wrap justify-content-between mb-4">
@@ -91,24 +91,22 @@
     </div>
 
     <nav class="page-navigation text-center mb-3" aria-label="Page navigation">
-        <h6 class="mb-3"><span class="text-uppercase">Showing</span> 12 of 60 items</h6>
-
+        <h6 class="mb-3"><span class="text-uppercase">Showing </span>@Model.Products.Count of @Model.TotalProducts items</h6>
         <ul class="pagination mb-5 justify-content-center">
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">5</a>
-            </li>
+            @if (Model.PageSize <= Model.TotalProducts)
+            {
+                for (int i = 1; i < Math.Ceiling((double)Model.TotalProducts / Model.PageSize) + 1; i++)
+                {
+                    if (Model.PageNumber == i)
+                    {
+                        <li class="current"><a href="?">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="?">@i</a></li>
+                    }
+                }
+            }
         </ul>
     </nav>
 </div>
