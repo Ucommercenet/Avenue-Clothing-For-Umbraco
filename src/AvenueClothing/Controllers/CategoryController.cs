@@ -91,10 +91,11 @@ namespace AvenueClothing.Controllers
 
             var page = Request.QueryString["pg"] ?? "1";
             var pageSize = Request.QueryString["size"] ?? "5";
-            var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));
+            var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));          
 
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
+
 
             var subCategories = CatalogLibrary.GetCategories(category.Categories);
             var products =

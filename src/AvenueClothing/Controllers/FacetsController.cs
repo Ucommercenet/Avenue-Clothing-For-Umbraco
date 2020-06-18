@@ -12,24 +12,36 @@ using Ucommerce.Search.Facets;
 using Ucommerce.Search.Models;
 using Umbraco.Core;
 using Umbraco.Web.Mvc;
+using AvenueClothing.Search;
+using ImageProcessor.Imaging.Colors;
 
 namespace AvenueClothing.Controllers
 {
     public static class FacetedQueryStringExtensions
-    {
+    {         
+
         public static IList<Facet> ToFacets(this NameValueCollection target)
         {
+            AvenueProductIndexDefinition prodDefiniation = new AvenueProductIndexDefinition();       
+           
+            var facets = prodDefiniation.Facets.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).ToDictionary(x => x.Key, x => x.Value);         
             var parameters = new Dictionary<string, string>();
+
+            string[] keys = new string[facets.Keys.Count];
+            facets.Keys.CopyTo(keys, 0);    
+
             foreach (var queryString in HttpContext.Current.Request.QueryString.AllKeys)
             {
                 parameters[queryString] = HttpContext.Current.Request.QueryString[queryString];
             }
 
-            parameters.RemoveAll(kvp =>
-                new [] { "umbDebugShowTrace", "product", "variant", "category", "categories", "catalog"}
-                    .Contains(kvp.Key));
+            //parameters.RemoveAll(kvp =>
+            //    new [] { "umbDebugShowTrace", "product", "variant", "category", "categories", "catalog"}
+            //        .Contains(kvp.Key));
 
-            var facetsForQuerying = new List<Facet>();
+            parameters.RemoveAll(p => !keys.Contains(p.Key));
+
+            var facetsForQuerying = new List<Facet>();          
 
             foreach (var parameter in parameters)
             {
@@ -37,7 +49,8 @@ namespace AvenueClothing.Controllers
                 foreach (var value in parameter.Value.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
                 {
                     facet.FacetValues.Add(new FacetValue() {Value = value});
-                }
+                }  
+
 
                 facetsForQuerying.Add(facet);
             }
@@ -54,6 +67,7 @@ namespace AvenueClothing.Controllers
         // GET: Facets
         public ActionResult Index()
         {
+
             var category = CatalogContext.CurrentCategory;
             var facetValueOutputModel = new FacetsDisplayedViewModel();
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();

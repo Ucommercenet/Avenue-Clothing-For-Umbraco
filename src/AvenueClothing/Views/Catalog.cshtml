@@ -99,11 +99,11 @@
                 {
                     if (Model.PageNumber == i)
                     {
-                        <li class="current"><a href="?">@i</a></li>
+                        <li class="current"><a href="?pg=@i&size=@Model.PageSize">@i</a></li>
                     }
                     else
                     {
-                        <li><a href="?">@i</a></li>
+                        <li><a href="?pg=@i&size=@Model.PageSize">@i</a></li>
                     }
                 }
             }
