@@ -14,6 +14,10 @@
 
         if (searchParams.get('size') && searchParams.get('size').length) {
             size = parseInt(searchParams.get('size'));
+
+            $('html, body').animate({
+                scrollTop: $products.offset().top - 200
+            }, 2000);
         }
 
         if (searchParams.get('pg') && searchParams.get('pg').length) {
@@ -27,8 +31,6 @@
         if (perPage &&  $numResultsSelect.find('option[value='+ perPage +']').length) {
             $numResultsSelect.val(perPage);
         }
-
-        console.log('s', size, page, totalProducts);
 
         if (size*page >=  totalProducts) {
             $loadMoreBtn.addClass('d-none');
