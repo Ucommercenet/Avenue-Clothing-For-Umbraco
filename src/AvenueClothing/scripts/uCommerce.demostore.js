@@ -7,26 +7,31 @@
         var $numResultsSelect = $('#resultsToShow');
         var $products = $('#products');
         var perPage = $numResultsSelect.val();
-        var size = perPage;
+        var size = $('#products').length;
         var page = 1;
         var totalProducts = parseInt($products.data('num-products'));
         var searchParams = new URLSearchParams(window.location.search);
 
-        if (searchParams.get('size').length) {
+        if (searchParams.get('size') && searchParams.get('size').length) {
             size = parseInt(searchParams.get('size'));
+        }
+
+        if (searchParams.get('pg') && searchParams.get('pg').length) {
             page =  parseInt(searchParams.get('pg'));
+        }
 
-            if (searchParams.get('pp')) {
-                perPage = parseInt(searchParams.get('pp'));
-            }
+        if (searchParams.get('pp') && searchParams.get('pp').length) {
+            perPage = parseInt(searchParams.get('pp'));
+        }
 
-            if (perPage &&  $numResultsSelect.find('option[value='+ perPage +']').length) {
-                $numResultsSelect.val(perPage);
-            }
+        if (perPage &&  $numResultsSelect.find('option[value='+ perPage +']').length) {
+            $numResultsSelect.val(perPage);
+        }
 
-            if (size*page < totalProducts) {
-                $loadMoreBtn.removeClass('d-none');
-            }
+        console.log('s', size, page, totalProducts);
+
+        if (size*page >=  totalProducts) {
+            $loadMoreBtn.addClass('d-none');
         }
 
         $numResultsSelect.on('click', function() {
