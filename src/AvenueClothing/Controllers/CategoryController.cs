@@ -30,9 +30,9 @@ namespace AvenueClothing.Controllers
         {
 
             var page = Request.QueryString["pg"] ?? "1";
-            var pageSize = Request.QueryString["size"] ?? "5";
+            var pageSize = Request.QueryString["size"] ?? "12";
 
-            using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))            
+            using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
             {
                 var currentCategory = CatalogContext.CurrentCategory;
                 int totalProductsCount;
@@ -45,7 +45,7 @@ namespace AvenueClothing.Controllers
                     Products = MapProductsInCategories(currentCategory, out totalProductsCount),
                     TotalProducts = totalProductsCount,
                     PageSize = Int32.Parse(pageSize),
-                    PageNumber = Int32.Parse(page)                    
+                    PageNumber = Int32.Parse(page)
                 };
 
                 if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
@@ -91,7 +91,7 @@ namespace AvenueClothing.Controllers
 
             var page = Request.QueryString["pg"] ?? "1";
             var pageSize = Request.QueryString["size"] ?? "5";
-            var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));          
+            var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));
 
             IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
             var productsInCategory = new List<ProductViewModel>();
@@ -116,6 +116,6 @@ namespace AvenueClothing.Controllers
 
             return productsInCategory;
         }
-    
+
     }
 }
