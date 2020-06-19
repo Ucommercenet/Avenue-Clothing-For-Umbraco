@@ -21,25 +21,22 @@ namespace AvenueClothing.Controllers
     {         
 
         public static IList<Facet> ToFacets(this NameValueCollection target)
-        {
-            AvenueProductIndexDefinition prodDefiniation = new AvenueProductIndexDefinition();       
+        {          
+            AvenueProductIndexDefinition productDefinition = new AvenueProductIndexDefinition();       
            
-            var facets = prodDefiniation.Facets.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).ToDictionary(x => x.Key, x => x.Value);         
-            var parameters = new Dictionary<string, string>();
+            var facets = productDefinition.Facets.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).ToDictionary(x => x.Key, x => x.Value);         
+            string[] facetsKeys = new string[facets.Keys.Count];
 
-            string[] keys = new string[facets.Keys.Count];
-            facets.Keys.CopyTo(keys, 0);    
+            facets.Keys.CopyTo(facetsKeys, 0);
+
+            var parameters = new Dictionary<string, string>();
 
             foreach (var queryString in HttpContext.Current.Request.QueryString.AllKeys)
             {
                 parameters[queryString] = HttpContext.Current.Request.QueryString[queryString];
             }
 
-            //parameters.RemoveAll(kvp =>
-            //    new [] { "umbDebugShowTrace", "product", "variant", "category", "categories", "catalog"}
-            //        .Contains(kvp.Key));
-
-            parameters.RemoveAll(p => !keys.Contains(p.Key));
+            parameters.RemoveAll(p => !facetsKeys.Contains(p.Key));
 
             var facetsForQuerying = new List<Facet>();          
 

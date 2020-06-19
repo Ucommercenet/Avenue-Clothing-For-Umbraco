@@ -71,7 +71,7 @@ namespace AvenueClothing.Controllers
                     Name = product.DisplayName,
                     ThumbnailImageUrl = product.PrimaryImageUrl,
                     Url = _urlService.GetUrl(CatalogContext.CurrentCatalog,
-                        CatalogContext.CurrentCategories.Append(CatalogContext.CurrentCategory).Compact(), product)
+                   CatalogContext.CurrentCategories.Append(CatalogContext.CurrentCategory).Compact(), product)
                 };
                 if (product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var unitPrice))
                 {
