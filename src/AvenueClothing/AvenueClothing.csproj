@@ -366,6 +366,7 @@
     <Compile Include="Controllers\ShippingController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
+    <Compile Include="Enums\PartialTypes.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AddToBasketViewModel.cs" />
@@ -418,12 +419,14 @@
     <None Include=".bin\node.cmd" />
     <Content Include="umbraco\Ucommerce\Apps\Ucommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
     <Content Include="views\PartialView\SiteWideCategoryNavigation.cshtml" />
+    <Content Include="views\PartialView\FeaturedCategoryNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

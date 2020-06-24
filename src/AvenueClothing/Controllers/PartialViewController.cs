@@ -7,6 +7,8 @@ using AvenueClothing.Models;
 using Ucommerce.Search.Models;
 using Ucommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
+using Umbraco.Core.Models;
+using AvenueClothing.Enums;
 
 namespace AvenueClothing.Controllers
 {
@@ -16,7 +18,7 @@ namespace AvenueClothing.Controllers
         public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 
-        public ActionResult CategoryNavigation()
+        public ActionResult CategoryNavigation(int partialViewType)
         {
             var categoryNavigationModel = new CategoryNavigationViewModel();
 
@@ -24,19 +26,19 @@ namespace AvenueClothing.Controllers
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
-            return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);
-        }
-
-        public ActionResult SiteWideCategoryNavigation()
-        {
-            var categoryNavigationModel = new CategoryNavigationViewModel();
-
-            IEnumerable<Category> rootCategories = CatalogLibrary.GetRootCategories().ToList();
-
-            categoryNavigationModel.Categories = MapCategories(rootCategories);
-
-            return View("/views/PartialView/SiteWideCategoryNavigation.cshtml", categoryNavigationModel);
-        }
+            switch (partialViewType)
+            {
+                case (int)PartialTypes.CategoryNavigation:
+                    return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);          
+                case (int)PartialTypes.SiteWideCategoryNavigation:
+                    return View("/views/PartialView/SiteWideCategoryNavigation.cshtml", categoryNavigationModel);
+                case (int)PartialTypes.FeaturedCategoryNavigation:
+                    return View("/views/PartialView/FeaturedCategoryNavigation.cshtml", categoryNavigationModel);
+                default:
+                    return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);
+            }
+            
+        } 
 
         private IList<CategoryViewModel> MapCategories(IEnumerable<Category> categoriesToMap)
         {
