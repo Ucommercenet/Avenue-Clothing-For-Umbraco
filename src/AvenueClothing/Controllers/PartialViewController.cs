@@ -27,6 +27,17 @@ namespace AvenueClothing.Controllers
             return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);
         }
 
+        public ActionResult SiteWideCategoryNavigation()
+        {
+            var categoryNavigationModel = new CategoryNavigationViewModel();
+
+            IEnumerable<Category> rootCategories = CatalogLibrary.GetRootCategories().ToList();
+
+            categoryNavigationModel.Categories = MapCategories(rootCategories);
+
+            return View("/views/PartialView/SiteWideCategoryNavigation.cshtml", categoryNavigationModel);
+        }
+
         private IList<CategoryViewModel> MapCategories(IEnumerable<Category> categoriesToMap)
         {
             var categoriesToReturn = new List<CategoryViewModel>();

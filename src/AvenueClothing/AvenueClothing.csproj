@@ -417,6 +417,7 @@
   <ItemGroup>
     <None Include=".bin\node.cmd" />
     <Content Include="umbraco\Ucommerce\Apps\Ucommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
+    <Content Include="views\PartialView\SiteWideCategoryNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

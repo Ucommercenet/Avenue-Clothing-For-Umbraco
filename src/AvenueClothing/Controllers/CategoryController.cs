@@ -55,7 +55,7 @@ namespace AvenueClothing.Controllers
 
                 return View("/Views/Catalog.cshtml", categoryViewModel);
             }
-        }
+        }    
 
         private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
         {
