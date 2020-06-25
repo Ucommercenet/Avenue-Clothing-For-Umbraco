@@ -26,7 +26,7 @@ namespace AvenueClothing.Controllers
 
             categoryNavigationModel.Categories = MapCategories(rootCategories);
 
-            switch (partialViewType)
+            switch (partialViewType) 
             {
                 case (int)PartialTypes.CategoryNavigation:
                     return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);          
@@ -36,8 +36,7 @@ namespace AvenueClothing.Controllers
                     return View("/views/PartialView/FeaturedCategoryNavigation.cshtml", categoryNavigationModel);
                 default:
                     return View("/views/PartialView/CategoryNavigation.cshtml", categoryNavigationModel);
-            }
-            
+            }            
         } 
 
         private IList<CategoryViewModel> MapCategories(IEnumerable<Category> categoriesToMap)
