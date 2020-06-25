@@ -5,64 +5,24 @@
     Layout = null;
 }
 
-<nav id="category-nav" class="collapse category-nav" >
-    <div class="navigation-dropdown-wrapper">
+@DisplayfooterCategories(Model.Categories)
 
-        <div class="container">
-            <div class="shadow">
-                <div class="d-flex flex-wrap flex-md-nowrap bg-white">
-                    @helper DisplayCategories(IList<CategoryViewModel> categories)
-                    {
-                        var featuredCategory = categories.FirstOrDefault();
-                        var remainingCategories = categories.Skip(1).Take(4);
+@helper DisplayfooterCategories(IList<CategoryViewModel> categories)
+{
+    var footerCategories = categories.Take(3);
 
-                        <div class="bg-black text-white p-4 navigation-dropdown-featured-item">
-                            <h5 class="h6 mb-3">Featured</h5>
-
-                            <ul>
-                                <li>
-                                    <a href="@featuredCategory.Url">
-                                        All @featuredCategory.Name
-                                    </a>
-                                </li>
-                                @DisplaySubcategories(featuredCategory.Categories)
-                            </ul>
-                        </div>
-
-                        foreach (var category in remainingCategories)
-                        {
-                            <div class="p-4 navigation-dropdown-item">
-                                <h5 class="h6 mb-3">@category.Name</h5>
-
-                                <ul>
-                                    <li>
-                                        <a href="@category.Url">
-                                            All @category.Name
-                                        </a>
-                                    </li>
-
-                                    @DisplaySubcategories(category.Categories)
-                                </ul>
-                            </div>
-                        }
-                    }
-
-                    @DisplayCategories(Model.Categories)
-                </div>
-
-                <a class="btn-link close" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">
-                    <span class="icon icon-xs" role="img">
-                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
-                    </span>
-                    <span class="sr-only">Close alert</span>
-                </a>
-            </div>
+    foreach (var category in footerCategories)
+    {
+        <div class="col-6 col-md-3 col-lg-2 pb-4 pb-lg-2">
+            <h6 class="mb-3 text-uppercase">@category.Name</h6>
+            <ul>
+                @DisplayFooterSubcategories(category.Categories)
+            </ul>
         </div>
-    </div>
-</nav>
+    }
+}
 
-
-@helper DisplaySubcategories(IList<CategoryViewModel> subcategories)
+@helper DisplayFooterSubcategories(IList<CategoryViewModel> subcategories)
 {
     foreach (var subcategory in subcategories)
     {

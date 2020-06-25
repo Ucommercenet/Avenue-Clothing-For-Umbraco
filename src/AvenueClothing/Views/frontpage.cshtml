@@ -1,5 +1,7 @@
 ﻿@using Umbraco.Web
+@using AvenueClothing.Enums
 @inherits Umbraco.Web.Mvc.UmbracoViewPage
+
 @{
     Layout = "Layout.cshtml";
 }
@@ -50,41 +52,7 @@
     </div>
 </div>
 
-<div class="container no-max-width">
-    <div class="row h4 px-2 pt-4">
-        <a class="image-link col-sm-6 pb-4" href="/demo-store/c/accessories">
-            <img src="/img/site/category-1.jpg" alt="Accessories">
-            <span class="caption">Accessories</span>
-        </a>
-
-        <a class="image-link col-sm-6 pb-4" href="/demo-store/c/shoes">
-            <img src="/img/site/category-2.jpg" alt="Shoes">
-            <span class="caption">Shoes</span>
-        </a>
-    </div>
-
-    <div class="row h5 px-2 pb-1 mb-md-2 pb-lg-4">
-        <a class="image-link col-6 col-md-3 pb-4" href="/demo-store/c/accessories/ties">
-            <img src="/img/site/category-3.jpg" alt="Ties">
-            <span class="caption">Ties</span>
-        </a>
-
-        <a class="image-link col-6 col-md-3 pb-4" href="/demo-store/c/tops/casual">
-            <img src="/img/site/category-4.jpg" alt="Casual Tops">
-            <span class="caption">Casual Tops</span>
-        </a>
-
-        <a class="image-link col-6 col-md-3 pb-4" href="/demo-store/c/tops/formal">
-            <img src="/img/site/category-5.jpg" alt="Formal Tops">
-            <span class="caption">Formal Tops</span>
-        </a>
-
-        <a class="image-link col-6 col-md-3 pb-4" href="/demo-store/c/accessories/scarves">
-            <img src="/img/site/category-6.jpg" alt="Scarves">
-            <span class="caption">Scarves</span>
-        </a>
-    </div>
-</div>
+@{Html.RenderAction("CategoryNavigation", "PartialView", new {partialViewType = (int)PartialTypes.FeaturedCategoryNavigation }); }
 
 <div class="container">
     <h5 class="text-center mb-4">Popular Products</h5>
@@ -93,24 +61,6 @@
 
     <h2 class="mt-5 pb-lg-5">About Us</h2>
 </div>
-
-<section class="jumbotron jumbotron-fluid p-0 my-5">
-    <div class="container">
-        <img class="jt-1" alt=" "  src="/img/site/jumbotron/jt1.jpg" >
-        <img class="jt-2" alt=" "  src="/img/site/jumbotron/jt2.jpg" >
-
-        <div class="jt-lead">
-            <h6>Umbraco e-commerce</h6>
-            <p>Ucommerce is a plugin for Umbraco, Sitefinity and Sitecore to add a rich e-commerce experience to your favourite CMS platform.</p>
-        </div>
-    </div>
-
-    <div class="cms-content">
-        <div class="container">
-            @Model.Value("content")
-        </div>
-    </div>
-</section>
 
 <div class="container mb-5">
     <h2 class="text-center pt-lg-3 mb-4 mb-lg-5">Join ouR newsletteR</h2>

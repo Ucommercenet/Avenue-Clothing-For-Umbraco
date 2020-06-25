@@ -5,71 +5,50 @@
     Layout = null;
 }
 
-<nav id="category-nav" class="collapse category-nav" >
-    <div class="navigation-dropdown-wrapper">
-
-        <div class="container">
-            <div class="shadow">
-                <div class="d-flex flex-wrap flex-md-nowrap bg-white">
-                    @helper DisplayCategories(IList<CategoryViewModel> categories)
-                    {
-                        var featuredCategory = categories.FirstOrDefault();
-                        var remainingCategories = categories.Skip(1).Take(4);
-
-                        <div class="bg-black text-white p-4 navigation-dropdown-featured-item">
-                            <h5 class="h6 mb-3">Featured</h5>
-
-                            <ul>
-                                <li>
-                                    <a href="@featuredCategory.Url">
-                                        All @featuredCategory.Name
-                                    </a>
-                                </li>
-                                @DisplaySubcategories(featuredCategory.Categories)
-                            </ul>
-                        </div>
-
-                        foreach (var category in remainingCategories)
-                        {
-                            <div class="p-4 navigation-dropdown-item">
-                                <h5 class="h6 mb-3">@category.Name</h5>
-
-                                <ul>
-                                    <li>
-                                        <a href="@category.Url">
-                                            All @category.Name
-                                        </a>
-                                    </li>
-
-                                    @DisplaySubcategories(category.Categories)
-                                </ul>
-                            </div>
-                        }
-                    }
-
-                    @DisplayCategories(Model.Categories)
-                </div>
-
-                <a class="btn-link close" href="#category-nav" data-toggle="collapse" aria-expanded="false" aria-controls="category-nav">
-                    <span class="icon icon-xs" role="img">
-                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/cross.svg")))
-                    </span>
-                    <span class="sr-only">Close alert</span>
-                </a>
-            </div>
-        </div>
+<div class="container no-max-width">
+    <div class="row h4 px-2 pt-4">
+        @DisplayLargeCategories(Model.Categories)
     </div>
-</nav>
+    <div class="row h5 px-2 pb-1 mb-md-2 pb-lg-4">
+        @DisplaySmallCategories(Model.Categories)
+    </div>
+</div>
 
 
-@helper DisplaySubcategories(IList<CategoryViewModel> subcategories)
+@helper DisplayLargeCategories(IList<CategoryViewModel> categories)
 {
-    foreach (var subcategory in subcategories)
+    var largeCategories = categories.Take(2);
+    int i = 1;
+
+    foreach (var category in largeCategories)
     {
-        <li>
-            <a href="@subcategory.Url">
-                @subcategory.Name
-            </a>
-        </li>
+
+        <a class="image-link col-sm-6 pb-4" href="@category.Url">
+            <img src="/img/site/@String.Concat("category-", i, ".jpg")" alt="@category.Name">
+            <span class="caption">@category.Name</span>
+        </a>
+
+        i++;
+    }
+}
+
+@helper DisplaySmallCategories(IList<CategoryViewModel> categories)
+{
+    int i = 3;
+
+    while (i < 7) {
+        foreach (var category in categories)
+        {
+            var subcats = category.Categories;
+            foreach (var subcat in subcats)
+            {
+                <a class="image-link col-6 col-md-3 pb-4" href="@subcat.Url">
+                    <img src="/img/site/@String.Concat("category-", i, ".jpg")" alt="@subcat.Name">
+                    <span class="caption">@subcat.Name</span>
+                </a>
+
+                i++;
+            }
+        }
     }
 }
