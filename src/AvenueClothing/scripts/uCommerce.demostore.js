@@ -272,35 +272,24 @@ var throttle = function (fn, threshold, scope) {
 };
 
 function updateCartTotals() {
-    if ($('#empty-basket').length != 0) {
-        prepCart();
-    }
-
     $.uCommerce.getBasket({}, function (response) {
         var basket = response.Basket;
-        var qty = $(".item-qty");
-        var sub = $(".order-subtotal");
-        var tax = $(".order-tax");
-        var disc = $(".order-discounts");
-        var tot = $(".order-total");
+        var qtyUnit = parseInt(basket.FormattedTotalItems) == 1 ? "item" : "items";
 
-        qty.text(basket.FormattedTotalItems);
-        sub.text(basket.FormattedSubTotal);
-        tax.text(basket.FormattedTaxTotal);
-        disc.text(basket.FormattedDiscountTotal);
-        tot.text(basket.FormattedOrderTotal);
+        if ($('#empty-basket').length != 0) {
+            var $minibasket = $('#empty-basket');
+
+            $minibasket.find('.js-minibasket-empty-text').remove();
+            $minibasket.find('.js-minibasket-qty').text(basket.FormattedTotalItems);
+            $minibasket.find('.js-minibasket-text').text(qtyUnit + " in basket");
+            $minibasket.find('.js-minibasket-total').text(basket.FormattedOrderTotal);
+            $minibasket.removeClass('is-empty').addClass('has-items');
+            $minibasket.attr('href', '/basket');
+            $minibasket.attr('id', 'mini-basket');
+        }
 
         // Pulse the basket so it catches the user's attention
         //var highlight = [qty, sub, tax, disc, tot];
         //$(highlight).effect("highlight", {}, 500);
     });
-};
-function prepCart() {
-    var icn = $("<i>", { "class": "fa fa-shopping-basket icon-white margin-right-small" });
-    var qty = $("<span>", { "class": "item-qty" });
-    var tot = $("<span>", { "class": "order-total" });
-    var basket = $("<a>", { 'href': '/basket', "id": "mini-basket" });
-
-    basket.append(icn).append(qty).append(" items in basket, total: ").append(tot);
-    $('#empty-basket').replaceWith(basket);
 };

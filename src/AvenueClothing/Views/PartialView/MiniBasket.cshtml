@@ -12,13 +12,15 @@
             <span class="icon icon-bag" aria-hidden="true" focusable="false" role="img">
                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
             </span>
-            <span class="d-none d-lg-inline">
+            <span class="d-none d-lg-inline js-minibasket-empty-text">
                 Your Basket is Empty
             </span>
+            <span class="item-qty js-minibasket-qty"></span>
+            <span class="d-none d-md-inline js-minibasket-text"><span class="order-total js-minibasket-total"></span></span>
         </a>
     }
 
-  else
+    else
     {
         <a href="/basket" class="@defaultCssClasses has-items" id="mini-basket">
             @*<i class="icon-shopping-cart icon-white"></i>*@
