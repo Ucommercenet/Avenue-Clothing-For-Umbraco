@@ -288,41 +288,53 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Ucommerce, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.dll</HintPath>
+    <Reference Include="Ucommerce, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Admin, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Admin.dll</HintPath>
+    <Reference Include="Ucommerce.Admin, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Admin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Api, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Api.dll</HintPath>
+    <Reference Include="Ucommerce.Api, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Infrastructure, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Infrastructure.dll</HintPath>
+    <Reference Include="Ucommerce.Infrastructure, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Infrastructure.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Installer, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Installer.dll</HintPath>
+    <Reference Include="Ucommerce.Installer, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Installer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.NHibernate, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.NHibernate.dll</HintPath>
+    <Reference Include="Ucommerce.NHibernate, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Pipelines, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Pipelines.dll</HintPath>
+    <Reference Include="Ucommerce.Pipelines, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Pipelines.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Presentation, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Presentation.dll</HintPath>
+    <Reference Include="Ucommerce.Presentation, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Presentation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Search, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.Search.dll</HintPath>
+    <Reference Include="Ucommerce.Search, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Search.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.SqlMultiReaderConnector, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.SqlMultiReaderConnector.dll</HintPath>
+    <Reference Include="Ucommerce.SqlMultiReaderConnector, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.SqlMultiReaderConnector.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.SystemHttp, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.SystemHttp.dll</HintPath>
+    <Reference Include="Ucommerce.SystemHttp, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.SystemHttp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.SystemWeb, Version=9.1.0.20154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uCommerce.Core.9.1.0.20154\lib\net45\Ucommerce.SystemWeb.dll</HintPath>
+    <Reference Include="Ucommerce.SystemWeb, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.SystemWeb.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.4.0\lib\net472\Umbraco.Core.dll</HintPath>
@@ -356,6 +368,7 @@
     <Compile Include="Controllers\FacetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomepageCatalogController.cs" />
+    <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Controllers\MiniBasketController.cs" />
     <Compile Include="Controllers\PartialViewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -376,6 +389,7 @@
     <Compile Include="Models\FacetsDisplayedViewModel.cs" />
     <Compile Include="Models\FacetValueViewModel.cs" />
     <Compile Include="Models\FacetViewModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MiniBasketViewModel.cs" />
     <Compile Include="Models\OrderlineViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
@@ -418,8 +432,48 @@
   <ItemGroup>
     <None Include=".bin\node.cmd" />
     <Content Include="umbraco\Ucommerce\Apps\Ucommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
+
+    <Content Include="Views\Membership\LoginForm.cshtml" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Layout.cshtml" />
+    <Content Include="Views\frontpage.cshtml" />
     <Content Include="views\PartialView\SiteWideCategoryNavigation.cshtml" />
     <Content Include="views\PartialView\FeaturedCategoryNavigation.cshtml" />
+    <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
+    <Content Include="Views\PartialView\MiniBasket.cshtml" />
+    <Content Include="Views\PartialView\Facets.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce CategoryNavigation.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Facets.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Mini Basket.cshtml" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Catalog.cshtml" />
+    <Content Include="Views\BillingShippingAddress.cshtml" />
+    <Content Include="Views\PartialView\Breadcrumbs.cshtml" />
+    <Content Include="Views\PartialView\Voucher.cshtml" />
+    <Content Include="Views\Basket.cshtml" />
+    <Content Include="Views\Shipping.cshtml" />
+    <Content Include="Views\Payment.cshtml" />
+    <Content Include="Views\Confirmation.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Breadcrumbs.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Voucher.cshtml" />
+    <Content Include="Views\Search.cshtml" />
+    <Content Include="Views\PartialView\HomepageCatalog.cshtml" />
+    <Content Include="Views\MacroPartials\Ucommerce Homepage Catalog.cshtml" />
+    <Content Include="Views\Product.cshtml" />
+    <Content Include="Views\PartialView\ProductReview.cshtml" />
+    <Content Include="Views\MacroPartials\UcommerceProductReviews.cshtml" />
+    <Content Include="Views\UcommerceEmail.cshtml" />
+    <Content Include="Views\Preview.cshtml" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
