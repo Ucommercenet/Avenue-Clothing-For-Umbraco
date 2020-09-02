@@ -33,6 +33,7 @@ namespace AvenueClothing.Controllers
             {
                 mappedProduct.Reviews = MapReviews(currentProductV2);
             }
+
             mappedProduct.Sku = currentProduct.Sku;
             return View("/Views/PartialView/ProductReview.cshtml", mappedProduct);
         }

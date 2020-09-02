@@ -125,6 +125,7 @@ using (Html.BeginUmbracoForm("Index", "Review"))
             <strong itemprop="author">@review.Name</strong> &ndash;
             <abbr class="small" title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
         </header>
+        @DisplayStars(review.Rating)
         <h6 itemprop="name">@review.Title</h6>
         <p itemprop="description">@review.Comments</p>
         <meta itemprop="ratingValue" content="@review.Rating">
