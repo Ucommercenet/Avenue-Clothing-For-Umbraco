@@ -121,7 +121,7 @@
                         <span class="d-md-none">Qty</span>
                         <span class="d-none d-md-inline">Quantity</span>
                     </th>
-                    <th class="text-right money">Total</th>
+                    <th class="text-right money" colspan="3">Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -153,20 +153,20 @@
                         </td>
                         <td class="d-none d-md-table-cell text-right money">@lineItem.Tax</td>
                         <td class="text-right number">@lineItem.Quantity</td>
-                        <td class="text-right money">@lineItem.Total</td>
+                        <td class="text-right money" colspan="3">@lineItem.Total</td>
                     </tr>
                 }
                 <tr class="bg-white">
                     <td class="d-none d-md-table-cell" rowspan="@ViewBag.RowSpan"></td>
                     <td class="d-none d-md-table-cell" rowspan="@ViewBag.RowSpan"></td>
                     <td class="d-none d-md-table-cell" rowspan="@ViewBag.RowSpan"></td>
-                    <td class="text-right" colspan="2">Sub total: </td>
+                    <td class="text-right" colspan="3">Sub total: </td>
                     <td class="text-right money">
                         @Model.SubTotal
                     </td>
                 </tr>
                 <tr class="bg-white">
-                    <td class="text-right" colspan="2">VAT: </td>
+                    <td class="text-right" colspan="3">VAT: </td>
                     <td class="text-right money">
                         @Model.TaxTotal
                     </td>
@@ -174,14 +174,14 @@
                 @if (@Model.DiscountAmount != 0)
                 {
                     <tr>
-                        <td class="text-right" colspan="2">Order discounts: </td>
+                        <td class="text-right" colspan="3">Order discounts: </td>
                         <td class="text-right money">- @Model.DiscountTotal</td>
                     </tr>
                 }
                 @if (@Model.ShipmentAmount != 0)
                 {
                     <tr class="bg-white">
-                        <td class="text-right" colspan="2">
+                        <td class="text-right" colspan="3">
                             Shipping
                             <text> (via @Model.ShipmentName)</text>
                         </td>
@@ -191,7 +191,7 @@
                 @if (@Model.PaymentAmount != 0)
                 {
                     <tr class="bg-white">
-                        <td class="text-right" colspan="2">
+                        <td class="text-right" colspan="3">
                             Payment
                             <text> (@Model.PaymentName)</text>
                         </td>
@@ -199,7 +199,11 @@
                     </tr>
                 }
                 <tr class="bg-white">
-                    <td class="text-right" colspan="2"><strong>Order total:</strong></td>
+                    <td class="text-right" colspan="3">Shipping (@Model.ShipmentName):</td>
+                    <td class="text-right money">@Model.ShippingTotal</td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="text-right" colspan="3"><strong>Order total:</strong></td>
                     <td class="text-right money"><strong>@Model.OrderTotal</strong></td>
                 </tr>
             </tbody>
