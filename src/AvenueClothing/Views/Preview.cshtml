@@ -6,36 +6,87 @@
     <form method="post">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="text-uppercase">Billing address</h3>
-
-                <address>
-                    <strong>@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</strong><br>
-                    @Model.BillingAddress.Line1<br>
-                    @Model.BillingAddress.PostalCode @Model.BillingAddress.City<br>
-                    @Model.BillingAddress.Country.Name</span>
-                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Attention))
-                    {
-                        <text>att. </text> @Model.BillingAddress.Attention
-                    }<br>
-                    <abbr class="mr-1" title="Phone">P:</abbr>@Model.BillingAddress.PhoneNumber<br>
-                    <abbr class="mr-1" title="Email">E:</abbr><a href="mailto:@Model.BillingAddress.EmailAddress">@Model.BillingAddress.EmailAddress</a>
-                </address>
-            </div>
-            <div class="col-md-6">
                 <h3 class="text-uppercase">Shipping address</h3>
 
                 <address>
+
                     <strong>@Model.ShipmentAddress.FirstName @Model.ShipmentAddress.LastName</strong><br>
-                    @Model.ShipmentAddress.CompanyName</span>
+
+                    <span> @Model.ShipmentAddress.CompanyName</span>
+
                     @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Attention))
                     {
-                        <text>att. </text> @Model.ShipmentAddress.Attention
-                    }<br />
-                    @Model.ShipmentAddress.Line1<br>
-                    @Model.ShipmentAddress.PostalCode @Model.ShipmentAddress.City<br>
-                    @Model.ShipmentAddress.Country.Name<br>
-                    <abbr class="mr-1" title="Phone">P:</abbr>@Model.ShipmentAddress.PhoneNumber<br>
-                    <abbr class="mr-1" title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.ShipmentAddress.EmailAddress</a>
+                        <text>att. </text>
+                        @Model.ShipmentAddress.Attention<br />
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Line1))
+                    {
+                        @Model.ShipmentAddress.Line1<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.PostalCode))
+                    {
+                        @Model.ShipmentAddress.PostalCode<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.City))
+                    {
+                        @Model.ShipmentAddress.City<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Country.Name))
+                    {
+                        @Model.ShipmentAddress.Country.Name<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.PhoneNumber))
+                    {
+                        <abbr class="mr-1" title="Phone">P:</abbr>@Model.ShipmentAddress.PhoneNumber<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.EmailAddress))
+                    {
+                        <abbr class="mr-1" title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.ShipmentAddress.EmailAddress</a>
+                    }
+                </address>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-uppercase">Billing address</h3>
+
+                <address>
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.FirstName))
+                    {
+                        <strong>@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</strong><br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Line1))
+                    {
+                        @Model.BillingAddress.Line1<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.PostalCode))
+                    {
+                        @Model.BillingAddress.PostalCode<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.City))
+                    {
+                        @Model.BillingAddress.City<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Country.Name))
+                    {
+                        <span>    @Model.BillingAddress.Country.Name</span><br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Attention))
+                    {
+                        <text>att. </text> @Model.BillingAddress.Attention<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.PhoneNumber))
+                    {
+                        <abbr class="mr-1" title="Phone">P:</abbr>@Model.BillingAddress.PhoneNumber<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.EmailAddress))
+                    {
+                        <abbr class="mr-1" title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.BillingAddress.EmailAddress</a>
+                    }
                 </address>
             </div>
         </div>
@@ -58,7 +109,7 @@
             </thead>
             <tbody>
                 @foreach (var lineItem in @Model.OrderLines)
-            {
+                {
                     <tr>
                         <td class="d-none d-md-table-cell">
                             @lineItem.Sku
@@ -104,14 +155,14 @@
                     </td>
                 </tr>
                 @if (@Model.DiscountAmount != 0)
-            {
+                {
                     <tr>
                         <td class="text-right" colspan="2">Order discounts: </td>
                         <td class="text-right money">- @Model.DiscountTotal</td>
                     </tr>
                 }
                 @if (@Model.ShipmentAmount != 0)
-            {
+                {
                     <tr class="bg-white">
                         <td class="text-right" colspan="2">
                             Shipping
@@ -121,7 +172,7 @@
                     </tr>
                 }
                 @if (@Model.PaymentAmount != 0)
-            {
+                {
                     <tr class="bg-white">
                         <td class="text-right" colspan="2">
                             Payment
