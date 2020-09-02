@@ -7,11 +7,8 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="text-uppercase">Shipping address</h3>
-
                 <address>
-
                     <strong>@Model.ShipmentAddress.FirstName @Model.ShipmentAddress.LastName</strong><br>
-
                     <span> @Model.ShipmentAddress.CompanyName</span>
 
                     @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Attention))
@@ -23,14 +20,24 @@
                     {
                         @Model.ShipmentAddress.Line1<br>
                     }
-                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.PostalCode))
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Line2))
                     {
-                        @Model.ShipmentAddress.PostalCode<br>
+                        @Model.ShipmentAddress.Line1<br>
                     }
+
                     @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.City))
                     {
                         @Model.ShipmentAddress.City<br>
                     }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.State))
+                    {
+                        @Model.ShipmentAddress.State<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.PostalCode))
+                    {
+                        @Model.ShipmentAddress.PostalCode<br>
+                    }
+
                     @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Country.Name))
                     {
                         @Model.ShipmentAddress.Country.Name<br>
@@ -60,14 +67,24 @@
                         @Model.BillingAddress.Line1<br>
                     }
 
-                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.PostalCode))
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Line2))
                     {
-                        @Model.BillingAddress.PostalCode<br>
+                        @Model.BillingAddress.Line2<br>
                     }
 
                     @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.City))
                     {
                         @Model.BillingAddress.City<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.State))
+                    {
+                        @Model.BillingAddress.State<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.PostalCode))
+                    {
+                        @Model.BillingAddress.PostalCode<br>
                     }
 
                     @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Country.Name))
