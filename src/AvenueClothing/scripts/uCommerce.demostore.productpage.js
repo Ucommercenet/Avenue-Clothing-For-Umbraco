@@ -5,7 +5,7 @@ $(function () {
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.js-variant'));
 	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.js-variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
-
+	submitReview('review-form');
 });
 
 function relateVariations(sku, size, colour) {
@@ -45,6 +45,13 @@ function wireupRatings(radios) {
 		});
 	});
 };
+
+function submitReview(formId) {
+	$('#'+ formId).on('submit', function(){
+		window.location.hash = formId;
+		return true;
+	});
+}
 
 function updateAddToCartButton(addToCartButton, variantInputs) {
 	if (variantInputs.length == 0)
