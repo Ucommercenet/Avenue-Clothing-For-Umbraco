@@ -19,7 +19,7 @@
 @helper DisplayReviewForm(ProductViewModel product)
 {
     @*<form action="@Url.Action("Index", "MyController")" method="post" class="validate form-horizontal"  >*@
-using (Html.BeginUmbracoForm("Index", "Review"))
+using (Html.BeginUmbracoForm("Index", "Review", null, new Dictionary<string, object> { { "id", "review" } }))
 {
     <div class="collapse" id="submit-review">
         <div class="card card-body">
@@ -74,7 +74,7 @@ using (Html.BeginUmbracoForm("Index", "Review"))
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn btn-dark js-submit-review" name="review-product">Save</button>
+                        <button type="submit" class="btn btn-dark" name="review-product">Save</button>
                         <input type="hidden" id="reviewed-product-sku" name="ProductSku" value="@product.Sku" />
                     </div>
                 </div>

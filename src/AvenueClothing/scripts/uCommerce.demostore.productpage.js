@@ -5,7 +5,7 @@ $(function () {
 	enableAddToCartWhenSelected($('#add-to-basket'), $('.js-variant'));
 	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.js-variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
-	submitReview('review-form');
+	submitReview();
 });
 
 function relateVariations(sku, size, colour) {
@@ -46,9 +46,14 @@ function wireupRatings(radios) {
 	});
 };
 
-function submitReview(formId) {
-	$('#'+ formId).on('submit', function(){
-		window.location.hash = formId;
+function submitReview() {
+	if (sessionStorage.getItem("ACReviewSubmitted")) {
+		$('html, body').animate({ scrollTop: $('#review').offset().top }, 'medium');
+		sessionStorage.clear();
+	}
+
+	$('#review').on('submit', function(){
+		sessionStorage.setItem("ACReviewSubmitted", true);
 		return true;
 	});
 }
@@ -149,7 +154,7 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
             		}
 
             		// If the size matches the selected size, this colour is available so enable it in the drop down list
-            		if (variationSize.Value == selectedSize) {
+            		if (variationSize && variationSize.Value == selectedSize) {
             			$('option[value="' + variationColour.Value + '"]', colour).removeAttr('disabled');
             		}
             	});
