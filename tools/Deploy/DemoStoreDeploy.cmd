@@ -2,7 +2,7 @@
 
 cd ..\..\
 
-SET version=7.3.0.20247
+SET version=7.3.0.20253
 
 rem Delete the exisiting packages folder and any contents
 del package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q
