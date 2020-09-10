@@ -56,6 +56,7 @@
                 $.get(URL, function( data ) {
                     var nextHtml = $(data).find('#products').html();
 
+                    $('html, body').animate({ scrollTop: $products.offset().top +  $products.outerHeight() - 60 }, 'medium');
                     $products.append(nextHtml);
 
                     $('.js-products-count').text($products.find('.js-product').length);
