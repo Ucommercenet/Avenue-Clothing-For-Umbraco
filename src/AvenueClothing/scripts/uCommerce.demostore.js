@@ -45,10 +45,29 @@
             }
         });
 
+        var $paginatorItems = $('.js-page-item');
+
         $loadMoreBtn.on('click', function() {
-            var currentlyShowing = size*page;
-            searchParams.set('size', currentlyShowing + parseInt(perPage));
-            window.location.search = searchParams.toString();
+            var currentPaginatorIndex = $paginatorItems.filter('.active').index();
+
+            if (currentPaginatorIndex < $paginatorItems.length - 1) {
+                var URL = $paginatorItems.eq(currentPaginatorIndex + 1).find('a').attr('href');
+
+                $.get(URL, function( data ) {
+                    var nextHtml = $(data).find('#products').html();
+
+                    $products.append(nextHtml);
+
+                    $('.js-products-count').text($products.find('.js-product').length);
+                    $('.js-page-item').removeClass('active');
+                    currentPaginatorIndex = currentPaginatorIndex + 1;
+                    $('.js-page-item').eq(currentPaginatorIndex).addClass('active');
+
+                    if (currentPaginatorIndex == $('.js-page-item').length - 1) {
+                        $loadMoreBtn.addClass('d-none');
+                    }
+                });
+            }
         });
     }
 
