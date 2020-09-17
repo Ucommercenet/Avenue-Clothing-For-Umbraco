@@ -20,14 +20,14 @@ rem Copy over the store files which will be included in the XML
 robocopy src\AvenueClothing package\_ToPackage\files *.css *.master /s /FFT /Z /XA:H /W:5
 
 rem Copy over the store files which will be zipped
-robocopy src\AvenueClothing package\_ToPackage\files uCommerceApiRegistration.cs FacetedQueryStringExtensions.cs *.cshtml *.js *.png *.jpg *.jpeg *.gif *.eot *.svq *.ttf *.woff *.woff2 *.otf /s /FFT /Z /XA:H /W:5 /xf *packages.config
+robocopy src\AvenueClothing package\_ToPackage\files uCommerceApiRegistration.cs FacetedQueryStringExtensions.cs *.cshtml *.js *.png  *.svg *.jpg *.jpeg *.gif *.eot *.svq *.ttf *.woff *.woff2 *.otf /s /FFT /Z /XA:H /W:5 /xf *packages.config
 robocopy src\AvenueClothing\bin package\_ToPackage\files\bin AvenueClothing.dll /FFT /Z /XA:H /W:5
 
 rem Copy AvenueProductsIndexDefinition.config into a separate app
 robocopy src\AvenueClothing\umbraco\Ucommerce\Apps package\_ToPackage\files\umbraco\Ucommerce\Apps /E
 
 rem Copy over the installer files
-robocopy src\AvenueClothing.Installer package\_ToPackage\files *.ascx *.js *.png *.jpg *.jpeg *.gif *.config /s /FFT /Z /XA:H /W:5 /xf *packages.config
+robocopy src\AvenueClothing.Installer package\_ToPackage\files *.ascx *.js *.png  *.svg *.jpg *.jpeg *.gif *.config /s /FFT /Z /XA:H /W:5 /xf *packages.config
 robocopy src\AvenueClothing.Installer\bin package\_ToPackage\files\bin  AvenueClothing.Installer.dll XmlConfigMerge.dll /FFT /Z /XA:H /W:5
 robocopy src\AvenueClothing.Installer\XmlStubs package\_ToPackage *.xml /FFT /Z /XA:H /W:5
 
