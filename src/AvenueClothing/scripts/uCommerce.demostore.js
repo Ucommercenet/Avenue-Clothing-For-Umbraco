@@ -156,6 +156,7 @@
                     return process(matches);
                 });
             });
+            $('.typeahead').css('top', $('.js-site-header').height());
             $searchForm.removeClass('searching');
         }
     });
