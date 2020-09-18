@@ -38,7 +38,7 @@
 
         $numResultsSelect.on('click', function() {
             if ($(this).val() != perPage) {
-                searchParams.set('pg', '1')
+                searchParams.set('pg', '1');
                 searchParams.set('size', $(this).val());
                 searchParams.set('pp', $(this).val());
                 window.location.search = searchParams.toString();
@@ -93,11 +93,11 @@
     $(window).on('scroll resize', throttle( function() {
         condenseHeader();
         collapseSiteNav();
-    }, throttleInterval))
+    }, throttleInterval));
 
     $(window).on('resize', throttle( function() {
         setupConfidences();
-    }, throttleInterval))
+    }, throttleInterval));
 
     function condenseHeader() {
         var scrollDistance = 10;
