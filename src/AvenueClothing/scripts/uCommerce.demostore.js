@@ -143,6 +143,10 @@
 
     var $searchForm = $('#search-form');
 
+    if ($('.typeahead').length) {
+        $('.typeahead').css('top', $('.js-site-header').height() + ' !important');
+    }
+
     $('#site-search').typeahead({
         minLength: 3,
         source: function (query, process) {
@@ -156,7 +160,6 @@
                     return process(matches);
                 });
             });
-            $('.typeahead').css('top', $('.js-site-header').height());
             $searchForm.removeClass('searching');
         }
     });
