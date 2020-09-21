@@ -2,62 +2,143 @@
 @{
     Layout = "Layout.cshtml";
 }
-<form method="post">
-    
-        <div class="col-md-6">
-            <h3>Billing address</h3>
-            <br />
-            <address>
-                <span class="address-line"><strong>@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</strong></span><br>
-                <span class="address-line">@Model.BillingAddress.Line1<br></span>
-                <span class="address-line">@Model.BillingAddress.PostalCode @Model.BillingAddress.City</span><br>
-                <span class="address-line">@Model.BillingAddress.Country.Name</span>
-                @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Attention))
-                {
-                    <span class="address-line"><text>att. </text> @Model.BillingAddress.Attention</span>
-                }<br>
-                <span class="address-line"><abbr title="Phone">P:</abbr>@Model.BillingAddress.PhoneNumber</span><br>
-                <span class="address-line"><abbr title="Mobile">M:</abbr>@Model.BillingAddress.MobilePhoneNumber </span><br>
-                <span class="address-line"><abbr title="Email">E:</abbr><a href="mailto:@Model.BillingAddress.EmailAddress">@Model.BillingAddress.EmailAddress</a></span>
-            </address>
+<div class="container py-4">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="text-uppercase">Shipping address</h3>
+                <address>
+                    <strong>@Model.ShipmentAddress.FirstName @Model.ShipmentAddress.LastName</strong><br>
+                    <span> @Model.ShipmentAddress.CompanyName</span>
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Attention))
+                    {
+                        <text>att. </text>
+                        @Model.ShipmentAddress.Attention<br />
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Line1))
+                    {
+                        @Model.ShipmentAddress.Line1<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Line2))
+                    {
+                        @Model.ShipmentAddress.Line1<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.City))
+                    {
+                        @Model.ShipmentAddress.City<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.State))
+                    {
+                        @Model.ShipmentAddress.State<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.PostalCode))
+                    {
+                        @Model.ShipmentAddress.PostalCode<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Country.Name))
+                    {
+                        @Model.ShipmentAddress.Country.Name<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.PhoneNumber))
+                    {
+                        <abbr class="mr-1" title="Phone">P:</abbr>@Model.ShipmentAddress.PhoneNumber<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.EmailAddress))
+                    {
+                        <abbr class="mr-1" title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.ShipmentAddress.EmailAddress</a>
+                    }
+                </address>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-uppercase">Billing address</h3>
+
+                <address>
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.FirstName))
+                    {
+                        <strong>@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</strong><br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Line1))
+                    {
+                        @Model.BillingAddress.Line1<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Line2))
+                    {
+                        @Model.BillingAddress.Line2<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.City))
+                    {
+                        @Model.BillingAddress.City<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.State))
+                    {
+                        @Model.BillingAddress.State<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.PostalCode))
+                    {
+                        @Model.BillingAddress.PostalCode<br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Country.Name))
+                    {
+                        <span>    @Model.BillingAddress.Country.Name</span><br>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.Attention))
+                    {
+                        <text>att. </text> @Model.BillingAddress.Attention<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.PhoneNumber))
+                    {
+                        <abbr class="mr-1" title="Phone">P:</abbr>@Model.BillingAddress.PhoneNumber<br>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.BillingAddress.EmailAddress))
+                    {
+                        <abbr class="mr-1" title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.BillingAddress.EmailAddress</a>
+                    }
+                </address>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h3>Shipping address</h3>
-            <br />
-            <address>
-                <span class="address-line"><strong>@Model.ShipmentAddress.FirstName @Model.ShipmentAddress.LastName</strong></span><br>
-                <span class="address-line">@Model.ShipmentAddress.CompanyName</span>
-                @if (!String.IsNullOrWhiteSpace(@Model.ShipmentAddress.Attention))
-                {
-                    <span class="address-line"><text>att. </text> @Model.ShipmentAddress.Attention </span>
-                }<br />
-                <span class="address-line">@Model.ShipmentAddress.Line1</span><br>
-                <span class="address-line">@Model.ShipmentAddress.PostalCode @Model.ShipmentAddress.City</span><br>
-                <span class="address-line">@Model.ShipmentAddress.Country.Name</span><br>
-                <span class="address-line"><abbr title="Phone">P:</abbr>@Model.ShipmentAddress.PhoneNumber</span><br>
-                <span class="address-line"><abbr title="Mobile">M:</abbr>@Model.ShipmentAddress.MobilePhoneNumber</span><br>
-                <span class="address-line"><abbr title="Email">E:</abbr><a href="mailto:@Model.ShipmentAddress.EmailAddress">@Model.ShipmentAddress.EmailAddress</a></span>
-            </address>
-        </div>
-    <div class="full-width">
-        <table class="table table-striped">
+
+        <table class="table table-striped mb-4">
             <thead>
                 <tr>
-                    <th>Item no. </th>
-                    <th class="span8">Description</th>
-                    <th class="span1 money">Price</th>
-                    <th class="span1 money">VAT</th>
-                    <th class="span1 number">Quantity</th>
-                    <th class="span1 money">Total</th>
+                    <th class="d-none d-md-table-cell">Item no.</th>
+                    <th>
+                        <span class="d-none d-md-inline">Description</span>
+                    </th>
+                    <th class="d-none d-md-table-cell text-right money">Price</th>
+                    <th class="d-none d-md-table-cell text-right money">VAT</th>
+                    <th class="text-right number">
+                        <span class="d-md-none">Qty</span>
+                        <span class="d-none d-md-inline">Quantity</span>
+                    </th>
+                    <th class="text-right money" colspan="5">Total</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var lineItem in @Model.OrderLines)
-            {
+                {
                     <tr>
-                        <td>@lineItem.Sku</td>
-                        <td>@lineItem.ProductName</td>
-                        <td class="money">
+                        <td class="d-none d-md-table-cell">
+                            @lineItem.Sku
+                        </td>
+                        <td>
+                            <div class="d-md-none">
+                                <p class="m-0"><strong>Item no.</strong> @lineItem.Sku</p>
+                            </div>
+
+                            @lineItem.ProductName
+                        </td>
+                        <td class="d-none d-md-table-cell text-right money">
                             @if (lineItem.Discount.HasValue && lineItem.Discount > 0)
                             {
                                 <span style="text-decoration: line-through">
@@ -70,58 +151,76 @@
                                 @lineItem.Price
                             }
                         </td>
-                        <td class="money">@lineItem.Tax</td>
-                        <td class="number">@lineItem.Quantity</td>
-                        <td class="money">@lineItem.Total</td>
+                        <td class="d-none d-md-table-cell text-right money">@lineItem.Tax</td>
+                        <td class="text-right number">@lineItem.Quantity</td>
+                        <td class="text-right money" colspan="5">@lineItem.Total</td>
                     </tr>
                 }
-                <tr>
-                    <td rowspan="@ViewBag.RowSpan" colspan="2"></td>
-                    <td colspan="3">Sub total: </td>
-                    <td class="money">
+                <tr class="bg-white">
+                    <td class="d-none d-md-table-cell" rowspan="@ViewBag.RowSpan"></td>
+                    <td class="d-none d-md-table-cell" rowspan="@ViewBag.RowSpan"></td>
+                    <td class="d-none d-md-table-cell" rowspan="@ViewBag.RowSpan"></td>
+                    <td class="text-right" colspan="5">Sub total: </td>
+                    <td class="text-right money">
                         @Model.SubTotal
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="3">VAT: </td>
-                    <td class="money">
+                <tr class="bg-white">
+                    <td class="text-right" colspan="5">VAT: </td>
+                    <td class="text-right money">
                         @Model.TaxTotal
                     </td>
                 </tr>
                 @if (@Model.DiscountAmount != 0)
-            {
+                {
                     <tr>
-                        <td colspan="3">Order discounts: </td>
-                        <td class="money">- @Model.DiscountTotal</td>
+                        <td class="text-right" colspan="5">Order discounts: </td>
+                        <td class="text-right money">- @Model.DiscountTotal</td>
                     </tr>
                 }
                 @if (@Model.ShipmentAmount != 0)
-            {
-                    <tr>
-                        <td colspan="3">
+                {
+                    <tr class="bg-white">
+                        <td class="text-right" colspan="4">
                             Shipping
                             <text> (via @Model.ShipmentName)</text>
                         </td>
-                        <td class="money">@Model.ShippingTotal</td>
+                        <td class="text-right money">@Model.ShippingTotal</td>
                     </tr>
                 }
                 @if (@Model.PaymentAmount != 0)
-            {
-                    <tr>
-                        <td colspan="3">
+                {
+                    <tr class="bg-white">
+                        <td class="text-right" colspan="5">
                             Payment
                             <text> (@Model.PaymentName)</text>
                         </td>
-                        <td class="money">@Model.PaymentTotal</td>
+                        <td class="text-right money">@Model.PaymentTotal</td>
                     </tr>
                 }
-                <tr>
-                    <td colspan="3">Order total: </td>
-                    <td class="money">@Model.OrderTotal</td>
+                <tr class="bg-white">
+                    <td class="text-right" colspan="5">Shipping (@Model.ShipmentName):</td>
+                    <td class="text-right money">@Model.ShippingTotal</td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="text-right" colspan="5"><strong>Order total:</strong></td>
+                    <td class="text-right money"><strong>@Model.OrderTotal</strong></td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <a href="/basket/payment" class="btn btn-secondary">Back to Payment Method</a>
-    <button name="send-order" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Complete Order <i class="icon-arrow-right icon-white"></i></button>
-</form>
+
+        <footer class="page-footer d-flex flex-wrap justify-content-between">
+            <a href="/basket/payment" class="btn btn-outline-secondary mb-3">
+                <span class="icon icon-xs mr-1 rotate-180 transform-from-bottom" aria-hidden="true" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                </span>
+                <span class="d-none d-sm-inline">Back to </span>
+                Payment
+                <span class="d-none d-sm-inline"> Method</span>
+            </a>
+            <button name="send-order" type="submit" class="btn btn-primary mb-3">
+                Complete Order
+            </button>
+        </footer>
+    </form>
+</div>

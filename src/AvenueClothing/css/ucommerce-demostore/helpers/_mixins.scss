@@ -1,0 +1,95 @@
+@mixin reset-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+// Font sizes
+@mixin font-size($fs-map, $fs-breakpoints: $breakpoints) {
+    @each $fs-breakpoint, $fs-font-size in $fs-map {
+        @if $fs-breakpoint == default {
+            font-size: $fs-font-size;
+        }
+
+        @else {
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+
+            @media screen and (min-width: $fs-breakpoint) {
+                font-size: $fs-font-size;
+
+            }
+        }
+    }
+}
+
+@mixin size($size) {
+    height: $size;
+    width: $size;
+}
+
+
+@mixin visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+}
+
+// Media queries / breakpoints
+@mixin breakpoint($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "`#{$breakpoint}` could not be found in `$breakpoints` map.";
+    }
+}
+
+@mixin placeholder {
+    $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+
+    @each $placeholder in $placeholders {
+        &:#{$placeholder}-placeholder {
+            @content;
+        }
+    }
+}
+
+@mixin outline {
+    $colors: tomato orange gold YellowGreen RoyalBlue purple Magenta;
+
+    @each $breakpoint in $breakpoints {
+        $index: index($breakpoints, $breakpoint);
+        $color: nth($colors, $index);
+
+        // passing the just breakpoint name (but not the value) to the breakpoint mixin
+        @include breakpoint(nth($breakpoint, 1)) {
+            outline: 5px solid $color;
+
+            &::before {
+                content: nth($breakpoint, 1);
+                background: black;
+                color: white;
+                display: block;
+                position: absolute;
+                    top: 0;
+                    left: 0;
+                padding: 0.5rem;
+            }
+        }
+    }
+}

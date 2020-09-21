@@ -7,46 +7,78 @@
     // Html.RequiresJs("~/Scripts/uCommerce.category.js");
 }
 
-<div class="row margin-bottom">
-    <div class="hero-unit">
-        @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
-        {
-            <img class="col-sm-9" src="@Model.BannerImageUrl" style="max-height: 350px; object-fit: cover;">
-        }
+<div class="hero-unit mb-4">
+    @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
+    {
+        <img class="w-100" src="@Model.BannerImageUrl">
+    }
+
+    <div class="container">
+        <h1 class="text-light text-uppercase">@Model.Name</h1>
     </div>
 </div>
 
-@Html.HiddenFor(x => x.CatalogId, new {id = "catalog-id"})
-@Html.HiddenFor(x => x.CategoryId, new {id = "category-id"})
-<div class="row">
-    <div class="product-list col-sm-12 col-md-12">
+@Html.HiddenFor(x => x.CatalogId, new { id = "catalog-id" })
+@Html.HiddenFor(x => x.CategoryId, new { id = "category-id" })
+
+<div id="catalogue" class="container mb-4">
+    <aside class="filterbar d-flex flex-wrap justify-content-between mb-4">
+        @Umbraco.RenderMacro("UcommerceFacets")
+
+        <div class="dropdown d-inline-flex align-items-center ml-auto">
+            <select id="resultsToShow">
+                <option value="12">12</option>
+                <option value="24">24</option>
+                <option value="48">48</option>
+                <option value="96">96</option>
+            </select>
+            <label for="resultsToShow">Per page</label>
+        </div>
+    </aside>
+
+    <div id="products" class="product-list" data-num-products="@Model.TotalProducts">
         @foreach (var product in Model.Products)
         {
-            <div class="product col-sm-4 col-md-4 col-xs-2" id="@product.Sku">
-                <div class="product-image">
+            <a href="@product.Url" id="@product.Sku" class="product js-product mb-3">
+                <div class="product-image mb-3">
                     @if (!string.IsNullOrEmpty(product.ThumbnailImageUrl))
                     {
-                        <a href="@product.Url">
-                            <img src="@product.ThumbnailImageUrl" style="width: 259px; height: 350px; object-fit: cover;">
-                        </a>
+                        <img class="img-fluid" src="@product.ThumbnailImageUrl">
                     }
                 </div>
 
-                <p class="item-name">
-                    <a href="@product.Url">@product.Name</a>
-                </p>
-                <p class="item-price">
-                    @product.Price
-                </p>
-                <p class="btn-group view-details">
-                    <a href="@product.Url" class="btn btn-default">
-                        View more
-                        <span>
-                            <i class="fa fa-shopping-cart icon-white" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                </p>
-            </div>
+                <div class="mx-2">
+                    <p class="mb-1 text-truncate">
+                        @product.Name
+                    </p>
+                    <p class="mb-1">
+                        <strong>@product.Price</strong>
+                    </p>
+                </div>
+            </a>
         }
     </div>
+
+    @if (Model.PageSize <= Model.TotalProducts)
+    {
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-dark mt-2 mb-4 js-load-more" type="button" data-toggle="collapse" data-total="">
+                load more products
+            </button>
+        </div>
+    }
+
+    <nav class="page-navigation text-center mb-3" aria-label="Page navigation">
+        <h6 class="mb-3"><span class="text-uppercase">Showing </span><span class="js-products-count">@Model.Products.Count</span> of @Model.TotalProducts items</h6>
+        <ul class="pagination mb-5 justify-content-center">
+            @if (Model.PageSize <= Model.TotalProducts)
+            {
+                for (int i = 1; i < Math.Ceiling((double)Model.TotalProducts / Model.PageSize) + 1; i++)
+                {
+                    var cssClass = Model.PageNumber == i ? "active" : "";
+                    <li class="page-item js-page-item @cssClass"><a class="page-link" href="?pg=@i&size=@Model.PageSize">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
 </div>

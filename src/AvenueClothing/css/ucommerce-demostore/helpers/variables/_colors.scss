@@ -1,0 +1,20 @@
+$grey-3: #333;
+$grey-6: #666;
+$grey-9: #979797;
+$grey-d: #DCDCDC;
+$grey-e: #EDEDED;
+$grey-f: #f7f7f7;
+
+$black: #000;
+$white: #fff;
+
+$red: #C10000;
+$orange: #FF9400;
+$green: #70A996;
+$green-hover: darken($green, 7);
+
+$danger: $red;
+$warning: #d38a81;
+$info: #d3e0e6;
+
+$white-transparent: transparentize($white, 0.1);

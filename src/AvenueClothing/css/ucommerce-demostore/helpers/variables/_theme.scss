@@ -1,0 +1,58 @@
+$theme: 'theme-sdr';
+$logo: 'logo.svg';
+$btn-min-width: 14.5rem;
+$confidences-height: 2.25rem;
+$header-height: 3.75rem;
+
+.#{$theme} {
+    .bg-dark {
+        background-color: $grey-3 !important;
+    }
+
+    .bg-black {
+        background-color: $black;
+    }
+
+    .bg-light {
+        background-color: $grey-e !important;
+    }
+
+    .bg-primary {
+        background-color: $orange !important;
+    }
+
+    .bg-secondary {
+        background-color: $green !important;
+    }
+
+    .bg-success {
+        background-color: $green !important;
+    }
+
+    .bg-info {
+        background-color: mix($white, $orange, 80) !important;
+    }
+
+    .text-danger {
+        color: $red;
+    }
+
+    a {
+        color: $green;
+
+        #{$hover-states} {
+            // outline: 2px solid transparentize($green, 0.8);
+            text-decoration: underline;
+        }
+    }
+
+    .container {
+        @media (max-width: 1199px) {
+            max-width: 100%;
+        }
+    }
+
+    .shadow {
+        box-shadow: 0 0 5px 1px transparentize($black, 0.9) !important;
+    }
+}
