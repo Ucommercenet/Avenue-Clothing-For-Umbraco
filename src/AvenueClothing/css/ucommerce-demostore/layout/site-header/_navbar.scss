@@ -1,0 +1,101 @@
+.#{$theme} {
+    .navbar-brand {
+        background: {
+            image: img-url($logo);
+            size: contain;
+            position: top left;
+            repeat: no-repeat;
+        }
+        min-width: 13rem;
+        margin-top: -0.3rem;
+        overflow: hidden;
+        text-indent: -2000vw;
+
+        @include breakpoint(small) {
+            min-width: 14rem;
+        }
+
+        @include breakpoint(medium) {
+            min-width: 15rem;
+        }
+    }
+
+    .navbar-toggler {
+        outline: none;
+
+        #{$hover-states} {
+            color: mix($green, $grey-3);
+        }
+
+        &[aria-expanded="true"] {
+            color: $green;
+        }
+
+        &[data-target="#navbar-form"] {
+            background: $grey-f;
+
+            #{$hover-states} {
+                background: $grey-e;
+            }
+        }
+    }
+
+    .site-nav {
+        background: $grey-e;
+        height: $confidences-height;
+        line-height: $confidences-height;
+        position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+        text-align: center;
+
+        @include breakpoint(large) {
+            background: transparent;
+            height: auto;
+            line-height: 1;
+            position: static;
+            text-align: left;
+        }
+
+        ul {
+            @include reset-list;
+        }
+
+        a {
+            color: currentColor;
+            font-size: 0.86rem;
+            font-weight: 600;
+
+            #{$hover-states} {
+                color: $black;
+                outline: none;
+            }
+
+            &[aria-expanded="true"] {
+                color: $black;
+                font-weight: 700;
+                outline: none;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .navbar-form {
+        background: $white-transparent;
+        position: absolute;
+            top: $header-height;
+            left: 0;
+            right: 0;
+
+        @include breakpoint(medium) {
+            background: transparent;
+            display: block;
+            position: static;
+        }
+
+        &.show {
+            box-shadow: $box-shadow;
+        }
+    }
+}

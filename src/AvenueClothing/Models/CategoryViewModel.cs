@@ -32,7 +32,10 @@ namespace AvenueClothing.Models
         public Guid CategoryId { get; set; }
 
         public Guid CatalogId { get; set; }
-
+   
+        public int TotalProducts { get; set; }
+        public int PageNumber { get; set; }       
+        public int PageSize { get; set; }
 
     }
 }

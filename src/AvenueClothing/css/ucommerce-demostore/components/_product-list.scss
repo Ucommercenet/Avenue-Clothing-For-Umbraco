@@ -1,0 +1,75 @@
+.#{$theme} {
+    .product-list {
+        @include reset-list;
+        display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            &::after {
+                content: '';
+                display: block;
+                flex: 1 1 auto;
+            }
+
+        &.keep-rows-even {
+            a {
+                @include breakpoint(small) {
+                    max-width: 25%;
+                }
+            }
+        }
+
+        a {
+            color: currentColor;
+            flex: 1 1 0;
+            line-height: 1.2;
+            max-width: 50%;
+            padding: 0 2px;
+            position: relative;
+            text-decoration: none;
+            transition: all $ts $tt;
+
+            display: flex;
+            flex-direction: column;
+
+            @include breakpoint(medium) {
+                max-width: 33%;
+            }
+
+            @include breakpoint(large) {
+                // max-width: 276px;
+                max-width: 25%;
+            }
+
+            #{$hover-states} {
+                .product-image {
+                    img {
+                        filter: brightness(1.075);
+                        transform: scale(1.01);
+                    }
+                }
+            }
+
+            div:last-child {
+                margin-top: auto;
+            }
+        }
+
+        .product-image {
+            height: 0;
+            width: 100%;
+            padding-top: 100%;
+            overflow: hidden;
+            position: relative;
+
+            img {
+                margin: auto;
+                position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                transition: all $ts*2 $tt;
+            }
+        }
+    }
+}
