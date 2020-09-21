@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<AvenueClothing.Models.PurchaseOrderViewModel>
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<AvenueClothing.Models.PurchaseOrderViewModel>
 @{
     Layout = "Layout.cshtml";
 }
@@ -165,12 +165,6 @@
                         @Model.SubTotal
                     </td>
                 </tr>
-                <tr class="bg-white">
-                    <td class="text-right" colspan="5">VAT: </td>
-                    <td class="text-right money">
-                        @Model.TaxTotal
-                    </td>
-                </tr>
                 @if (@Model.DiscountAmount != 0)
                 {
                     <tr>
@@ -201,6 +195,12 @@
                 <tr class="bg-white">
                     <td class="text-right" colspan="5">Shipping (@Model.ShipmentName):</td>
                     <td class="text-right money">@Model.ShippingTotal</td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="text-right" colspan="5">VAT: </td>
+                    <td class="text-right money">
+                        @Model.TaxTotal
+                    </td>
                 </tr>
                 <tr class="bg-white">
                     <td class="text-right" colspan="5"><strong>Order total:</strong></td>
