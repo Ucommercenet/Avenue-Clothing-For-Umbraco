@@ -1,0 +1,60 @@
+$pagination-default: $grey-d;
+$pagination-active: $black;
+$pagination-hover:  mix($black, $grey-d, 20);
+
+.#{$theme} {
+    .page-navigation {
+        h6 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    }
+
+    .pagination {
+        border-radius: 0;
+        margin: 0 auto;
+    }
+
+    .page-item {
+        text-indent: -100vw;
+        overflow: hidden;
+        outline: none;
+
+        &:first-child,
+        &:last-child {
+            .page-link {
+                border-radius: 0;
+            }
+        }
+    }
+
+    .active {
+        .page-link {
+            background: $pagination-active;
+            pointer-events: none;
+        }
+
+        ~.page-item {
+            .page-link {
+                background: $pagination-default;
+
+                #{$hover-states} {
+                    background: $pagination-hover;
+                }
+            }
+        }
+    }
+
+    .page-link {
+        background: $pagination-active;
+        border: 0;
+        padding: 0;
+        height: 6px;
+        width: 55px;
+        transition: background $ts $tt;
+
+        #{$hover-states} {
+            background: $pagination-hover;
+        }
+    }
+}

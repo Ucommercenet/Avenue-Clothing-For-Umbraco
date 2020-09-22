@@ -1,0 +1,43 @@
+.#{$theme} {
+    .table {
+        max-width: 100%;
+
+        td {
+            border-color: $grey-d;
+            font-size: 0.9rem;
+
+            @include breakpoint(medium) {
+                font-size: 1rem;
+            }
+        }
+
+        input {
+            height: auto;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .number {
+            .form-control {
+                width: 3.5rem;
+            }
+        }
+    }
+
+    thead {
+        th {
+            background: $white;
+            border-color: $grey-d;
+            border-top-width: 2px;
+            // font-family: $font-heading;
+            // text-transform: uppercase;
+        }
+    }
+
+    .table-striped {
+        tr {
+            &:nth-last-of-type(odd) {
+                background-color: $grey-f;
+            }
+        }
+    }
+}

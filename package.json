@@ -1,0 +1,28 @@
+{
+  "name": "AC",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "font-awesome": "^4.6.3",
+    "gulp": "^4.0.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.9",
+    "browser-sync": "^2.26.7",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cheerio": "^1.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-eslint": "^6.0.0",
+    "gulp-filter": "^6.0.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-svgmin": "^2.2.0",
+    "gulp-svgstore": "^7.0.1",
+    "path": "^0.12.7",
+    "process-nextick-args": "^1.0.3",
+    "node-sass": "^4.14.1"
+  }
+}

@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700|Roboto:400,500&display=swap');
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-regular-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-black-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-black-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-blackitalic-webfont.woff2') format('woff2'),
+     url('fonts/baronneue-blackitalic-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-bold-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-bolditalic-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-bolditalic-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'baron_neue';
+    src: url('fonts/baronneue-italic-webfont.woff2') format('woff2'),
+        url('fonts/baronneue-italic-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+
+$font-heading: 'baron_neue', sans-serif;
+$font-main: 'Avenir Next', 'Prompt', sans-serif;
+$font-secondary: 'Roboto', sans-serif;
+
+body {
+    &.#{$theme} {
+        font-family: $font-main;
+        text-rendering: optimizeLegibility;
+        -webkit-font-feature-settings: "kern" 1;
+    }
+
+}
+
+.#{$theme} {
+    #{headings(1,5)} {
+        font-family: $font-heading;
+        font-weight: 400;
+        letter-spacing: 0.125rem;
+
+        @include breakpoint(large) {
+            letter-spacing: 0.2rem;
+        }
+    }
+
+    h6 {
+        font-family: $font-main;
+    }
+
+    strong {
+        font-weight: 600;
+    }
+
+    .small {
+        line-height: 1.3;
+    }
+}
