@@ -9,110 +9,139 @@
     Html.RequiresJs("~/scripts/uCommerce.demostore.productpage.js", 3);
 }
 
-@if (Model.Reviews.Any())
-{
-    foreach (var review in Model.Reviews)
-    {
-        <section itemprop="review" itemscope itemtype="http://schema.org/Review" class="review">
-            <header>
-                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars">
-                    @DisplayStars(review.Rating)
-                </div>
-                <p itemprop="name" class="review-headline">@review.Title</p>
-            </header>
-            <aside class="review-by">
-                <p>
-                    by <span itemprop="author">@review.Name</span> on
-                    <abbr title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
-                </p>
-            </aside>
-            <p itemprop="description">@review.Comments</p>
-            <meta itemprop="ratingValue" content="@review.Rating">
-            <meta itemprop="worstRating" content="1">
-            <meta itemprop="bestRating" content="5">
-            <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
-        </section>
-    }
-}
-else
-{
-    <p>No-one has reviewed this product yet.</p>
-}
+<header class="pt-2 py-2 px-3 d-flex flex-wrap flex-lg-nowrap justify-content-center justify-content-sm-between align-items-center bg-dark text-white text-lg-left">
+    <h5 class="m-0 py-1">Customer Reviews</h5>
+
+    <a href="#submit-review" aria-controls="submit-review" data-toggle="collapse" role="button" aria-expanded="false" class="btn btn-outline-light border-thin text-uppercase">Submit a review</a>
+</header>
 @DisplayReviewForm(Model)
-
-
-
 
 @helper DisplayReviewForm(ProductViewModel product)
 {
     @*<form action="@Url.Action("Index", "MyController")" method="post" class="validate form-horizontal"  >*@
-using (Html.BeginUmbracoForm("Index", "Review"))
+using (Html.BeginUmbracoForm("Index", "Review", null, new Dictionary<string, object> { { "id", "review" } }))
 {
+    <div class="collapse" id="submit-review">
+        <div class="card card-body">
+            <h5>Send Us Your Review</h5>
+            <div class="control-group">
+                <label class="control-label" for="review-rating">Rating</label>
+                <div class="controls rating js-rating">
+                    <label><input type="radio" name="Rating" value="1" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="2" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="3" /><i class="fa fa-star-o"></i></label>
+                    <label><inpu type="radio" name="Rating" value="4" /><i class="fa fa-star-o"></i></label>
+                    <label><input type="radio" name="Rating" value="5" /><i class="fa fa-star-o"></i></label>
+                </div>
+            </div>
 
-    <h5>Send Us Your Review</h5>
-    <div class="control-group">
-        <label class="control-label" for="review-rating">Rating</label>
-        <div class="controls rating">
-            <label><input type="radio" name="Rating" value="1" /><i class="fa fa-star"></i></label>
-            <label><input type="radio" name="Rating" value="2" /><i class="fa fa-star"></i></label>
-            <label><input type="radio" name="Rating" value="3" /><i class="fa fa-star"></i></label>
-            <label><input type="radio" name="Rating" value="4" /><i class="fa fa-star"></i></label>
-            <label><input type="radio" name="Rating" value="5" /><i class="fa fa-star"></i></label>
-        </div>
-    </div>
-
-        <div id="review-form" class="">
-            <div class="control-group margin-top">
-                <br />
-                <tag tag-default="tag-default" class="control-tag tag-default" for="review-name">
-                    Your Name
+            <div id="review-form" class="">
+                <div class="control-group mb-3">
+                    <tag tag-default="tag-default" class="control-tag tag-default" for="review-name">
+                        Your Name
+                        <div class="controls">
+                            <input type="text" id="review-name" name="Name" placeholder=""
+                                    class="required span12 form-control" />
+                        </div>
+                    </tag>
+                </div>
+                <div class="control-group mb-3">
+                    <tag tag-default="tag-default" class="control-tag tag-default" for="review-email">
+                        Your Email
+                        <div class="controls">
+                            <input type="text" id="review-email" name="Email" placeholder=""
+                                    class="required span12 form-control" />
+                        </div>
+                    </tag>
+                </div>
+                <div class="control-group mb-3">
+                    <tag tag-default="tag-default" class="control-tag tag-default" for="review-headline">
+                        Review Title
+                        <div class="controls">
+                            <input type="text" id="review-headline" name="Title" placeholder=""
+                                    class="required span12 form-control" />
+                        </div>
+                    </tag>
+                </div>
+                <div class="control-group mb-3">
+                    <tag tag-default="tag-default" class="control-tag tag-default" for="review-text">
+                        Comments
+                        <div class="controls">
+                            <textarea rows="3" id="review-text" name="Comments" placeholder="Describe your experience with the product"
+                                        class="required span12 form-control"></textarea>
+                        </div>
+                    </tag>
+                </div>
+                <div class="control-group">
                     <div class="controls">
-                        <input type="text" id="review-name" name="Name" placeholder=""
-                               class="required span12 form-control" />
+                        <button type="submit" class="btn btn-dark" name="review-product">Save</button>
+                        <input type="hidden" id="reviewed-product-sku" name="ProductSku" value="@product.Sku" />
                     </div>
-                </tag>
-            </div>
-            <div class="control-group margin-top">
-                <tag tag-default="tag-default" class="control-tag tag-default" for="review-email">
-                    Your Email
-                    <div class="controls">
-                        <input type="text" id="review-email" name="Email" placeholder=""
-                               class="required span12 form-control" />
-                    </div>
-                </tag>
-            </div>
-            <div class="control-group margin-top">
-                <tag tag-default="tag-default" class="control-tag tag-default" for="review-headline">
-                    Review Title
-                    <div class="controls">
-                        <input type="text" id="review-headline" name="Title" placeholder=""
-                               class="required span12 form-control" />
-                    </div>
-                </tag>
-            </div>
-            <div class="control-group margin-top">
-                <tag tag-default="tag-default" class="control-tag tag-default" for="review-text">
-                    Comments
-                    <div class="controls">
-                        <textarea rows="3" id="review-text" name="Comments" placeholder="Describe your experience with the product"
-                                  class="required span12 form-control"></textarea>
-                    </div>
-                </tag>
-            </div>
-            <div class="control-group margin-top">
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary" name="review-product">Save</button>
-                    <input type="hidden" id="reviewed-product-sku" name="ProductSku" value="@product.Sku" />
                 </div>
             </div>
         </div>
+    </div>
 }}
+
+<div class="bg-info pt-2 pb-2 px-4 mb-3">
+    @if (Model.Reviews.Any())
+    {
+        int numToTake = 3;
+        var initiallyDisplayedReviews = Model.Reviews.Take(numToTake);
+        var additionalReviews = Model.Reviews.Skip(numToTake).Take(Model.Reviews.Count() - numToTake);
+
+        foreach (var review in initiallyDisplayedReviews)
+        {
+            @DisplayReview(review)
+        }
+
+        if (additionalReviews.Count() > 0) {
+            <div class="text-center load-more">
+                <button class="btn btn-outline-dark my-3" type="button" data-toggle="collapse" data-target="#additionalReviews" aria-expanded="false" aria-controls="additionalReviews">
+                    Load more reviews
+                </button>
+            </div>
+
+            <div class="collapse additional-reviews" id="additionalReviews">
+                @foreach (var review in additionalReviews)
+                {
+                    @DisplayReview(review)
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p class="m-0">No-one has reviewed this product yet.</p>
+    }
+</div>
+
+@helper DisplayReview(ProductReviewViewModel review) {
+    <section itemprop="review" itemscope itemtype="http://schema.org/Review" class="review pt-3">
+        <header class="review-header mb-2">
+            <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="review-stars mb-1">
+
+            </div>
+            <strong itemprop="author">@review.Name</strong> &ndash;
+            <abbr class="small" title="@review.CreatedOn.ToString("u")">@review.CreatedOn.ToString("MMM dd, yyyy")</abbr>
+        </header>
+        @DisplayStars(review.Rating)
+        <h6 itemprop="name">@review.Title</h6>
+        <p itemprop="description">@review.Comments</p>
+        <meta itemprop="ratingValue" content="@review.Rating">
+        <meta itemprop="worstRating" content="1">
+        <meta itemprop="bestRating" content="5">
+        <meta itemprop="datePublished" content="@review.CreatedOn.ToString("yyyy-MM-dd")" />
+    </section>
+}
+
+
 
 @helper DisplayStars(double? rating)
 {
-if (rating.HasValue)
-{
-        <span class="star-rating">
+    if (rating.HasValue)
+    {
+        <span class="star-rating rating-@rating">
             @for (var i = 20; i <= 100; i = i + 20)
             {
                 if (rating >= i)
@@ -125,6 +154,6 @@ if (rating.HasValue)
                 }
             }
         </span>
-}
+    }
 }
 

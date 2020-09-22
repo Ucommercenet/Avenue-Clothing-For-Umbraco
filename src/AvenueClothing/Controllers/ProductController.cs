@@ -45,6 +45,7 @@ namespace AvenueClothing.Controllers
             {
                 Sku = currentProduct.Sku,
                 Name = currentProduct.DisplayName,
+                ShortDescription = currentProduct.ShortDescription,
                 LongDescription = currentProduct.LongDescription,
                 IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductType == ProductType.ProductFamily,
@@ -89,6 +90,7 @@ namespace AvenueClothing.Controllers
                     Sku = currentVariant.Sku,
                     VariantSku = currentVariant.VariantSku,
                     Name = currentVariant.DisplayName,
+                    ShortDescription = currentVariant.ShortDescription,
                     LongDescription = currentVariant.LongDescription,
                     IsVariant = true
                 };
