@@ -247,10 +247,6 @@
       <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ucommerce.Admin, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Admin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Ucommerce.Api, Version=9.2.0.20195, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\uCommerce.Core.9.2.0.20195\lib\net45\Ucommerce.Api.dll</HintPath>
       <Private>True</Private>
