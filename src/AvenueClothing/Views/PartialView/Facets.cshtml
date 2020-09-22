@@ -1,4 +1,4 @@
-﻿@model AvenueClothing.Models.FacetsDisplayedViewModel
+@model AvenueClothing.Models.FacetsDisplayedViewModel
 @{
     Layout = "";
 }
@@ -12,14 +12,16 @@
                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/chevron.svg")))
             </span>
         </button>
-
-        @foreach (var value in facet.FacetValues)
-        {
-            <div class="dropdown-menu" aria-labelledby="facet-@facet.DisplayName">
-                <input type="checkbox" id="filter-@facet.Name-@value.FacetValueName" key="@facet.Name" class="filter" value="@value.FacetValueName">
-                @value.FacetValueName (@value.FacetValueHits)
-            </div>
-        }
-
+        <div class="dropdown-menu" >
+            @foreach (var value in facet.FacetValues)
+            {
+                var disabled = value.FacetValueHits > 0 ? "" : "disabled";
+                <label class="form-check-label mb-2 @disabled" aria-labelledby="facet-@facet.DisplayName">
+                    <input type="checkbox" id="filter-@facet.Name-@value.FacetValueName" key="@facet.Name" class="filter" value="@value.FacetValueName" @disabled>
+                    <span class="cb"></span>
+                    @value.FacetValueName (@value.FacetValueHits)
+                </label>
+            }
+        </div>
     </div>
 }
