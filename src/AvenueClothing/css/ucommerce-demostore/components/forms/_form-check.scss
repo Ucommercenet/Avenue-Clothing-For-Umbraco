@@ -89,6 +89,12 @@ $label-color: $black;
         }
     }
 
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        font-weight: 400;
+    }
+
     input {
         cursor: pointer;
         position: absolute;

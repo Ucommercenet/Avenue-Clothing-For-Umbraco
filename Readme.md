@@ -20,13 +20,13 @@ If you want to customise the store in any way, it's really easy. If you are usin
 
 To use the *DemoStoreDeploy.cmd* script, just open a command prompt, go to directory to the {project root}\tools\deploy folder, and run the *DemoStoreDeploy.cmd*
 
-Example: 
+Example:
 
 	cd: D:\Avenue-Clothing-For-Umbraco\tools\deploy
 	DemoStoreDeploy.cmd
 
-After the script runs, you will recieve a message saying: 
-	
+After the script runs, you will recieve a message saying:
+
 	"Package saved to package\packageName_packageVersion.zip"
 
 ..and your package is ready to be installed, through the Packages section of Umbraco's backoffice.
@@ -78,5 +78,10 @@ Don't forget to let us know what you're up to.
 
 
 
-Produced with love for you by [The Site Doctor](http://www.thesitedoctor.co.uk/ "The most feature rich e-commerce package for Umbraco") for 
+Produced with love for you by [The Site Doctor](http://www.thesitedoctor.co.uk/ "The most feature rich e-commerce package for Umbraco") for
 [Ucommerce](http://ucommerce.dk/ "The most feature rich e-commerce package for Umbraco")
+
+
+### Front end
+- run the UmbracoV8 DB to serve up the site (remember to copy over any changes you make)
+- `yarn install` to install dependencies, then `gulp sass` to compile styles (or default task `gulp` to watch sass folder for changes)
