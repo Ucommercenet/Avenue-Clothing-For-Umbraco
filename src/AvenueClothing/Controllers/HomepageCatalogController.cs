@@ -31,17 +31,17 @@ namespace AvenueClothing.Controllers
             foreach (var product in products)
             {
                 string niceUrl = UrlService.GetUrl(CatalogContext.CurrentCatalog, product);
-                product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
+                product.PricesInclTax.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal price);
+                product.Taxes.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal tax);
                 string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-                decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
                 productsViewModel.Products.Add(new ProductViewModel
                 {
                     Sku = product.Sku,
                     Name = product.Name,
                     Url = niceUrl,
-                    Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : "",
-                    Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
+                    Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
+                    Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
                     IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
                     VariantSku = product.VariantSku,
                     ThumbnailImageUrl = product.ThumbnailImageUrl

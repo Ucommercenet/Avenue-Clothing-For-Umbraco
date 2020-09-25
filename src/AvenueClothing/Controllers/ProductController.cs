@@ -37,9 +37,9 @@ namespace AvenueClothing.Controllers
             Product currentProduct = CatalogContext.CurrentProduct;
 
             // Price calculations
-            currentProduct.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
+            currentProduct.PricesInclTax.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal price);
+            currentProduct.Taxes.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal tax);
             string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-            decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
 
             var productViewModel = new ProductViewModel
             {
@@ -49,8 +49,8 @@ namespace AvenueClothing.Controllers
                 IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductType == ProductType.ProductFamily,
                 IsVariant = false,
-                Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
-                Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : ""
+                Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
+                Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : ""
             };
 
             if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
