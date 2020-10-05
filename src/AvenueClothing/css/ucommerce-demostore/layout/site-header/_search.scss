@@ -1,10 +1,4 @@
 .#{$theme} {
-    &.scrolled {
-        .typeahead {
-
-        }
-    }
-
     .typeahead {
         background: $white-transparent;
         border-radius: 0;
@@ -14,6 +8,7 @@
         position: fixed;
         max-width: 90%;
         z-index: $zi-search-dropdown;
+        top: $header-height !important;
 
         @include breakpoint(large) {
             max-width: 25rem;
