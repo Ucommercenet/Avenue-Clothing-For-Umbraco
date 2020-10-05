@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     var $body = $('body');
     var throttleInterval = 250;
 
