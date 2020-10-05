@@ -27,7 +27,7 @@
             <span class="icon icon-bag" aria-hidden="true" focusable="false" role="img">
                 @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/bag.svg")))
             </span>
-            <span class="item-qty">@Model.NumberOfItems</span>
-            <span class="d-none d-md-inline"> @basketItemsText in basket: <span class="order-total">@Model.Total</span></span>
+            <span class="item-qty js-minibasket-qty">@Model.NumberOfItems</span>
+            <span class="d-none d-md-inline js-minibasket-text"> @basketItemsText in basket: <span class="order-total js-minibasket-total">@Model.Total</span></span>
         </a>
     }

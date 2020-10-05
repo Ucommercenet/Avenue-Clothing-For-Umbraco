@@ -299,18 +299,20 @@ function updateCartTotals() {
     $.uCommerce.getBasket({}, function (response) {
         var basket = response.Basket;
         var qtyUnit = parseInt(basket.FormattedTotalItems) == 1 ? "item" : "items";
+        var basketIsEmpty = $('#empty-basket').length != 0;
 
-        if ($('#empty-basket').length != 0) {
-            var $minibasket = $('#empty-basket');
+        var $minibasket = basketIsEmpty ? $('#empty-basket') : $('#mini-basket');
 
+        if (basketIsEmpty) {
             $minibasket.find('.js-minibasket-empty-text').remove();
-            $minibasket.find('.js-minibasket-qty').text(basket.FormattedTotalItems);
-            $minibasket.find('.js-minibasket-text').text(qtyUnit + " in basket");
-            $minibasket.find('.js-minibasket-total').text(basket.FormattedOrderTotal);
             $minibasket.removeClass('is-empty').addClass('has-items');
-            $minibasket.attr('href', '/basket');
+            $minibasket.find('.js-minibasket-text').text(qtyUnit + " in basket");
             $minibasket.attr('id', 'mini-basket');
+            $minibasket.attr('href', '/basket');
         }
+
+        $minibasket.find('.js-minibasket-qty').text(basket.FormattedTotalItems);
+        $minibasket.find('.js-minibasket-total').text(basket.FormattedOrderTotal);
 
         // Pulse the basket so it catches the user's attention
         //var highlight = [qty, sub, tax, disc, tot];
