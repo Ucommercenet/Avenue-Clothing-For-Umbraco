@@ -30,6 +30,7 @@ const config = {
     imagesPath: basePath + 'img'
 }
 
+
 // Sass
 gulp.task('sass', function () {
     return gulp
@@ -47,6 +48,7 @@ gulp.task('sass', function () {
         }))
         .pipe(sourcemaps.write('.'))
         .pipe(filter('**/*.css'))
+        .pipe(gulp.dest('C:/SQL Backups/UmbracoV8/css'))
         .pipe(gulp.dest('./src/AvenueClothing/css/'))
 });
 
@@ -90,7 +92,7 @@ gulp.task('serve', function () {
 
 // Rerun the task when a file changes
 gulp.task('watch', function () {
-    gulp.watch(config.sassPath + '/**/*.scss', gulp.series('sass')).on("change", browserSync.reload);
+    gulp.watch('./src/AvenueClothing/css/ucommerce-demostore/**/*.scss', gulp.series('sass')).on("change", browserSync.reload);
     gulp.watch(config.imagesPath + '/**/*.svg', gulp.series('sprites')).on("change", browserSync.reload);
 });
 
