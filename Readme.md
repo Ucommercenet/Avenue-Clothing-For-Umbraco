@@ -83,5 +83,10 @@ Produced with love for you by [The Site Doctor](http://www.thesitedoctor.co.uk/ 
 
 
 ### Front end
-- run the UmbracoV8 DB to serve up the site (remember to copy over any changes you make)
-- `yarn install` to install dependencies, then `gulp sass` to compile styles (or default task `gulp` to watch sass folder for changes)
+- run the UmbracoV8 DB to serve up the site (remember to copy over any changes you make to view files, js etc)
+
+Styles:
+- `yarn install` to install dependencies
+- `gulp sass` to compile styles
+- or use default task `gulp` to watch sass folder for changes
+The gulp Sass task copies the css file from the the Avenue-Clothing-For-Umbraco project over to the UmbracoV8 folder (the file paths will need to match your own project setup)

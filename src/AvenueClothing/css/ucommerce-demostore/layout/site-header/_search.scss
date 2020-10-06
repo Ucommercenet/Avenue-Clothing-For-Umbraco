@@ -8,10 +8,11 @@
         position: fixed;
         max-width: 90%;
         z-index: $zi-search-dropdown;
-        top: $header-height !important;
+        top: 7rem !important;
 
         @include breakpoint(large) {
             max-width: 25rem;
+            top: $header-height !important;
         }
 
         li {
