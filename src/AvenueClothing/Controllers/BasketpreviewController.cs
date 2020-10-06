@@ -1,8 +1,7 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using Ucommerce;
 using Ucommerce.Api;
-using Ucommerce.Api.PriceCalculation;
 using Ucommerce.EntitiesV2;
 using Ucommerce.Infrastructure;
 using AvenueClothing.Models;
@@ -102,11 +101,17 @@ namespace AvenueClothing.Controllers
         [HttpPost]
         public ActionResult Index()
         {
-            TransactionLibrary.RequestPayments();
+            var payment = TransactionLibrary.GetBasket().Payments.First();
+            if (payment.PaymentMethod.PaymentMethodServiceName == null)
+            {
+                var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");            
+                var confirmation = parent.Children(x => x.Name == "Confirmation").FirstOrDefault();            
+                return Redirect(confirmation.Url);
+            }
 
-            var parent = PublishedRequest.PublishedContent.AncestorOrSelf("basket");
-            var confirmation = parent.Children(x => x.Name == "Confirmation").FirstOrDefault();
-            return Redirect(confirmation.Url);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            var paymentUrl = TransactionLibrary.GetPaymentPageUrl(payment);
+            return Redirect(paymentUrl);
         }
     }
 }
