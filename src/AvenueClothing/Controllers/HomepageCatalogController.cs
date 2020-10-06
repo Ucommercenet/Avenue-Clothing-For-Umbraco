@@ -48,7 +48,8 @@ namespace AvenueClothing.Controllers
                     IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
                     VariantSku = product.VariantSku, 
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
-                    Categories = CatalogLibrary.GetCategories(product.Categories).ToList()
+                    Categories = CatalogLibrary.GetCategories(product.Categories).ToList(),
+                    Rating = product.Rating
                 });
             }
 

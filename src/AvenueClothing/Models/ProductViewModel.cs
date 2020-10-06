@@ -60,5 +60,6 @@ namespace AvenueClothing.Models
 
 		public string Price { get; set; }
 
+		public double? Rating { get; set; }
 	}
 }
