@@ -2,7 +2,7 @@
 
 cd ..\..\
 
-SET version=7.2.0.20195
+SET version=9.0.0.20195
 
 rem Delete the exisiting packages folder and any contents
 del package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q
@@ -33,6 +33,9 @@ robocopy src\AvenueClothing.Installer\XmlStubs package\_ToPackage *.xml /FFT /Z 
 
 rem Package the various files
 tools\deploy\PackageGen.exe -name="package\Avenue_Clothing_Umbraco8_%version%.zip" -guid="61fc5d84-9cc2-4d36-93a8-bfe0d076b219" -path="package\_ToPackage"
+
+rd package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219
+rd package\Avenue_Clothing_Umbraco8_%version%
 
 GOTO :DONE
 
