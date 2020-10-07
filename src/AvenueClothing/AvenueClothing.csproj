@@ -427,7 +427,6 @@
     <Content Include="scripts/**" />
     <Content Include="fonts/**" />
     <Content Include="img/**" />
-    <Content Include="views/**" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />
