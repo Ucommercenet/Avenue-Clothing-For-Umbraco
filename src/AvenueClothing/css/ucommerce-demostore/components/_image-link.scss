@@ -1,0 +1,54 @@
+.#{$theme} {
+    .h4 {
+        .caption {
+            bottom: 1rem;
+
+            @include breakpoint(medium) {
+                bottom: 1.5rem;
+            }
+        }
+    }
+
+    .image-link {
+        // display: block;
+        position: relative;
+
+        #{$hover-states} {
+            outline: none;
+            img {
+                filter: brightness(1.1);
+            }
+        }
+
+        img {
+            transition: all $ts $tt;
+            width: 100%;
+        }
+    }
+
+    .caption {
+        color: $black;
+        font-family: $font-heading;
+        font-size: inherit;
+        line-height: 1.2;
+        margin: 0 auto;
+        padding: 0.75rem 0.5rem;
+        position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+        text-align: center;
+        text-shadow: 0px 0px 3px $white, 0px 0px 5px transparentize($white, 0.5), 0px 0px 10px  transparentize($white, 0.5);
+        text-transform: uppercase;
+
+        @include breakpoint(medium) {
+            letter-spacing: 0.125rem;
+            padding: 1rem;
+        }
+
+        @include breakpoint(large) {
+            letter-spacing: 0.25rem;
+        }
+    }
+}
+

@@ -1,0 +1,29 @@
+.#{$theme} {
+    .icon {
+        display: inline-block;
+        fill: currentColor;
+        height: 1.5rem;
+        width: 1.5rem;
+        position: relative;
+
+        svg {
+            fill: currentColor;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .icon-small {
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+
+    .icon-xs {
+        height: 0.8rem;
+        width: 0.8rem;
+    }
+
+    .icon-up {
+        transform: translateY(-0.1rem);
+    }
+}

@@ -1,16 +1,16 @@
 ﻿$(function () {
-    wireUpCart($('#cart'));
+    wireUpCart($('#basket'));
 });
-function wireUpCart(cart) {
-    wireupQuantityChange(cart);
-    wireUpClickHandlers(cart);
+function wireUpCart(basket) {
+    wireupQuantityChange(basket);
+    wireUpClickHandlers(basket);
 };
-function wireupQuantityChange(cart) {
-    $('tr.order-line', cart).each(function (i, row) {
-        addUpdateButton(cart, row);
+function wireupQuantityChange(basket) {
+    $('tr.order-line', basket).each(function (i, row) {
+        addUpdateButton(basket, row);
     });
 };
-function addUpdateButton(cart, row) {
+function addUpdateButton(basket, row) {
     var qty = $('.qty', row);
     var lineId = qty.data("orderlineid");
     qty.data('original', qty.val());
@@ -19,10 +19,10 @@ function addUpdateButton(cart, row) {
         "class": "input-append"
     });
     qty.wrap(div);
-   
+
     var btn = $('<button />', {
         name: "update-basket-line",
-        "class": "btn btn-success update-cart",
+        "class": "btn btn-success update-basket",
         "type": "submit",
         value: lineId
     }).hide();
@@ -32,21 +32,21 @@ function addUpdateButton(cart, row) {
     }).appendTo(btn);
 
     btn.insertAfter(qty);
-    watchForQuantityChange(qty, cart);
+    watchForQuantityChange(qty, basket);
 };
-function watchForQuantityChange(qty, cart) {
+function watchForQuantityChange(qty, basket) {
     qty.change(function () {
         var t = $(this);
         if (t.val() == t.data('original')) {
             return;
         }
-        $('.update-cart', t.parent()).fadeIn();
-        enableUpdateButton(cart);
+        $('.update-basket', t.parent()).fadeIn();
+        enableUpdateButton(basket);
     });
 };
-function wireUpClickHandlers(cart) {
-    disableUpdateButton(cart);
-    $('.update-cart', cart).click(function (e) {
+function wireUpClickHandlers(basket) {
+    disableUpdateButton(basket);
+    $('.update-basket', basket).click(function (e) {
         e.preventDefault();
         var t = $(this);
         var qty = $('.qty', t.parent());
@@ -62,10 +62,10 @@ function wireUpClickHandlers(cart) {
             var row = t.parents('tr');
             updateLineTotals(row, updatedLine.UpdatedLine);
             updateQuantity(row, updatedLine.UpdatedLine);
-            if ($('.pending-change', cart).length > 0) {
-                enableUpdateButton(cart);
+            if ($('.pending-change', basket).length > 0) {
+                enableUpdateButton(basket);
             } else {
-                disableUpdateButton(cart);
+                disableUpdateButton(basket);
             }
         });
         return false;
@@ -77,11 +77,11 @@ function updateLineTotals(row, line) {
 function updateQuantity(row, line) {
     $('.qty', row).data('original', line.Quantity);
 };
-function enableUpdateButton(cart) {
-    $('.update-basket', cart).addClass('btn-success').removeClass('disabled').removeAttr('disabled');
-    $('.update-basket i', cart).addClass('icon-white');
+function enableUpdateButton(basket) {
+    $('.update-basket', basket).addClass('btn-success').removeClass('disabled').removeAttr('disabled');
+    $('.update-basket i', basket).addClass('icon-white');
 };
-function disableUpdateButton(cart) {
-    $('.update-basket', cart).removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
-    $('.update-basket i', cart).removeClass('icon-white');
+function disableUpdateButton(basket) {
+    $('.update-basket', basket).removeClass('btn-success').addClass('disabled').attr('disabled', 'disabled');
+    $('.update-basket i', basket).removeClass('icon-white');
 };

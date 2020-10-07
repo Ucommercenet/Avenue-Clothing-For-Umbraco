@@ -31,7 +31,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
-    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -83,10 +82,6 @@
     </Reference>
     <Reference Include="ImageProcessor, Version=2.7.0.100, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\ImageProcessor.2.7.0.100\lib\net452\ImageProcessor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ImageProcessor.Web, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ImageProcessor.Web.3.3.1.0\lib\net45\ImageProcessor.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -384,6 +379,7 @@
     <Compile Include="Controllers\ShippingController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
+    <Compile Include="Enums\PartialTypes.cs" />
     <Compile Include="Models\AddressDetailsViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AddToBasketViewModel.cs" />
@@ -414,142 +410,6 @@
     <Compile Include="Search\AvenueProductIndexDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\font-awesome.min.css" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="css\glyphicons-28-search.png" />
-    <Content Include="css\sass.css" />
-    <Content Include="css\Site.css" />
-    <Content Include="css\tether.css" />
-    <Content Include="css\tether.min.css" />
-    <Content Include="css\Ucommerce.bootstrap-responsive.css" />
-    <Content Include="css\Ucommerce.demostore.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="img\loader.gif" />
-    <Content Include="img\loading-spin.svg" />
-    <Content Include="img\Ucommerce\cards.png" />
-    <Content Include="img\Ucommerce\homepage-banner-black-wonderland.jpg" />
-    <Content Include="img\Ucommerce\homepage-banner-blue-kittens.jpg" />
-    <Content Include="img\Ucommerce\homepage-banner-purple-wonderland.jpg" />
-    <Content Include="img\Ucommerce\logo.png" />
-    <Content Include="img\Ucommerce\return.png" />
-    <Content Include="img\Ucommerce\Ucommerce.png" />
-    <Content Include="scripts\bootstrap.js" />
-    <Content Include="scripts\bootstrap.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="css\bootstrap.min.css.map" />
-    <Content Include="css\bootstrap\bootstrap-flex.scss" />
-    <Content Include="css\bootstrap\bootstrap-grid.scss" />
-    <Content Include="css\bootstrap\bootstrap-reboot.scss" />
-    <Content Include="css\bootstrap\bootstrap.scss" />
-    <Content Include="css\bootstrap\mixins\_alert.scss" />
-    <Content Include="css\bootstrap\mixins\_background-variant.scss" />
-    <Content Include="css\bootstrap\mixins\_border-radius.scss" />
-    <Content Include="css\bootstrap\mixins\_breakpoints.scss" />
-    <Content Include="css\bootstrap\mixins\_buttons.scss" />
-    <Content Include="css\bootstrap\mixins\_cards.scss" />
-    <Content Include="css\bootstrap\mixins\_clearfix.scss" />
-    <Content Include="css\bootstrap\mixins\_forms.scss" />
-    <Content Include="css\bootstrap\mixins\_gradients.scss" />
-    <Content Include="css\bootstrap\mixins\_grid-framework.scss" />
-    <Content Include="css\bootstrap\mixins\_grid.scss" />
-    <Content Include="css\bootstrap\mixins\_hover.scss" />
-    <Content Include="css\bootstrap\mixins\_image.scss" />
-    <Content Include="css\bootstrap\mixins\_list-group.scss" />
-    <Content Include="css\bootstrap\mixins\_lists.scss" />
-    <Content Include="css\bootstrap\mixins\_nav-divider.scss" />
-    <Content Include="css\bootstrap\mixins\_navbar-align.scss" />
-    <Content Include="css\bootstrap\mixins\_pagination.scss" />
-    <Content Include="css\bootstrap\mixins\_progress.scss" />
-    <Content Include="css\bootstrap\mixins\_pulls.scss" />
-    <Content Include="css\bootstrap\mixins\_reset-filter.scss" />
-    <Content Include="css\bootstrap\mixins\_reset-text.scss" />
-    <Content Include="css\bootstrap\mixins\_resize.scss" />
-    <Content Include="css\bootstrap\mixins\_screen-reader.scss" />
-    <Content Include="css\bootstrap\mixins\_size.scss" />
-    <Content Include="css\bootstrap\mixins\_tab-focus.scss" />
-    <Content Include="css\bootstrap\mixins\_table-row.scss" />
-    <Content Include="css\bootstrap\mixins\_tag.scss" />
-    <Content Include="css\bootstrap\mixins\_text-emphasis.scss" />
-    <Content Include="css\bootstrap\mixins\_text-hide.scss" />
-    <Content Include="css\bootstrap\mixins\_text-truncate.scss" />
-    <Content Include="css\bootstrap\utilities\_background.scss" />
-    <Content Include="css\bootstrap\utilities\_clearfix.scss" />
-    <Content Include="css\bootstrap\utilities\_display.scss" />
-    <Content Include="css\bootstrap\utilities\_flex.scss" />
-    <Content Include="css\bootstrap\utilities\_pulls.scss" />
-    <Content Include="css\bootstrap\utilities\_screenreaders.scss" />
-    <Content Include="css\bootstrap\utilities\_spacing.scss" />
-    <Content Include="css\bootstrap\utilities\_text.scss" />
-    <Content Include="css\bootstrap\utilities\_visibility.scss" />
-    <Content Include="css\bootstrap\_alert.scss" />
-    <Content Include="css\bootstrap\_animation.scss" />
-    <Content Include="css\bootstrap\_breadcrumb.scss" />
-    <Content Include="css\bootstrap\_button-group.scss" />
-    <Content Include="css\bootstrap\_buttons.scss" />
-    <Content Include="css\bootstrap\_card.scss" />
-    <Content Include="css\bootstrap\_carousel.scss" />
-    <Content Include="css\bootstrap\_close.scss" />
-    <Content Include="css\bootstrap\_code.scss" />
-    <Content Include="css\bootstrap\_custom-forms.scss" />
-    <Content Include="css\bootstrap\_custom.scss" />
-    <Content Include="css\bootstrap\_dropdown.scss" />
-    <Content Include="css\bootstrap\_forms.scss" />
-    <Content Include="css\bootstrap\_grid.scss" />
-    <Content Include="css\bootstrap\_images.scss" />
-    <Content Include="css\bootstrap\_input-group.scss" />
-    <Content Include="css\bootstrap\_jumbotron.scss" />
-    <Content Include="css\bootstrap\_list-group.scss" />
-    <Content Include="css\bootstrap\_media.scss" />
-    <Content Include="css\bootstrap\_mixins.scss" />
-    <Content Include="css\bootstrap\_modal.scss" />
-    <Content Include="css\bootstrap\_nav.scss" />
-    <Content Include="css\bootstrap\_navbar.scss" />
-    <Content Include="css\bootstrap\_normalize.scss" />
-    <Content Include="css\bootstrap\_pagination.scss" />
-    <Content Include="css\bootstrap\_popover.scss" />
-    <Content Include="css\bootstrap\_print.scss" />
-    <Content Include="css\bootstrap\_progress.scss" />
-    <Content Include="css\bootstrap\_reboot.scss" />
-    <Content Include="css\bootstrap\_responsive-embed.scss" />
-    <Content Include="css\bootstrap\_tables.scss" />
-    <Content Include="css\bootstrap\_tags.scss" />
-    <Content Include="css\bootstrap\_tooltip.scss" />
-    <Content Include="css\bootstrap\_type.scss" />
-    <Content Include="css\bootstrap\_utilities.scss" />
-    <Content Include="css\bootstrap\_variables.scss" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <None Include="scripts\jquery-1.10.2.intellisense.js" />
-    <None Include="scripts\jquery-3.0.0.intellisense.js" />
-    <Content Include="scripts\jquery-3.0.0.js" />
-    <Content Include="scripts\jquery-3.0.0.min.js" />
-    <Content Include="scripts\jquery-3.0.0.slim.js" />
-    <Content Include="scripts\jquery.validate.min.js" />
-    <Content Include="scripts\modernizr-2.6.2.js" />
-    <Content Include="scripts\tether.js" />
-    <Content Include="scripts\tether.min.js" />
-    <Content Include="scripts\Ucommerce.bootstrap.js" />
-    <Content Include="scripts\Ucommerce.category.js" />
-    <Content Include="scripts\Ucommerce.demostore.checkout.js" />
-    <Content Include="scripts\Ucommerce.demostore.cart.js" />
-    <Content Include="scripts\Ucommerce.demostore.js" />
-    <Content Include="scripts\Ucommerce.facets.js" />
-    <Content Include="scripts\Ucommerce.jQuery.js" />
-    <Content Include="scripts\Ucommerce.demostore.productpage.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="css\Ucommerce.bootstrap.css" />
-    <Content Include="img\Ucommerce\Ucommerce.glyphicons-halflings-white.png" />
-    <Content Include="img\Ucommerce\Ucommerce.glyphicons-halflings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="scripts\Ucommerce.ServiceStack.js" />
     <Content Include="umbraco\images\umbraco\Ucommerce-address.png" />
     <Content Include="umbraco\images\umbraco\Ucommerce-cart.png" />
     <Content Include="umbraco\images\umbraco\Ucommerce-catalog.png" />
@@ -563,17 +423,20 @@
     <Content Include="umbraco\images\umbraco\Ucommerce-product.png" />
     <Content Include="umbraco\images\umbraco\Ucommerce-search.png" />
     <Content Include="umbraco\images\umbraco\Ucommerce-shipping.png" />
+    <Content Include="css/**" />
+    <Content Include="scripts/**" />
+    <Content Include="fonts/**" />
+    <Content Include="img/**" />
+    <Content Include="views/**" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />
-    <Content Include="css\sass.scss" />
     <Content Include="umbraco\Ucommerce\Apps\Ucommerce.Search.Lucene.Avenue\Configuration\AvenueProductsIndexDefinition.config" />
     <Content Include="Views\Membership\LoginForm.cshtml" />
-    <Content Include="web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\frontpage.cshtml" />
+    <Content Include="views\PartialView\SiteWideCategoryNavigation.cshtml" />
+    <Content Include="views\PartialView\FeaturedCategoryNavigation.cshtml" />
     <Content Include="Views\PartialView\CategoryNavigation.cshtml" />
     <Content Include="Views\PartialView\MiniBasket.cshtml" />
     <Content Include="Views\PartialView\Facets.cshtml" />
@@ -601,12 +464,6 @@
     <Content Include="Views\MacroPartials\UcommerceProductReviews.cshtml" />
     <Content Include="Views\UcommerceEmail.cshtml" />
     <Content Include="Views\Preview.cshtml" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -620,7 +477,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

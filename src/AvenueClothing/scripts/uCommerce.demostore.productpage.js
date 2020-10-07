@@ -2,10 +2,10 @@
 
 $(function () {
 	relateVariations($('#product-sku'), $('#variation-CollarSize'), $('#variation-Colour'), $('#add-to-basket'));
-	enableAddToCartWhenSelected($('#add-to-basket'), $('.variant'));
-	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.variant'), $('#quantity-to-add'));
+	enableAddToCartWhenSelected($('#add-to-basket'), $('.js-variant'));
+	wireupAddToCartButton($('#add-to-basket'), $('#catalog-id'), $('#product-sku'), $('.js-variant'), $('#quantity-to-add'));
 	wireupRatings($('.rating'));
-
+	submitReview();
 });
 
 function relateVariations(sku, size, colour) {
@@ -31,33 +31,32 @@ function enableAddToCartWhenSelected(addToCartButton, variantInputs) {
 };
 
 function wireupRatings(radios) {
-    $('#review-form').addClass("display-none");
-    $('label', radios).each(function () {
-        var t = $(this);
-        t.addClass('off');
-        $('input:radio', t).addClass("display-none");
-        setStarHoverOutState($('i', t));
-        t.hover(function () {
-            var parent = $(this);
-            var labels = parent.prevAll('label');
-            setStarHoverState($('i', labels));
-            setStarHoverState($('i', parent));
-        }, function () {
-            var parent = $(this);
-            var labels = parent.prevAll('label');
-            if (!parent.hasClass('selected')) {
-                setStarHoverOutState($('i', labels));
-                setStarHoverOutState($('i', parent));
-            }
-        });
-        t.click(function () {
-            var parent = $(this);
-            parent.addClass('selected');
-            $('#review-form').slideDown();
-        });
-    });
+	var $ratings = $('.js-rating label');
+
+	$ratings.on('click', function(){
+		var currentIndex = $(this).index();
+
+		$ratings.each(function(){
+			if ($(this).index() <= currentIndex) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+	});
 };
 
+function submitReview() {
+	if (sessionStorage.getItem("ACReviewSubmitted")) {
+		$('html, body').animate({ scrollTop: $('#review').offset().top }, 'medium');
+		sessionStorage.clear();
+	}
+
+	$('#review').on('submit', function(){
+		sessionStorage.setItem("ACReviewSubmitted", true);
+		return true;
+	});
+}
 
 function updateAddToCartButton(addToCartButton, variantInputs) {
 	if (variantInputs.length == 0)
@@ -73,12 +72,7 @@ function updateAddToCartButton(addToCartButton, variantInputs) {
 	}
 };
 
-function setStarHoverState(label) {
-	label.addClass('fa-star').removeClass('fa-star-o');
-}
-function setStarHoverOutState(label) {
-	label.addClass('fa-star-o').removeClass('fa-star');
-}
+
 function wireupAddToCartButton(addToCartButton, catalogIdInput, skuInput, variantInputs, quantityInput) {
 	addToCartButton.click(function (e) {
 		e.preventDefault();
@@ -160,7 +154,7 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
             		}
 
             		// If the size matches the selected size, this colour is available so enable it in the drop down list
-            		if (variationSize.Value == selectedSize) {
+            		if (variationSize && variationSize.Value == selectedSize) {
             			$('option[value="' + variationColour.Value + '"]', colour).removeAttr('disabled');
             		}
             	});
@@ -172,7 +166,7 @@ function updateVariationOptions(sku, size, colour, userAction, success, failure)
             		colour.val(availableOptions.val());
             		//Fire these events manually to prevent a loop
             		updateVariationOptions(sku, size, colour, false);
-            		updateAddToCartButton($('#add-to-basket'), $('.variant'));
+            		updateAddToCartButton($('#add-to-basket'), $('.js-variant'));
             	}
 
             	// Now call any functions that need to run after the updates
