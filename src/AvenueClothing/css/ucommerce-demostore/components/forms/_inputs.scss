@@ -1,0 +1,16 @@
+.#{$theme} {
+    input,
+    textarea {
+        border-radius: 0;
+        color: $grey-3;
+        font-family: $font-main;
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        &:focus {
+            box-shadow: none;
+            outline: thin solid $grey-9;
+        }
+    }
+}

@@ -1,18 +1,27 @@
-﻿@model AvenueClothing.Models.FacetsDisplayedViewModel
+@model AvenueClothing.Models.FacetsDisplayedViewModel
 @{
     Layout = "";
 }
+
 @foreach (var facet in @Model.Facets)
 {
-    <div class="well">
-        <legend>@(string.IsNullOrEmpty(facet.DisplayName) ? facet.Name : facet.DisplayName)</legend>
-        @foreach (var value in facet.FacetValues)
-        {
-            <label>
-                <input type="checkbox" id="filter-@facet.Name-@value.FacetValueName" key="@facet.Name" class="filter" value="@value.FacetValueName">
-                @value.FacetValueName (@value.FacetValueHits)
-            </label>
-        }
-
+    <div class="dropdown">
+        <button class="dropdown-toggle" type="button" id="facet-@facet.DisplayName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @(string.IsNullOrEmpty(facet.DisplayName) ? facet.Name : facet.DisplayName)
+            <span class="icon icon-chevron" aria-hidden="true" focusable="false" role="img">
+                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/chevron.svg")))
+            </span>
+        </button>
+        <div class="dropdown-menu" >
+            @foreach (var value in facet.FacetValues)
+            {
+                var disabled = value.FacetValueHits > 0 ? "" : "disabled";
+                <label class="form-check-label mb-2 @disabled" aria-labelledby="facet-@facet.DisplayName">
+                    <input type="checkbox" id="filter-@facet.Name-@value.FacetValueName" key="@facet.Name" class="filter" value="@value.FacetValueName" @disabled>
+                    <span class="cb"></span>
+                    @value.FacetValueName (@value.FacetValueHits)
+                </label>
+            }
+        </div>
     </div>
 }

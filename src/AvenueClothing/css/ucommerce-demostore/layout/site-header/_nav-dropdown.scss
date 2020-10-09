@@ -1,0 +1,97 @@
+.#{$theme} {
+    &.scrolled {
+        .category-nav{
+            &.show {
+                @include breakpoint(large) {
+                    top: $header-height;
+                }
+            }
+        }
+    }
+
+    .category-nav {
+        opacity: 0;
+        position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        transition: all $ts $tt;
+
+        &.collapsing {
+            z-index: $zi-base;
+        }
+
+        &.show {
+            opacity: 1;
+            top: $header-height + $confidences-height;
+            z-index: $zi-header-dropdown;
+        }
+    }
+
+    .navigation-dropdown-wrapper {
+        .container {
+            position: relative;
+        }
+
+        .close {
+            color: $black;
+            position: absolute;
+                top: 0;
+                right: 1.5rem;
+        }
+
+
+        ul {
+            @include reset-list;
+            font-family: $font-main;
+            font-size: 0.82rem;
+        }
+    }
+
+    .navigation-dropdown-featured-item {
+        flex: 0 0 100%;
+
+        @include breakpoint(small) {
+            flex: 0 0 auto;
+        }
+    }
+
+    .navigation-dropdown-item {
+        flex: 0 0 auto;
+    }
+
+    .navigation-dropdown-item,
+    .navigation-dropdown-featured-item {
+        a {
+            color: currentColor;
+            display: block;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            position: relative;
+
+            @include breakpoint(medium) {
+                font-weight: 300;
+            }
+
+            #{$hover-states} {
+                outline: none;
+                text-decoration: none;
+
+                &::after {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            &::after {
+                content: '>';
+                display: inline-block;
+                font-family: $font-heading;
+                opacity: 0;
+                transform: translateX(-0.5rem);
+                transition: all $ts $tt;
+            }
+        }
+    }
+}

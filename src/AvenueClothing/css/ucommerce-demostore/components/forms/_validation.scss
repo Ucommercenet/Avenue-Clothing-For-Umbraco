@@ -1,0 +1,48 @@
+.#{$theme} {
+    .single-line-form {
+        &.form-invalid {
+            button[type="submit"] {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+
+        &.form-valid {
+            button[type="submit"] {
+                background: $green;
+                border-color: $green;
+            }
+        }
+
+        .help-inline {
+            position: absolute;
+                left: 0;
+                top: 100%;
+        }
+    }
+
+    .input-group {
+        .help-inline {
+            display: none !important;
+        }
+
+        &.invalid {
+            border-color: $red;
+
+            .help-inline {
+                display: block !important;
+                padding: 0.1rem 0.75rem;
+            }
+        }
+    }
+
+    .help-inline {
+        background: $red;
+        // border-radius: 0 0 3rem 3rem;
+        color: $white;
+        float: left;
+        font-size: 0.8rem;
+
+        width: auto;
+    }
+}

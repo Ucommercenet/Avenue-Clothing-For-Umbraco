@@ -15,7 +15,7 @@ var uCommerce = uCommerce || {};
                 });
             },
             getProductVariations: function (options, onSuccess, onError) {
-                console.log('getProductVariations');
+                //console.log('getProductVariations');
 
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
@@ -28,7 +28,7 @@ var uCommerce = uCommerce || {};
                 });
             },
             getSkuFromSelection: function (options, onSuccess, onError) {
-                console.log('sku from selection');
+                //console.log('sku from selection');
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
                 $.post('/ucommerceapi/razorstore/products/getvariantskufromselection', extendedOptions)
@@ -40,7 +40,7 @@ var uCommerce = uCommerce || {};
 
             },
             getVariantSkuFromSelection: function (options, onSuccess, onError) {
-                console.log('getVariantSkuFromSelection');
+                //console.log('getVariantSkuFromSelection');
 
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);

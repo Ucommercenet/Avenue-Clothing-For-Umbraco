@@ -1,0 +1,22 @@
+.#{$theme} {
+    .hero-unit {
+        position: relative;
+        width: 100%;
+
+        .container {
+            display: flex;
+            align-items: center;
+            margin: auto;
+            position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+        }
+
+        #{headings(1,6)} {
+            font-size: 4vw;
+            max-width: 40vw;
+        }
+    }
+}
