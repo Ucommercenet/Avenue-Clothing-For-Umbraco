@@ -4,35 +4,49 @@
     Layout = "Layout.cshtml";
 }
 
-<form method="post">
-    <div class="row col-sm-12 col-md-12">
-        <div class="col-md-6">
-            <h3>Payment method</h3>
-            <br />
-            @if (@Model.AvailablePaymentMethods.Count > 0)
+<div class="container py-4">
+    <h1 class="h2 text-upper pb-4">Payment method</h1>
+
+    <form method="post">
+        @if (@Model.AvailablePaymentMethods.Count > 0)
+        {
+            foreach (var paymentMethod in @Model.AvailablePaymentMethods)
             {
-                foreach (var paymentMethod in @Model.AvailablePaymentMethods)
-                {
-                    <label class="radio">
-                        @if (paymentMethod.Selected)
-                        {
-                            @Html.RadioButtonFor(x => x.SelectedPaymentMethodId, paymentMethod.Value, new {@checked = "checked"})
-                            <span>@paymentMethod.Text</span>
-                        }
-                        else
-                        {
-                            @Html.RadioButtonFor(x => x.SelectedPaymentMethodId, paymentMethod.Value)
-                            <span>@paymentMethod.Text</span>
-                        }
-                    </label>
-                }
+                <label class="form-check-label is-radio mb-3">
+                    @if (paymentMethod.Selected)
+                    {
+                        @Html.RadioButtonFor(x => x.SelectedPaymentMethodId, paymentMethod.Value, new {@checked = "checked"})
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(x => x.SelectedPaymentMethodId, paymentMethod.Value)
+                    }
+                    <span class="cb"></span>
+                    @paymentMethod.Text
+                </label>
             }
-            else
-            {
-                <p class="alert">WARNING: No payment methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">Ucommerce</a> administration area.</p>
-            }
-        </div>
-    </div>
-    <a href="/basket/shipping.aspx" class="btn btn-secondary">Back to Shipping Method</a>
-    <button name="update-payment" class="pull-xs-right btn btn-secondary btn-lg btn-success" type="submit">Continue to Confirmation <i class="icon-arrow-right icon-white"></i></button>
-</form>
+        }
+        else
+        {
+            <p class="alert">WARNING: No payment methods have been configured for @Model.ShippingCountry within <a href="http://ucommerce.dk">Ucommerce</a> administration area.</p>
+        }
+
+        <footer class="page-footer d-flex flex-wrap justify-content-between">
+            <a href="/basket/shipping.aspx" class="btn btn-outline-secondary mb-3">
+                <span class="icon icon-xs mr-1 rotate-180 transform-from-bottom" aria-hidden="true" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                </span>
+                <span class="d-none d-sm-inline">Back to </span>
+                Shipping
+                <span class="d-none d-sm-inline"> Method</span>
+            </a>
+            <button name="update-shipment" type="submit" class="btn btn-primary mb-3">
+                <span class="d-none d-sm-inline">Continue to </span>
+                Confirmation
+                <span class="icon icon-xs ml-1 mb-1" aria-hidden="true" role="img">
+                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                </span>
+            </button>
+        </footer>
+    </form>
+</div>

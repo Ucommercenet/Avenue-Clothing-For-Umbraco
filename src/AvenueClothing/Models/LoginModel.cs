@@ -6,6 +6,7 @@ namespace AvenueClothing.Models
     {
         public string Login { get; set; }
         public string Password { get; set; }
+        [Display(Name = "Stay Logged In")]
         public bool RememberMe { get; set; }
     }
 }

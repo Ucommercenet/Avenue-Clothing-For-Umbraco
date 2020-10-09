@@ -3,39 +3,49 @@
     Layout = "Layout.cshtml";
 }
 
-
-    @if (Model.OrderLines.Count == 0)
-    {
-        <div class="alert alert-info">
-            <p>Your cart is empty. Please <a href="/">return to our store and add some items</a>.</p>
+@if (Model.OrderLines.Count == 0)
+{
+    <div class="alert alert-info">
+        <div class="container">
+            <h5 class="pt-2 text-uppercase">Your basket is empty.</h5>
+            <p>Please <a href="/">return to our store and add some items</a>.</p>
         </div>
-    }
-    else
-    {
-        <form method="post">
-            <table class="table table-striped" id="cart">
+    </div>
+}
+else
+{
+    <div class="container py-4">
+        <h1 class="h2 text-uppercase py-2">Your Order</h1>
+
+        <form method="post" class="mb-5">
+            <table id="basket" class="table table-striped mb-4">
                 <thead>
-                <tr>
-                    <th class="span7">Description</th>
-                    <th class="span1 money">Price</th>
-                    <th class="span1 money">VAT</th>
-                    <th class="span2">Quantity</th>
-                    <th class="span1 money">Total</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Description</th>
+                        <th class="d-none d-md-table-cell text-right money">Price</th>
+                        <th class="d-none d-md-table-cell text-right money">VAT</th>
+                        <th class="text-right number">
+                            <span class="d-md-none">Qty</span>
+                            <span class="d-none d-md-inline">Quantity</span>
+                        </th>
+                        <th class="text-right money">Total</th>
+                        <th></th>
+                    </tr>
                 </thead>
+
                 <tbody>
                 @for (var i = 0; i < Model.OrderLines.Count; i++)
                 {
                     var line = Model.OrderLines[i];
                     <tr class="order-line">
-
                         @Html.HiddenFor(model => model.OrderLines[i].Sku)
                         @Html.HiddenFor(model => model.OrderLines[i].VariantSku)
                         @Html.HiddenFor(model => model.OrderLines[i].OrderLineId)
 
-                        <td><a href="@line.ProductUrl">@line.ProductName</a></td>
-                        <td class="money">
+                        <td>
+                            <a href="@line.ProductUrl">@line.ProductName</a>
+                        </td>
+                        <td class="d-none d-md-table-cell text-right money">
                             @if (@line.Discount.HasValue && @line.Discount > 0)
                             {
                                 <span style="text-decoration: line-through">
@@ -48,63 +58,89 @@
                                 @line.Price
                             }
                         </td>
-                        <td class="money">
+                        <td class="d-none d-md-table-cell text-right money">
                             @line.Tax
                         </td>
-                        <td>
-                            @Html.TextBoxFor(model => model.OrderLines[i].Quantity, new {@class = "qty form-control no-padding" })
+                        <td class="number">
+                            @Html.TextBoxFor(model => model.OrderLines[i].Quantity, new {@class = "qty form-control ml-auto text-right" })
                         </td>
-                        <td>
+                        <td class="text-right money">
                             @line.Total
                         </td>
                         <td>
-                            <button type="submit" value="@line.OrderLineId" name="RemoveOrderlineId" class="line-remove">×</button>
+                            <button type="submit" value="@line.OrderLineId" name="RemoveOrderlineId" class="btn btn-link btn-sm line-remove">
+                                <span class="icon icon-xs" aria-hidden="true" role="img">
+                                    @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/trash.svg")))
+                                </span>
+                                <span class="sr-only">Remove item from basket</span>
+                            </button>
                         </td>
                     </tr>
                 }
-                <tr>
-
-                    <td rowspan="4">
+                <tr class="bg-white">
+                    <td class="d-none d-md-table-cell">
                     </td>
-                    <td colspan="2" rowspan="4">
-                        <button name="update-basket" id="update-basket" class="btn btn-secondary update-basket" type="submit"><i class="icon-refresh icon-white"></i>Update</button>
+                    <td class="d-none d-md-table-cell">
                     </td>
-                    <td>Sub total:</td>
-                    <td class="money order-subtotal">
+                    <td class="text-right" colspan="3">
+                        <button name="update-basket" id="update-basket" class="btn btn-sm btn-outline-secondary update-basket" type="submit">
+                            <span class="icon icon-xs icon-up mr-1" aria-hidden="true" role="img">
+                                @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/update.svg")))
+                            </span>
+                            Update
+                        </button>
+                    </td>
+                     <td></td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="d-none d-md-table-cell" colspan="2" rowspan="4">
+                    </td>
+                    <td class="text-right" colspan="2">Sub total:</td>
+                    <td class="text-right money order-subtotal">
                         @Model.SubTotal
                     </td>
-                    <td>&nbsp;</td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>VAT:</td>
-                    <td class="money order-tax">
+                <tr class="bg-white">
+                    <td class="text-right" colspan="2">VAT:</td>
+                    <td class="text-right money order-tax">
                         @Model.TaxTotal
                     </td>
-                    <td>&nbsp;</td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>Discounts:</td>
-                    <td class="money order-discounts">
+                <tr class="bg-white">
+                    <td class="text-right" colspan="2">Discounts:</td>
+                    <td class="text-right money order-discounts">
                         @Model.DiscountTotal
                     </td>
-                    <td>&nbsp;</td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>Order total:</td>
-                    <td class="money order-total">
-                        @Model.OrderTotal
+                <tr class="bg-white">
+                    <td class="text-right" colspan="2"><strong>Order total:</strong></td>
+                    <td class="text-right money order-total">
+                        <strong>@Model.OrderTotal</strong>
                     </td>
-                    <td>&nbsp;</td>
+                    <td></td>
                 </tr>
                 </tbody>
             </table>
-            <div class="pull-xs-right">
-                <a href="/basket/address" class="btn btn-secondary btn-large btn-success">  Continue to Checkout <i class="fa fa-arrow-right icon-white"></i></a>
-    </div>
-        </form>
-        <div class="col-md-6" id="voucher-form">
-            @Umbraco.RenderMacro("UcommerceVoucher")
-            <p><span class="label label-info">Tip!</span> <small>Sign up to our mailing list and get 10% off your first order! <a href="#">Click here to get 10% off now</a>!</small></p>
-        </div>
-    }
 
+            <footer class="page-footer d-flex flex-wrap justify-content-between">
+                <a href="/basket/address" class="btn btn-secondary btn-large btn-success ml-auto"> Continue to Checkout
+                    <span class="icon icon-xs ml-1 mb-1" aria-hidden="true" role="img">
+                        @Html.Raw(System.IO.File.ReadAllText(Server.MapPath("~/img/icons/arrow-right.svg")))
+                    </span>
+                </a>
+            </footer>
+        </form>
+
+        <div class="col-sm-8 col-md-7 col-lg-5 px-0">
+            <div class="single-line-form" id="voucher-form">
+                @Umbraco.RenderMacro("UcommerceVoucher")
+                <p class="small pt-2">
+                    <span class="label label-info">Tip!</span> Sign up to our mailing list and get 10% off your first order! <a href="#" class="d-lg-block"><strong>Click here to get 10% off now !</strong></a>
+                </p>
+            </div>
+        </div>
+    </div>
+}

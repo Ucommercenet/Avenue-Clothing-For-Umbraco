@@ -1,0 +1,18 @@
+.#{$theme} {
+    .pipe-list {
+        @include reset-list;
+        display: flex;
+        align-items: bottom;
+
+        li {
+            &:not(:first-child) {
+                position: relative;
+
+                &::before {
+                    content: '|';
+                    padding: 0 0.4rem;
+                }
+            }
+        }
+    }
+}

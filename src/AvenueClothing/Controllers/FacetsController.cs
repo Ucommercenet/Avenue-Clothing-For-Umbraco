@@ -12,96 +12,106 @@ using Ucommerce.Search.Facets;
 using Ucommerce.Search.Models;
 using Umbraco.Core;
 using Umbraco.Web.Mvc;
+using AvenueClothing.Search;
+using ImageProcessor.Imaging.Colors;
 
 namespace AvenueClothing.Controllers
 {
-    public static class FacetedQueryStringExtensions
-    {
-        public static IList<Facet> ToFacets(this NameValueCollection target)
-        {
-            var parameters = new Dictionary<string, string>();
-            foreach (var queryString in HttpContext.Current.Request.QueryString.AllKeys)
-            {
-                parameters[queryString] = HttpContext.Current.Request.QueryString[queryString];
-            }
+	public static class FacetedQueryStringExtensions
+	{
 
-            parameters.RemoveAll(kvp =>
-                new [] { "umbDebugShowTrace", "product", "variant", "category", "categories", "catalog"}
-                    .Contains(kvp.Key));
+		public static IList<Facet> ToFacets(this NameValueCollection target)
+		{
+			var productDefinition = ObjectFactory.Instance.Resolve<Ucommerce.Search.IIndexDefinition<Ucommerce.Search.Models.Product>>();
+			var facets = productDefinition.Facets.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).ToDictionary(x => x.Key, x => x.Value);
+			string[] facetsKeys = new string[facets.Keys.Count];
 
-            var facetsForQuerying = new List<Facet>();
+			facets.Keys.CopyTo(facetsKeys, 0);
 
-            foreach (var parameter in parameters)
-            {
-                var facet = new Facet {FacetValues = new List<FacetValue>(), Name = parameter.Key};
-                foreach (var value in parameter.Value.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    facet.FacetValues.Add(new FacetValue() {Value = value});
-                }
+			var parameters = new Dictionary<string, string>();
 
-                facetsForQuerying.Add(facet);
-            }
+			foreach (var queryString in HttpContext.Current.Request.QueryString.AllKeys)
+			{
+				parameters[queryString] = HttpContext.Current.Request.QueryString[queryString];
+			}
 
-            return facetsForQuerying;
-        }
-    }
+			parameters.RemoveAll(p => !facetsKeys.Contains(p.Key));
 
-    public class FacetsController : SurfaceController
-    {
-        private ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+			var facetsForQuerying = new List<Facet>();
 
-        // GET: Facets
-        public ActionResult Index()
-        {
-            var category = CatalogContext.CurrentCategory;
-            var facetValueOutputModel = new FacetsDisplayedViewModel();
-            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+			foreach (var parameter in parameters)
+			{
+				var facet = new Facet { FacetValues = new List<FacetValue>(), Name = parameter.Key };
+				foreach (var value in parameter.Value.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					facet.FacetValues.Add(new FacetValue() { Value = value });
+				}
 
-            if (ShouldDisplayFacets(category))
-            {
-                IList<Facet> facets = CatalogLibrary.GetFacets(category.Guid, facetsForQuerying.ToFacetDictionary());
-                if (facets.Any(x => x.FacetValues.Any(y => y.Count > 0)))
-                {
-                    facetValueOutputModel.Facets = MapFacets(facets);
-                }
-            }
 
-            return View("/Views/PartialView/Facets.cshtml", facetValueOutputModel);
-        }
+				facetsForQuerying.Add(facet);
+			}
 
-        private bool ShouldDisplayFacets(Category category)
-        {
-            var product = CatalogContext.CurrentProduct;
+			return facetsForQuerying;
+		}
+	}
 
-            return category != null && product == null;
-        }
+	public class FacetsController : SurfaceController
+	{
+		private ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+		private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
 
-        private IList<FacetViewModel> MapFacets(IList<Facet> facetsInCategory)
-        {
-            IList<FacetViewModel> facets = new List<FacetViewModel>();
+		// GET: Facets
+		public ActionResult Index()
+		{
 
-            foreach (var facet in facetsInCategory)
-            {
-                var facetViewModel = new FacetViewModel();
-                facetViewModel.Name = facet.Name;
-                facetViewModel.DisplayName = facet.DisplayName;
+			var category = CatalogContext.CurrentCategory;
+			var facetValueOutputModel = new FacetsDisplayedViewModel();
+			IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
 
-                if (!facet.FacetValues.Any())
-                {
-                    continue;
-                }
+			if (ShouldDisplayFacets(category))
+			{
+				IList<Facet> facets = CatalogLibrary.GetFacets(category.Guid, facetsForQuerying.ToFacetDictionary());
+				if (facets.Any(x => x.FacetValues.Any(y => y.Count > 0)))
+				{
+					facetValueOutputModel.Facets = MapFacets(facets);
+				}
+			}
 
-                foreach (var value in facet.FacetValues)
-                {
-                    FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, (int) value.Count);
-                    facetViewModel.FacetValues.Add(facetVal);
-                }
+			return View("/Views/PartialView/Facets.cshtml", facetValueOutputModel);
+		}
 
-                facets.Add(facetViewModel);
-            }
+		private bool ShouldDisplayFacets(Category category)
+		{
+			var product = CatalogContext.CurrentProduct;
 
-            return facets;
-        }
-    }
+			return category != null && product == null;
+		}
+
+		private IList<FacetViewModel> MapFacets(IList<Facet> facetsInCategory)
+		{
+			IList<FacetViewModel> facets = new List<FacetViewModel>();
+
+			foreach (var facet in facetsInCategory)
+			{
+				var facetViewModel = new FacetViewModel();
+				facetViewModel.Name = facet.Name;
+				facetViewModel.DisplayName = facet.DisplayName;
+
+				if (!facet.FacetValues.Any())
+				{
+					continue;
+				}
+
+				foreach (var value in facet.FacetValues)
+				{
+					FacetValueViewModel facetVal = new FacetValueViewModel(value.Value, (int)value.Count);
+					facetViewModel.FacetValues.Add(facetVal);
+				}
+
+				facets.Add(facetViewModel);
+			}
+
+			return facets;
+		}
+	}
 }

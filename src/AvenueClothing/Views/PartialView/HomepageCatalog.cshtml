@@ -2,30 +2,101 @@
 @{
     Layout = null;
 }
-<div class="row" id="homepage-catalog">
-    <div class="span12">
-        @foreach (var product in Model.Products)
-        {
-            <div class="product col-sm-4 col-md-4 col-xs-2">
-                <div class="product-image">
-                    <a href="@product.Url"><img src="@product.ThumbnailImageUrl" /></a>
-                </div>
-                <p class="item-name">
-                    <a href="@product.Url">@product.Name</a>
+<div class="product-list multi-item-carousel js-multi-item-carousel mb-5">
+    @foreach (var product in Model.Products)
+    {
+        <a href="@product.Url" class="">
+            <div class="product-image mb-3">
+                <img class="img-fluid" src="@product.ThumbnailImageUrl">
+            </div>
+
+            <div class="mx-2">
+                <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
+                </p>
+                <p class="mb-1 text-truncate">
+                    @product.Name
                 </p>
                 @if (product.Price != null)
                 {
-                    <p class="item-price">
-                        @product.Price
+                    <p class="mb-1">
+                        <strong>@product.Price</strong>
                     </p>
                 }
-                else
-                {
-                    <p class="item-price"></p>
-                }
-                <p class="btn-group view-details">
-                    <a href="@product.Url" class="btn btn-default">View more <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span></a>
+            </div>
+        </a>
+    }
+
+    @foreach (var product in Model.Products)
+    {
+        <a href="@product.Url" class="">
+            <div class="product-image mb-3">
+                <img class="img-fluid" src="@product.ThumbnailImageUrl">
+            </div>
+
+            <div class="mx-2">
+                <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
                 </p>
-            </div>}
-    </div>
+                <p class="mb-1 text-truncate">
+                    @product.Name
+                </p>
+                @if (product.Price != null)
+                {
+                    <p class="mb-1">
+                        <strong>@product.Price</strong>
+                    </p>
+                }
+            </div>
+        </a>
+    }
+
+    @foreach (var product in Model.Products)
+    {
+        <a href="@product.Url" class="">
+
+            <div class="product-image mb-3">
+                <img class="img-fluid" src="@product.ThumbnailImageUrl">
+            </div>
+
+            <div class="mx-2">
+                <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
+                </p>
+                <p class="mb-1 text-truncate">
+                    @product.Name
+                </p>
+                @if (product.Price != null)
+                {
+                    <p class="mb-1">
+                        <strong>@product.Price</strong>
+                    </p>
+                }
+            </div>
+        </a>
+    }
+
+    @foreach (var product in Model.Products)
+    {
+        <a href="@product.Url" class="">
+            <div class="product-image mb-3">
+                <img class="img-fluid" src="@product.ThumbnailImageUrl">
+            </div>
+
+            <div class="mx-2">
+                <p class="mb-1 text-truncate">
+                    @product.Categories.FirstOrDefault().DisplayName
+                </p>
+                <p class="mb-1 text-truncate">
+                    @product.Name
+                </p>
+                @if (product.Price != null)
+                {
+                    <p class="mb-1">
+                        <strong>@product.Price</strong>
+                    </p>
+                }
+            </div>
+        </a>
+    }
 </div>

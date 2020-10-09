@@ -1,0 +1,14 @@
+// Image backgrounds
+@function img-url($path) {
+    @return url('/img/' + $path);
+}
+
+// Output a range of heading tags
+@function headings($from:1, $to:6) {
+    @if $from == $to {
+        @return 'h#{$from}';
+    }
+    @else {
+        @return 'h#{$from},' + headings($from+1, $to);
+    }
+}

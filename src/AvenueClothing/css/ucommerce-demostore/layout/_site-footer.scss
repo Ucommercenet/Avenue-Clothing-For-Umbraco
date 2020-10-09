@@ -1,0 +1,58 @@
+.#{$theme} {
+    .site-footer {
+        font-size: 0.8rem;
+        font-weight: 300;
+        line-height: 1.8;
+
+        .row {
+            ~.row {
+                position: relative;
+
+                &::before {
+                    border-top: thin solid $white;
+                    content: '';
+                    opacity: 0.4;
+                    position: absolute;
+                        top: 0;
+                        left: 15px;
+                        right: 15px;
+                }
+            }
+        }
+
+        h6 {
+            font-weight: 500;
+            letter-spacing: 0.01rem;
+
+            &.text-smaller {
+                font-size: 0.92rem;
+            }
+        }
+
+        ul {
+            @include reset-list;
+
+        }
+
+        a {
+            color: currentColor;
+
+            #{$hover-states} {
+                color: $grey-d;
+            }
+        }
+
+        .logo-ucommerce {
+            height: 1.8rem;
+        }
+
+        .payment-options {
+            height: 1.6rem;
+
+            @include breakpoint(medium) {
+                height: 1.16rem;
+
+            }
+        }
+    }
+}
