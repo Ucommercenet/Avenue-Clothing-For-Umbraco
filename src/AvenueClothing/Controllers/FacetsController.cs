@@ -23,7 +23,7 @@ namespace AvenueClothing.Controllers
 		public static IList<Facet> ToFacets(this NameValueCollection target)
 		{
 			var productDefinition = ObjectFactory.Instance.Resolve<Ucommerce.Search.IIndexDefinition<Ucommerce.Search.Models.Product>>();
-			var facets = productDefinition.Facets.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).ToDictionary(x => x.Key, x => x.Value);
+			var facets = productDefinition.Facets().Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).ToDictionary(x => x.Key, x => x.Value);
 			string[] facetsKeys = new string[facets.Keys.Count];
 
 			facets.Keys.CopyTo(facetsKeys, 0);
