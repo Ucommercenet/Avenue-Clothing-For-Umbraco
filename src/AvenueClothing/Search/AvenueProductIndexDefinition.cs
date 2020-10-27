@@ -18,11 +18,11 @@ namespace AvenueClothing.Search
             this.Field(p => p.Taxes);
             this.Field(p => p.PricesInclTax);
             this.Field(p => p.UnitPrices);
-            this.Facet(p => p.PricesInclTax["EUR 15 pct"], new FacetOptions { AutomaticRanges = true });
+            this.Field(p => p.PricesInclTax["EUR 15 pct"]).Facet().AutoRanges(5, 10);
 
-            this.Facet("Colour");
-            this.Facet("CollarSize");
-            this.Facet("ShoeSize");
+            this.Field("Colour").Facet();
+            this.Field("CollarSize").Facet();
+            this.Field("ShoeSize").Facet();
         }
     }
 }
