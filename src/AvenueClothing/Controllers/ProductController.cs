@@ -7,6 +7,7 @@ using Ucommerce.Infrastructure;
 using Ucommerce.Search;
 using AvenueClothing.Models;
 using Ucommerce;
+using Ucommerce.Infrastructure.Globalization;
 using Ucommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -18,7 +19,9 @@ namespace AvenueClothing.Controllers
 		public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
 		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 		private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-
+		private IIndexDefinition<Product> ProductIndexDefinition => ObjectFactory.Instance.Resolve <IIndexDefinition<Product>>();
+		private ILocalizationContext LocalizationContext => ObjectFactory.Instance.Resolve<ILocalizationContext>();
+		
 		[HttpGet]
 		public ActionResult Index(ContentModel model)
 		{
@@ -116,7 +119,8 @@ namespace AvenueClothing.Controllers
 			foreach (var prop in uniqueVariants)
 			{
 				var productPropertiesViewModel = new ProductPropertiesViewModel();
-				productPropertiesViewModel.PropertyName = prop.Key;
+				productPropertiesViewModel.PropertyName = ProductIndexDefinition.FieldDefinitions[prop.Key]
+					.GetDisplayName(LocalizationContext.CurrentCulture.Name);
 
 				foreach (var value in prop.Select(p => p.Value).Distinct())
 				{
