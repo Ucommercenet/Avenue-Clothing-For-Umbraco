@@ -1,24 +1,96 @@
 ﻿@using Umbraco.Web
+@using AvenueClothing.Enums
 @inherits Umbraco.Web.Mvc.UmbracoViewPage
+
 @{
     Layout = "Layout.cshtml";
 }
 
-<div id="myCarousel" class="carousel slide">
+<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+    </ol>
     <div class="carousel-inner">
-        <div class="item active carousel-item">
-            <img src="/img/ucommerce/homepage-banner-black-wonderland.jpg" />
-        </div>
-        <div class="item carousel-item">
-            <img src="/img/ucommerce/homepage-banner-blue-kittens.jpg" />
-        </div>
-        <div class="item carousel-item">
-            <img src="/img/ucommerce/homepage-banner-purple-wonderland.jpg" />
-        </div>
-    </div> <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="icon-prev" aria-hidden="true"></span></a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="icon-next" aria-hidden="true"></span></a>
+        <a class="carousel-item active" href="/demo-store/c/accessories">
+            <picture class="d-block w-100">
+                <source media="(max-width: 640px)" type="image/jpg"
+                srcset="/img/site/slider/slider0-1x.jpg">
+                <img src="/img/site/slider/slider0-2x.jpg" alt="Spring Summer Collection 2020">
+            </picture>
+
+            <div class="carousel-caption">
+                <h5 class="mb-3">SpRing SummeR COLLECTION 2020</h5>
+                <div class="btn btn-outline-light">shop now</div>
+            </div>
+        </a>
+        <a class="carousel-item" href="/demo-store/c/tops">
+            <picture class="d-block w-100">
+                <source media="(max-width: 640px)" type="image/jpg"
+                srcset="/img/site/slider/slider1-1x.jpg">
+                <img src="/img/site/slider/slider1-2x.jpg" alt="Spring Summer Collection 2020">
+            </picture>
+
+            <div class="carousel-caption">
+                <h5 class="mb-3">SpRing SummeR COLLECTION 2020</h5>
+                <div class="btn btn-outline-light">shop now</div>
+            </div>
+        </a>
+        <a class="carousel-item" href="/demo-store/c/shoes">
+            <picture class="d-block w-100">
+                <source media="(max-width: 640px)" type="image/jpg"
+                srcset="/img/site/slider/slider2-1x.jpg">
+                <img src="/img/site/slider/slider2-2x.jpg" alt="Spring Summer Collection 2020">
+            </picture>
+
+            <div class="carousel-caption">
+                <h5 class="mb-3">SpRing SummeR COLLECTION 2020 more text</h5>
+                <div class="btn btn-outline-light">shop now</div>
+            </div>
+        </a>
+    </div>
 </div>
-<div class="hero-unit">
-    @Model.Value("content")
+
+@{Html.RenderAction("CategoryNavigation", "PartialView", new {partialViewType = (int)PartialTypes.FeaturedCategoryNavigation }); }
+
+<div class="container">
+    <h5 class="text-center mb-4">Popular Products</h5>
+
+    @Umbraco.RenderMacro("UcommerceHomepageCatalog")
+
+    <h2 class="mt-5 pb-lg-5">About Us</h2>
+    <section class="jumbotron jumbotron-fluid p-0 my-5">
+        <div class="container">
+            <img class="jt-1" alt=" "  src="/img/site/jumbotron/jt1.jpg" >
+            <img class="jt-2" alt=" "  src="/img/site/jumbotron/jt2.jpg" >
+
+            <div class="jt-lead">
+                <h6>Umbraco e-commerce</h6>
+                <p>Ucommerce is a plugin for Umbraco, Sitefinity and Sitecore to add a rich e-commerce experience to your favourite CMS platform.</p>
+            </div>
+        </div>
+
+        <div class="cms-content">
+            <div class="container">
+                @Model.Value("content")
+            </div>
+        </div>
+    </section>
 </div>
-@Umbraco.RenderMacro("UcommerceHomepageCatalog")
+
+<div class="container mb-5">
+    <h2 class="text-center pt-lg-3 mb-4 mb-lg-5">Join ouR newsletteR</h2>
+
+    <p class="text-center mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</p>
+
+    <form action="http://thesitedoctor.createsend.com/t/y/s/xbjtk/" method="post" class="validate single-line-form mx-auto my-5" id="newsletter-form">
+        <div class="input-append input-group control-group">
+            <input type="email" name="cm-xbjtk-xbjtk" id="xbjtk-xbjtk" class="form-control required email" placeholder="email address">
+            <span class="input-group-btn">
+                <button class="btn btn-dark" type="submit">sign up</button>
+            </span>
+        </div>
+        <p class="small text-center mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </form>
+</div>

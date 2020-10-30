@@ -9,6 +9,7 @@ namespace AvenueClothing.Search
     public class AvenueProductIndexDefinition : DefaultProductsIndexDefinition
     {
         public AvenueProductIndexDefinition() : base()
+        
         {
             this.Field(p => p["ShowOnHomepage"], typeof(bool));
             this.Field(p => p["CollarSize"], typeof(string));

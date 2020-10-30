@@ -15,43 +15,51 @@ using Umbraco.Web.Mvc;
 using Category = Ucommerce.Search.Models.Category;
 using Money = Ucommerce.Money;
 using Product = Ucommerce.Search.Models.Product;
+using System;
 
 namespace AvenueClothing.Controllers
 {
-    public class CategoryController : RenderMvcController
-    {
-        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-        private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
-        private IUrlService _urlService => ObjectFactory.Instance.Resolve<IUrlService>();
+	public class CategoryController : RenderMvcController
+	{
+		public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+		private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
+		private IUrlService _urlService => ObjectFactory.Instance.Resolve<IUrlService>();
 
-        public override ActionResult Index(ContentModel model)
-        {
-            using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
-            {
-                var currentCategory = CatalogContext.CurrentCategory;
+		public override ActionResult Index(ContentModel model)
+		{
 
-                var categoryViewModel = new CategoryViewModel
-                {
-                    Name = currentCategory.DisplayName,
-                    Description = currentCategory.Description,
-                    CatalogId = currentCategory.ProductCatalog,
-                    CategoryId = currentCategory.Guid,
-                    Products = MapProductsInCategories(currentCategory)
-                };
+			var page = Request.QueryString["pg"] ?? "1";
+			var pageSize = Request.QueryString["size"] ?? "12";
 
-                if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
-                {
-                    categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
-                }
+			using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
+			{
+				var currentCategory = CatalogContext.CurrentCategory;
+				int totalProductsCount;
+				var categoryViewModel = new CategoryViewModel
+				{
+					Name = currentCategory.DisplayName,
+					Description = currentCategory.Description,
+					CatalogId = currentCategory.ProductCatalog,
+					CategoryId = currentCategory.Guid,
+					Products = MapProductsInCategories(currentCategory, out totalProductsCount),
+					TotalProducts = totalProductsCount,
+					PageSize = Int32.Parse(pageSize),
+					PageNumber = Int32.Parse(page)
+				};
 
-                return View("/Views/Catalog.cshtml", categoryViewModel);
-            }
-        }
+				if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
+				{
+					categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+				}
 
-        private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
-        {
-            IList<ProductViewModel> productViews = new List<ProductViewModel>();
+				return View("/Views/Catalog.cshtml", categoryViewModel);
+			}
+		}
+
+		private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
+		{
+			IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
             var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
             var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
@@ -69,35 +77,46 @@ namespace AvenueClothing.Controllers
                         CatalogContext.CurrentCategories.Append(CatalogContext.CurrentCategory).Compact(), product),
                     Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
                     Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
+                    Rating = product.Rating
                 };
 
-                productViews.Add(productViewModel);
-            }
+				productViews.Add(productViewModel);
+			}
 
-            return productViews;
-        }
+			return productViews;
+		}
 
 
-        private IList<ProductViewModel> MapProductsInCategories(Category category)
-        {
-            IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
-            var productsInCategory = new List<ProductViewModel>();
+		private IList<ProductViewModel> MapProductsInCategories(Category category, out int totalProducts)
+		{
 
-            var subCategories = CatalogLibrary.GetCategories(category.Categories);
-            var products =
-                CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(),
-                    facetsForQuerying.ToFacetDictionary());
+			var page = Request.QueryString["pg"] ?? "1";
+			var pageSize = Request.QueryString["size"] ?? "12";
+			var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));
 
-            foreach (var subCategory in subCategories)
-            {
-                var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
-                productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
-            }
+			IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+			var productsInCategory = new List<ProductViewModel>();
 
-            productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid))
-                .ToList()));
 
-            return productsInCategory;
-        }
-    }
+			var subCategories = CatalogLibrary.GetCategories(category.Categories);
+			var products =
+				CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(),
+					facetsForQuerying.ToFacetDictionary());
+
+			foreach (var subCategory in subCategories)
+			{
+				var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
+				productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
+			}
+
+			productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid))
+				.ToList()));
+
+			totalProducts = productsInCategory.Count;
+			productsInCategory = productsInCategory.Skip(skip).Take(Int32.Parse(pageSize)).ToList();
+
+			return productsInCategory;
+		}
+
+	}
 }

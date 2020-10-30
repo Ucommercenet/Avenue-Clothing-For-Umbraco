@@ -1,0 +1,41 @@
+.#{$theme} {
+    .minicart {
+        &.minicart {
+            color: $grey-3;
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            #{$hover-states} {
+                text-decoration: none;
+            }
+        }
+
+        &.has-items {
+            color: $orange;
+            position: relative;
+
+            .icon {
+                color: $grey-3;
+            }
+
+            .item-qty {
+                color: darken($orange, 5);
+                font-weight: 600;
+                line-height: 1;
+                margin: 0;
+                position: absolute;
+                    right: 0;
+                    bottom: 0.1rem;
+                    left: 0;
+                text-align: center;
+                text-shadow: 0 0 1px $white,  1px 1px 0 $white, -1px -1px 0 $white,  1px 1px 2px $white, -1px -1px 2px $white, 0 0 4px $white, 0 0 5px $white;
+
+                @include breakpoint(medium) {
+                    color: currentColor;
+                    position: static;
+                    text-shadow: none;
+                }
+            }
+        }
+    }
+}

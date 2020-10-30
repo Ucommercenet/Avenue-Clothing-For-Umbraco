@@ -1,0 +1,45 @@
+.#{$theme} {
+    select {
+        background: $white img-url('icons/chevron.svg') center right 1rem no-repeat;
+        border: thin solid $black;
+        border-radius: 0;
+        color: $black;
+        outline: none;
+        padding: 0.25rem 3rem 0.25rem 1rem;
+        transition: all $ts $tt;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+
+        &:hover {
+            background-color: mix($white, $grey-d);
+        }
+
+        &:focus,
+        &:active {
+            background-color: $white;
+            border-color: $black;
+        }
+
+        &::-ms-expand {
+            display: none;
+       }
+
+       +label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin: 0;
+            position: relative;
+       }
+    }
+
+    option {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: 0;
+        outline: 0;
+    }
+}

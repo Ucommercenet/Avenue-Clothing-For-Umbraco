@@ -58,7 +58,8 @@ namespace AvenueClothing.Controllers
                     Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
                     Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
-                    VariantSku = product.VariantSku
+                    VariantSku = product.VariantSku,
+                    Rating = product.Rating
                 });
             }
 

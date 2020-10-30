@@ -1,0 +1,80 @@
+$filterbar-padding-y: 0.5rem;
+$filterbar-padding-lg-y: 1rem;
+
+.#{$theme} {
+    .filterbar {
+        .dropdown {
+            display: inline-flex;
+                align-items: flex-end;
+            margin-right: 0.25rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &.open {
+                .dropdown-toggle {
+                    background-color: $white;
+                    border-color: $black;
+                    border-bottom-color: $white;
+                    z-index: $zi-base + 1;
+                }
+
+                .dropdown-menu {
+                    display: block;
+                    z-index: $zi-base;
+                }
+            }
+        }
+
+        .dropdown-toggle {
+            background: $white;
+            border: thin solid $white;
+            font-weight: 500;
+            outline: none;
+            padding: $filterbar-padding-y 2rem;
+            position: relative;
+            text-transform: uppercase;
+
+            @include breakpoint(medium) {
+                padding: $filterbar-padding-lg-y 2rem;
+            }
+
+            &:active {
+                border-color: $white;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: mix($white, $grey-d);
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+
+        .dropdown-menu {
+            border-radius: 0;
+            border: thin solid $black;
+            margin-top: -1px;
+            min-width: 14rem;
+            padding: 1.5rem 1rem;
+            transition: all $ts $tt;
+        }
+
+        select {
+            border: thin solid $white;
+            margin-right: 0.5rem;
+            padding: $filterbar-padding-y 3rem $filterbar-padding-y 1rem;
+
+            @include breakpoint(medium) {
+                padding: $filterbar-padding-lg-y 3rem $filterbar-padding-lg-y 1rem;
+            }
+        }
+
+        label {
+            white-space: nowrap;
+        }
+    }
+}

@@ -1,0 +1,42 @@
+.#{$theme} {
+    .rating {
+        display: flex;
+        justify-content: flex-start;
+
+        #{$hover-states} {
+            .fa-star-o {
+                &::before {
+                    content: '\f005';
+                }
+            }
+        }
+
+        label {
+            cursor: pointer;
+            position: relative;
+
+            input {
+                opacity: 0;
+                position: absolute;
+            }
+
+            &.active {
+                .fa-star-o {
+                    &::before {
+                        content: '\f005';
+                    }
+                }
+            }
+
+            #{$hover-states} {
+                ~label {
+                    .fa-star-o {
+                        &::before {
+                            content: '\f006';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

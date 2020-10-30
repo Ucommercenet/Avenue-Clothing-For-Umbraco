@@ -9,12 +9,15 @@ using Ucommerce.Search;
 using Ucommerce.Search.Models;
 using Ucommerce.Search.Slugs;
 using Umbraco.Web.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AvenueClothing.Controllers
 {
     public class HomepageCatalogController : SurfaceController
     {
         public IUrlService UrlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
         public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
         public IIndex<Product> ProductIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
@@ -43,12 +46,16 @@ namespace AvenueClothing.Controllers
                     Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
                     Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
                     IsVariant = !String.IsNullOrWhiteSpace(product.VariantSku),
-                    VariantSku = product.VariantSku,
-                    ThumbnailImageUrl = product.ThumbnailImageUrl
+                    VariantSku = product.VariantSku, 
+                    ThumbnailImageUrl = product.ThumbnailImageUrl,
+                    Categories = CatalogLibrary.GetCategories(product.Categories).ToList(),
+                    Rating = product.Rating
                 });
             }
 
             return View("/Views/PartialView/HomepageCatalog.cshtml", productsViewModel);
         }
+
+
     }
 }
