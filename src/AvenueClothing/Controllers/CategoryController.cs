@@ -61,24 +61,24 @@ namespace AvenueClothing.Controllers
 		{
 			IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
-			var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
-			var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-			foreach (var product in productsInCategory)
-			{
-				var productViewModel = new ProductViewModel
-				{
-					Sku = product.Sku,
-					Name = product.DisplayName,
-					ThumbnailImageUrl = product.PrimaryImageUrl,
-					Url = _urlService.GetUrl(CatalogContext.CurrentCatalog,
-					CatalogContext.CurrentCategories.Append(CatalogContext.CurrentCategory).Compact(), product),
-					Rating = product.Rating
-				};
-				if (product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var unitPrice))
-				{
-					productViewModel.Price = new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString();
-					productViewModel.Tax = new Money(unitPrice * taxRate, currencyIsoCode).ToString();
-				}
+            var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+            var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
+            foreach (var product in productsInCategory)
+            {
+                product.PricesInclTax.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var price);
+                product.Taxes.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var tax);
+                
+                var productViewModel = new ProductViewModel
+                {
+                    Sku = product.Sku,
+                    Name = product.DisplayName,
+                    ThumbnailImageUrl = product.PrimaryImageUrl,
+                    Url = _urlService.GetUrl(CatalogContext.CurrentCatalog,
+                        CatalogContext.CurrentCategories.Append(CatalogContext.CurrentCategory).Compact(), product),
+                    Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
+                    Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
+                    Rating = product.Rating
+                };
 
 				productViews.Add(productViewModel);
 			}

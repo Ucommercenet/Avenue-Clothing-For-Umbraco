@@ -39,7 +39,8 @@ namespace AvenueClothing.Controllers
                 orderLineModel.Sku = orderLine.Sku;
                 orderLineModel.VariantSku = orderLine.VariantSku;
                 orderLineModel.Total =
-                    new Money(orderLine.Total.GetValueOrDefault(), orderLine.PurchaseOrder.BillingCurrency.ISOCode).ToString();
+                    new Money(orderLine.Total.GetValueOrDefault(), orderLine.PurchaseOrder.BillingCurrency.ISOCode)
+                        .ToString();
                 orderLineModel.Tax =
                     new Money(orderLine.VAT, basket.BillingCurrency.ISOCode).ToString();
                 orderLineModel.Price =
@@ -55,10 +56,12 @@ namespace AvenueClothing.Controllers
             basketModel.DiscountTotal =
                 new Money(basket.DiscountTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.DiscountAmount = basket.DiscountTotal.GetValueOrDefault();
-            basketModel.SubTotal = new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.SubTotal =
+                new Money(basket.SubTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.OrderTotal =
                 new Money(basket.OrderTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
-            basketModel.TaxTotal = new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
+            basketModel.TaxTotal =
+                new Money(basket.TaxTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.ShippingTotal =
                 new Money(basket.ShippingTotal.GetValueOrDefault(), basket.BillingCurrency.ISOCode).ToString();
             basketModel.PaymentTotal =
