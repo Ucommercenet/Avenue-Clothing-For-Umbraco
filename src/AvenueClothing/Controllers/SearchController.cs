@@ -46,7 +46,8 @@ namespace AvenueClothing.Controllers
 
             foreach (var product in products)
             {
-                product.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
+                product.PricesInclTax.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal price);
+                product.Taxes.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal tax);
                 productsViewModel.Products.Add(new ProductViewModel
                 {
                     Url = UrlService.GetUrl(CatalogContext.CurrentCatalog, product),
@@ -54,8 +55,8 @@ namespace AvenueClothing.Controllers
                     Sku = product.Sku,
                     IsVariant = !string.IsNullOrWhiteSpace(product.VariantSku),
                     LongDescription = product.LongDescription,
-                    Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
-                    Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : "",
+                    Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
+                    Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
                     ThumbnailImageUrl = product.ThumbnailImageUrl,
                     VariantSku = product.VariantSku,
                     Rating = product.Rating

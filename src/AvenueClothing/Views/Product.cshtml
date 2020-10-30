@@ -116,16 +116,17 @@
 			    <b>@Model.ProductViewModel.Name</b>
 		    </h2>
 
-		    @if (Model.ProductViewModel.IsOrderingAllowed)
-		    {
-			    <div class="sticky-top stick-below-header bg-white pb-1">
-				    <form class="mb-4" method="post" action="@Url.Action("Index", "Product")">
-					    <aside itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-						    <p class="h5 mb-4 item-price" itemprop="price">@Model.ProductViewModel.Price</p>
-						    @*<p class="item-tax">
-                                <small>Inc. @Model.ProductViewModel.TaxCalculation</small>
-                            </p>*@
-					    </aside>
+        @if (Model.ProductViewModel.IsOrderingAllowed)
+        {
+
+            <form method="post" action="@Url.Action("Index", "Product")">
+                <div class="col-md-12 well">
+                    <aside class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        <p class="item-price" itemprop="price">@Model.ProductViewModel.Price</p>
+                        <p class="item-tax">
+                            <small>Inc. tax of @Model.ProductViewModel.Tax</small>
+                        </p>
+                    </aside>
 
 					    @if (Model.ProductViewModel.Properties.Count > 0 && Model.ProductViewModel.IsProductFamily)
 					    {
