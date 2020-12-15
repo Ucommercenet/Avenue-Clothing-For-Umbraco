@@ -16,50 +16,51 @@ using Category = Ucommerce.Search.Models.Category;
 using Money = Ucommerce.Money;
 using Product = Ucommerce.Search.Models.Product;
 using System;
+using Ucommerce;
+using Ucommerce.Search.Definitions;
 
 namespace AvenueClothing.Controllers
 {
-	public class CategoryController : RenderMvcController
-	{
-		public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
-		private ILoggingService _log => ObjectFactory.Instance.Resolve<ILoggingService>();
-		private IUrlService _urlService => ObjectFactory.Instance.Resolve<IUrlService>();
+    public class CategoryController : RenderMvcController
+    {
+        public ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
+        public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
+        private IUrlService _urlService => ObjectFactory.Instance.Resolve<IUrlService>();
+        public IIndex<Product> ProductsIndex => ObjectFactory.Instance.Resolve<IIndex<Product>>();
 
-		public override ActionResult Index(ContentModel model)
-		{
 
-			var page = Request.QueryString["pg"] ?? "1";
-			var pageSize = Request.QueryString["size"] ?? "12";
+        public override ActionResult Index(ContentModel model)
+        {
+            uint page = uint.Parse(Request.QueryString["pg"] ?? "1");
+            uint take = uint.Parse(Request.QueryString["size"] ?? "12");
+            uint skip = take * page - take;
 
-			using (new SearchCounter(_log, "Made {0} search queries during catalog page display."))
-			{
-				var currentCategory = CatalogContext.CurrentCategory;
-				int totalProductsCount;
-				var categoryViewModel = new CategoryViewModel
-				{
-					Name = currentCategory.DisplayName,
-					Description = currentCategory.Description,
-					CatalogId = currentCategory.ProductCatalog,
-					CategoryId = currentCategory.Guid,
-					Products = MapProductsInCategories(currentCategory, out totalProductsCount),
-					TotalProducts = totalProductsCount,
-					PageSize = Int32.Parse(pageSize),
-					PageNumber = Int32.Parse(page)
-				};
+            var currentCategory = CatalogContext.CurrentCategory;
+            var products = GetAllSiblingProductsInCategory(currentCategory, skip, take);
+                
+            var categoryViewModel = new CategoryViewModel
+            {
+                Name = currentCategory.DisplayName,
+                Description = currentCategory.Description,
+                CatalogId = currentCategory.ProductCatalog,
+                CategoryId = currentCategory.Guid,
+                Products = MapProducts(products),
+                TotalProducts = products.TotalCount,
+                PageSize = take,
+                PageNumber = page
+            };
 
-				if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
-				{
-					categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
-				}
+            if (!string.IsNullOrEmpty(currentCategory.ImageMediaUrl))
+            {
+                categoryViewModel.BannerImageUrl = currentCategory.ImageMediaUrl;
+            }
 
-				return View("/Views/Catalog.cshtml", categoryViewModel);
-			}
-		}
+            return View("/Views/Catalog.cshtml", categoryViewModel);
+        }
 
-		private IList<ProductViewModel> MapProducts(ICollection<Product> productsInCategory)
-		{
-			IList<ProductViewModel> productViews = new List<ProductViewModel>();
+        private IList<ProductViewModel> MapProducts(ResultSet<Product> productsInCategory)
+        {
+            IList<ProductViewModel> productViews = new List<ProductViewModel>();
 
             var taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
             var currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
@@ -67,7 +68,7 @@ namespace AvenueClothing.Controllers
             {
                 product.PricesInclTax.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var price);
                 product.Taxes.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out var tax);
-                
+
                 var productViewModel = new ProductViewModel
                 {
                     Sku = product.Sku,
@@ -80,43 +81,24 @@ namespace AvenueClothing.Controllers
                     Rating = product.Rating
                 };
 
-				productViews.Add(productViewModel);
-			}
+                productViews.Add(productViewModel);
+            }
 
-			return productViews;
-		}
-
-
-		private IList<ProductViewModel> MapProductsInCategories(Category category, out int totalProducts)
-		{
-
-			var page = Request.QueryString["pg"] ?? "1";
-			var pageSize = Request.QueryString["size"] ?? "12";
-			var skip = (Int32.Parse(pageSize) * Int32.Parse(page) - Int32.Parse(pageSize));
-
-			IList<Facet> facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
-			var productsInCategory = new List<ProductViewModel>();
+            return productViews;
+        }
 
 
-			var subCategories = CatalogLibrary.GetCategories(category.Categories);
-			var products =
-				CatalogLibrary.GetProducts(category.Categories.Append(category.Guid).ToList(),
-					facetsForQuerying.ToFacetDictionary());
+        private ResultSet<Product> GetAllSiblingProductsInCategory(Category category, uint skip, uint take)
+        {
+            FacetDictionary facetsForQuerying = System.Web.HttpContext.Current.Request.QueryString.ToFacets();
+            var allProducts = (List<Guid>) category["ProductsInAllSubcategories"];
 
-			foreach (var subCategory in subCategories)
-			{
-				var productsInSubCategory = products.Where(p => p.Categories.Contains(subCategory.Guid));
-				productsInCategory.AddRange(MapProducts(productsInSubCategory.ToList()));
-			}
-
-			productsInCategory.AddRange(MapProducts(products.Where(p => p.Categories.Contains(category.Guid))
-				.ToList()));
-
-			totalProducts = productsInCategory.Count;
-			productsInCategory = productsInCategory.Skip(skip).Take(Int32.Parse(pageSize)).ToList();
-
-			return productsInCategory;
-		}
-
-	}
+            return ProductsIndex.Find()
+                .Where(p => allProducts.Contains(p.Guid))
+                .Where(facetsForQuerying)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+        }
+    }
 }

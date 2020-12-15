@@ -2,19 +2,19 @@
 
 cd ..\..\
 
-SET version=8.0.0.20281
+IF NOT DEFINED AVENUE_VERSION SET AVENUE_VERSION=7.4.0.1000
 
 rem Delete the exisiting packages folder and any contents
-del package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q
-del package\Avenue_Clothing_Umbraco8_%version% /Q
+del package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q
+del package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION% /Q
 del package\_ToPackage /Q
 del package /Q
-rd package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q
-rd package\Avenue_Clothing_Umbraco8_%version% /Q
+rd package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219 /Q
+rd package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION% /Q
 rd package /Q
 
 rem Create the package directory
-md package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219
+md package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219
 
 rem Copy over the store files which will be included in the XML
 robocopy src\AvenueClothing package\_ToPackage\files *.css *.master /s /FFT /Z /XA:H /W:5
@@ -32,10 +32,10 @@ robocopy src\AvenueClothing.Installer\bin package\_ToPackage\files\bin  AvenueCl
 robocopy src\AvenueClothing.Installer\XmlStubs package\_ToPackage *.xml /FFT /Z /XA:H /W:5
 
 rem Package the various files
-tools\deploy\PackageGen.exe -name="package\Avenue_Clothing_Umbraco8_%version%.zip" -guid="61fc5d84-9cc2-4d36-93a8-bfe0d076b219" -path="package\_ToPackage"
+tools\deploy\PackageGen.exe -name="package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION%.zip" -guid="61fc5d84-9cc2-4d36-93a8-bfe0d076b219" -path="package\_ToPackage"
 
-rd package\Avenue_Clothing_Umbraco8_%version%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219
-rd package\Avenue_Clothing_Umbraco8_%version%
+rd package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION%\61fc5d84-9cc2-4d36-93a8-bfe0d076b219
+rd package\Avenue_Clothing_Umbraco8_%AVENUE_VERSION%
 
 GOTO :DONE
 

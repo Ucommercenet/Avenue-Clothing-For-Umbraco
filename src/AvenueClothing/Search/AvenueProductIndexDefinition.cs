@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ucommerce.Search;
 using Ucommerce.Search.Definitions;
 using Ucommerce.Search.Extensions;
@@ -25,6 +26,7 @@ namespace AvenueClothing.Search
             this.Field(p => p.PricesInclTax);
             this.Field(p => p.UnitPrices);
             this.Field(p => p.PricesInclTax["EUR 15 pct"]).Facet().AutoRanges(5, 10);
+            this.Field("ProductsInAllSubcategories", typeof(List<Guid>));
         }
     }
 }

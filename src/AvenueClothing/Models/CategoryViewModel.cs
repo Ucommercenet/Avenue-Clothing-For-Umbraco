@@ -33,9 +33,9 @@ namespace AvenueClothing.Models
 
 		public Guid CatalogId { get; set; }
 
-		public int TotalProducts { get; set; }
-		public int PageNumber { get; set; }
-		public int PageSize { get; set; }
+		public uint TotalProducts { get; set; }
+		public uint PageNumber { get; set; }
+		public uint PageSize { get; set; }
 
 	}
 }
