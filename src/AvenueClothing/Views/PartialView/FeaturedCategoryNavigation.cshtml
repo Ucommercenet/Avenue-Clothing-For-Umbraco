@@ -10,8 +10,8 @@
         @DisplayLargeCategories(Model.Categories)
     </div>
     <div class="row h5 px-2 pb-1 mb-md-2 pb-lg-4">
-        @DisplaySmallCategories(Model.Categories)
-    </div>
+        @* @DisplaySmallCategories(Model.Categories) *@
+    </div>S
 </div>
 
 
@@ -32,23 +32,23 @@
     }
 }
 
-@helper DisplaySmallCategories(IList<CategoryViewModel> categories)
-{
-    int i = 3;
-
-    while (i < 7) {
-        foreach (var category in categories)
-        {
-            var subcats = category.Categories;
-            foreach (var subcat in subcats)
-            {
-                <a class="image-link col-6 col-md-3 pb-4" href="@subcat.Url">
-                    <img src="/img/site/@String.Concat("category-", i, ".jpg")" alt="@subcat.Name">
-                    <span class="caption">@subcat.Name</span>
-                </a>
-
-                i++;
-            }
-        }
-    }
-}
+@* @helper DisplaySmallCategories(IList<CategoryViewModel> categories) *@
+@* { *@
+@*     int i = 3; *@
+@* *@
+@*     while (i < 7) { *@
+@*         foreach (var category in categories) *@
+@*         { *@
+@*             var subcats = category.Categories; *@
+@*             foreach (var subcat in subcats) *@
+@*             { *@
+@*                 <a class="image-link col-6 col-md-3 pb-4" href="@subcat.Url"> *@
+@*                     <img src="/img/site/@String.Concat("category-", i, ".jpg")" alt="@subcat.Name"> *@
+@*                     <span class="caption">@subcat.Name</span> *@
+@*                 </a> *@
+@* *@
+@*                 i++; *@
+@*             } *@
+@*         } *@
+@*     } *@
+@* } *@

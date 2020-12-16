@@ -25,7 +25,7 @@
                                         All @featuredCategory.Name
                                     </a>
                                 </li>
-                                @DisplaySubcategories(featuredCategory.Categories)
+                                @* @DisplaySubcategories(featuredCategory.Categories) *@
                             </ul>
                         </div>
 
@@ -41,7 +41,7 @@
                                         </a>
                                     </li>
 
-                                    @DisplaySubcategories(category.Categories)
+                                    @* @DisplaySubcategories(category.Categories) *@
                                 </ul>
                             </div>
                         }
@@ -61,14 +61,14 @@
     </div>
 </nav>
 
-@helper DisplaySubcategories(IList<CategoryViewModel> subcategories)
-{
-    foreach (var subcategory in subcategories)
-    {
-        <li>
-            <a href="@subcategory.Url">
-                @subcategory.Name
-            </a>
-        </li>
-    }
-}
+@* @helper DisplaySubcategories(IList<CategoryViewModel> subcategories) *@
+@* { *@
+@*     foreach (var subcategory in subcategories) *@
+@*     { *@
+@*         <li> *@
+@*             <a href="@subcategory.Url"> *@
+@*                 @subcategory.Name *@
+@*             </a> *@
+@*         </li> *@
+@*     } *@
+@* } *@
