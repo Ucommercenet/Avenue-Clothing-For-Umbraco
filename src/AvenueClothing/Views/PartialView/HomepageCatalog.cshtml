@@ -12,7 +12,7 @@
 
             <div class="mx-2">
                 <p class="mb-1 text-truncate">
-                    @product.Categories.FirstOrDefault().DisplayName
+                    @product.Categories.FirstOrDefault()?.DisplayName
                 </p>
                 <p class="mb-1 text-truncate">
                     @product.Name
@@ -36,7 +36,7 @@
 
             <div class="mx-2">
                 <p class="mb-1 text-truncate">
-                    @product.Categories.FirstOrDefault().DisplayName
+                    @product.Categories.FirstOrDefault()?.DisplayName
                 </p>
                 <p class="mb-1 text-truncate">
                     @product.Name
@@ -61,7 +61,7 @@
 
             <div class="mx-2">
                 <p class="mb-1 text-truncate">
-                    @product.Categories.FirstOrDefault().DisplayName
+                    @product.Categories.FirstOrDefault()?.DisplayName
                 </p>
                 <p class="mb-1 text-truncate">
                     @product.Name
@@ -85,7 +85,7 @@
 
             <div class="mx-2">
                 <p class="mb-1 text-truncate">
-                    @product.Categories.FirstOrDefault().DisplayName
+                    @product.Categories.FirstOrDefault()?.DisplayName
                 </p>
                 <p class="mb-1 text-truncate">
                     @product.Name
