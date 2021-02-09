@@ -7,6 +7,7 @@ using Ucommerce.Infrastructure;
 using Ucommerce.Search;
 using AvenueClothing.Models;
 using Ucommerce;
+using Ucommerce.Extensions;
 using Ucommerce.Infrastructure.Globalization;
 using Ucommerce.Search.Models;
 using Umbraco.Web.Models;
@@ -122,7 +123,7 @@ namespace AvenueClothing.Controllers
 				productPropertiesViewModel.PropertyName = ProductIndexDefinition.FieldDefinitions[prop.Key]
 					.GetDisplayName(LocalizationContext.CurrentCulture.Name);
 
-				foreach (var value in prop.Select(p => p.Value).Distinct())
+				foreach (var value in prop.Select(p => p.Value).Compact().Distinct())
 				{
 					productPropertiesViewModel.Values.Add(value.ToString());
 				}
