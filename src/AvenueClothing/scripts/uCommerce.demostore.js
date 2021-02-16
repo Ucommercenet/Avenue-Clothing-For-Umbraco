@@ -151,19 +151,12 @@ $(function () {
         minLength: 3,
         source: function (query, process) {
             $searchForm.addClass('searching');
-            $.uCommerce.search({ keyword: query }, function (resp) {
-                $.map(resp, function (data) {
-                    var matches = [];
-                    for (var i = 0; i < data.length; i++) {
-                        matches.push(data[i].ProductName);
-                    }
-                    return process(matches);
-                });
+            $.uCommerce.suggest({ keyword: query }, function (resp) {
+                return process(resp);
             });
             $searchForm.removeClass('searching');
         }
     });
-
 
     $('#newsletter-form').submit(function (e) {
         e.preventDefault();

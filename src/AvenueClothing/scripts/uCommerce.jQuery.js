@@ -56,10 +56,10 @@ var uCommerce = uCommerce || {};
                     if (onError) onError(response);
                 });
             },
-            search: function (options, onSuccess, onError) {
+            suggest: function (options, onSuccess, onError) {
                 var defaults = {};
                 var extendedOptions = $.extend(defaults, options);
-                $.post('/ucommerceapi/razorstore/search', extendedOptions)
+                $.post('/ucommerceapi/razorstore/suggest', extendedOptions)
                     .done(function (response) {
                         onSuccess(response);
                     }).fail(function (response) {
