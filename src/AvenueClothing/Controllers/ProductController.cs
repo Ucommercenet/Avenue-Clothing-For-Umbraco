@@ -120,7 +120,8 @@ namespace AvenueClothing.Controllers
 			foreach (var prop in uniqueVariants)
 			{
 				var productPropertiesViewModel = new ProductPropertiesViewModel();
-				productPropertiesViewModel.PropertyName = ProductIndexDefinition.FieldDefinitions[prop.Key]
+				productPropertiesViewModel.PropertyName = prop.Key;
+				productPropertiesViewModel.DisplayName = ProductIndexDefinition.FieldDefinitions[prop.Key]
 					.GetDisplayName(LocalizationContext.CurrentCulture.Name);
 
 				foreach (var value in prop.Select(p => p.Value).Compact().Distinct())
