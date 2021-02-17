@@ -134,7 +134,7 @@
                             foreach (var prop in Model.ProductViewModel.Properties)
                             {
                                 var controlName = string.Format("variation-{0}", prop.PropertyName);
-                                <label for="@controlName">@prop.PropertyName</label>
+                                <label for="@controlName">@prop.DisplayName</label>
                                 <select name="@controlName" id="@controlName" class="form-control mb-3 js-variant">
                                     <option value="">-- Please Select --</option>
                                     @foreach (var value in prop.Values)
