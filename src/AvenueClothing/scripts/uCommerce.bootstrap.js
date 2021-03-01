@@ -1829,12 +1829,6 @@
     }
 
   , process: function (items) {
-      var that = this
-
-      items = $.grep(items, function (item) {
-        return that.matcher(item)
-      })
-
       items = this.sorter(items)
 
       if (!items.length) {

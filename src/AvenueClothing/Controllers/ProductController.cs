@@ -7,6 +7,8 @@ using Ucommerce.Infrastructure;
 using Ucommerce.Search;
 using AvenueClothing.Models;
 using Ucommerce;
+using Ucommerce.Extensions;
+using Ucommerce.Infrastructure.Globalization;
 using Ucommerce.Search.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -18,7 +20,9 @@ namespace AvenueClothing.Controllers
 		public ITransactionLibrary TransactionLibrary => ObjectFactory.Instance.Resolve<ITransactionLibrary>();
 		public ICatalogContext CatalogContext => ObjectFactory.Instance.Resolve<ICatalogContext>();
 		private ICatalogLibrary CatalogLibrary => ObjectFactory.Instance.Resolve<ICatalogLibrary>();
-
+		private IIndexDefinition<Product> ProductIndexDefinition => ObjectFactory.Instance.Resolve <IIndexDefinition<Product>>();
+		private ILocalizationContext LocalizationContext => ObjectFactory.Instance.Resolve<ILocalizationContext>();
+		
 		[HttpGet]
 		public ActionResult Index(ContentModel model)
 		{
@@ -36,24 +40,24 @@ namespace AvenueClothing.Controllers
 		{
 			Product currentProduct = CatalogContext.CurrentProduct;
 
-			// Price calculations
-			currentProduct.UnitPrices.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal unitPrice);
-			string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
-			decimal taxRate = CatalogContext.CurrentPriceGroup.TaxRate;
+            // Price calculations
+            currentProduct.PricesInclTax.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal price);
+            currentProduct.Taxes.TryGetValue(CatalogContext.CurrentPriceGroup.Name, out decimal tax);
+            string currencyIsoCode = CatalogContext.CurrentPriceGroup.CurrencyISOCode;
 
-			var productViewModel = new ProductViewModel
-			{
-				Sku = currentProduct.Sku,
-				Name = currentProduct.DisplayName,
-				ShortDescription = currentProduct.ShortDescription,
-				LongDescription = currentProduct.LongDescription,
-				IsOrderingAllowed = currentProduct.AllowOrdering,
-				IsProductFamily = currentProduct.ProductType == ProductType.ProductFamily,
-				IsVariant = false,
-				Tax = unitPrice > 0 ? new Money(unitPrice * taxRate, currencyIsoCode).ToString() : "",
-				Price = unitPrice > 0 ? new Money(unitPrice * (1.0M + taxRate), currencyIsoCode).ToString() : "",
-				Rating = currentProduct.Rating
-			};
+            var productViewModel = new ProductViewModel
+            {
+                Sku = currentProduct.Sku,
+                Name = currentProduct.DisplayName,
+                ShortDescription = currentProduct.ShortDescription,
+                LongDescription = currentProduct.LongDescription,
+                IsOrderingAllowed = currentProduct.AllowOrdering,
+                IsProductFamily = currentProduct.ProductType == ProductType.ProductFamily,
+                IsVariant = false,
+                Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",
+                Price = price > 0 ? new Money(price, currencyIsoCode).ToString() : "",
+                Rating = currentProduct.Rating
+            };
 
 			if (!string.IsNullOrEmpty(currentProduct.PrimaryImageUrl))
 			{
@@ -117,8 +121,10 @@ namespace AvenueClothing.Controllers
 			{
 				var productPropertiesViewModel = new ProductPropertiesViewModel();
 				productPropertiesViewModel.PropertyName = prop.Key;
+				productPropertiesViewModel.DisplayName = ProductIndexDefinition.FieldDefinitions[prop.Key]
+					.GetDisplayName(LocalizationContext.CurrentCulture.Name);
 
-				foreach (var value in prop.Select(p => p.Value).Distinct())
+				foreach (var value in prop.Select(p => p.Value).Compact().Distinct())
 				{
 					productPropertiesViewModel.Values.Add(value.ToString());
 				}

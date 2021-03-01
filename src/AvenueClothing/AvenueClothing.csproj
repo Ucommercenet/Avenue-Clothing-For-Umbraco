@@ -505,6 +505,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)..\..\Avenue-Clothing-For-Umbraco\tools\deploy\Deploy.cmd" "$(ProjectDir)" "C:\inetpub\u8\Website"
+    </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

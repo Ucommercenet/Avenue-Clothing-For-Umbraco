@@ -10,6 +10,8 @@ namespace AvenueClothing.Models
         public ProductPropertiesViewModel() {
             Values = new List<string>();
         }
+
+        public string DisplayName { get; set; }
         public string PropertyName { get; set; }
         public IList<string> Values { get; set; }
 
