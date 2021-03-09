@@ -1,5 +1,10 @@
 # Welcome to the Avenue Clothing Demo Store for Ucommerce
 
+## Looking to install Avenue-Clothing
+Please note that this repository is meant to build the package and/or serve as reference code. If you are looking to get avenue-clothing installed in the first place, this is not the place to start. please download the official supported package from our website:
+
+https://ucommerce.net/platform/download/
+
 ## Compatibility ##
 Ucommerce 9.0.0 and higher, Umbraco 8 and higher.
 
