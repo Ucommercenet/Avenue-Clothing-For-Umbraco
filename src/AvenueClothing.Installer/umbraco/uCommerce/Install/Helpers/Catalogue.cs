@@ -465,7 +465,6 @@ namespace AvenueClothing.Installer.Helpers
             product.Name = name;
             product.ProductDefinition = productDefinition;
             product.DisplayOnSite = true;
-            product.AllowOrdering = true;
             product.Save();
 
             return product;
