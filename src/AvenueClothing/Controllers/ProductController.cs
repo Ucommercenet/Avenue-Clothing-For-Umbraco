@@ -51,7 +51,6 @@ namespace AvenueClothing.Controllers
                 Name = currentProduct.DisplayName,
                 ShortDescription = currentProduct.ShortDescription,
                 LongDescription = currentProduct.LongDescription,
-                IsOrderingAllowed = currentProduct.AllowOrdering,
                 IsProductFamily = currentProduct.ProductType == ProductType.ProductFamily,
                 IsVariant = false,
                 Tax = tax > 0 ? new Money(tax, currencyIsoCode).ToString() : "",

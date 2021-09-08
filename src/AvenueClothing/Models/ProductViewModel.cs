@@ -54,8 +54,6 @@ namespace AvenueClothing.Models
 
 		public IList<ProductReviewViewModel> Reviews { get; set; }
 
-		public bool IsOrderingAllowed { get; set; }
-
 		public string Tax { get; set; }
 
 		public string Price { get; set; }

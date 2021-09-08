@@ -31,6 +31,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
+    <InstallGulp>true</InstallGulp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -516,7 +517,7 @@
     <Error Condition="!Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Npm.js.2.13.1.0\build\npm.js.targets'))" />
     <Error Condition="!Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets'))" />
   </Target>
-  <Import Project="..\packages\Gulp.js.1.0.2\build\gulp.js.targets" Condition="Exists('..\packages\Gulp.js.1.0.2\build\gulp.js.targets')" />
-  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
+  <Import Project="..\packages\Gulp.js.1.0.2\build\gulp.js.targets" Condition="Exists('..\packages\Gulp.js.1.0.2\build\gulp.js.targets') And '$(InstallGulp)' == 'true'" />
+  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets') And '$(InstallGulp)' == 'true'" />
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />
 </Project>
