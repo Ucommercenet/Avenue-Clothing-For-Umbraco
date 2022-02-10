@@ -23,6 +23,6 @@
     "gulp-svgstore": "^7.0.1",
     "path": "^0.12.7",
     "process-nextick-args": "^1.0.3",
-    "node-sass": "^4.14.1"
+    "node-sass": "^7.0.0"
   }
 }
