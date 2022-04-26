@@ -397,6 +397,20 @@
     <Compile Include="Api\Model\ProductProperty.cs" />
     <Compile Include="Api\Model\LineItem.cs" />
     <Compile Include="Search\AvenueProductIndexDefinition.cs" />
+    <Compile Include="SettingsCreator\CreateCountryTask.cs" />
+    <Compile Include="SettingsCreator\CreateDataTypeTask.cs" />
+    <Compile Include="SettingsCreator\CreateDefinitionTask.cs" />
+    <Compile Include="SettingsCreator\CreateEmailTask.cs" />
+    <Compile Include="SettingsCreator\CreateOrderNumberSerieTask.cs" />
+    <Compile Include="SettingsCreator\CreatePriceGroupTask.cs" />
+    <Compile Include="SettingsCreator\CreateProductDefinitionTask.cs" />
+    <Compile Include="SettingsCreator\CreateProductRelationTypeTask.cs" />
+    <Compile Include="SettingsCreator\CreateSettingsHelper.cs" />
+    <Compile Include="SettingsCreator\old\Catalogue.cs" />
+    <Compile Include="SettingsCreator\old\ConfigurationInstaller.cs" />
+    <Compile Include="SettingsCreator\old\GenericHelpers.cs" />
+    <Compile Include="SettingsCreator\old\InstallDefaultAcceleratorData.cs" />
+    <Compile Include="SettingsCreator\old\Media.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="umbraco\images\umbraco\Ucommerce-address.png" />
@@ -452,6 +466,7 @@
     <Content Include="Views\MacroPartials\UcommerceProductReviews.cshtml" />
     <Content Include="Views\UcommerceEmail.cshtml" />
     <Content Include="Views\Preview.cshtml" />
+    <None Include="umbraco\Ucommerce\Apps\SettingsCreator\SettingsCreator.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

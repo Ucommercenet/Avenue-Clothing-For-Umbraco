@@ -2,7 +2,7 @@
 using Ucommerce.Infrastructure;
 using Ucommerce.Infrastructure.Globalization;
 
-namespace AvenueClothing.Installer.Helpers
+namespace AvenueClothing.SettingsCreator.old
 {
     public class GenericHelpers
     {

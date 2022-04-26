@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Ucommerce.EntitiesV2;
 using Ucommerce.EntitiesV2.Factories;
 using Ucommerce.Infrastructure;
-using Ucommerce.Search.Indexers;
 using Ucommerce.Security;
 
-namespace AvenueClothing.Installer.Helpers
+namespace AvenueClothing.SettingsCreator.old
 {
     public class CatalogueInstaller
     {

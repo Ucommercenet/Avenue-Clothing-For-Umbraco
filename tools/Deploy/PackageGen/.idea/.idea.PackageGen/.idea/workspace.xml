@@ -1,127 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2f14cc9-8cf2-4f1c-888e-9fdac5e5a871" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../src/gulpfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../src/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Admin.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Infrastructure.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Installer.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.NHibernate.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Pipelines.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Presentation.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.SystemHttp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Transactions.Payments.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Umbraco7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.Web.Api.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../lib/uCommerce/7.18.0.18185/UCommerce.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../package/uCommerce_Demo_Store_-_Razor_5.0.7.19093.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/UCommerce.RazorStore.Installer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/UCommerce.RazorStore.Installer.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/XmlStubs/Info.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/ConfigurationInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/Helpers/ConfigurationInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/uCommerce.DemoStore.Web.IIS7.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/UCommerce.RazorStore.Installer/umbraco/uCommerce/Install/uCommerce.DemoStore.Web.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BasketPreviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Controllers/BasketPreviewController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/Views/web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/uCommerce.RazorStore/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DemoStoreDeploy.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../DemoStoreDeploy.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PackageGen.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../PackageGen.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PackageGen.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../PackageGen.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PackageGen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PackageGen/PackageBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PackageGen/PackageBuilder.cs" afterDir="false" />
-    </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="d2f14cc9-8cf2-4f1c-888e-9fdac5e5a871" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-              <folding>
-                <marker date="1497946635538" expanded="true" signature="20:390" ph="{...}" />
-                <marker date="1497946635538" expanded="true" signature="55:152" ph="/// Represents the Package.Xml manifest file used by Umbraco ... " />
-                <marker date="1497946635538" expanded="true" signature="180:388" ph="{...}" />
-                <marker date="1497946635538" expanded="true" signature="259:382" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/PackageGen/PackageBuilder.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="108" column="9" lean-forward="true" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
-              <folding>
-                <marker date="1556713810263" expanded="true" signature="59:10319" ph="{...}" />
-                <marker date="1556713810263" expanded="false" signature="72:210" ph="..." />
-                <marker date="1556713810263" expanded="true" signature="243:10317" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="838:1157" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="1202:1574" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="1612:1785" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="1817:2080" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="2118:2539" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="2171:2348" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="2393:2529" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="2580:3466" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="3510:5084" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="3702:4847" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="4972:5040" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="5147:5364" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="5665:7398" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="5817:7164" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="6165:6326" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="7287:7355" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="7448:8268" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="7577:8044" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="8150:8221" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="8395:8493" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="8622:8855" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="8909:9513" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="9099:9356" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="9228:9316" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="9605:9743" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="9805:9953" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="9876:9943" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="10017:10164" ph="{...}" />
-                <marker date="1556713810263" expanded="true" signature="10215:10311" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PackageGen/Program.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="37" column="37" lean-forward="true" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
-              <folding>
-                <marker date="1497946635553" expanded="true" signature="35:3504" ph="{...}" />
-                <marker date="1497946635553" expanded="false" signature="48:84" ph="..." />
-                <marker date="1497946635553" expanded="true" signature="103:3502" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="149:2984" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="512:1563" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="1581:1640" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="1678:1770" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="1798:1879" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="1936:2082" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="2237:2372" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="2430:2568" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="3027:3242" ph="{...}" />
-                <marker date="1497946635553" expanded="true" signature="3299:3496" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -130,25 +14,18 @@
     </findStrings>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PackageGen/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PackageGen/packages.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PackageGen/PackageBuilder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PackageGen/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C8EA872B-C6C3-4547-B28C-904F5E42F85A/2c/05b89605/Path.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/PackageGen/packages.config" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/PackageGen/PackageBuilder.cs" />
-      </list>
-    </option>
+    <setting file="file://$PROJECT_DIR$/PackageGen/PackageXml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
   </component>
+  <component name="ProjectId" id="21Jgqu6CQdLkEYFGRIa29mCs32z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="SolutionExplorer" proportions="" version="1">
@@ -171,6 +48,11 @@
       </pane>
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
@@ -178,18 +60,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
@@ -207,10 +78,11 @@
       <option name="PROJECT_KIND" value="Console" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.0,Profile=Client" />
       <method v="2">
-        <option name="Build" enabled="true" />
+        <option name="Build" />
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -223,6 +95,7 @@
       <updated>1556640988322</updated>
       <workItem from="1556640989562" duration="237000" />
       <workItem from="1556709712852" duration="3436000" />
+      <workItem from="1637664811432" duration="150000" />
     </task>
     <servers />
   </component>
@@ -272,7 +145,12 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

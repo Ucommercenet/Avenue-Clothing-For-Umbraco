@@ -343,11 +343,7 @@
     <Compile Include="PackageActions\InstallDefaultAcceleratorData.cs" />
     <Compile Include="PackageActions\PackageActionsHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="umbraco\Ucommerce\Install\Helpers\Catalogue.cs" />
-    <Compile Include="umbraco\Ucommerce\Install\Helpers\ConfigurationInstaller.cs" />
-    <Compile Include="umbraco\Ucommerce\Install\Helpers\GenericHelpers.cs" />
     <Compile Include="umbraco\Ucommerce\Install\Helpers\Node.cs" />
-    <Compile Include="umbraco\Ucommerce\Install\Helpers\Media.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

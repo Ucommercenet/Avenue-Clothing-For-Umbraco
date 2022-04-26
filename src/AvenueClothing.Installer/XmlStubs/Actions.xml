@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Actions>
-  <Action runat="install" alias="InstallDefaultAcceleratorData" />
+<!--  <Action runat="install" alias="InstallDefaultAcceleratorData" />-->
 </Actions>

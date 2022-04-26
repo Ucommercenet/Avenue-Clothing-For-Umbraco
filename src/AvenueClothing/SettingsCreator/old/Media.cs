@@ -12,7 +12,7 @@ using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 using File = System.IO.File;
 
-namespace AvenueClothing.Installer.Helpers
+namespace AvenueClothing.SettingsCreator.old
 {
     public class MediaService
     {
