@@ -36,7 +36,7 @@ After the script runs, you will recieve a message saying:
 
 ..and your package is ready to be installed, through the Packages section of Umbraco's backoffice.
 
-Thanks to Visual Studio's integration with NPM, node packages get installed automatically as well, when building the project, just like nuget packages do, however if you are not using Visual Studio, you can still run the 'npm install' command from command prompt.
+Thanks to Visual Studio's integration with NPM, node packages get installed automatically as well, when building the project, just like nuget packages do, however if you are not using Visual Studio, you must use NPM version 14 and run the  'npm install' command from command prompt.
 
 ## What's Inside? ##
 
